@@ -1,0 +1,42 @@
+<div>
+    <script id="relatedInitTemplate" type="text/template">	
+		{{#artworks}}
+		<h3 class="heading--l heading--bordered">{{{label}}}</h3>
+		<div id="teaser-container-grid" class="full-width">	
+        	<article class="teaser--grid"></article>
+		</div>
+		{{/artworks}}
+	 </script>
+	 	
+	 <script id="relatedArticleTemplate" type="text/template">	
+		{{#artworks}}		
+        <article class="teaser--grid">
+          <div class="teaser__wrapper">
+            <div class="teaser__thumbnail image_loading" src="{{thumbnail}}" alt="{{#copyright}}{{{copyright}}}{{/copyright}}" img_id="{{img_id}}">
+              <a href="{{url}}" alt="{{title}}"></a>
+            </div>
+            
+            <div class="teaser__content">
+              <ul class="teaser__category">
+                {{#categories}}
+                  <li>
+                    <a href="{{url}}">{{name}}</a>
+                  </li>
+                {{/categories}}
+              </ul>
+              
+              <h3 class="teaser__heading">
+					<a href="#" alt="{{title}}" class="article_artwork">{{artist_name}}<br><i>{{title}}</i></a> 
+              </h3>
+
+              <ul class="teaser__meta">
+                {{#meta}}
+                  <li><span>{{key}}</span> {{value}}</li>
+                {{/meta}}
+              </ul>
+            </div><!-- teaser__content -->
+          </div><!-- teaser__wrapper -->
+        </article><!-- teaser -->      
+      {{/artworks}}	 
+	</script>	
+</div>
