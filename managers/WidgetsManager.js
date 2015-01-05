@@ -15,6 +15,7 @@ var EventsManager;
 		//** load solr conf  
 		var solr_conf = new Configurator.constructor();
 		solr_conf.load_json("conf/solr_conf.json");
+		var server = solr_conf.get_server();
 		var exposed = solr_conf.get_exposed_params();
 		var q_default = solr_conf.get_q_default();
 		var sort_default = solr_conf.get_sort_default();
@@ -45,7 +46,7 @@ var EventsManager;
 		//** init widgetManager
 		//******************************    
 		Manager = new AjaxSolr.smkManager({
-			solrUrl: smkCommon.getSolrPath(), 
+			solrUrl: server, 
 			proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
 			store: new AjaxSolr.smkParameterStore({
 				exposed: exposed,    		
@@ -83,7 +84,7 @@ var EventsManager;
 		//** init thumbnailsManager
 		//******************************    
 		var thumbnailsManager = new AjaxSolr.smkManager({
-			solrUrl: smkCommon.getSolrPath(), 
+			solrUrl: server, 
 			proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
 			store: new AjaxSolr.smkParameterStore({
 				exposed: exposed
@@ -97,7 +98,7 @@ var EventsManager;
 		//** init relatedManager
 		//******************************    
 		var relatedManager = new AjaxSolr.smkManager({
-			solrUrl: smkCommon.getSolrPath(), 
+			solrUrl: server, 
 			proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
 			store: new AjaxSolr.smkParameterStore({
 				exposed: exposed 
@@ -115,6 +116,13 @@ var EventsManager;
 			id: 'searchbox',
 			target: '#searchbox',			
 			template: Mustache.getTemplate('templates/search_box.html')
+		}));
+		
+		Manager.addWidget(new AjaxSolr.SearchBoxAutoWidget({
+			id: 'searchboxauto',
+			target: '#searchboxauto',			
+			template: Mustache.getTemplate('templates/search_box.html'),
+			fields: params["facet.field"]
 		}));
 
 		Manager.addWidget(new AjaxSolr.CurrentSearchWidget({

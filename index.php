@@ -3,7 +3,7 @@
   <head>
   <meta http-equiv="content-type" content="text/html; charset=windows-1250">
   <meta name="generator" content="PSPad editor, www.pspad.com">
-  <title>SMK - Uendelig opdagelsesrejse</title>
+  <title>SMK - Advanceret søg i samlinger</title>
   
 
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
@@ -32,6 +32,7 @@
     <script src="managers/ViewManager.js" type="text/javascript"></script>                   
 	<script src="core/AbstractTextWidget.js" type="text/javascript"></script>
 	<script src="widgets/SearchBoxWidget.js" type="text/javascript"></script>
+	<script src="widgets/SearchBoxAutoWidget.js" type="text/javascript"></script>
 	<script src="js/sprintf.min.js" type="text/javascript"></script>
 	<script src="js/mustache.smk.js" type="text/javascript"></script>
 	<script src="js/jquery.cookie.js" type="text/javascript"></script>

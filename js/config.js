@@ -47,7 +47,11 @@
 									  
 								  case "exposed":		 			  			  			  									  				    		
 								    	this.exposed_params = item;				  			  			  
-									  break;		  
+									  break;
+									  
+								  case "server":		 			  			  			  									  				    		
+								    	this.server = item;				  			  			  
+									  break;	
 							  }
 						};					  					  
 				  }, this),
@@ -91,6 +95,13 @@
 		this.get_sort_default = function(){
 			return this.sort_default;
 		};
+		
+		/*
+		 *
+		 */
+		this.get_server = function(){
+			return this.server;
+		};
 	
 		/*
 		 * variables
@@ -99,7 +110,8 @@
 		this.qf_default = {}; // qf default
 		this.q_default = null; // q default
 		this.sort_default = null; // sort default
-		this.exposed_params = null; // exposed parameters		
+		this.exposed_params = null; // exposed parameters	
+		this.server = null; // exposed parameters	
 	}
 	
 }));
