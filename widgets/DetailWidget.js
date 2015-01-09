@@ -108,15 +108,21 @@
 					type: "smk_detail_this_img_loaded"
 				});
 				return;		
-			}
-
+			}			
+			
 			var artwork_data = null;
 			var dataHandler = new getData_Detail.constructor(this);
 			var multi_work_ref_req = null;
 			var related_id_req = null;			
 
 			for (var i = 0, l = this.manager.response.response.docs.length; i < l ; i++) {
-				var doc = this.manager.response.response.docs[i];      
+				var doc = this.manager.response.response.docs[i]; 
+				
+				//øøøøøøøøøøøø//
+				var dataHandler_test = new getData_Detail_Extended.constructor(this);
+				var artwork_data_test = dataHandler_test.get_data(doc); 				
+				//øøøøøøøøøøøø//
+				
 				artwork_data = dataHandler.get_data(doc);  
 				//* process thumbnails
 				multi_work_ref_req = artwork_data.subwidget.req_multiwork;
