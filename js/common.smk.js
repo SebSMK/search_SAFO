@@ -20,7 +20,7 @@
 	
 	common.getValueFromSplit = function(splited, index){		
 		return splited.length > index && common.isValidDataText(splited[index]) ? splited[index] : null;		
-	}
+	};
 	
 	common.firstCapital = function(string){				
 		return string === undefined ? '' : string.charAt(0).toUpperCase() + string.slice(1)		

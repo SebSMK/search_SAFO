@@ -18,6 +18,7 @@
 	<script src="core/smkParameterStore.js" type="text/javascript"></script>
 	<script src="core/AbstractWidget.js" type="text/javascript"></script>
 	<script src="widgets/DetailWidget.js" type="text/javascript"></script>
+	<script src="widgets/OriginalWidget.js" type="text/javascript"></script>
 	<script src="widgets/ThumbsWidget.js" type="text/javascript"></script>
 	<script src="widgets/TeasersWidget.js" type="text/javascript"></script>	
 	<script src="widgets/RelatedWidget.js" type="text/javascript"></script>
@@ -46,7 +47,9 @@
 	<script src="js/jquery.tooltipster.js" type="text/javascript"></script>
 	<script src="js/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script>
 	<script src="js/jquery.address-1.5.min.js" type="text/javascript"></script>
+	<script src="data/getData_Common.js" type="text/javascript"></script>	
 	<script src="data/getData_Detail.js" type="text/javascript"></script>
+	<script src="data/getData_Original.js" type="text/javascript"></script>
 	<script src="data/getData_Detail_Extented.js" type="text/javascript"></script>	
 	<script src="data/getData_Related.js" type="text/javascript"></script>	
 	<script src="data/getData_Teasers.js" type="text/javascript"></script>	

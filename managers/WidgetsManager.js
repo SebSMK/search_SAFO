@@ -109,6 +109,20 @@ var EventsManager;
 		});	
 		
 		//******************************
+		//** init getDetailManager
+		//******************************    
+		var getDetailManager = new AjaxSolr.smkManager({
+			solrUrl: server, 
+			proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
+			store: new AjaxSolr.smkParameterStore({
+				exposed: exposed 
+			}),
+			allWidgetsProcessed: allWidgetsProcessedBound,
+			generalSolrError: generalSolrErrorProcessedBound,
+			translator: translator
+		});	
+		
+		//******************************
 		//** load widgets
 		//******************************
 
@@ -213,15 +227,22 @@ var EventsManager;
 			template: Mustache.getTemplate('templates/related.html')
 		});
 		
+		var sub_originalWidget = new AjaxSolr.OriginalWidget({
+			id: 'original',
+			target: '#original',
+			template: Mustache.getTemplate('templates/original.html')
+		});
+		
 		Manager.addWidget(new AjaxSolr.DetailWidget({
 			id: 'details',
 			target: '#smk_detail',
-			thumbnails_target:'#thumbnails',
 			template: Mustache.getTemplate('templates/detail.html'),
 			thumbnailsManager: thumbnailsManager,
 			thumbnails_subWidget: sub_thumbsWidget,
-			reltatedManager: relatedManager,
-			related_subWidget: sub_relatedWidget
+			relatedManager: relatedManager,
+			related_subWidget: sub_relatedWidget,
+			originalManager: getDetailManager,
+			original_subWidget: sub_originalWidget
 		}));		
 
 		//******************************

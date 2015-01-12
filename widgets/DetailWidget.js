@@ -5,11 +5,12 @@
 		constructor: function (attributes) {
 			AjaxSolr.DetailWidget.__super__.constructor.apply(this, arguments);
 			AjaxSolr.extend(this, {
-				thumbnails_target: null,
 				thumbnailsManager:null,
 				thumbnails_subWidget:null,
-				reltatedManager: null,
-				related_subWidget: null
+				relatedManager: null,
+				related_subWidget: null,
+				originalManager: null,
+				original_subWidget: null
 			}, attributes);
 		},	
 
@@ -34,14 +35,21 @@
 			
 			for (var name in params) {
 				self.thumbnailsManager.store.addByValue(name, params[name]);
-				self.reltatedManager.store.addByValue(name, params[name]);
+				self.relatedManager.store.addByValue(name, params[name]);
+				self.originalManager.store.addByValue(name, params[name]);
 			}    		
 			
+			//***
+			//* original sub widget
+			//***
+			//* sub widget coupling
+			self.originalManager.addWidget(self.original_subWidget); 
+
 			//***
 			//* related sub widget
 			//***
 			//* sub widget coupling
-			self.reltatedManager.addWidget(self.related_subWidget); 				
+			self.relatedManager.addWidget(self.related_subWidget); 				
 
 			//* a new image has been displayed in "scroll teaser"
 			$(self.related_subWidget).on('smk_related_this_img_loaded', function(event){     	            								
@@ -113,14 +121,18 @@
 			var artwork_data = null;
 			var dataHandler = new getData_Detail.constructor(this);
 			var multi_work_ref_req = null;
-			var related_id_req = null;			
+			var related_id_req = null;
+			var original_id_req = null;
 
 			for (var i = 0, l = this.manager.response.response.docs.length; i < l ; i++) {
 				var doc = this.manager.response.response.docs[i]; 
 				
 				//øøøøøøøøøøøø//
 				var dataHandler_test = new getData_Detail_Extended.constructor(this);
-				var artwork_data_test = dataHandler_test.get_data(doc); 				
+				var artwork_data_test = dataHandler_test.get_data(doc); 
+				
+				//* process related
+				original_id_req = artwork_data_test.subwidget.req_original;	
 				//øøøøøøøøøøøø//
 				
 				artwork_data = dataHandler.get_data(doc);  
@@ -129,7 +141,10 @@
 				if (self.getCurrentThumb_selec() == null)
 					self.setCurrentThumb_selec(doc.id);
 				//* process related
-				related_id_req = artwork_data.subwidget.req_relatedid;								
+				related_id_req = artwork_data.subwidget.req_relatedid;	
+				
+				
+
 			}
 			
 			//* merge data and template
@@ -164,9 +179,16 @@
 			if(related_id_req != null){				
 				//* start thumbnail sub request
 				var param = new AjaxSolr.Parameter({name: "q", value: related_id_req });					  					
-				this.reltatedManager.store.add(param.name, param);	 			
-				this.reltatedManager.doRequest();				
+				this.relatedManager.store.add(param.name, param);	 			
+				this.relatedManager.doRequest();
 			}
+			
+			if(original_id_req != null){	
+				//* start original  sub request
+				var param = new AjaxSolr.Parameter({name: "q", value: original_id_req });					  					
+				this.originalManager.store.add(param.name, param);	 			
+				this.originalManager.doRequest();
+			}						
 
 		},  
 
