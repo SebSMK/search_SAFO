@@ -27,6 +27,7 @@
 	};
 	
 	common.isValidDataText = function(text, field){
+		text = new String(text);
 		if (text === undefined 
 				|| text == null 
 				|| text == 'undefined'

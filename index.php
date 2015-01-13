@@ -47,8 +47,9 @@
 	<script src="js/jquery.tooltipster.js" type="text/javascript"></script>
 	<script src="js/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script>
 	<script src="js/jquery.address-1.5.min.js" type="text/javascript"></script>
-	<script src="data/getData_Common.js" type="text/javascript"></script>	
+	<script src="data/getData_Common_functions.js" type="text/javascript"></script>	
 	<script src="data/getData_Detail.js" type="text/javascript"></script>
+	<script src="data/getData_Detail_Standard.js" type="text/javascript"></script>
 	<script src="data/getData_Original.js" type="text/javascript"></script>
 	<script src="data/getData_Detail_Extented.js" type="text/javascript"></script>	
 	<script src="data/getData_Related.js" type="text/javascript"></script>	

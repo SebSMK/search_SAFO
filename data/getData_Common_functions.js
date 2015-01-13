@@ -690,5 +690,33 @@
 		}
 
 		return allrelatedRequest.length == 0 ? null : allrelatedRequest.join(' OR ');
-	};		
+	};	
+	
+	/**
+	 * Media
+	 * */
+	getdatacommon.getMedia_alt = function (doc){	  
+		var artist = smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, 'original')) ? '' : getData_Common.getProducent_producent(doc, 'original') + ' - ';
+		var title = getData_Common.getTitle(doc, 'museum');
+		var copyright = smkCommon.computeCopyright(doc); 
+
+		return  copyright == false ? sprintf('%s%s', artist, title) : sprintf('%s - %s', copyright, title); 	  
+	};
+	
+	getdatacommon.getMedia_image = function (doc, caller){	  
+		return doc.medium_image_url !== undefined ? doc.medium_image_url : caller.default_picture_path;		 	  
+	};
+	
+	getdatacommon.getMedia_copyright = function (doc, caller){	  
+		return doc.medium_image_url !== undefined ? 
+				smkCommon.computeCopyright(doc) != false ?
+						smkCommon.computeCopyright(doc)
+					:
+						caller.manager.translator.getLabel('copyright_def')
+				: 
+					caller.manager.translator.getLabel("detail_no_photo");	 	  
+	};
+	
+	
+	
 }));

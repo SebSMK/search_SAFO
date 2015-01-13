@@ -131,8 +131,11 @@
 				var dataHandler_test = new getData_Detail_Extended.constructor(this);
 				var artwork_data_test = dataHandler_test.get_data(doc); 
 				
-				//* process related
-				original_id_req = artwork_data_test.subwidget.req_original;	
+				
+				
+				var dataHandler_test_basis = new getData_Detail_Basis.constructor(this);
+				var artwork_data_test_basis = dataHandler_test_basis.get_data(doc); 
+				
 				//øøøøøøøøøøøø//
 				
 				artwork_data = dataHandler.get_data(doc);  

@@ -89,12 +89,6 @@
 						motiv_topografisk: getData_Common.getMotiv_topografisk(doc),
 						motiv_portraet: getData_Common.getMotiv_portraet(doc),
 						motiv_note: getData_Common.getMotiv_note(doc),															
-					},
-					
-					subwidget:{
-						req_original: getData_Common.getSubWidgReq_original(doc),
-						req_multiwork: getData_Common.getSubWidgReq_vaerkdele(doc),
-						req_relatedid: getData_Common.getSubWidgReq_relatere(doc)									
 					}
 			};	
 
