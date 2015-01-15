@@ -1,44 +1,61 @@
 <div>
 	<script id="teaserInitTemplate" type="text/template">	
-		<div id="teaser-container-grid" class="full-width">	
-        	<article class="teaser--grid"></article>			
+		<div class="search-results" class="full-width">	
+			<div class="matrix">         	
+				<div class="matrix-tile"></div>			
+			</div>
 		</div>
 	 </script>
 
 	<script id="teaserArticleTemplate" type="text/template">	
 		{{#artworks}}
-        <article class="teaser--grid">
-          <div class="teaser__wrapper">            
-			{{#media}}			
-			<div class="teaser__thumbnail image_loading" src="{{image}}" alt="{{#copyright}}{{{copyright}}}{{/copyright}}" img_id="{{img_id}}">              	 
-				<a href="#" alt="{{alt}}" class="article_artwork"></a>								 
-            </div>			
-            {{/media}}
-            
-			<div class="teaser__content">  
-              {{#info}}
-              <h3 class="teaser__heading">               					 
-					<a href="#" class="article_artwork">{{#producent_kunster}}{{{artist_data.name}}}<br>{{/producent_kunster}}{{#title_pad}}<br>{{/title_pad}}{{#title_museum}}{{title}}{{/title_museum}}<br><span>{{{datering_production_vaerkdatering}}}</span></a> 				
-              </h3>		
-			  {{/info}}	 
 
-			  <!-- inventar number -->
-  			  	{{#info.ident_invnummer}}              
-				<ul class="teaser__meta">                                				  				  	
-					<li>{{{info.ident_invnummer}}}</li>				  					                  
-              	</ul>
-				{{/info.ident_invnummer}}
 
-				<!-- location -->
-  			  	{{#info.location_location}}              
-				<ul class="teaser__meta">                                				  				  	
-						<li>{{{info.location_location}}}</li>				  					                  
-              	</ul>
-				{{/info.location_location}}			 								 
-
-            </div><!-- teaser__content -->
-          </div><!-- teaser__wrapper -->
-        </article><!-- teaser -->      
-      {{/artworks}}	 
-	</script>
+			<div class="matrix-tile">
+				<div class="matrix-tile-inner">
+			
+					{{#media}}
+					<div class="matrix-tile-image image_loading" src="{{image}}"
+						alt="{{#copyright}}{{{copyright}}}{{/copyright}}" img_id="{{img_id}}">
+						<a href="#" alt="{{alt}}" class="article_artwork"></a>
+					</div>
+					{{/media}}
+			
+					<div class="matrix-tile-header">
+						{{#info}} {{#producent_kunster}}
+						<h3>{{{artist_data.name}}}</h3>
+						{{/producent_kunster}} {{#title_museum}}
+						<h2>
+							<a href="#" class="article_artwork">{{title}}<span
+								class="matrix-tile-date">{{{datering_production_vaerkdatering}}}</span></a>
+						</h2>
+						{{/title_museum}} {{/info}}
+			
+						<!-- inventar number -->
+						{{#info.ident_invnummer}}
+						<ul class="matrix-tile-meta">
+							<li class="matrix-tile-meta-id"><span>ID:</span>{{{info.ident_invnummer}}}</li>
+						</ul>
+						{{/info.ident_invnummer}}
+			
+						<!-- location -->
+						{{#info.location_location}}
+						<ul class="matrix-tile-meta-location">
+							<li>{{{info.location_location}}}</li>
+						</ul>
+						{{/info.location_location}}
+			
+					</div>
+					<!-- teaser__content -->
+			
+			
+				</div>
+				<!-- matrix-tile-inner -->
+			</div>
+			<!-- matrix-tile -->
+			
+			
+			
+			{{/artworks}}
+</script>
 </div>

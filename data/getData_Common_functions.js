@@ -258,7 +258,7 @@
 		if (doc.dimension_bladmaal !== undefined)
 			dimensions.push( 
 					{
-						'type' : 'bladmÃ¥l',
+						'type' : 'bladmål',
 						'dim' : doc.dimension_bladmaal
 					}
 			);			
@@ -266,7 +266,7 @@
 		if (doc.dimension_plademaal!== undefined)
 			dimensions.push( 
 					{
-						'type' : 'plademÃ¥l',
+						'type' : 'plademål',
 						'dim' : doc.dimension_plademaal
 					}
 			);

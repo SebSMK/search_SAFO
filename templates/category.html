@@ -1,7 +1,8 @@
-<div>	
+<div class="search-type-selector">	
 	 <script id="categoryItemsTemplate" type="text/template">	
-		<ul class="tabs">	 	
-			{{#categories}}<li name="{{facetname}}" {{#active}}class="tab--active"{{/active}}><a href="#">{{{facettext}}} <span>({{count}})</span></a></li>{{/categories}}
+		<ul>	 	
+			<li> <a class="simple-search-tab active" href="#">{{{simple}}}</a></li>
+			<li> <a class="advanced-search-tab" href="#">{{{advanced}}}</a></li>
 		</ul>		 	
 	</script>	
 </div>

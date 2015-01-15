@@ -17,15 +17,15 @@
 			var html = self.template;     
 			$target.html($(html).find('#teaserInitTemplate').html());		
 
-			$target.find('#teaser-container-grid article').hide();
+			$target.find('.search-results .matrix .matrix-tile').hide();
 
 			//* init masonry
-			$target.find('#teaser-container-grid').masonry( {
+			$target.find('.search-results .matrix').masonry( {
 				transitionDuration: 0
 			});
 
 			this.default_picture_path = smkCommon.getDefaultPicture('medium');      
-			this.teaser_article_class = $target.find('#teaser-container-grid article').attr('class');	
+			this.teaser_article_class = $target.find('.search-results .matrix .matrix-tile').attr('class');	
 
 		},  
 
@@ -48,8 +48,8 @@
 				var $article = $(html);	      
 				//* load current article visualization classes
 				$article.removeClass().addClass(self.teaser_article_class);	      
-				$target.find('#teaser-container-grid').append($article);	      	        
-				$target.find('#teaser-container-grid').masonry('appended', $article);	 
+				$target.find('.search-results .matrix').append($article);	      	        
+				$target.find('.search-results .matrix').masonry('appended', $article);	 
 				$target.find('.image_loading').removeClass('image_loading').hide();
 
 				// trig "this image is loaded" event	      
@@ -92,36 +92,17 @@
 						});
 
 						return;
-					})	
-
-					//* ...else if the current article is a link to a webpage
-					$article.find('.article_link')
-					.click({detail_id: artwork_data.img_id, caller:this}, function (event) {
-						/*
-						//* the user leaves the current search page for a result page    
-						if (typeof _gaq !== undefined)
-							_gaq.push(['_trackEvent','Search', 'Paging result', $(this).attr("href"), 0, true]);
-						 */
-						
-						event.preventDefault();		  	    		
-
-						var url = $(this).attr("href");
-						var windowName = $(this).attr("alt");	                    
-						window.open(url, windowName);
-
-						return;
-					});	
-
+					})						
 
 					//* append the current article to list
-					$target.find('#teaser-container-grid').append($article);	      
+					$target.find('.search-results .matrix').append($article);	      
 
 					//* refresh masonry
-					$target.find('#teaser-container-grid').masonry('appended', $article);	      
+					$target.find('.search-results .matrix').masonry('appended', $article);	      
 				}						
 
 				//* add image + link to detail on click on image to all articles
-				$target.find('article').each(function() {    	    	
+				$target.find('.matrix-tile').each(function() {    	    	
 					dataHandler.getImage($(this), $(this).find('.image_loading'));
 				});
 			}	   
@@ -136,117 +117,14 @@
 
 		removeAllArticles: function(){
 			var $target = $(this.target); 
-			var $all_articles = $target.find('#teaser-container-grid article');
+			var $all_articles = $target.find('.search-results .matrix .matrix-tile');
 
 			if($all_articles.length > 0 ){
 				//* save current visualization class
-				this.teaser_article_class = $target.find('#teaser-container-grid article').attr('class');
-				$target.find('#teaser-container-grid').masonry('remove', $all_articles);		
+				this.teaser_article_class = $target.find('.search-results .matrix .matrix-tile').attr('class');
+				$target.find('.search-results .matrix').masonry('remove', $all_articles);		
 			};		  
-		},  
-
-		switch_list_grid: function (view) {
-			var self = this;  
-
-			switch(view)
-			{		  
-			case "grid":
-				self.setTeaserViewGrid();
-				//$(this.target).find('#teaser-container-grid').masonry('layout');
-				break;
-
-			case "list":
-				self.setTeaserViewList();
-				break;
-
-			default:
-				self.setTeaserViewGrid();
-			}		
-		},
-
-//		Grid view
-		setTeaserViewGrid: function () {
-			var $target = $(this.target);	  
-			// Restyling articles
-			var teasers = $target.find('article').each( function() {
-				if ( $(this).hasClass('teaser--list') ) {
-
-					// Switching classes
-					$(this).removeClass('teaser--list');
-					$(this).removeClass('teaser--two-columns');
-					$(this).addClass('teaser--grid');
-
-					// Removing inline css
-					$(this).attr('style', '');
-
-					// Adding CSS position (masonry doesn't add this automatically when rerun - see below)
-					$(this).css('position', 'absolute');
-
-					// Removing list style vertical alignment for thumbs
-					$(this).find('img').css('margin-top', 'auto');
-				} // end if
-			});
-
-			// Rerun masonry to enable grid
-			$target.find('#teaser-container-grid').masonry({
-				transitionDuration: 0
-			});
-		}, // setTeaserViewGrid
-
-		// List view
-		setTeaserViewList: function () {
-
-			var $target = $(this.target);
-			// Resetting the height of the containing element
-			$target.find('#teaser-container-grid').css('height', 'auto');
-
-			// Restyling articles
-			$target.find('article').each( function() {
-				if ( $(this).hasClass('teaser--grid') ) {
-
-					// Switching classes
-					$(this).removeClass('teaser--grid');
-					$(this).addClass('teaser--list');
-
-					// Adjusting CSS
-					$(this).attr('style', '');
-				} // end if
-
-				// If the teaser container is full width, than make a two column layout.
-				if ( $target.find('#teaser-container-grid').hasClass('full-width') ) {
-					$(this).addClass('teaser--two-columns');
-				}else{
-					$(this).removeClass('teaser--two-columns');	
-				}
-			});
-
-			this.verticalAlign();
-
-		}, // setTeaserViewGrid
-
-
-		verticalAlign: function() {
-
-			var $target = $(this.target);	  
-
-			$(this.target).show().children().not('.modal').show();
-
-			// Vertically align thumbs (in relation to their frames)
-			$target.find('.teaser--list img').each( function() {
-
-				// Calculating offset that will vertically center the thumb
-				// NOTE: 66 is the maximum thumb height in pixels
-				var thumbHeight = $(this).height();
-				var verticalOffset =  (66 - thumbHeight) / 2;
-
-				if( $(this).height() < 66 ) {
-					$(this).css('margin-top', verticalOffset + 'px');
-				}
-			});
-
 		}
-
-
 	});
 
 })(jQuery);

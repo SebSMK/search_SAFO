@@ -132,6 +132,12 @@ var EventsManager;
 			template: Mustache.getTemplate('templates/search_box.html')
 		}));
 		
+		Manager.addWidget(new AjaxSolr.SearchInfoWidget({
+			id: 'search-info',
+			target: '#searchinfo',			
+			template: Mustache.getTemplate('templates/search_info.html')
+		}));
+		
 		Manager.addWidget(new AjaxSolr.SearchBoxAutoWidget({
 			id: 'searchboxauto',
 			target: '#searchboxauto',			

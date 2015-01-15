@@ -1,8 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-  <meta http-equiv="content-type" content="text/html; charset=windows-1250">
-  <meta name="generator" content="PSPad editor, www.pspad.com">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">  
   <title>SMK - Advanceret søg i samlinger</title>
   
 
@@ -23,7 +22,8 @@
 	<script src="widgets/ThumbsWidget.js" type="text/javascript"></script>
 	<script src="widgets/TeasersWidget.js" type="text/javascript"></script>	
 	<script src="widgets/RelatedWidget.js" type="text/javascript"></script>
-	<script src="widgets/PagerWidget.js" type="text/javascript"></script>	
+	<script src="widgets/PagerWidget.js" type="text/javascript"></script>
+	<script src="widgets/SearchInfoWidget.js" type="text/javascript"></script>		
 	<script src="js/jquery/jquery.highlight.js" type="text/javascript"></script>
 	<script src="core/AbstractFacetWidget.js" type="text/javascript"></script>
 	<script src="widgets/SearchFiltersWidget.js" type="text/javascript"></script>

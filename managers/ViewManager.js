@@ -105,7 +105,7 @@
 
 		//* teaser		
 		this.smk_teasers_this_img_displayed = function(){
-			$(this.callWidgetTarget('teasers')).find('#teaser-container-grid').masonry('layout');
+			$(this.callWidgetTarget('teasers')).find('.search-results .matrix').masonry('layout');
 
 			//* check if there are still images not displayed in "teaser"
 			if ($(this.callWidgetTarget('teasers')).find('.image_loading').length == 0 && 
@@ -118,7 +118,7 @@
 		};
 
 		this.smk_teasers_this_img_loaded = function(){
-			$(this.callWidgetTarget('teasers')).find('#teaser-container-grid').masonry('layout');
+			$(this.callWidgetTarget('teasers')).find('.search-results .matrix').masonry('layout');
 
 			//* check if there are still images loading in "teaser"
 			if ($(this.callWidgetTarget('teasers')).find('.image_loading').length == 0){
@@ -147,7 +147,7 @@
 
 		//* related
 		this.smk_related_this_img_loaded = function(){
-			$(this.callWidgetTarget('details', 'related_subWidget')).find('#teaser-container-grid').masonry('layout');  
+			$(this.callWidgetTarget('details', 'related_subWidget')).find('.search-results .matrix').masonry('layout');  
 
 			//* check if there are still images loading in "related"
 			if ($(this.callWidgetTarget('details', 'related_subWidget')).find('.image_loading').length == 0){    		
@@ -236,7 +236,7 @@
 				self.showWidget($(self.callWidgetTarget('details', 'related_subWidget')));				
 
 				$(self.callWidgetTarget('details', 'related_subWidget')).find('h3.heading--l').hide(); // we don't want to see the title of "relatedwidget" now (only after "afterrequest")
-				$target.find('.view  #related-artworks #teaser-container-grid').masonry('layout');
+				$target.find('.view  #related-artworks .search-results .matrix').masonry('layout');
 
 				break;		  
 			} 	
@@ -280,7 +280,7 @@
 					break;
 				default:		    			  			   							  
 					$target.find("#search-filters").hide();
-					$(this.callWidgetTarget('teasers')).find('#teaser-container-grid').addClass('full-width').hide();				
+					$(this.callWidgetTarget('teasers')).find('.search-results .matrix').addClass('full-width').hide();				
 					this.callWidgetFn('category', 'setActiveTab', {params: ['all']});
 					break;		  
 			}			
@@ -300,8 +300,8 @@
 				});
 			}										 
 
-			if($(this.callWidgetTarget('teasers')).find('#teaser-container-grid .teaser--grid').length > 0)
-				$(this.callWidgetTarget('teasers')).find('#teaser-container-grid').masonry('layout');
+			if($(this.callWidgetTarget('teasers')).find('.search-results .matrix .matrix-tile').length > 0)
+				$(this.callWidgetTarget('teasers')).find('.search-results .matrix').masonry('layout');
 
 			return;
 		};
