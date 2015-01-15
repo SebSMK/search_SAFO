@@ -7,7 +7,7 @@
 		if (typeof define === "function" && define.amd) {
 			define(getdatadetailstandard); // AMD
 		} else {
-			root.getData_Detail_Basis = getdatadetailstandard; // <script>
+			root.getData_Detail_Standard= getdatadetailstandard; // <script>
 		}
 	}
 }(this, function (getdatadetailstandard) {

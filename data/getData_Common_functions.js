@@ -13,6 +13,20 @@
 }(this, function (getdatacommon) {
 
 	/**
+	 * Location
+	 * */
+	
+	getdatacommon.getLocation_location = function (doc, caller){
+		var location = smkCommon.firstCapital(doc.location_name);
+		var location_inhouse = smkCommon.isValidDataText(location) ? caller.manager.translator.getCollection(smkCommon.replace_dansk_char(location)) : ''; 
+		
+		if(smkCommon.isValidDataText(location_inhouse));
+			return caller.manager.translator.getLabel("teaser_on_display"); 
+
+		return caller.manager.translator.getLabel("teaser_appoint");	  
+	};
+	
+	/**
 	 * Identification
 	 * */
 	getdatacommon.getIdent_vaerktype = function(doc){			
@@ -71,11 +85,14 @@
 					var death = smkCommon.isValidDataText(docDeath[i], 'date') ? docDeath[i] : (docBirth[i] < 1800) ? '(?)' : '';
 					var dates = smkCommon.isValidDataText(docDeath[i], 'date') || smkCommon.isValidDataText(docBirth[i], 'date') ? sprintf('%s - %s', birth, death) : '';
 
+					
 					artistData.push({'artist_data' : 
 					{'name' : name,
 						'nationality' : nationality,
 						'dates' : dates}
-					});		  		  
+					});
+					//artistData.push(name);
+					
 				}
 			}		  		  
 		}	  
@@ -114,8 +131,9 @@
 		var arrayLength = titles_split.length;
 
 		for (var i = 0; i < arrayLength; i++) {					
-			var values = titles_split[i].split(smkCommon.split_2_niv);
-			if(smkCommon.getValueFromSplit(values, 4) != null && smkCommon.getValueFromSplit(values, 4).indexOf(type) > -1){
+			var values = titles_split[i].split(smkCommon.split_2_niv);			
+			if(smkCommon.getValueFromSplit(values, 4) != null && smkCommon.getValueFromSplit(values, 4).indexOf(type) > -1 ||
+					smkCommon.getValueFromSplit(values, 4) == null && 'museum'.indexOf(type) > -1){
 				var title = smkCommon.getValueFromSplit(values, 0);
 				var title_note = smkCommon.getValueFromSplit(values, 1);
 				var title_lang = smkCommon.getValueFromSplit(values, 2);

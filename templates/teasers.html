@@ -8,73 +8,33 @@
 	<script id="teaserArticleTemplate" type="text/template">	
 		{{#artworks}}
         <article class="teaser--grid">
-          <div class="teaser__wrapper">
-            {{#loading}}
-			<div class="teaser__thumbnail image_loading" src="{{thumbnail}}" alt="{{#copyright}}{{{copyright}}}{{/copyright}}" img_id="{{img_id}}">
-              	{{#is_artwork}} 
-					<a href="{{url}}" alt="{{title}}" class="article_artwork"></a>
-				{{/is_artwork}}
-				{{#not_is_artwork}} 
-					<a href="{{url}}" alt="{{title}}" class="article_link"></a>
-				{{/not_is_artwork}} 
-            </div>
-			{{/loading}}
+          <div class="teaser__wrapper">            
+			{{#media}}			
+			<div class="teaser__thumbnail image_loading" src="{{image}}" alt="{{#copyright}}{{{copyright}}}{{/copyright}}" img_id="{{img_id}}">              	 
+				<a href="#" alt="{{alt}}" class="article_artwork"></a>								 
+            </div>			
+            {{/media}}
             
-            <div class="teaser__content">
-              <ul class="teaser__category">
-                {{#categories}}
-                  <li>
-                    <a>{{{name}}}</a>
-                  </li>
-                {{/categories}}
-              </ul>              				
+			<div class="teaser__content">  
+              {{#info}}
+              <h3 class="teaser__heading">               					 
+					<a href="#" class="article_artwork">{{#producent_kunster}}{{{artist_data.name}}}<br>{{/producent_kunster}}{{#title_pad}}<br>{{/title_pad}}{{#title_museum}}{{title}}{{/title_museum}}<br><span>{{{datering_production_vaerkdatering}}}</span></a> 				
+              </h3>		
+			  {{/info}}	 
 
-              <h3 class="teaser__heading">
-               	<!-- show an artwork -->
-				{{#is_artwork}} 
-					<a href="{{url}}" alt="{{title}}" class="article_artwork">{{{artist_data}}}{{#title_pad}}<br>{{/title_pad}}{{title}}<span>{{{artwork_date}}}</span></a> 
-				{{/is_artwork}}
-				
-				<!-- not showing an artwork -->
-				{{#not_is_artwork}} 
-					<a href="{{url}}" alt="{{title}}" class="article_link">{{title}}</a> 
-				{{/not_is_artwork}}
-              </h3>
+			  <!-- inventar number -->
+  			  	{{#info.ident_invnummer}}              
+				<ul class="teaser__meta">                                				  				  	
+					<li>{{{info.ident_invnummer}}}</li>				  					                  
+              	</ul>
+				{{/info.ident_invnummer}}
 
-			  {{#description}}
-              <div class="teaser__description">
-                {{description}}
-              </div>
-			  {{/description}}
-
-			  <!-- location -->
-              <ul class="teaser__meta">
-                {{#meta}}                  
-				  {{#is_artwork}}
-				  	{{#location}}
-						<li>{{{label}}}</li>
-				  	{{/location}}
-				  {{/is_artwork}}
-                {{/meta}}
-              </ul>	
-			
-			{{#not_is_artwork}}
-			  	{{#lastupdate}}
-			  		<!-- last update ()website -->
-              		<ul class="teaser__meta">                 				  
-						<li><span>{{{key}}}</span>&nbsp;{{{value}}}</li>			                
-              		</ul>								
-	  			{{/lastupdate}}
-			{{/not_is_artwork}}		
-
- 			<!-- event date -->
-			{{#not_is_artwork}}
-				{{#eventdato}}
-		            <ul class="teaser__meta">                 				  
-						<li>{{{eventdato}}}</li>
-					</ul>
-	  			{{/eventdato}}
-			{{/not_is_artwork}}				 
+				<!-- location -->
+  			  	{{#info.location_location}}              
+				<ul class="teaser__meta">                                				  				  	
+						<li>{{{info.location_location}}}</li>				  					                  
+              	</ul>
+				{{/info.location_location}}			 								 
 
             </div><!-- teaser__content -->
           </div><!-- teaser__wrapper -->

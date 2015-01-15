@@ -233,6 +233,18 @@ var EventsManager;
 			template: Mustache.getTemplate('templates/original.html')
 		});
 		
+		Manager.addWidget(new AjaxSolr.DetailTabsWidget({
+			id: 'details_tabs',
+			target: '#smk_detail_tabs',
+			template: Mustache.getTemplate('templates/detail_tabs.html'),
+			thumbnailsManager: thumbnailsManager,
+			thumbnails_subWidget: sub_thumbsWidget,
+			relatedManager: relatedManager,
+			related_subWidget: sub_relatedWidget,
+			originalManager: getDetailManager,
+			original_subWidget: sub_originalWidget
+		}));	
+		
 		Manager.addWidget(new AjaxSolr.DetailWidget({
 			id: 'details',
 			target: '#smk_detail',
@@ -243,7 +255,7 @@ var EventsManager;
 			related_subWidget: sub_relatedWidget,
 			originalManager: getDetailManager,
 			original_subWidget: sub_originalWidget
-		}));		
+		}));
 
 		//******************************
 		//** add event listeners

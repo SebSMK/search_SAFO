@@ -25,72 +25,7 @@
 			
 			self.default_picture_path = smkCommon.getDefaultPicture('large');
 			self.current_language = self.manager.translator.getLanguage();
-			
-			//* set and save default request parameters for both sub_managers                
-			var params = {					
-					'rows':500,					
-					'start': 0,
-					'json.nl': 'map'
-			};
-			
-			for (var name in params) {
-				self.thumbnailsManager.store.addByValue(name, params[name]);
-				self.relatedManager.store.addByValue(name, params[name]);
-				self.originalManager.store.addByValue(name, params[name]);
-			}    		
-			
-			//***
-			//* original sub widget
-			//***
-			//* sub widget coupling
-			self.originalManager.addWidget(self.original_subWidget); 
-
-			//***
-			//* related sub widget
-			//***
-			//* sub widget coupling
-			self.relatedManager.addWidget(self.related_subWidget); 				
-
-			//* a new image has been displayed in "scroll teaser"
-			$(self.related_subWidget).on('smk_related_this_img_loaded', function(event){     	            								
-				$(self).trigger({
-					type: "smk_related_this_img_loaded"
-				});
-			});	
-			
-			// click on a related artwork
-			$(self.related_subWidget).on('smk_search_call_detail', function(event){ 								
-				$(self).trigger({
-					type: "smk_search_call_detail",
-					event_caller: event
-				});
-			});
-
-			//***
-			//* thumbnail sub widget
-			//***
-			//* sub widget coupling
-			self.thumbnailsManager.addWidget(self.thumbnails_subWidget); 				
-
-			// a new image has been displayed in "scroll teaser"
-			$(self.thumbnails_subWidget).on('smk_thumbs_img_loaded', function(event){     	            								
-				$(self).trigger({
-					type: "smk_thumbs_img_loaded"
-				});
-			});	
-			
-			// click on a thumb
-			$(self.thumbnails_subWidget).on('smk_search_call_detail', function(event){ 
-				
-				self.setCurrentThumb_selec(event.detail_id);  
-				
-				$(self).trigger({
-					type: "smk_search_call_detail",
-					event_caller: event
-				});
-			});
-
-			self.thumbnailsManager.init();
+						
 		}, 
 
 		afterRequest: function () {	  
@@ -119,35 +54,11 @@
 			}			
 			
 			var artwork_data = null;
-			var dataHandler = new getData_Detail.constructor(this);
-			var multi_work_ref_req = null;
-			var related_id_req = null;
-			var original_id_req = null;
+			var dataHandler = new getData_Detail.constructor(this);			
 
 			for (var i = 0, l = this.manager.response.response.docs.length; i < l ; i++) {
-				var doc = this.manager.response.response.docs[i]; 
-				
-				//øøøøøøøøøøøø//
-				var dataHandler_test = new getData_Detail_Extended.constructor(this);
-				var artwork_data_test = dataHandler_test.get_data(doc); 
-				
-				
-				
-				var dataHandler_test_basis = new getData_Detail_Basis.constructor(this);
-				var artwork_data_test_basis = dataHandler_test_basis.get_data(doc); 
-				
-				//øøøøøøøøøøøø//
-				
+				var doc = this.manager.response.response.docs[i]; 												
 				artwork_data = dataHandler.get_data(doc);  
-				//* process thumbnails
-				multi_work_ref_req = artwork_data.subwidget.req_multiwork;
-				if (self.getCurrentThumb_selec() == null)
-					self.setCurrentThumb_selec(doc.id);
-				//* process related
-				related_id_req = artwork_data.subwidget.req_relatedid;	
-				
-				
-
 			}
 			
 			//* merge data and template
@@ -170,53 +81,14 @@
 						});  		    		    		    			
 						return;  		    		            
 					}
-			);
-			
-			if(multi_work_ref_req != null){				
-				//* start thumbnail sub request
-				var param = new AjaxSolr.Parameter({name: "q", value: multi_work_ref_req });					  					
-				this.thumbnailsManager.store.add(param.name, param);	 			
-				this.thumbnailsManager.doRequest();				
-			}	
-			
-			if(related_id_req != null){				
-				//* start thumbnail sub request
-				var param = new AjaxSolr.Parameter({name: "q", value: related_id_req });					  					
-				this.relatedManager.store.add(param.name, param);	 			
-				this.relatedManager.doRequest();
-			}
-			
-			if(original_id_req != null){	
-				//* start original  sub request
-				var param = new AjaxSolr.Parameter({name: "q", value: original_id_req });					  					
-				this.originalManager.store.add(param.name, param);	 			
-				this.originalManager.doRequest();
-			}						
-
+			);						
 		},  
 
 		template_integration_json: function (json_data, templ_id){	  
 			var template = this.template; 	
 			var html = Mustache.to_html($(template).find(templ_id).html(), json_data);
 			return html;
-		},
-		
-		setCurrentThumb_selec: function(selec){
-			this.thumbnails_subWidget.setCurrent_selec(selec);
-		},
-		
-		getCurrentThumb_selec: function(){
-			return this.thumbnails_subWidget.getCurrent_selec();
-		},
-		
-		verticalAlignThumbs: function(){
-			this.thumbnails_subWidget.verticalAlign();
-		},
-		
-		removeAllRelated: function(){
-			this.related_subWidget.removeAllArticles();
-		}
-
+		},		
 	});
 
 })(jQuery);
