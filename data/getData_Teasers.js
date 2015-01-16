@@ -35,10 +35,12 @@
 						title_museum: this.getListTitle(doc),															
 						datering_production_vaerkdatering: getData_Common.getProduction_vaerkdatering(doc),		
 						ident_invnummer: getData_Common.getIdent_invnummer(doc),	
-						location_location: getData_Common.getLocation_location(doc, this.caller),
+						location_location: this.getListLocation(doc, this.caller),
 						
 						title_pad: smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, 'original')) ? false : true,
-						url: this.getDetailUrl(doc)								
+						url: this.getDetailUrl(doc),
+						
+						label_ref: this.caller.manager.translator.getLabel("list_reference")
 					}
 			};	
 
@@ -60,11 +62,22 @@
 			var max = 70;
 			var short;
 			if (title.length > 0){
-				short = title[0].title.length > max ? sprintf('%s...', title[0].title.substring(0, max)) : title[0].title;
+				short = title[0].title.length > max ? sprintf('%s(...)', title[0].title.substring(0, max)) : title[0].title;
 				title[0].title = short;
 			}
 				
 			return title.length > 0 ? title[0] : null;
+		};
+		
+		this.getListLocation = function (doc, caller){
+			var location = smkCommon.firstCapital(doc.location_name);
+			var location_inhouse = smkCommon.isValidDataText(location) ? caller.manager.translator.getCollection(smkCommon.replace_dansk_char(location)) : ''; 
+			var label = smkCommon.isValidDataText(location_inhouse) ? 
+					sprintf('%s %s', caller.manager.translator.getLabel("teaser_on_display"), location) 
+						: 
+					caller.manager.translator.getLabel("teaser_appoint");
+			
+			return label;
 		};
 		
 		this.getListProducers = function(doc){									
@@ -99,7 +112,7 @@
 				
 				for (var j = 0, k = list[i].length; res.length < max && j < k ; j++) {
 					if (res.length == max - 1 && (j + 1 < k || i + 1 < l))
-						list[i][j].artist_data.etc = '...';
+						list[i][j].artist_data.etc = '(...)';
 						
 					
 					if(smkCommon.isValidDataText(list[i][j].artist_data.role))

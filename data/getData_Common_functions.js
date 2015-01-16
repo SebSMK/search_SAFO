@@ -19,11 +19,7 @@
 	getdatacommon.getLocation_location = function (doc, caller){
 		var location = smkCommon.firstCapital(doc.location_name);
 		var location_inhouse = smkCommon.isValidDataText(location) ? caller.manager.translator.getCollection(smkCommon.replace_dansk_char(location)) : ''; 
-		
-		if(smkCommon.isValidDataText(location_inhouse));
-			return caller.manager.translator.getLabel("teaser_on_display"); 
-
-		return caller.manager.translator.getLabel("teaser_appoint");	  
+		return smkCommon.isValidDataText(location_inhouse) ? location_inhouse : null;
 	};
 	
 	/**

@@ -48,6 +48,8 @@
 	  "label_type_activity":	"activity",
 	  "label_type_exhibition":	"exhibition",
 	  
+	  "list_reference":			"ref.",
+	  
 	  "detail_technique":		"technique",
 	  "detail_acquisition":		"acquisition",
 	  "detail_reference":		"reference",
@@ -80,7 +82,7 @@
 	  
 	  "teaser_reference":		"reference",
 	  "teaser_appoint":			"view by appointement",
-	  "teaser_on_display": 		"on display",
+	  "teaser_on_display": 		"on display in",
 	  "teaser_last_update":		"last updated",
 	  "teaser_event_date":		"dato",
 	  
@@ -313,6 +315,8 @@
 	  
 	  "label_type_activity":	"aktivitet",
 	  "label_type_exhibition":	"udstilling",
+	  
+	  "list_reference":			"inv.nr.",
 	  	   	  
 	  "detail_technique":		"teknik",
 	  "detail_acquisition":		"erhvervelse",
@@ -348,7 +352,7 @@
 	  
 	  "teaser_reference":		"inv.nr.",
 	  "teaser_appoint":			"kan ses efter aftale",
-	  "teaser_on_display": 		"kan ses p&aring; museet",
+	  "teaser_on_display": 		"kan ses i",
 	  "teaser_last_update":		"sidst opdateret",
 	  "teaser_event_date":		"dato",
 	  
