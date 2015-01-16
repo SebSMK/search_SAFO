@@ -82,7 +82,7 @@
 
 					//* if the current article is an artwork, add a link to detail on click on title
 					$article.find('.article_artwork')
-					.click({detail_id: artwork_data.img_id, caller:this}, 
+					.click({detail_id: artwork_data.media.img_id, caller:this}, 
 							function (event) {
 						event.preventDefault();
 						$(event.data.caller).trigger({

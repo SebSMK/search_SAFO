@@ -182,6 +182,9 @@
 			switch(stateChange["view"]){
 			case "teasers":			  
 
+				$target.find("section.section--list").show();
+				$target.find("section.section--detail").hide();
+				
 				$(self.callWidgetTarget('details', 'thumbnails_subWidget')).empty().hide();
 				$(self.callWidgetTarget('details')).empty().hide();
 				$(self.callWidgetTarget('details', 'related_subWidget')).empty().hide();
@@ -221,6 +224,9 @@
 
 				self.callWidgetFn('details', 'removeAllRelated');
 
+				$target.find("section.section--list").hide();
+				$target.find("section.section--detail").show();
+				
 				$target.find("#pager-header").hide();
 				$target.find("#search-filters").hide();
 

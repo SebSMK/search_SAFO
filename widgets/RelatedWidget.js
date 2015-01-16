@@ -71,7 +71,7 @@
 
 				//* add a link to detail on click on title
 				$article.find('.article_artwork')
-				.click({detail_id: artwork_data.img_id, caller:self}, function (event) {
+				.click({detail_id: artwork_data.media.img_id, caller:self}, function (event) {
 					event.preventDefault();
 					$(event.data.caller).trigger({
 						type: "smk_search_call_detail",

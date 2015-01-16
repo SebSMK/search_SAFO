@@ -18,8 +18,6 @@
 			var data;
 
 			var data =  {
-
-					url: this.getDetailUrl(doc.id), 
 					
 					media:{
 						title:  getData_Common.getTitle(doc, 'museum'),	
@@ -28,7 +26,8 @@
 						copyright: getData_Common.getMedia_copyright(doc, this.caller),
 						copyright_default: !smkCommon.computeCopyright(doc) && doc.medium_image_url !== undefined,
 						copyright_valid: smkCommon.computeCopyright(doc),
-						img_id:doc.id
+						img_id: doc.id,
+						url: this.getDetailUrl(doc)
 					},
 					
 					info:{
@@ -39,7 +38,7 @@
 						location_location: getData_Common.getLocation_location(doc, this.caller),
 						
 						title_pad: smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, 'original')) ? false : true,
-														
+						url: this.getDetailUrl(doc)								
 					}
 			};	
 
@@ -48,9 +47,9 @@
 
 		};  				
 		
-		this.getDetailUrl = function(id){									
+		this.getDetailUrl = function(doc){									
 			var model = {};
-			model.q = id;
+			model.q = doc.id;
 			model.view = 'detail';
 
 			return ModelManager.buildURLFromModel(model); 
