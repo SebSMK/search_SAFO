@@ -80,16 +80,17 @@
 			for (var i = 0, l = doc.artist_name.length; i < l; i++) {
 				if(doc.artist_auth[i].indexOf(role) > -1){
 					var name = doc.artist_name[i];						
-					var nationality = smkCommon.isValidDataText(docNatio[i], 'natio') ? sprintf('%s, ', docNatio[i]) : '';
+					var nationality = smkCommon.isValidDataText(docNatio[i], 'natio') ? docNatio[i] : '';
 					var birth = docBirth[i];
 					var death = smkCommon.isValidDataText(docDeath[i], 'date') ? docDeath[i] : (docBirth[i] < 1800) ? '(?)' : '';
 					var dates = smkCommon.isValidDataText(docDeath[i], 'date') || smkCommon.isValidDataText(docBirth[i], 'date') ? sprintf('%s - %s', birth, death) : '';
-
+					var auth = !smkCommon.isValidDataText(doc.artist_auth[i]) || doc.artist_auth[i] == 'original' ? '' : doc.artist_auth[i]; 
 					
 					artistData.push({'artist_data' : 
 					{'name' : name,
 						'nationality' : nationality,
-						'dates' : dates}
+						'dates' : dates,
+						'role': auth}
 					});
 					//artistData.push(name);
 					

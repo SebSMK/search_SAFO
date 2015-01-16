@@ -22,7 +22,7 @@
 					url: this.getDetailUrl(doc.id), 
 					
 					media:{
-						title: getData_Common.getTitle(doc, 'museum'),	
+						title:  getData_Common.getTitle(doc, 'museum'),	
 						alt: getData_Common.getMedia_alt(doc),
 						image: getData_Common.getMedia_image(doc, this.caller),						
 						copyright: getData_Common.getMedia_copyright(doc, this.caller),
@@ -32,8 +32,8 @@
 					},
 					
 					info:{
-						producent_kunster: getData_Common.getProducent_producent(doc, 'original'),																																
-						title_museum: getData_Common.getTitle(doc, 'museum'),															
+						producent_kunster: this.getListProducers(doc),																																
+						title_museum: this.getListTitle(doc),															
 						datering_production_vaerkdatering: getData_Common.getProduction_vaerkdatering(doc),		
 						ident_invnummer: getData_Common.getIdent_invnummer(doc),	
 						location_location: getData_Common.getLocation_location(doc, this.caller),
@@ -54,6 +54,64 @@
 			model.view = 'detail';
 
 			return ModelManager.buildURLFromModel(model); 
+		};
+		
+		this.getListTitle = function(doc){
+			var title = getData_Common.getTitle(doc, 'museum');
+			var max = 70;
+			var short;
+			if (title.length > 0){
+				short = title[0].title.length > max ? sprintf('%s...', title[0].title.substring(0, max)) : title[0].title;
+				title[0].title = short;
+			}
+				
+			return title.length > 0 ? title[0] : null;
+		};
+		
+		this.getListProducers = function(doc){									
+			var res = new Array();
+			var list = new Array();
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, 'original')))
+				list.push(getData_Common.getProducent_producent(doc, 'original'));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, 'tilskrevet')))
+				list.push(getData_Common.getProducent_producent(doc, 'tilskrevet'));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, 'tidl')))
+				list.push(getData_Common.getProducent_producent(doc, 'tidl'));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, 'værksted')))
+				list.push(getData_Common.getProducent_producent(doc, 'værksted'));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, 'skole')))
+				list.push(getData_Common.getProducent_producent(doc, 'skole'));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, 'stil')))
+				list.push(getData_Common.getProducent_producent(doc, 'stil'));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, 'kopi')))
+				list.push(getData_Common.getProducent_producent(doc, 'kopi'));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, 'forlæg')))
+				list.push(getData_Common.getProducent_producent(doc, 'forlæg'));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, 'udgiver')))
+				list.push(getData_Common.getProducent_producent(doc, 'udgiver'));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, 'trykker')))
+				list.push(getData_Common.getProducent_producent(doc, 'trykker'));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, 'forfatter')))
+				list.push(getData_Common.getProducent_producent(doc, 'forfatter'));
+			
+			var max = 3;
+			
+			for (var i = 0, l = list.length; res.length < max && i < l; i++) {
+				
+				for (var j = 0, k = list[i].length; res.length < max && j < k ; j++) {
+					if (res.length == max - 1 && (j + 1 < k || i + 1 < l))
+						list[i][j].artist_data.etc = '...';
+						
+					
+					if(smkCommon.isValidDataText(list[i][j].artist_data.role))
+						list[i][j].artist_data.role = sprintf(' %s', list[i][j].artist_data.role);
+						
+					res.push(list[i][j]);
+				}				
+				
+			}
+			
+			return res; 
 		};
 		
 		this.getImage = function ($container, $target){

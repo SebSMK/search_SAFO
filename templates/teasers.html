@@ -22,9 +22,12 @@
 					{{/media}}
 			
 					<div class="matrix-tile-header">
-						{{#info}} {{#producent_kunster}}
-						<h3>{{{artist_data.name}}}</h3>
-						{{/producent_kunster}} {{#title_museum}}
+						{{#info}} 
+						{{#producent_kunster}}
+						<h3>{{{artist_data.name}}}&nbsp;<span>{{{artist_data.role}}}</span>{{#artist_data.etc}}<br>{{{artist_data.etc}}}{{/artist_data.etc}}</h3>
+						{{/producent_kunster}} 
+						
+						{{#title_museum}}
 						<h2>
 							<a href="#" class="article_artwork">{{title}}<span
 								class="matrix-tile-date">{{{datering_production_vaerkdatering}}}</span></a>
