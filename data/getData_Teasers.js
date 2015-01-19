@@ -37,7 +37,7 @@
 						ident_invnummer: getData_Common.getIdent_invnummer(doc),	
 						location_location: this.getListLocation(doc, this.caller),
 						
-						title_pad: smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, 'original')) ? false : true,
+						title_pad: smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.orig)) ? false : true,
 						url: this.getDetailUrl(doc),
 						
 						label_ref: this.caller.manager.translator.getLabel("list_reference")
@@ -83,28 +83,32 @@
 		this.getListProducers = function(doc){									
 			var res = new Array();
 			var list = new Array();
-			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, 'original')))
-				list.push(getData_Common.getProducent_producent(doc, 'original'));
-			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, 'tilskrevet')))
-				list.push(getData_Common.getProducent_producent(doc, 'tilskrevet'));
-			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, 'tidl')))
-				list.push(getData_Common.getProducent_producent(doc, 'tidl'));
-			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, 'værksted')))
-				list.push(getData_Common.getProducent_producent(doc, 'værksted'));
-			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, 'skole')))
-				list.push(getData_Common.getProducent_producent(doc, 'skole'));
-			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, 'stil')))
-				list.push(getData_Common.getProducent_producent(doc, 'stil'));
-			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, 'kopi')))
-				list.push(getData_Common.getProducent_producent(doc, 'kopi'));
-			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, 'forlæg')))
-				list.push(getData_Common.getProducent_producent(doc, 'forlæg'));
-			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, 'udgiver')))
-				list.push(getData_Common.getProducent_producent(doc, 'udgiver'));
-			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, 'trykker')))
-				list.push(getData_Common.getProducent_producent(doc, 'trykker'));
-			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, 'forfatter')))
-				list.push(getData_Common.getProducent_producent(doc, 'forfatter'));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.orig)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.orig));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.tilsk)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.tilsk));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.tidl)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.tidl));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.vaerksted)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.vaerksted));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.efterfoel)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.efterfoel));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.inventor)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.inventor));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.skole)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.skole));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.stil)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.stil));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.kopi)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.kopi));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.efterfor)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.efterfor));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.udgiver)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.udgiver));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.trykker)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.trykker));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.forfatter)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.forfatter));
 			
 			var max = 3;
 			

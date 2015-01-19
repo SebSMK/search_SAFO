@@ -74,7 +74,7 @@
 				return doc.artist_name;
 
 			for (var i = 0, l = doc.artist_name.length; i < l; i++) {
-				if(doc.artist_auth[i].indexOf(role) > -1){
+				if(doc.artist_auth[i].indexOf(role) == 0){
 					var name = doc.artist_name[i];						
 					var nationality = smkCommon.isValidDataText(docNatio[i], 'natio') ? docNatio[i] : '';
 					var birth = docBirth[i];
@@ -255,7 +255,7 @@
 		if (doc.dimension_bladmaal !== undefined)
 			dimensions.push( 
 					{
-						'type' : 'bladmål',
+						'type' : 'bladmï¿½l',
 						'dim' : doc.dimension_bladmaal
 					}
 			);			
@@ -263,7 +263,7 @@
 		if (doc.dimension_plademaal!== undefined)
 			dimensions.push( 
 					{
-						'type' : 'plademål',
+						'type' : 'plademï¿½l',
 						'dim' : doc.dimension_plademaal
 					}
 			);
@@ -711,7 +711,7 @@
 	 * Media
 	 * */
 	getdatacommon.getMedia_alt = function (doc){	  
-		var artist = smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, 'original')) ? '' : getData_Common.getProducent_producent(doc, 'original') + ' - ';
+		var artist = smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.orig)) ? '' : getData_Common.getProducent_producent(doc, getData_Common.enumProducent.orig) + ' - ';
 		var title = getData_Common.getTitle(doc, 'museum');
 		var copyright = smkCommon.computeCopyright(doc); 
 
@@ -732,6 +732,24 @@
 					caller.manager.translator.getLabel("detail_no_photo");	 	  
 	};
 	
+	/**
+	 * Enum
+	 * */
 	
+	getdatacommon.enumProducent = {			
+		'orig': 'original',
+		'tilsk': 'tilskrevet',
+		'tidl': 'tidl',
+		'vaerksted': 'vÃ¦rksted',
+		'efterfoel': 'efterf',
+		'inventor': 'inventor',
+		'skole': 'skole',
+		'stil': 'stil',
+		'kopi': 'kopi',
+		'efterfor': 'efter forlÃ¦g',
+		'udgiver': 'udgiver',
+		'trykker': 'trykker',
+		'forfatter': 'forfatter'									
+	}
 	
 }));

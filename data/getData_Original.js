@@ -22,7 +22,7 @@
 						original_placering: this.getEjer(doc),						
 						original_invnummer: getData_Common.getIdent_invnummer(doc),
 						original_proveniens: getData_Common.getErhverv_proveniens(doc),						
-						original_kunster: getData_Common.getProducent_producent(doc, 'original'),
+						original_kunster: getData_Common.getProducent_producent(doc, getData_Common.enumProducent.orig),
 						original_autenticitet: getData_Common.getProducent_objectophavsbeskrivelse(doc),	
 						original_tilstand: getData_Common.getTechnique_tilstand(doc),
 						original_indskrift: getData_Common.getTechnique_kollation(doc), 
