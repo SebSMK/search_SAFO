@@ -66,8 +66,10 @@
 			var q = [];
 			if (model.view != 'detail'){
 				q = [Manager.store.q_default];										
-				if(model.q !== undefined)
-					q = q.concat(model.q);
+				if(model.q !== undefined){
+					q = q.concat(model.q);				
+					q = q.join(" AND ");
+				}					
 			}else{
 				if(model.q !== undefined)
 					q = sprintf('id_s:%s', model.q);			    	

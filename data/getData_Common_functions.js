@@ -750,6 +750,16 @@
 		'udgiver': 'udgiver',
 		'trykker': 'trykker',
 		'forfatter': 'forfatter'									
+	};
+	
+	/**
+	 * Debug
+	 * */
+	
+	getdatacommon.getScore = function(doc){
+		return doc.score;
+		
 	}
+	
 	
 }));

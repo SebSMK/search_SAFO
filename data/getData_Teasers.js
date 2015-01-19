@@ -41,6 +41,10 @@
 						url: this.getDetailUrl(doc),
 						
 						label_ref: this.caller.manager.translator.getLabel("list_reference")
+					},
+					
+					debug:{
+						score: getData_Common.getScore(doc)						
 					}
 			};	
 

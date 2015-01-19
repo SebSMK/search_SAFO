@@ -67,7 +67,7 @@ var EventsManager;
 				'facet.field': ['artist_name_ss', 'artist_natio', 'object_production_century_earliest', 'object_type'],
 				'facet.limit': -1,
 				'facet.mincount': 1,
-				'rows':12,
+				'rows':24,
 				'defType': 'edismax',      
 				'qf': Manager.store.get_qf_string(),
 				'start': 0, // Math.floor((Math.random()*2000)+1),

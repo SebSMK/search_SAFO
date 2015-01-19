@@ -23,13 +23,13 @@ AjaxSolr.SearchBoxWidget = AjaxSolr.AbstractTextWidget.extend({
 			return;
 		}	 		  
 	  
-		$(this.target).find('input#smk_search.typeahead').val('');
+		$(this.target).find('input#search-bar.typeahead').val('');
 		
 		$(this.target).find('form').bind(
 				'submit',
 				{
 					mmgr : self.manager,
-					$input : $(this.target).find('input#smk_search.typeahead'),
+					$input : $(this.target).find('input#search-bar'),
 					caller : self
 				},
 				function(e) {

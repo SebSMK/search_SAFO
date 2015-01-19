@@ -363,7 +363,7 @@
 		this.set_focus = function(){
 			var self = this;
 			$(document).ready(function () {
-				$(self.callWidgetTarget('searchbox')).find('#smk_search').focus();
+				$(self.callWidgetTarget('searchbox')).find('#search-bar').focus();
 			});	  	  
 		};		
 

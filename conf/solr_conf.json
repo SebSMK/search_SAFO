@@ -2,38 +2,23 @@
     "server":							"http://csdev-seb:8180/solr-example/dev_SAFO/",
     
     "exposed": 							["fq", "q", "start", "limit", "sort", "qf"],
-    "q_default": 						"-(id_s:(*/*) AND category:collections) -(id_s:(*verso) AND category:collections)",
+    "q_default": 						"-(id_s:(*/*)) AND -(id_s:(*verso))",
     
     "sort_default": 					"score desc",
     
+    "fl_default": 						"*, score",
+    
     "qf_default":{	
 		"dk":{
-				"id":					"20", 
-				"title_dk":				"15", 
-				"title_eng":			"5", 
-				"title_first":			"15", 
-				"artist_name":			"15", 
-				"page_content":			"10", 
-				"page_title":			"15", 
-				"description_note_dk":	"5", 
-				"description_note_en":	"2", 
-				"prod_technique_dk":	"5", 
-				"prod_technique_en":	"2", 
-				"object_type":			"10"    			
+				"collector1":			"20", 
+				"collector2":			"15", 
+				"collector3":			"5" 							
 			},
 		"en":{
-				"id":					"20", 
-				"title_dk":				"5", 
-				"title_eng":			"15", 
-				"title_first":			"15", 
-				"artist_name":			"15", 
-				"page_content":			"10", 
-				"page_title":			"15", 
-				"description_note_dk":	"2", 
-				"description_note_en":	"5", 
-				"prod_technique_dk":	"2", 
-				"prod_technique_en":	"5", 
-				"object_type":			"10"    			
+				"collector1":			"20", 
+				"collector_en":			"15", 
+				"collector2":			"5", 
+				"collector3":			"5" 			
 			}
 	}
 }
