@@ -106,7 +106,7 @@
 			};
 			
 			// fl param			
-			Manager.store.addByValue('fl', 'score, id, title_all, medium_image_url, title_first, artist_birth_dk, artist_death_dk, artist_natio, artist_name, artist_auth, copyright, ');
+			Manager.store.addByValue('fl', 'score, id, title_all, medium_image_url, title_first, artist_birth_dk, artist_death_dk, artist_natio, artist_name, artist_auth, copyright, location_name, object_production_date_text_dk, object_production_date_text_en');
 						
 			//* process widgets
 			// remove all previous search filters - only if search filters is set to "getRefresh"					

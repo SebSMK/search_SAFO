@@ -10,12 +10,12 @@
     
     "qf_default":{	
 		"dk":{
-				"collector1":			"20", 
+				"collector1":			"50", 
 				"collector2":			"15", 
 				"collector3":			"5" 							
 			},
 		"en":{
-				"collector1":			"20", 
+				"collector1":			"50", 
 				"collector_en":			"15", 
 				"collector2":			"5", 
 				"collector3":			"5" 			
