@@ -47,7 +47,7 @@ var EventsManager;
 		//******************************    
 		Manager = new AjaxSolr.smkManager({
 			solrUrl: server, 
-			proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
+			//proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
 			store: new AjaxSolr.smkParameterStore({
 				exposed: exposed,    		
 				q_default: q_default,
@@ -63,14 +63,16 @@ var EventsManager;
 		//* set and save default request parameters                
 		var params = {
 				'q': Manager.store.q_default,	
+				/*
 				'facet': true,
 				'facet.field': ['artist_name_ss', 'artist_natio', 'object_production_century_earliest', 'object_type'],
 				'facet.limit': -1,
 				'facet.mincount': 1,
+				*/
 				'rows':24,
 				'defType': 'edismax',      
 				'qf': Manager.store.get_qf_string(),
-				'start': 0, // Math.floor((Math.random()*2000)+1),
+				'start': 0,
 				'sort': Manager.store.sort_default,
 				'json.nl': 'map'
 		};
@@ -78,14 +80,14 @@ var EventsManager;
 			Manager.store.addByValue(name, params[name]);
 		}    
 		// add facet category with locals params
-		Manager.store.add('facet.field', new AjaxSolr.Parameter({ name:'facet.field', value: 'category', locals: { ex:'category' } }));
+		//øøøøøøøøøøøøøøøøø Manager.store.add('facet.field', new AjaxSolr.Parameter({ name:'facet.field', value: 'category', locals: { ex:'category' } }));
 		
 		//******************************
 		//** init thumbnailsManager
 		//******************************    
 		var thumbnailsManager = new AjaxSolr.smkManager({
 			solrUrl: server, 
-			proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
+			//proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
 			store: new AjaxSolr.smkParameterStore({
 				exposed: exposed
 			}),
@@ -99,7 +101,7 @@ var EventsManager;
 		//******************************    
 		var relatedManager = new AjaxSolr.smkManager({
 			solrUrl: server, 
-			proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
+			//proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
 			store: new AjaxSolr.smkParameterStore({
 				exposed: exposed 
 			}),
@@ -113,7 +115,7 @@ var EventsManager;
 		//******************************    
 		var getDetailManager = new AjaxSolr.smkManager({
 			solrUrl: server, 
-			proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
+			//proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
 			store: new AjaxSolr.smkParameterStore({
 				exposed: exposed 
 			}),
@@ -137,14 +139,15 @@ var EventsManager;
 			target: '#searchinfo',			
 			template: Mustache.getTemplate('templates/search_info.html')
 		}));
-		
+
+		/*
 		Manager.addWidget(new AjaxSolr.SearchBoxAutoWidget({
 			id: 'searchboxauto',
 			target: '#searchboxauto',			
 			template: Mustache.getTemplate('templates/search_box.html'),
 			fields: params["facet.field"]
 		}));
-
+*/
 		Manager.addWidget(new AjaxSolr.CurrentSearchWidget({
 			id: 'currentsearch',
 			target: '#currentsearch',

@@ -65,12 +65,12 @@
 			var title = getData_Common.getTitle(doc, 'museum');
 			var max = 70;
 			var short;
-			if (title.length > 0){
+			if (title != undefined && title.length > 0){
 				short = title[0].title.length > max ? sprintf('%s(...)', title[0].title.substring(0, max)) : title[0].title;
 				title[0].title = short;
 			}
 				
-			return title.length > 0 ? title[0] : null;
+			return title != undefined && title.length > 0 ? title[0] : null;
 		};
 		
 		this.getListLocation = function (doc, caller){

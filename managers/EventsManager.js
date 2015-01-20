@@ -67,8 +67,7 @@
 			if (model.view != 'detail'){
 				q = [Manager.store.q_default];										
 				if(model.q !== undefined){
-					q = q.concat(model.q);				
-					q = q.join(" AND ");
+					q = q.concat(sprintf('"%s"', model.q)); // "" specifies that we want an exact match on the search word
 				}					
 			}else{
 				if(model.q !== undefined)
@@ -101,6 +100,11 @@
 			}else{
 				Manager.store.addByValue('start', 0);
 			};
+			
+			// fl param
+			
+			Manager.store.addByValue('fl', 'score, id, title_all, medium_image_url, title_first');
+			
 
 			//* process widgets
 			// remove all previous search filters - only if search filters is set to "getRefresh"					
