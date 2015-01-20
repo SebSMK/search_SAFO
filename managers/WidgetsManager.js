@@ -17,7 +17,7 @@ var EventsManager;
 		solr_conf.load_json("conf/solr_conf.json");
 		var server = solr_conf.get_server();
 		var exposed = solr_conf.get_exposed_params();
-		var q_default = solr_conf.get_q_default();
+		var fq_default = solr_conf.get_fq_default();
 		var sort_default = solr_conf.get_sort_default();
 		var qf_default = solr_conf.get_qf_default(current_language);
 
@@ -50,7 +50,7 @@ var EventsManager;
 			//proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
 			store: new AjaxSolr.smkParameterStore({
 				exposed: exposed,    		
-				q_default: q_default,
+				fq_default: fq_default,
 				qf_default: qf_default,
 				sort_default: sort_default 
 			}),
@@ -62,7 +62,7 @@ var EventsManager;
 
 		//* set and save default request parameters                
 		var params = {
-				'q': Manager.store.q_default,	
+				'fq': Manager.store.fq_default,	
 				/*
 				'facet': true,
 				'facet.field': ['artist_name_ss', 'artist_natio', 'object_production_century_earliest', 'object_type'],

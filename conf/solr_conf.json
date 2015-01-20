@@ -2,7 +2,7 @@
     "server":							"http://csdev-seb:8180/solr-example/dev_SAFO/",
     
     "exposed": 							["fq", "q", "start", "limit", "sort", "qf"],
-    "q_default": 						"-(id_s:(*/*)) -(id_s:(*verso))",
+    "fq_default": 						"-(id_s:(*/*)) -(id_s:(*verso))",
     
     "sort_default": 					"score desc",
     

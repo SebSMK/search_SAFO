@@ -64,10 +64,11 @@
 
 			// q param
 			var q = [];
-			if (model.view != 'detail'){
-				q = [Manager.store.q_default];										
+			if (model.view != 'detail'){									
 				if(model.q !== undefined){
 					q = q.concat(sprintf('"%s"', model.q)); // "" specifies that we want an exact match on the search word
+				}else{
+					q = "*:*";
 				}					
 			}else{
 				if(model.q !== undefined)
@@ -76,13 +77,16 @@
 
 			Manager.store.addByValue('q', q);
 
-			// fq param
+			// fq param						
+			if (model.view != 'detail')				
+				Manager.store.addByValue('fq', Manager.store.fq_default);			
+			
 			if(model.fq !== undefined && AjaxSolr.isArray(model.fq)){
 				for (var i = 0, l = model.fq.length; i < l; i++) {						
 					Manager.store.addByValue('fq', model.fq[i].value, model.fq[i].locals);
 				};											
-			};												
-
+			};	
+														
 			// qf param
 			if(model.view != "detail")
 				Manager.store.addByValue('qf', Manager.store.get_qf_string());					    		
@@ -101,11 +105,9 @@
 				Manager.store.addByValue('start', 0);
 			};
 			
-			// fl param
-			
-			Manager.store.addByValue('fl', 'score, id, title_all, medium_image_url, title_first');
-			
-
+			// fl param			
+			Manager.store.addByValue('fl', 'score, id, title_all, medium_image_url, title_first, artist_birth_dk, artist_death_dk, artist_natio, artist_name, artist_auth, copyright, ');
+						
 			//* process widgets
 			// remove all previous search filters - only if search filters is set to "getRefresh"					
 			for (var i = 0, l = Manager.searchfilterList.length; i < l; i++) {				
@@ -266,7 +268,7 @@
 
 			Manager.store.removeElementFrom_q(facet);   			
 
-			var qvalue = Manager.store.extract_q_from_manager();
+			var qvalue = Manager.store.get('q');
 			var model = {};
 			model.q = qvalue;
 			model.fq = ModelManager.current_value_joker;;

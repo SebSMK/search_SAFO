@@ -37,8 +37,8 @@
 								        };					  			  			  
 									  break;
 									  
-								  case "q_default":		 			  			  			  
-									  this.q_default = item;			  			  			  
+								  case "fq_default":		 			  			  			  
+									  this.fq_default = item;			  			  			  
 									  break;
 									  
 								  case "sort_default":		 			  			  			  
@@ -85,8 +85,8 @@
 		/*
 		 *
 		 */
-		this.get_q_default = function(){
-			return this.q_default;
+		this.get_fq_default = function(){
+			return this.fq_default;
 		};
 		
 		/*
@@ -108,7 +108,7 @@
 		 */
 		this.default_lang = 'dk';
 		this.qf_default = {}; // qf default
-		this.q_default = null; // q default
+		this.fq_default = null; // fq default
 		this.sort_default = null; // sort default
 		this.exposed_params = null; // exposed parameters	
 		this.server = null; // exposed parameters	

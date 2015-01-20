@@ -16,7 +16,7 @@
 				constructor: function (attributes) {
 					AjaxSolr.smkParameterStore.__super__.constructor.apply(this, arguments);
 					AjaxSolr.extend(this, {
-						q_default:null,
+						fq_default:null,
 						qf_default:null,
 						sort_default:null
 					}, attributes);
@@ -57,12 +57,6 @@
 					};
 
 					return res;
-				},
-				
-				extract_q_from_manager: function(){	  
-					var res = '';
-					var q_all = this.get('q').value == null ? [] : this.get('q').value.slice();
-					return smkCommon.removeA(q_all, this.q_default);
 				},
 				
 				/******************************
