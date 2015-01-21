@@ -18,6 +18,42 @@
 	display: none;
 }
 
+
+.search-terms {
+    margin-bottom: 12px;
+    position: absolute;
+    left: 740px;
+    top: 115px;
+}
+.search-terms ul li {
+    background-clip: padding-box;
+    background-color: #111;
+    border-radius: 2px;
+    color: #fff;
+    cursor: default;
+    display: inline-block;
+    line-height: normal;
+    margin: 0 0.35em 0.5em 0;
+    padding: 0.25em 1.5em 0.25em 0.4em;
+    position: relative;
+}
+.search-terms ul li > span {
+    color: #fff;
+}
+.search-terms ul li > a {
+    background-image: url("../images/sprite_2x_old.png");
+    background-position: 0 -36px;
+    background-size: 215px auto;
+    display: inline-block;
+    height: 9px;
+    opacity: 0.6;
+    position: absolute;
+    right: 0.4em;
+    text-indent: -9999em;
+    top: 0.45em;
+    width: 9px;
+}
+
 /* info window */
 .tooltipster-shadow {
 	border-radius: 5px;

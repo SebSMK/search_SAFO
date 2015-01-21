@@ -66,7 +66,7 @@
 			var q = [];
 			if (model.view != 'detail'){									
 				if(model.q !== undefined){
-					q = q.concat(sprintf('%s', model.q));
+					q = q.concat(model.q);
 				}else{
 					q = "*:*";
 				}					
@@ -268,7 +268,7 @@
 
 			Manager.store.removeElementFrom_q(facet);   			
 
-			var qvalue = Manager.store.get('q');
+			var qvalue = Manager.store.get('q').value;
 			var model = {};
 			model.q = qvalue;
 			model.fq = ModelManager.current_value_joker;;
