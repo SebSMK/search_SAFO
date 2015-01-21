@@ -66,7 +66,7 @@
 			var q = [];
 			if (model.view != 'detail'){									
 				if(model.q !== undefined){
-					q = q.concat(sprintf('"%s"', model.q)); // "" specifies that we want an exact match on the search word
+					q = q.concat(sprintf('%s', model.q));
 				}else{
 					q = "*:*";
 				}					
