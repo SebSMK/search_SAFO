@@ -13,11 +13,23 @@
 	margin-right: auto;
 	position: fixed;
 	top: 0;
-	width: 882px;
+	width: 100%;
 	z-index: 1000;
 	display: none;
 }
 
+.scroll-spinning {		
+	background: url("../images/scroll_spinning.gif") no-repeat fixed 57% bottom rgba(255, 255, 255, 1);
+    bottom: 0;
+    height: 16px;
+    left: 56%;
+    margin-left: auto;
+    margin-right: auto;
+    position: fixed;
+    width: 25px;
+    z-index: 1001;
+    display: none;	
+}
 
 .matrix-tile.scroll_add, .matrix-tile.realtime_add {
 	opacity: 0;

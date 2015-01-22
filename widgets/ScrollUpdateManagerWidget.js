@@ -98,19 +98,19 @@
 
 			switch(state){
 			case "true":								
-				$(this.scroll_subWidget.target).find("#scroll-spinning").css('visibility', 'visible');
+				$(this.scroll_subWidget.target).find(".scroll-spinning").show();
 				break;
 
 			case "false":								
-				$(this.scroll_subWidget.target).find("#scroll-spinning").css('visibility', 'hidden');
+				$(this.scroll_subWidget.target).find(".scroll-spinning").hide();
 				break;
 
 			case "end":								
-				$(this.scroll_subWidget.target).find("#scroll-spinning").css('visibility', 'hidden');
+				$(this.scroll_subWidget.target).find(".scroll-spinning").hide();
 				break;
 
 			default:				
-				$(this.scroll_subWidget.target).find("#scroll-spinning").css('visibility', 'hidden');				
+				$(this.scroll_subWidget.target).find(".scroll-spinning").hide();				
 			}									
 		},
 
