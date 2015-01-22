@@ -17,8 +17,10 @@
 					AjaxSolr.smkParameterStore.__super__.constructor.apply(this, arguments);
 					AjaxSolr.extend(this, {
 						fq_default:null,
+						q_default:null,
 						qf_default:null,
-						sort_default:null
+						sort_default:null,
+						scroll_rows_default:null
 					}, attributes);
 				},	 			
 

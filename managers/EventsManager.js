@@ -20,20 +20,49 @@
 			 * n.b.: externalChange is triggered also on document load
 			 * */
 			var self = this;
+			
+			// set windows to top
+			$(window).scrollTop(0);
+			
 			$.address.strict(false);
 			$( document ).ready(function() {				  
 				$.address.externalChange(function(e){self.addressChange(e)});
+				$(window).mousewheel(function(e){self.scrollStart(e)});
 			});	  	  
 		};
 
 		/********
 		 * EVENTS
 		 * *******/
+		
+		/*
+		 * page scrolled 
+		 * */			        		           
+		this.scrollStart = function(event) {		        	
+			var containerloc = $(".search-results").offset().top + $(window).scrollTop();
+			var windowsloc = $(window).height();
+			var self = this;
+			
+			if ($(".search-results").height() <= ($(window).height() + $(window).scrollTop()) + 200) {				
+				//* start scroll request
+				ViewManager.callWidgetFn('scroll_update', 'start_scroll_request');	        		
+			}		        		    
+		};							
+		
 		/*
 		 * change in address bar
 		 * */
 		this.addressChange = function(e){	 
 
+			//øøøøøøøøø
+			//* set windows to top
+			$(window).scrollTop(0);
+
+			//* reset scroll manager				
+			ViewManager.callWidgetFn('scroll_update', 'reset');
+			//øøøøøø
+			
+			
 			ViewManager.beforeRequest();
 			
 			ModelManager.setModel(e.value, "url");
@@ -68,7 +97,7 @@
 				if(model.q !== undefined){
 					q = q.concat(model.q);
 				}else{
-					q = "*:*";
+					q = Manager.store.q_default;
 				}					
 			}else{
 				if(model.q !== undefined)
@@ -350,6 +379,14 @@
 		 * 
 		 * */
 
+		//* scroll - no more result to show		 
+		this.smk_scroll_no_more_results = function() {},
+									
+		//* scroll - new picture has been added in teaser		
+		this.smk_scroll_all_images_displayed = function(){
+			ViewManager.smk_scroll_all_images_displayed();							
+		},
+		
 		//* searchfilters has finished loading	
 		this.remove_modal_loading_from_widget = function(value){
 			ViewManager.remove_modal_loading_from_widget(value);

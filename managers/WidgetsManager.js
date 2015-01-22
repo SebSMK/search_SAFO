@@ -18,8 +18,10 @@ var EventsManager;
 		var server = solr_conf.get_server();
 		var exposed = solr_conf.get_exposed_params();
 		var fq_default = solr_conf.get_fq_default();
+		var q_default = solr_conf.get_q_default();
 		var sort_default = solr_conf.get_sort_default();
 		var qf_default = solr_conf.get_qf_default(current_language);
+		var scroll_rows_default = solr_conf.get_scroll_rows_default();
 
 		//** load multi language script 
 		var translator = new Language.constructor();	
@@ -51,6 +53,7 @@ var EventsManager;
 			store: new AjaxSolr.smkParameterStore({
 				exposed: exposed,    		
 				fq_default: fq_default,
+				q_default: q_default,
 				qf_default: qf_default,
 				sort_default: sort_default 
 			}),
@@ -71,7 +74,7 @@ var EventsManager;
 				*/
 				'rows':24,
 				'defType': 'edismax',      
-				'qf': Manager.store.get_qf_string(),
+				'qf': Manager.store.qf_default,
 				'start': 0,
 				'sort': Manager.store.sort_default,
 				'json.nl': 'map'
@@ -81,6 +84,28 @@ var EventsManager;
 		}    
 		// add facet category with locals params
 		//øøøøøøøøøøøøøøøøø Manager.store.add('facet.field', new AjaxSolr.Parameter({ name:'facet.field', value: 'category', locals: { ex:'category' } }));
+		
+		
+		//******************************
+		//** init scrollManager
+		//******************************    
+		var scrollManager = new AjaxSolr.smkManager({
+			solrUrl: server,
+			//proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',
+			store: new AjaxSolr.smkParameterStore({
+				exposed: exposed,
+				start: 0,     		
+				fq_default: fq_default,
+				q_default: q_default,
+				qf_default: Manager.store.qf_default,
+				sort_default: sort_default,
+				scroll_rows_default: scroll_rows_default 
+			}),
+			allWidgetsProcessed: allWidgetsProcessedBound,
+			generalSolrError: generalSolrErrorProcessedBound,
+			translator: translator
+		});
+
 		
 		//******************************
 		//** init thumbnailsManager
@@ -266,6 +291,25 @@ var EventsManager;
 			original_subWidget: sub_originalWidget
 		}));
 
+		
+		//* scroll widget
+		// sub widget (managed by scrollManagerWidget)
+		var sub_scrollWidget = new AjaxSolr.ScrollWidget({
+			id: 'sub_scroll_teasers',
+			target: '#smk_teasers',
+			//øøøøøø on_picture_click_fct: $.proxy(Manager.widgets['teasers'].add_link_to_article, Manager.widgets['teasers']) ,
+			template: Mustache.getTemplate('templates/teasers.html')
+		});
+
+		Manager.addWidget( new AjaxSolr.ScrollUpdateManagerWidget({
+			id: 'scroll_update',
+			scrollManager: scrollManager, 
+			scroll_subWidget: sub_scrollWidget,
+			start_offset:parseInt(Manager.store.get('start').val()) + parseInt(Manager.store.get('rows').val())
+		}));
+		
+		
+		
 		//******************************
 		//** add event listeners
 		//******************************
@@ -273,8 +317,8 @@ var EventsManager;
 		/*
 		 * UI events
 		 * 
-		 * */
-
+		 * */		
+		
 		///* switch grid/list in teasers view
 //		$(Manager.widgets['viewpicker']).on('view_picker', function(event){ 
 //			EventsManager.switch_list_grid(event.value);
@@ -336,6 +380,16 @@ var EventsManager;
 		 * 
 		 * */
 
+		//* no more results to show after scroll
+		$(Manager.widgets['scroll_update']).on('smk_scroll_no_more_results', function(event){     	            	
+			EventsManager.smk_scroll_no_more_results();
+		});
+		
+		//* scroll has finished loading images
+		$(Manager.widgets['scroll_update']).on('smk_scroll_all_images_displayed', function(event){     	            	
+			EventsManager.smk_scroll_all_images_displayed();
+		});
+		
 		//* searchfilters has finished loading
 		for (var i = 0, l = searchFieldsTypes.length; i < l; i++) {
 			$(Manager.widgets[searchFieldsTypes[i].field]).on('smk_search_filter_loaded', function(event){

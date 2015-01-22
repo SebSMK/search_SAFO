@@ -41,6 +41,10 @@
 									  this.fq_default = item;			  			  			  
 									  break;
 									  
+								  case "q_default":		 			  			  			  
+									  this.q_default = item;			  			  			  
+									  break;
+									  
 								  case "sort_default":		 			  			  			  
 									  this.sort_default = item;			  			  			  
 									  break;
@@ -51,7 +55,11 @@
 									  
 								  case "server":		 			  			  			  									  				    		
 								    	this.server = item;				  			  			  
-									  break;	
+									  break;
+									  
+								  case "scroll_rows_default":		 			  			  			  
+									  this.scroll_rows_default = item;			  			  			  
+									  break;
 							  }
 						};					  					  
 				  }, this),
@@ -92,6 +100,13 @@
 		/*
 		 *
 		 */
+		this.get_q_default = function(){
+			return this.q_default;
+		};
+		
+		/*
+		 *
+		 */
 		this.get_sort_default = function(){
 			return this.sort_default;
 		};
@@ -104,14 +119,23 @@
 		};
 	
 		/*
+		 *
+		 */
+		this.get_scroll_rows_default = function(){
+			return this.scroll_rows_default;
+		};	
+		
+		/*
 		 * variables
 		 */
 		this.default_lang = 'dk';
 		this.qf_default = {}; // qf default
 		this.fq_default = null; // fq default
+		this.q_default = null; // q default
 		this.sort_default = null; // sort default
 		this.exposed_params = null; // exposed parameters	
 		this.server = null; // exposed parameters	
+		this.scroll_rows_default = null
 	}
 	
 }));

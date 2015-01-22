@@ -19,6 +19,11 @@
 }
 
 
+.matrix-tile.scroll_add, .matrix-tile.realtime_add {
+	opacity: 0;
+	transition: opacity 500ms ease-in-out 0s;
+}
+
 .search-terms {
     margin-bottom: 12px;
     position: absolute;

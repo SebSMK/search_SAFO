@@ -101,8 +101,8 @@
 
 		/**
 		 * image loading handlers
-		 * */
-
+		 * */		
+		
 		//* teaser		
 		this.smk_teasers_this_img_displayed = function(){
 			$(this.callWidgetTarget('teasers')).find('.search-results .matrix').masonry('layout');
@@ -145,6 +145,11 @@
 
 		};
 
+		//...efter scroll
+		this.smk_scroll_all_images_displayed = function(){		
+			$(this.callWidgetTarget('teasers')).find('.search-results .matrix').masonry('layout');
+		},
+				
 		//* related
 		this.smk_related_this_img_loaded = function(){
 			$(this.callWidgetTarget('details', 'related_subWidget')).find('.search-results .matrix').masonry('layout');  

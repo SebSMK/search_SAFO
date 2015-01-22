@@ -4,6 +4,8 @@
     "exposed": 							["fq", "q", "start", "limit", "sort", "qf"],
     "fq_default": 						"-(id_s:(*/*)) -(id_s:(*verso))",
     
+    "q_default": 						"*:*",
+    
     "sort_default": 					"score desc",
     
     "fl_default": 						"*, score",
@@ -25,5 +27,7 @@
 				"collector2":			"5", 
 				"collector3":			"5" 			
 			}
-	}
+	},
+	
+	"scroll_rows_default":				"4"  
 }
