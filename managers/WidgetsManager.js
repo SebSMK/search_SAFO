@@ -186,7 +186,7 @@ var EventsManager;
 			nextLabel: '&gt;',
 			innerWindow: 1,
 			renderHeader: function (perPage, offset, total) {
-				$('#pager-header').html($('<li></li>').html( sprintf(' %s <span>%s</span> %s <span>%s</span> %s <span>%s</span>', translator.getLabel('pager_display'), Math.min(total, offset + 1), translator.getLabel('pager_to'), Math.min(total, offset + perPage),translator.getLabel('pager_af'), total)));
+				$('#pager-viser').html($('<li></li>').html( sprintf(' %s <span>%s</span> %s <span>%s</span> %s', translator.getLabel('pager_display'), Math.min(total, offset + perPage), translator.getLabel('pager_udaf'), total, translator.getLabel('pager_resultater'))));
 			}
 		}));
 
@@ -387,7 +387,7 @@ var EventsManager;
 		
 		//* scroll has finished loading images
 		$(Manager.widgets['scroll_update']).on('smk_scroll_all_images_displayed', function(event){     	            	
-			EventsManager.smk_scroll_all_images_displayed();
+			EventsManager.smk_scroll_all_images_displayed(event.added);
 		});
 		
 		//* searchfilters has finished loading

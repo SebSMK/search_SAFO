@@ -89,7 +89,8 @@
 				this.show_infinite_scroll_spin('false');	
 				this.isRequestRunning = false;
 				$(this).trigger({
-					type: "smk_scroll_all_images_displayed"
+					type: "smk_scroll_all_images_displayed",
+					added: this.scrollManager.store.scroll_rows_default // number of added images
 				});		
 			}    		  			
 		},

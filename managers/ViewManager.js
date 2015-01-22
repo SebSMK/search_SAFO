@@ -145,9 +145,11 @@
 
 		};
 
-		//...efter scroll
-		this.smk_scroll_all_images_displayed = function(){		
-			$(this.callWidgetTarget('teasers')).find('.search-results .matrix').masonry('layout');
+		//...efter scroll: all the new images loaded in teaser
+		this.smk_scroll_all_images_displayed = function(added){		
+			$(this.callWidgetTarget('teasers')).find('.search-results .matrix').masonry('layout');			
+			if (added !== undefined)
+				this.callWidgetFn('pager', 'refreshDisplay', {params: [added]});
 		},
 				
 		//* related
@@ -196,7 +198,7 @@
 
 				self.callWidgetFn('details', 'removeAllRelated');				
 
-				self.showWidget($target.find("#pager-header"));
+				self.showWidget($target.find("#pager-viser"));
 				self.showWidget($(self.callWidgetTarget('currentsearch')));
 				self.showWidget($(self.callWidgetTarget('category')));
 //				self.showWidget($(self.callWidgetTarget('viewpicker')));
@@ -232,7 +234,7 @@
 				$target.find("section.section--list").hide();
 				$target.find("section.section--detail").show();
 				
-				$target.find("#pager-header").hide();
+				$target.find("#pager-viser").hide();
 				$target.find("#search-filters").hide();
 
 				$(self.callWidgetTarget('currentsearch')).hide();

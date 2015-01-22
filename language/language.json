@@ -64,7 +64,9 @@
 	  "pager_display":			"displaying",
 	  "pager_to":				"to",
 	  "pager_af":				"of",
+	  "pager_udaf":				"out of",
 	  "pager_results": 			"search results",
+	  "pager_resultater": 		"results",
 	  
 	  "related_reference":		"reference",
 	  "related_label":			"related artworks",
@@ -330,7 +332,9 @@
 	  "pager_display":			"viser",
 	  "pager_to":				"til",
 	  "pager_af":				"af",
+	  "pager_udaf":				"ud af",
 	  "pager_results": 			"resultater for søgning",
+	  "pager_resultater": 		"resultater",
 	  
 	  "related_reference":		"inv.num",
 	  "related_label":			"relaterede v&aelig;rker",

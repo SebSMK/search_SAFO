@@ -382,9 +382,9 @@
 		//* scroll - no more result to show		 
 		this.smk_scroll_no_more_results = function() {},
 									
-		//* scroll - new picture has been added in teaser		
-		this.smk_scroll_all_images_displayed = function(){
-			ViewManager.smk_scroll_all_images_displayed();							
+		//* scroll - all new pictures has been added in teaser		
+		this.smk_scroll_all_images_displayed = function(added){
+			ViewManager.smk_scroll_all_images_displayed(added);							
 		},
 		
 		//* searchfilters has finished loading	

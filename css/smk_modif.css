@@ -18,6 +18,23 @@
 	display: none;
 }
 
+#pager-viser{		
+    bottom: 5px;
+    margin: 1em 0 0.5em;
+    position: fixed;
+    right: 70px;
+    text-align: center;
+    width: 200px;
+}
+   
+#pager-viser li {
+    display: inline-block;        
+    color: #88888c;
+    float: left;
+    font-style: italic;
+    padding-top: 1.25em;
+}
+
 .scroll-spinning {		
 	background: url("../images/scroll_spinning.gif") no-repeat fixed 57% bottom rgba(255, 255, 255, 1);
     bottom: 0;
