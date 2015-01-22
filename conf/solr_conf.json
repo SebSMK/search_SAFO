@@ -11,7 +11,7 @@
     "qf_default":{	
 		"dk":{
 				"collectorExact1":		"100",
-				"collectorExact2":		"30", 
+				"collectorExact2":		"20", 
 				"collector1":			"20", 
 				"collector2":			"15", 
 				"collector3":			"5" 							
@@ -19,7 +19,7 @@
 		"en":{
 		
 				"collectorExact1":		"100",
-				"collectorExact2":		"30",
+				"collectorExact2":		"20",
 				"collector1":			"20", 
 				"collector_en":			"15", 
 				"collector2":			"5", 

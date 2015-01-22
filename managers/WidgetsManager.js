@@ -165,11 +165,11 @@ var EventsManager;
 			}
 		}));
 
-		Manager.addWidget(new AjaxSolr.ViewPickerWidget({
-			id: 'viewpicker',
-			target: '#viewpicker',
-			template: Mustache.getTemplate('templates/view_picker.html')
-		})); 
+//		Manager.addWidget(new AjaxSolr.ViewPickerWidget({
+//			id: 'viewpicker',
+//			target: '#viewpicker',
+//			template: Mustache.getTemplate('templates/view_picker.html')
+//		})); 
 
 		Manager.addWidget(new AjaxSolr.SorterWidget({
 			id: 'sorter',
@@ -276,13 +276,13 @@ var EventsManager;
 		 * */
 
 		///* switch grid/list in teasers view
-		$(Manager.widgets['viewpicker']).on('view_picker', function(event){ 
-			EventsManager.switch_list_grid(event.value);
-		}); 
+//		$(Manager.widgets['viewpicker']).on('view_picker', function(event){ 
+//			EventsManager.switch_list_grid(event.value);
+//		}); 
 
-		$(ViewManager).on('current_view_mode', function(event){ 
-			EventsManager.switch_list_grid(event.value);
-		});
+//		$(ViewManager).on('current_view_mode', function(event){ 
+//			EventsManager.switch_list_grid(event.value);
+//		});
 
 		//* selected category changed
 		$(Manager.widgets['category']).on('smk_search_category_changed', function(event){     	

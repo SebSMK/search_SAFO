@@ -125,10 +125,10 @@
 
 				// highlight search string in teasers
 				var vArray = [].concat(Manager.store.get('q').value);
-				if (undefined !== vArray && vArray.length > 1){ //  > 1 -> do not take into account the (first) q default value   			
+				if (undefined !== vArray && vArray.length > 0){    			
 					var words = [];
 
-					for (var i = 1, l = vArray.length; i < l; i++) {    				
+					for (var i = 0, l = vArray.length; i < l; i++) {    				
 						words = words.concat(vArray[i].trim().split(" "));    				
 					};
 
@@ -194,7 +194,7 @@
 				self.showWidget($target.find("#pager-header"));
 				self.showWidget($(self.callWidgetTarget('currentsearch')));
 				self.showWidget($(self.callWidgetTarget('category')));
-				self.showWidget($(self.callWidgetTarget('viewpicker')));
+//				self.showWidget($(self.callWidgetTarget('viewpicker')));
 				self.showWidget($(self.callWidgetTarget('sorter')));
 				self.showWidget($(self.callWidgetTarget('pager')));				
 				self.showWidget($(self.callWidgetTarget('teasers')));
@@ -232,7 +232,7 @@
 
 				$(self.callWidgetTarget('currentsearch')).hide();
 				$(self.callWidgetTarget('category')).hide();
-				$(self.callWidgetTarget('viewpicker')).hide();
+//				$(self.callWidgetTarget('viewpicker')).hide();
 				$(self.callWidgetTarget('sorter')).hide();
 				$(self.callWidgetTarget('pager')).hide();												
 				$(self.callWidgetTarget('teasers')).hide();
