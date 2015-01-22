@@ -52,6 +52,8 @@
 	<script src="js/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script>
 	<script src="js/jquery.address-1.5.min.js" type="text/javascript"></script>
 	<script src="js/jquery.mousewheel.min.js" type="text/javascript"></script>	
+	<script src="js/backtotop/js/main.js" type="text/javascript"></script>
+	<script src="js/backtotop/js/modernizr.js" type="text/javascript"></script>		
 	<script src="data/getData_Common_functions.js" type="text/javascript"></script>	
 	<script src="data/getData_Detail.js" type="text/javascript"></script>
 	<script src="data/getData_Detail_Tabs.js" type="text/javascript"></script>
@@ -63,7 +65,8 @@
 	<script src="data/getData_Thumbs.js" type="text/javascript"></script>	
 	
 	<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/themes/smoothness/jquery-ui.css" media="all" />
-	<link rel="stylesheet" type="text/css" href="js/fancybox/source/jquery.fancybox.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="js/fancybox/source/jquery.fancybox.css" media="all" />	
+	<link rel="stylesheet" type="text/css" href="js/backtotop/css/style.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="css/app.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="css/smk_modif.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="css/smk_print.css" media="print" />
