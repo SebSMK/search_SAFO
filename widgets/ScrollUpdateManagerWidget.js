@@ -19,6 +19,7 @@
 			var self = this;
 			//* set and save default request parameters  
 			var scrollParams = {
+					'fq': Manager.store.fq_default,	
 					'q': self.scrollManager.store.q_default,	
 					'rows': self.scrollManager.store.scroll_rows_default,
 					'defType': 'edismax',      
