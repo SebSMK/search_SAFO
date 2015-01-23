@@ -729,7 +729,7 @@
 					:
 						caller.manager.translator.getLabel('copyright_def')
 				: 
-					caller.manager.translator.getLabel("detail_no_photo");	 	  
+					null;	 	  
 	};
 	
 	/**

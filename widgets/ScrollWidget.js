@@ -52,10 +52,18 @@
 				
 				//* add image + link on div to all articles
 				$target.find('.matrix-tile.scroll_add').each(function() {    	    	
+					var tile = this;
 					dataHandler.getImage($(this), $(this).find('.image_loading'));
 					$(this).click({detail_url: $(this).find('a').attr('href'), caller: self}, 
 						function (event) {dataHandler.addLink(event);}
 					)	
+					
+					$(this).find('a').mouseenter({caller: tile},
+						function (event) {$(tile).find('span.copyright-info').css('opacity', 1);}
+					)
+					$(this).find('a').mouseleave({caller: tile},
+						function (event) {$(tile).find('span.copyright-info').css('opacity', 0);}
+					)
 				});                       										
 			}
 		}, 		

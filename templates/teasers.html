@@ -1,6 +1,6 @@
 <div>
 	<script id="teaserInitTemplate" type="text/template">	
-		<div class="search-results" class="full-width">				
+		<div class="search-results">				
 		
 <div class="matrix">         	
 				<div class="matrix-tile"></div>			
@@ -21,9 +21,17 @@
 				<a class="divLink" href="{{url}}">&nbsp;</a>
 	
 				{{#media}}
-				<div class="matrix-tile-image image_loading" src="{{image}}"
-					alt="{{#copyright}}{{{copyright}}}{{/copyright}}"
-					img_id="{{img_id}}"></div>
+				<div class="matrix-tile-image image_loading" src="{{image}}" img_id="{{img_id}}">
+
+					{{#copyright}}
+					<span class="copyright-info">
+						<ul>
+							<li>{{{copyright}}}</li>
+						</ul>
+					</span>
+					{{/copyright}}
+
+				</div>
 				{{/media}}
 	
 				<div class="matrix-tile-header">
@@ -64,7 +72,6 @@
 	
 			</div>
 			<!-- matrix-tile-inner -->
-			
 	
 		</div>
 		<!-- matrix-tile -->

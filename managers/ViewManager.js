@@ -410,7 +410,7 @@
 					words = words.concat(vArray[i].trim().split(" "));    				
 				};
 
-				$(this.callWidgetTarget('teasers')).highlight(words);
+				$(this.callWidgetTarget('teasers')).find('.matrix-tile-header').highlight(words);
 			}    
 		};
 
