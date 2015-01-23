@@ -29,5 +29,6 @@
 			}
 	},
 	
+	"rows_default":						"10" , 
 	"scroll_rows_default":				"4"  
 }

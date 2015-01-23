@@ -124,17 +124,8 @@
 			if ($(this.callWidgetTarget('teasers')).find('.image_loading').length == 0){
 
 				// highlight search string in teasers
-				var vArray = [].concat(Manager.store.get('q').value);
-				if (undefined !== vArray && vArray.length > 0){    			
-					var words = [];
-
-					for (var i = 0, l = vArray.length; i < l; i++) {    				
-						words = words.concat(vArray[i].trim().split(" "));    				
-					};
-
-					$(this.callWidgetTarget('teasers')).highlight(words);
-				}    			
-
+				this.highlightning();
+				
 				// if all images are loaded, we stop the modal "waiting image" for this widget
 				this.remove_modal_loading_from_widget(this.callWidgetTarget('teasers'));
 
@@ -407,6 +398,20 @@
 				$(this).text(text);
 			});
 
+		};
+		
+		this.highlightning = function(){
+			// highlight search string in teasers
+			var vArray = [].concat(Manager.store.get('q').value);
+			if (undefined !== vArray && vArray.length > 0){    			
+				var words = [];
+
+				for (var i = 0, l = vArray.length; i < l; i++) {    				
+					words = words.concat(vArray[i].trim().split(" "));    				
+				};
+
+				$(this.callWidgetTarget('teasers')).highlight(words);
+			}    
 		};
 
 	}

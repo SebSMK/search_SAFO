@@ -60,6 +60,10 @@
 								  case "scroll_rows_default":		 			  			  			  
 									  this.scroll_rows_default = item;			  			  			  
 									  break;
+								  
+								  case "rows_default":		 			  			  			  
+									  this.rows_default = item;			  			  			  
+									  break;
 							  }
 						};					  					  
 				  }, this),
@@ -126,6 +130,13 @@
 		};	
 		
 		/*
+		 *
+		 */
+		this.get_rows_default = function(){
+			return this.rows_default;
+		};	
+		
+		/*
 		 * variables
 		 */
 		this.default_lang = 'dk';
@@ -135,7 +146,8 @@
 		this.sort_default = null; // sort default
 		this.exposed_params = null; // exposed parameters	
 		this.server = null; // exposed parameters	
-		this.scroll_rows_default = null
+		this.scroll_rows_default = null;
+		this.rows_default = null;
 	}
 	
 }));

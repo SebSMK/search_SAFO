@@ -22,6 +22,7 @@ var EventsManager;
 		var sort_default = solr_conf.get_sort_default();
 		var qf_default = solr_conf.get_qf_default(current_language);
 		var scroll_rows_default = solr_conf.get_scroll_rows_default();
+		var rows_default = solr_conf.get_rows_default();
 
 		//** load multi language script 
 		var translator = new Language.constructor();	
@@ -72,7 +73,7 @@ var EventsManager;
 				'facet.limit': -1,
 				'facet.mincount': 1,
 				*/
-				'rows':24,
+				'rows':rows_default,
 				'defType': 'edismax',      
 				'qf': Manager.store.qf_default,
 				'start': 0,

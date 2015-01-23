@@ -374,12 +374,14 @@
 									
 		//* scroll - all new pictures has been added in teaser		
 		this.smk_scroll_all_images_displayed = function(added){
+			ViewManager.highlightning(); // highlight search words
 			ViewManager.smk_scroll_all_images_displayed(added);							
 		},
 		
 		//* searchfilters has finished loading	
-		this.remove_modal_loading_from_widget = function(value){
+		this.remove_modal_loading_from_widget = function(value){			
 			ViewManager.remove_modal_loading_from_widget(value);
+			
 		};
 
 		//* a new image has been displayed in "teaser"
