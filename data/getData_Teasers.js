@@ -18,6 +18,7 @@
 			var data;
 
 			var data =  {
+					url: this.getDetailUrl(doc),
 					
 					media:{
 						title:  getData_Common.getTitle(doc, 'museum'),	
@@ -27,7 +28,7 @@
 						copyright_default: !smkCommon.computeCopyright(doc) && doc.medium_image_url !== undefined,
 						copyright_valid: smkCommon.computeCopyright(doc),
 						img_id: doc.id,
-						url: this.getDetailUrl(doc)
+						
 					},
 					
 					info:{
@@ -37,8 +38,7 @@
 						ident_invnummer: getData_Common.getIdent_invnummer(doc),	
 						location_location: this.getListLocation(doc, this.caller),
 						
-						title_pad: smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.orig)) ? false : true,
-						url: this.getDetailUrl(doc),
+						title_pad: smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.orig)) ? false : true,						
 						
 						label_ref: this.caller.manager.translator.getLabel("list_reference")
 					},
@@ -163,14 +163,7 @@
 				// with the holding div #loader, apply:
 				$target
 				// remove the loading class (so no background spinner), 
-				.removeClass('image_loading')
-				// then insert our image
-				.find('a')
-				// call detailed view on click on image
-				.click(function (event) {
-					event.preventDefault();	
-					// ... then ---> bubbles op to "click on title"	    		
-				})	
+				.removeClass('image_loading')				
 				.append(this);
 
 				$(this).addClass('not_displayed');				
@@ -198,16 +191,7 @@
 
 			// if there was an error loading the image, react accordingly
 			.error(function () {
-				$target
-				// remove the loading class (so no background spinner), 
-				.removeClass('image_loading')
-				.find('a')	    	
-				.append(sprintf('<img src="%s" />', self.default_picture_path));
-				// call detailed view on click on image
-				$target.find('a').click(function (event) {
-					event.preventDefault();
-					// ... then ---> bubbles op to "click on title"		    	
-				});
+				$target.removeClass('image_loading');	// remove the loading class (so no background spinner), 								
 				$target.fadeIn();
 
 				// trig "this image is loaded" event	    	
@@ -223,6 +207,17 @@
 			.attr('src', path); 
 		};
 
+		
+		this.addLink = function (event) {
+			event.preventDefault();
+			$(event.data.caller).trigger({
+				type: "smk_search_call_detail",
+				detail_url: event.data.detail_url 
+			});
+
+			return;
+		}
+		
 		/*
 		 * variables
 		 */

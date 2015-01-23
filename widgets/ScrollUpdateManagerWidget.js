@@ -40,8 +40,7 @@
 			self.scrollManager.addWidget(this.scroll_subWidget); 		
 
 			//* a new image has been displayed in "scroll teaser"
-			$(self.scroll_subWidget).on('smk_teasers_this_img_displayed', function(event){     	            	
-				//Manager.widgets['state_manager'].smk_teasers_this_img_displayed();
+			$(self.scroll_subWidget).on('smk_teasers_this_img_displayed', function(event){     	            					
 				self.new_img_displayed();
 			});	 
 
@@ -53,7 +52,14 @@
 				$(self).trigger({
 					type: "smk_scroll_no_more_results"
 				}); 
-			});	  
+			});	
+			
+			$(self.scroll_subWidget).on('smk_search_call_detail', function(event){     					
+				$(self).trigger({
+					type: "smk_search_call_detail",
+					detail_url: event.detail_url					
+				});
+			});
 
 			self.scrollManager.init(); 
 		},

@@ -78,21 +78,7 @@
 					var $article = $(html);
 
 					//* load current article visualization classes
-					$article.removeClass().addClass(self.teaser_article_class);		      
-
-					//* add a link to detail on click on title
-					$article.find('.article_artwork')
-					.click({detail_id: artwork_data.media.img_id, caller:this}, 
-							function (event) {
-						event.preventDefault();
-						$(event.data.caller).trigger({
-							type: "smk_search_call_detail",
-							detail_id: event.data.detail_id,
-							save_current_request: true
-						});
-
-						return;
-					})						
+					$article.removeClass().addClass(self.teaser_article_class);		      				
 
 					//* append the current article to list
 					$target.find('.search-results .matrix').append($article);	      
@@ -101,9 +87,12 @@
 					$target.find('.search-results .matrix').masonry('appended', $article);	      
 				}						
 
-				//* add image + link to detail on click on image to all articles
+				//* add image + link on div to all articles
 				$target.find('.matrix-tile').each(function() {    	    	
 					dataHandler.getImage($(this), $(this).find('.image_loading'));
+					$(this).click({detail_url: $(this).find('a').attr('href'), caller: self}, 
+						function (event) {dataHandler.addLink(event);}
+					)	
 				});
 			}	   
 

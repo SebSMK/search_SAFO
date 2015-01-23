@@ -234,21 +234,11 @@
 
 		/*
 		 * call to detail view
-		 * @result:  model update 
+		 * @result:  open detail in a new window
 		 * */  
-		this.smk_search_call_detail = function(event){			
-			var save_current_request = event.save_current_request;    		  
-			var art_id = event.detail_id;		  
-
-			if(save_current_request){
-				ModelManager.storeCurrentModel();
-			}		
-
-			var model = {};			 				    		  							
-			model.q = art_id;
-			model.view = "detail";
-
-			ModelManager.update(model); 
+		this.smk_search_call_detail = function(event){						 		  
+			var detail_url = event.detail_url;
+			window.open(event.detail_url);			
 		};	
 
 		/*

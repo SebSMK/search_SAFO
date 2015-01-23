@@ -1,13 +1,6 @@
 (function ($) {
 
-	AjaxSolr.ScrollWidget = AjaxSolr.AbstractWidget.extend({  
-
-		constructor: function (attributes) {
-			AjaxSolr.AbstractWidget.__super__.constructor.apply(this, arguments);
-			AjaxSolr.extend(this, {
-				on_picture_click_fct: null
-			}, attributes);
-		},	
+	AjaxSolr.ScrollWidget = AjaxSolr.AbstractWidget.extend({  		
 
 		default_picture_path: null, 
 
@@ -49,25 +42,21 @@
 					var $article = $(html); 
 
 					$article.addClass('scroll_add');   
-
-					//* add a link to article
-					if(self.on_picture_click_fct != null)
-						self.on_picture_click_fct($article, doc);				
-
-					//dataHandler.getImage($article, $article.find('.image_loading'));
-
-//					//* append the current article to list
+					
+					//* append the current article to list
 					$target.find('.search-results .matrix').append($article);	      
 
 					//* append to masonry
 					$target.find('.search-results .matrix').masonry('appended', $article);	  											
 				}
-        
-        //* add image to all articles
-        $target.find('.matrix-tile.scroll_add').each(function() {
-          dataHandler.getImage($(this), $(this).find('.image_loading'));
-        });
-        										
+				
+				//* add image + link on div to all articles
+				$target.find('.matrix-tile.scroll_add').each(function() {    	    	
+					dataHandler.getImage($(this), $(this).find('.image_loading'));
+					$(this).click({detail_url: $(this).find('a').attr('href'), caller: self}, 
+						function (event) {dataHandler.addLink(event);}
+					)	
+				});                       										
 			}
 		}, 		
 

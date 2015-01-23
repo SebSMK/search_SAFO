@@ -297,7 +297,6 @@ var EventsManager;
 		var sub_scrollWidget = new AjaxSolr.ScrollWidget({
 			id: 'sub_scroll_teasers',
 			target: '#smk_teasers',
-			//øøøøøø on_picture_click_fct: $.proxy(Manager.widgets['teasers'].add_link_to_article, Manager.widgets['teasers']) ,
 			template: Mustache.getTemplate('templates/teasers.html')
 		});
 
@@ -363,6 +362,10 @@ var EventsManager;
 
 		//* calls to detail view
 		$(Manager.widgets['teasers']).on('smk_search_call_detail', function(event){     	
+			EventsManager.smk_search_call_detail(event);
+		});
+		
+		$(Manager.widgets['scroll_update']).on('smk_search_call_detail', function(event){     	
 			EventsManager.smk_search_call_detail(event);
 		});
 		
