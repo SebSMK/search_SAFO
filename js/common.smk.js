@@ -32,7 +32,7 @@
 				|| text == null 
 				|| text == 'undefined'
 				|| text == 'null' 
-				|| text == '')
+				|| text.trim() == '')
 			return false;
 
 		var field_expr = field === undefined ? 'defaut' : field;

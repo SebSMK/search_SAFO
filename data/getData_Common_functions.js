@@ -177,7 +177,7 @@
 			break;
 		}
 
-		return vaerkdatering === undefined ? null : vaerkdatering;
+		return smkCommon.isValidDataText(vaerkdatering) ? vaerkdatering : null;
 	};			
 
 	getdatacommon.getProduction_udgivet_place = function(doc){	

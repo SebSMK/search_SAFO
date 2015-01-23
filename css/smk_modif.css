@@ -129,6 +129,14 @@ a.divLink {
     width: 9px;
 }
 
+
+/* Modif of Jacques' code */
+.matrix-tile-date:before {
+    content: ", ";
+}
+
+/*!!!!!!!!!!!!!!!!! old stuff below !!!!!!!!!!!!!!!!!!!!!1*/
+
 /* info window */
 .tooltipster-shadow {
 	border-radius: 5px;
