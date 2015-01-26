@@ -701,7 +701,7 @@
 		for ( var i = 0, l = related_works.length; i<l; ++i ) {
 			var work = related_works[i].split(';--;');
 			if(work.length > 0)
-				allrelatedRequest.push(sprintf('id_s:"%s"', work[1]));	
+				allrelatedRequest.push(sprintf('id:"%s"', work[1]));	
 		}
 
 		return allrelatedRequest.length == 0 ? null : allrelatedRequest.join(' OR ');

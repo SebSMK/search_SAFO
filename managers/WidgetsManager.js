@@ -87,7 +87,7 @@ var EventsManager;
 			Manager.store.addByValue(name, params[name]);
 		}    
 		// add facet category with locals params
-		//øøøøøøøøøøøøøøøøø Manager.store.add('facet.field', new AjaxSolr.Parameter({ name:'facet.field', value: 'category', locals: { ex:'category' } }));
+		Manager.store.add('facet.field', new AjaxSolr.Parameter({ name:'facet.field', value: 'category', locals: { ex:'category' } }));
 		
 		
 		//******************************

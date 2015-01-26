@@ -52,17 +52,12 @@
 		 * */
 		this.addressChange = function(e){	 
 
-			//øøøøøøøøø
 			//* set windows to top
-			$(window).scrollTop(0);
-
-			//* reset scroll manager				
-			ViewManager.callWidgetFn('scroll_update', 'reset');
-			//øøøøøø
-			
+			$(window).scrollTop(0);			
 			
 			ViewManager.beforeRequest();
 			
+			//* get the view's model
 			ModelManager.setModel(e.value, "url");
 			var model = ModelManager.getModel();		    			    
 
@@ -99,7 +94,7 @@
 				}					
 			}else{
 				if(model.q !== undefined)
-					q = sprintf('id_s:%s', model.q);			    	
+					q = sprintf('id:%s', model.q);			    	
 			};
 
 			Manager.store.addByValue('q', q);
@@ -169,6 +164,9 @@
 			// select "sort" option in sorterWidget
 			ViewManager.callWidgetFn('sorter', 'setOption', {params: [Manager.store.get('sort').val()]});
 
+			// reset scroll manager				
+			ViewManager.callWidgetFn('scroll_update', 'reset');
+			
 			//**> start Solr request 
 			Manager.doRequest();				   																   	 
 		};
