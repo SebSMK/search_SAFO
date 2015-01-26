@@ -18,6 +18,7 @@ var EventsManager;
 		var server = solr_conf.get_server();
 		var exposed = solr_conf.get_exposed_params();
 		var fq_default = solr_conf.get_fq_default();
+		var fl_options = solr_conf.get_fl_options();
 		var q_default = solr_conf.get_q_default();
 		var sort_default = solr_conf.get_sort_default();
 		var qf_default = solr_conf.get_qf_default(current_language);
@@ -54,6 +55,7 @@ var EventsManager;
 			store: new AjaxSolr.smkParameterStore({
 				exposed: exposed,    		
 				fq_default: fq_default,
+				fl_options: {"list": fl_options.list, "detail": fl_options.detail, "default": fl_options.default},
 				q_default: q_default,
 				qf_default: qf_default,
 				sort_default: sort_default 
@@ -67,6 +69,7 @@ var EventsManager;
 		//* set and save default request parameters                
 		var params = {
 				'fq': Manager.store.fq_default,	
+				'fl': Manager.store.fl_options.default,	
 				/*
 				'facet': true,
 				'facet.field': ['artist_name_ss', 'artist_natio', 'object_production_century_earliest', 'object_type'],
@@ -97,6 +100,7 @@ var EventsManager;
 				exposed: exposed,
 				start: 0,     		
 				fq_default: fq_default,
+				fl_options: {"list": fl_options.list},
 				q_default: q_default,
 				qf_default: Manager.store.qf_default,
 				sort_default: sort_default,
@@ -111,11 +115,12 @@ var EventsManager;
 		//******************************
 		//** init thumbnailsManager
 		//******************************    
-		var thumbnailsManager = new AjaxSolr.smkManager({
+		var thumbnailsManager = new AjaxSolr.smkManager({			
 			solrUrl: server, 
 			//proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
 			store: new AjaxSolr.smkParameterStore({
-				exposed: exposed
+				exposed: exposed,
+				fl_options: {"thumbs": fl_options.thumbs}
 			}),
 			allWidgetsProcessed: allWidgetsProcessedBound,
 			generalSolrError: generalSolrErrorProcessedBound,
@@ -129,7 +134,8 @@ var EventsManager;
 			solrUrl: server, 
 			//proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
 			store: new AjaxSolr.smkParameterStore({
-				exposed: exposed 
+				exposed: exposed,
+				fl_options: {"related": fl_options.related}
 			}),
 			allWidgetsProcessed: allWidgetsProcessedBound,
 			generalSolrError: generalSolrErrorProcessedBound,
@@ -143,7 +149,8 @@ var EventsManager;
 			solrUrl: server, 
 			//proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
 			store: new AjaxSolr.smkParameterStore({
-				exposed: exposed 
+				exposed: exposed,
+				fl_options: {"detail": fl_options.detail}
 			}),
 			allWidgetsProcessed: allWidgetsProcessedBound,
 			generalSolrError: generalSolrErrorProcessedBound,

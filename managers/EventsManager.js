@@ -134,8 +134,12 @@
 				Manager.store.addByValue('start', 0);
 			};
 			
-			// fl param			
-			Manager.store.addByValue('fl', 'score, id, title_all, medium_image_url, title_first, artist_birth_dk, artist_death_dk, artist_natio, artist_name, artist_auth, copyright, location_name, object_production_date_text_dk, object_production_date_text_en');
+			// fl param
+			if (model.view == 'detail'){									
+				Manager.store.addByValue('fl', Manager.store.fl_options.detail);			
+			}else{
+				Manager.store.addByValue('fl', Manager.store.fl_options.list);		    	
+			};									
 						
 			//* process widgets
 			// remove all previous search filters - only if search filters is set to "getRefresh"					
@@ -237,7 +241,7 @@
 		 * @result:  open detail in a new window
 		 * */  
 		this.smk_search_call_detail = function(event){						 		  
-			var detail_url = event.detail_url;
+			var detail_url = event.detail_url + '&fl=detail';
 			window.open(event.detail_url);			
 		};	
 

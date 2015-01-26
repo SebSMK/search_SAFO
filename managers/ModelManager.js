@@ -45,6 +45,9 @@ var	ModelManager = {
 
 			if (this.isValid(this.fq))
 				model.fq = this.fq;
+			
+			if (this.isValid(this.fl))
+				model.fl = this.fl;
 
 			if (this.isValid(this.qf))
 				model.qf = this.qf;
@@ -88,11 +91,12 @@ var	ModelManager = {
 				var cat = model.category != undefined && model.category != '' && model.category != 'all' ? sprintf('%1$scategory%1$s%2$s%1$s', this._cat_separator,model.category) : '';
 				var q =  model.q != undefined &&  this.encode_q(model.q) != '' ? sprintf('%sq=%s', this._separator, encodeURIComponent(this.encode_q(model.q))) : '';
 				var fq =  model.fq != undefined && this.encode_fq(model.fq) != '' ? sprintf('%sfq=%s', this._separator, encodeURIComponent(this.encode_fq(model.fq))) : '';
+				var fl =  model.fl != undefined && model.fl != '' ? sprintf('%sfl=%s', this._separator, encodeURIComponent(model.fl)) : '';
 				var start =  model.start != undefined && model.start != 0 ? sprintf('%sstart=%s', this._separator, encodeURIComponent(model.start)) : '';
 				var sort =  model.sort != undefined && model.sort != "score desc" ? sprintf('%ssort=%s', this._separator, encodeURIComponent(model.sort)) : '';
 
 
-				uniqueURL = sprintf('%s%s%s%s%s', cat, q, fq, start, sort);
+				uniqueURL = sprintf('%s%s%s%s%s', cat, q, fq, fl, start, sort);
 
 			}; 	  
 
@@ -125,6 +129,7 @@ var	ModelManager = {
 			this.fq = this.getModelValue(model, "fq");
 			this.qf = this.getModelValue(model, "qf");
 			this.start = this.getModelValue(model, "start");
+			this.fl = this.getModelValue(model, "fl");
 			this.sort = this.getModelValue(model, "sort");								
 		},
 
@@ -216,6 +221,11 @@ var	ModelManager = {
 						value = params[i].replace('start=', '');
 						model.start = decodeURIComponent(value);						   	 
 						break;	
+						
+					case "fl":
+						value = params[i].replace('fl=', '');
+						model.fl = decodeURIComponent(value);						   	 
+						break;
 
 					case "sort":
 						value = params[i].replace('sort=', '');
@@ -295,6 +305,7 @@ var	ModelManager = {
 		fq: null,
 		qf: null,
 		start: null,
+		fl: null,
 		sort: null,
 
 		current_value_joker: '*',

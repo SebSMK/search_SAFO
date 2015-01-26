@@ -8,7 +8,14 @@
     
     "sort_default": 					"score desc",
     
-    "fl_default": 						"*, score",
+    "fl_options": 						{
+    											"default": "*, score",
+    											"detail": "*, score",
+    											"list": "score, id, title_all, medium_image_url, title_first, artist_birth_dk, artist_death_dk, artist_natio, artist_name, artist_auth, copyright, location_name, object_production_date_text_dk, object_production_date_text_en",
+    											"related": "score, id, title_all, medium_image_url, title_first, artist_birth_dk, artist_death_dk, artist_natio, artist_name, artist_auth, copyright, location_name, object_production_date_text_dk, object_production_date_text_en, related_id",
+    											"thumbs": "score, id, title_all, medium_image_url, title_first, artist_birth_dk, artist_death_dk, artist_natio, artist_name, artist_auth, copyright, location_name, object_production_date_text_dk, object_production_date_text_en, multi_work_ref"
+    
+    									},
     
     "qf_default":{	
 		"dk":{

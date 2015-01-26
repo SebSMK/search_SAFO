@@ -41,6 +41,10 @@
 									  this.fq_default = item;			  			  			  
 									  break;
 									  
+								  case "fl_options":		 			  			  			  
+									  this.fl_options = item;			  			  			  
+									  break;
+									  
 								  case "q_default":		 			  			  			  
 									  this.q_default = item;			  			  			  
 									  break;
@@ -104,6 +108,13 @@
 		/*
 		 *
 		 */
+		this.get_fl_options = function(){
+			return this.fl_options;
+		};
+		
+		/*
+		 *
+		 */
 		this.get_q_default = function(){
 			return this.q_default;
 		};
@@ -142,6 +153,7 @@
 		this.default_lang = 'dk';
 		this.qf_default = {}; // qf default
 		this.fq_default = null; // fq default
+		this.fl_options = null; // fl default
 		this.q_default = null; // q default
 		this.sort_default = null; // sort default
 		this.exposed_params = null; // exposed parameters	

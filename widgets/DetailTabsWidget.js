@@ -26,18 +26,44 @@
 			self.default_picture_path = smkCommon.getDefaultPicture('large');
 			self.current_language = self.manager.translator.getLanguage();
 			
-			//* set and save default request parameters for both sub_managers                
-			var params = {					
-					'rows':500,					
-					'start': 0,
-					'json.nl': 'map'
+			//* related              
+			var params = 
+			
+			{
+					"related": {					
+								'rows':500,					
+								'start': 0,
+								'fl': self.relatedManager.store.fl_options.related,
+								'json.nl': 'map'
+								},
+					
+					"thumbs": {					
+								'rows':500,					
+								'start': 0,
+								'fl': self.thumbnailsManager.store.fl_options.thumbs,
+								'json.nl': 'map'
+								},
+						
+					"detail": {					
+								'rows':500,					
+								'start': 0,
+								'fl': self.originalManager.store.fl_options.detail,
+								'json.nl': 'map'
+								},
+					
 			};
 			
-			for (var name in params) {
-				self.thumbnailsManager.store.addByValue(name, params[name]);
-				self.relatedManager.store.addByValue(name, params[name]);
-				self.originalManager.store.addByValue(name, params[name]);
-			}    		
+			for (var name in params.related) {				
+				self.relatedManager.store.addByValue(name, params.related[name]);				
+			}   						
+			
+			for (var name in params.thumbs) {
+				self.thumbnailsManager.store.addByValue(name, params.thumbs[name]);			
+			}   
+			
+			for (var name in params.detail) {				
+				self.originalManager.store.addByValue(name, params.detail[name]);
+			}   
 			
 			//***
 			//* original sub widget

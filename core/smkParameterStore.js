@@ -16,6 +16,7 @@
 				constructor: function (attributes) {
 					AjaxSolr.smkParameterStore.__super__.constructor.apply(this, arguments);
 					AjaxSolr.extend(this, {
+						fl_options:null,
 						fq_default:null,
 						q_default:null,
 						qf_default:null,
