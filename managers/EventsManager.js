@@ -38,15 +38,13 @@
 		/*
 		 * page scrolled 
 		 * */			        		           
-		this.scrollStart = function(event) {		        	
-			var containerloc = $(".search-results").offset().top + $(window).scrollTop();
-			var windowsloc = $(window).height();
-			var self = this;
-			
-			if ($(".search-results").height() <= ($(window).height() + $(window).scrollTop()) + 200) {				
-				//* start scroll request
-				ViewManager.callWidgetFn('scroll_update', 'start_scroll_request');	        		
-			}		        		    
+		this.scrollStart = function(event) {		        								
+				ModelManager.setModel($.address.value(), "url");
+				var model = ModelManager.getModel();	
+				if (model.view != 'detail')									
+					if (($(".search-results").height() <= ($(window).height() + $(window).scrollTop()) + 200))				
+						//* start scroll request
+						ViewManager.callWidgetFn('scroll_update', 'start_scroll_request');	        																	        		    
 		};							
 		
 		/*
