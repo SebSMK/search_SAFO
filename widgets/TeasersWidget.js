@@ -90,14 +90,24 @@
 				//* add image + link on div to all articles
 				$target.find('.matrix-tile').each(function() {    	    	
 					var tile = this;
+					// add image
 					dataHandler.getImage($(this), $(this).find('.image_loading'));
-					$(this).click({detail_url: $(this).find('a').attr('href'), caller: self}, 
+										
+					// add click on image
+					$(this).find('.matrix-tile-image').click({detail_url: $(this).find('.matrix-tile-image a').attr('href'), caller: self}, 
 						function (event) {dataHandler.addLink(event);}
 					)
-					$(this).find('a').mouseenter({caller: tile},
+
+					// add click on title
+					$(this).find('.artwork-title').click({detail_url: $(this).find('.artwork-title').attr('href'), caller: self}, 
+						function (event) {dataHandler.addLink(event);}
+					)
+					
+					// add copyright info on image
+					$(this).find('.matrix-tile-image a').mouseenter({caller: tile},
 						function (event) {$(tile).find('span.copyright-info').css('opacity', 1);}
 					)
-					$(this).find('a').mouseleave({caller: tile},
+					$(this).find('.matrix-tile-image a').mouseleave({caller: tile},
 						function (event) {$(tile).find('span.copyright-info').css('opacity', 0);}
 					)
 				});

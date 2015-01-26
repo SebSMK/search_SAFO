@@ -28,6 +28,7 @@
 						copyright_default: !smkCommon.computeCopyright(doc) && doc.medium_image_url !== undefined,
 						copyright_valid: smkCommon.computeCopyright(doc),
 						img_id: doc.id,
+						url: this.getDetailUrl(doc)
 						
 					},
 					
@@ -37,6 +38,7 @@
 						datering_production_vaerkdatering: getData_Common.getProduction_vaerkdatering(doc),		
 						ident_invnummer: getData_Common.getIdent_invnummer(doc),	
 						location_location: this.getListLocation(doc, this.caller),
+						url: this.getDetailUrl(doc),
 						
 						title_pad: smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.orig)) ? false : true,						
 						

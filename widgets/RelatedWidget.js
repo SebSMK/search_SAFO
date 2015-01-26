@@ -70,7 +70,7 @@
 
 
 				//* add a link to detail on click on title
-				$article.find('.article_artwork')
+				$article.find('.artwork-title')
 				.click({detail_id: artwork_data.img_id, caller:self}, function (event) {
 					event.preventDefault();
 					$(event.data.caller).trigger({

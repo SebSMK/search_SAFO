@@ -15,13 +15,13 @@
 	
 		<div class="matrix-tile">
 	
-			<div class="matrix-tile-inner">
-	
-				<!-- invisible link - make the whole div container clickable -->
-				<a class="divLink" href="{{url}}">&nbsp;</a>
+			<div class="matrix-tile-inner">				
 	
 				{{#media}}
 				<div class="matrix-tile-image image_loading" src="{{image}}" img_id="{{img_id}}">
+
+				<!-- invisible link - make the whole div container clickable -->
+					<a class="divLink" href="{{url}}">&nbsp;</a>
 
 					{{#copyright}}
 					<span class="copyright-info">
@@ -44,7 +44,7 @@
 
 					{{#title_museum}}
 					<h2>
-						<a href="{{url}}" class="article_artwork">{{title}}
+						<a href="{{url}}" class="artwork-title" href="{{url}}">{{title}}
 							{{#datering_production_vaerkdatering}}
 								<span class="matrix-tile-date">{{{datering_production_vaerkdatering}}}</span>
 							{{/datering_production_vaerkdatering}}

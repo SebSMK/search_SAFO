@@ -131,8 +131,12 @@ a.divLink {
 
 
 /* Modif of Jacques' code */
-.matrix-tile-date:before {
-    content: ", ";
+
+.matrix-tile:hover {
+    border: 1px solid #1a1919;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    cursor: default;
+    z-index: 999;
 }
 
 /*!!!!!!!!!!!!!!!!! old stuff below !!!!!!!!!!!!!!!!!!!!!1*/
@@ -226,7 +230,7 @@ a.divLink {
 	font-size: 0.8em;
 }
 
-.article_artwork span {
+.artwork-title span {
 	font-size: 0.8em;
 }
 
