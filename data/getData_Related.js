@@ -121,8 +121,7 @@
 					event.preventDefault();
 					$(event.data.caller).trigger({
 						type: "smk_search_call_detail",
-						detail_id: event.data.detail_id,
-						save_current_request: false
+						detail_id: event.data.detail_id
 					});
 
 					return;
@@ -142,8 +141,7 @@
 				event.preventDefault();
 				$(event.data.caller).trigger({
 					type: "smk_search_call_detail",
-					detail_id: event.data.detail_id,
-					save_current_request: false
+					detail_id: event.data.detail_id
 				});
 
 				return;

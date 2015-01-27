@@ -27,16 +27,21 @@
 			var self = this;
 			var $target = $(this.target);	
 
-			//* merge data and template
+			$target.hide();
+			
+			//* merge data and template						
 			var html = self.template_integration_json({}, '#generalTemplate');    	  	  
-			$target.empty();	  
 			$target.html(html);	
+			
+			ModelManager.setModel($.address.value(), "url");
+			var model = ModelManager.getModel();	
+			var tohide = model.view == 'detail' ? 'section.section--list' : 'section.section--detail';								
+			$target.find(tohide).hide();									
 			
 			//* add version number
 			$target.find('#smk_search_version').text(Manager.translator.getVersion());
-			
-			//* fix cufon problem in footer
-			this.fixCrappyfooter();
+		
+			$target.show();
 		};
 
 		this.beforeRequest = function(){	 
@@ -127,11 +132,7 @@
 				this.highlightning();
 				
 				// if all images are loaded, we stop the modal "waiting image" for this widget
-				this.remove_modal_loading_from_widget(this.callWidgetTarget('teasers'));
-
-				// if in list view mode, align images
-				if ($(this.callWidgetTarget('teasers')).find('.teaser--list').length > 0)
-					this.callWidgetFn('teasers', 'verticalAlign'); 
+				this.remove_modal_loading_from_widget(this.callWidgetTarget('teasers'));				
 			}    		  
 
 		};
@@ -205,14 +206,7 @@
 					$target.find("#search-filters").hide();		  	 		  	  
 				break;		  
 				}
-
-				// If the teaser container is full width, then make a two column layout.
-				if ( $target.find('#teaser-container-grid').hasClass('full-width') ) {
-					$(this).addClass('teaser--two-columns');
-				}else{
-					$(this).removeClass('teaser--two-columns');	
-				}
-
+				
 				break;
 
 			case "detail":	
@@ -264,8 +258,7 @@
 						if (this.callWidgetFn(Manager.searchfilterList[i].field, 'getRefresh'))					
 							this.callWidgetFn(Manager.searchfilterList[i].field, 'hide_drop')
 					};
-					
-					$(this.callWidgetTarget('teasers')).find('#teaser-container-grid').removeClass('full-width').hide();				
+														
 					this.callWidgetFn('category', 'setActiveTab', {params: [stateChange["category"]]});	
 					break;
 				case "nyheder":
@@ -273,8 +266,7 @@
 				case "artikel":
 				case "praktisk":
 				case "all":
-					$target.find("#search-filters").hide();
-					$(this.callWidgetTarget('teasers')).find('#teaser-container-grid').addClass('full-width').hide();			
+					$target.find("#search-filters").hide();								
 					this.callWidgetFn('category', 'setActiveTab',  {params: [stateChange["category"]]});
 	
 					// remove all search filters
@@ -287,22 +279,7 @@
 					$(this.callWidgetTarget('teasers')).find('.search-results .matrix').addClass('full-width').hide();				
 					this.callWidgetFn('category', 'setActiveTab', {params: ['all']});
 					break;		  
-			}			
-			
-			if($(this.callWidgetTarget('teasers')).find('#teaser-container-grid .teaser--grid').length > 0){
-				//* grid view mode
-				$(this).trigger({
-					type: "current_view_mode",
-					value:'grid'
-				});
-
-			}else{
-				//* list view mode
-				$(this).trigger({
-					type: "current_view_mode",
-					value:'list'
-				});
-			}										 
+			}																	 
 
 			if($(this.callWidgetTarget('teasers')).find('.search-results .matrix .matrix-tile').length > 0)
 				$(this.callWidgetTarget('teasers')).find('.search-results .matrix').masonry('layout');

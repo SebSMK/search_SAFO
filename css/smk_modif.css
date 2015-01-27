@@ -312,17 +312,6 @@ a span {
 	max-height: 99px;
 }
 
-.view #teaser-container-grid {
-	margin-left: -11px;
-	margin-right: -11px;
-	margin-top: 27px;
-}
-
-.view #teaser-container-grid .teaser--grid {
-	margin-left: 11px;
-	margin-right: 11px;
-}
-
 .tabs li {
 	float: left;
 	font-family: "hill regular", sans-serif;
@@ -340,10 +329,6 @@ a span {
  § Grid layout (default)
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /* line 10, ../../src/scss/components/_related.scss */
-#related-container-grid {
-	margin-right: -1.6%;
-	margin-left: -1.6%;
-}
 
 /* line 17, ../../src/scss/components/_related.scss */
 .related,.related--list,.related--grid {

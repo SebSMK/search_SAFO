@@ -141,17 +141,9 @@ function main() {
 				</script>
 					
 				<div id="smk_search_wrapper" class="modal_loading">
+								
+					<div class="modal"></div>
 				
-				<div class="view">
-				
-				<div class="container">
-				<div class="smk-logo fixedElement">Statens Museum for Kunst / National Gallery of Denmark</div>
-				<section class="section--main" role="main">
-				<div class="" id="smk_teasers"></div>
-				</section>
-				</div>
-				<div class="modal"></div>
-				</div>
 				</div>',
 					
 				$solr_path,
