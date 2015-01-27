@@ -209,6 +209,10 @@ var EventsManager;
 			target: '#sorter',
 			options: {
 				'all': [{"value": "score desc", "text" : smkCommon.firstCapital(Manager.translator.getLabel("sorter_relevans")), "selected": false},
+				        {"value": "object_production_date_earliest asc", "text" : smkCommon.firstCapital(Manager.translator.getLabel("sorter_dato_asc")), "selected": false},
+                        {"value": "object_production_date_earliest desc", "text" : smkCommon.firstCapital(Manager.translator.getLabel("sorter_dato_desc")), "selected": false},
+                        {"value": "artist_first_name asc", "text" : smkCommon.firstCapital(Manager.translator.getLabel("sorter_name_asc")), "selected": false},
+                        {"value": "artist_first_name desc", "text" : smkCommon.firstCapital(Manager.translator.getLabel("sorter_name_desc")), "selected": false},
 				        {"value": "last_update desc", "text" : smkCommon.firstCapital(Manager.translator.getLabel("sorter_last_updated")), "selected": false}],
 
 		        'praktisk': [{"value": "score desc", "text" : smkCommon.firstCapital(Manager.translator.getLabel("sorter_relevans")), "selected": false},

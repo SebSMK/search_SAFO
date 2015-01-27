@@ -78,6 +78,8 @@
 	  "sorter_relevans":		"relevance",
 	  "sorter_dato_desc":		"date (most recent first)",
 	  "sorter_dato_asc":		"date (older first)",
+	  "sorter_name_desc":		"name (A to &Aring;)",
+	  "sorter_name_asc":		"name (&Aring; to A)",
 	  "sorter_last_updated":	"last updated",
 	  
 	  "teaser_reference":		"reference",
@@ -346,6 +348,8 @@
 	  "sorter_relevans":		"relevans",
 	  "sorter_dato_desc":		"dato (nyest f&oslash;rst)",
 	  "sorter_dato_asc":		"dato (&aelig;ldst f&oslash;rst)",
+	  "sorter_name_desc":		"navn (A to &Aring;)",
+	  "sorter_name_asc":		"navn (&Aring; to A)",
 	  "sorter_last_updated":	"sidst opdateret",	  
 	  
 	  "sorter_last_updated":	"sidst opdateret",

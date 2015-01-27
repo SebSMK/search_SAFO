@@ -66,15 +66,17 @@
 		},
 
 		start_scroll_request: function(){
-
+			
 			if(!this.isRequestRunning && !this.noMoreResults){
 				var params = {};
 
-				params.q = ModelManager.get_q();
+				params.q = ModelManager.get_q();				
 				params.start = parseInt(this.scrollManager.store.get('start').val()) + parseInt(this.scrollManager.store.scroll_rows_default);			
-
+				params.sort = smkCommon.isValidDataText(ModelManager.get_sort()) ? ModelManager.get_sort() : this.scrollManager.store.sort_default;				
+				
 				this.scrollManager.store.addByValue('q', params.q !== undefined && params.q.length > 0  ? params.q : this.scrollManager.store.q_default);
 				this.scrollManager.store.addByValue('start', params.start);
+				this.scrollManager.store.addByValue('sort', params.sort);
 
 				this.isRequestRunning = true;
 				this.scrollManager.doRequest();

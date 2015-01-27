@@ -91,12 +91,11 @@ var	ModelManager = {
 				var cat = model.category != undefined && model.category != '' && model.category != 'all' ? sprintf('%1$scategory%1$s%2$s%1$s', this._cat_separator,model.category) : '';
 				var q =  model.q != undefined &&  this.encode_q(model.q) != '' ? sprintf('%sq=%s', this._separator, encodeURIComponent(this.encode_q(model.q))) : '';
 				var fq =  model.fq != undefined && this.encode_fq(model.fq) != '' ? sprintf('%sfq=%s', this._separator, encodeURIComponent(this.encode_fq(model.fq))) : '';
-				var fl =  model.fl != undefined && model.fl != '' ? sprintf('%sfl=%s', this._separator, encodeURIComponent(model.fl)) : '';
 				var start =  model.start != undefined && model.start != 0 ? sprintf('%sstart=%s', this._separator, encodeURIComponent(model.start)) : '';
 				var sort =  model.sort != undefined && model.sort != "score desc" ? sprintf('%ssort=%s', this._separator, encodeURIComponent(model.sort)) : '';
 
 
-				uniqueURL = sprintf('%s%s%s%s%s', cat, q, fq, fl, start, sort);
+				uniqueURL = sprintf('%s%s%s%s%s', cat, q, fq, start, sort);
 
 			}; 	  
 
@@ -108,10 +107,13 @@ var	ModelManager = {
 			this.setModel(model);
 			window.location.href = this.buildURLFromModel(this.getModel());
 		},
-		
-		
+				
 		get_q: function(){
 			return this.isValid(this.q) ? this.q : [];			
+		},
+		
+		get_sort: function(){
+			return this.isValid(this.sort) ? this.sort : "";			
 		},
 
 		/******************************
