@@ -64,8 +64,6 @@
 
 			//* proceed facet values
 			var maxCount = 0;
-			var totalCount = 0;
-			var i = 0;
 			var objectedItems = [];
 
 			switch (self.field){
@@ -75,11 +73,9 @@
 					if (count > maxCount) {
 						maxCount = count;
 					};	
-					
-					objectedItems.push({ "value": facet, "text": this.getCentury(facet), "count": count, "i": i }); 
-					i++;
+
+					objectedItems.push({ "value": facet, "text": this.getCentury(facet), "count": count });  	  	    	  	      
 				};
-				totalCount = i;
 				objectedItems.sort(function (a, b) {
 					return parseInt(b.value)-parseInt(a.value);	  	      
 				});				  			  			  
@@ -92,11 +88,9 @@
 					if (count > maxCount) {
 						maxCount = count;
 					};
-					
-					objectedItems.push({ "value": facet, "text": smkCommon.firstCapital(self.manager.translator.getLabel(smkCommon.replace_dansk_char(facet))).trim(), "count": count, "i": i }); 
-					i++;	    	  	  	      	  	      
+
+					objectedItems.push({ "value": facet, "text": smkCommon.firstCapital(self.manager.translator.getLabel(smkCommon.replace_dansk_char(facet))).trim(), "count": count });	    	  	  	      	  	      
 				};
-				totalCount = i;
 				objectedItems.sort(function (a, b) {
 					if (self.manager.translator.getLanguage() == 'dk')
 						return typeof (a.value === 'string') && typeof (b.value === 'string') ? (a.value.trim() < b.value.trim() ? -1 : 1) : (a.value < b.value ? -1 : 1);
@@ -111,11 +105,9 @@
 					if (count > maxCount) {
 						maxCount = count;
 					};
-					
-					objectedItems.push({ "value": facet, "text": smkCommon.firstCapital(facet).trim(), "count": count, "i": i }); 
-					i++;	    	  	  	      	  	      
+
+					objectedItems.push({ "value": facet, "text": smkCommon.firstCapital(facet).trim(), "count": count });	    	  	  	      	  	      
 				};
-				totalCount = i;
 				objectedItems.sort(function (a, b) {
 					return typeof (a.value === 'string') && typeof (b.value === 'string') ? (a.value.trim() < b.value.trim() ? -1 : 1) : (a.value < b.value ? -1 : 1);	  	      
 				});	  	 		  	  
@@ -123,39 +115,10 @@
 			};
 
 			//* merge facet data and template			
-			var json_data = {"options" : new Array({title:this.title, totalCount:totalCount, values:objectedItems})};	    	    	    
+			var json_data = {"options" : new Array({title:this.title, values:objectedItems})};	    	    	    
 			var html = self.template_integration_json(json_data, '#chosenTemplate'); 
 
-			$target.html(html);
-												
 			//** refresh view
-			
-			 if (document.querySelector(this.target + ".filter-multiple")) {
-			        var a = document.querySelectorAll(this.target + ".filter-multiple"), b = "filter-multiple-open", c = 46;
-			        //px
-			        Array.prototype.forEach.call(a, function(a) {
-			            // Move checked options to a visible area (so you don't need to open the 
-			            // .filter-multiple to see the selected options)
-			            var d = a.querySelectorAll(".filter-options input[checked]");
-			            Array.prototype.forEach.call(d, function(a) {
-			                var b = a.parentNode.parentNode.parentNode;
-			                b.querySelector(".filter-options-checked").appendChild(a.parentNode);
-			            }), a.querySelector(".filter-toggle").addEventListener("click", function(d) {
-			                d.preventDefault(), d.stopImmediatePropagation(), a.classList.contains(b) ? (a.classList.remove(b), 
-			                a.style.height = a.querySelector(".filter-options-checked") ? c + a.querySelector(".filter-options-checked").clientHeight + "px" : c + "px") : (a.classList.add(b), 
-			                a.style.height = a.querySelector(".filter-options").clientHeight + a.querySelector(".filter-options-checked").clientHeight + c + "px");
-			            }, !0), // Open if the .filter-multiple has the 'open' class
-			            a.classList.contains(b) ? a.style.height = a.querySelector(".filter-options").clientHeight + a.querySelector(".filter-options-checked").clientHeight + c + "px" : // If options list has checked items, adjust the height of the containing
-			            // element, so that we can se the checked items.
-			            a.querySelector(".filter-options-checked") && (a.style.height = c + a.querySelector(".filter-options-checked").clientHeight + "px"), 
-			            // Hide the down-arrow on the filter toggle if there is only 1 option.
-			            // aka. nothing more to show.
-			            0 == a.querySelectorAll(".filter-options li").length && (a.querySelector(".filter-toggle i").style.display = "none"), 
-			            a.querySelectorAll(".filter-options-checked li").length > 0 && a.classList.add("active");
-			        });
-			    }
-
-/*			
 			//* save previous selected values in the target 'select' component	  	 
 			$select.find("option:selected").each(function (){
 				self.previous_values[self.field].push(this.value.replace(/^"|"$/g, ''));	  		
@@ -209,7 +172,7 @@
 			}			
 
 			self.previous_values[self.field] = new Array();		
-*/
+
 			//* send "loaded" event
 			$(this).trigger({
 				type: "smk_search_filter_loaded"

@@ -15,7 +15,7 @@
 	  "tagCloud_country": 		"nationality",
 	  "tagCloud_art_type": 		"technique",
 	  
-	  "search_artist_name_ss_lab": 		"Select artist",
+	  "search_artist_name_lab": 		"Select artist",
 	  "search_object_production_century_earliest_lab": 		"Select period",
 	  "search_artist_natio_lab": 	"Select nationality",
 	  "search_object_type_lab":	"Select technique",
@@ -285,7 +285,7 @@
       "tagCloud_country": 		"nationalitet",
       "tagCloud_art_type": 		"teknik",
           
-      "search_artist_name_ss_lab": 		"Indtast kunstner",
+      "search_artist_name_lab": 		"Indtast kunstner",
       "search_object_production_century_earliest_lab": 		"Indtast periode",
       "search_artist_natio_lab": 	"Indtast kunstners nationalitet",
       "search_object_type_lab":	"Indtast teknik",

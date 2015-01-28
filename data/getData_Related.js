@@ -39,11 +39,11 @@
 		
 		this.getArtistName = function(doc){	  	  	  
 			// we take only the first name
-			if (doc.artist_name_ss === undefined)
+			if (doc.artist_name === undefined)
 				return '';
 
-			for (var i = 0, l = doc.artist_name_ss.length; i < l; i++) {
-				return doc.artist_name_ss[i];		  		  		  
+			for (var i = 0, l = doc.artist_name.length; i < l; i++) {
+				return doc.artist_name[i];		  		  		  
 			}
 		};
 

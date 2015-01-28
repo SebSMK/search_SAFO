@@ -35,7 +35,7 @@
 					info:{
 
 						title: this.getTitle(doc),	
-						artist: doc.artist_name_ss === undefined ? '' : this.getArtist(doc),
+						artist: doc.artist_name === undefined ? '' : this.getArtist(doc),
 						artwork_date: this.getObjectProdDate(doc),
 						description: this.getDescriptionNote(doc),
 						technique: {
@@ -276,13 +276,13 @@
 			}
 
 
-			if (doc.artist_name_ss !== undefined){
+			if (doc.artist_name !== undefined){
 				// check if all arrays containing artist's data have the same size
-				if((doc.artist_name_ss.length != doc.artist_auth.length) && (doc.artist_name_ss.length != doc.artist_natio.length)  && (doc.artist_name_ss.length != docBirth.length) && (doc.artist_name_ss.length != docDeath.length))
-					return doc.artist_name_ss;
+				if((doc.artist_name.length != doc.artist_auth.length) && (doc.artist_name.length != doc.artist_natio.length)  && (doc.artist_name.length != docBirth.length) && (doc.artist_name.length != docDeath.length))
+					return doc.artist_name;
 
-				for (var i = 0, l = doc.artist_name_ss.length; i < l; i++) {
-					var name = doc.artist_name_ss[i];
+				for (var i = 0, l = doc.artist_name.length; i < l; i++) {
+					var name = doc.artist_name[i];
 					var role = doc.artist_auth[i] != 'original' && doc.artist_auth[i] != '' ? sprintf('(%s)', doc.artist_auth[i].toLowerCase()) : "";
 					var nationality = docNatio[i] != '(?)' && docNatio[i].trim() != '' ? sprintf('%s', docNatio[i]) : '';
 					var birth = docBirth[i];
@@ -301,11 +301,11 @@
 
 		this.getArtistName = function(doc){	  	  	  
 			// we take only the first name
-			if (doc.artist_name_ss === undefined)
+			if (doc.artist_name === undefined)
 				return '';
 
-			for (var i = 0, l = doc.artist_name_ss.length; i < l; i++) {
-				return doc.artist_name_ss[i];		  		  		  
+			for (var i = 0, l = doc.artist_name.length; i < l; i++) {
+				return doc.artist_name[i];		  		  		  
 			}
 		};
 

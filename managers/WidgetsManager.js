@@ -31,7 +31,7 @@ var EventsManager;
 		translator.setLanguage(current_language);	
 
 		//** load searchFields
-		var searchFieldsTypes = [ {field:'artist_name_ss', title:translator.getLabel('tagCloud_artist')}, {field:'artist_natio', title:translator.getLabel('tagCloud_country')}, {field:'object_production_century_earliest', title:translator.getLabel('tagCloud_period')}, {field:'object_type', title:translator.getLabel('tagCloud_art_type')} ];
+		var searchFieldsTypes = [ {field:'artist_name', title:translator.getLabel('tagCloud_artist')}, {field:'artist_natio', title:translator.getLabel('tagCloud_country')}, {field:'object_production_century_earliest', title:translator.getLabel('tagCloud_period')}, {field:'object_type', title:translator.getLabel('tagCloud_art_type')} ];
 
 		//** create state manager
 		ViewManager = new ViewManager.constructor({				
@@ -69,13 +69,11 @@ var EventsManager;
 		//* set and save default request parameters                
 		var params = {
 				'fq': Manager.store.fq_default,	
-				'fl': Manager.store.fl_options.default,	
-				/*
+				'fl': Manager.store.fl_options.default,					
 				'facet': true,
-				'facet.field': ['artist_name_ss', 'artist_natio', 'object_production_century_earliest', 'object_type'],
+				'facet.field': ['artist_name', 'artist_natio', 'object_production_century_earliest', 'object_type'],
 				'facet.limit': -1,
-				'facet.mincount': 1,
-				*/
+				'facet.mincount': 1,				
 				'rows':rows_default,
 				'defType': 'edismax',      
 				'qf': Manager.store.qf_default,
@@ -213,23 +211,7 @@ var EventsManager;
                         {"value": "object_production_date_earliest desc", "text" : smkCommon.firstCapital(Manager.translator.getLabel("sorter_dato_desc")), "selected": false},
                         {"value": "artist_first_name asc", "text" : smkCommon.firstCapital(Manager.translator.getLabel("sorter_name_asc")), "selected": false},
                         {"value": "artist_first_name desc", "text" : smkCommon.firstCapital(Manager.translator.getLabel("sorter_name_desc")), "selected": false},
-				        {"value": "last_update desc", "text" : smkCommon.firstCapital(Manager.translator.getLabel("sorter_last_updated")), "selected": false}],
-
-		        'praktisk': [{"value": "score desc", "text" : smkCommon.firstCapital(Manager.translator.getLabel("sorter_relevans")), "selected": false},
-		                     {"value": "last_update desc", "text" : smkCommon.firstCapital(Manager.translator.getLabel("sorter_last_updated")), "selected": false}],
-
-                 'collections': [{"value": "score desc", "text" : smkCommon.firstCapital(Manager.translator.getLabel("sorter_relevans")), "selected": true},
-                                 {"value": "object_production_date_earliest asc", "text" : smkCommon.firstCapital(Manager.translator.getLabel("sorter_dato_asc")), "selected": false},
-                                 {"value": "object_production_date_earliest desc", "text" : smkCommon.firstCapital(Manager.translator.getLabel("sorter_dato_desc")), "selected": false},
-                                 {"value": "last_update desc", "text" : smkCommon.firstCapital(Manager.translator.getLabel("sorter_last_updated")), "selected": false}],
-
-                 'kalender': [{"value": "score desc", "text" : smkCommon.firstCapital(Manager.translator.getLabel("sorter_relevans")), "selected": false},
-                              {"value": "page_eventStartDate_dateS asc", "text" : smkCommon.firstCapital(Manager.translator.getLabel("sorter_dato_asc")), "selected": false},
-                              {"value": "page_eventStartDate_dateS desc", "text" : smkCommon.firstCapital(Manager.translator.getLabel("sorter_dato_desc")), "selected": false}],
-
-                  'nyheder': [{"value": "score desc", "text" : smkCommon.firstCapital(Manager.translator.getLabel("sorter_relevans")), "selected": false},
-                              {"value": "created asc", "text" : smkCommon.firstCapital(Manager.translator.getLabel("sorter_dato_asc")), "selected": false},
-                              {"value": "created desc", "text" : smkCommon.firstCapital(Manager.translator.getLabel("sorter_dato_desc")), "selected": false}]
+				        {"value": "last_update desc", "text" : smkCommon.firstCapital(Manager.translator.getLabel("sorter_last_updated")), "selected": false}]
 			},	
 			template: Mustache.getTemplate('templates/sorter.html')
 		})); 
@@ -408,7 +390,7 @@ var EventsManager;
 		//* searchfilters has finished loading
 		for (var i = 0, l = searchFieldsTypes.length; i < l; i++) {
 			$(Manager.widgets[searchFieldsTypes[i].field]).on('smk_search_filter_loaded', function(event){
-				EventsManager.remove_modal_loading_from_widget(event.currentTarget.target);
+				EventsManager.smk_search_filter_loaded(event.currentTarget.target);
 			});
 		};	
 		

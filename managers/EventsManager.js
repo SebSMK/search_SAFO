@@ -379,7 +379,7 @@
 		},
 		
 		//* searchfilters has finished loading	
-		this.remove_modal_loading_from_widget = function(value){			
+		this.smk_search_filter_loaded = function(value){			
 			ViewManager.remove_modal_loading_from_widget(value);
 			
 		};

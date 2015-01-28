@@ -1,30 +1,30 @@
 @charset "UTF-8";
 /*
- Â§ Variables
+ § Variables
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*
- Â§ Mixins
+ § Mixins
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*
- Â§ Extra small screens
+ § Extra small screens
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*
- Â§ Small screens
+ § Small screens
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*
- Â§ Medium screens
+ § Medium screens
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*
- Â§ Large screens
+ § Large screens
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*
- Â§ Extra large screens
+ § Extra large screens
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*
- Â§ Retina screens
+ § Retina screens
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*
- Â§ Components
+ § Components
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 @font-face {
   font-family: "hill light";
@@ -48,10 +48,10 @@
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
- Â§ Base
+ § Base
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*
- Â§ Box sizing.
+ § Box sizing.
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 *,
 *:before,
@@ -63,7 +63,7 @@
 }
 
 /*
- Â§ Reset user agent styles.
+ § Reset user agent styles.
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
 blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img,
@@ -420,10 +420,10 @@ th {
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
- Â§ Type
+ § Type
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*
- Â§ Text elements
+ § Text elements
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 html {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -451,6 +451,7 @@ s,
 small,
 .matrix-tile-meta,
 .back-to-site a,
+.language-selector li,
 .main-footer,
 .search-type-selector .search-query-info,
 .small {
@@ -463,21 +464,57 @@ small,
   padding-left: .1em;
 }
 
-.back-to-site a,
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
+ § Copy
+\*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.copy h2 {
+  margin-top: 1.1em;
+}
+.copy h3 {
+  margin-top: 1.25em;
+}
+.copy h4 {
+  margin-top: 1.6em;
+}
+.copy h5,
+.copy h6 {
+  margin-top: 1.45em;
+  font-style: italic;
+  color: #e6e6e8;
+}
+.copy p {
+  margin-bottom: .85em;
+}
+.copy p a:hover, .copy p a:focus {
+  text-decoration: underline;
+}
+.copy img {
+  margin: 0.4em 0 1.1em;
+  width: 100%;
+}
+.copy figure img {
+  margin-bottom: .4em;
+}
+.copy figure figcaption {
+  margin-bottom: 1.2em;
+  color: #5f5f60;
+}
+
+.back-to-site a, .language-selector li, .language-selector a,
 a {
   color: #5f66f2;
   text-decoration: none;
   line-height: inherit;
 }
-.back-to-site a:hover,
+.back-to-site a:hover, .language-selector li:hover, .language-selector a:hover,
 a:hover {
   text-decoration: none;
 }
 
-.back-to-site a {
+.back-to-site a, .language-selector li, .language-selector a {
   color: #88888c;
 }
-.back-to-site a:hover {
+.back-to-site a:hover, .language-selector li:hover, .language-selector a:hover {
   color: #5f5f60;
 }
 
@@ -505,6 +542,13 @@ a:hover {
 .matrix {
   margin: 0 -10px;
 }
+.matrix:before, .matrix:after {
+  content: " ";
+  display: table;
+}
+.matrix:after {
+  clear: both;
+}
 @media (min-width: 1000px) {
   .matrix {
     margin: 0 -15px;
@@ -529,7 +573,6 @@ a:hover {
 .matrix-tile:hover {
   cursor: pointer;
   border: 1px solid #1a1919;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
   z-index: 999;
 }
 
@@ -544,32 +587,127 @@ a:hover {
 }
 .matrix-tile-header h3 {
   margin-bottom: .25em;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .matrix-tile-header h2 {
   font-family: 'hill demibold', sans-serif;
   font-size: 1.25em;
   line-height: 1.3;
-  margin-bottom: .65em;
+  margin-bottom: .3em;
 }
 .matrix-tile-header h2 a {
+  display: block;
   color: #1a1919;
+  max-height: 3.75em;
+  overflow: hidden;
 }
 
 .matrix-tile-date {
   font-family: 'hill regular', sans-serif;
-  font-size: .8em;
-}
-.matrix-tile-date:before {
-  content: ", ";
+  margin-bottom: .4em;
 }
 
 .matrix-tile-meta {
   color: #88888c;
 }
+.matrix-tile-meta li {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.matrix-tile-image-missing {
+  border: 1px solid #d6d6dd;
+  height: 180px;
+  text-align: center;
+  margin-bottom: .8em;
+}
+.matrix-tile-image-missing i {
+  display: block;
+  width: 60px;
+  height: 58px;
+  vertical-align: middle;
+  text-indent: -9999em;
+  background-image: url(../images/sprite.png);
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: -8px -240px;
+  background-size: 500px;
+  display: inline-block;
+  text-indent: 0;
+  margin-top: 60px;
+}
+@media (-webkit-min-device-pixel-ratio: 2) {
+  .matrix-tile-image-missing i {
+    background-image: url(../images/sprite@2x.png);
+  }
+}
+@media (-webkit-min-device-pixel-ratio: 3) {
+  .matrix-tile-image-missing i {
+    background-image: url(../images/sprite@3x.png);
+  }
+}
+
+/*
+ § 5 column matrix
+\*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+@media (min-width: 1000px) {
+  .matrix-five-columns .matrix-tile {
+    width: 20%;
+  }
+}
+
+/*
+ § Equalized matrix (equalized heights)
+\*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.matrix-equalized .matrix-tile {
+  padding-bottom: 10px;
+  height: 360px;
+}
+.matrix-equalized .matrix-tile-meta {
+  height: 34px;
+}
+.matrix-equalized .matrix-tile-header {
+  margin-top: .75em;
+}
+.matrix-equalized .matrix-tile-image {
+  height: 180px;
+  overflow: hidden;
+  border: 1px solid #d6d6dd;
+  padding: 10px;
+  text-align: center;
+}
+.matrix-equalized .matrix-tile-image img {
+  opacity: 0;
+  -webkit-transition: opacity 400ms ease;
+  -moz-transition: opacity 400ms ease;
+  -ms-transition: opacity 400ms ease;
+  -o-transition: opacity 400ms ease;
+  transition: opacity 400ms ease;
+}
+.matrix-equalized .matrix-tile-image-missing {
+  margin-bottom: 0;
+}
+
+/*
+ § Thumbnail matrix tiles
+\*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.matrix-tile.matrix-tile-thumbnail {
+  height: 202px;
+}
+@media (min-width: 1000px) {
+  .matrix-tile.matrix-tile-thumbnail {
+    height: 212px;
+  }
+}
 
 .back-to-site {
-  padding-top: 1.1em;
-  margin-bottom: 1.8em;
+  float: left;
+  width: 50%;
 }
 .back-to-site i {
   display: block;
@@ -595,6 +733,20 @@ a:hover {
   .back-to-site i {
     background-image: url(../images/sprite@3x.png);
   }
+}
+
+.language-selector {
+  float: right;
+  width: 50%;
+  text-align: right;
+}
+.language-selector li {
+  display: inline-block;
+  margin-left: .5em;
+}
+.language-selector li.active a {
+  font-weight: bold;
+  color: #1a1919;
 }
 
 .main-header {
@@ -647,7 +799,7 @@ a:hover {
 }
 @media (min-width: 1000px) {
   .main-header .search-bar {
-    padding-left: 17px;
+    padding-left: 15px;
   }
 }
 @media (min-width: 866px) {
@@ -672,9 +824,6 @@ a:hover {
   -o-transition: border-color 300ms ease;
   transition: border-color 300ms ease;
 }
-.main-header .search-bar form.in-focus {
-  border-color: #5f66f2;
-}
 .main-header .search-bar label {
   display: none;
 }
@@ -693,9 +842,6 @@ a:hover {
   -o-transition: color 300ms ease;
   transition: color 300ms ease;
   float: left;
-}
-.main-header .search-bar .in-focus input[type="text"] {
-  color: #5f66f2;
 }
 .main-header .search-bar input[type="submit"] {
   vertical-align: top;
@@ -726,15 +872,24 @@ a:hover {
     background-image: url(../images/sprite@3x.png);
   }
 }
-.main-header .search-bar input[type="submit"]:focus, .main-header .search-bar input[type="submit"]:hover {
-  background-position: -207px -3px;
+
+.main-header-topshelf {
+  padding-top: 1.1em;
+  margin-bottom: 1.8em;
+}
+.main-header-topshelf:before, .main-header-topshelf:after {
+  content: " ";
+  display: table;
+}
+.main-header-topshelf:after {
+  clear: both;
 }
 
 .main-footer {
   clear: both;
   border-top: 1px solid #e6e6e8;
   margin-bottom: 3em;
-  padding-top: 1em;
+  padding-top: 1.4em;
   color: #88888c;
 }
 .main-footer:before, .main-footer:after {
@@ -744,23 +899,37 @@ a:hover {
 .main-footer:after {
   clear: both;
 }
+.main-footer .contact,
+.main-footer .copyright {
+  margin-bottom: .4em;
+}
+.main-footer i {
+  margin: 0 .2em;
+}
+.main-footer i:first-child {
+  margin-left: 0;
+}
+.main-footer a {
+  color: #88888c;
+}
+.main-footer a:hover {
+  color: #39393a;
+}
 
-.tabs, .search-type-selector {
+.tabs, .search-type-selector .search-tabs {
   margin-bottom: 1.5em;
   border-bottom: 1px solid #1a1919;
 }
-.tabs:before, .search-type-selector:before, .tabs:after, .search-type-selector:after {
+.tabs:before, .search-type-selector .search-tabs:before, .tabs:after, .search-type-selector .search-tabs:after {
   content: " ";
   display: table;
 }
-.tabs:after, .search-type-selector:after {
+.tabs:after, .search-type-selector .search-tabs:after {
   clear: both;
 }
-.tabs ul li, .search-type-selector ul li {
+.tabs a, .search-type-selector .search-tabs a {
   float: left;
   margin-right: 1.15em;
-}
-.tabs ul li a, .search-type-selector ul li a {
   text-transform: uppercase;
   font-family: 'hill demibold', sans-serif;
   font-size: 14px;
@@ -768,10 +937,10 @@ a:hover {
   display: inline-block;
   padding: .75em 3px .9em;
 }
-.tabs ul li a:hover, .search-type-selector ul li a:hover {
+.tabs a:hover, .search-type-selector .search-tabs a:hover {
   color: #5f5f60;
 }
-.tabs ul li a.active, .search-type-selector ul li a.active {
+.tabs a.active, .search-type-selector .search-tabs a.active {
   color: #1a1919;
   box-shadow: inset 0 -3px 0 #1a1919;
 }
@@ -786,6 +955,18 @@ a:hover {
   position: relative !important;
   top: 0 !important;
   left: 0 !important;
+}
+
+.single-artwork-tabs {
+  margin-bottom: 3em;
+}
+.single-artwork-tabs .copy {
+  padding-top: 2px;
+}
+@media (min-width: 1000px) {
+  .single-artwork-tabs .copy {
+    padding-top: 8px;
+  }
 }
 
 .pager {
@@ -859,9 +1040,19 @@ a:hover {
 
 .search-type-selector {
   margin-bottom: 2.5em;
+  border-bottom: 1px solid #1a1919;
 }
-.search-type-selector ul {
+.search-type-selector:before, .search-type-selector:after {
+  content: " ";
+  display: table;
+}
+.search-type-selector:after {
+  clear: both;
+}
+.search-type-selector .search-tabs {
   float: left;
+  border-bottom: 0;
+  margin-bottom: 0;
 }
 .search-type-selector .search-query-info {
   color: #88888c;
@@ -1828,4 +2019,3 @@ This file is generated by `grunt build`, do not edit it by hand.
     background-image: url(../images/sprite@3x.png);
   }
 }
-
