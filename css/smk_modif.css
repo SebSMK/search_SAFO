@@ -18,6 +18,11 @@
 	display: none;
 }
 
+#sorter{
+	display: block; 
+	margin-bottom: 20px; 	
+}
+
 .matrix-tile-image{
 	position: relative;		
 }
