@@ -110,7 +110,7 @@
 		
 		//* teaser		
 		this.smk_teasers_this_img_displayed = function(){
-			$(this.callWidgetTarget('teasers')).find('.search-results .matrix').masonry('layout');
+			$(this.callWidgetTarget('teasers')).find('.matrix').masonry('layout');
 
 			//* check if there are still images not displayed in "teaser"
 			if ($(this.callWidgetTarget('teasers')).find('.image_loading').length == 0 && 
@@ -123,11 +123,13 @@
 		};
 
 		this.smk_teasers_this_img_loaded = function(){
-			$(this.callWidgetTarget('teasers')).find('.search-results .matrix').masonry('layout');
+			$(this.callWidgetTarget('teasers')).find('.matrix').masonry('layout');
 
 			//* check if there are still images loading in "teaser"
 			if ($(this.callWidgetTarget('teasers')).find('.image_loading').length == 0){
 
+				this.showWidget($(this.callWidgetTarget('teasers')));								
+				
 				// highlight search string in teasers
 				this.highlightning();
 				
@@ -139,14 +141,14 @@
 
 		//...efter scroll: all the new images loaded in teaser
 		this.smk_scroll_all_images_displayed = function(added){		
-			$(this.callWidgetTarget('teasers')).find('.search-results .matrix').masonry('layout');			
+			$(this.callWidgetTarget('teasers')).find('.matrix').masonry('layout');			
 			if (added !== undefined)
 				this.callWidgetFn('pager', 'refreshDisplay', {params: [added]});
 		},
 				
 		//* related
 		this.smk_related_this_img_loaded = function(){
-			$(this.callWidgetTarget('details', 'related_subWidget')).find('.search-results .matrix').masonry('layout');  
+			$(this.callWidgetTarget('details', 'related_subWidget')).find('.matrix').masonry('layout');  
 
 			//* check if there are still images loading in "related"
 			if ($(this.callWidgetTarget('details', 'related_subWidget')).find('.image_loading').length == 0){    		
@@ -250,7 +252,7 @@
 			this.callWidgetFn('teasers', 'removeAllArticles');
 			this.showWidget($(this.callWidgetTarget('teasers')));
 									
-			$(this.callWidgetTarget('teasers')).find('.search-results .matrix').addClass('full-width').hide();							
+			$(this.callWidgetTarget('teasers')).find('.matrix').addClass('full-width').hide();							
 			this.showWidget($target.find("#search-filters"));
 			for (var i = 0, l = Manager.searchfilterList.length; i < l; i++) {				
 				if (this.callWidgetFn(Manager.searchfilterList[i].field, 'getRefresh'))					
@@ -287,8 +289,8 @@
 //					break;		  
 //			}																	 
 
-			if($(this.callWidgetTarget('teasers')).find('.search-results .matrix .matrix-tile').length > 0)
-				$(this.callWidgetTarget('teasers')).find('.search-results .matrix').masonry('layout');
+			if($(this.callWidgetTarget('teasers')).find('.matrix .matrix-tile').length > 0)
+				$(this.callWidgetTarget('teasers')).find('.matrix').masonry('layout');
 
 			return;
 		};

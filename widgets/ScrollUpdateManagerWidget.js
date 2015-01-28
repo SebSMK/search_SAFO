@@ -86,7 +86,7 @@
 
 		new_img_displayed: function(){
 
-			$(this.scroll_subWidget.target).find('.search-results .matrix').masonry('layout');
+			$(this.scroll_subWidget.target).find('.matrix').masonry('layout');
 			
 			if ($(this.scroll_subWidget.target).find('.image_loading').length == 0 && 
 					$(this.scroll_subWidget.target).find('.not_displayed').length == 0){				

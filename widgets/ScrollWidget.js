@@ -44,10 +44,10 @@
 					$article.addClass('scroll_add');   
 					
 					//* append the current article to list
-					$target.find('.search-results .matrix').append($article);	      
+					$target.find('.matrix').append($article);	      
 
 					//* append to masonry
-					$target.find('.search-results .matrix').masonry('appended', $article);	  											
+					$target.find('.matrix').masonry('appended', $article);	  											
 				}
 				
 				//* add image + link on div to all articles

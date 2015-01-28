@@ -17,15 +17,15 @@
 			var html = self.template;     
 			$target.html($(html).find('#teaserInitTemplate').html());		
 
-			$target.find('.search-results .matrix .matrix-tile').hide();
+			$target.find('.matrix .matrix-tile').hide();
 
 			//* init masonry
-			$target.find('.search-results .matrix').masonry( {
+			$target.find('.matrix').masonry( {
 				transitionDuration: 0
 			});
 
 			this.default_picture_path = smkCommon.getDefaultPicture('medium');      
-			this.teaser_article_class = $target.find('.search-results .matrix .matrix-tile').attr('class');	
+			this.teaser_article_class = $target.find('.matrix .matrix-tile').attr('class');	
 
 		},  
 
@@ -48,8 +48,8 @@
 				var $article = $(html);	      
 				//* load current article visualization classes
 				$article.removeClass().addClass(self.teaser_article_class);	      
-				$target.find('.search-results .matrix').append($article);	      	        
-				$target.find('.search-results .matrix').masonry('appended', $article);	 
+				$target.find('.matrix').append($article);	      	        
+				$target.find('.matrix').masonry('appended', $article);	 
 				$target.find('.image_loading').removeClass('image_loading').hide();
 
 				// trig "this image is loaded" event	      
@@ -81,10 +81,10 @@
 					$article.removeClass().addClass(self.teaser_article_class);		      				
 
 					//* append the current article to list
-					$target.find('.search-results .matrix').append($article);	      
+					$target.find('.matrix').append($article);	      
 
 					//* refresh masonry
-					$target.find('.search-results .matrix').masonry('appended', $article);	      
+					$target.find('.matrix').masonry('appended', $article);	      
 				}						
 
 				//* add image + link on div to all articles
@@ -123,12 +123,12 @@
 
 		removeAllArticles: function(){
 			var $target = $(this.target); 
-			var $all_articles = $target.find('.search-results .matrix .matrix-tile');
+			var $all_articles = $target.find('.matrix .matrix-tile');
 
 			if($all_articles.length > 0 ){
 				//* save current visualization class
-				this.teaser_article_class = $target.find('.search-results .matrix .matrix-tile').attr('class');
-				$target.find('.search-results .matrix').masonry('remove', $all_articles);		
+				this.teaser_article_class = $target.find('.matrix .matrix-tile').attr('class');
+				$target.find('.matrix').masonry('remove', $all_articles);		
 			};		  
 		}
 	});
