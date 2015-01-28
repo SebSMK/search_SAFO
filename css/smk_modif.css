@@ -18,6 +18,15 @@
 	display: none;
 }
 
+
+#currentsearch{
+    width: 60%;
+    padding-left: 15px;
+    padding-top: 3px;
+    position: absolute;
+    right: 0;    
+}    
+
 #sorter{
 	display: block; 
 	margin-bottom: 20px; 	
@@ -98,12 +107,6 @@ a.divLink {
 	transition: opacity 500ms ease-in-out 0s;
 }
 
-.search-terms {
-    margin-bottom: 12px;
-    position: absolute;
-    left: 740px;
-    top: 115px;
-}
 .search-terms ul li {
     background-clip: padding-box;
     background-color: #111;
