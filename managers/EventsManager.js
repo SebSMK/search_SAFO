@@ -42,7 +42,7 @@
 				ModelManager.setModel($.address.value(), "url");
 				var model = ModelManager.getModel();	
 				if (model.view != 'detail')									
-					if (($(".search-results").height() <= ($(window).height() + $(window).scrollTop()) + 200))				
+					if (($(".search-results").height() <= ($(window).height() + $(window).scrollTop()) + 200))						
 						//* start scroll request
 						ViewManager.callWidgetFn('scroll_update', 'start_scroll_request');	        																	        		    
 		};							

@@ -320,7 +320,7 @@
 		 */
 		this.add_modal_loading_to_widget = function(widget){
 			if(this.isThisWidgetActive(widget))
-				this.callWidgetFn(widget, 'addClass', {params: 'modal_loading'});
+				$(this.callWidgetTarget(widget)).addClass('modal_loading');				
 		};
 		
 		this.isThisWidgetActive = function(widget){
