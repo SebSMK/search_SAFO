@@ -163,6 +163,10 @@ a.divLink {
     display: block;
 }
 
+.matrix-tile-image img[src*="default_picture"] {
+    opacity: 0.3;
+}
+
 /* Modif of Jacques' code */
 
 .matrix-tile:hover {

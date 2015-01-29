@@ -19,20 +19,24 @@
     
     "qf_default":{	
 		"dk":{
-				"collectorExact1":		"100",
-				"collectorExact2":		"20", 
+				"collectorExact1":		"150",
+				"collectorExact2":		"30", 
+				"collectorExact3":		"20", 
 				"collector1":			"20", 
 				"collector2":			"15", 
-				"collector3":			"5" 							
+				"collector3":			"5", 	
+				"collector4":			"1" 							
 			},
 		"en":{
 		
-				"collectorExact1":		"100",
-				"collectorExact2":		"20",
+				"collectorExact1":		"150",
+				"collectorExact2":		"30",
+				"collectorExact3":		"10",
 				"collector1":			"20", 
 				"collector_en":			"15", 
 				"collector2":			"5", 
-				"collector3":			"5" 			
+				"collector3":			"5",
+				"collector4":			"1" 			
 			}
 	},
 	
