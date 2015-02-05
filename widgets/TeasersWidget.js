@@ -21,6 +21,7 @@
 
 			//* init masonry
 			$target.find('.matrix').masonry( {
+				itemSelector: '.matrix-tile',
 				transitionDuration: 0
 			});
 

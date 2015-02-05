@@ -115,6 +115,10 @@
 			//* check if there are still images not displayed in "teaser"
 			if ($(this.callWidgetTarget('teasers')).find('.image_loading').length == 0 && 
 					$(this.callWidgetTarget('teasers')).find('.not_displayed').length == 0){				
+				
+				// if all images are loaded, we stop the modal "waiting image" for this widget
+				this.remove_modal_loading_from_widget(this.callWidgetTarget('teasers'));	
+				
 				// if all images in teaser are displayed, send event
 				$(this).trigger({
 					type: "smk_teasers_all_images_displayed"
@@ -133,8 +137,7 @@
 				// highlight search string in teasers
 				this.highlightning();
 				
-				// if all images are loaded, we stop the modal "waiting image" for this widget
-				this.remove_modal_loading_from_widget(this.callWidgetTarget('teasers'));				
+							
 			}    		  
 
 		};

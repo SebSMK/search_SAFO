@@ -2,7 +2,7 @@
 <html>
   <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">  
-  <title>SMK - Advanceret søg i samlinger</title>
+  <title>SMK Søg i Samling</title>
   
 
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>

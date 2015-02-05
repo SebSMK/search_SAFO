@@ -46,6 +46,8 @@
     position: absolute;
     width: 100%;
     opacity: 0;	
+    color: white;
+    font-style: italic;
 }
 
 .matrix-tile .copyright-info >ul {
