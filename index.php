@@ -24,7 +24,8 @@
 	<script src="widgets/RelatedWidget.js" type="text/javascript"></script>
 	<script src="widgets/PagerWidget.js" type="text/javascript"></script>
 	<script src="widgets/SearchInfoWidget.js" type="text/javascript"></script>	
-	<script src="widgets/ScrollWidget.js" type="text/javascript"></script>	
+	<script src="widgets/ScrollWidget.js" type="text/javascript"></script>
+	<script src="widgets/LanguagePickerWidget.js" type="text/javascript"></script>	
 	<script src="widgets/ScrollUpdateManagerWidget.js" type="text/javascript"></script>		
 	<script src="js/jquery/jquery.highlight.js" type="text/javascript"></script>		
 	<script src="core/AbstractFacetWidget.js" type="text/javascript"></script>

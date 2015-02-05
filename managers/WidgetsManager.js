@@ -202,6 +202,14 @@ var EventsManager;
 //			template: Mustache.getTemplate('templates/view_picker.html')
 //		})); 
 
+		Manager.addWidget(new AjaxSolr.LanguagePickerWidget({
+		id: 'lang-picker',
+		target: '#lang-picker',
+		template: Mustache.getTemplate('templates/language_picker.html')
+	})); 
+
+		
+		
 		Manager.addWidget(new AjaxSolr.SorterWidget({
 			id: 'sorter',
 			target: '#sorter',
