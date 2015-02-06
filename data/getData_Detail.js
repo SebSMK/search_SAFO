@@ -21,14 +21,14 @@
 						alt: this.getAlt(doc),		  						
 						image: doc.medium_image_url !== undefined ? doc.medium_image_url : this.caller.default_picture_path,
 						copyright: doc.medium_image_url !== undefined ? 
-										smkCommon.computeCopyright(doc) != false ?
-											smkCommon.computeCopyright(doc)
+										getData_Common.computeCopyright(doc) != false ?
+											getData_Common.computeCopyright(doc)
 										:
 											this.caller.manager.translator.getLabel('copyright_def')
 									: 
 										this.caller.manager.translator.getLabel("detail_no_photo"),
-						copyright_default: !smkCommon.computeCopyright(doc) && doc.medium_image_url !== undefined,
-						copyright_valid: smkCommon.computeCopyright(doc),
+						copyright_default: !getData_Common.computeCopyright(doc) && doc.medium_image_url !== undefined,
+						copyright_valid: getData_Common.computeCopyright(doc),
 						img_id:doc.id
 					},
 
@@ -194,14 +194,14 @@
 		this.getAlt = function (doc){	  
 			var artist = this.getArtistName(doc) == '' ? '' : this.getArtistName(doc) + ' - ';
 			var title = this.getTitle(doc);
-			var copyright = smkCommon.computeCopyright(doc); 
+			var copyright = getData_Common.computeCopyright(doc); 
 
 			return  copyright == false ? sprintf('%s%s', artist, title) : sprintf('%s - %s', copyright, title); 	  
 		};
 
 		this.get_OG_description = function (doc){	  
 			var artist = this.getArtistName(doc) == '' ? '' : this.getArtistName(doc);	
-			var copyright = smkCommon.computeCopyright(doc); 
+			var copyright = getData_Common.computeCopyright(doc); 
 
 			return  copyright == false ? sprintf('%s', artist) : sprintf('%s', copyright); 	  
 		};

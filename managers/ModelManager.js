@@ -9,8 +9,8 @@ var	ModelManager = {
 
 		/**
 		 * Set model
-		 * @param {String|Json} [values] The value to set.
-		 * @param {String} [type] value's type.		
+		 * @param {String|Json} [values] Values passed to the model.
+		 * @param {String} [type] values' format.		
 		 * */
 		setModel: function(values, type){
 
@@ -34,29 +34,31 @@ var	ModelManager = {
 
 			var model = {};
 
-			if (this.isValid(this.view))
+			if (smkCommon.isValidDataText(this.view))
 				model.view = this.view;
 
-			if (this.isValid(this.category))
+			if (smkCommon.isValidDataText(this.category))
 				model.category = this.category;
 
-			if (this.isValid(this.q))
+			if (smkCommon.isValidDataText(this.q))
 				model.q = this.q;
 
-			if (this.isValid(this.fq))
+			if (smkCommon.isValidDataText(this.fq))
 				model.fq = this.fq;
 			
-			if (this.isValid(this.fl))
+			if (smkCommon.isValidDataText(this.fl))
 				model.fl = this.fl;
 
-			if (this.isValid(this.qf))
+			if (smkCommon.isValidDataText(this.qf))
 				model.qf = this.qf;
 
-			if (this.isValid(this.start))
+			if (smkCommon.isValidDataText(this.start))
 				model.start = this.start;
 
-			if (this.isValid(this.sort))
-				model.sort = this.sort;		
+			if (smkCommon.isValidDataText(this.sort))
+				model.sort = this.sort;
+			
+			model.lang = smkCommon.isValidDataText(eval("smkCommon.enum_lang." + this.lang)) ? this.lang : smkCommon.enum_lang.def;
 
 			return model;
 		},	
@@ -85,17 +87,18 @@ var	ModelManager = {
 			var uniqueURL = "";		      
 
 			if(model.view == 'detail'){
-				uniqueURL = sprintf('%s%s%s%s', this._cat_separator, model.view, this._cat_separator, encodeURIComponent(this.encode_q(model.q)) );				  				  
+				var lang = smkCommon.isValidDataText(eval("smkCommon.enum_lang." + model.lang)) && smkCommon.enum_lang.def != model.lang ? sprintf('%1$s%2$s', this._cat_separator, model.lang) : '';
+				uniqueURL = sprintf('%s%s%s%s%s',lang, this._cat_separator, model.view, this._cat_separator, encodeURIComponent(this.encode_q(model.q)) );				  				  
 			}else{
 
-				var cat = model.category != undefined && model.category != '' && model.category != 'all' ? sprintf('%1$scategory%1$s%2$s%1$s', this._cat_separator,model.category) : '';
+				var cat = model.category != undefined && model.category != '' && model.category != 'all' ? sprintf('%1$scategory%1$s%2$s%1$s', this._cat_separator, model.category) : '';
 				var q =  model.q != undefined &&  this.encode_q(model.q) != '' ? sprintf('%sq=%s', this._separator, encodeURIComponent(this.encode_q(model.q))) : '';
 				var fq =  model.fq != undefined && this.encode_fq(model.fq) != '' ? sprintf('%sfq=%s', this._separator, encodeURIComponent(this.encode_fq(model.fq))) : '';
 				var start =  model.start != undefined && model.start != 0 ? sprintf('%sstart=%s', this._separator, encodeURIComponent(model.start)) : '';
-				var sort =  model.sort != undefined && model.sort != "score desc" ? sprintf('%ssort=%s', this._separator, encodeURIComponent(model.sort)) : '';
+				var sort =  model.sort != undefined && model.sort != "score desc" ? sprintf('%ssort=%s', this._separator, encodeURIComponent(model.sort)) : '';				
+				var lang = smkCommon.isValidDataText(eval("smkCommon.enum_lang." + model.lang)) && smkCommon.enum_lang.def != model.lang ? sprintf('%1$s%2$s%1$s', this._cat_separator, model.lang) : '';
 
-
-				uniqueURL = sprintf('%s%s%s%s%s', cat, q, fq, start, sort);
+				uniqueURL = sprintf('%s%s%s%s%s%s', lang, cat, q, fq, start, sort);
 
 			}; 	  
 
@@ -109,11 +112,15 @@ var	ModelManager = {
 		},
 				
 		get_q: function(){
-			return this.isValid(this.q) ? this.q : [];			
+			return smkCommon.isValidDataText(this.q) ? this.q : [];			
 		},
 		
 		get_sort: function(){
-			return this.isValid(this.sort) ? this.sort : "";			
+			return smkCommon.isValidDataText(this.sort) ? this.sort : "";			
+		},
+		
+		get_lang: function(){
+			return smkCommon.isValidDataText(eval("smkCommon.enum_lang." + this.lang)) ? this.lang : smkCommon.enum_lang.def;			
 		},
 
 		/******************************
@@ -132,12 +139,13 @@ var	ModelManager = {
 			this.qf = this.getModelValue(model, "qf");
 			this.start = this.getModelValue(model, "start");
 			this.fl = this.getModelValue(model, "fl");
-			this.sort = this.getModelValue(model, "sort");								
+			this.sort = this.getModelValue(model, "sort");	
+			this.lang = this.getModelValue(model, "lang");	
 		},
 
 		getModelValue: function(model, type){
 			var value = model !== undefined && model != null ? eval("model." + type) : null;
-			return this.isValid(value) ? (value == this.current_value_joker ? eval("this." + type) : value) : null;
+			return smkCommon.isValidDataText(value) ? (value == this.current_value_joker ? eval("this." + type) : value) : null;
 		},
 
 		/**
@@ -148,52 +156,40 @@ var	ModelManager = {
 			var model = {};
 
 			var cats = url.replace(this._cat_separator, '').split(this._cat_separator);
-
-			if(cats.length > 0){
-
-				switch(cats[0]){
+			
+			var i = 0;
+			
+			while (i < cats.length){
+				
+				switch(cats[i]){
+				case smkCommon.enum_lang.en:
+				case smkCommon.enum_lang.dk:
+				case smkCommon.enum_lang.def:
+					model.lang = cats[i];
+					i++;
+					break;
+									
 				case "detail":
-					model.q = sprintf('"%s"', decodeURIComponent(cats[1]));
-					model.view = cats[0];
-					break;	
+					model.q = sprintf('"%s"', decodeURIComponent(cats[i + 1]));
+					model.view = cats[i];
+					this.setModelFromJson(model);
+					return;
 
 				case "category":												
-					model.category = cats[1];	
-					model.fq = [{	'value': sprintf('%s:%s', cats[0], cats[1]),
-						'locals': {'tag': cats[0]}  
+					model.category = cats[i];	
+					model.fq = [{	'value': sprintf('%s:%s', cats[i], cats[i+ 1]),
+						'locals': {'tag': cats[i]}  
 					}];
-					this.extract_params(cats[2].split(this._separator), model);						
-					break;	
-
+					this.extract_params(cats[i + 2].split(this._separator), model);						
+					this.setModelFromJson(model);
+					return;
+					
 				default:
-					this.extract_params(cats[0].split(this._separator), model);
-				break;
-				}
-
-			}
-
-			this.setModelFromJson(model);
-
-		},
-
-
-		/**
-		 * check if a value is valid
-		 * @param {String} [value] The value to check.
-		 * @param {String} [type] optional: value's type.
-		 * @returns The value.
-		 * */
-		isValid: function(value, type){
-
-			var res = false;
-
-			switch(type){
-			default:
-				res = value !== undefined && value != null && value != ''; 
-			}
-
-			return res;
-
+					this.extract_params(cats[i].split(this._separator), model);
+					this.setModelFromJson(model);
+					return;
+				}					
+			}		
 		},
 
 
@@ -309,6 +305,7 @@ var	ModelManager = {
 		start: null,
 		fl: null,
 		sort: null,
+		lang: null,
 
 		current_value_joker: '*',
 

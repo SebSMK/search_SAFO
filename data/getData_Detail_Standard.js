@@ -22,8 +22,8 @@
 						alt: getData_Common.getMedia_alt(doc),
 						image: getData_Common.getMedia_image(doc, this.caller),						
 						copyright: getData_Common.getMedia_copyright(doc, this.caller),
-						copyright_default: !smkCommon.computeCopyright(doc) && doc.medium_image_url !== undefined,
-						copyright_valid: smkCommon.computeCopyright(doc),
+						copyright_default: !getData_Common.computeCopyright(doc) && doc.medium_image_url !== undefined,
+						copyright_valid: getData_Common.computeCopyright(doc),
 						img_id:doc.id
 					},
 					

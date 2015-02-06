@@ -23,7 +23,7 @@
 				title : doc.title_first,
 				image : doc.medium_image_url !== undefined ? doc.medium_image_url : this.caller.default_picture_path,
 				current: this.caller.getCurrent_selec() == doc.id,
-				copyright: smkCommon.computeCopyright(doc) != false ? smkCommon.computeCopyright(doc) :  '',
+				copyright: getData_Common.computeCopyright(doc) != false ? getData_Common.computeCopyright(doc) :  '',
 				url: this.getDetailUrl(doc.id)
 			}; 		
 		}; 						

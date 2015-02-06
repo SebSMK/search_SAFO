@@ -36,6 +36,15 @@
 	position: relative;		
 }
 
+.matrix-tile-date:before {
+    content: ", ";
+}
+
+.matrix-tile-date {
+    font-size: 0.8em;
+}
+
+
 .matrix-tile .copyright-info{
 	background: none repeat scroll 0 0 rgba(0, 0, 0, 0.2);
     bottom: 0;

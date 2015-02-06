@@ -17,6 +17,7 @@
 	common.split_3_niv = ";---;";
 	common.split_4_niv = ";-v;";	
 	
+	common.enum_lang = {'def':'dk', 'en':'en', 'dk':'dk'}; //languages
 	
 	common.getValueFromSplit = function(splited, index){		
 		return splited.length > index && common.isValidDataText(splited[index]) ? splited[index] : null;		
@@ -94,17 +95,6 @@
 		return res;
 	};
 
-	/*
-	 * check an artwork copyright
-	 * @param doc - result returned by Solr for artwork 
-	 * @return - false if not under copyright, copyright text if otherwise 
-	 */
-	common.computeCopyright = function(doc) {
-
-		return doc.copyright !== undefined ? doc.copyright : false;
-
-	};
-
 	common.getDefaultPicture = function(size){		
 		var picturePath = ""
 			var server = common.getCurrentServerName();
@@ -170,7 +160,7 @@
 	};	
 
 	common.getCurrentLanguage = function(){		
-		return smkSearchAllConf.currentLanguage;
+		return  ModelManager.get_lang();
 	};
 
 	common.getCurrentPluginDir = function(){		

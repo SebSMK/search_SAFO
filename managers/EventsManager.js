@@ -194,6 +194,7 @@
 			model.start = start;
 			model.sort = ModelManager.current_value_joker;
 			model.category = ModelManager.current_value_joker;
+			model.lang = ModelManager.current_value_joker;
 
 			ModelManager.update(model);
 		};
@@ -215,6 +216,7 @@
 				var model = {};
 				model.q = ModelManager.current_value_joker;
 				model.category = category;
+				model.lang = ModelManager.current_value_joker;
 
 				ModelManager.update(model); 
 			};
@@ -269,6 +271,7 @@
 				model.sort = ModelManager.current_value_joker;
 				model.view = default_teaser_view ? "teasers" : ModelManager.current_value_joker;
 				model.category = default_teaser_view ? "all" : ModelManager.current_value_joker;
+				model.lang = ModelManager.current_value_joker;
 
 				if (!default_teaser_view)
 					model.fq = ModelManager.current_value_joker;
@@ -290,10 +293,11 @@
 			var qvalue = Manager.store.get('q').value;
 			var model = {};
 			model.q = qvalue;
-			model.fq = ModelManager.current_value_joker;;
-			model.sort = ModelManager.current_value_joker;;
+			model.fq = ModelManager.current_value_joker;
+			model.sort = ModelManager.current_value_joker;
 			model.view = ModelManager.current_value_joker;
 			model.category = ModelManager.current_value_joker;
+			model.lang = ModelManager.current_value_joker;
 
 			ModelManager.update(model);   	    	
 		};  
@@ -324,6 +328,7 @@
 				model.sort = ModelManager.current_value_joker;
 				model.view = ModelManager.current_value_joker;
 				model.category = ModelManager.current_value_joker;
+				model.lang = ModelManager.current_value_joker;
 
 				ModelManager.update(model);
 			}
@@ -351,18 +356,37 @@
 			model.fq = ModelManager.current_value_joker;	
 			model.view = ModelManager.current_value_joker;
 			model.category = ModelManager.current_value_joker;
+			model.lang = ModelManager.current_value_joker;
 
 			ModelManager.update(model);			
 		};		
 
+//		/* 
+//		 * switch grid/list in teasers view	
+//		 * @result:  view changes  	 
+//		 */
+//		this.switch_list_grid = function(value){ 			
+//			ViewManager.callWidgetFn('teasers', 'switch_list_grid', {params: [value]});
+//		};	
+
+
 		/* 
-		 * switch grid/list in teasers view	
+		 * switch language
 		 * @result:  view changes  	 
 		 */
-		this.switch_list_grid = function(value){ 			
-			ViewManager.callWidgetFn('teasers', 'switch_list_grid', {params: [value]});
-		};	
+		this.smk_lang_changed = function(lang){ 
+			
+			var model = {};
+			model.lang = lang;
+			model.sort = ModelManager.current_value_joker;
+			model.q = ModelManager.current_value_joker;
+			model.fq = ModelManager.current_value_joker;	
+			model.view = ModelManager.current_value_joker;
+			model.category = ModelManager.current_value_joker;
 
+			ModelManager.update(model);		
+			
+		};	
 
 		/**
 		 * Finish loading events

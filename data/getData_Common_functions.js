@@ -64,7 +64,7 @@
 		case "en":
 			docBirth = doc.artist_birth_en;
 			docDeath = doc.artist_death_en;
-			docNatio = doc.artist_natio_en;
+			docNatio = doc.artist_natio; //doc.artist_natio_en;
 			break;
 		}
 
@@ -713,7 +713,7 @@
 	getdatacommon.getMedia_alt = function (doc){	  
 		var artist = smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.orig)) ? '' : getData_Common.getProducent_producent(doc, getData_Common.enumProducent.orig) + ' - ';
 		var title = getData_Common.getTitle(doc, 'museum');
-		var copyright = smkCommon.computeCopyright(doc); 
+		var copyright = this.computeCopyright(doc); 
 
 		return  copyright == false ? sprintf('%s%s', artist, title) : sprintf('%s - %s', copyright, title); 	  
 	};
@@ -724,8 +724,8 @@
 	
 	getdatacommon.getMedia_copyright = function (doc, caller){	  
 		return doc.medium_image_url !== undefined ? 
-				smkCommon.computeCopyright(doc) != false ?
-						smkCommon.computeCopyright(doc)
+				this.computeCopyright(doc) != false ?
+						this.computeCopyright(doc)
 					:
 						caller.manager.translator.getLabel('copyright_def')
 				: 
@@ -733,9 +733,15 @@
 	};
 	
 	/**
+	 * Utils
+	 * */
+	getdatacommon.computeCopyright = function(doc) {
+		return doc.copyright !== undefined ? doc.copyright : false;
+	};
+	
+	/**
 	 * Enum
 	 * */
-	
 	getdatacommon.enumProducent = {			
 		'orig': 'original',
 		'tilsk': 'tilskrevet',

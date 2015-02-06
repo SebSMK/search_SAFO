@@ -21,12 +21,12 @@
 					url: this.getDetailUrl(doc),
 					
 					media:{
-						title:  getData_Common.getTitle(doc, 'museum'),	
+						title: getData_Common.getTitle(doc, 'museum'),	
 						alt: getData_Common.getMedia_alt(doc),
 						image: getData_Common.getMedia_image(doc, this.caller),						
 						copyright: getData_Common.getMedia_copyright(doc, this.caller),
-						copyright_default: !smkCommon.computeCopyright(doc) && doc.medium_image_url !== undefined,
-						copyright_valid: smkCommon.computeCopyright(doc),
+						copyright_default: !getData_Common.computeCopyright(doc) && doc.medium_image_url !== undefined,
+						copyright_valid: getData_Common.computeCopyright(doc),
 						img_id: doc.id,
 						url: this.getDetailUrl(doc)
 						
@@ -64,15 +64,26 @@
 		};
 		
 		this.getListTitle = function(doc){
-			var title = getData_Common.getTitle(doc, 'museum');
+			var title_all = getData_Common.getTitle(doc, 'museum');
+			var title = new String();
 			var max = 70;
 			var short;
-			if (title != undefined && title.length > 0){
-				short = title[0].title.length > max ? sprintf('%s(...)', title[0].title.substring(0, max)) : title[0].title;
-				title[0].title = short;
+			
+			if(title_all.length > 0){
+				switch(smkCommon.getCurrentLanguage()){
+				case "dk":		 		
+					title = title_all[0].title;
+					break;
+				case "en":
+					title = smkCommon.isValidDataText(title_all[0].trans) ? title_all[0].trans : title_all[0].title; 
+					break;
+				}
+				
+				if (smkCommon.isValidDataText(title))
+					title = title.length > max ? sprintf('%s(...)', title.substring(0, max)) : title;	
 			}
 				
-			return title != undefined && title.length > 0 ? title[0] : null;
+			return smkCommon.isValidDataText(title) ? title : null;
 		};
 		
 		this.getListLocation = function (doc, caller){

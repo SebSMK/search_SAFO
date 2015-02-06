@@ -10,6 +10,7 @@ var EventsManager;
 		//******************************
 		//** load configuration
 		//****************************** 
+		ModelManager.setModel($.address.value(), "url");
 		var current_language = smkCommon.getCurrentLanguage();
 
 		//** load solr conf  
@@ -51,7 +52,7 @@ var EventsManager;
 		//******************************    
 		Manager = new AjaxSolr.smkManager({
 			solrUrl: server, 
-			//proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
+			proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
 			store: new AjaxSolr.smkParameterStore({
 				exposed: exposed,    		
 				fq_default: fq_default,
@@ -93,7 +94,7 @@ var EventsManager;
 		//******************************    
 		var scrollManager = new AjaxSolr.smkManager({
 			solrUrl: server,
-			//proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',
+			proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',
 			store: new AjaxSolr.smkParameterStore({
 				exposed: exposed,
 				start: 0,     		
@@ -115,7 +116,7 @@ var EventsManager;
 		//******************************    
 		var thumbnailsManager = new AjaxSolr.smkManager({			
 			solrUrl: server, 
-			//proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
+			proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
 			store: new AjaxSolr.smkParameterStore({
 				exposed: exposed,
 				fl_options: {"thumbs": fl_options.thumbs}
@@ -130,7 +131,7 @@ var EventsManager;
 		//******************************    
 		var relatedManager = new AjaxSolr.smkManager({
 			solrUrl: server, 
-			//proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
+			proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
 			store: new AjaxSolr.smkParameterStore({
 				exposed: exposed,
 				fl_options: {"related": fl_options.related}
@@ -145,7 +146,7 @@ var EventsManager;
 		//******************************    
 		var getDetailManager = new AjaxSolr.smkManager({
 			solrUrl: server, 
-			//proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
+			proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
 			store: new AjaxSolr.smkParameterStore({
 				exposed: exposed,
 				fl_options: {"detail": fl_options.detail}
@@ -378,7 +379,14 @@ var EventsManager;
 		//* calls to teasers view
 		$(Manager.widgets['details']).on('smk_search_call_teasers', function(event){  
 			EventsManager.smk_search_call_teasers();
-		});	    
+		});
+		
+		//* change language
+		$(Manager.widgets['lang-picker']).on('smk_lang_changed', function(event){  
+			EventsManager.smk_lang_changed(event.value);
+		});
+		
+		
 
 		/*
 		 * Finish loading events

@@ -8,6 +8,11 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
 	
+	<script src="js/common.smk.js" type="text/javascript"></script>
+	<script src="js/language.js" type="text/javascript"></script>
+	<script src="js/config.js" type="text/javascript"></script>
+	<script src="managers/ModelManager.js" type="text/javascript"></script>
+	
 	<script src="managers/WidgetsManager.js" type="text/javascript"></script>
 	<script src="core/Core.js" type="text/javascript"></script>
 	<script src="core/AbstractManager.js" type="text/javascript"></script>
@@ -33,7 +38,7 @@
 	<script src="widgets/CategoryWidget.js" type="text/javascript"></script>
 	<script src="widgets/CurrentSearchWidget.js" type="text/javascript"></script>
     <script src="managers/EventsManager.js" type="text/javascript"></script>
-    <script src="managers/ModelManager.js" type="text/javascript"></script>
+   
     <script src="managers/ViewManager.js" type="text/javascript"></script>                   
 	<script src="core/AbstractTextWidget.js" type="text/javascript"></script>
 	<script src="widgets/SearchBoxWidget.js" type="text/javascript"></script>
@@ -46,9 +51,8 @@
 	<script src="js/jquery.dimensions.js" type="text/javascript"></script>
 	<script src="widgets/ViewPickerWidget.js" type="text/javascript"></script>
 	<script src="widgets/SorterWidget.js" type="text/javascript"></script>
-	<script src="js/common.smk.js" type="text/javascript"></script>
-	<script src="js/language.js" type="text/javascript"></script>
-	<script src="js/config.js" type="text/javascript"></script>
+	
+	
 	<script src="js/jquery.tooltipster.js" type="text/javascript"></script>
 	<script src="js/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script>
 	<script src="js/jquery.address-1.5.min.js" type="text/javascript"></script>

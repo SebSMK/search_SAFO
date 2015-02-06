@@ -24,7 +24,7 @@
 				meta: {key: smkCommon.firstCapital(this.caller.manager.translator.getLabel("related_reference")), value: doc.id},				  		
 				img_id: doc.id, // for verso and sub-artworks
 				artist_name: this.getArtistName(doc),			
-				copyright: smkCommon.computeCopyright(doc) != false ? smkCommon.computeCopyright(doc) :	'',
+				copyright: getData_Common.computeCopyright(doc) != false ? getData_Common.computeCopyright(doc) :	'',
 				url: this.getDetailUrl(doc.id)
 			};
 		};  
