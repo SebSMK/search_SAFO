@@ -266,7 +266,7 @@
 			case "dk":		 			  			  			  
 				docBirth = doc.artist_birth_dk;
 				docDeath = doc.artist_death_dk;	
-				docNatio = doc.artist_natio;
+				docNatio = doc.artist_natio_dk;
 				break;
 			case "en":
 				docBirth = doc.artist_birth_en;
@@ -278,7 +278,7 @@
 
 			if (doc.artist_name !== undefined){
 				// check if all arrays containing artist's data have the same size
-				if((doc.artist_name.length != doc.artist_auth.length) && (doc.artist_name.length != doc.artist_natio.length)  && (doc.artist_name.length != docBirth.length) && (doc.artist_name.length != docDeath.length))
+				if((doc.artist_name.length != doc.artist_auth.length) && (doc.artist_name.length != doc.artist_natio_dk.length)  && (doc.artist_name.length != docBirth.length) && (doc.artist_name.length != docDeath.length))
 					return doc.artist_name;
 
 				for (var i = 0, l = doc.artist_name.length; i < l; i++) {

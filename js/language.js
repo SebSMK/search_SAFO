@@ -61,8 +61,8 @@
 		 * * if no current language was set, use default language
 		 * * if the label doesn't exist in the current language, try default		 
 		 */		
-		this.getLabel = function(label){
-			
+		this.getLabel = function(label_orig){
+			var label = label_orig.toLowerCase(); 
 			// check language
 			if(!this.labels.hasOwnProperty(this.current_lang))
 				if(!this.labels.hasOwnProperty(this.default_lang))
@@ -89,8 +89,8 @@
 		 * * if the location doesn't exist in the current language, try default language
 		 * * otherwise, return "default" label		 
 		 */		
-		this.getCollection = function(collection){
-			
+		this.getCollection = function(collection_orig){
+			var collection = collection_orig.toLowerCase();
 			// check language
 			if(!this.collections.hasOwnProperty(this.current_lang))
 				if(!this.collections.hasOwnProperty(this.default_lang))

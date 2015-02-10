@@ -2,20 +2,14 @@
 
 	AjaxSolr.SearchFiltersWidget = AjaxSolr.AbstractFacetWidget.extend({
 
-		constructor: function (attributes) {
-			AjaxSolr.SearchFiltersWidget.__super__.constructor.apply(this, arguments);
-			AjaxSolr.extend(this, {
-				title: null
-			}, attributes);
-		},
-
 		previous_values: {},
 
 		init: function () {
 			var self = this;
 			var $target = $(this.target);
+			var title = self.manager.translator.getLabel("tagcloud_" + this.field);
 
-			var json_data = {"options" : new Array({title:this.title, search_lab:self.manager.translator.getLabel(sprintf('search_%s_lab', this.id)), values:[{ "value": 'value', "text": ''}]})};	 
+			var json_data = {"options" : new Array({title:title, search_lab:self.manager.translator.getLabel(sprintf('search_%s_lab', this.id)), values:[{ "value": 'value', "text": ''}]})};	 
 			var html = self.template_integration_json(json_data, '#chosenTemplate'); 	
 
 			$target.html(html);	
@@ -34,10 +28,10 @@
 			var self = this;
 			var $target = $(this.target);
 			var $select = $(this.target).find('select');
-			
+
 			if (!self.getRefresh())				
 				return;			
-			
+
 			$select.attr('data-placeholder', self.manager.translator.getLabel('search_data_loading'));
 			$target.find('select').trigger("chosen:updated");	
 
@@ -47,6 +41,7 @@
 			var self = this;
 			var $target = $(this.target);
 			var $select = $(this.target).find('select');
+			var title = self.manager.translator.getLabel("tagcloud_" + this.field);
 
 			if (!self.getRefresh()){
 				self.setRefresh(true);
@@ -75,7 +70,7 @@
 					if (count > maxCount) {
 						maxCount = count;
 					};	
-					
+
 					objectedItems.push({ "value": facet, "text": this.getCentury(facet), "count": count, "i": i }); 
 					i++;
 				};
@@ -85,16 +80,21 @@
 				});				  			  			  
 				break;	
 
-			case 'artist_natio':
-			case 'object_type':
+			case 'artist_natio_en':
+			case 'artist_natio_dk':
+			case 'object_type_dk':
+			case 'object_type_en':
 				for (var facet in self.manager.response.facet_counts.facet_fields[self.field]) {
 					var count = parseInt(self.manager.response.facet_counts.facet_fields[self.field][facet]);
 					if (count > maxCount) {
 						maxCount = count;
 					};
-					
-					objectedItems.push({ "value": facet, "text": smkCommon.firstCapital(self.manager.translator.getLabel(smkCommon.replace_dansk_char(facet))).trim(), "count": count, "i": i }); 
-					i++;	    	  	  	      	  	      
+
+					if(smkCommon.isValidDataText(facet)){
+						objectedItems.push({ "value": facet, "text": smkCommon.firstCapital(facet).trim(), "count": count, "i": i }); 
+						i++;
+					}
+
 				};
 				totalCount = i;
 				objectedItems.sort(function (a, b) {
@@ -111,7 +111,7 @@
 					if (count > maxCount) {
 						maxCount = count;
 					};
-					
+
 					objectedItems.push({ "value": facet, "text": smkCommon.firstCapital(facet).trim(), "count": count, "i": i }); 
 					i++;	    	  	  	      	  	      
 				};
@@ -123,39 +123,39 @@
 			};
 
 			//* merge facet data and template			
-			var json_data = {"options" : new Array({title:this.title, totalCount:totalCount, values:objectedItems})};	    	    	    
+			var json_data = {"options" : new Array({title:title, totalCount:totalCount, values:objectedItems})};	    	    	    
 			var html = self.template_integration_json(json_data, '#chosenTemplate'); 
 
 			$target.html(html);
-												
-			//** refresh view
-			
-			 if (document.querySelector(this.target + ".filter-multiple")) {
-			        var a = document.querySelectorAll(this.target + ".filter-multiple"), b = "filter-multiple-open", c = 46;
-			        //px
-			        Array.prototype.forEach.call(a, function(a) {
-			            // Move checked options to a visible area (so you don't need to open the 
-			            // .filter-multiple to see the selected options)
-			            var d = a.querySelectorAll(".filter-options input[checked]");
-			            Array.prototype.forEach.call(d, function(a) {
-			                var b = a.parentNode.parentNode.parentNode;
-			                b.querySelector(".filter-options-checked").appendChild(a.parentNode);
-			            }), a.querySelector(".filter-toggle").addEventListener("click", function(d) {
-			                d.preventDefault(), d.stopImmediatePropagation(), a.classList.contains(b) ? (a.classList.remove(b), 
-			                a.style.height = a.querySelector(".filter-options-checked") ? c + a.querySelector(".filter-options-checked").clientHeight + "px" : c + "px") : (a.classList.add(b), 
-			                a.style.height = a.querySelector(".filter-options").clientHeight + a.querySelector(".filter-options-checked").clientHeight + c + "px");
-			            }, !0), // Open if the .filter-multiple has the 'open' class
-			            a.classList.contains(b) ? a.style.height = a.querySelector(".filter-options").clientHeight + a.querySelector(".filter-options-checked").clientHeight + c + "px" : // If options list has checked items, adjust the height of the containing
-			            // element, so that we can se the checked items.
-			            a.querySelector(".filter-options-checked") && (a.style.height = c + a.querySelector(".filter-options-checked").clientHeight + "px"), 
-			            // Hide the down-arrow on the filter toggle if there is only 1 option.
-			            // aka. nothing more to show.
-			            0 == a.querySelectorAll(".filter-options li").length && (a.querySelector(".filter-toggle i").style.display = "none"), 
-			            a.querySelectorAll(".filter-options-checked li").length > 0 && a.classList.add("active");
-			        });
-			    }
 
-/*			
+			//** refresh view
+
+			if (document.querySelector(this.target + ".filter-multiple")) {
+				var a = document.querySelectorAll(this.target + ".filter-multiple"), b = "filter-multiple-open", c = 46;
+				//px
+				Array.prototype.forEach.call(a, function(a) {
+					// Move checked options to a visible area (so you don't need to open the 
+					// .filter-multiple to see the selected options)
+					var d = a.querySelectorAll(".filter-options input[checked]");
+					Array.prototype.forEach.call(d, function(a) {
+						var b = a.parentNode.parentNode.parentNode;
+						b.querySelector(".filter-options-checked").appendChild(a.parentNode);
+					}), a.querySelector(".filter-toggle").addEventListener("click", function(d) {
+						d.preventDefault(), d.stopImmediatePropagation(), a.classList.contains(b) ? (a.classList.remove(b), 
+								a.style.height = a.querySelector(".filter-options-checked") ? c + a.querySelector(".filter-options-checked").clientHeight + "px" : c + "px") : (a.classList.add(b), 
+										a.style.height = a.querySelector(".filter-options").clientHeight + a.querySelector(".filter-options-checked").clientHeight + c + "px");
+					}, !0), // Open if the .filter-multiple has the 'open' class
+					a.classList.contains(b) ? a.style.height = a.querySelector(".filter-options").clientHeight + a.querySelector(".filter-options-checked").clientHeight + c + "px" : // If options list has checked items, adjust the height of the containing
+						// element, so that we can se the checked items.
+						a.querySelector(".filter-options-checked") && (a.style.height = c + a.querySelector(".filter-options-checked").clientHeight + "px"), 
+						// Hide the down-arrow on the filter toggle if there is only 1 option.
+						// aka. nothing more to show.
+						0 == a.querySelectorAll(".filter-options li").length && (a.querySelector(".filter-toggle i").style.display = "none"), 
+						a.querySelectorAll(".filter-options-checked li").length > 0 && a.classList.add("active");
+				});
+			}
+
+			/*			
 			//* save previous selected values in the target 'select' component	  	 
 			$select.find("option:selected").each(function (){
 				self.previous_values[self.field].push(this.value.replace(/^"|"$/g, ''));	  		
@@ -186,10 +186,10 @@
 				$(this.target).find('select').val(self.previous_values[self.field]); 	
 
 			}			
-			
+
 			//* add behaviour on select change
 			$target.find('select').change(self.clickHandler());
-			
+
 			//* change default text			
 			$select.attr('data-placeholder', self.manager.translator.getLabel(sprintf('search_%s_lab', this.id)));
 
@@ -209,7 +209,7 @@
 			}			
 
 			self.previous_values[self.field] = new Array();		
-*/
+			 */
 			//* send "loaded" event
 			$(this).trigger({
 				type: "smk_search_filter_loaded"

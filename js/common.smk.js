@@ -82,6 +82,8 @@
 		if (text === undefined)
 			return text;			
 
+		text = text.toLowerCase();
+		
 		var res = text;
 
 		// utf8 encoding (JSON)

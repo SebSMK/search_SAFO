@@ -59,6 +59,7 @@
 			var model = {};
 			model.q = doc.id;
 			model.view = 'detail';
+			model.lang = smkCommon.getCurrentLanguage();
 
 			return ModelManager.buildURLFromModel(model); 
 		};

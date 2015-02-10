@@ -1,11 +1,23 @@
 (function ($) {
 
-AjaxSolr.CategoryWidget = AjaxSolr.AbstractFacetWidget.extend({
+AjaxSolr.CategoryWidget = AjaxSolr.AbstractFacetWidget.extend({	
 	
   init: function () {        
 	  	var labels = {'simple': this.manager.translator.getLabel('category_simple'),'advanced': this.manager.translator.getLabel('category_advanced')};
         var html = this.template_integration_json(labels, '#categoryItemsTemplate');
         $(this.target).html(html);
+  },
+  
+  afterRequest: function () { 
+	  
+	  var self = this;	  
+	  if (!self.getRefresh()){
+		self.setRefresh(true);
+		return;
+	  }
+	  var labels = {'simple': self.manager.translator.getLabel('category_simple'),'advanced': self.manager.translator.getLabel('category_advanced')};
+      var html = self.template_integration_json(labels, '#categoryItemsTemplate');
+      $(self.target).html(html);
   },
   
   template_integration_json: function (json_data, templ_id){	  

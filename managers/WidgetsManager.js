@@ -32,7 +32,12 @@ var EventsManager;
 		translator.setLanguage(current_language);	
 
 		//** load searchFields
-		var searchFieldsTypes = [ {field:'artist_name', title:translator.getLabel('tagCloud_artist')}, {field:'artist_natio', title:translator.getLabel('tagCloud_country')}, {field:'object_production_century_earliest', title:translator.getLabel('tagCloud_period')}, {field:'object_type', title:translator.getLabel('tagCloud_art_type')} ];
+		var searchFieldsTypes = [{field:'artist_name'}, 
+		                         {field:'artist_natio_dk'}, 
+		                         {field:'artist_natio_en'}, 
+		                         {field:'object_production_century_earliest'}, 
+		                         {field:'object_type_dk'}, 
+		                         {field:'object_type_en'}];
 
 		//** create state manager
 		ViewManager = new ViewManager.constructor({				
@@ -52,7 +57,7 @@ var EventsManager;
 		//******************************    
 		Manager = new AjaxSolr.smkManager({
 			solrUrl: server, 
-			proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
+			//proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
 			store: new AjaxSolr.smkParameterStore({
 				exposed: exposed,    		
 				fq_default: fq_default,
@@ -72,7 +77,12 @@ var EventsManager;
 				'fq': Manager.store.fq_default,	
 				'fl': Manager.store.fl_options.default,					
 				'facet': true,
-				'facet.field': ['artist_name', 'artist_natio', 'object_production_century_earliest', 'object_type'],
+				'facet.field': ['artist_name', 
+				                'artist_natio_dk', 
+				                'artist_natio_en', 
+				                'object_production_century_earliest', 
+				                'object_type_dk',
+				                'object_type_en'],
 				'facet.limit': -1,
 				'facet.mincount': 1,				
 				'rows':rows_default,
@@ -94,7 +104,7 @@ var EventsManager;
 		//******************************    
 		var scrollManager = new AjaxSolr.smkManager({
 			solrUrl: server,
-			proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',
+			//proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',
 			store: new AjaxSolr.smkParameterStore({
 				exposed: exposed,
 				start: 0,     		
@@ -116,7 +126,7 @@ var EventsManager;
 		//******************************    
 		var thumbnailsManager = new AjaxSolr.smkManager({			
 			solrUrl: server, 
-			proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
+			//proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
 			store: new AjaxSolr.smkParameterStore({
 				exposed: exposed,
 				fl_options: {"thumbs": fl_options.thumbs}
@@ -131,7 +141,7 @@ var EventsManager;
 		//******************************    
 		var relatedManager = new AjaxSolr.smkManager({
 			solrUrl: server, 
-			proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
+			//proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
 			store: new AjaxSolr.smkParameterStore({
 				exposed: exposed,
 				fl_options: {"related": fl_options.related}
@@ -146,7 +156,7 @@ var EventsManager;
 		//******************************    
 		var getDetailManager = new AjaxSolr.smkManager({
 			solrUrl: server, 
-			proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
+			//proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
 			store: new AjaxSolr.smkParameterStore({
 				exposed: exposed,
 				fl_options: {"detail": fl_options.detail}
@@ -215,12 +225,12 @@ var EventsManager;
 			id: 'sorter',
 			target: '#sorter',
 			options: {
-				'all': [{"value": "score desc", "text" : smkCommon.firstCapital(Manager.translator.getLabel("sorter_relevans")), "selected": false},
-				        {"value": "object_production_date_earliest asc", "text" : smkCommon.firstCapital(Manager.translator.getLabel("sorter_dato_asc")), "selected": false},
-                        {"value": "object_production_date_earliest desc", "text" : smkCommon.firstCapital(Manager.translator.getLabel("sorter_dato_desc")), "selected": false},
-                        {"value": "artist_first_name asc", "text" : smkCommon.firstCapital(Manager.translator.getLabel("sorter_name_asc")), "selected": false},
-                        {"value": "artist_first_name desc", "text" : smkCommon.firstCapital(Manager.translator.getLabel("sorter_name_desc")), "selected": false},
-				        {"value": "last_update desc", "text" : smkCommon.firstCapital(Manager.translator.getLabel("sorter_last_updated")), "selected": false}]
+				'all': [{"value": "score desc", "selected": false},
+				        {"value": "object_production_date_earliest asc", "selected": false},
+                        {"value": "object_production_date_earliest desc", "selected": false},
+                        {"value": "artist_first_name asc", "selected": false},
+                        {"value": "artist_first_name desc", "selected": false},
+				        {"value": "last_update desc", "selected": false}]
 			},	
 			template: Mustache.getTemplate('templates/sorter.html')
 		})); 
@@ -244,7 +254,6 @@ var EventsManager;
 		for (var i = 0, l = searchFieldsTypes.length; i < l; i++) {
 			Manager.addWidget(new AjaxSolr.SearchFiltersWidget({
 				id: searchFieldsTypes[i].field,
-				title: searchFieldsTypes[i].title,
 				target: '#' + searchFieldsTypes[i].field,
 				field: searchFieldsTypes[i].field,
 				template: Mustache.getTemplate('templates/chosen.html')

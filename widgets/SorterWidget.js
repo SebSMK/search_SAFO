@@ -18,6 +18,7 @@ AjaxSolr.SorterWidget = AjaxSolr.AbstractFacetWidget.extend({
 	  var options = this.options.all;
       
       for (var i = 0, l = options.length; i < l; i++) {
+    	  options[i].text = smkCommon.firstCapital(self.manager.translator.getLabel("sorter_" + options[i].value));
     	  objectedItems.push(options[i]);    	  
       }
  
@@ -54,13 +55,16 @@ AjaxSolr.SorterWidget = AjaxSolr.AbstractFacetWidget.extend({
 	  $target.hide();	  
       
       for (var i = 0, l = options.length; i < l; i++) {
+    	  options[i].text = smkCommon.firstCapital(self.manager.translator.getLabel("sorter_" + options[i].value));
     	  objectedItems.push(options[i]);    	  
       }
  
       var html = self.template_integration_json(
-    		  {	"label": smkCommon.firstCapital(this.manager.translator.getLabel("sorter_sort")),
-    			"options": objectedItems}, 
+    		  {	"options": objectedItems}, 
     			'#sorterItemsTemplate');
+                
+      //* set label text
+      $target.find('label').text(smkCommon.firstCapital(this.manager.translator.getLabel("sorter_sort")));      
       
       //* remove all options in 'select'...
       $target.find('select').empty();	  	
@@ -71,8 +75,7 @@ AjaxSolr.SorterWidget = AjaxSolr.AbstractFacetWidget.extend({
             
       $target.find('select').trigger("chosen:updated");
       
-      $target.show();	
-	  	  
+      $target.show();      	  	  
   },
 
   /**
@@ -124,12 +127,11 @@ AjaxSolr.SorterWidget = AjaxSolr.AbstractFacetWidget.extend({
 	//* update 'chosen' plugin		
 	$(this.target).find('select').trigger("chosen:updated");	  	  
   },
-  
-  
+    
   setOption: function(option) {
 	  $(this.target).find('select').val(option);
 	  $(this.target).find('select').trigger("chosen:updated");
-  },
+  },   
   
   init_chosen: function() {
 	  /*

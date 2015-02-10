@@ -61,6 +61,10 @@
 			ModelManager.setModel(e.value, "url");
 			var model = ModelManager.getModel();		    			    
 
+			
+			//* set language
+			Manager.translator.setLanguage(model.lang);
+			
 			//* process view
 			if(model.view !== undefined){
 				ViewManager.viewChanged({'view': model.view});				    				    				    					    					    	

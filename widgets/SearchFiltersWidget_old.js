@@ -81,8 +81,10 @@
 				});				  			  			  
 				break;	
 
-			case 'artist_natio':
-			case 'object_type':
+			case 'artist_natio_en':
+			case 'artist_natio_dk':
+			case 'object_type_dk':
+			case 'object_type_en':
 				for (var facet in self.manager.response.facet_counts.facet_fields[self.field]) {
 					var count = parseInt(self.manager.response.facet_counts.facet_fields[self.field][facet]);
 					if (count > maxCount) {
