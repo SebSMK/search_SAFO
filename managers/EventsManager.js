@@ -189,7 +189,7 @@
 			ViewManager.callWidgetFn('currentsearch', 'setRefresh', {params: [false]});
 			ViewManager.callWidgetFn('category', 'setRefresh', {params: [false]});
 			for (var i = 0, l = searchFieldsTypes.length; i < l; i++) {				
-				ViewManager.callWidgetFn(searchFieldsTypes[i].field, 'setRefresh', {params: [false]});
+				ViewManager.callWidgetFn(searchFieldsTypes[i], 'setRefresh', {params: [false]});
 			};			
 
 			var model = {};
@@ -350,7 +350,7 @@
 			ViewManager.callWidgetFn('currentsearch', 'setRefresh', {params: [false]});
 			ViewManager.callWidgetFn('category', 'setRefresh', {params: [false]});			
 			for (var i = 0, l = searchFieldsTypes.length; i < l; i++) {				
-				ViewManager.callWidgetFn(searchFieldsTypes[i].field, 'setRefresh', {params: [false]});
+				ViewManager.callWidgetFn(searchFieldsTypes[i], 'setRefresh', {params: [false]});
 			};	
 
 			var sortvalue = params.selected;

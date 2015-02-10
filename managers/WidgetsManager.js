@@ -25,6 +25,7 @@ var EventsManager;
 		var qf_default = solr_conf.get_qf_default(current_language);
 		var scroll_rows_default = solr_conf.get_scroll_rows_default();
 		var rows_default = solr_conf.get_rows_default();
+		var facets = solr_conf.get_facets();
 
 		//** load multi language script 
 		var translator = new Language.constructor();	
@@ -32,12 +33,7 @@ var EventsManager;
 		translator.setLanguage(current_language);	
 
 		//** load searchFields
-		var searchFieldsTypes = [{field:'artist_name'}, 
-		                         {field:'artist_natio_dk'}, 
-		                         {field:'artist_natio_en'}, 
-		                         {field:'object_production_century_earliest'}, 
-		                         {field:'object_type_dk'}, 
-		                         {field:'object_type_en'}];
+		var searchFieldsTypes = facets;
 
 		//** create state manager
 		ViewManager = new ViewManager.constructor({				
@@ -253,9 +249,9 @@ var EventsManager;
 
 		for (var i = 0, l = searchFieldsTypes.length; i < l; i++) {
 			Manager.addWidget(new AjaxSolr.SearchFiltersWidget({
-				id: searchFieldsTypes[i].field,
-				target: '#' + searchFieldsTypes[i].field,
-				field: searchFieldsTypes[i].field,
+				id: searchFieldsTypes[i],
+				target: '#' + searchFieldsTypes[i],
+				field: searchFieldsTypes[i],
 				template: Mustache.getTemplate('templates/chosen.html')
 			}));
 		};				
@@ -346,7 +342,7 @@ var EventsManager;
 
 		//* searchfilters changed
 		for (var i = 0, l = searchFieldsTypes.length; i < l; i++) {
-			$(Manager.widgets[searchFieldsTypes[i].field]).on('smk_search_filter_changed', {self: Manager.widgets[searchFieldsTypes[i].field]}, function(event){    		
+			$(Manager.widgets[searchFieldsTypes[i]]).on('smk_search_filter_changed', {self: Manager.widgets[searchFieldsTypes[i]]}, function(event){    		
 				EventsManager.smk_search_filter_changed(event.data.self, event.params);    		    		    		    		
 			});
 		};
@@ -414,7 +410,7 @@ var EventsManager;
 		
 		//* searchfilters has finished loading
 		for (var i = 0, l = searchFieldsTypes.length; i < l; i++) {
-			$(Manager.widgets[searchFieldsTypes[i].field]).on('smk_search_filter_loaded', function(event){
+			$(Manager.widgets[searchFieldsTypes[i]]).on('smk_search_filter_loaded', function(event){
 				EventsManager.smk_search_filter_loaded(event.currentTarget.target);
 			});
 		};	
@@ -432,7 +428,7 @@ var EventsManager;
 		//* all images displayed in "teaser"
 		$(ViewManager).on('smk_teasers_all_images_displayed', function(event){ 			
 			for (var i = 0, l = searchFieldsTypes.length; i < l; i++) {
-				EventsManager.after_afterRequest(searchFieldsTypes[i].field);				
+				EventsManager.after_afterRequest(searchFieldsTypes[i]);				
 			};				
 		});	
 		

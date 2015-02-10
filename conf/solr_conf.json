@@ -1,7 +1,16 @@
 {
     "server":							"http://csdev-seb:8180/solr-example/dev_SAFO/",
     
+    
+    "facets":							["artist_name", 
+							                "artist_natio_dk", 
+							                "artist_natio_en", 
+							                "object_production_century_earliest", 
+							                "object_type_dk",
+							                "object_type_en"],
+							                
     "exposed": 							["fq", "q", "start", "limit", "sort", "qf"],
+    
     "fq_default": 						"-(id:(*/*)) -(id:(*verso))",
     
     "q_default": 						"*:*",

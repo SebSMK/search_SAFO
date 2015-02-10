@@ -57,6 +57,10 @@
 								    	this.exposed_params = item;				  			  			  
 									  break;
 									  
+								  case "facets":		 			  			  			  									  				    		
+								    	this.facets = item;				  			  			  
+									  break;
+									  
 								  case "server":		 			  			  			  									  				    		
 								    	this.server = item;				  			  			  
 									  break;
@@ -96,6 +100,13 @@
 		 */
 		this.get_exposed_params = function(){
 			return this.exposed_params;
+		};
+		
+		/*
+		 *
+		 */
+		this.get_facets = function(){
+			return this.facets;
 		};
 		
 		/*
@@ -156,8 +167,9 @@
 		this.fl_options = null; // fl default
 		this.q_default = null; // q default
 		this.sort_default = null; // sort default
-		this.exposed_params = null; // exposed parameters	
-		this.server = null; // exposed parameters	
+		this.exposed_params = null; // exposed parameters
+		this.facets = null; // facets
+		this.server = null;
 		this.scroll_rows_default = null;
 		this.rows_default = null;
 	}
