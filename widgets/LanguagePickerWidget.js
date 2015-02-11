@@ -17,7 +17,7 @@ AjaxSolr.LanguagePickerWidget = AjaxSolr.AbstractWidget.extend({
 						
 						$(self.target).find('.active').removeClass('active');
 						$(this).addClass('active');
-						var lang = $(this).attr('lang');
+						var lang = $(this).attr('lang_radio');
 						
 						$(self).trigger({
 							type: "smk_lang_changed",

@@ -60,10 +60,10 @@
 			//* get the view's model
 			ModelManager.setModel(e.value, "url");
 			var model = ModelManager.getModel();		    			    
-
 			
-			//* set language
-			Manager.translator.setLanguage(model.lang);
+			//* process language
+			Manager.translator.setLanguage(model.lang);		
+			Manager.store.set_current_lang(model.lang);
 			
 			//* process view
 			if(model.view !== undefined){
@@ -102,7 +102,19 @@
 			};
 
 			Manager.store.addByValue('q', q);
-
+			
+			// facets
+			Manager.store.remove('facet');
+			Manager.store.remove('facet.field');
+			if (model.view != 'detail'){
+				Manager.store.addByValue('facet', true);
+				Manager.store.addByValue('facet.field', Manager.store.facets_default[model.lang]);
+				Manager.store.add('facet.field', 
+						new AjaxSolr.Parameter({ name:'facet.field', 
+												value: 'category', 
+												locals: { ex:'category' } }));
+			}																				
+			
 			// fq param						
 			if (model.view != 'detail')				
 				Manager.store.addByValue('fq', Manager.store.fq_default);			

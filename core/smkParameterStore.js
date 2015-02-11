@@ -21,7 +21,9 @@
 						q_default:null,
 						qf_default:null,
 						sort_default:null,
-						scroll_rows_default:null
+						scroll_rows_default:null,
+						facets_default:null,
+						current_lang:null
 					}, attributes);
 				},	 			
 
@@ -53,13 +55,17 @@
 
 					var res = "";
 
-					if( this.qf_default != null){
-						$.each(this.qf_default, function(k, v) {
+					if( this.qf_default[this.current_lang] != null){
+						$.each(this.qf_default[this.current_lang], function(k, v) {
 							res = res.concat(sprintf(' %s^%s', k, v));
 						});		  
 					};
 
 					return res;
+				},
+				
+				set_current_lang: function(lang){
+					this.current_lang = lang;										
 				},
 				
 				/******************************

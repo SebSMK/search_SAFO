@@ -243,6 +243,8 @@
 				break;		  
 			} 	
 
+			this.setLanguage(smkCommon.getCurrentLanguage());
+			
 			return;
 		};
 
@@ -382,6 +384,25 @@
 		
 		this.generalSolrError = function(e){
 			$(this.target).empty().html(sprintf('%s &nbsp;&nbsp; returned:&nbsp;&nbsp; %s<br>Please contact website administrator.', Manager.solrUrl, e)); 
+		};
+		
+		this.setLanguage = function(lang){
+			var setLang;
+			
+			switch(lang){
+				case smkCommon.enum_lang.en:
+					setLang = smkCommon.enum_lang.en;
+					break;
+				case smkCommon.enum_lang.dk:
+					setLang = smkCommon.enum_lang.dk;
+					break;
+					
+				default:
+					setLang = smkCommon.enum_lang.def;											
+			}			
+			
+			$(this.target).find("[lang][lang='"+setLang+"']").show();
+			$(this.target).find("[lang][lang!='"+setLang+"']").hide();
 		};
 	}
 }));

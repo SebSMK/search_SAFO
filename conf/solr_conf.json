@@ -2,12 +2,24 @@
     "server":							"http://csdev-seb:8180/solr-example/dev_SAFO/",
     
     
-    "facets":							["artist_name", 
-							                "artist_natio_dk", 
-							                "artist_natio_en", 
-							                "object_production_century_earliest", 
-							                "object_type_dk",
-							                "object_type_en"],
+    "facets":{
+				"dk":["artist_name", 
+		                "artist_natio_dk", 
+		                "object_production_century_earliest", 
+		                "object_type_dk"],
+		                
+		         "en":["artist_name", 			                 
+		                "artist_natio_en", 
+		                "object_production_century_earliest", 			                
+		                "object_type_en"],
+		          
+		          "all":["artist_name", 			                 
+		                "artist_natio_dk", 
+		                "artist_natio_en", 
+		                "object_production_century_earliest", 			                
+		                "object_type_dk",
+		                "object_type_en"]			                
+		          },
 							                
     "exposed": 							["fq", "q", "start", "limit", "sort", "qf"],
     
@@ -38,12 +50,11 @@
 			},
 		"en":{
 		
-				"collectorExact1":		"150",
-				"collectorExact2":		"30",
+				"collectorExact1Eng":	"150",
+				"collectorExact2Eng":	"30",
 				"collectorExact3":		"10",
-				"collector1":			"20", 
-				"collector_en":			"15", 
-				"collector2":			"5", 
+				"collector1Eng":		"20", 				 
+				"collector2Eng":		"5", 
 				"collector3":			"5",
 				"collector4":			"1" 			
 			}

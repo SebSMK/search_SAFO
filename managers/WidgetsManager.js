@@ -22,18 +22,18 @@ var EventsManager;
 		var fl_options = solr_conf.get_fl_options();
 		var q_default = solr_conf.get_q_default();
 		var sort_default = solr_conf.get_sort_default();
-		var qf_default = solr_conf.get_qf_default(current_language);
+		var qf_default = solr_conf.get_qf_default();
 		var scroll_rows_default = solr_conf.get_scroll_rows_default();
 		var rows_default = solr_conf.get_rows_default();
-		var facets = solr_conf.get_facets();
+		var facets_default = solr_conf.get_facets();
 
 		//** load multi language script 
 		var translator = new Language.constructor();	
 		translator.load_json("language/language.json");	
 		translator.setLanguage(current_language);	
 
-		//** load searchFields
-		var searchFieldsTypes = facets;
+		//** load all searchFields (in all languages)
+		var searchFieldsTypes = facets_default['all'];
 
 		//** create state manager
 		ViewManager = new ViewManager.constructor({				
@@ -60,7 +60,9 @@ var EventsManager;
 				fl_options: {"list": fl_options.list, "detail": fl_options.detail, "default": fl_options.default},
 				q_default: q_default,
 				qf_default: qf_default,
-				sort_default: sort_default 
+				sort_default: sort_default,
+				facets_default: facets_default,
+				current_lang:current_language
 			}),
 			searchfilterList: searchFieldsTypes,
 			allWidgetsProcessed: allWidgetsProcessedBound,
@@ -70,29 +72,27 @@ var EventsManager;
 
 		//* set and save default request parameters                
 		var params = {
-				'fq': Manager.store.fq_default,	
-				'fl': Manager.store.fl_options.default,					
-				'facet': true,
-				'facet.field': ['artist_name', 
-				                'artist_natio_dk', 
-				                'artist_natio_en', 
-				                'object_production_century_earliest', 
-				                'object_type_dk',
-				                'object_type_en'],
+//				'fq': Manager.store.fq_default,	
+//				'fl': Manager.store.fl_options.default,					
+//				'facet': true,
+//				'facet.field': Manager.store.facets_default[current_language],
 				'facet.limit': -1,
 				'facet.mincount': 1,				
 				'rows':rows_default,
 				'defType': 'edismax',      
-				'qf': Manager.store.qf_default,
+//				'qf': Manager.store.qf_default[current_language],
 				'start': 0,
-				'sort': Manager.store.sort_default,
+//				'sort': Manager.store.sort_default,
 				'json.nl': 'map'
 		};
 		for (var name in params) {
 			Manager.store.addByValue(name, params[name]);
 		}    
 		// add facet category with locals params
-		Manager.store.add('facet.field', new AjaxSolr.Parameter({ name:'facet.field', value: 'category', locals: { ex:'category' } }));
+//		Manager.store.add('facet.field', 
+//				new AjaxSolr.Parameter({ name:'facet.field', 
+//										value: 'category', 
+//										locals: { ex:'category' } }));
 		
 		
 		//******************************
@@ -107,9 +107,10 @@ var EventsManager;
 				fq_default: fq_default,
 				fl_options: {"list": fl_options.list},
 				q_default: q_default,
-				qf_default: Manager.store.qf_default,
+				qf_default: Manager.store.qf_default[current_language],
 				sort_default: sort_default,
-				scroll_rows_default: scroll_rows_default 
+				scroll_rows_default: scroll_rows_default,
+				current_lang:current_language 
 			}),
 			allWidgetsProcessed: allWidgetsProcessedBound,
 			generalSolrError: generalSolrErrorProcessedBound,
@@ -125,7 +126,8 @@ var EventsManager;
 			//proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
 			store: new AjaxSolr.smkParameterStore({
 				exposed: exposed,
-				fl_options: {"thumbs": fl_options.thumbs}
+				fl_options: {"thumbs": fl_options.thumbs},
+				current_lang:current_language
 			}),
 			allWidgetsProcessed: allWidgetsProcessedBound,
 			generalSolrError: generalSolrErrorProcessedBound,
@@ -140,7 +142,8 @@ var EventsManager;
 			//proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
 			store: new AjaxSolr.smkParameterStore({
 				exposed: exposed,
-				fl_options: {"related": fl_options.related}
+				fl_options: {"related": fl_options.related},
+				current_lang:current_language
 			}),
 			allWidgetsProcessed: allWidgetsProcessedBound,
 			generalSolrError: generalSolrErrorProcessedBound,
@@ -155,7 +158,8 @@ var EventsManager;
 			//proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
 			store: new AjaxSolr.smkParameterStore({
 				exposed: exposed,
-				fl_options: {"detail": fl_options.detail}
+				fl_options: {"detail": fl_options.detail},
+				current_lang:current_language
 			}),
 			allWidgetsProcessed: allWidgetsProcessedBound,
 			generalSolrError: generalSolrErrorProcessedBound,

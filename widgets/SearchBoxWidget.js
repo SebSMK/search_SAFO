@@ -23,7 +23,7 @@
 				  
 			var json_data = {"default_text" : this.manager.translator.getLabel("search_box_default"), 'search': this.manager.translator.getLabel("search_box_button")};	 
 			var html = self.template_integration_json(json_data, '#searchboxTemplate');		  		  
-			$(this.target).html(html);	
+			$(this.target).append(html);	
 
 			$(this.target).find('input#search-bar').val('');
 
