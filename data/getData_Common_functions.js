@@ -142,7 +142,8 @@
 		for (var i = 0; i < arrayLength; i++) {					
 			var values = titles_split[i].split(smkCommon.split_2_niv);			
 			if(smkCommon.getValueFromSplit(values, 4) != null && smkCommon.getValueFromSplit(values, 4).indexOf(type) > -1 ||
-					smkCommon.getValueFromSplit(values, 4) == null && 'museum'.indexOf(type) > -1){
+					(smkCommon.getValueFromSplit(values, 4) == null && type == 'museum') || 
+					(smkCommon.getValueFromSplit(values, 4) != null && smkCommon.getValueFromSplit(values, 4).indexOf('blank') > -1 && type == 'museum')){
 				var title = smkCommon.getValueFromSplit(values, 0);
 				var title_note = smkCommon.getValueFromSplit(values, 1);
 				var title_lang = smkCommon.getValueFromSplit(values, 2);
@@ -170,7 +171,7 @@
 			}				
 		};
 
-		return titles_data;			
+		return titles_data.length > 0 ? titles_data : null;			
 	}
 
 	/**

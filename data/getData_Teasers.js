@@ -34,7 +34,7 @@
 					
 					info:{
 						producent_kunster: this.getListProducers(doc),																																
-						title_museum: this.getListTitle(doc),															
+						title_museum: this.getTeaserTitle(doc),															
 						datering_production_vaerkdatering: getData_Common.getProduction_vaerkdatering(doc),		
 						ident_invnummer: getData_Common.getIdent_invnummer(doc),	
 						location_location: this.getListLocation(doc, this.caller),
@@ -64,25 +64,31 @@
 			return ModelManager.buildURLFromModel(model); 
 		};
 		
-		this.getListTitle = function(doc){
-			var title_all = getData_Common.getTitle(doc, 'museum');
+		this.getTeaserTitle = function(doc){
+			var title_mus = getData_Common.getTitle(doc, 'museum');
+			var title_besk = getData_Common.getTitle(doc, 'beskriv');
+			var title_serie = getData_Common.getTitle(doc, 'serie');
+			var title_teaser = title_mus || title_besk || title_serie;
+			
 			var title = new String();
 			var max = 70;
 			var short;
 			
-			if(title_all.length > 0){
+			if(title_teaser != null && title_teaser.length > 0){
 				switch(smkCommon.getCurrentLanguage()){
 				case "dk":		 		
-					title = title_all[0].title;
+					title = title_teaser[0].title;
 					break;
 				case "en":
-					title = smkCommon.isValidDataText(title_all[0].trans) ? title_all[0].trans : title_all[0].title; 
+					title = smkCommon.isValidDataText(title_teaser[0].trans) ? title_teaser[0].trans : title_teaser[0].title; 
 					break;
-				}
-				
-				if (smkCommon.isValidDataText(title))
-					title = title.length > max ? sprintf('%s(...)', title.substring(0, max)) : title;	
+				}									
+			}else{				
+				title = doc.title_first;
 			}
+			
+			if (smkCommon.isValidDataText(title))
+				title = title.length > max ? sprintf('%s(...)', title.substring(0, max)) : title;
 				
 			return smkCommon.isValidDataText(title) ? title : null;
 		};
