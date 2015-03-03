@@ -64,14 +64,18 @@
 			var objectedItems = [];
 
 			switch (self.field){
-			case 'object_production_century_earliest':		 			  			  			  
-				for (var facet in self.manager.response.facet_counts.facet_fields[self.field]) {
-					var count = parseInt(self.manager.response.facet_counts.facet_fields[self.field][facet]);
+			case 'object_production_date_earliest':		 			  			  			  
+				//for (var facet in self.manager.response.facet_counts.facet_fields[self.field]) {
+				for (var facet in self.manager.response.facet_counts.facet_ranges[self.field].counts) {
+					var count = parseInt(self.manager.response.facet_counts.facet_ranges[self.field].counts[facet]);
 					if (count > maxCount) {
 						maxCount = count;
 					};	
 
-					objectedItems.push({ "value": facet, "text": this.getCentury(facet), "count": count, "i": i }); 
+					//objectedItems.push({ "value": facet, "text": this.getCentury(facet), "count": count, "i": i });
+					var daterange = new Date(facet);
+					
+					objectedItems.push({ "value": facet, "text": this.getCentury(daterange.getFullYear()), "count": count, "i": i });
 					i++;
 				};
 				totalCount = i;
@@ -84,6 +88,8 @@
 			case 'artist_natio_dk':
 			case 'object_type_dk':
 			case 'object_type_en':
+			case 'prod_technique_dk':
+			case 'prod_technique_en':
 				for (var facet in self.manager.response.facet_counts.facet_fields[self.field]) {
 					var count = parseInt(self.manager.response.facet_counts.facet_fields[self.field][facet]);
 					if (count > maxCount) {
@@ -225,10 +231,13 @@
 
 			switch (this.manager.translator.getLanguage()){
 			case "dk":
-				number = (number -1) * 100; 
+				//number = (number -1) * 100; 
 				ordinal = "-";					  			  			  
 				break;
-			case "en":		 			  			  			  
+			case "en":		 
+				while(number > 21){
+					number = number / 10;
+				}
 				ordinal = smkCommon.ordinal_suffix(number);					  			  			  
 				break;		  
 			};

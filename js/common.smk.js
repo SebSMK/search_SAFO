@@ -33,6 +33,7 @@
 				|| text == null 
 				|| text == 'undefined'
 				|| text == 'null' 
+				|| text == '(blank)' 
 				|| text.trim() == '')
 			return false;
 
@@ -64,7 +65,12 @@
 	}; 
 
 	common.ordinal_suffix = function (i) {
-		var j = i % 10;
+		var j = 0;
+		
+		while(i > 21){
+			i = i / 10;
+		}
+			
 		if (j == 1 && i != 11) {
 			return "st";
 		}

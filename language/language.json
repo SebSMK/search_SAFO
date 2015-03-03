@@ -1,7 +1,7 @@
 {
   "config": {
     "default": "dk",
-    "version": "0.000.000.0047 mvc NOproxy"
+    "version": "0.000.000.0048 mvc NOproxy"
   },
   "language": {
     "dk": {
@@ -11,11 +11,11 @@
       "copyright_def":			"CC0 - Public Domain",
       
       "tagcloud_artist_name": 		"kunstner",
-	  "tagcloud_object_production_century_earliest": 		"periode",
+	  "tagcloud_object_production_date_earliest": 		"periode",
 	  "tagcloud_artist_natio_dk": 		"nationalitet",
-	  "tagcloud_artist_natio_en": 		"nationalitet",
-	  "tagcloud_object_type_dk": 		"teknik",
-	  "tagcloud_object_type_en": 		"teknik",
+	  "tagcloud_object_type_dk": 		"værktype",
+	  "tagcloud_prod_technique_dk":		"teknik",
+	  "tagcloud_collection":		"samling",
           
       "search_artist_name_lab": 		"Indtast kunstner",
       "search_object_production_century_earliest_lab": 		"Indtast periode",
@@ -101,11 +101,11 @@
       "copyright_def":			"CC0 - Public Domain",			
 
 	  "tagcloud_artist_name": 		"artist",
-	  "tagcloud_object_production_century_earliest": 		"period",
-	  "tagcloud_artist_natio_dk":	"nationality",
+	  "tagcloud_object_production_date_earliest": 		"period",
 	  "tagcloud_artist_natio_en":	"nationality",
-	  "tagcloud_object_type_dk": 		"technique",
-	  "tagcloud_object_type_en": 		"technique",
+	  "tagcloud_object_type_en": 		"artwork type",
+	  "tagcloud_prod_technique_en": 		"technique",
+	  "tagcloud_collection":		"collection",
 	  
 	  "search_artist_name_lab": 		"Select artist",
 	  "search_object_production_century_earliest_lab": 		"Select period",

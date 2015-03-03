@@ -4,21 +4,26 @@
     
     "facets":{
 				"dk":["artist_name", 
-		                "artist_natio_dk", 
-		                "object_production_century_earliest", 
-		                "object_type_dk"],
+		                "artist_natio_dk", 		                
+		                "object_type_dk",
+		                "prod_technique_dk",
+		                "collection"],
 		                
 		         "en":["artist_name", 			                 
-		                "artist_natio_en", 
-		                "object_production_century_earliest", 			                
-		                "object_type_en"],
+		                "artist_natio_en", 		                 			                
+		                "object_type_en",
+		                "prod_technique_en",
+		                "collection"],
 		          
 		          "all":["artist_name", 			                 
 		                "artist_natio_dk", 
 		                "artist_natio_en", 
-		                "object_production_century_earliest", 			                
+		                "object_production_date_earliest", 			                
 		                "object_type_dk",
-		                "object_type_en"]			                
+		                "object_type_en",
+		                "prod_technique_dk",
+		                "prod_technique_en",
+		                "collection"]			                
 		          },
 							                
     "exposed": 							["fq", "q", "start", "limit", "sort", "qf"],
