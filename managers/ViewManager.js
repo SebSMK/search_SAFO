@@ -118,11 +118,15 @@
 				
 				// if all images are loaded, we stop the modal "waiting image" for this widget
 				this.remove_modal_loading_from_widget(this.callWidgetTarget('teasers'));	
-				
+								
 				// if all images in teaser are displayed, send event
-				$(this).trigger({
-					type: "smk_teasers_all_images_displayed"
-				});
+				var $this = $(this); 
+				// we had to set a Timeout here in order to let the modal mode finish 
+				setTimeout(function() {
+					$this.trigger({
+						type: "smk_teasers_all_images_displayed"
+					});
+				}, 1);												
 			}    		  
 		};
 

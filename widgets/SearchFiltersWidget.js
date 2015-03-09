@@ -27,13 +27,20 @@
 		beforeRequest: function(){			
 			var self = this;
 			var $target = $(this.target);
-			var $select = $(this.target).find('select');
 
 			if (!self.getRefresh())				
-				return;			
-
-			$select.attr('data-placeholder', self.manager.translator.getLabel('search_data_loading'));
-			$target.find('select').trigger("chosen:updated");	
+				return;	
+			
+			$target.find('.number-of-matches').text(self.manager.translator.getLabel('search_data_loading'));			
+			
+			
+//			var $select = $(this.target).find('select');
+//
+//			if (!self.getRefresh())				
+//				return;			
+//
+//			$select.attr('data-placeholder', self.manager.translator.getLabel('search_data_loading'));
+//			$target.find('select').trigger("chosen:updated");	
 
 		},
 
