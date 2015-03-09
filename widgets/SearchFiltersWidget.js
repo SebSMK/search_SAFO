@@ -48,8 +48,9 @@
 				return;
 			};	 		  	  			  		
 
-			//* just in case...
-			if (self.manager.response.facet_counts.facet_fields[self.field] === undefined) {
+			
+			if (self.manager.response.facet_counts.facet_fields[self.field] === undefined &&
+				self.manager.response.facet_counts.facet_ranges[self.field] === undefined) {
 //				var template = Mustache.getTemplate(templ_path);			
 //				var html = Mustache.to_html($(template).find('#chosenTemplate').html(), json_data);
 //				$target.html(html);
@@ -72,12 +73,21 @@
 						maxCount = count;
 					};	
 
-					//objectedItems.push({ "value": facet, "text": this.getCentury(facet), "count": count, "i": i });
 					var daterange = new Date(facet);
 					
 					objectedItems.push({ "value": facet, "text": this.getCentury(daterange.getFullYear()), "count": count, "i": i });
 					i++;
 				};
+				if (self.manager.response.facet_counts.facet_ranges[self.field].before !== undefined){
+					var count = self.manager.response.facet_counts.facet_ranges[self.field].before;				
+					var last_facet = objectedItems[0].value;
+					var daterange = new Date(last_facet);
+					var text = sprintf("%s %s",  self.manager.translator.getLabel("search_filter_before"), this.getCentury(daterange.getFullYear()));
+					
+					objectedItems.push({ "value": "< " + last_facet, "text": text, "count": count, "i": i });
+					i++;
+				}
+				
 				totalCount = i;
 				objectedItems.sort(function (a, b) {
 					return parseInt(b.value)-parseInt(a.value);	  	      

@@ -108,11 +108,25 @@
 			Manager.store.remove('facet.field');
 			if (model.view != 'detail'){
 				Manager.store.addByValue('facet', true);
-				Manager.store.addByValue('facet.field', Manager.store.facets_default[model.lang]);
-				Manager.store.add('facet.field', 
-						new AjaxSolr.Parameter({ name:'facet.field', 
-												value: 'category', 
-												locals: { ex:'category' } }));
+				Manager.store.addByValue('facet.field', Manager.store.facets_default[model.lang]['facets']);
+				
+				if (Manager.store.facets_default[model.lang]['ranges'] !== undefined){
+					var range = Manager.store.facets_default[model.lang]['ranges']['range'];
+					var opt = sprintf('f.%s.facet.range.', range);
+
+					Manager.store.addByValue('facet.range', range);				 
+					Manager.store.addByValue(opt + 'start', Manager.store.facets_default[model.lang]['ranges']['start']);
+					Manager.store.addByValue(opt + 'end', Manager.store.facets_default[model.lang]['ranges']['end']);
+					Manager.store.addByValue(opt + 'gap', Manager.store.facets_default[model.lang]['ranges']['gap']);
+					if(Manager.store.facets_default[model.lang]['ranges']['other'] !== undefined)
+						Manager.store.addByValue(opt + 'other', Manager.store.facets_default[model.lang]['ranges']['other']);					
+				}												
+				
+//				Manager.store.add('facet.field', 
+//						new AjaxSolr.Parameter({ name:'facet.field', 
+//												value: 'category', 
+//												locals: { ex:'category' } }));
+				
 			}																				
 			
 			// fq param						

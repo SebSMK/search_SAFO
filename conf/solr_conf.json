@@ -1,21 +1,43 @@
 {
-    "server":							"http://csdev-seb:8180/solr-example/dev_SAFO/",
+    "server":	"http://csdev-seb:8180/solr-example/dev_SAFO/",
     
     
     "facets":{
-				"dk":["artist_name", 
+				"dk":
+				{
+					"facets":
+						["artist_name", 
 		                "artist_natio_dk", 		                
 		                "object_type_dk",
 		                "prod_technique_dk",
 		                "collection"],
+		             "ranges":{
+		             	"range": "object_production_date_earliest",
+		             	"start": "1400-01-01T00:00:00.001Z",
+						"end": "NOW",
+						"gap": "+100YEARS",
+						"other": "before"		             
+		             }		             	
+		         },
 		                
-		         "en":["artist_name", 			                 
+		         "en":
+		         {
+					"facets":
+						["artist_name", 			                 
 		                "artist_natio_en", 		                 			                
 		                "object_type_en",
 		                "prod_technique_en",
 		                "collection"],
-		          
-		          "all":["artist_name", 			                 
+		              "ranges":{
+		             	"range": "object_production_date_earliest",
+		             	"start": "1400-01-01T00:00:00.001Z",
+						"end": "NOW",
+						"gap": "+100YEARS",
+						"other": "before"		             
+		             }	
+		         },
+		         		         		          
+		         "all":["artist_name", 			                 
 		                "artist_natio_dk", 
 		                "artist_natio_en", 
 		                "object_production_date_earliest", 			                

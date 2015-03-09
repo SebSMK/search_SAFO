@@ -23,6 +23,7 @@
       "search_object_type_lab":	"Indtast teknik",
       "search_filter":			"Afgræns din søgning",      	  
 	  "search_filter_cent":		"tallet",
+	  "search_filter_before":	"før ",
       "search_data_loading":	"loading data...",
       
       "category_artwork" : 		"værker",
@@ -113,6 +114,7 @@
 	  "search_object_type_lab":	"Select technique",
 	  "search_filter":			"Filter your search",	  	  
 	  "search_filter_cent":		" c.",
+	  "search_filter_before":	"before ",
 	  "search_data_loading":	"loading data...",
 
       "category_artwork" : 		"artworks",
