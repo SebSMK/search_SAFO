@@ -1,21 +1,15 @@
 <div>	
 	 <script id="chosenTemplate" type="text/template">
-
-    {{#options}}		        
-    		<div class="filter-toggle">{{title}}<span class="number-of-matches">({{totalCount}})</span> <i></i></div>
-    		<ul class="filter-options-checked"></ul>
-    		<ul class="filter-options">
-    	
+    	{{#options}}
+		<h2 class="heading--widget">{{title}}</h2>
+    	<div class="chosen--multiple chosen--open">
+	      	<select data-placeholder="{{{search_lab}}}" multiple>
+    	    	<option value=""></option>
         		{{#values}}
-            	<li>
-              		<input type="checkbox" value="{{value}}" name="{{i}}" id="{{i}}">
-              		<label for="{{i}}"><i></i>{{text}}<span class="number-of-matches">({{count}})</span></label>
-            	</li>
+        			<option value="{{value}}">{{{text}}} {{#count}}({{count}}){{/count}}</option>
         		{{/values}}       
-      
-    		</ul>  
-    	
-	{{/options}}
-
+      		</select>
+    	</div><!-- chosen -->
+		{{/options}}
 	</script>
 </div>

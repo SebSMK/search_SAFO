@@ -28,19 +28,19 @@
 			var self = this;
 			var $target = $(this.target);
 
-			if (!self.getRefresh())				
-				return;	
-			
-			$target.find('.number-of-matches').text(self.manager.translator.getLabel('search_data_loading'));			
-			
-			
-//			var $select = $(this.target).find('select');
-//
 //			if (!self.getRefresh())				
-//				return;			
-//
-//			$select.attr('data-placeholder', self.manager.translator.getLabel('search_data_loading'));
-//			$target.find('select').trigger("chosen:updated");	
+//				return;	
+//			
+//			$target.find('.number-of-matches').text(self.manager.translator.getLabel('search_data_loading'));			
+			
+			
+			var $select = $(this.target).find('select');
+
+			if (!self.getRefresh())				
+				return;			
+
+			$select.attr('data-placeholder', self.manager.translator.getLabel('search_data_loading'));
+			$target.find('select').trigger("chosen:updated");	
 
 		},
 
@@ -149,6 +149,7 @@
 			var json_data = {"options" : new Array({title:title, totalCount:totalCount, values:objectedItems})};	    	    	    
 			var html = self.template_integration_json(json_data, '#chosenTemplate'); 
 
+			/*
 			$target.html(html);
 
 			//** refresh view
@@ -177,8 +178,8 @@
 						a.querySelectorAll(".filter-options-checked li").length > 0 && a.classList.add("active");
 				});
 			}
-
-			/*			
+*/
+						
 			//* save previous selected values in the target 'select' component	  	 
 			$select.find("option:selected").each(function (){
 				self.previous_values[self.field].push(this.value.replace(/^"|"$/g, ''));	  		
@@ -232,7 +233,7 @@
 			}			
 
 			self.previous_values[self.field] = new Array();		
-			 */
+			 
 			//* send "loaded" event
 			$(this).trigger({
 				type: "smk_search_filter_loaded"

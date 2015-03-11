@@ -73,6 +73,7 @@
 	<link rel="stylesheet" type="text/css" href="js/fancybox/source/jquery.fancybox.css" media="all" />	
 	<link rel="stylesheet" type="text/css" href="js/backtotop/css/style.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="css/app.css" media="all" />
+<link rel="stylesheet" type="text/css" href="css/chosen.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="css/smk_modif.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="css/smk_print.css" media="print" />
 
