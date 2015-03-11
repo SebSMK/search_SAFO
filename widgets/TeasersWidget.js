@@ -39,6 +39,8 @@
 				return;
 			}	 		  
 
+			if(smkCommon.debugTime()) console.time("Teasers");
+			
 			//* remove all articles
 			self.removeAllArticles();		
 

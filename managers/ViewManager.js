@@ -54,7 +54,7 @@
 							
 			// searchfilters
 //			for (var i = 0, l = Manager.searchfilterList.length; i < l; i++) {		  	
-//			this.add_modal_loading_to_widget(Manager.widgets[Manager.searchfilterList[i].field]);
+//			this.add_modal_loading_to_widget(Manager.widgets[Manager.searchfilterList[i]]);
 //			};
 			// details
 			this.add_modal_loading_to_widget('details');	 
@@ -118,7 +118,9 @@
 				
 				// if all images are loaded, we stop the modal "waiting image" for this widget
 				this.remove_modal_loading_from_widget(this.callWidgetTarget('teasers'));	
-								
+				
+				if(smkCommon.debugTime()) console.timeEnd("Teasers");
+				
 				// if all images in teaser are displayed, send event
 				var $this = $(this); 
 //				// we had to set a Timeout here in order to let the modal mode finish 
@@ -136,7 +138,7 @@
 			//* check if there are still images loading in "teaser"
 			if ($(this.callWidgetTarget('teasers')).find('.image_loading').length == 0){
 
-				this.showWidget($(this.callWidgetTarget('teasers')));								
+				this.showWidget($(this.callWidgetTarget('teasers')));																
 				
 				// highlight search string in teasers
 				this.highlightning();
@@ -254,22 +256,22 @@
 
 			this.callWidgetFn('teasers', 'removeAllArticles');
 			
-			smkCommon.debugTime(), console.time("categoryChanged1");
+			if(smkCommon.debugTime()) console.time("categoryChanged1");
 			this.showWidget($(this.callWidgetTarget('teasers')));
-			smkCommon.debugTime(), console.timeEnd("categoryChanged1");
+			if(smkCommon.debugTime()) console.timeEnd("categoryChanged1");
 			
-			smkCommon.debugTime(), console.time("categoryChanged2");
+			if(smkCommon.debugTime()) console.time("categoryChanged2");
 			$(this.callWidgetTarget('teasers')).find('.matrix').addClass('full-width').hide();							
 			this.showWidget($target.find("#search-filters"));
 			for (var i = 0, l = Manager.searchfilterList.length; i < l; i++) {				
-				if (this.callWidgetFn(Manager.searchfilterList[i].field, 'getRefresh'))					
-					this.callWidgetFn(Manager.searchfilterList[i].field, 'hide_drop')
+				if (this.callWidgetFn(Manager.searchfilterList[i], 'getRefresh'))					
+					this.callWidgetFn(Manager.searchfilterList[i], 'hide_drop')
 			};																				 
 
 			if($(this.callWidgetTarget('teasers')).find('.matrix .matrix-tile').length > 0)
 				$(this.callWidgetTarget('teasers')).find('.matrix').masonry('layout');
 
-			smkCommon.debugTime(), console.timeEnd("categoryChanged2");
+			if(smkCommon.debugTime()) console.timeEnd("categoryChanged2");
 			
 			return;
 		};
@@ -282,7 +284,7 @@
 		 * start general modal loading screen 
 		 */
 		this.start_modal_loading = function(){
-			$(this.target).addClass("modal_loading"); 	  
+			//$(this.target).addClass("modal_loading"); 	  
 		};
 
 		/*
@@ -299,7 +301,7 @@
 		 */
 		this.add_modal_loading_to_widget = function(widget){
 			if(this.isThisWidgetActive(widget))				
-				$(this.callWidgetTarget(widget)).addClass('modal_loading');												
+				$(this.callWidgetTarget(widget)).addClass('widget_modal_loading');												
 		};
 		
 		this.isThisWidgetActive = function(widget){			
@@ -310,10 +312,10 @@
 		 * stop loading mode for a given widget.
 		 */
 		this.remove_modal_loading_from_widget = function(target){
-			$(target).removeClass("modal_loading");
+			$(target).removeClass("widget_modal_loading");
 
 			if (this.allWidgetProcessed){
-				if ($(this.target).find('.modal_loading').length == 0){
+				if ($(this.target).find('.widget_modal_loading').length == 0){
 					// all widgets are loaded, we remove the general loading screen
 					this.stop_modal_loading();					
 					this.set_focus();
@@ -329,7 +331,7 @@
 		};		
 
 		this.allWidgetsProcessed = function(){
-			if ($(this.target).find('.modal_loading').length != 0){
+			if ($(this.target).find('.widget_modal_loading').length != 0){
 				// there are still some widgets loading
 				this.allWidgetProcessed = true;	
 			}	else{
