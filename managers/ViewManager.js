@@ -254,11 +254,11 @@
 
 			this.callWidgetFn('teasers', 'removeAllArticles');
 			
-			smkCommon.debugTime(), console.time("categoryChanged1");
+			if(smkCommon.debugTime()) console.time("categoryChanged1");
 			this.showWidget($(this.callWidgetTarget('teasers')));
-			smkCommon.debugTime(), console.timeEnd("categoryChanged1");
+			if(smkCommon.debugTime()) console.timeEnd("categoryChanged1");
 			
-			smkCommon.debugTime(), console.time("categoryChanged2");
+			if(smkCommon.debugTime()) console.time("categoryChanged2");
 			$(this.callWidgetTarget('teasers')).find('.matrix').addClass('full-width').hide();							
 			this.showWidget($target.find("#search-filters"));
 			for (var i = 0, l = Manager.searchfilterList.length; i < l; i++) {				
@@ -269,7 +269,7 @@
 			if($(this.callWidgetTarget('teasers')).find('.matrix .matrix-tile').length > 0)
 				$(this.callWidgetTarget('teasers')).find('.matrix').masonry('layout');
 
-			smkCommon.debugTime(), console.timeEnd("categoryChanged2");
+			if(smkCommon.debugTime()) console.timeEnd("categoryChanged2");
 			
 			return;
 		};

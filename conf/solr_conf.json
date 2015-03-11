@@ -1,7 +1,7 @@
 {    
     "version": "0.000.000.0048 mvc NOproxy",
     
-    "mode": "perf",
+    "mode": "prod",
     
     "server":	"http://csdev-seb:8180/solr-example/dev_SAFO/",
         
