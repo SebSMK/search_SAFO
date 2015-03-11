@@ -12,6 +12,8 @@
 	}
 }(this, function (common) {			
 
+	common.version = "000";
+	
 	common.split_1_niv = ";-;";
 	common.split_2_niv = ";--;";
 	common.split_3_niv = ";---;";
@@ -168,7 +170,7 @@
 	};	
 
 	common.getCurrentLanguage = function(){		
-		return  ModelManager.get_lang();
+		return ModelManager.get_lang();
 	};
 
 	common.getCurrentPluginDir = function(){		
@@ -196,6 +198,37 @@
 			}
 		}
 		return arr;
+	};	
+	
+	common.setVersion = function(version){
+		if(version !== undefined)
+			common.version = version;
 	};
+	
+	common.getVersion = function(version){		
+		return common.version;
+	};
+	
+	/*** debug mode ****/
+	
+	common.mode = "prod";
+	
+	common.setMode = function(mode){
+		if(mode !== undefined)
+			common.mode = mode;
+	};
+	
+	common.getMode = function(mode){		
+		return common.mode;
+	};			
+	
+	common.debugTime = function(){		
+		return common.mode == "perf";			
+	};	
+	
+	common.debugLog= function(){
+		return common.mode != "prod"			
+	};	
+	
 
 }));

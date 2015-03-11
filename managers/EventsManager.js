@@ -51,27 +51,40 @@
 		 * change in address bar
 		 * */
 		this.addressChange = function(e){	 
-
-			//* set windows to top
-			$(window).scrollTop(0);			
 			
-			ViewManager.beforeRequest();
+			smkCommon.debugTime(), console.time("adresschanged");	
+	
+			
+			smkCommon.debugTime(), console.time("process view1");
+			//* set windows to top
+			$(window).scrollTop(0);	
 			
 			//* get the view's model
 			ModelManager.setModel(e.value, "url");
-			var model = ModelManager.getModel();		    			    
+			var model = ModelManager.getModel();	
+			smkCommon.debugTime(), console.timeEnd("process view1");
 			
-			//* process language
-			Manager.translator.setLanguage(model.lang);		
-			Manager.store.set_current_lang(model.lang);
-			
+			smkCommon.debugTime(), console.time("process view2");
 			//* process view
 			if(model.view !== undefined){
 				ViewManager.viewChanged({'view': model.view});				    				    				    					    					    	
 			}else{
 				ViewManager.viewChanged({'view': "teasers"});
 			}			    
-
+			smkCommon.debugTime(), console.timeEnd("process view2");
+			
+			smkCommon.debugTime(), console.time("ViewManager.beforeRequest");
+			ViewManager.beforeRequest();				    			    
+			smkCommon.debugTime(), console.timeEnd("ViewManager.beforeRequest");
+			
+			smkCommon.debugTime(), console.time("process view_lang");
+			//* process language
+			Manager.translator.setLanguage(model.lang);		
+			Manager.store.set_current_lang(model.lang);	
+			smkCommon.debugTime(), console.timeEnd("process view_lang");
+			
+			
+			smkCommon.debugTime(), console.time("process view_cate");
 			//* process category
 			if(model.category !== undefined){
 				if (model.view != 'detail'){			    		
@@ -82,9 +95,13 @@
 			}else if(model.category == undefined && model.view != 'detail'){
 				ViewManager.categoryChanged({'category': "all"});
 			}
+			smkCommon.debugTime(), console.timeEnd("process view_cate");
+			
+			
+			//****** process Solr request *******
 
-			//* process Solr request
-
+			smkCommon.debugTime(), console.time("process_q");
+			
 			// reset exposed parameters
 			Manager.store.exposedReset();
 
@@ -128,7 +145,7 @@
 //												locals: { ex:'category' } }));
 				
 			}																				
-			
+
 			// fq param						
 			if (model.view != 'detail')				
 				Manager.store.addByValue('fq', Manager.store.fq_default);			
@@ -163,8 +180,11 @@
 			}else{
 				Manager.store.addByValue('fl', Manager.store.fl_options.list);		    	
 			};									
-						
+			
+			smkCommon.debugTime(), console.timeEnd("process_q");
+			
 			//* process widgets
+			smkCommon.debugTime(), console.time("process_widgets");
 			// remove all previous search filters - only if search filters is set to "getRefresh"					
 			for (var i = 0, l = Manager.searchfilterList.length; i < l; i++) {				
 				if(ViewManager.callWidgetFn(Manager.searchfilterList[i].field, 'getRefresh'))
@@ -196,9 +216,14 @@
 
 			// reset scroll manager				
 			ViewManager.callWidgetFn('scroll_update', 'reset');
+			smkCommon.debugTime(), console.timeEnd("process_widgets");
 			
 			//**> start Solr request 
-			Manager.doRequest();				   																   	 
+			Manager.doRequest();
+				
+			smkCommon.debugTime(), console.timeEnd("adresschanged");
+			smkCommon.debugTime(), console.timeEnd("smk_search_q_added");
+			
 		};
 
 
@@ -278,6 +303,7 @@
 		 * @result:  model update 
 		 * */
 		this.smk_search_q_added = function(event){
+			smkCommon.debugTime(), console.time("smk_search_q_added");
 			var search_string = jQuery.trim(event.val);			
 			var q = new Array()
 			if (search_string != '') {																																									
@@ -315,7 +341,6 @@
 		 * @result:  model update 
 		 * */
 		this.smk_search_remove_one_search_string = function(event){
-
 			var facet = event.facet;			
 
 			Manager.store.removeElementFrom_q(facet);   			
@@ -329,7 +354,7 @@
 			model.category = ModelManager.current_value_joker;
 			model.lang = ModelManager.current_value_joker;
 
-			ModelManager.update(model);   	    	
+			ModelManager.update(model); 
 		};  
 
 		/*
@@ -368,8 +393,7 @@
 		 * sorting changed
 		 * @result:  model update  
 		 * */
-		this.smk_search_sorter_changed = function(params, searchFieldsTypes){
-
+		this.smk_search_sorter_changed = function(params, searchFieldsTypes){			
 			if (params.selected == undefined)																					
 				return;	  
 			
@@ -388,7 +412,7 @@
 			model.category = ModelManager.current_value_joker;
 			model.lang = ModelManager.current_value_joker;
 
-			ModelManager.update(model);			
+			ModelManager.update(model);	
 		};		
 
 //		/* 

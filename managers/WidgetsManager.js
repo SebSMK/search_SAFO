@@ -26,6 +26,8 @@ var EventsManager;
 		var scroll_rows_default = solr_conf.get_scroll_rows_default();
 		var rows_default = solr_conf.get_rows_default();
 		var facets_default = solr_conf.get_facets();
+		smkCommon.setMode(solr_conf.get_mode());
+		smkCommon.setVersion(solr_conf.get_version());
 
 		//** load multi language script 
 		var translator = new Language.constructor();	
@@ -62,7 +64,7 @@ var EventsManager;
 				qf_default: qf_default,
 				sort_default: sort_default,
 				facets_default: facets_default,
-				current_lang:current_language
+				current_lang: current_language
 			}),
 			searchfilterList: searchFieldsTypes,
 			allWidgetsProcessed: allWidgetsProcessedBound,

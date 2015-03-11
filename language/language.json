@@ -1,7 +1,6 @@
 {
   "config": {
-    "default": "dk",
-    "version": "0.000.000.0048 mvc NOproxy"
+    "default": "dk"
   },
   "language": {
     "dk": {

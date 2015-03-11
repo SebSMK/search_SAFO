@@ -70,6 +70,14 @@
 						case "rows_default":		 			  			  			  
 							this.rows_default = item;			  			  			  
 							break;
+							
+						case "mode":
+							this.mode = item;				  			  			  
+							break;
+						
+						case "version":
+							this.version = item;				  			  			  
+							break;
 						}
 					};					  					  
 				}, this),
@@ -150,6 +158,15 @@
 			return this.rows_default;
 		};	
 
+		
+		this.get_mode = function(){
+			return this.mode;
+		};
+		
+		this.get_version = function(){
+			return this.version;
+		};
+		
 		/*
 		 * variables
 		 */
@@ -164,6 +181,8 @@
 		this.server = null;
 		this.scroll_rows_default = null;
 		this.rows_default = null;
+		this.mode = "normal";
+		this.version = null;
 	}
 
 }));
