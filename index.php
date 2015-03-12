@@ -147,7 +147,7 @@ function main() {
 		
 				</script>
 					
-				<div id="smk_search_wrapper" class="NO_modal_loading">
+				<div id="smk_search_wrapper" class="modal_loading">
 								
 					<div class="modal"></div>
 				

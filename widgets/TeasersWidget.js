@@ -87,7 +87,6 @@
 					$target.find('.matrix').masonry('appended', $article);																				
 				}						
 
-
 				//* add image + link on div to all articles
 				$target.find('.matrix-tile').each(function() { 
 					
@@ -107,6 +106,7 @@
 							});															
 						}						
 					};
+					
 					var img = dataHandler.getItem($imgcontainer);
 					$imgcontainer.prepend( $(img) );
 					

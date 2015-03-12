@@ -51,20 +51,45 @@
 				}
 				
 				//* add image + link on div to all articles
-				$target.find('.matrix-tile.scroll_add').each(function() {    	    	
-					var tile = this;
-					dataHandler.getImage($(this), $(this).find('.image_loading'));
-					$(this).click({detail_url: $(this).find('a').attr('href'), caller: self}, 
-						function (event) {dataHandler.addLink(event);}
-					)	
+				$target.find('.matrix-tile.scroll_add').each(function() { 
 					
-					$(this).find('a').mouseenter({caller: tile},
-						function (event) {$(tile).find('span.copyright-info').css('opacity', 1);}
+					var $tile = $(this);
+										
+					// add image					
+					var $imgcontainer = $tile.find('.matrix-tile-image');
+					
+					var onLoaded = function(){						
+						$target.find('.matrix').masonry('layout');
+						//$tile.removeClass('scroll_add');
+						$imgcontainer.removeClass('image_loading');						
+						// image loaded, trigger event							
+						$(self).trigger({
+							type: "smk_scroll_all_images_loaded"
+						});															
+					};
+					var img = dataHandler.getItem($imgcontainer);
+					$imgcontainer.prepend( $(img) );
+					
+					$imgcontainer.imagesLoaded().always(onLoaded);
+					
+					// add click on image
+					$imgcontainer.click({detail_url: $imgcontainer.find('a').attr('href'), caller: self}, 
+						function (event) {dataHandler.addLink(event);}
 					)
-					$(this).find('a').mouseleave({caller: tile},
-						function (event) {$(tile).find('span.copyright-info').css('opacity', 0);}
+
+					// add click on title
+					$(this).find('.artwork-title').click({detail_url: $tile.find('.artwork-title').attr('href'), caller: self}, 
+						function (event) {dataHandler.addLink(event);}
 					)
-				});                       										
+					
+					// add copyright info on image
+					$imgcontainer.find('a').mouseenter({caller: this},
+						function (event) {$tile.find('span.copyright-info').css('opacity', 1);}
+					)
+					$imgcontainer.find('a').mouseleave({caller: this},
+						function (event) {$tile.find('span.copyright-info').css('opacity', 0);}
+					)
+				});	                   										
 			}
 		}, 		
 

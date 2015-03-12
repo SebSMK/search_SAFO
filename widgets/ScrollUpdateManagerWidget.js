@@ -41,7 +41,7 @@
 			self.scrollManager.addWidget(this.scroll_subWidget); 		
 
 			//* a new image has been displayed in "scroll teaser"
-			$(self.scroll_subWidget).on('smk_teasers_this_img_displayed', function(event){     	            					
+			$(self.scroll_subWidget).on('smk_scroll_all_images_loaded', function(event){     	            					
 				self.new_img_displayed();
 			});	 
 

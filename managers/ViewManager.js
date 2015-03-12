@@ -265,7 +265,7 @@
 		 * start general modal loading screen 
 		 */
 		this.start_modal_loading = function(){
-			//$(this.target).addClass("modal_loading"); 	  
+			$(this.target).addClass("modal_loading"); 	  
 		};
 
 		/*
