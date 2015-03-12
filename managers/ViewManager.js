@@ -108,45 +108,26 @@
 		 * image loading handlers
 		 * */		
 		
-		//* teaser		
-		this.smk_teasers_this_img_displayed = function(){
-			$(this.callWidgetTarget('teasers')).find('.matrix').masonry('layout');
-
-			//* check if there are still images not displayed in "teaser"
-			if ($(this.callWidgetTarget('teasers')).find('.image_loading').length == 0 && 
-					$(this.callWidgetTarget('teasers')).find('.not_displayed').length == 0){				
-				
-				// if all images are loaded, we stop the modal "waiting image" for this widget
-				this.remove_modal_loading_from_widget(this.callWidgetTarget('teasers'));	
-				
-				if(smkCommon.debugTime()) console.timeEnd("Teasers");
-				
-				// if all images in teaser are displayed, send event
-				var $this = $(this); 
-//				// we had to set a Timeout here in order to let the modal mode finish 
-//				setTimeout(function() {
-					$this.trigger({
-						type: "smk_teasers_all_images_displayed"
-					});
-//				}, 100);												
-			}    		  
-		};
-
-		this.smk_teasers_this_img_loaded = function(){
-			$(this.callWidgetTarget('teasers')).find('.matrix').masonry('layout');
-
-			//* check if there are still images loading in "teaser"
-			if ($(this.callWidgetTarget('teasers')).find('.image_loading').length == 0){
-
-				this.showWidget($(this.callWidgetTarget('teasers')));																
-				
-				// highlight search string in teasers
-				this.highlightning();
-				
-							
-			}    		  
-
-		};
+		//* teaser	
+		
+		this.smk_teasers_all_images_loaded = function(){
+			var $this = $(this);
+			
+			this.showWidget($(this.callWidgetTarget('teasers')));																			
+			// highlight search string in teasers
+			this.highlightning();
+			// we stop the modal "waiting image" for Teaser
+			this.remove_modal_loading_from_widget(this.callWidgetTarget('teasers'));				
+			
+			if(smkCommon.debugTime()) console.timeEnd("Teasers");
+			
+			//this timeout is a buffer before loading facets (which hampers image loading)
+			setTimeout(function() {
+				$this.trigger({
+					type: "smk_teasers_ready"
+				});
+			}, 100);							
+		}				
 
 		//...efter scroll: all the new images loaded in teaser
 		this.smk_scroll_all_images_displayed = function(added){		
@@ -261,15 +242,15 @@
 			if(smkCommon.debugTime()) console.timeEnd("categoryChanged1");
 			
 			if(smkCommon.debugTime()) console.time("categoryChanged2");
-			$(this.callWidgetTarget('teasers')).find('.matrix').addClass('full-width').hide();							
+//			$(this.callWidgetTarget('teasers')).find('.matrix').addClass('full-width').hide();							
 			this.showWidget($target.find("#search-filters"));
 			for (var i = 0, l = Manager.searchfilterList.length; i < l; i++) {				
 				if (this.callWidgetFn(Manager.searchfilterList[i], 'getRefresh'))					
 					this.callWidgetFn(Manager.searchfilterList[i], 'hide_drop')
 			};																				 
 
-			if($(this.callWidgetTarget('teasers')).find('.matrix .matrix-tile').length > 0)
-				$(this.callWidgetTarget('teasers')).find('.matrix').masonry('layout');
+//			if($(this.callWidgetTarget('teasers')).find('.matrix .matrix-tile').length > 0)
+//				$(this.callWidgetTarget('teasers')).find('.matrix').masonry('layout');
 
 			if(smkCommon.debugTime()) console.timeEnd("categoryChanged2");
 			

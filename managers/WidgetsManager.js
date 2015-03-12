@@ -402,7 +402,6 @@ var EventsManager;
 		});
 		
 		
-
 		/*
 		 * Finish loading events
 		 * 
@@ -425,22 +424,17 @@ var EventsManager;
 			});
 		};	
 		
-		//* a new image has been displayed in "teaser"
-		$(Manager.widgets['teasers']).on('smk_teasers_this_img_displayed', function(event){     	            	
-			EventsManager.smk_teasers_this_img_displayed();
+		//* all images loaded in "teaser"
+		$(Manager.widgets['teasers']).on('smk_teasers_all_images_loaded', function(event){     	            	
+			EventsManager.smk_teasers_all_images_loaded();
 		});	
 		
-		//* a new image has finished loading in "teaser"
-		$(Manager.widgets['teasers']).on('smk_teasers_this_img_loaded', function(event){     	            	
-			EventsManager.smk_teasers_this_img_loaded();
-		});				
-
-		//* all images displayed in "teaser"
-		$(ViewManager).on('smk_teasers_all_images_displayed', function(event){ 			
+		//* "teaser" ready after image loading
+		$(ViewManager).on('smk_teasers_ready', function(event){ 			
 			for (var i = 0, l = searchFieldsTypes.length; i < l; i++) {
 				EventsManager.after_afterRequest(searchFieldsTypes[i]);				
 			};				
-		});	
+		});			
 		
 		//* a new image has finished loading in "related"
 		$(Manager.widgets['details']).on('smk_related_this_img_loaded', function(event){   

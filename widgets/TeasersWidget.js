@@ -17,7 +17,7 @@
 			var html = self.template;     
 			$target.html($(html).find('#teaserInitTemplate').html());		
 
-			$target.find('.matrix .matrix-tile').hide();
+			//$target.find('.matrix .matrix-tile').hide();
 
 			//* init masonry
 			$target.find('.matrix').masonry( {
@@ -57,11 +57,8 @@
 
 				// trig "this image is loaded" event	      
 				$(self).trigger({
-					type: "smk_teasers_this_img_loaded"
-				});
-				$(self).trigger({
-					type: "smk_teasers_this_img_displayed"
-				});
+					type: "smk_teasers_all_images_loaded"
+				});				
 
 				return;		
 			}
@@ -87,35 +84,53 @@
 					$target.find('.matrix').append($article);	      
 
 					//* refresh masonry
-					$target.find('.matrix').masonry('appended', $article);	      
+					$target.find('.matrix').masonry('appended', $article);																				
 				}						
 
+
 				//* add image + link on div to all articles
-				$target.find('.matrix-tile').each(function() {    	    	
-					var tile = this;
-					// add image
-					dataHandler.getImage($(this), $(this).find('.image_loading'));
+				$target.find('.matrix-tile').each(function() { 
+					
+					var $tile = $(this);
 										
+					// add image					
+					var $imgcontainer = $tile.find('.matrix-tile-image');
+					
+					var onLoaded = function(){						
+						$target.find('.matrix').masonry('layout');
+						$imgcontainer.removeClass('image_loading');
+						// are there still images loading in Teaser?
+						if($target.find('.image_loading').length == 0){
+							// all images loaded, trigger event							
+							$(self).trigger({
+								type: "smk_teasers_all_images_loaded"
+							});															
+						}						
+					};
+					var img = dataHandler.getItem($imgcontainer);
+					$imgcontainer.prepend( $(img) );
+					
+					$imgcontainer.imagesLoaded().always(onLoaded);
+					
 					// add click on image
-					$(this).find('.matrix-tile-image').click({detail_url: $(this).find('.matrix-tile-image a').attr('href'), caller: self}, 
+					$imgcontainer.click({detail_url: $imgcontainer.find('a').attr('href'), caller: self}, 
 						function (event) {dataHandler.addLink(event);}
 					)
 
 					// add click on title
-					$(this).find('.artwork-title').click({detail_url: $(this).find('.artwork-title').attr('href'), caller: self}, 
+					$(this).find('.artwork-title').click({detail_url: $tile.find('.artwork-title').attr('href'), caller: self}, 
 						function (event) {dataHandler.addLink(event);}
 					)
 					
 					// add copyright info on image
-					$(this).find('.matrix-tile-image a').mouseenter({caller: tile},
-						function (event) {$(tile).find('span.copyright-info').css('opacity', 1);}
+					$imgcontainer.find('a').mouseenter({caller: this},
+						function (event) {$tile.find('span.copyright-info').css('opacity', 1);}
 					)
-					$(this).find('.matrix-tile-image a').mouseleave({caller: tile},
-						function (event) {$(tile).find('span.copyright-info').css('opacity', 0);}
+					$imgcontainer.find('a').mouseleave({caller: this},
+						function (event) {$tile.find('span.copyright-info').css('opacity', 0);}
 					)
-				});
+				});				
 			}	   
-
 		}, 
 
 		template_integration_json: function (json_data, templ_id){	  

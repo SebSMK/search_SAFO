@@ -37,9 +37,9 @@
 	<script src="widgets/SearchFiltersWidget.js" type="text/javascript"></script>
 	<script src="widgets/CategoryWidget.js" type="text/javascript"></script>
 	<script src="widgets/CurrentSearchWidget.js" type="text/javascript"></script>
-    <script src="managers/EventsManager.js" type="text/javascript"></script>
+  <script src="managers/EventsManager.js" type="text/javascript"></script>
    
-    <script src="managers/ViewManager.js" type="text/javascript"></script>                   
+   <script src="managers/ViewManager.js" type="text/javascript"></script>                   
 	<script src="core/AbstractTextWidget.js" type="text/javascript"></script>
 	<script src="widgets/SearchBoxWidget.js" type="text/javascript"></script>
 	<script src="widgets/SearchBoxAutoWidget.js" type="text/javascript"></script>
@@ -54,6 +54,7 @@
 	
 	
 	<script src="js/jquery.tooltipster.js" type="text/javascript"></script>
+  <script src="js/imagesloaded.pkgd.min.js" type="text/javascript"></script>  
 	<script src="js/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script>
 	<script src="js/jquery.address-1.5.min.js" type="text/javascript"></script>
 	<script src="js/jquery.mousewheel.min.js" type="text/javascript"></script>	
@@ -146,7 +147,7 @@ function main() {
 		
 				</script>
 					
-				<div id="smk_search_wrapper" class="modal_loading">
+				<div id="smk_search_wrapper" class="NO_modal_loading">
 								
 					<div class="modal"></div>
 				

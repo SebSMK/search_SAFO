@@ -462,15 +462,20 @@
 			
 		};
 
-		//* a new image has been displayed in "teaser"
-		this.smk_teasers_this_img_displayed = function(){
-			ViewManager.smk_teasers_this_img_displayed();
-		};		
-
+//		//* a new image has been displayed in "teaser"
+//		this.smk_teasers_this_img_displayed = function(){
+//			ViewManager.smk_teasers_this_img_displayed();
+//		};		
+//
+//		//* a new image has finished loading in "teaser"
+//		this.smk_teasers_this_img_loaded = function(){
+//			ViewManager.smk_teasers_this_img_loaded();
+//		};		
+		
 		//* a new image has finished loading in "teaser"
-		this.smk_teasers_this_img_loaded = function(){
-			ViewManager.smk_teasers_this_img_loaded();
-		};			
+		this.smk_teasers_all_images_loaded = function(){
+			ViewManager.smk_teasers_all_images_loaded();
+		};	
 
 		//* all images displayed in "teaser"
 		this.after_afterRequest = function(field){			
