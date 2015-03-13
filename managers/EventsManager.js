@@ -50,11 +50,14 @@
 		/*
 		 * change in address bar
 		 * */
-		this.addressChange = function(e){	 
-						
+		this.addressChange = function(e){	 						
+			
 			if(smkCommon.debugTime()) console.time("adresschanged");	
 			
 			if(smkCommon.debugTime()) console.time("adresschanged-process view");
+			
+			ViewManager.start_modal_loading();
+			
 			//* set windows to top
 			$(window).scrollTop(0);	
 			

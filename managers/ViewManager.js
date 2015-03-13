@@ -65,7 +65,7 @@
 
 		this.beforeRequest = function(){	 
 
-			this.start_modal_loading();			
+			//this.start_modal_loading();			
 			
 			//* start loading mode for some chosen widgets  
 			// teasers			
@@ -73,7 +73,7 @@
 							
 			// searchfilters
 			for (var i = 0, l = Manager.searchfilterList.length; i < l; i++) {		  	
-				this.add_modal_loading_to_widget(Manager.widgets[Manager.searchfilterList[i]]);
+				this.add_modal_loading_to_widget(Manager.widgets[Manager.searchfilterList[i]].field);
 			};
 			
 			// details
