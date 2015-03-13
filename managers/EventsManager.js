@@ -51,40 +51,33 @@
 		 * change in address bar
 		 * */
 		this.addressChange = function(e){	 
-			
+						
 			if(smkCommon.debugTime()) console.time("adresschanged");	
-	
 			
-			if(smkCommon.debugTime()) console.time("process view1");
+			if(smkCommon.debugTime()) console.time("adresschanged-process view");
 			//* set windows to top
 			$(window).scrollTop(0);	
 			
 			//* get the view's model
 			ModelManager.setModel(e.value, "url");
 			var model = ModelManager.getModel();	
-			if(smkCommon.debugTime()) console.timeEnd("process view1");
 			
-			if(smkCommon.debugTime()) console.time("process view2");
 			//* process view
 			if(model.view !== undefined){
 				ViewManager.viewChanged({'view': model.view});				    				    				    					    					    	
 			}else{
 				ViewManager.viewChanged({'view': "teasers"});
 			}			    
-			if(smkCommon.debugTime()) console.timeEnd("process view2");
 			
-			if(smkCommon.debugTime()) console.time("ViewManager.beforeRequest");
 			ViewManager.beforeRequest();				    			    
-			if(smkCommon.debugTime()) console.timeEnd("ViewManager.beforeRequest");
 			
-			if(smkCommon.debugTime()) console.time("process view_lang");
 			//* process language
 			Manager.translator.setLanguage(model.lang);		
-			Manager.store.set_current_lang(model.lang);	
-			if(smkCommon.debugTime()) console.timeEnd("process view_lang");
+			Manager.store.set_current_lang(model.lang);				
 			
+			if(smkCommon.debugTime()) console.timeEnd("adresschanged-process view");
 			
-			if(smkCommon.debugTime()) console.time("process view_cate");
+			if(smkCommon.debugTime()) console.time("adresschanged-process view_cate");
 			//* process category
 			if(model.category !== undefined){
 				if (model.view != 'detail'){			    		
@@ -95,12 +88,12 @@
 			}else if(model.category == undefined && model.view != 'detail'){
 				ViewManager.categoryChanged({'category': "all"});
 			}
-			if(smkCommon.debugTime()) console.timeEnd("process view_cate");
+			if(smkCommon.debugTime()) console.timeEnd("adresschanged-process view_cate");
 			
 			
 			//****** process Solr request *******
 
-			if(smkCommon.debugTime()) console.time("process_q");
+			if(smkCommon.debugTime()) console.time("adresschanged-process_q");
 			
 			// reset exposed parameters
 			Manager.store.exposedReset();
@@ -181,17 +174,21 @@
 				Manager.store.addByValue('fl', Manager.store.fl_options.list);		    	
 			};									
 			
-			if(smkCommon.debugTime()) console.timeEnd("process_q");
+			if(smkCommon.debugTime()) console.timeEnd("adresschanged-process_q");
 			
 			//* process widgets
-			if(smkCommon.debugTime()) console.time("process_widgets");
-			// remove all previous search filters - only if search filters is set to "getRefresh"					
-			for (var i = 0, l = Manager.searchfilterList.length; i < l; i++) {				
-				if(ViewManager.callWidgetFn(Manager.searchfilterList[i], 'getRefresh'))
-					ViewManager.callWidgetFn(Manager.searchfilterList[i], 'removeAllSelectedFilters', {params:[false]});	
-
-			};
-			if (model.category == 'collections' && model.fq !== undefined){
+			if(smkCommon.debugTime()) console.time("adresschanged-process_widgets");
+			if(smkCommon.debugTime()) console.time("adresschanged-process_widgets-1");
+//			if(smkCommon.debugTime()) console.time("adresschanged-process_widgets-1-1");
+//			// remove all previous search filters - only if search filters is set to "getRefresh"					
+//			for (var i = 0, l = Manager.searchfilterList.length; i < l; i++) {				
+//				if(ViewManager.callWidgetFn(Manager.searchfilterList[i], 'getRefresh'))
+//					ViewManager.callWidgetFn(Manager.searchfilterList[i], 'removeAllSelectedFilters', {params:[false]});	
+//
+//			};
+//			if(smkCommon.debugTime()) console.timeEnd("adresschanged-process_widgets-1-1");
+			if(smkCommon.debugTime()) console.time("adresschanged-process_widgets-1-2");
+			if (model.fq !== undefined){
 				// add selected filters in searchFiltersWidget
 				for (var i = 0, l = model.fq.length; i < l; i++) {
 					if(model.fq[i].value !== undefined){
@@ -200,7 +197,10 @@
 					}															
 				}			    			
 			}
-
+			if(smkCommon.debugTime()) console.timeEnd("adresschanged-process_widgets-1-2");
+			if(smkCommon.debugTime()) console.timeEnd("adresschanged-process_widgets-1");
+			
+			if(smkCommon.debugTime()) console.time("adresschanged-process_widgets-2");
 			// reinit thumbs current selected
 			ViewManager.callWidgetFn('details', 'setCurrentThumb_selec');	
 			
@@ -216,7 +216,9 @@
 
 			// reset scroll manager				
 			ViewManager.callWidgetFn('scroll_update', 'reset');
-			if(smkCommon.debugTime()) console.timeEnd("process_widgets");
+			if(smkCommon.debugTime()) console.time("adresschanged-process_widgets-2");
+			
+			if(smkCommon.debugTime()) console.timeEnd("adresschanged-process_widgets");
 			
 			//**> start Solr request 
 			Manager.doRequest();

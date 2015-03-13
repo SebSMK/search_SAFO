@@ -61,7 +61,7 @@
 
 			var $target = $(this.target);	  
 
-			$(this.target).show().children().not('.modal').show();	
+			$(this.target).show().children().show();	
 
 			// Vertically align thumbs (in relation to their frames)
 			$target.find('li img').each( function() {

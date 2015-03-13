@@ -13,7 +13,26 @@
 }(this, function (viewManager) {
 
 	viewManager.constructor = function(options){
-
+		var generalSpinopts = {
+				  lines: 11, // The number of lines to draw
+				  length: 20, // The length of each line
+				  width: 10, // The line thickness
+				  radius: 29, // The radius of the inner circle
+				  corners: 1, // Corner roundness (0..1)
+				  rotate: 0, // The rotation offset
+				  direction: 1, // 1: clockwise, -1: counterclockwise
+				  color: '#000', // #rgb or #rrggbb or array of colors
+				  speed: 0.8, // Rounds per second
+				  trail: 68, // Afterglow percentage
+				  shadow: false, // Whether to render a shadow
+				  hwaccel: false, // Whether to use hardware acceleration
+				  className: 'generalspinner', // The CSS class to assign to the spinner
+				  zIndex: 2e9, // The z-index (defaults to 2000000000)
+				  top: '50%', // Top position relative to parent
+				  left: '50%' // Left position relative to parent
+				};
+		
+		this.generalSpin = new Spinner(generalSpinopts);
 		this.options = options || {};
 		this.template = options.template;
 		this.target = options.target;
@@ -46,16 +65,17 @@
 
 		this.beforeRequest = function(){	 
 
-			this.start_modal_loading(this.target);			
-			//* start loading mode for some choosen widgets  
-			// teasers
+			this.start_modal_loading();			
 			
+			//* start loading mode for some chosen widgets  
+			// teasers			
 			this.add_modal_loading_to_widget('teasers');
 							
 			// searchfilters
-//			for (var i = 0, l = Manager.searchfilterList.length; i < l; i++) {		  	
-//			this.add_modal_loading_to_widget(Manager.widgets[Manager.searchfilterList[i]]);
-//			};
+			for (var i = 0, l = Manager.searchfilterList.length; i < l; i++) {		  	
+				this.add_modal_loading_to_widget(Manager.widgets[Manager.searchfilterList[i]]);
+			};
+			
 			// details
 			this.add_modal_loading_to_widget('details');	 
 			// related
@@ -121,7 +141,7 @@
 			
 			if(smkCommon.debugTime()) console.timeEnd("Teasers");
 			
-			//this timeout is a buffer before loading facets (which hampers image loading)
+			//this timeout is a buffer before starting facets loading (which otherwise hampers image loading)
 			setTimeout(function() {
 				$this.trigger({
 					type: "smk_teasers_ready"
@@ -259,20 +279,26 @@
 
 		/*********
 		 * PRIVATE FUNCTIONS
-		 ********** */
-
+		 ********** */		
+		
 		/*
 		 * start general modal loading screen 
 		 */
+
 		this.start_modal_loading = function(){
-			$(this.target).addClass("modal_loading"); 	  
+			//$(this.target).addClass("modal_loading");
+			var spintarget = document.getElementById(this.target.replace('#', ''));
+			$(this.target).addClass('opaque');
+			this.generalSpin.spin(spintarget);
 		};
 
 		/*
 		 * stop general modal loading screen 
 		 */
 		this.stop_modal_loading = function(){	  
-			$(this.target).removeClass("modal_loading"); 
+			//$(this.target).removeClass("modal_loading");
+			this.generalSpin.stop();
+			$(this.target).removeClass('opaque');
 			this.allWidgetProcessed = false;	  
 		};
 
@@ -323,7 +349,7 @@
 
 		this.showWidget = function($target){
 			$target.removeClass('no_refresh');
-			$target.show().children().not('.modal').show();	  	  
+			$target.show().children().show();	  	  
 		};		
 		
 		this.hideWidget = function($target){
