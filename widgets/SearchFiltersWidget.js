@@ -55,7 +55,10 @@
 				return;
 			};	 		  	  			  		
 
+			if(smkCommon.debugTime()) console.time("SearchFilters - " + this.field);	
 			
+			if(smkCommon.debugTime()) console.time("SearchFilters - " + this.field + " - process");
+						
 			if (self.manager.response.facet_counts.facet_fields[self.field] === undefined &&
 				self.manager.response.facet_counts.facet_ranges[self.field] === undefined) {
 //				var template = Mustache.getTemplate(templ_path);			
@@ -147,39 +150,11 @@
 
 			//* merge facet data and template			
 			var json_data = {"options" : new Array({title:title, totalCount:totalCount, values:objectedItems})};	    	    	    
-			var html = self.template_integration_json(json_data, '#chosenTemplate'); 
-
-			/*
-			$target.html(html);
-
-			//** refresh view
-
-			if (document.querySelector(this.target + ".filter-multiple")) {
-				var a = document.querySelectorAll(this.target + ".filter-multiple"), b = "filter-multiple-open", c = 46;
-				//px
-				Array.prototype.forEach.call(a, function(a) {
-					// Move checked options to a visible area (so you don't need to open the 
-					// .filter-multiple to see the selected options)
-					var d = a.querySelectorAll(".filter-options input[checked]");
-					Array.prototype.forEach.call(d, function(a) {
-						var b = a.parentNode.parentNode.parentNode;
-						b.querySelector(".filter-options-checked").appendChild(a.parentNode);
-					}), a.querySelector(".filter-toggle").addEventListener("click", function(d) {
-						d.preventDefault(), d.stopImmediatePropagation(), a.classList.contains(b) ? (a.classList.remove(b), 
-								a.style.height = a.querySelector(".filter-options-checked") ? c + a.querySelector(".filter-options-checked").clientHeight + "px" : c + "px") : (a.classList.add(b), 
-										a.style.height = a.querySelector(".filter-options").clientHeight + a.querySelector(".filter-options-checked").clientHeight + c + "px");
-					}, !0), // Open if the .filter-multiple has the 'open' class
-					a.classList.contains(b) ? a.style.height = a.querySelector(".filter-options").clientHeight + a.querySelector(".filter-options-checked").clientHeight + c + "px" : // If options list has checked items, adjust the height of the containing
-						// element, so that we can se the checked items.
-						a.querySelector(".filter-options-checked") && (a.style.height = c + a.querySelector(".filter-options-checked").clientHeight + "px"), 
-						// Hide the down-arrow on the filter toggle if there is only 1 option.
-						// aka. nothing more to show.
-						0 == a.querySelectorAll(".filter-options li").length && (a.querySelector(".filter-toggle i").style.display = "none"), 
-						a.querySelectorAll(".filter-options-checked li").length > 0 && a.classList.add("active");
-				});
-			}
-*/
-						
+			var html = self.template_integration_json(json_data, '#chosenTemplate'); 			
+			
+			if(smkCommon.debugTime()) console.timeEnd("SearchFilters - " + this.field + " - process");						
+			if(smkCommon.debugTime()) console.time("SearchFilters - " + this.field + " - chosen");
+			
 			//* save previous selected values in the target 'select' component	  	 
 			$select.find("option:selected").each(function (){
 				self.previous_values[self.field].push(this.value.replace(/^"|"$/g, ''));	  		
@@ -190,7 +165,9 @@
 			//* remove all options in 'select'...
 			$select.empty();	  	
 			//*... and copy the new option list
+			
 			$select.append($(html).find('option'));	  		  	
+			
 
 			//* add previous selected values in the target 'select' component
 			if (self.previous_values[self.field].length > 0){
@@ -217,23 +194,42 @@
 			//* change default text			
 			$select.attr('data-placeholder', self.manager.translator.getLabel(sprintf('search_%s_lab', this.id)));
 
+			
+			if(smkCommon.debugTime()) console.time("SearchFilters - " + this.field + " - chosen - update");
 			//* update 'chosen' plugin		
 			$target.find('select').trigger("chosen:updated");		
+			if(smkCommon.debugTime()) console.timeEnd("SearchFilters - " + this.field + " - chosen - update");
+			
+			if(smkCommon.debugTime()) console.time("SearchFilters - " + this.field + " - chosen - open");
 			self.open_multiple_select();		
+			if(smkCommon.debugTime()) console.timeEnd("SearchFilters - " + this.field + " - chosen - open");
 
+			
 			//* show component
 			$target.show();
 			$target.find('chosen-choices').blur();
+			
 
+			
+			
 			//* .. but hide the list if a filter is already selected
 			if (self.previous_values[self.field].length > 0){
+				if(smkCommon.debugTime()) console.time("SearchFilters - " + this.field + " - chosen - hide");
 				this.hide_drop();
+				if(smkCommon.debugTime()) console.timeEnd("SearchFilters - " + this.field + " - chosen - hide");
 			}else{
+				if(smkCommon.debugTime()) console.time("SearchFilters - " + this.field + " - chosen - show");
 				$(this.target).find('.chosen-drop').show("1000");
+				if(smkCommon.debugTime()) console.timeEnd("SearchFilters - " + this.field + " - chosen - show");
+				
 			}			
+			
 
-			self.previous_values[self.field] = new Array();		
-			 
+			self.previous_values[self.field] = new Array();					
+			
+			if(smkCommon.debugTime()) console.timeEnd("SearchFilters - " + this.field + " - chosen");
+			if(smkCommon.debugTime()) console.timeEnd("SearchFilters - " + this.field);	
+			
 			//* send "loaded" event
 			$(this).trigger({
 				type: "smk_search_filter_loaded"
