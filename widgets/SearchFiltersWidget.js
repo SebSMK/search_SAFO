@@ -85,7 +85,7 @@
 					objectedItems.push({ "value": facet, "text": this.getCentury(daterange.getFullYear()), "count": count, "i": i });
 					i++;
 				};
-				if (self.manager.response.facet_counts.facet_ranges[self.field].before !== undefined){
+				if (self.manager.response.numFound > 0 && self.manager.response.facet_counts.facet_ranges[self.field].before !== undefined){
 					var count = self.manager.response.facet_counts.facet_ranges[self.field].before;				
 					var last_facet = objectedItems[0].value;
 					var daterange = new Date(last_facet);

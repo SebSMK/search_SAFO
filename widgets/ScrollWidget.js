@@ -67,7 +67,7 @@
 							type: "smk_scroll_all_images_loaded"
 						});															
 					};
-					var img = dataHandler.getItem($imgcontainer);
+					var img = dataHandler.getImage($imgcontainer);
 					$imgcontainer.prepend( $(img) );
 					
 					$imgcontainer.imagesLoaded().always(onLoaded);

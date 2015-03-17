@@ -157,6 +157,22 @@ a.divLink {
     opacity: 0.3;
 }
 
+.matrix-tile-size  {
+  width: 33.33%;
+  padding: 10px;
+  float: left;
+  margin-bottom: 0;
+  background-color: #fff;
+  border: 1px solid transparent;
+  border-radius: 1px;
+}
+@media (min-width: 1000px) {
+  .matrix-tile-size  {
+    width: 25%;
+    padding: 15px;
+  }
+}
+
 /* Modif of Jacques' code */
 
 .matrix-tile:hover {
