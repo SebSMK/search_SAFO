@@ -14,7 +14,7 @@
 		isRequestRunning: false,
 
 		noMoreResults: false,				
-		
+
 		scrollSpin: null, 
 
 		init: function(){     
@@ -56,7 +56,7 @@
 					type: "smk_scroll_no_more_results"
 				}); 
 			});	
-			
+
 			$(self.scroll_subWidget).on('smk_search_call_detail', function(event){     					
 				$(self).trigger({
 					type: "smk_search_call_detail",
@@ -66,38 +66,38 @@
 
 			//* spinner
 			var scrollSpinopts = {
-					  lines: 11, // The number of lines to draw
-					  length: 9, // The length of each line
-					  width: 3, // The line thickness
-					  radius: 10, // The radius of the inner circle
-					  corners: 1, // Corner roundness (0..1)
-					  rotate: 0, // The rotation offset
-					  direction: 1, // 1: clockwise, -1: counterclockwise
-					  color: '#000', // #rgb or #rrggbb or array of colors
-					  speed: 0.8, // Rounds per second
-					  trail: 68, // Afterglow percentage
-					  shadow: false, // Whether to render a shadow
-					  hwaccel: false, // Whether to use hardware acceleration
-					  className: 'scrollspinner', // The CSS class to assign to the spinner
-					  zIndex: 2e9, // The z-index (defaults to 2000000000)
-					  top: '95%', // Top position relative to parent
-					  left: '57%' // Left position relative to parent
-					};			
-			
+					lines: 11, // The number of lines to draw
+					length: 9, // The length of each line
+					width: 3, // The line thickness
+					radius: 10, // The radius of the inner circle
+					corners: 1, // Corner roundness (0..1)
+					rotate: 0, // The rotation offset
+					direction: 1, // 1: clockwise, -1: counterclockwise
+					color: '#000', // #rgb or #rrggbb or array of colors
+					speed: 0.8, // Rounds per second
+					trail: 68, // Afterglow percentage
+					shadow: false, // Whether to render a shadow
+					hwaccel: false, // Whether to use hardware acceleration
+					className: 'scrollspinner', // The CSS class to assign to the spinner
+					zIndex: 2e9, // The z-index (defaults to 2000000000)
+					top: '95%', // Top position relative to parent
+					left: '57%' // Left position relative to parent
+			};			
+
 			this.scrollSpin = new Spinner(scrollSpinopts);			
-			
+
 			self.scrollManager.init(); 
 		},
 
 		start_scroll_request: function(){
-			
+
 			if(!this.isRequestRunning && !this.noMoreResults){
 				var params = {};
 
 				params.q = ModelManager.get_q();				
 				params.start = parseInt(this.scrollManager.store.get('start').val()) + parseInt(this.scrollManager.store.scroll_rows_default);			
 				params.sort = smkCommon.isValidDataText(ModelManager.get_sort()) ? ModelManager.get_sort() : this.scrollManager.store.sort_default;				
-				
+
 				this.scrollManager.store.addByValue('q', params.q !== undefined && params.q.length > 0  ? params.q : this.scrollManager.store.q_default);
 				this.scrollManager.store.addByValue('start', params.start);
 				this.scrollManager.store.addByValue('sort', params.sort);
@@ -109,24 +109,17 @@
 		},
 
 		new_img_displayed: function(){
-
-			$(this.scroll_subWidget.target).find('.matrix').masonry('layout');
-			
 			if ($(this.scroll_subWidget.target).find('.image_loading').length == 0 && 
-					$(this.scroll_subWidget.target).find('.not_displayed').length == 0){				
+					$(this.scroll_subWidget.target).find('.not_displayed').length == 0){
 
-				//* all pictures loaded and displayed
-				var opacity_pic = '0.5';
-				$(this.scroll_subWidget.target).find('.matrix-tile.scroll_add').css('opacity', opacity_pic);				
-				$(this.scroll_subWidget.target).find('.matrix-tile.scroll_add').css('opacity', 1);
 				$(this.scroll_subWidget.target).find('.matrix-tile.scroll_add').removeClass('scroll_add');
 				this.show_infinite_scroll_spin('false');	
 				this.isRequestRunning = false;
 				$(this).trigger({
 					type: "smk_scroll_all_images_displayed",
 					added: this.scrollManager.store.scroll_rows_default // number of added images
-				});		
-			}    		  			
+				});
+			}			 		  			
 		},
 
 		show_infinite_scroll_spin: function(state){		

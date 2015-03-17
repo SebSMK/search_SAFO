@@ -150,8 +150,7 @@
 		}				
 
 		//...efter scroll: all the new images loaded in teaser
-		this.smk_scroll_all_images_displayed = function(added){		
-			$(this.callWidgetTarget('teasers')).find('.matrix').masonry('layout');			
+		this.smk_scroll_all_images_displayed = function(added){			
 			if (added !== undefined)
 				this.callWidgetFn('pager', 'refreshDisplay', {params: [added]});
 		},

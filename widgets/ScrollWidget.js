@@ -27,69 +27,12 @@
 			}
 			else{
 				//* load data
-				var artwork_data = null;		
-				var dataHandler = new getData_Teasers.constructor(this);
-				var proceeded = false;
+				var $matrix = $target.find('.matrix');
+				var container = document.querySelector($matrix.selector);
+				var msnry = Masonry.data(container);			
 
-				for (var i = 0, l = self.manager.response.response.docs.length ; i < l; i++) {
-					var doc = self.manager.response.response.docs[i];	      	      	       															
-
-					//* load data for this artwork		      
-					artwork_data = dataHandler.getData(doc);	      	      
-
-					//* merge data and template
-					var html = self.template_integration_json({"artworks": artwork_data}, '#teaserArticleTemplate');     
-					var $article = $(html); 
-
-					$article.addClass('scroll_add');   
-					
-					//* append the current article to list
-					$target.find('.matrix').append($article);	      
-
-					//* append to masonry
-					$target.find('.matrix').masonry('appended', $article);	  											
-				}
-				
-				//* add image + link on div to all articles
-				$target.find('.matrix-tile.scroll_add').each(function() { 
-					
-					var $tile = $(this);
-										
-					// add image					
-					var $imgcontainer = $tile.find('.matrix-tile-image');
-					
-					var onLoaded = function(){						
-						$target.find('.matrix').masonry('layout');
-						//$tile.removeClass('scroll_add');
-						$imgcontainer.removeClass('image_loading');						
-						// image loaded, trigger event							
-						$(self).trigger({
-							type: "smk_scroll_all_images_loaded"
-						});															
-					};
-					var img = dataHandler.getImage($imgcontainer);
-					$imgcontainer.prepend( $(img) );
-					
-					$imgcontainer.imagesLoaded().always(onLoaded);
-					
-					// add click on image
-					$imgcontainer.click({detail_url: $imgcontainer.find('a').attr('href'), caller: self}, 
-						function (event) {dataHandler.addLink(event);}
-					)
-
-					// add click on title
-					$(this).find('.artwork-title').click({detail_url: $tile.find('.artwork-title').attr('href'), caller: self}, 
-						function (event) {dataHandler.addLink(event);}
-					)
-					
-					// add copyright info on image
-					$imgcontainer.find('a').mouseenter({caller: this},
-						function (event) {$tile.find('span.copyright-info').css('opacity', 1);}
-					)
-					$imgcontainer.find('a').mouseleave({caller: this},
-						function (event) {$tile.find('span.copyright-info').css('opacity', 0);}
-					)
-				});	                   										
+				var $tiles = this.getTiles();								
+				$(msnry.element).masonryImagesReveal(msnry, $tiles,  $.proxy(this.onComplete, self), self, this.onClickLink);								
 			}
 		}, 		
 
@@ -97,6 +40,53 @@
 			var template = this.template; 	
 			var html = Mustache.to_html($(template).find(templ_id).html(), json_data);
 			return html;
+		}, 	
+		
+		getTiles: function(){			
+			var artwork_data = null;		
+			var dataHandler = new getData_Teasers.constructor(this);				
+			var tiles = new String();													
+			
+			for (var i = 0, l = this.manager.response.response.docs.length; i < l; i++) {
+				var doc = this.manager.response.response.docs[i];	      	      	      
+				
+				//* load data for this artwork		      
+				artwork_data = dataHandler.getData(doc);	      	      
+
+				//* merge data and template
+				var $tile = $(this.template_integration_json({"artworks": artwork_data}, '#teaserArticleTemplate'));
+				$tile.addClass('scroll_add');
+				
+				// add image					
+				var $imgcontainer = $tile.find('.matrix-tile-image');
+				  
+				
+				var img = dataHandler.getImage($imgcontainer);				
+				$imgcontainer.prepend( $(img) );
+				$imgcontainer.find('img').addClass('image-loading');
+				
+				tiles += $tile[0].outerHTML;										
+			}									
+			
+			return $(tiles);
+			
+		},				
+
+		onComplete: function onComplete() {										
+			$(this).trigger({
+				type: "smk_scroll_all_images_loaded"
+			});	
+			return true;
+		},
+
+		onClickLink: function (event) {
+			event.preventDefault();
+			$(event.data.caller).trigger({
+				type: "smk_search_call_detail",
+				detail_url: event.data.detail_url 
+			});
+
+			return;
 		}
 	});
 

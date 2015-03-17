@@ -154,27 +154,18 @@
 			return res; 
 		};
 		
-		this.getImage = function ($target){			
+		this.getImage = function ($src){			
 
-			if ($target === undefined || $target.length == 0)				
+			if ($src === undefined || $src.length == 0)				
 				return;			
 			
-			var path = $target.attr("src");
-			var alt = $target.attr("alt");
-			var title = $target.attr("alt");
+			var path = $src.attr("src");
+			var alt = $src.attr("alt");
+			var title = $src.attr("alt");
 			
 			return '<img src="' + path + '" />'; 
 		};
 		
-//		this.addLink = function (event) {
-//			event.preventDefault();
-//			$(event.data.caller).trigger({
-//				type: "smk_search_call_detail",
-//				detail_url: event.data.detail_url 
-//			});
-//
-//			return;
-//		};
 		
 		/*
 		 * variables
