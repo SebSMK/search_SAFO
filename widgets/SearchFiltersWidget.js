@@ -200,28 +200,33 @@
 			$target.find('select').trigger("chosen:updated");		
 			if(smkCommon.debugTime()) console.timeEnd("SearchFilters - " + this.field + " - chosen - update");
 			
-			if(smkCommon.debugTime()) console.time("SearchFilters - " + this.field + " - chosen - open");
-			self.open_multiple_select();		
+			//* in the lines below, we're queuing process_multiple_select and showing of dropdown list,
+			//* so that they execute in a row with a 10ms interval
+			if(smkCommon.debugTime()) console.time("SearchFilters - " + this.field + " - chosen - open");	
+			$.queue.add(self.process_multiple_select, this, 0);	
 			if(smkCommon.debugTime()) console.timeEnd("SearchFilters - " + this.field + " - chosen - open");
 
 			
 			//* show component
-			$target.show();
-			$target.find('chosen-choices').blur();
-			
+//			$target.show();
+//			$target.find('chosen-choices').blur();
 
-			
-			
-			//* .. but hide the list if a filter is already selected
+			//* show dropdownlist excepted if a filter is already selected
 			if (self.previous_values[self.field].length > 0){
-				if(smkCommon.debugTime()) console.time("SearchFilters - " + this.field + " - chosen - hide");
 				this.hide_drop();
-				if(smkCommon.debugTime()) console.timeEnd("SearchFilters - " + this.field + " - chosen - hide");
 			}else{
-				if(smkCommon.debugTime()) console.time("SearchFilters - " + this.field + " - chosen - show");
-				$(this.target).find('.chosen-drop').show("1000");
-				if(smkCommon.debugTime()) console.timeEnd("SearchFilters - " + this.field + " - chosen - show");
-				
+				if(smkCommon.debugTime()) console.time("SearchFilters - " + this.field + " - chosen - show");			
+
+				var doQueueShow = function(target){				
+					var doShow= function() {
+						$(target).find('.chosen-drop').show();
+					};
+					$.queue.add(doShow, this, 10);	
+				};
+											
+				doQueueShow(self.target);								
+
+				if(smkCommon.debugTime()) console.timeEnd("SearchFilters - " + this.field + " - chosen - show");				
 			}			
 			
 
@@ -285,11 +290,11 @@
 			var html = Mustache.to_html($(template).find(templ_id).html(), json_data);
 			return html;
 		},
-
+		/*
+		   § Chosen
+		  \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 		init_chosen: function() {
-			/*
-	   § Chosen
-	  \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+			
 			var $target = $(this.target); 		
 
 			$target.find('.chosen select').chosen();
@@ -299,11 +304,9 @@
 				width: "198px"
 			});
 
-			//this.open_multiple_select();
-
 		},
 
-		open_multiple_select: function(){
+		process_multiple_select: function(){
 
 			var $target = $(this.target); 
 			// Multiple select (always open).
@@ -319,19 +322,20 @@
 				// the options.
 
 				var chosenResults = $(this).find('.chosen-results');
-				var selectOptions = [];
-
-				// Put all select options in an array
-				$(this).find('select option').each( function() {
-					selectOptions.push( $(this).text() );
-				});
 
 				// For each item in the array, append a <li> to .chosen-results
-				$.each(selectOptions, function(i, val) {
-					if(this != "") {
-						chosenResults.append('<li class="active-result" data-option-array-index="' + i + '">' + this + '</li>');
-					}
+				var i = 0;
+				var doQueueProcess = function(i, text){
+					setTimeout(function () {
+						chosenResults.append('<li class="active-result" data-option-array-index="' + i + '">' + text + '</li>');
+					}, 10);
+					
+				};
+				$(this).find('select option').each( function() {
+					doQueueProcess(i, $(this).text());
+					i++;
 				});
+			
 			});    	  	  
 		},
 
