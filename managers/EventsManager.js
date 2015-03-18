@@ -41,7 +41,7 @@
 		this.scrollStart = function(event) {		        								
 				ModelManager.setModel($.address.value(), "url");
 				var model = ModelManager.getModel();	
-				if (model.view != 'detail')									
+				if (model.view != 'detail' && $('.generalspinner').length == 0)									
 					if (($(".search-results").height() <= ($(window).height() + $(window).scrollTop()) + 200))						
 						//* start scroll request
 						ViewManager.callWidgetFn('scroll_update', 'start_scroll_request');	        																	        		    
