@@ -44,7 +44,7 @@
 				ModelManager.setModel($.address.value(), "url");
 				var model = ModelManager.getModel();	
 				if (model.view != 'detail' && $('.generalspinner').length == 0)									
-					if (($(".matrix").height() <= ($(window).height() + $(window).scrollTop()) + 200))						
+					//if (($(".matrix").height() <= ($(window).height() + $(window).scrollTop()) + 200))						
 						//* start scroll request
 						ViewManager.callWidgetFn('scroll_update', 'start_scroll_request');	        																	        		    
 		};							
@@ -470,10 +470,14 @@
 		//* scroll - no more result to show		 
 		this.smk_scroll_no_more_results = function() {},
 									
-		//* scroll - all new pictures has been added in teaser		
+		//* scroll - all new pictures has been added (in teaser)		
 		this.smk_scroll_all_images_displayed = function(added){
 			ViewManager.highlightning(); // highlight search words
-			ViewManager.smk_scroll_all_images_displayed(added);							
+			ViewManager.smk_scroll_all_images_displayed(added);	
+			
+			//* start preloading of teaser's images 
+			ViewManager.callWidgetFn('scroll_update', 'start_preload_request');	
+			
 		},
 		
 		//* a searchfilter has finished loading	

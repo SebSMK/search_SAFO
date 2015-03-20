@@ -21,7 +21,7 @@
 			var $matrix = $target.find('.matrix');
 			$matrix.masonry( {
 				itemSelector: '.matrix-tile',
-				columnWidth: '.matrix-tile-size'			
+				columnWidth: '.matrix-tile-size'
 			});
 			
 			this.default_picture_path = smkCommon.getDefaultPicture('medium');      	

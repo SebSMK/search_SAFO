@@ -1,7 +1,7 @@
 {    
-    "version": "0.000.000.0126 mvc NO proxy",
+    "version": "0.000.000.0140 mvc NO proxy",
     
-    "mode": "perf",
+    "mode": "debug",
     
     "server":	"http://csdev-seb:8180/solr-example/dev_SAFO/",
         
@@ -90,6 +90,6 @@
 			}
 	},
 	
-	"rows_default":						"5" , 
+	"rows_default":						"4" , 
 	"scroll_rows_default":				"4"  
 }

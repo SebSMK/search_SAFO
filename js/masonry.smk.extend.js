@@ -36,12 +36,8 @@ $.fn.masonryImagesReveal = function(msnry, $tiles, onComplete, caller, onClickLi
 	    	$tiles.each(function() {
 	    		// show tile
 	    		$(this).show();	
-	    		if(!$(this).hasClass('preloaded')){
-	    			    			
-		    		// masonry does its thing	
-		    		msnry.appended(this);
-	    		}
-	    			
+	    		//if(!$(this).hasClass('preloaded'))	    			    					    		
+		    		msnry.appended(this);	    			    			
 	    	}); 	    	
 	    	msnry.on( 'layoutComplete', onComplete);
 	    	msnry.layout();

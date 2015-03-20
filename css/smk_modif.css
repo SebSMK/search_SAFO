@@ -31,7 +31,7 @@
 }
 
 .preloaded{
-	opacity:0;
+	opacity:0 !important;
 }
 
 .matrix-tile .copyright-info{
@@ -156,10 +156,6 @@ a.divLink {
     display: none;	
 }
 
-.matrix-tile-image img[src*="default_picture"] {
-    opacity: 0.3;
-}
-
 .matrix-tile-size  {
   width: 33.33%;
   padding: 10px;
@@ -185,3 +181,22 @@ a.divLink {
     z-index: 999;
 }
 
+.matrix-tile-image img {
+  max-width: 100%;
+  /* width: 100%; */
+  width: auto;
+  max-height: 150px;
+}
+
+.matrix-equalized .matrix-tile-image img {
+   opacity: 1; 
+  -webkit-transition: opacity 400ms ease;
+  -moz-transition: opacity 400ms ease;
+  -ms-transition: opacity 400ms ease;
+  -o-transition: opacity 400ms ease;
+  transition: opacity 400ms ease;
+}
+
+.matrix-equalized .matrix-tile-image img[src*="default_picture"] {
+    opacity: 0.3;
+}
