@@ -30,6 +30,9 @@
     font-size: 0.8em;
 }
 
+.preloaded{
+	opacity:0;
+}
 
 .matrix-tile .copyright-info{
 	background: none repeat scroll 0 0 rgba(0, 0, 0, 0.2);

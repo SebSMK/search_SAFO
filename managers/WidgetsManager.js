@@ -47,7 +47,7 @@ var EventsManager;
 		EventsManager = new EventsManager.constructor();
 
 		// those functions will be passed as parameter in the manager - we've got to bind it to an environment
-		var allWidgetsProcessedBound = $.proxy(ViewManager.allWidgetsProcessed, ViewManager);
+		var allWidgetsProcessedBound = $.proxy(EventsManager.allWidgetsProcessed, EventsManager);
 		var generalSolrErrorProcessedBound = $.proxy(ViewManager.generalSolrError, ViewManager);
 
 		//******************************
@@ -426,24 +426,8 @@ var EventsManager;
 
 		//* all images loaded in "teaser"
 		$(Manager.widgets['teasers']).on('smk_teasers_all_images_loaded', function(event){     	            	
-			EventsManager.smk_teasers_all_images_loaded();
-		});	
-
-		//* "teaser" ready after image loading...
-		//* ...we process searchFilters.
-		$(ViewManager).on('smk_teasers_ready', function(event){ 			
-			// we're queuing processing of each searchField, so that they're processed in a row with a 10ms interval
-			var doQueueProcess = function(field){				
-				var doQueue= function() {
-					EventsManager.after_afterRequest(field);
-				};
-				$.queue.add(doQueue, this, 10);	
-			};
-			
-			for (var i = 0, l = searchFieldsTypes.length; i < l; i++) {				
-				doQueueProcess(searchFieldsTypes[i]);								
-			};				
-		});			
+			EventsManager.smk_teasers_all_images_loaded(searchFieldsTypes);
+		});		
 
 		//* a new image has finished loading in "related"
 		$(Manager.widgets['details']).on('smk_related_this_img_loaded', function(event){   

@@ -137,8 +137,8 @@ AjaxSolr.smkManager = AjaxSolr.AbstractManager.extend(
       this.widgets[widgetId].afterRequest();
     }; 
     
-    //* Uses a function passed as an argument.
-    //* The whole idea is that this function should refer to a function in ViewManager
+    //* Uses a callBack function
+    //* The whole idea is that this callback function should refer to a function in EventManager
     if(this.allWidgetsProcessed != null)
     	this.allWidgetsProcessed();
 

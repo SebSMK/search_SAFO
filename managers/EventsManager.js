@@ -14,6 +14,8 @@
 
 	eventsManager.constructor = function(){
 
+		this.allWidgetProcessed = false;
+		
 		this.init = function(){
 			/*
 			 * Management of changes in address bar
@@ -42,7 +44,7 @@
 				ModelManager.setModel($.address.value(), "url");
 				var model = ModelManager.getModel();	
 				if (model.view != 'detail' && $('.generalspinner').length == 0)									
-					if (($(".search-results").height() <= ($(window).height() + $(window).scrollTop()) + 200))						
+					if (($(".matrix").height() <= ($(window).height() + $(window).scrollTop()) + 200))						
 						//* start scroll request
 						ViewManager.callWidgetFn('scroll_update', 'start_scroll_request');	        																	        		    
 		};							
@@ -420,15 +422,6 @@
 			ModelManager.update(model);	
 		};		
 
-//		/* 
-//		 * switch grid/list in teasers view	
-//		 * @result:  view changes  	 
-//		 */
-//		this.switch_list_grid = function(value){ 			
-//			ViewManager.callWidgetFn('teasers', 'switch_list_grid', {params: [value]});
-//		};	
-
-
 		/* 
 		 * switch language
 		 * @result:  view changes  	 
@@ -452,6 +445,28 @@
 		 * 
 		 * */
 
+		//* all widgets have been processed (but maybe some of them are still loading)
+		this.allWidgetsProcessed = function(){
+			this.allWidgetProcessed = true;
+			if ($('.widget_modal_loading').length == 0)
+				this.allWidgetsLoaded();						
+		},
+		
+		//* a new widget has finished loading
+		this.wigdetLoaded = function(){
+			if ($('.widget_modal_loading').length == 0 && this.allWidgetProcessed)
+				this.allWidgetsLoaded();
+		},
+		
+		//* all widgets have been process AND finished loading
+		this.allWidgetsLoaded = function(){
+			this.allWidgetProcessed = false;
+			ViewManager.allWidgetsLoaded();
+			
+			//* start preloading of teaser's images 
+			ViewManager.callWidgetFn('scroll_update', 'start_preload_request');		
+		},
+
 		//* scroll - no more result to show		 
 		this.smk_scroll_no_more_results = function() {},
 									
@@ -461,32 +476,37 @@
 			ViewManager.smk_scroll_all_images_displayed(added);							
 		},
 		
-		//* searchfilters has finished loading	
+		//* a searchfilter has finished loading	
 		this.smk_search_filter_loaded = function(value){			
 			ViewManager.remove_modal_loading_from_widget(value);
-			
-		};
-
-//		//* a new image has been displayed in "teaser"
-//		this.smk_teasers_this_img_displayed = function(){
-//			ViewManager.smk_teasers_this_img_displayed();
-//		};		
-//
-//		//* a new image has finished loading in "teaser"
-//		this.smk_teasers_this_img_loaded = function(){
-//			ViewManager.smk_teasers_this_img_loaded();
-//		};		
-		
-		//* a new image has finished loading in "teaser"
-		this.smk_teasers_all_images_loaded = function(){
-			ViewManager.smk_teasers_all_images_loaded();
+			this.wigdetLoaded();
 		};	
+		
+		//* all image have finished loading in "teaser"
+		this.smk_teasers_all_images_loaded = function(searchFieldsTypes){			
+			ViewManager.smk_teasers_all_images_loaded();
+			this.wigdetLoaded();
+			var self = this;
+			
+			// start searchFilters processing
+			// we're queuing processing of each searchField, so that they're processed in a row with a 10ms interval
+			var doQueueProcess = function(field){				
+				var doQueue= function() {
+					ViewManager.callWidgetFn(field, 'process_filter');
+				};
+				$.queue.add(doQueue, this, 10);	
+			};
+			
+			for (var i = 0, l = searchFieldsTypes.length; i < l; i++) {				
+				doQueueProcess(searchFieldsTypes[i]);								
+			};			
+		};			
 
-		//* all images displayed in "teaser"
-		this.after_afterRequest = function(field){			
-			ViewManager.callWidgetFn(field, 'after_afterRequest');
+		//* image has finished loading in "detail"
+		this.smk_detail_this_img_loaded = function(){
+			ViewManager.smk_detail_this_img_loaded();
 		};
-
+		
 		//* a new image has finished loading in "related"
 		this.smk_related_this_img_loaded = function(){
 			ViewManager.smk_related_this_img_loaded();
@@ -497,9 +517,5 @@
 			ViewManager.smk_thumbs_img_loaded();
 		};
 
-		//* image has finished loading in "detail"
-		this.smk_detail_this_img_loaded = function(){
-			ViewManager.smk_detail_this_img_loaded();
-		};          
 	}
 }));

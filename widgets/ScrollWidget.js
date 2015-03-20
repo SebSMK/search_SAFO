@@ -3,6 +3,8 @@
 	AjaxSolr.ScrollWidget = AjaxSolr.AbstractWidget.extend({  		
 
 		default_picture_path: null, 
+		
+		preloading: false,
 
 		init: function(){		
 			this.default_picture_path = smkCommon.getDefaultPicture('medium');      	
@@ -26,13 +28,13 @@
 				return;		
 			}
 			else{
-				//* load data
+				//* load data				
 				var $matrix = $target.find('.matrix');
 				var container = document.querySelector($matrix.selector);
 				var msnry = Masonry.data(container);			
 
-				var $tiles = this.getTiles();								
-				$(msnry.element).masonryImagesReveal(msnry, $tiles,  $.proxy(this.onComplete, self), self, this.onClickLink);								
+				var $tiles = this.getTiles();				
+				$(msnry.element).masonryImagesReveal(msnry, $tiles,  $.proxy(this.onComplete, self), self, this.onClickLink, this.preloading);					
 			}
 		}, 		
 
@@ -74,7 +76,7 @@
 
 		onComplete: function onComplete() {										
 			$(this).trigger({
-				type: "smk_scroll_all_images_loaded"
+				type: this.preloading == true ? "smk_scroll_all_images_preloaded" :  "smk_scroll_all_images_loaded"
 			});	
 			return true;
 		},
@@ -87,6 +89,10 @@
 			});
 
 			return;
+		},
+		
+		isPreloading: function(bool){
+			this.preloading = bool == true ? true : false; 			
 		}
 	});
 

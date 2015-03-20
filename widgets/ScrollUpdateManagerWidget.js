@@ -16,6 +16,10 @@
 		noMoreResults: false,				
 
 		scrollSpin: null, 
+		
+		isPreloading: false,
+		
+		preloaded: {},
 
 		init: function(){     
 			var self = this;
@@ -42,9 +46,14 @@
 			//* add sub widget (will add pictures)
 			self.scrollManager.addWidget(this.scroll_subWidget); 		
 
-			//* a new image has been displayed in "scroll teaser"
+			//* all images displayed in "scroll teaser"
 			$(self.scroll_subWidget).on('smk_scroll_all_images_loaded', function(event){     	            					
 				self.new_img_displayed();
+			});	 
+			
+			//* all images preloaded in "scroll teaser"
+			$(self.scroll_subWidget).on('smk_scroll_all_images_preloaded', function(event){     	            					
+				self.new_img_preloaded();
 			});	 
 
 			$(self.scroll_subWidget).on('smk_scroll_no_more_results', function(event){     	            	
@@ -89,7 +98,50 @@
 			self.scrollManager.init(); 
 		},
 
+		isScrolledIntoView: function(elem){
+		    var $elem = $(elem);
+		    var $window = $(window);
+
+		    var docViewTop = $window.scrollTop();
+		    var docViewBottom = docViewTop + $window.height();
+
+		    var elemTop = $elem.offset().top;
+		    var elemBottom = elemTop + $elem.height();
+
+		    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+		},
+		
+		msnrAppend: function(elem){
+			var $matrix = $(this.target).find('.matrix');
+			var container = document.querySelector($matrix.selector);
+			var msnry = Masonry.data(container);			
+			msnry.appended(elem);
+		},
+		
+		onComplete: function onComplete() {										
+			$(this).trigger({
+				type: "smk_scroll_all_images_loaded"
+			});	
+			return true;
+		},
+		
 		start_scroll_request: function(){
+			var self = this;
+						
+			$(self.scroll_subWidget.target).find('.preloaded').each(function(){
+				if(self.isScrolledIntoView(this)){
+					$(this).removeClass('preloaded');
+					self.msnrAppend(this);
+				}
+				var $matrix = $(self.target).find('.matrix');
+				var container = document.querySelector($matrix.selector);
+				var msnry = Masonry.data(container);
+				msnry.on( 'layoutComplete', self.onComplete);
+		    	msnry.layout();
+				
+				return;
+			});
+			
 
 			if(!this.isRequestRunning && !this.noMoreResults){
 				var params = {};
@@ -97,7 +149,7 @@
 				params.q = ModelManager.get_q();				
 				params.start = parseInt(this.scrollManager.store.get('start').val()) + parseInt(this.scrollManager.store.scroll_rows_default);			
 				params.sort = smkCommon.isValidDataText(ModelManager.get_sort()) ? ModelManager.get_sort() : this.scrollManager.store.sort_default;				
-
+								
 				this.scrollManager.store.addByValue('q', params.q !== undefined && params.q.length > 0  ? params.q : this.scrollManager.store.q_default);
 				this.scrollManager.store.addByValue('start', params.start);
 				this.scrollManager.store.addByValue('sort', params.sort);
@@ -105,6 +157,29 @@
 				this.isRequestRunning = true;
 				this.scrollManager.doRequest();
 				this.show_infinite_scroll_spin('true');
+			}        
+		},
+		
+		start_preload_request: function(){
+
+			if(!this.isRequestRunning && !this.noMoreResults){
+				var params = {};
+
+				params.q = ModelManager.get_q();				
+				params.start = parseInt(this.scrollManager.store.get('start').val()) + parseInt(this.scrollManager.store.scroll_rows_default);			
+				params.sort = smkCommon.isValidDataText(ModelManager.get_sort()) ? ModelManager.get_sort() : this.scrollManager.store.sort_default;				
+				params.rows = ModelManager.get_scroll_rows_default * 3;
+				
+				this.scrollManager.store.addByValue('q', params.q !== undefined && params.q.length > 0  ? params.q : this.scrollManager.store.q_default);
+				this.scrollManager.store.addByValue('start', params.start);
+				this.scrollManager.store.addByValue('sort', params.sort);
+				this.scrollManager.store.addByValue('rows', params.rows);
+
+				this.isRequestRunning = true;
+				this.isPreloading = true;
+				this.scroll_subWidget.isPreloading(true);
+				this.scrollManager.doRequest();
+				//this.show_infinite_scroll_spin('true');				
 			}        
 		},
 
@@ -118,6 +193,22 @@
 				$(this).trigger({
 					type: "smk_scroll_all_images_displayed",
 					added: this.scrollManager.store.scroll_rows_default // number of added images
+				});
+			}			 		  			
+		},
+		
+		new_img_preloaded: function(){
+			if ($(this.scroll_subWidget.target).find('.image_loading').length == 0 && 
+					$(this.scroll_subWidget.target).find('.not_displayed').length == 0){
+
+				$(this.scroll_subWidget.target).find('.matrix-tile.scroll_add').removeClass('scroll_add');
+				//this.show_infinite_scroll_spin('false');	
+				this.isRequestRunning = false;
+				this.isPreloading = false;
+				this.scroll_subWidget.isPreloading(false);
+				$(this).trigger({
+					type: "smk_scroll_all_images_preloaded",
+//					added: this.scrollManager.store.scroll_rows_default // number of added images
 				});
 			}			 		  			
 		},

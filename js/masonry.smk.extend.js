@@ -1,4 +1,4 @@
-$.fn.masonryImagesReveal = function(msnry, $tiles, onComplete, caller, onClickLink) {	  
+$.fn.masonryImagesReveal = function(msnry, $tiles, onComplete, caller, onClickLink, preloading) {	  
 	  var itemSelector = msnry.options.itemSelector;
 	  // hide by default
 	  $tiles.hide();
@@ -10,7 +10,10 @@ $.fn.masonryImagesReveal = function(msnry, $tiles, onComplete, caller, onClickLi
 	    // image is imagesLoaded class, not <img>, <img> is image.img
 	    var $tile = $(image.img).parents( itemSelector );	 
 		var $imgcontainer = $tile.find('.matrix-tile-image');
-	    
+	   
+		if(preloading == true) 
+			$tile.addClass('preloaded');
+		
 		// add click on image
 		$imgcontainer.click({detail_url: $imgcontainer.find('a').attr('href'), caller: caller}, 
 			function (event) {onClickLink(event);}
@@ -32,9 +35,13 @@ $.fn.masonryImagesReveal = function(msnry, $tiles, onComplete, caller, onClickLi
 		        		    	
 	    	$tiles.each(function() {
 	    		// show tile
-	    		$(this).show();
-	    		// masonry does its thing	
-	    		msnry.appended( this );
+	    		$(this).show();	
+	    		if(!$(this).hasClass('preloaded')){
+	    			    			
+		    		// masonry does its thing	
+		    		msnry.appended(this);
+	    		}
+	    			
 	    	}); 	    	
 	    	msnry.on( 'layoutComplete', onComplete);
 	    	msnry.layout();

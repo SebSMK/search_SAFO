@@ -44,7 +44,7 @@
 
 		},
 
-		after_afterRequest: function () {
+		process_filter: function () {
 			var self = this;
 			var $target = $(this.target);
 			var $select = $(this.target).find('select');
