@@ -245,6 +245,7 @@
 		},
 
 		reset: function(){
+			//this.scroll_subWidget.stopRunningRequest(true);
 			var start = this.start_offset - this.scrollManager.store.scroll_rows_default + 1;
 			this.scrollManager.store.addByValue('start', start);   
 			this.isRequestRunning = false;  

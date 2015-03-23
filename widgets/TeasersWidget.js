@@ -114,7 +114,10 @@
 			
 			if($all_articles.length > 0 ){
 				$target.find('.matrix').masonry('remove', $all_articles);		
-			};		  
+			};
+			
+			// in case of some articles were in the matrix but not yet in masonry, remove it "manually"
+			$all_articles.remove();
 		}
 
 	});

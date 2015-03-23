@@ -15,6 +15,7 @@
 	eventsManager.constructor = function(){
 
 		this.allWidgetProcessed = false;
+		this.startPreLoad = false;
 		
 		this.init = function(){
 			/*
@@ -53,6 +54,11 @@
 		 * change in address bar
 		 * */
 		this.addressChange = function(e){	 						
+			
+			//* reset all current running ajax request, queued functions and preloaded data
+			Manager.requestAbort();
+			$.queue.clear();
+			this.startPreLoad = false;
 			
 			if(smkCommon.debugTime()) console.time("adresschanged");	
 			
@@ -463,6 +469,7 @@
 			this.allWidgetProcessed = false;
 			ViewManager.allWidgetsLoaded();
 			
+			this.startPreLoad = true;
 			//* start preloading of teaser's images 
 			ViewManager.callWidgetFn('scroll_update', 'start_preload_request');		
 		},
@@ -476,7 +483,8 @@
 			ViewManager.smk_scroll_all_images_displayed(added);	
 			
 			//* start preloading of teaser's images 
-			ViewManager.callWidgetFn('scroll_update', 'start_preload_request');	
+			if(this.startPreLoad)
+				ViewManager.callWidgetFn('scroll_update', 'start_preload_request');	
 			
 		},
 		
