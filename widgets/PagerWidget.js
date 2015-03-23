@@ -261,7 +261,7 @@
 
 					// @added: optional param - > 0 if new results was shown (e.g. after scrolling) 
 					refreshDisplay : function(added){
-						this.currentAdd += jQuery.isNumeric(added) ? parseInt(added) : 0;
+						this.currentAdd = jQuery.isNumeric(added) ? this.currentAdd + parseInt(added) : 0;
 						var perPage = this.perPage() + this.currentAdd;
 						var offset  = this.getOffset();
 						var total   = parseInt(this.manager.response.response.numFound);
