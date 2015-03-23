@@ -74,7 +74,7 @@
 				var $imgcontainer = $tile.find('.matrix-tile-image');								
 				
 				var img = dataHandler.getImage($imgcontainer);				
-				$imgcontainer.prepend( $(img) );
+				$imgcontainer.prepend($(img));
 				$imgcontainer.find('img').addClass('image-loading');
 				
 				tiles += $tile[0].outerHTML;										

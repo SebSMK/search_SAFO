@@ -28,13 +28,16 @@
 				return;		
 			}
 			else{
+				if(smkCommon.debugLog()) console.log(sprintf("scroll_request - afterRequest: isPreloading_%s", this.preloading));
 				//* load data				
 				var $matrix = $target.find('.matrix');
 				var container = document.querySelector($matrix.selector);
 				var msnry = Masonry.data(container);			
-
-				var $tiles = this.getTiles();				
-				$(msnry.element).masonryImagesReveal(msnry, $tiles,  $.proxy(this.onComplete, self), self, this.onClickLink, this.preloading);					
+				
+				var $tiles = this.getTiles();
+				if(smkCommon.debugLog()) console.log(sprintf("scroll_request - afterRequest: getTiles"));
+				$(msnry.element).masonryImagesReveal(msnry, $tiles,  $.proxy(this.onComplete, self), self, this.onClickLink, this.preloading);
+				if(smkCommon.debugLog()) console.log(sprintf("scroll_request - afterRequest: masonryImagesReveal"));
 			}
 		}, 		
 
@@ -74,7 +77,8 @@
 			
 		},				
 
-		onComplete: function onComplete() {										
+		onComplete: function onComplete() {	
+			if(smkCommon.debugLog()) console.log(sprintf("scroll_request - onComplete: isPreloading_%s", this.preloading));
 			$(this).trigger({
 				type: this.preloading == true ? "smk_scroll_all_images_preloaded" :  "smk_scroll_all_images_loaded"
 			});	

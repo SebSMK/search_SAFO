@@ -12,6 +12,8 @@
 		},	
 
 		isRequestRunning: false,
+		
+		isLoadingRunning: false,
 
 		noMoreResults: false,				
 
@@ -46,12 +48,14 @@
 
 			//* set event - all images displayed in "scroll teaser"
 			$(self.scroll_subWidget).on('smk_scroll_all_images_loaded', function(event){     	            					
-				self.new_img_displayed();
+				if(smkCommon.debugLog()) console.log(sprintf("end_scroll_request - smk_scroll_all_images_loaded: isRequestRunning_%s - isPreloading_%s", self.isRequestRunning, self.isPreloading));
+				self.all_img_displayed();
 			});	 
 			
 			//* set event - all images preloaded in "scroll teaser"
 			$(self.scroll_subWidget).on('smk_scroll_all_images_preloaded', function(event){     	            					
-				self.new_img_preloaded();
+				if(smkCommon.debugLog()) console.log(sprintf("end_preload_request - smk_scroll_all_images_preloaded: isRequestRunning_%s - isPreloading_%s", self.isRequestRunning, self.isPreloading));
+				self.all_img_preloaded();
 			});	 
 
 			$(self.scroll_subWidget).on('smk_scroll_no_more_results', function(event){     	            	
@@ -97,17 +101,17 @@
 						
 		},
 
-		isScrolledIntoView: function(elem){
-		    var $elem = $(elem);
+		isScrolledIntoView: function(elem){		   		    						
+			var $elem = $(elem);
 		    var $window = $(window);
 
 		    var docViewTop = $window.scrollTop();
-		    var docViewBottom = docViewTop + $window.height();
-
+		    var docViewBottom = docViewTop + $window.height();		    
+		    
 		    var elemTop = $elem.offset().top;
 		    var elemBottom = elemTop + $elem.height();
 
-		    return ((elemBottom <= docViewBottom + 100) && (elemTop >= docViewTop));
+		    return elemBottom <= (docViewBottom + 100);// && (elemTop >= docViewTop));
 		},
 		
 		msnrAppend: function(elem){
@@ -134,26 +138,25 @@
 		
 		start_scroll_request: function(){
 			var self = this;						
-			var newImg = 0;
+			var newImg = 0;													
+			
+			// show preloaded images
 			if ($(self.scroll_subWidget.target).find('.preloaded').length > 0){
+				this.isLoadingRunning = true;
+				if(smkCommon.debugLog()) console.log("start_scroll_request - show preloaded");	
+				
 				$(self.scroll_subWidget.target).find('.preloaded').each(function(){
 					if(self.isScrolledIntoView(this)){
 						$(this).removeClass('preloaded').show();
 						newImg++;
-						//self.msnrAppend(this);
-					}
-//					var $matrix = $(self.target).find('.matrix');
-//					var container = document.querySelector($matrix.selector);
-//					var msnry = Masonry.data(container);
-//					msnry.on( 'layoutComplete', self.onComplete);
-//			    	msnry.layout();
-					
-					
+					}										
 				});
 				if (newImg > 0)
-					self.onFinishLoaded(newImg);				
+					self.onFinishLoaded(newImg);
+				this.isLoadingRunning = false;
 			}
-			else{
+			// ...or start scroll request
+			else{		
 				if(!this.isRequestRunning && !this.noMoreResults && this.trigger_req()){
 					var params = {};
 
@@ -166,6 +169,11 @@
 					this.scrollManager.store.addByValue('sort', params.sort);
 
 					this.isRequestRunning = true;
+					this.isPreloading = false;
+					this.scroll_subWidget.isPreloading(false);
+					
+					if(smkCommon.debugLog()) console.log(sprintf("start_scroll_request - doRequest: isRequestRunning_%s - isPreloading_%s", this.isRequestRunning, this.isPreloading));	
+					
 					this.scrollManager.doRequest();
 					this.show_infinite_scroll_spin('true');
 				}        				
@@ -174,13 +182,18 @@
 		
 		start_preload_request: function(){
 
-			if(!this.isRequestRunning && !this.noMoreResults){
+			if(!this.isRequestRunning && !this.noMoreResults){				
 				var params = {};
+				var nber_rows_to_preload = this.scrollManager.store.scroll_rows_default * 30;
+				
+				// preloading starts only under a given number of preloaded images
+				if($(this.scroll_subWidget.target).find('.preloaded').length > (nber_rows_to_preload / 1.5))
+					return;
 
 				params.q = ModelManager.get_q();				
 				params.start = $(this.scroll_subWidget.target).find('.matrix-tile').length + 1;			
 				params.sort = smkCommon.isValidDataText(ModelManager.get_sort()) ? ModelManager.get_sort() : this.scrollManager.store.sort_default;				
-				params.rows = this.scrollManager.store.scroll_rows_default * 3 - $(this.scroll_subWidget.target).find('.preloaded').length;				
+				params.rows = nber_rows_to_preload; // - $(this.scroll_subWidget.target).find('.preloaded').length;				
 				
 				this.scrollManager.store.addByValue('q', params.q !== undefined && params.q.length > 0  ? params.q : this.scrollManager.store.q_default);
 				this.scrollManager.store.addByValue('start', params.start);
@@ -190,14 +203,15 @@
 				this.isRequestRunning = true;
 				this.isPreloading = true;
 				this.scroll_subWidget.isPreloading(true);
-				this.scrollManager.doRequest();
-				//this.show_infinite_scroll_spin('true');				
+				
+				if(smkCommon.debugLog()) console.log(sprintf("start_preload_request - doRequest: isRequestRunning_%s - isPreloading_%s", this.isRequestRunning, this.isPreloading));
+				
+				this.scrollManager.doRequest();								
 			}        
 		},
 
-		new_img_displayed: function(){
-			if ($(this.scroll_subWidget.target).find('.image_loading').length == 0 && 
-					$(this.scroll_subWidget.target).find('.not_displayed').length == 0){
+		all_img_displayed: function(){
+			if ($(this.scroll_subWidget.target).find('.image_loading').length == 0){
 
 				$(this.scroll_subWidget.target).find('.matrix-tile.scroll_add').removeClass('scroll_add');
 				this.show_infinite_scroll_spin('false');	
@@ -206,9 +220,8 @@
 			}			 		  			
 		},
 		
-		new_img_preloaded: function(){
-			if ($(this.scroll_subWidget.target).find('.image_loading').length == 0 && 
-					$(this.scroll_subWidget.target).find('.not_displayed').length == 0){
+		all_img_preloaded: function(){
+			if ($(this.scroll_subWidget.target).find('.image_loading').length == 0){
 
 				$(this.scroll_subWidget.target).find('.matrix-tile.scroll_add').removeClass('scroll_add');
 				//this.show_infinite_scroll_spin('false');	
