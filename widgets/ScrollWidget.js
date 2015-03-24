@@ -5,6 +5,8 @@
 		default_picture_path: null, 
 		
 		preloading: false,
+		
+		reset: false,
 
 		init: function(){		
 			this.default_picture_path = smkCommon.getDefaultPicture('medium');      	
@@ -36,6 +38,7 @@
 				
 				var $tiles = this.getTiles();
 				if(smkCommon.debugLog()) console.log(sprintf("scroll_request - afterRequest: getTiles"));
+				this.setReset(false);
 				$(msnry.element).masonryImagesReveal(msnry, $tiles,  $.proxy(this.onComplete, self), self, this.onClickLink, this.preloading);
 				if(smkCommon.debugLog()) console.log(sprintf("scroll_request - afterRequest: masonryImagesReveal"));
 			}
@@ -97,6 +100,10 @@
 		
 		isPreloading: function(bool){
 			this.preloading = bool == true ? true : false; 			
+		},
+		
+		setReset: function(bool){
+			this.reset = bool == true ? true : false;
 		}
 	});
 

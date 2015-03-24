@@ -11,18 +11,12 @@
 		init: function(){
 
 			var self = this;
-			var $target = $(this.target);		
+			var $target = $(this.target);	
+			
 
 			//* load empty template
 			var html = self.template;     
-			$target.html($(html).find('#teaserInitTemplate').html());					
-
-			//* init masonry*/
-			var $matrix = $target.find('.matrix');
-			$matrix.masonry( {
-				itemSelector: '.matrix-tile',
-				columnWidth: '.matrix-tile-size'
-			});
+			$target.html($(html).find('#teaserInitTemplate').html());														
 			
 			this.default_picture_path = smkCommon.getDefaultPicture('medium');      	
 
@@ -36,12 +30,11 @@
 			if (!self.getRefresh()){
 				self.setRefresh(true);
 				return;
-			}	 		  
+			}	 		  						
 			
 			if(smkCommon.debugTime()) console.time("Teasers");									
 			
-			var container = document.querySelector($matrix.selector);
-			var msnry = Masonry.data(container);
+			
 			
 			if (this.manager.response.response.docs.length == 0){
 				// trig "is loaded" event	      
@@ -51,7 +44,15 @@
 				return;		
 			}
 			else{																														
-				var $tiles = this.getTiles();				
+				var $tiles = this.getTiles();	
+				//* init masonry*/	
+				//var $matrix = $target.find('.matrix');
+				$matrix.masonry( {
+					itemSelector: '.matrix-tile',
+					columnWidth: '.matrix-tile-size'
+				});
+				var container = document.querySelector($matrix.selector);
+				var msnry = Masonry.data(container);
 				$(msnry.element).masonryImagesReveal(msnry, $tiles,  $.proxy(this.onComplete, self), self, this.onClickLink);				
 			}	   
 		}, 				
@@ -113,10 +114,13 @@
 			var $all_articles = $target.find('.matrix .matrix-tile');
 			
 			if($all_articles.length > 0 ){
-				$target.find('.matrix').masonry('remove', $all_articles);		
+				$target.find('.matrix').masonry('remove', $all_articles);
+				$target.find('.matrix').masonry('destroy');
 			};
 			
 			// in case of some articles were in the matrix but not yet in masonry, remove it "manually"
+			//$target.empty();
+			
 			$all_articles.remove();
 		}
 

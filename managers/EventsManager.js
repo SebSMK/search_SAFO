@@ -15,7 +15,7 @@
 	eventsManager.constructor = function(){
 
 		this.allWidgetProcessed = false;
-		this.startPreLoad = false;
+		this.startScroll = false;
 		
 		this.init = function(){
 			/*
@@ -58,7 +58,7 @@
 			//* reset all current running ajax request, queued functions and preloaded data
 			Manager.requestAbort();
 			$.queue.clear();
-			this.startPreLoad = false;
+			this.startScroll = false;						
 			
 			if(smkCommon.debugTime()) console.time("adresschanged");	
 			
@@ -232,6 +232,7 @@
 			if(smkCommon.debugTime()) console.timeEnd("adresschanged-process_widgets");
 			
 			//**> start Solr request 
+			if(smkCommon.debugLog()) console.log(sprintf("adresschanged - request: %s", model.q));
 			Manager.doRequest();
 				
 			if(smkCommon.debugTime()) console.timeEnd("adresschanged");
@@ -469,7 +470,7 @@
 			this.allWidgetProcessed = false;
 			ViewManager.allWidgetsLoaded();
 			
-			this.startPreLoad = true;
+			this.startScroll = true;
 			//* start preloading of teaser's images 
 			ViewManager.callWidgetFn('scroll_update', 'start_preload_request');		
 		},
@@ -483,7 +484,7 @@
 			ViewManager.smk_scroll_all_images_displayed(added);	
 			
 			//* start preloading of teaser's images 
-			if(this.startPreLoad)
+			if(this.startScroll)
 				ViewManager.callWidgetFn('scroll_update', 'start_preload_request');	
 			
 		},

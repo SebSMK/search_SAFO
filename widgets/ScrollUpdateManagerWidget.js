@@ -12,8 +12,6 @@
 		},	
 
 		isRequestRunning: false,
-		
-		isLoadingRunning: false,
 
 		noMoreResults: false,				
 
@@ -141,8 +139,7 @@
 			var newImg = 0;													
 			
 			// show preloaded images
-			if ($(self.scroll_subWidget.target).find('.preloaded').length > 0){
-				this.isLoadingRunning = true;
+			if ($(self.scroll_subWidget.target).find('.preloaded').length > 0){				
 				if(smkCommon.debugLog()) console.log("start_scroll_request - show preloaded");	
 				
 				$(self.scroll_subWidget.target).find('.preloaded').each(function(){
@@ -152,8 +149,7 @@
 					}										
 				});
 				if (newImg > 0)
-					self.onFinishLoaded(newImg);
-				this.isLoadingRunning = false;
+					self.onFinishLoaded(newImg);				
 			}
 			// ...or start scroll request
 			else{		
@@ -249,7 +245,10 @@
 			var start = this.start_offset - this.scrollManager.store.scroll_rows_default + 1;
 			this.scrollManager.store.addByValue('start', start);   
 			this.isRequestRunning = false;  
-			this.noMoreResults = false;   
+			this.noMoreResults = false;  
+			this.isPreloading = false;
+			this.scroll_subWidget.isPreloading(false);
+			this.scroll_subWidget.setReset(true);
 		}
 
 	});

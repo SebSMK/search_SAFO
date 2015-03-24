@@ -1,4 +1,8 @@
 $.fn.masonryImagesReveal = function(msnry, $tiles, onComplete, caller, onClickLink, preloading) {	  
+
+	if (caller.reset == true)	// avoid infinite loop when a new request is send while preloading is still running 
+		return this;
+	
 	var itemSelector = msnry.options.itemSelector;
 	// hide by default
 	$tiles.hide();
@@ -10,6 +14,10 @@ $.fn.masonryImagesReveal = function(msnry, $tiles, onComplete, caller, onClickLi
 	this.append( $tiles );
 	
 	$tiles.find('img').imagesLoaded().progress( function( imgLoad, image ) {
+		
+		if (caller.reset == true)	// avoid infinite loop when a new request is send while preloading is still running
+			return this;
+		
 		// get item
 		// image is imagesLoaded class, not <img>, <img> is image.img
 		var $tile = $(image.img).parents( itemSelector );	 
@@ -31,7 +39,7 @@ $.fn.masonryImagesReveal = function(msnry, $tiles, onComplete, caller, onClickLi
 
 		$(image.img).removeClass('image-loading');
 
-		if(smkCommon.debugLog()) console.log(sprintf("scroll_request - masonryImagesReveal: removeClass('image-loading')"));
+		if(smkCommon.debugLog()) console.log(sprintf("scroll_request - masonryImagesReveal: removeClass('image-loading') - %s", $tile.attr("id")));
 		
 		// if all images are loaded, append to masonry
 		if ($(msnry.element).find('img.image-loading').length == 0){	    		    	
