@@ -170,12 +170,7 @@
 
 		//* detail
 		this.smk_detail_this_img_loaded = function(){			
-			this.remove_modal_loading_from_widget(this.callWidgetTarget('details'));			
-			$this.trigger({
-				type: "smk_widget_loaded"
-			});
-			// show "back-button" in Detail view
-			$(this.callWidgetTarget('details')).find('a.back-button').css('opacity', '1');			
+			this.remove_modal_loading_from_widget(this.callWidgetTarget('details'));												
 		};			
 
 

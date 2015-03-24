@@ -22,10 +22,10 @@
 
 		init: function(){	  	    
 			var self = this;
-			
+
 			self.default_picture_path = smkCommon.getDefaultPicture('large');
 			self.current_language = self.manager.translator.getLanguage();
-						
+
 		}, 
 
 		afterRequest: function () {	  
@@ -52,7 +52,7 @@
 				});
 				return;		
 			}			
-			
+
 			var artwork_data = null;
 			var dataHandler = new getData_Detail.constructor(this);			
 
@@ -60,28 +60,35 @@
 				var doc = this.manager.response.response.docs[i]; 												
 				artwork_data = dataHandler.get_data(doc);  
 			}
-			
+
 			//* merge data and template
-			var html = self.template_integration_json({"detail": artwork_data}, '#detailTemplate');    
-			$target.html(html);    
+			var html = self.template_integration_json({"detail": artwork_data}, '#detailTemplate'); 
+			var $html = $(html);
+			
+			// add image					
+			var $imgcontainer = $html.find('.gallery__main');												
+			var img = dataHandler.getImage($imgcontainer);				
+			$imgcontainer.prepend($(img));
+			$imgcontainer.find('img').addClass('image-loading');			
 
-			//* add main image
-			$target.find('.gallery__main.image_loading').each(function() {    	    	
-				dataHandler.getImage($(this));
-			});      	
+			$imgcontainer.find('img').imagesLoaded().progress( function( imgLoad, image ) {
+  						
+				// add copyright info on image
+				$(image.img).mouseenter(function (event) {
+					$html.find('span.copyright-info').css('opacity', 1);}
+				);
+				$(image.img).mouseleave(function (event) {$html.find('span.copyright-info').css('opacity', 0);});
 
-			//* add link to back button	  
-			//$target.find('a.back-button').css('opacity', '1');
-			$target.find('a.back-button').click(
-					function (event) {
-						event.preventDefault();
-						// send call to teaser view restoring (but without sending a request to Solr)
-						$(self).trigger({
-							type: "smk_search_call_teasers"
-						});  		    		    		    			
-						return;  		    		            
-					}
-			);						
+				$(image.img).removeClass('image-loading');					
+				
+				//* add data to template
+				$target.prepend($html); 				
+
+				//* send loaded event
+				$(self).trigger({
+					type: "smk_detail_this_img_loaded"
+				});
+			});	    	
 		},  
 
 		template_integration_json: function (json_data, templ_id){	  

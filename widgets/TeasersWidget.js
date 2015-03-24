@@ -72,8 +72,7 @@
 				 var $tile = $(this.template_integration_json({"artworks": artwork_data}, '#teaserArticleTemplate'));
 				 
 				// add image					
-				var $imgcontainer = $tile.find('.matrix-tile-image');								
-				
+				var $imgcontainer = $tile.find('.matrix-tile-image');												
 				var img = dataHandler.getImage($imgcontainer);				
 				$imgcontainer.prepend($(img));
 				$imgcontainer.find('img').addClass('image-loading');

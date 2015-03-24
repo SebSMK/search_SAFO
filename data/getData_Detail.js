@@ -19,14 +19,8 @@
 					media:{
 						title: this.getTitle(doc),	
 						alt: this.getAlt(doc),		  						
-						image: doc.medium_image_url !== undefined ? doc.medium_image_url : this.caller.default_picture_path,
-						copyright: doc.medium_image_url !== undefined ? 
-										getData_Common.computeCopyright(doc) != false ?
-											getData_Common.computeCopyright(doc)
-										:
-											this.caller.manager.translator.getLabel('copyright_def')
-									: 
-										this.caller.manager.translator.getLabel("detail_no_photo"),
+						image: getData_Common.getMedia_image(doc, 'large', this.caller),
+						copyright: getData_Common.getMedia_copyright(doc, this.caller),
 						copyright_default: !getData_Common.computeCopyright(doc) && doc.medium_image_url !== undefined,
 						copyright_valid: getData_Common.computeCopyright(doc),
 						img_id:doc.id
@@ -45,34 +39,9 @@
 						meta: {
 							key: this.caller.manager.translator.getLabel('detail_reference'),
 							value: doc.id
-						},
-						media: {
-							fb: sprintf('%s%s?%s%s%s', 
-								smkCommon.getPluginURL(),
-								'media/fb.php',
-								'image=' + doc.medium_image_url,
-								'&title=' + this.get_OG_title(doc),
-								'&description=' + this.get_OG_description(doc)
-							),
-							google: sprintf('%s%s?%s%s%s', 
-										smkCommon.getPluginURL(),
-										'media/google.php',
-										'image=' + doc.medium_image_url,
-										'&title=' + this.get_OG_title(doc),
-										'&description=' + this.get_OG_description(doc)
-								),
-							twitter:{		  		    	
-								url: $(location).attr('href').substr(0,$(location).attr('href').indexOf('#')),
-								description: sprintf('%s   %s', this.get_OG_title(doc), this.get_OG_description(doc))
-							},
-							pinterest:{
-								image: doc.medium_image_url,
-								url: $(location).attr('href').substr(0,$(location).attr('href').indexOf('#')),
-								description: sprintf('StatensMuseumForKunst - %s   %s', this.get_OG_title(doc), this.get_OG_description(doc))
-							}
 						},	
 
-						image: doc.medium_image_url !== undefined ? doc.medium_image_url : this.caller.default_picture_path,
+						image: getData_Common.getMedia_image(doc, 'large', this.caller),
 						acq: false,
 						dim: false,
 						location:false,
@@ -336,92 +305,17 @@
 			return false;	  				  
 		};		 
 
-		this.getImage = function ($target){
+		this.getImage = function ($src){			
 
-			var self = this.caller;
-
-			if ($target === undefined || $target.length == 0){
-				$(self).trigger({
-					type: "smk_teasers_this_img_loaded"
-				});  	
-				return;
-			}
-
-			var img_id = $target.attr("img_id");
-			var path = $target.attr("src");
-			var alt = $target.attr("alt");
-			var title = $target.attr("alt");
-			var img = new Image();
-
-			// wrap our new image in jQuery, then:
-			$(img)
-			// once the image has loaded, execute this code
-			.load(function () {
-				// set the image hidden by default    
-				$target.hide();
-
-				//* if not default picture
-				if ($(this).attr("src") != self.default_picture_path){
-					// with the holding div #loader, apply:
-					$target
-					// remove the loading class (so the ViewManager can remove background spinner), 
-					.removeClass('image_loading')
-					.find('a')
-					// then insert our image
-					.append(this);
-
-					// add fancybox
-					$target.find('a').addClass('fancybox');
-					$(this).fancybox({
-						afterClose: function(){
-							$target.find('img').show();
-						}
-					});
-				}
-				//* default picture
-				else{
-
-					$target
-					// remove the loading class (so the ViewManager can remove background spinner), 
-					.removeClass('image_loading')
-					// remove link
-					.remove('a')
-					// then insert our image
-					.append(this);
-				};	          
-
-				// fade our image in to create a nice effect
-				$target.show();
-
-				// trig "this image is loaded" event	      
-				$(self).trigger({
-					type: "smk_detail_this_img_loaded"
-				}); 
-
-			})
-
-			// if there was an error loading the image, react accordingly
-			.error(function () {
-				$target
-				// remove the loading class (so no background spinner), 
-				.removeClass('image_loading')
-				.remove('a')
-				.append(sprintf('<img src="%s" />', self.default_picture_path));
-
-				$target.fadeIn();
-
-				// trig "this image is loaded" event	      
-				$(self).trigger({
-					type: "smk_detail_this_img_loaded"
-				});
-			})		
-
-			.attr('alt', alt)
-			.attr('title', title)
-
-			// *finally*, set the src attribute of the new image to our image
-			.attr('src', path);	  	   
-		};		  
+			if ($src === undefined || $src.length == 0)				
+				return;			
+			
+			var path = $src.attr("src");
+			var alt = $src.attr("alt");
+			var title = $src.attr("alt");
+			
+			return '<img src="' + path + '" />'; 
+		};				  
 
 		/*
 		 * variables

@@ -516,8 +516,9 @@
 		};			
 
 		//* image has finished loading in "detail"
-		this.smk_detail_this_img_loaded = function(){
+		this.smk_detail_this_img_loaded = function(){						
 			ViewManager.smk_detail_this_img_loaded();
+			this.wigdetLoaded();
 		};
 		
 		//* a new image has finished loading in "related"
