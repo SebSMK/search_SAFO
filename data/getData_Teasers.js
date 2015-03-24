@@ -23,7 +23,7 @@
 					media:{
 						title: getData_Common.getTitle(doc, 'museum'),	
 						alt: getData_Common.getMedia_alt(doc),
-						image: getData_Common.getMedia_image(doc, this.caller),						
+						image: getData_Common.getMedia_image(doc, 'medium', this.caller),						
 						copyright: getData_Common.getMedia_copyright(doc, this.caller),
 						copyright_default: !getData_Common.computeCopyright(doc) && doc.medium_image_url !== undefined,
 						copyright_valid: getData_Common.computeCopyright(doc),

@@ -731,8 +731,9 @@
 		return  copyright == false ? sprintf('%s%s', artist, title) : sprintf('%s - %s', copyright, title); 	  
 	};
 	
-	getdatacommon.getMedia_image = function (doc, caller){	  
-		return doc.medium_image_url !== undefined ? doc.medium_image_url : caller.default_picture_path;		 	  
+	getdatacommon.getMedia_image = function (doc, size, caller){	  
+		//return doc.medium_image_url !== undefined ? doc.medium_image_url : caller.default_picture_path;	
+		return doc.medium_image_url !== undefined ? smkCommon.getScaledPicture(doc.medium_image_url, size) : caller.default_picture_path;
 	};
 	
 	getdatacommon.getMedia_copyright = function (doc, caller){	  
