@@ -57,7 +57,7 @@
 			
 			//* reset all current running ajax request, queued functions and preloaded data
 			Manager.requestAbort();
-			$.queue.clear();
+			$.taskQueue.clear();
 			this.startScroll = false;						
 			
 			if(smkCommon.debugTime()) console.time("adresschanged");	
@@ -507,7 +507,7 @@
 				var doQueue= function() {
 					ViewManager.callWidgetFn(field, 'process_filter');
 				};
-				$.queue.add(doQueue, this, 10);	
+				$.taskQueue.add(doQueue, this, 10);	
 			};
 			
 			for (var i = 0, l = searchFieldsTypes.length; i < l; i++) {				

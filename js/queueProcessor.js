@@ -1,25 +1,25 @@
-$.queue = {
+$.taskQueue = {
     _timer: null,
     _queue: [],
     add: function(fn, context, time) {
         var setTimer = function(time) {
-            $.queue._timer = setTimeout(function() {
-                time = $.queue.add();
-                if ($.queue._queue.length) {
+            $.taskQueue ._timer = setTimeout(function() {
+                time = $.taskQueue .add();
+                if ($.taskQueue ._queue.length) {
                     setTimer(time);
                 }
             }, time || 2);
         }
 
         if (fn) {
-            $.queue._queue.push([fn, context, time]);
-            if ($.queue._queue.length == 1) {
+            $.taskQueue ._queue.push([fn, context, time]);
+            if ($.taskQueue ._queue.length == 1) {
                 setTimer(time);
             }
             return;
         }
 
-        var next = $.queue._queue.shift();
+        var next = $.taskQueue ._queue.shift();
         if (!next) {
             return 0;
         }
@@ -27,7 +27,7 @@ $.queue = {
         return next[2];
     },
     clear: function() {
-        clearTimeout($.queue._timer);
-        $.queue._queue = [];
+        clearTimeout($.taskQueue ._timer);
+        $.taskQueue ._queue = [];
     }
 };

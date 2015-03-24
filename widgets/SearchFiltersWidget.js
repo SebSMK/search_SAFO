@@ -203,7 +203,7 @@
 			//* in the lines below, we're queuing process_multiple_select and showing of dropdown list,
 			//* so that they execute in a row with a 10ms interval
 			if(smkCommon.debugTime()) console.time("SearchFilters - " + this.field + " - chosen - open");	
-			$.queue.add(self.process_multiple_select, this, 0);	
+			$.taskQueue.add(self.process_multiple_select, this, 0);	
 			if(smkCommon.debugTime()) console.timeEnd("SearchFilters - " + this.field + " - chosen - open");
 
 			
@@ -221,7 +221,7 @@
 					var doShow= function() {
 						$(target).find('.chosen-drop').show();
 					};
-					$.queue.add(doShow, this, 10);	
+					$.taskQueue.add(doShow, this, 10);	
 				};
 											
 				doQueueShow(self.target);								
