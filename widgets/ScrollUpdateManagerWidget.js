@@ -19,6 +19,10 @@
 		
 		isPreloading: false,		
 
+		/*
+		 * PUBLIC FUNCTIONS
+		 * **/
+		
 		init: function(){     
 			var self = this;
 			//* set and save default request parameters  
@@ -98,42 +102,7 @@
 			self.scrollManager.init(); 
 						
 		},
-
-		isScrolledIntoView: function(elem){		   		    						
-			var $elem = $(elem);
-		    var $window = $(window);
-
-		    var docViewTop = $window.scrollTop();
-		    var docViewBottom = docViewTop + $window.height();		    
-		    
-		    var elemTop = $elem.offset().top;
-		    var elemBottom = elemTop + $elem.height();
-
-		    return elemBottom <= (docViewBottom + 100);// && (elemTop >= docViewTop));
-		},
-		
-		msnrAppend: function(elem){
-			var $matrix = $(this.target).find('.matrix');
-			var container = document.querySelector($matrix.selector);
-			var msnry = Masonry.data(container);			
-			msnry.appended(elem);
-		},
-		
-		onFinishLoaded: function(num) {	
-			$(this).trigger({
-				type: "smk_scroll_all_images_displayed",
-				added: num // number of added images
-			});
-			return true;
-		},				
-		
-		trigger_req: function(){
-			var win = ($(window).height() + $(window).scrollTop()) + 200;
-			var matrix = $(".matrix").height();
-			
-			return matrix <= win ;
-		},
-		
+				
 		start_scroll_request: function(){
 			var self = this;						
 			var newImg = 0;													
@@ -187,7 +156,7 @@
 					return;
 
 				params.q = ModelManager.get_q();				
-				params.start = $(this.scroll_subWidget.target).find('.matrix-tile').length + 1;			
+				params.start = $(this.scroll_subWidget.target).find('.matrix-tile').length;			
 				params.sort = smkCommon.isValidDataText(ModelManager.get_sort()) ? ModelManager.get_sort() : this.scrollManager.store.sort_default;				
 				params.rows = nber_rows_to_preload; // - $(this.scroll_subWidget.target).find('.preloaded').length;				
 				
@@ -206,6 +175,11 @@
 			}        
 		},
 
+		
+		/*
+		 * EVENTS
+		 * **/
+		
 		all_img_displayed: function(){
 			if ($(this.scroll_subWidget.target).find('.image_loading').length == 0){
 
@@ -225,7 +199,38 @@
 				this.isPreloading = false;
 				this.scroll_subWidget.isPreloading(false);			}			 		  			
 		},
+		
+		/*
+		 * PRIVATE FUNCTIONS
+		 * **/		
+		isScrolledIntoView: function(elem){		   		    						
+			var $elem = $(elem);
+		    var $window = $(window);
 
+		    var docViewTop = $window.scrollTop();
+		    var docViewBottom = docViewTop + $window.height();		    
+		    
+		    var elemTop = $elem.offset().top;
+		    var elemBottom = elemTop + $elem.height();
+
+		    return elemBottom <= (docViewBottom + 100);// && (elemTop >= docViewTop));
+		},				
+		
+		onFinishLoaded: function(num) {	
+			$(this).trigger({
+				type: "smk_scroll_all_images_displayed",
+				added: num // number of added images
+			});
+			return true;
+		},				
+		
+		trigger_req: function(){
+			var win = ($(window).height() + $(window).scrollTop()) + 200;
+			var matrix = $(".matrix").height();
+			
+			return matrix <= win ;
+		},
+		
 		show_infinite_scroll_spin: function(state){		
 
 			switch(state){
@@ -240,8 +245,7 @@
 			}									
 		},
 
-		reset: function(){
-			//this.scroll_subWidget.stopRunningRequest(true);
+		reset: function(){			
 			var start = this.start_offset - this.scrollManager.store.scroll_rows_default + 1;
 			this.scrollManager.store.addByValue('start', start);   
 			this.isRequestRunning = false;  
@@ -250,6 +254,5 @@
 			this.scroll_subWidget.isPreloading(false);
 			this.scroll_subWidget.setReset(true);
 		}
-
 	});
 })(jQuery);
