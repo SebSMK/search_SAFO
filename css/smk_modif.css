@@ -34,7 +34,13 @@
 	opacity:0 !important;
 }
 
-.matrix-tile .copyright-info{
+.gallery__main{	
+	position:relative;
+}
+
+.matrix-tile .copyright-info,
+.gallery__main .copyright-info 
+{
 	background: none repeat scroll 0 0 rgba(0, 0, 0, 0.2);
     bottom: 0;
     cursor: pointer;
