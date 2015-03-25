@@ -1,0 +1,21 @@
+<div>	
+	 <script id="chosenTemplate" type="text/template">
+
+    {{#options}}		        
+    		<div class="filter-toggle">{{title}}<span class="number-of-matches">({{totalCount}})</span> <i></i></div>
+    		<ul class="filter-options-checked"></ul>
+    		<ul class="filter-options">
+    	
+        		{{#values}}
+            	<li>
+              		<input type="checkbox" value="{{value}}" name="{{i}}" id="{{i}}">
+              		<label for="{{i}}"><i></i>{{text}}<span class="number-of-matches">({{count}})</span></label>
+            	</li>
+        		{{/values}}       
+      
+    		</ul>  
+    	
+	{{/options}}
+
+	</script>
+</div>

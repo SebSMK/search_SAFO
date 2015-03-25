@@ -42,12 +42,12 @@ var EventsManager;
 			template: Mustache.getTemplate('templates/general_template.html'),
 			target:'#smk_search_wrapper'
 		});
-    
-	    //** create events manager
-	    EventsManager = new EventsManager.constructor();
-    
+
+		//** create events manager
+		EventsManager = new EventsManager.constructor();
+
 		// those functions will be passed as parameter in the manager - we've got to bind it to an environment
-		var allWidgetsProcessedBound = $.proxy(ViewManager.allWidgetsProcessed, ViewManager);
+		var allWidgetsProcessedBound = $.proxy(EventsManager.allWidgetsProcessed, EventsManager);
 		var generalSolrErrorProcessedBound = $.proxy(ViewManager.generalSolrError, ViewManager);
 
 		//******************************
@@ -96,11 +96,11 @@ var EventsManager;
 		}    
 		// add facet category with locals params
 //		Manager.store.add('facet.field', 
-//				new AjaxSolr.Parameter({ name:'facet.field', 
-//										value: 'category', 
-//										locals: { ex:'category' } }));
-		
-		
+//		new AjaxSolr.Parameter({ name:'facet.field', 
+//		value: 'category', 
+//		locals: { ex:'category' } }));
+
+
 		//******************************
 		//** init scrollManager
 		//******************************    
@@ -123,7 +123,7 @@ var EventsManager;
 			translator: translator
 		});
 
-		
+
 		//******************************
 		//** init thumbnailsManager
 		//******************************    
@@ -139,7 +139,7 @@ var EventsManager;
 			generalSolrError: generalSolrErrorProcessedBound,
 			translator: translator
 		});	
-		
+
 		//******************************
 		//** init relatedManager
 		//******************************    
@@ -155,7 +155,7 @@ var EventsManager;
 			generalSolrError: generalSolrErrorProcessedBound,
 			translator: translator
 		});	
-		
+
 		//******************************
 		//** init getDetailManager
 		//******************************    
@@ -171,7 +171,7 @@ var EventsManager;
 			generalSolrError: generalSolrErrorProcessedBound,
 			translator: translator
 		});	
-		
+
 		//******************************
 		//** load widgets
 		//******************************
@@ -181,7 +181,7 @@ var EventsManager;
 			target: '#searchbox',			
 			template: Mustache.getTemplate('templates/search_box.html')
 		}));
-		
+
 		Manager.addWidget(new AjaxSolr.SearchInfoWidget({
 			id: 'search-info',
 			target: '#searchinfo',			
@@ -195,7 +195,7 @@ var EventsManager;
 			template: Mustache.getTemplate('templates/search_box.html'),
 			fields: params["facet.field"]
 		}));
-*/
+		 */
 		Manager.addWidget(new AjaxSolr.CurrentSearchWidget({
 			id: 'currentsearch',
 			target: '#currentsearch',
@@ -214,28 +214,28 @@ var EventsManager;
 		}));
 
 //		Manager.addWidget(new AjaxSolr.ViewPickerWidget({
-//			id: 'viewpicker',
-//			target: '#viewpicker',
-//			template: Mustache.getTemplate('templates/view_picker.html')
+//		id: 'viewpicker',
+//		target: '#viewpicker',
+//		template: Mustache.getTemplate('templates/view_picker.html')
 //		})); 
 
 		Manager.addWidget(new AjaxSolr.LanguagePickerWidget({
-		id: 'lang-picker',
-		target: '#lang-picker',
-		template: Mustache.getTemplate('templates/language_picker.html')
-	})); 
+			id: 'lang-picker',
+			target: '#lang-picker',
+			template: Mustache.getTemplate('templates/language_picker.html')
+		})); 
 
-		
-		
+
+
 		Manager.addWidget(new AjaxSolr.SorterWidget({
 			id: 'sorter',
 			target: '#sorter',
 			options: {
 				'all': [{"value": "score desc", "selected": false},
 				        {"value": "object_production_date_earliest asc", "selected": false},
-                        {"value": "object_production_date_earliest desc", "selected": false},
-                        {"value": "artist_first_name asc", "selected": false},
-                        {"value": "artist_first_name desc", "selected": false},
+				        {"value": "object_production_date_earliest desc", "selected": false},
+				        {"value": "artist_first_name asc", "selected": false},
+				        {"value": "artist_first_name desc", "selected": false},
 				        {"value": "last_update desc", "selected": false}]
 			},	
 			template: Mustache.getTemplate('templates/sorter.html')
@@ -272,19 +272,19 @@ var EventsManager;
 			target: '#thumbnails',
 			template: Mustache.getTemplate('templates/thumb.html')
 		});
-		
+
 		var sub_relatedWidget = new AjaxSolr.RelatedWidget({
 			id: 'related',
 			target: '#related-artworks',
 			template: Mustache.getTemplate('templates/related.html')
 		});
-		
+
 		var sub_originalWidget = new AjaxSolr.OriginalWidget({
 			id: 'original',
 			target: '#original',
 			template: Mustache.getTemplate('templates/original.html')
 		});
-		
+
 		Manager.addWidget(new AjaxSolr.DetailTabsWidget({
 			id: 'details_tabs',
 			target: '#smk_detail_tabs',
@@ -296,7 +296,7 @@ var EventsManager;
 			originalManager: getDetailManager,
 			original_subWidget: sub_originalWidget
 		}));	
-		
+
 		Manager.addWidget(new AjaxSolr.DetailWidget({
 			id: 'details',
 			target: '#smk_detail',
@@ -309,7 +309,7 @@ var EventsManager;
 			original_subWidget: sub_originalWidget
 		}));
 
-		
+
 		//* scroll widget
 		// sub widget (managed by scrollManagerWidget)
 		var sub_scrollWidget = new AjaxSolr.ScrollWidget({
@@ -324,9 +324,9 @@ var EventsManager;
 			scroll_subWidget: sub_scrollWidget,
 			start_offset:parseInt(Manager.store.get('start').val()) + parseInt(Manager.store.get('rows').val())
 		}));
-		
-		
-		
+
+
+
 		//******************************
 		//** add event listeners
 		//******************************
@@ -335,14 +335,14 @@ var EventsManager;
 		 * UI events
 		 * 
 		 * */		
-		
+
 		///* switch grid/list in teasers view
 //		$(Manager.widgets['viewpicker']).on('view_picker', function(event){ 
-//			EventsManager.switch_list_grid(event.value);
+//		EventsManager.switch_list_grid(event.value);
 //		}); 
 
 //		$(ViewManager).on('current_view_mode', function(event){ 
-//			EventsManager.switch_list_grid(event.value);
+//		EventsManager.switch_list_grid(event.value);
 //		});
 
 		//* selected category changed
@@ -376,17 +376,17 @@ var EventsManager;
 		$(Manager.widgets['currentsearch']).on('smk_search_remove_one_search_string', function(event){     	
 			EventsManager.smk_search_remove_one_search_string(event);
 		});	
- 
+
 
 		//* calls to detail view
 		$(Manager.widgets['teasers']).on('smk_search_call_detail', function(event){     	
 			EventsManager.smk_search_call_detail(event);
 		});
-		
+
 		$(Manager.widgets['scroll_update']).on('smk_search_call_detail', function(event){     	
 			EventsManager.smk_search_call_detail(event);
 		});
-		
+
 		$(Manager.widgets['details']).on('smk_search_call_detail', function(event){     	
 			EventsManager.smk_search_call_detail(event.event_caller);
 		});
@@ -395,13 +395,12 @@ var EventsManager;
 		$(Manager.widgets['details']).on('smk_search_call_teasers', function(event){  
 			EventsManager.smk_search_call_teasers();
 		});
-		
+
 		//* change language
 		$(Manager.widgets['lang-picker']).on('smk_lang_changed', function(event){  
 			EventsManager.smk_lang_changed(event.value);
 		});
-		
-		
+
 
 		/*
 		 * Finish loading events
@@ -412,41 +411,29 @@ var EventsManager;
 		$(Manager.widgets['scroll_update']).on('smk_scroll_no_more_results', function(event){     	            	
 			EventsManager.smk_scroll_no_more_results();
 		});
-		
+
 		//* scroll has finished loading images
 		$(Manager.widgets['scroll_update']).on('smk_scroll_all_images_displayed', function(event){     	            	
 			EventsManager.smk_scroll_all_images_displayed(event.added);
 		});
-		
+
 		//* searchfilters has finished loading
 		for (var i = 0, l = searchFieldsTypes.length; i < l; i++) {
 			$(Manager.widgets[searchFieldsTypes[i]]).on('smk_search_filter_loaded', function(event){
 				EventsManager.smk_search_filter_loaded(event.currentTarget.target);
 			});
 		};	
-		
-		//* a new image has been displayed in "teaser"
-		$(Manager.widgets['teasers']).on('smk_teasers_this_img_displayed', function(event){     	            	
-			EventsManager.smk_teasers_this_img_displayed();
-		});	
-		
-		//* a new image has finished loading in "teaser"
-		$(Manager.widgets['teasers']).on('smk_teasers_this_img_loaded', function(event){     	            	
-			EventsManager.smk_teasers_this_img_loaded();
-		});				
 
-		//* all images displayed in "teaser"
-		$(ViewManager).on('smk_teasers_all_images_displayed', function(event){ 			
-			for (var i = 0, l = searchFieldsTypes.length; i < l; i++) {
-				EventsManager.after_afterRequest(searchFieldsTypes[i]);				
-			};				
-		});	
-		
+		//* all images loaded in "teaser"
+		$(Manager.widgets['teasers']).on('smk_teasers_all_images_loaded', function(event){     	            	
+			EventsManager.smk_teasers_all_images_loaded(searchFieldsTypes);
+		});		
+
 		//* a new image has finished loading in "related"
 		$(Manager.widgets['details']).on('smk_related_this_img_loaded', function(event){   
 			EventsManager.smk_related_this_img_loaded();
 		}); 
-		
+
 		//* a new image has finished loading in "thumbs"
 		$(Manager.widgets['details']).on('smk_thumbs_img_loaded', function(event){
 			EventsManager.smk_thumbs_img_loaded();  		  	    
@@ -475,7 +462,7 @@ var EventsManager;
 			//* people coming from a request to SMK's search form    
 			if (typeof _gaq !== undefined)
 				_gaq.push(['_trackEvent','Search', 'Regular search', postedSearchString, 0, true]);
-			*/
+			 */
 
 			var model = {};
 			model.q = postedSearchString;		 		 			
@@ -485,7 +472,7 @@ var EventsManager;
 			//* people coming through direct link to SMK's search               
 			if (typeof _gaq !== undefined)
 				_gaq.push(['_trackEvent','Search', 'Searching from ingoing link', sprintf('%s searched: %s', document.referrer,  $.address.value()), 0, true]);
-			*/
+			 */
 		}
 	});
 

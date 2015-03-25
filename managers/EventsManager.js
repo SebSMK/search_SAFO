@@ -14,6 +14,9 @@
 
 	eventsManager.constructor = function(){
 
+		this.allWidgetProcessed = false;
+		this.startScroll = false;
+		
 		this.init = function(){
 			/*
 			 * Management of changes in address bar
@@ -41,50 +44,52 @@
 		this.scrollStart = function(event) {		        								
 				ModelManager.setModel($.address.value(), "url");
 				var model = ModelManager.getModel();	
-				if (model.view != 'detail')									
-					if (($(".search-results").height() <= ($(window).height() + $(window).scrollTop()) + 200))						
-						//* start scroll request
-						ViewManager.callWidgetFn('scroll_update', 'start_scroll_request');	        																	        		    
+				if (model.view != 'detail' && $('.generalspinner').length == 0)																				
+					//* start scroll request
+					ViewManager.callWidgetFn('scroll_update', 'start_scroll_request');	        																	        		    
 		};							
 		
 		/*
 		 * change in address bar
 		 * */
-		this.addressChange = function(e){	 
-			
+		this.addressChange = function(e){	 											
+
+			//* reset all current running ajax request, queued functions and preloaded data
+			Manager.requestAbort();
+			$.taskQueue.clear();
+			this.startScroll = false;						
+
 			if(smkCommon.debugTime()) console.time("adresschanged");	
-	
 			
-			if(smkCommon.debugTime()) console.time("process view1");
+			if(smkCommon.debugTime()) console.time("adresschanged-process view");
+			
+			ViewManager.start_modal_loading();
+			
 			//* set windows to top
 			$(window).scrollTop(0);	
 			
 			//* get the view's model
 			ModelManager.setModel(e.value, "url");
 			var model = ModelManager.getModel();	
-			if(smkCommon.debugTime()) console.timeEnd("process view1");
-			
-			if(smkCommon.debugTime()) console.time("process view2");
+
 			//* process view
 			if(model.view !== undefined){
 				ViewManager.viewChanged({'view': model.view});				    				    				    					    					    	
 			}else{
 				ViewManager.viewChanged({'view': "teasers"});
 			}			    
-			if(smkCommon.debugTime()) console.timeEnd("process view2");
-			
-			if(smkCommon.debugTime()) console.time("ViewManager.beforeRequest");
+
 			ViewManager.beforeRequest();				    			    
-			if(smkCommon.debugTime()) console.timeEnd("ViewManager.beforeRequest");
-			
-			if(smkCommon.debugTime()) console.time("process view_lang");
+
 			//* process language
 			Manager.translator.setLanguage(model.lang);		
+
 			Manager.store.set_current_lang(model.lang);	
-			if(smkCommon.debugTime()) console.timeEnd("process view_lang");
 			
+			if(smkCommon.debugTime()) console.timeEnd("adresschanged-process view");
 			
-			if(smkCommon.debugTime()) console.time("process view_cate");
+			if(smkCommon.debugTime()) console.time("adresschanged-process view_cate");
+
 			//* process category
 			if(model.category !== undefined){
 				if (model.view != 'detail'){			    		
@@ -95,12 +100,12 @@
 			}else if(model.category == undefined && model.view != 'detail'){
 				ViewManager.categoryChanged({'category': "all"});
 			}
-			if(smkCommon.debugTime()) console.timeEnd("process view_cate");
-			
+
+			if(smkCommon.debugTime()) console.timeEnd("adresschanged-process view_cate");			
 			
 			//****** process Solr request *******
 
-			if(smkCommon.debugTime()) console.time("process_q");
+			if(smkCommon.debugTime()) console.time("adresschanged-process_q");
 			
 			// reset exposed parameters
 			Manager.store.exposedReset();
@@ -180,18 +185,22 @@
 			}else{
 				Manager.store.addByValue('fl', Manager.store.fl_options.list);		    	
 			};									
-			
-			if(smkCommon.debugTime()) console.timeEnd("process_q");
+
+			if(smkCommon.debugTime()) console.timeEnd("adresschanged-process_q");
 			
 			//* process widgets
-			if(smkCommon.debugTime()) console.time("process_widgets");
-			// remove all previous search filters - only if search filters is set to "getRefresh"					
-			for (var i = 0, l = Manager.searchfilterList.length; i < l; i++) {				
-				if(ViewManager.callWidgetFn(Manager.searchfilterList[i].field, 'getRefresh'))
-					ViewManager.callWidgetFn(Manager.searchfilterList[i].field, 'removeAllSelectedFilters', {params:[false]});	
-
-			};
-			if (model.category == 'collections' && model.fq !== undefined){
+			if(smkCommon.debugTime()) console.time("adresschanged-process_widgets");
+			if(smkCommon.debugTime()) console.time("adresschanged-process_widgets-1");
+//			if(smkCommon.debugTime()) console.time("adresschanged-process_widgets-1-1");
+//			// remove all previous search filters - only if search filters is set to "getRefresh"					
+//			for (var i = 0, l = Manager.searchfilterList.length; i < l; i++) {				
+//				if(ViewManager.callWidgetFn(Manager.searchfilterList[i], 'getRefresh'))
+//					ViewManager.callWidgetFn(Manager.searchfilterList[i], 'removeAllSelectedFilters', {params:[false]});	
+//
+//			};
+//			if(smkCommon.debugTime()) console.timeEnd("adresschanged-process_widgets-1-1");
+			if(smkCommon.debugTime()) console.time("adresschanged-process_widgets-1-2");
+			if (model.fq !== undefined){
 				// add selected filters in searchFiltersWidget
 				for (var i = 0, l = model.fq.length; i < l; i++) {
 					if(model.fq[i].value !== undefined){
@@ -200,7 +209,10 @@
 					}															
 				}			    			
 			}
-
+			if(smkCommon.debugTime()) console.timeEnd("adresschanged-process_widgets-1-2");
+			if(smkCommon.debugTime()) console.timeEnd("adresschanged-process_widgets-1");
+			
+			if(smkCommon.debugTime()) console.time("adresschanged-process_widgets-2");
 			// reinit thumbs current selected
 			ViewManager.callWidgetFn('details', 'setCurrentThumb_selec');	
 			
@@ -216,9 +228,13 @@
 
 			// reset scroll manager				
 			ViewManager.callWidgetFn('scroll_update', 'reset');
-			if(smkCommon.debugTime()) console.timeEnd("process_widgets");
+
+			if(smkCommon.debugTime()) console.time("adresschanged-process_widgets-2");
+			
+			if(smkCommon.debugTime()) console.timeEnd("adresschanged-process_widgets");
 			
 			//**> start Solr request 
+			if(smkCommon.debugLog()) console.log(sprintf("adresschanged - request: %s", model.q));
 			Manager.doRequest();
 				
 			if(smkCommon.debugTime()) console.timeEnd("adresschanged");
@@ -415,15 +431,6 @@
 			ModelManager.update(model);	
 		};		
 
-//		/* 
-//		 * switch grid/list in teasers view	
-//		 * @result:  view changes  	 
-//		 */
-//		this.switch_list_grid = function(value){ 			
-//			ViewManager.callWidgetFn('teasers', 'switch_list_grid', {params: [value]});
-//		};	
-
-
 		/* 
 		 * switch language
 		 * @result:  view changes  	 
@@ -447,36 +454,75 @@
 		 * 
 		 * */
 
+		//* all widgets have been processed (but maybe some of them are still loading)
+		this.allWidgetsProcessed = function(){
+			this.allWidgetProcessed = true;
+			if ($('.widget_modal_loading').length == 0)
+				this.allWidgetsLoaded();						
+		},
+		
+		//* a new widget has finished loading
+		this.wigdetLoaded = function(){
+			if ($('.widget_modal_loading').length == 0 && this.allWidgetProcessed)
+				this.allWidgetsLoaded();
+		},
+		
+		//* all widgets have been process AND finished loading
+		this.allWidgetsLoaded = function(){
+			this.allWidgetProcessed = false;
+			ViewManager.allWidgetsLoaded();
+			
+			this.startScroll = true;
+			//* start preloading of teaser's images 
+			ViewManager.callWidgetFn('scroll_update', 'start_scroll_preload_request');		
+		},
+
 		//* scroll - no more result to show		 
 		this.smk_scroll_no_more_results = function() {},
 									
-		//* scroll - all new pictures has been added in teaser		
+		//* scroll - all new pictures has been added (in teaser)		
 		this.smk_scroll_all_images_displayed = function(added){
 			ViewManager.highlightning(); // highlight search words
-			ViewManager.smk_scroll_all_images_displayed(added);							
+			ViewManager.smk_scroll_all_images_displayed(added);	
+			
+			//* start preloading of teaser's images 
+			if(this.startScroll)
+				ViewManager.callWidgetFn('scroll_update', 'start_scroll_preload_request');	
+			
 		},
 		
-		//* searchfilters has finished loading	
+		//* a searchfilter has finished loading	
 		this.smk_search_filter_loaded = function(value){			
 			ViewManager.remove_modal_loading_from_widget(value);
+			this.wigdetLoaded();
+		};	
+		
+		//* all image have finished loading in "teaser"
+		this.smk_teasers_all_images_loaded = function(searchFieldsTypes){			
+			ViewManager.smk_teasers_all_images_loaded();
+			this.wigdetLoaded();
+			var self = this;
 			
-		};
-
-		//* a new image has been displayed in "teaser"
-		this.smk_teasers_this_img_displayed = function(){
-			ViewManager.smk_teasers_this_img_displayed();
-		};		
-
-		//* a new image has finished loading in "teaser"
-		this.smk_teasers_this_img_loaded = function(){
-			ViewManager.smk_teasers_this_img_loaded();
+			// start searchFilters processing
+			// we're queuing processing of each searchField, so that they're processed in a row with a 10ms interval
+			var doQueueProcess = function(field){				
+				var doQueue= function() {
+					ViewManager.callWidgetFn(field, 'process_filter');
+				};
+				$.taskQueue.add(doQueue, this, 10);	
+			};
+			
+			for (var i = 0, l = searchFieldsTypes.length; i < l; i++) {				
+				doQueueProcess(searchFieldsTypes[i]);								
+			};			
 		};			
 
-		//* all images displayed in "teaser"
-		this.after_afterRequest = function(field){			
-			ViewManager.callWidgetFn(field, 'after_afterRequest');
+		//* image has finished loading in "detail"
+		this.smk_detail_this_img_loaded = function(){						
+			ViewManager.smk_detail_this_img_loaded();
+			this.wigdetLoaded();
 		};
-
+		
 		//* a new image has finished loading in "related"
 		this.smk_related_this_img_loaded = function(){
 			ViewManager.smk_related_this_img_loaded();
@@ -487,9 +533,5 @@
 			ViewManager.smk_thumbs_img_loaded();
 		};
 
-		//* image has finished loading in "detail"
-		this.smk_detail_this_img_loaded = function(){
-			ViewManager.smk_detail_this_img_loaded();
-		};          
 	}
 }));

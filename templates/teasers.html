@@ -1,13 +1,8 @@
 <div>
 	<script id="teaserInitTemplate" type="text/template">	
-					
-		
-			<div class="matrix">         	
-				<div class="matrix-tile"></div>			
-			</div>
-			<div>
-				<div class="scroll-spinning" ></div>
-			</div>			
+			<div class="matrix matrix-equalized">         	
+				<div class="matrix-tile-size"></div>			
+			</div>		
 		
 	 </script>
 
@@ -15,12 +10,12 @@
 	
 		{{#artworks}}	
 	
-		<div class="matrix-tile">
+		<div id="{{media.img_id}}" class="matrix-tile">
 	
 			<div class="matrix-tile-inner">				
 	
 				{{#media}}
-				<div class="matrix-tile-image image_loading" src="{{image}}" img_id="{{img_id}}">
+				<div class="matrix-tile-image" src="{{image}}" img_id="{{img_id}}">
 
 				<!-- invisible link - make the whole div container clickable -->
 					<a class="divLink" href="{{url}}">&nbsp;</a>

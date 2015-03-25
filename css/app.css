@@ -1,57 +1,60 @@
 @charset "UTF-8";
 /*
- § Variables
+ Â§ Variables
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*
- § Mixins
+ Â§ Mixins
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*
- § Extra small screens
+ Â§ Extra small screens
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*
- § Small screens
+ Â§ Small screens
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*
- § Medium screens
+ Â§ Medium screens
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*
- § Large screens
+ Â§ Large screens
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*
- § Extra large screens
+ Â§ Extra large screens
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*
- § Retina screens
+ Â§ Retina screens
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*
- § Components
+ Â§ Components
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+@font-face {
+  font-family: "hill thin";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts//hill_thin.eot") format("eot"), url("../fonts//hill_thin.woff") format("woff"), url("../fonts//hill_thin.ttf") format("truetype"), url("../fonts//hill_thin.svg#hill_thin") format("svg");
+}
 @font-face {
   font-family: "hill light";
   font-style: normal;
   font-weight: normal;
   src: url("../fonts//hill_light.eot") format("eot"), url("../fonts//hill_light.woff") format("woff"), url("../fonts//hill_light.ttf") format("truetype"), url("../fonts//hill_light.svg#hill_light") format("svg");
 }
-
 @font-face {
   font-family: "hill regular";
   font-style: normal;
   font-weight: normal;
   src: url("../fonts//hill_regular.eot") format("eot"), url("../fonts//hill_regular.woff") format("woff"), url("../fonts//hill_regular.ttf") format("truetype"), url("../fonts//hill_regular.svg#hill_regular") format("svg");
 }
-
 @font-face {
   font-family: "hill demibold";
   font-style: normal;
   font-weight: normal;
   src: url("../fonts//hill_demibold.eot") format("eot"), url("../fonts//hill_demibold.woff") format("woff"), url("../fonts//hill_demibold.ttf") format("truetype"), url("../fonts//hill_demibold.svg#hill_demibold") format("svg");
 }
-
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
- § Base
+ Â§ Base
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*
- § Box sizing.
+ Â§ Box sizing.
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 *,
 *:before,
@@ -59,11 +62,11 @@
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
 }
 
 /*
- § Reset user agent styles.
+ Â§ Reset user agent styles.
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
 blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img,
@@ -420,10 +423,10 @@ th {
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
- § Type
+ Â§ Type
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*
- § Text elements
+ Â§ Text elements
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 html {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -449,11 +452,11 @@ s,
 }
 
 small,
+.copy figure figcaption,
 .matrix-tile-meta,
 .back-to-site a,
 .language-selector li,
 .main-footer,
-.search-type-selector .search-query-info,
 .small {
   font-size: .8em;
 }
@@ -465,7 +468,7 @@ small,
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
- § Copy
+ Â§ Copy
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 .copy h2 {
   margin-top: 1.1em;
@@ -572,7 +575,7 @@ a:hover {
 }
 .matrix-tile:hover {
   cursor: pointer;
-  border: 1px solid #1a1919;
+  border: 1px solid #1A1919;
   z-index: 999;
 }
 
@@ -586,28 +589,32 @@ a:hover {
   margin-top: .5em;
 }
 .matrix-tile-header h3 {
-  margin-bottom: .25em;
+  margin-bottom: .5em;
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  max-height: 3.75em;
+  overflow: hidden;
+}
+.matrix-tile-header h3 a {
+  color: #39393a;
+  text-decoration: underline;
+}
+.matrix-tile-header h3 a:hover {
+  color: #a2a2a5;
 }
 .matrix-tile-header h2 {
   font-family: 'hill demibold', sans-serif;
   font-size: 1.25em;
   line-height: 1.3;
-  margin-bottom: .3em;
+  margin-bottom: .5em;
 }
 .matrix-tile-header h2 a {
   display: block;
-  color: #1a1919;
+  color: #1A1919;
   max-height: 3.75em;
   overflow: hidden;
-}
-
-.matrix-tile-date {
-  font-family: 'hill regular', sans-serif;
-  margin-bottom: .4em;
 }
 
 .matrix-tile-meta {
@@ -653,7 +660,7 @@ a:hover {
 }
 
 /*
- § 5 column matrix
+ Â§ 5 column matrix
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 @media (min-width: 1000px) {
   .matrix-five-columns .matrix-tile {
@@ -662,17 +669,17 @@ a:hover {
 }
 
 /*
- § Equalized matrix (equalized heights)
+ Â§ Equalized matrix (equalized heights)
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 .matrix-equalized .matrix-tile {
   padding-bottom: 10px;
-  height: 360px;
+  height: 373px;
 }
 .matrix-equalized .matrix-tile-meta {
-  height: 34px;
+  height: 47px;
 }
 .matrix-equalized .matrix-tile-header {
-  margin-top: .75em;
+  margin-top: 1em;
 }
 .matrix-equalized .matrix-tile-image {
   height: 180px;
@@ -694,7 +701,7 @@ a:hover {
 }
 
 /*
- § Thumbnail matrix tiles
+ Â§ Thumbnail matrix tiles
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 .matrix-tile.matrix-tile-thumbnail {
   height: 202px;
@@ -746,7 +753,7 @@ a:hover {
 }
 .language-selector li.active a {
   font-weight: bold;
-  color: #1a1919;
+  color: #1A1919;
 }
 
 .main-header {
@@ -759,7 +766,7 @@ a:hover {
 }
 .main-header .branding a {
   display: block;
-  width: 107px;
+  width: 98px;
   height: 38px;
   vertical-align: middle;
   text-indent: -9999em;
@@ -768,6 +775,7 @@ a:hover {
   background-repeat: no-repeat;
   background-position: -1px -1px;
   background-size: 500px;
+  background-position: -1px 4px;
 }
 @media (-webkit-min-device-pixel-ratio: 2) {
   .main-header .branding a {
@@ -781,94 +789,53 @@ a:hover {
 }
 .main-header .branding i {
   position: absolute;
-  bottom: -26px;
-  left: 116px;
+  bottom: -22px;
+  left: 102px;
   height: 38px;
-  font-family: "hill light", sans-serif;
-  font-size: 2.1em;
+  font-family: 'hill thin', sans-serif;
+  font-size: 39px;
   display: inline-block;
   letter-spacing: -.015em;
   line-height: 0;
 }
-.main-header .search-bar {
-  width: 44%;
-  padding-left: 12px;
+.main-header .print {
   position: absolute;
-  top: 4.55em;
+  top: 67px;
   right: 0;
 }
-@media (min-width: 1000px) {
-  .main-header .search-bar {
-    padding-left: 15px;
-  }
+.main-header .print a {
+  color: #1A1919;
+  opacity: .55;
+  display: inline-block;
+  padding-top: .9em;
+  padding-bottom: .65em;
 }
-@media (min-width: 866px) {
-  .main-header .search-bar {
-    width: 50%;
-  }
+.main-header .print a:hover {
+  opacity: .75;
 }
-@media (min-width: 1100px) {
-  .main-header .search-bar {
-    width: 60%;
-  }
-}
-.main-header .search-bar form {
-  border: 1px solid #1a1919;
-  border-radius: 1px;
-  height: 35px;
-  overflow: hidden;
-  position: relative;
-  -webkit-transition: border-color 300ms ease;
-  -moz-transition: border-color 300ms ease;
-  -ms-transition: border-color 300ms ease;
-  -o-transition: border-color 300ms ease;
-  transition: border-color 300ms ease;
-}
-.main-header .search-bar label {
-  display: none;
-}
-.main-header .search-bar input[type="text"] {
-  vertical-align: top;
-  position: absolute;
-  top: 1px;
-  left: 0;
-  width: 100%;
-  font-family: 'hill regular';
-  font-size: 1.1em;
-  padding: .5em .65em .5em;
-  -webkit-transition: color 300ms ease;
-  -moz-transition: color 300ms ease;
-  -ms-transition: color 300ms ease;
-  -o-transition: color 300ms ease;
-  transition: color 300ms ease;
-  float: left;
-}
-.main-header .search-bar input[type="submit"] {
-  vertical-align: top;
+.main-header .print a i {
   display: block;
-  width: 15px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   vertical-align: middle;
   text-indent: -9999em;
   background-image: url(../images/sprite.png);
   background-color: transparent;
   background-repeat: no-repeat;
-  background-position: -162px -3px;
+  background-position: -1px -150px;
   background-size: 500px;
-  position: absolute;
-  top: 0;
-  right: 0;
-  background-color: #fff;
-  height: 33px;
-  width: 43px;
+  display: inline-block;
+  position: relative;
+  top: -.15em;
+  margin-right: .1em;
 }
 @media (-webkit-min-device-pixel-ratio: 2) {
-  .main-header .search-bar input[type="submit"] {
+  .main-header .print a i {
     background-image: url(../images/sprite@2x.png);
   }
 }
 @media (-webkit-min-device-pixel-ratio: 3) {
-  .main-header .search-bar input[type="submit"] {
+  .main-header .print a i {
     background-image: url(../images/sprite@3x.png);
   }
 }
@@ -916,9 +883,83 @@ a:hover {
   color: #39393a;
 }
 
+.search-bar {
+  width: 100%;
+  margin-bottom: 1.75em;
+  margin-top: -1px;
+}
+.search-bar form {
+  border: 1px solid #1A1919;
+  border-radius: 1px;
+  height: 47px;
+  overflow: hidden;
+  position: relative;
+  -webkit-transition: border-color 300ms ease;
+  -moz-transition: border-color 300ms ease;
+  -ms-transition: border-color 300ms ease;
+  -o-transition: border-color 300ms ease;
+  transition: border-color 300ms ease;
+}
+.search-bar label {
+  display: none;
+}
+.search-bar input[type="text"] {
+  vertical-align: top;
+  position: absolute;
+  top: 1px;
+  left: 0;
+  width: 100%;
+  font-family: 'hill light';
+  font-size: 1.4em;
+  padding: .6em .9em .7em;
+  -webkit-transition: color 300ms ease;
+  -moz-transition: color 300ms ease;
+  -ms-transition: color 300ms ease;
+  -o-transition: color 300ms ease;
+  transition: color 300ms ease;
+  float: left;
+  height: 43px;
+}
+.search-bar input[type="submit"] {
+  vertical-align: top;
+  display: block;
+  width: 15px;
+  height: 16px;
+  vertical-align: middle;
+  text-indent: -9999em;
+  background-image: url(../images/sprite.png);
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: -257px -12px;
+  background-size: 500px;
+  background-position: -241px 1px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #fff;
+  height: 45px;
+  width: 50px;
+}
+@media (-webkit-min-device-pixel-ratio: 2) {
+  .search-bar input[type="submit"] {
+    background-image: url(../images/sprite@2x.png);
+  }
+}
+@media (-webkit-min-device-pixel-ratio: 3) {
+  .search-bar input[type="submit"] {
+    background-image: url(../images/sprite@3x.png);
+  }
+}
+
+.search-utilities {
+  margin-bottom: 2.2em;
+  color: #a2a2a5;
+  font-style: italic;
+}
+
 .tabs, .search-type-selector .search-tabs {
   margin-bottom: 1.5em;
-  border-bottom: 1px solid #1a1919;
+  border-bottom: 1px solid #1A1919;
 }
 .tabs:before, .search-type-selector .search-tabs:before, .tabs:after, .search-type-selector .search-tabs:after {
   content: " ";
@@ -941,8 +982,8 @@ a:hover {
   color: #5f5f60;
 }
 .tabs a.active, .search-type-selector .search-tabs a.active {
-  color: #1a1919;
-  box-shadow: inset 0 -3px 0 #1a1919;
+  color: #1A1919;
+  box-shadow: inset 0 -3px 0 #1A1919;
 }
 
 .tab-content {
@@ -991,7 +1032,7 @@ a:hover {
 .pager li.pager-ellipsis,
 .pager li.pager-active a {
   font-family: 'hill demibold', sans-serif;
-  color: #1a1919;
+  color: #1A1919;
   font-size: 1.3em;
   position: relative;
   bottom: -.07em;
@@ -1039,8 +1080,7 @@ a:hover {
 }
 
 .search-type-selector {
-  margin-bottom: 2.5em;
-  border-bottom: 1px solid #1a1919;
+  border-bottom: 1px solid #1A1919;
 }
 .search-type-selector:before, .search-type-selector:after {
   content: " ";
@@ -1053,55 +1093,6 @@ a:hover {
   float: left;
   border-bottom: 0;
   margin-bottom: 0;
-}
-.search-type-selector .search-query-info {
-  color: #88888c;
-  float: left;
-  padding-top: 1.25em;
-  font-style: italic;
-}
-.search-type-selector .search-query-info i {
-  font-style: italic;
-  color: #1a1919;
-}
-.search-type-selector .extra-controls {
-  float: right;
-}
-.search-type-selector .extra-controls .print {
-  color: #1a1919;
-  opacity: .55;
-  display: inline-block;
-  padding-top: .9em;
-  padding-bottom: .65em;
-}
-.search-type-selector .extra-controls .print:hover {
-  opacity: .75;
-}
-.search-type-selector .extra-controls .print i {
-  display: block;
-  width: 14px;
-  height: 14px;
-  vertical-align: middle;
-  text-indent: -9999em;
-  background-image: url(../images/sprite.png);
-  background-color: transparent;
-  background-repeat: no-repeat;
-  background-position: -1px -150px;
-  background-size: 500px;
-  display: inline-block;
-  position: relative;
-  top: -.15em;
-  margin-right: .1em;
-}
-@media (-webkit-min-device-pixel-ratio: 2) {
-  .search-type-selector .extra-controls .print i {
-    background-image: url(../images/sprite@2x.png);
-  }
-}
-@media (-webkit-min-device-pixel-ratio: 3) {
-  .search-type-selector .extra-controls .print i {
-    background-image: url(../images/sprite@3x.png);
-  }
 }
 
 .advanced-search-panel-wrapper {
@@ -1198,11 +1189,11 @@ a:hover {
 
 .advanced-search-panel-submit {
   border-radius: 2px;
-  border: 1px solid #1a1919;
+  border: 1px solid #1A1919;
   text-transform: uppercase;
   font-family: 'hill demibold', sans-serif;
   font-size: 14px;
-  color: #1a1919;
+  color: #1A1919;
   display: inline-block;
   background-color: #fff;
   padding: 6px 15px;
@@ -1320,7 +1311,7 @@ a:hover {
   background-position: -45px -86px;
 }
 .filter input[type="checkbox"]:checked + label {
-  color: #1a1919;
+  color: #1A1919;
 }
 .filter input[type="checkbox"]:checked + label i {
   background-position: -1px -86px;
@@ -1336,7 +1327,7 @@ a:hover {
   color: #5f5f60;
 }
 .filter-boolean label:hover {
-  color: #1a1919;
+  color: #1A1919;
 }
 .filter-boolean label i {
   left: 3px;
@@ -1411,7 +1402,7 @@ a:hover {
 }
 .filter-toggle:hover {
   cursor: pointer;
-  color: #1a1919;
+  color: #1A1919;
 }
 .filter-toggle:hover i {
   opacity: .8;
@@ -1429,7 +1420,7 @@ a:hover {
   display: inline-block;
   line-height: 13px;
   padding: 4px 23px 4px 5px;
-  background: #1a1919;
+  background: #1A1919;
   color: #fff;
   border-radius: 2px;
   margin-bottom: 4px;
@@ -1558,7 +1549,7 @@ This file is generated by `grunt build`, do not edit it by hand.
   border: 1px solid #d6d6dd;
   border-radius: 1px;
   background-color: #fff;
-  color: #1a1919;
+  color: #1A1919;
   text-decoration: none;
   white-space: nowrap;
   line-height: 23px;
@@ -1577,7 +1568,7 @@ This file is generated by `grunt build`, do not edit it by hand.
   float: left;
   border-top-left-radius: 2px;
   border-bottom-left-radius: 2px;
-  background-color: #1a1919;
+  background-color: #1A1919;
   color: #fff;
   line-height: 13px;
   padding: 4px 5px 4px 5px;
@@ -1602,7 +1593,7 @@ This file is generated by `grunt build`, do not edit it by hand.
   background-position: -98px -120px;
   background-size: 500px;
   display: inline-block;
-  background-color: #1a1919;
+  background-color: #1A1919;
   line-height: 13px;
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
@@ -1822,10 +1813,10 @@ This file is generated by `grunt build`, do not edit it by hand.
   position: relative;
   margin: 4px 4px 4px 0;
   padding: 3px 19px 3px 5px;
-  border: 1px solid #1a1919;
+  border: 1px solid #1A1919;
   max-width: 100%;
   border-radius: 2px;
-  background-color: #1a1919;
+  background-color: #1A1919;
   background-size: 100% 19px;
   background-repeat: repeat-x;
   background-clip: padding-box;
@@ -2019,3 +2010,10 @@ This file is generated by `grunt build`, do not edit it by hand.
     background-image: url(../images/sprite@3x.png);
   }
 }
+
+.todo {
+  background: pink;
+  outline: 2px solid pink;
+}
+
+/*# sourceMappingURL=app.css.map */

@@ -23,7 +23,7 @@
 					media:{
 						title: getData_Common.getTitle(doc, 'museum'),	
 						alt: getData_Common.getMedia_alt(doc),
-						image: getData_Common.getMedia_image(doc, this.caller),						
+						image: getData_Common.getMedia_image(doc, 'medium', this.caller),						
 						copyright: getData_Common.getMedia_copyright(doc, this.caller),
 						copyright_default: !getData_Common.computeCopyright(doc) && doc.medium_image_url !== undefined,
 						copyright_valid: getData_Common.computeCopyright(doc),
@@ -154,89 +154,18 @@
 			return res; 
 		};
 		
-		this.getImage = function ($container, $target){
+		this.getImage = function ($src){			
 
-			var self = this.caller;
-
-			if ($target === undefined || $target.length == 0){
-				$(self).trigger({
-					type: "smk_teasers_this_img_loaded"
-				});  	
-				return;
-			}
-
-			var img_id = $target.attr("img_id");
-			var path = $target.attr("src");
-			var alt = $target.attr("alt");
-			var title = $target.attr("alt");
-
-			//
-			var img = new Image();
-
-			// wrap our new image in jQuery, then:
-			$(img)
-			// once the image has loaded, execute this code
-			.load(function () {
-				// set the image hidden by default    
-				$(this).hide();
-
-				// with the holding div #loader, apply:
-				$target
-				// remove the loading class (so no background spinner), 
-				.removeClass('image_loading')				
-				.append(this);
-
-				$(this).addClass('not_displayed');				
-
-				// fade our image in to create a nice effect
-				var duration = 400;
-				$(this).fadeIn({
-					duration: duration, 
-					complete: function(){
-						$(this).removeClass('not_displayed');
-						// trig "this image is loaded" event	      
-						$(self).trigger({
-							type: "smk_teasers_this_img_displayed"
-						}); 						
-					}
-				}
-				);
-
-				// trig "this image is loaded" event	      
-				$(self).trigger({
-					type: "smk_teasers_this_img_loaded"
-				});  	    	  
-
-			})
-
-			// if there was an error loading the image, react accordingly
-			.error(function () {
-				$target.removeClass('image_loading');	// remove the loading class (so no background spinner), 								
-				$target.fadeIn();
-
-				// trig "this image is loaded" event	    	
-				$(self).trigger({
-					type: "smk_teasers_this_img_loaded"
-				});  	    	  	     
-			})	    	
-
-			.attr('alt', alt)
-			.attr('title', title)
-
-			// *finally*, set the src attribute of the new image to our image
-			.attr('src', path); 
+			if ($src === undefined || $src.length == 0)				
+				return;			
+			
+			var path = $src.attr("src");
+			var alt = $src.attr("alt");
+			var title = $src.attr("alt");
+			
+			return '<img src="' + path + '" />'; 
 		};
-
 		
-		this.addLink = function (event) {
-			event.preventDefault();
-			$(event.data.caller).trigger({
-				type: "smk_search_call_detail",
-				detail_url: event.data.detail_url 
-			});
-
-			return;
-		};
 		
 		/*
 		 * variables

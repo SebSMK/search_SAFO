@@ -13,12 +13,31 @@
 }(this, function (viewManager) {
 
 	viewManager.constructor = function(options){
+		var generalSpinopts = {
+				lines: 11, // The number of lines to draw
+				length: 20, // The length of each line
+				width: 10, // The line thickness
+				radius: 29, // The radius of the inner circle
+				corners: 1, // Corner roundness (0..1)
+				rotate: 0, // The rotation offset
+				direction: 1, // 1: clockwise, -1: counterclockwise
+				color: '#000', // #rgb or #rrggbb or array of colors
+				speed: 0.8, // Rounds per second
+				trail: 68, // Afterglow percentage
+				shadow: false, // Whether to render a shadow
+				hwaccel: false, // Whether to use hardware acceleration
+				className: 'generalspinner', // The CSS class to assign to the spinner
+				zIndex: 2e9, // The z-index (defaults to 2000000000)
+				top: '50%', // Top position relative to parent
+				left: '50%' // Left position relative to parent
+		};
 
+		this.generalSpin = new Spinner(generalSpinopts);
 		this.options = options || {};
 		this.template = options.template;
 		this.target = options.target;
-		this.allWidgetProcessed = false; 
-		
+//		this.allWidgetProcessed = false; 
+
 		/*********
 		 * PUBLIC FUNCTIONS
 		 ********** */
@@ -28,39 +47,40 @@
 			var $target = $(this.target);	
 
 			$target.hide();
-			
+
 			//* merge data and template						
 			var html = self.template_integration_json({}, '#generalTemplate');    	  	  
 			$target.html(html);	
-			
+
 			ModelManager.setModel($.address.value(), "url");
 			var model = ModelManager.getModel();	
 			var tohide = model.view == 'detail' ? 'section.section--list' : 'section.section--detail';								
 			$target.find(tohide).hide();									
-			
+
 			//* add version number
 			$target.find('#smk_search_version').text(smkCommon.getVersion() + "-" + smkCommon.getMode());
-		
+
 			$target.show();
 		};
 
 		this.beforeRequest = function(){	 
 
-			this.start_modal_loading(this.target);			
-			//* start loading mode for some choosen widgets  
-			// teasers
-			
+			//this.start_modal_loading();			
+
+			//* start loading mode for some chosen widgets  
+			// teasers			
 			this.add_modal_loading_to_widget('teasers');
-							
+
 			// searchfilters
-//			for (var i = 0, l = Manager.searchfilterList.length; i < l; i++) {		  	
-//			this.add_modal_loading_to_widget(Manager.widgets[Manager.searchfilterList[i].field]);
-//			};
+			for (var i = 0, l = Manager.searchfilterList.length; i < l; i++) {		  	
+				this.add_modal_loading_to_widget(Manager.widgets[Manager.searchfilterList[i]].field);
+			};
+
 			// details
 			this.add_modal_loading_to_widget('details');	 
 			// related
 //			this.add_modal_loading_to_widget(Manager.widgets['details'].related_subWidget);*/
-		
+
 		};  
 
 		this.template_integration_json = function (json_data, templ_id){	  
@@ -79,7 +99,7 @@
 		this.callWidgetFn = function(widget, fn, options){	
 			var options = options || {};
 			var params = options.params;								
-			
+
 			if(Manager.widgets[widget] === undefined || typeof(Manager.widgets[widget][fn]) !== "function"){
 				console.log(sprintf("%s - %s not defined", widget, fn));								
 				return false;
@@ -93,75 +113,51 @@
 		 * @param {String} [subwidget] subWidget name - optional
 		 */
 		this.callWidgetTarget = function(widget, subwidget){												
-						
+
 			if(Manager.widgets[widget] === undefined ||
 					(subwidget !== undefined && Manager.widgets[widget][subwidget] === undefined)
 			){
 				console.log(sprintf("target %s/%s not defined", widget, subwidget));
 				return [];
 			}						
-			
+
 			return subwidget === undefined ? Manager.widgets[widget].target : Manager.widgets[widget][subwidget].target;
 		};
 
 		/**
 		 * image loading handlers
 		 * */		
-		
-		//* teaser		
-		this.smk_teasers_this_img_displayed = function(){
-			$(this.callWidgetTarget('teasers')).find('.matrix').masonry('layout');
 
-			//* check if there are still images not displayed in "teaser"
-			if ($(this.callWidgetTarget('teasers')).find('.image_loading').length == 0 && 
-					$(this.callWidgetTarget('teasers')).find('.not_displayed').length == 0){				
-				
-				// if all images are loaded, we stop the modal "waiting image" for this widget
-				this.remove_modal_loading_from_widget(this.callWidgetTarget('teasers'));	
-								
-				// if all images in teaser are displayed, send event
-				var $this = $(this); 
-//				// we had to set a Timeout here in order to let the modal mode finish 
-//				setTimeout(function() {
-					$this.trigger({
-						type: "smk_teasers_all_images_displayed"
-					});
-//				}, 100);												
-			}    		  
-		};
+		//* teaser	
 
-		this.smk_teasers_this_img_loaded = function(){
-			$(this.callWidgetTarget('teasers')).find('.matrix').masonry('layout');
+		this.smk_teasers_all_images_loaded = function(){
+			var $this = $(this);
 
-			//* check if there are still images loading in "teaser"
-			if ($(this.callWidgetTarget('teasers')).find('.image_loading').length == 0){
+			this.showWidget($(this.callWidgetTarget('teasers')));																			
+			// highlight search string in teasers
+			this.highlightning();
+			// we stop the modal "waiting image" for Teaser
+			this.remove_modal_loading_from_widget(this.callWidgetTarget('teasers'));				
 
-				this.showWidget($(this.callWidgetTarget('teasers')));								
-				
-				// highlight search string in teasers
-				this.highlightning();
-				
-							
-			}    		  
-
-		};
+			if(smkCommon.debugTime()) console.timeEnd("Teasers");																
+		}				
 
 		//...efter scroll: all the new images loaded in teaser
-		this.smk_scroll_all_images_displayed = function(added){		
-			$(this.callWidgetTarget('teasers')).find('.matrix').masonry('layout');			
+		this.smk_scroll_all_images_displayed = function(added){			
 			if (added !== undefined)
 				this.callWidgetFn('pager', 'refreshDisplay', {params: [added]});
 		},
-				
+
 		//* related
 		this.smk_related_this_img_loaded = function(){
-			$(this.callWidgetTarget('details', 'related_subWidget')).find('.matrix').masonry('layout');  
+			//$(this.callWidgetTarget('details', 'related_subWidget')).find('.matrix').masonry('layout');  
 
-			//* check if there are still images loading in "related"
-			if ($(this.callWidgetTarget('details', 'related_subWidget')).find('.image_loading').length == 0){    		
-				// if all images are loaded, we stop the modal "waiting image" for this widget
-				this.remove_modal_loading_from_widget(this.callWidgetTarget('details', 'related_subWidget'));   	   	 	       	  	
-			} 	
+//			//* check if there are still images loading in "related"
+//			if ($(this.callWidgetTarget('details', 'related_subWidget')).find('.image_loading').length == 0){    		
+//			// if all images are loaded, we stop the modal "waiting image" for this widget
+//			this.remove_modal_loading_from_widget(this.callWidgetTarget('details', 'related_subWidget'));
+//			this.wigdetLoaded();
+//			} 	
 		};
 
 		//* thumbs
@@ -173,10 +169,8 @@
 		};
 
 		//* detail
-		this.smk_detail_this_img_loaded = function(){
-			this.remove_modal_loading_from_widget(this.callWidgetTarget('details'));   
-			// show "back-button" in Detail view
-			$(this.callWidgetTarget('details')).find('a.back-button').css('opacity', '1');			
+		this.smk_detail_this_img_loaded = function(){			
+			this.remove_modal_loading_from_widget(this.callWidgetTarget('details'));												
 		};			
 
 
@@ -192,12 +186,12 @@
 
 				$target.find("section.section--list").show();
 				$target.find("section.section--detail").hide();
-				
+
 				$(self.callWidgetTarget('details', 'thumbnails_subWidget')).empty();
 				self.hideWidget($(self.callWidgetTarget('details', 'thumbnails_subWidget')));
 				$(self.callWidgetTarget('details', 'related_subWidget')).empty();
 				self.hideWidget($(self.callWidgetTarget('details', 'related_subWidget')));
-				
+
 				$(self.callWidgetTarget('details')).empty();
 				self.hideWidget($(self.callWidgetTarget('details')));
 
@@ -212,17 +206,17 @@
 				self.showWidget($(self.callWidgetTarget('teasers')));
 
 				self.showWidget($target.find("#search-filters"));
-								
+
 				break;
 
 			case "detail":										 
 
 				self.callWidgetFn('details', 'removeAllRelated');
-				
+
 				$target.find("section.section--list").hide();
-								
+
 				$target.find("section.section--detail").show();
-								
+
 				self.hideWidget($target.find("#pager-viser"));
 				self.hideWidget($target.find("#search-filters"));				
 				self.hideWidget($(self.callWidgetTarget('currentsearch')));																			
@@ -242,13 +236,13 @@
 			} 	
 
 			this.setLanguage(smkCommon.getCurrentLanguage());
-			
+
 			return;
 		};
 
 		this.categoryChanged = function (stateChange) {        	    
 			var $target = $(this.target);			
-			
+
 			if (stateChange["category"] === undefined )
 				return;			
 
@@ -259,38 +253,44 @@
 			if(smkCommon.debugTime()) console.timeEnd("categoryChanged1");
 			
 			if(smkCommon.debugTime()) console.time("categoryChanged2");
-			$(this.callWidgetTarget('teasers')).find('.matrix').addClass('full-width').hide();							
+//			$(this.callWidgetTarget('teasers')).find('.matrix').addClass('full-width').hide();							
+
 			this.showWidget($target.find("#search-filters"));
 			for (var i = 0, l = Manager.searchfilterList.length; i < l; i++) {				
-				if (this.callWidgetFn(Manager.searchfilterList[i].field, 'getRefresh'))					
-					this.callWidgetFn(Manager.searchfilterList[i].field, 'hide_drop')
+				if (this.callWidgetFn(Manager.searchfilterList[i], 'getRefresh'))					
+					this.callWidgetFn(Manager.searchfilterList[i], 'hide_drop')
 			};																				 
 
-			if($(this.callWidgetTarget('teasers')).find('.matrix .matrix-tile').length > 0)
-				$(this.callWidgetTarget('teasers')).find('.matrix').masonry('layout');
+//			if($(this.callWidgetTarget('teasers')).find('.matrix .matrix-tile').length > 0)
+//			$(this.callWidgetTarget('teasers')).find('.matrix').masonry('layout');
 
 			if(smkCommon.debugTime()) console.timeEnd("categoryChanged2");
-			
+
 			return;
 		};
 
 		/*********
 		 * PRIVATE FUNCTIONS
-		 ********** */
+		 ********** */		
 
 		/*
 		 * start general modal loading screen 
 		 */
+
 		this.start_modal_loading = function(){
-			$(this.target).addClass("modal_loading"); 	  
+			//$(this.target).addClass("modal_loading");
+			var spintarget = document.getElementById(this.target.replace('#', ''));
+			$(this.target).addClass('opaque');
+			this.generalSpin.spin(spintarget);
 		};
 
 		/*
 		 * stop general modal loading screen 
 		 */
 		this.stop_modal_loading = function(){	  
-			$(this.target).removeClass("modal_loading"); 
-			this.allWidgetProcessed = false;	  
+			//$(this.target).removeClass("modal_loading");
+			this.generalSpin.stop();
+			$(this.target).removeClass('opaque');  
 		};
 
 		/*
@@ -299,27 +299,28 @@
 		 */
 		this.add_modal_loading_to_widget = function(widget){
 			if(this.isThisWidgetActive(widget))				
-				$(this.callWidgetTarget(widget)).addClass('modal_loading');												
-		};
-		
-		this.isThisWidgetActive = function(widget){			
-			return this.callWidgetFn(widget, 'getRefresh');			
+				$(this.callWidgetTarget(widget)).addClass('widget_modal_loading');												
 		};
 
 		/*
 		 * stop loading mode for a given widget.
 		 */
 		this.remove_modal_loading_from_widget = function(target){
-			$(target).removeClass("modal_loading");
+			$(target).removeClass("widget_modal_loading");
+		};
 
-			if (this.allWidgetProcessed){
-				if ($(this.target).find('.modal_loading').length == 0){
-					// all widgets are loaded, we remove the general loading screen
-					this.stop_modal_loading();					
-					this.set_focus();
-				}			  
-			}
-		};  	
+
+		this.isThisWidgetActive = function(widget){			
+			return this.callWidgetFn(widget, 'getRefresh');			
+		};
+
+		/*
+		 * all widgets are processed AND loaded
+		 */
+		this.allWidgetsLoaded = function(){
+			this.stop_modal_loading();					
+			this.set_focus();
+		};
 
 		this.set_focus = function(){
 			var self = this;
@@ -328,26 +329,16 @@
 			});	  	  
 		};		
 
-		this.allWidgetsProcessed = function(){
-			if ($(this.target).find('.modal_loading').length != 0){
-				// there are still some widgets loading
-				this.allWidgetProcessed = true;	
-			}	else{
-				// all widgets are loaded, we remove the general loading screen
-				this.stop_modal_loading();
-			}	  	  
-		};
-
 		this.showWidget = function($target){
 			$target.removeClass('no_refresh');
-			$target.show().children().not('.modal').show();	  	  
+			$target.show().children().show();	  	  
 		};		
-		
+
 		this.hideWidget = function($target){
 			$target.addClass('no_refresh');
 			$target.hide();	  	  
 		};
-		
+
 		this.highlightning = function(){
 			// highlight search string in teasers
 			var vArray = [].concat(Manager.store.get('q').value);
@@ -361,26 +352,26 @@
 				$(this.callWidgetTarget('teasers')).find('.matrix-tile-header').highlight(words);
 			}    
 		};
-		
+
 		this.generalSolrError = function(e){
 			$(this.target).empty().html(sprintf('%s &nbsp;&nbsp; returned:&nbsp;&nbsp; %s<br>Please contact website administrator.', Manager.solrUrl, e)); 
 		};
-		
+
 		this.setLanguage = function(lang){
 			var setLang;
-			
+
 			switch(lang){
-				case smkCommon.enum_lang.en:
-					setLang = smkCommon.enum_lang.en;
-					break;
-				case smkCommon.enum_lang.dk:
-					setLang = smkCommon.enum_lang.dk;
-					break;
-					
-				default:
-					setLang = smkCommon.enum_lang.def;											
+			case smkCommon.enum_lang.en:
+				setLang = smkCommon.enum_lang.en;
+				break;
+			case smkCommon.enum_lang.dk:
+				setLang = smkCommon.enum_lang.dk;
+				break;
+
+			default:
+				setLang = smkCommon.enum_lang.def;											
 			}			
-			
+
 			$(this.target).find("[lang][lang='"+setLang+"']").show();
 			$(this.target).find("[lang][lang!='"+setLang+"']").hide();
 		};

@@ -1,13 +1,15 @@
 (function ($) {
 
-	AjaxSolr.ScrollWidget = AjaxSolr.AbstractWidget.extend({  		
+	AjaxSolr.ScrollWidget = AjaxSolr.AbstractWidget.extend({  				
 
-		default_picture_path: null, 
-
+		/*
+		 * PUBLIC FUNCTIONS
+		 * **/
+		
 		init: function(){		
 			this.default_picture_path = smkCommon.getDefaultPicture('medium');      	
-		},  
-
+		},  		
+		
 		afterRequest: function () {  
 			var self = this;
 			var $target = $(this.target);
@@ -26,53 +28,98 @@
 				return;		
 			}
 			else{
-				//* load data
-				var artwork_data = null;		
-				var dataHandler = new getData_Teasers.constructor(this);
-				var proceeded = false;
-
-				for (var i = 0, l = self.manager.response.response.docs.length ; i < l; i++) {
-					var doc = self.manager.response.response.docs[i];	      	      	       															
-
-					//* load data for this artwork		      
-					artwork_data = dataHandler.getData(doc);	      	      
-
-					//* merge data and template
-					var html = self.template_integration_json({"artworks": artwork_data}, '#teaserArticleTemplate');     
-					var $article = $(html); 
-
-					$article.addClass('scroll_add');   
-					
-					//* append the current article to list
-					$target.find('.matrix').append($article);	      
-
-					//* append to masonry
-					$target.find('.matrix').masonry('appended', $article);	  											
-				}
+				if(smkCommon.debugLog()) console.log(sprintf("scroll_request - afterRequest: isPreloading_%s", this.preloading));
+				//* load data				
+				var $matrix = $target.find('.matrix');
+				var container = document.querySelector($matrix.selector);
+				var msnry = Masonry.data(container);			
 				
-				//* add image + link on div to all articles
-				$target.find('.matrix-tile.scroll_add').each(function() {    	    	
-					var tile = this;
-					dataHandler.getImage($(this), $(this).find('.image_loading'));
-					$(this).click({detail_url: $(this).find('a').attr('href'), caller: self}, 
-						function (event) {dataHandler.addLink(event);}
-					)	
-					
-					$(this).find('a').mouseenter({caller: tile},
-						function (event) {$(tile).find('span.copyright-info').css('opacity', 1);}
-					)
-					$(this).find('a').mouseleave({caller: tile},
-						function (event) {$(tile).find('span.copyright-info').css('opacity', 0);}
-					)
-				});                       										
+				var $tiles = this.getTiles();
+				if(smkCommon.debugLog()) console.log(sprintf("scroll_request - afterRequest: getTiles"));
+				this.setReset(false);
+				$(msnry.element).masonryImagesReveal(msnry, $tiles,  $.proxy(this.onAllImagesLoaded, self), self, this.onClickLink, this.preloading);
+				if(smkCommon.debugLog()) console.log(sprintf("scroll_request - afterRequest: masonryImagesReveal"));
 			}
-		}, 		
+		}, 
+				
+		isPreloading: function(bool){
+			this.preloading = bool == true ? true : false; 			
+		},
+		
+		setReset: function(bool){
+			this.reset = bool == true ? true : false;
+		},
 
+		/*
+		 * EVENTS
+		 * **/
+		
+		onAllImagesLoaded: function onComplete() {	
+			if(smkCommon.debugLog()) console.log(sprintf("scroll_request - onComplete: isPreloading_%s", this.preloading));
+			$(this).trigger({
+				type: this.preloading == true ? "smk_scroll_all_images_preloaded" :  "smk_scroll_all_images_loaded"
+			});	
+			return true;
+		},
+
+		onClickLink: function (event) {
+			event.preventDefault();
+			$(event.data.caller).trigger({
+				type: "smk_search_call_detail",
+				detail_url: event.data.detail_url 
+			});
+
+			return;
+		},
+		
+		/*
+		 * PRIVATE FUNCTIONS
+		 * **/	
+		
 		template_integration_json: function (json_data, templ_id){	  
 			var template = this.template; 	
 			var html = Mustache.to_html($(template).find(templ_id).html(), json_data);
 			return html;
-		}
+		}, 	
+		
+		getTiles: function(){			
+			var artwork_data = null;		
+			var dataHandler = new getData_Teasers.constructor(this);				
+			var tiles = new String();													
+			
+			for (var i = 0, l = this.manager.response.response.docs.length; i < l; i++) {
+				var doc = this.manager.response.response.docs[i];	      	      	      
+				
+				//* load data for this artwork		      
+				artwork_data = dataHandler.getData(doc);	      	      
+
+				//* merge data and template
+				var $tile = $(this.template_integration_json({"artworks": artwork_data}, '#teaserArticleTemplate'));
+				$tile.addClass('scroll_add');
+				
+				// add image					
+				var $imgcontainer = $tile.find('.matrix-tile-image');				  
+				
+				var img = dataHandler.getImage($imgcontainer);				
+				$imgcontainer.prepend( $(img) );
+				$imgcontainer.find('img').addClass('image-loading');
+				
+				tiles += $tile[0].outerHTML;										
+			}									
+			
+			return $(tiles);
+			
+		},						
+		
+		/*
+		 * PRIVATE VARIABLES
+		 * **/
+		
+		default_picture_path: null, 
+		
+		preloading: false,
+		
+		reset: false,
 	});
 
 })(jQuery);
