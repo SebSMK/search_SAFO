@@ -1,17 +1,15 @@
 (function ($) {
 
-	AjaxSolr.ScrollWidget = AjaxSolr.AbstractWidget.extend({  		
+	AjaxSolr.ScrollWidget = AjaxSolr.AbstractWidget.extend({  				
 
-		default_picture_path: null, 
+		/*
+		 * PUBLIC FUNCTIONS
+		 * **/
 		
-		preloading: false,
-		
-		reset: false,
-
 		init: function(){		
 			this.default_picture_path = smkCommon.getDefaultPicture('medium');      	
-		},  
-
+		},  		
+		
 		afterRequest: function () {  
 			var self = this;
 			var $target = $(this.target);
@@ -39,11 +37,45 @@
 				var $tiles = this.getTiles();
 				if(smkCommon.debugLog()) console.log(sprintf("scroll_request - afterRequest: getTiles"));
 				this.setReset(false);
-				$(msnry.element).masonryImagesReveal(msnry, $tiles,  $.proxy(this.onComplete, self), self, this.onClickLink, this.preloading);
+				$(msnry.element).masonryImagesReveal(msnry, $tiles,  $.proxy(this.onAllImagesLoaded, self), self, this.onClickLink, this.preloading);
 				if(smkCommon.debugLog()) console.log(sprintf("scroll_request - afterRequest: masonryImagesReveal"));
 			}
-		}, 		
+		}, 
+				
+		isPreloading: function(bool){
+			this.preloading = bool == true ? true : false; 			
+		},
+		
+		setReset: function(bool){
+			this.reset = bool == true ? true : false;
+		},
 
+		/*
+		 * EVENTS
+		 * **/
+		
+		onAllImagesLoaded: function onComplete() {	
+			if(smkCommon.debugLog()) console.log(sprintf("scroll_request - onComplete: isPreloading_%s", this.preloading));
+			$(this).trigger({
+				type: this.preloading == true ? "smk_scroll_all_images_preloaded" :  "smk_scroll_all_images_loaded"
+			});	
+			return true;
+		},
+
+		onClickLink: function (event) {
+			event.preventDefault();
+			$(event.data.caller).trigger({
+				type: "smk_search_call_detail",
+				detail_url: event.data.detail_url 
+			});
+
+			return;
+		},
+		
+		/*
+		 * PRIVATE FUNCTIONS
+		 * **/	
+		
 		template_integration_json: function (json_data, templ_id){	  
 			var template = this.template; 	
 			var html = Mustache.to_html($(template).find(templ_id).html(), json_data);
@@ -66,8 +98,7 @@
 				$tile.addClass('scroll_add');
 				
 				// add image					
-				var $imgcontainer = $tile.find('.matrix-tile-image');
-				  
+				var $imgcontainer = $tile.find('.matrix-tile-image');				  
 				
 				var img = dataHandler.getImage($imgcontainer);				
 				$imgcontainer.prepend( $(img) );
@@ -78,33 +109,17 @@
 			
 			return $(tiles);
 			
-		},				
-
-		onComplete: function onComplete() {	
-			if(smkCommon.debugLog()) console.log(sprintf("scroll_request - onComplete: isPreloading_%s", this.preloading));
-			$(this).trigger({
-				type: this.preloading == true ? "smk_scroll_all_images_preloaded" :  "smk_scroll_all_images_loaded"
-			});	
-			return true;
-		},
-
-		onClickLink: function (event) {
-			event.preventDefault();
-			$(event.data.caller).trigger({
-				type: "smk_search_call_detail",
-				detail_url: event.data.detail_url 
-			});
-
-			return;
-		},
+		},						
 		
-		isPreloading: function(bool){
-			this.preloading = bool == true ? true : false; 			
-		},
+		/*
+		 * PRIVATE VARIABLES
+		 * **/
 		
-		setReset: function(bool){
-			this.reset = bool == true ? true : false;
-		}
+		default_picture_path: null, 
+		
+		preloading: false,
+		
+		reset: false,
 	});
 
 })(jQuery);

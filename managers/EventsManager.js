@@ -44,10 +44,9 @@
 		this.scrollStart = function(event) {		        								
 				ModelManager.setModel($.address.value(), "url");
 				var model = ModelManager.getModel();	
-				if (model.view != 'detail' && $('.generalspinner').length == 0)									
-					//if (($(".matrix").height() <= ($(window).height() + $(window).scrollTop()) + 200))						
-						//* start scroll request
-						ViewManager.callWidgetFn('scroll_update', 'start_scroll_request');	        																	        		    
+				if (model.view != 'detail' && $('.generalspinner').length == 0)																				
+					//* start scroll request
+					ViewManager.callWidgetFn('scroll_update', 'start_scroll_request');	        																	        		    
 		};							
 		
 		/*
@@ -472,7 +471,7 @@
 			
 			this.startScroll = true;
 			//* start preloading of teaser's images 
-			ViewManager.callWidgetFn('scroll_update', 'start_preload_request');		
+			ViewManager.callWidgetFn('scroll_update', 'start_scroll_preload_request');		
 		},
 
 		//* scroll - no more result to show		 
@@ -485,7 +484,7 @@
 			
 			//* start preloading of teaser's images 
 			if(this.startScroll)
-				ViewManager.callWidgetFn('scroll_update', 'start_preload_request');	
+				ViewManager.callWidgetFn('scroll_update', 'start_scroll_preload_request');	
 			
 		},
 		
