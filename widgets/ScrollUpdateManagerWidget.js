@@ -80,12 +80,12 @@
 			var newImg = 0;													
 
 			// show preloaded images
-			if ($(self.scroll_subWidget.target).find('.preloaded').length > 0){				
-				if(smkCommon.debugLog()) console.log("start_scroll_request - show preloaded");	
+			if ($(self.scroll_subWidget.target).find('.preloaded').length > 0){									
 
 				$(self.scroll_subWidget.target).find('.preloaded').each(function(){
 					if(self.isScrolledIntoView(this)){
 						$(this).removeClass('preloaded').show();
+						if(smkCommon.debugLog()) console.log(sprintf("start_scroll_request - show preloaded: %s", $(this).attr("id")));	
 						newImg++;
 					}										
 				});
@@ -100,16 +100,19 @@
 					params.q = ModelManager.get_q();				
 					params.start = parseInt(this.scrollManager.store.get('start').val()) + parseInt(this.scrollManager.store.scroll_rows_default);			
 					params.sort = smkCommon.isValidDataText(ModelManager.get_sort()) ? ModelManager.get_sort() : this.scrollManager.store.sort_default;				
-
+					params.rows = this.scrollManager.store.scroll_rows_default; 
+					
+					
 					this.scrollManager.store.addByValue('q', params.q !== undefined && params.q.length > 0  ? params.q : this.scrollManager.store.q_default);
 					this.scrollManager.store.addByValue('start', params.start);
 					this.scrollManager.store.addByValue('sort', params.sort);
+					this.scrollManager.store.addByValue('rows', params.rows);
 
 					this.isRequestRunning = true;
 					this.isPreloading = false;
 					this.scroll_subWidget.isPreloading(false);
 
-					if(smkCommon.debugLog()) console.log(sprintf("start_scroll_request - doRequest: isRequestRunning_%s - isPreloading_%s", this.isRequestRunning, this.isPreloading));	
+					if(smkCommon.debugLog()) console.log(sprintf("start_scroll_request - doRequest: start_%s, rows_%s, isRequestRunning_%s - isPreloading_%s", params.start, params.rows, this.isRequestRunning, this.isPreloading));	
 
 					this.scrollManager.doRequest();
 					this.show_infinite_scroll_spin('true');
@@ -122,7 +125,7 @@
 			var nber_rows_to_preload = this.scrollManager.store.scroll_rows_default * 30;
 
 			// preloading starts only under a given thresold of remaining number of preloaded images
-			if($(this.scroll_subWidget.target).find('.preloaded').length < (nber_rows_to_preload / 1.5)
+			if($(this.scroll_subWidget.target).find('.preloaded').length < (nber_rows_to_preload / 1.2)
 					&& !this.isRequestRunning 
 					&& !this.noMoreResults ){				
 
@@ -139,10 +142,11 @@
 				this.isRequestRunning = true;
 				this.isPreloading = true;
 				this.scroll_subWidget.isPreloading(true);
+				
+				if(smkCommon.debugLog()) console.log(sprintf("start_scroll_preload_request - doRequest: start_%s, rows_%s, isRequestRunning_%s - isPreloading_%s", params.start, params.rows, this.isRequestRunning, this.isPreloading));	
 
-				if(smkCommon.debugLog()) console.log(sprintf("start_scroll_preload_request - doRequest: isRequestRunning_%s - isPreloading_%s", this.isRequestRunning, this.isPreloading));
-
-				this.scrollManager.doRequest();								
+				this.scrollManager.doRequest();	
+				this.show_infinite_scroll_spin('true');
 			}        
 		},
 
@@ -165,7 +169,7 @@
 			if ($(this.scroll_subWidget.target).find('.image_loading').length == 0){
 
 				$(this.scroll_subWidget.target).find('.matrix-tile.scroll_add').removeClass('scroll_add');
-				//this.show_infinite_scroll_spin('false');	
+				this.show_infinite_scroll_spin('false');	
 				this.isRequestRunning = false;
 				this.isPreloading = false;
 				this.scroll_subWidget.isPreloading(false);			}			 		  			

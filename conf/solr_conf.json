@@ -1,7 +1,7 @@
 {    
-    "version": "0.000.000.0168 mvc NO proxy",
+    "version": "0.000.000.0181 mvc NO proxy",
     
-    "mode": "debug",
+    "mode": "perf debug",
     
     "server":	"http://csdev-seb:8180/solr-example/dev_SAFO/",
         

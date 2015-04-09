@@ -16,39 +16,48 @@
 
 		this.allWidgetProcessed = false;
 		this.startScroll = false;
-		
+
 		this.init = function(){
 			/*
 			 * Management of changes in address bar
 			 * n.b.: externalChange is triggered also on document load
 			 * */
 			var self = this;
-			
+
 			// set windows to top
 			$(window).scrollTop(0);
-			
+
 			$.address.strict(false);
 			$( document ).ready(function() {				  
 				$.address.externalChange(function(e){self.addressChange(e)});
-				$(window).mousewheel(function(e){self.scrollStart(e)});
+				$(window).mousewheel(function(event){self.scrollStart(event)});								
 			});	  	  
 		};
 
 		/********
 		 * EVENTS
 		 * *******/
-		
+
 		/*
 		 * page scrolled 
 		 * */			        		           
-		this.scrollStart = function(event) {		        								
-				ModelManager.setModel($.address.value(), "url");
-				var model = ModelManager.getModel();	
-				if (model.view != 'detail' && $('.generalspinner').length == 0)																				
-					//* start scroll request
-					ViewManager.callWidgetFn('scroll_update', 'start_scroll_request');	        																	        		    
+		this.scrollStart = function(event) {		        															
+
+			if (ModelManager.get_view() != 'detail' 
+				&& $('.generalspinner').length == 0) {
+				//&& $('.scrollspinner').length == 0){
+
+
+				//if(smkCommon.debugLog()) console.log(sprintf("scrollspinner value: %s : %s : %s ", event.deltaX, event.deltaY, event.deltaFactor));	
+
+				//* start scroll request
+				ViewManager.callWidgetFn('scroll_update', 'start_scroll_request');	        																	        		    
+
+				//* start preloading of teaser's images				
+				ViewManager.callWidgetFn('scroll_update', 'start_scroll_preload_request');					
+			}																				
 		};							
-		
+
 		/*
 		 * change in address bar
 		 * */
@@ -60,14 +69,14 @@
 			this.startScroll = false;						
 
 			if(smkCommon.debugTime()) console.time("adresschanged");	
-			
+
 			if(smkCommon.debugTime()) console.time("adresschanged-process view");
-			
+
 			ViewManager.start_modal_loading();
-			
+
 			//* set windows to top
 			$(window).scrollTop(0);	
-			
+
 			//* get the view's model
 			ModelManager.setModel(e.value, "url");
 			var model = ModelManager.getModel();	
@@ -85,9 +94,9 @@
 			Manager.translator.setLanguage(model.lang);		
 
 			Manager.store.set_current_lang(model.lang);	
-			
+
 			if(smkCommon.debugTime()) console.timeEnd("adresschanged-process view");
-			
+
 			if(smkCommon.debugTime()) console.time("adresschanged-process view_cate");
 
 			//* process category
@@ -102,11 +111,11 @@
 			}
 
 			if(smkCommon.debugTime()) console.timeEnd("adresschanged-process view_cate");			
-			
+
 			//****** process Solr request *******
 
 			if(smkCommon.debugTime()) console.time("adresschanged-process_q");
-			
+
 			// reset exposed parameters
 			Manager.store.exposedReset();
 
@@ -124,14 +133,14 @@
 			};
 
 			Manager.store.addByValue('q', q);
-			
+
 			// facets
 			Manager.store.remove('facet');
 			Manager.store.remove('facet.field');
 			if (model.view != 'detail'){
 				Manager.store.addByValue('facet', true);
 				Manager.store.addByValue('facet.field', Manager.store.facets_default[model.lang]['facets']);
-				
+
 				if (Manager.store.facets_default[model.lang]['ranges'] !== undefined){
 					var range = Manager.store.facets_default[model.lang]['ranges']['range'];
 					var opt = sprintf('f.%s.facet.range.', range);
@@ -143,24 +152,24 @@
 					if(Manager.store.facets_default[model.lang]['ranges']['other'] !== undefined)
 						Manager.store.addByValue(opt + 'other', Manager.store.facets_default[model.lang]['ranges']['other']);					
 				}												
-				
+
 //				Manager.store.add('facet.field', 
-//						new AjaxSolr.Parameter({ name:'facet.field', 
-//												value: 'category', 
-//												locals: { ex:'category' } }));
-				
+//				new AjaxSolr.Parameter({ name:'facet.field', 
+//				value: 'category', 
+//				locals: { ex:'category' } }));
+
 			}																				
 
 			// fq param						
 			if (model.view != 'detail')				
 				Manager.store.addByValue('fq', Manager.store.fq_default);			
-			
+
 			if(model.fq !== undefined && AjaxSolr.isArray(model.fq)){
 				for (var i = 0, l = model.fq.length; i < l; i++) {						
 					Manager.store.addByValue('fq', model.fq[i].value, model.fq[i].locals);
 				};											
 			};	
-														
+
 			// qf param
 			if(model.view != "detail")
 				Manager.store.addByValue('qf', Manager.store.get_qf_string());					    		
@@ -178,7 +187,7 @@
 			}else{
 				Manager.store.addByValue('start', 0);
 			};
-			
+
 			// fl param
 			if (model.view == 'detail'){									
 				Manager.store.addByValue('fl', Manager.store.fl_options.detail);			
@@ -187,16 +196,16 @@
 			};									
 
 			if(smkCommon.debugTime()) console.timeEnd("adresschanged-process_q");
-			
+
 			//* process widgets
 			if(smkCommon.debugTime()) console.time("adresschanged-process_widgets");
 			if(smkCommon.debugTime()) console.time("adresschanged-process_widgets-1");
 //			if(smkCommon.debugTime()) console.time("adresschanged-process_widgets-1-1");
 //			// remove all previous search filters - only if search filters is set to "getRefresh"					
 //			for (var i = 0, l = Manager.searchfilterList.length; i < l; i++) {				
-//				if(ViewManager.callWidgetFn(Manager.searchfilterList[i], 'getRefresh'))
-//					ViewManager.callWidgetFn(Manager.searchfilterList[i], 'removeAllSelectedFilters', {params:[false]});	
-//
+//			if(ViewManager.callWidgetFn(Manager.searchfilterList[i], 'getRefresh'))
+//			ViewManager.callWidgetFn(Manager.searchfilterList[i], 'removeAllSelectedFilters', {params:[false]});	
+
 //			};
 //			if(smkCommon.debugTime()) console.timeEnd("adresschanged-process_widgets-1-1");
 			if(smkCommon.debugTime()) console.time("adresschanged-process_widgets-1-2");
@@ -211,11 +220,11 @@
 			}
 			if(smkCommon.debugTime()) console.timeEnd("adresschanged-process_widgets-1-2");
 			if(smkCommon.debugTime()) console.timeEnd("adresschanged-process_widgets-1");
-			
+
 			if(smkCommon.debugTime()) console.time("adresschanged-process_widgets-2");
 			// reinit thumbs current selected
 			ViewManager.callWidgetFn('details', 'setCurrentThumb_selec');	
-			
+
 			// copy "q" values in Currentsearch widget (without q default)	
 			ViewManager.callWidgetFn('currentsearch', 'removeAllCurrentSearch');			
 			var q_wout_q_def = ModelManager.get_q();									
@@ -230,16 +239,16 @@
 			ViewManager.callWidgetFn('scroll_update', 'reset');
 
 			if(smkCommon.debugTime()) console.time("adresschanged-process_widgets-2");
-			
+
 			if(smkCommon.debugTime()) console.timeEnd("adresschanged-process_widgets");
-			
+
 			//**> start Solr request 
 			if(smkCommon.debugLog()) console.log(sprintf("adresschanged - request: %s", model.q));
 			Manager.doRequest();
-				
+
 			if(smkCommon.debugTime()) console.timeEnd("adresschanged");
 			if(smkCommon.debugTime()) console.timeEnd("smk_search_q_added");
-			
+
 		};
 
 
@@ -298,7 +307,7 @@
 		 * @result:  model update 
 		 * */
 		this.smk_search_call_teasers = function(){
-			
+
 			//restore previous search params
 			var model = ModelManager.loadStoredModel();
 
@@ -324,31 +333,31 @@
 			var q = new Array()
 			if (search_string != '') {																																									
 				var default_teaser_view = ModelManager.getModel().view == 'detail';
-				
+
 				if (!default_teaser_view)
 					q = AjaxSolr.isArray(ModelManager.get_q()) ?  
 							ModelManager.get_q() 
-						: 
-							ModelManager.get_q() === undefined ? new Array() : new Array(ModelManager.get_q());				
-				
-				q.push(search_string); 			
-				
-				/*
+							: 
+								ModelManager.get_q() === undefined ? new Array() : new Array(ModelManager.get_q());				
+
+								q.push(search_string); 			
+
+								/*
 				if (typeof _gaq !== undefined)
 					_gaq.push(['_trackEvent','Search', 'Regular search', search_string, 0, true]);
-				*/
-				
-				var model = {};										
-				model.q = q;					
-				model.sort = ModelManager.current_value_joker;
-				model.view = default_teaser_view ? "teasers" : ModelManager.current_value_joker;
-				model.category = default_teaser_view ? "all" : ModelManager.current_value_joker;
-				model.lang = ModelManager.current_value_joker;
+								 */
 
-				if (!default_teaser_view)
-					model.fq = ModelManager.current_value_joker;
+								var model = {};										
+								model.q = q;					
+								model.sort = ModelManager.current_value_joker;
+								model.view = default_teaser_view ? "teasers" : ModelManager.current_value_joker;
+								model.category = default_teaser_view ? "all" : ModelManager.current_value_joker;
+								model.lang = ModelManager.current_value_joker;
 
-				ModelManager.update(model);					
+								if (!default_teaser_view)
+									model.fq = ModelManager.current_value_joker;
+
+								ModelManager.update(model);					
 			};
 		};
 
@@ -412,7 +421,7 @@
 		this.smk_search_sorter_changed = function(params, searchFieldsTypes){			
 			if (params.selected == undefined)																					
 				return;	  
-			
+
 			ViewManager.callWidgetFn('currentsearch', 'setRefresh', {params: [false]});
 			ViewManager.callWidgetFn('category', 'setRefresh', {params: [false]});			
 			for (var i = 0, l = searchFieldsTypes.length; i < l; i++) {				
@@ -436,7 +445,7 @@
 		 * @result:  view changes  	 
 		 */
 		this.smk_lang_changed = function(lang){ 
-			
+
 			var model = {};
 			model.lang = lang;
 			model.sort = ModelManager.current_value_joker;
@@ -446,7 +455,7 @@
 			model.category = ModelManager.current_value_joker;
 
 			ModelManager.update(model);		
-			
+
 		};	
 
 		/**
@@ -460,49 +469,54 @@
 			if ($('.widget_modal_loading').length == 0)
 				this.allWidgetsLoaded();						
 		},
-		
+
 		//* a new widget has finished loading
 		this.wigdetLoaded = function(){
 			if ($('.widget_modal_loading').length == 0 && this.allWidgetProcessed)
 				this.allWidgetsLoaded();
 		},
-		
+
 		//* all widgets have been process AND finished loading
 		this.allWidgetsLoaded = function(){
+
 			this.allWidgetProcessed = false;
+			if(smkCommon.debugLog()) console.log(sprintf(sprintf("Events - allWidgetsLoaded b4 - scrollTop_%s", $(window).scrollTop() )));
+			
 			ViewManager.allWidgetsLoaded();
+
+			if(smkCommon.debugLog()) console.log(sprintf(sprintf("Events - allWidgetsLoaded - scrollTop_%s", $(window).scrollTop() )));
 			
 			this.startScroll = true;
 			//* start preloading of teaser's images 
-			ViewManager.callWidgetFn('scroll_update', 'start_scroll_preload_request');		
+//			ViewManager.callWidgetFn('scroll_update', 'start_scroll_preload_request');		
 		},
 
 		//* scroll - no more result to show		 
 		this.smk_scroll_no_more_results = function() {},
-									
+
 		//* scroll - all new pictures has been added (in teaser)		
 		this.smk_scroll_all_images_displayed = function(added){
 			ViewManager.highlightning(); // highlight search words
 			ViewManager.smk_scroll_all_images_displayed(added);	
-			
-			//* start preloading of teaser's images 
-			if(this.startScroll)
-				ViewManager.callWidgetFn('scroll_update', 'start_scroll_preload_request');	
-			
+
+//			//* start preloading of teaser's images 
+//			if(this.startScroll)
+//			ViewManager.callWidgetFn('scroll_update', 'start_scroll_preload_request');	
+
 		},
-		
+
 		//* a searchfilter has finished loading	
 		this.smk_search_filter_loaded = function(value){			
 			ViewManager.remove_modal_loading_from_widget(value);
 			this.wigdetLoaded();
 		};	
-		
+
 		//* all image have finished loading in "teaser"
 		this.smk_teasers_all_images_loaded = function(searchFieldsTypes){			
 			ViewManager.smk_teasers_all_images_loaded();
 			this.wigdetLoaded();
 			var self = this;
-			
+
 			// start searchFilters processing
 			// we're queuing processing of each searchField, so that they're processed in a row with a 10ms interval
 			var doQueueProcess = function(field){				
@@ -511,7 +525,7 @@
 				};
 				$.taskQueue.add(doQueue, this, 10);	
 			};
-			
+
 			for (var i = 0, l = searchFieldsTypes.length; i < l; i++) {				
 				doQueueProcess(searchFieldsTypes[i]);								
 			};			
@@ -522,7 +536,7 @@
 			ViewManager.smk_detail_this_img_loaded();
 			this.wigdetLoaded();
 		};
-		
+
 		//* a new image has finished loading in "related"
 		this.smk_related_this_img_loaded = function(){
 			ViewManager.smk_related_this_img_loaded();

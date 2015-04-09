@@ -247,11 +247,11 @@
 				return;			
 
 			this.callWidgetFn('teasers', 'removeAllArticles');
-			
+
 			if(smkCommon.debugTime()) console.time("categoryChanged1");
 			this.showWidget($(this.callWidgetTarget('teasers')));
 			if(smkCommon.debugTime()) console.timeEnd("categoryChanged1");
-			
+
 			if(smkCommon.debugTime()) console.time("categoryChanged2");
 //			$(this.callWidgetTarget('teasers')).find('.matrix').addClass('full-width').hide();							
 
@@ -324,8 +324,22 @@
 
 		this.set_focus = function(){
 			var self = this;
-			$(document).ready(function () {
-				$(self.callWidgetTarget('searchbox')).find('#search-bar').focus();
+			$(document).ready(function () {				
+				var $elem = $(self.callWidgetTarget('searchbox')).find('#search-bar');
+				var $window = $(window);
+
+				var docViewTop = $window.scrollTop();
+				var docViewBottom = docViewTop + $window.height();		    
+
+				var elemTop = $elem.offset().top;
+				var elemBottom = elemTop + $elem.height();
+
+				// we set focus only if the searchbox is visible (otherwise Firefox scrolls up automatically to the element!!)
+				if ((elemBottom > docViewTop)){
+					if(smkCommon.debugLog()) console.log(sprintf(sprintf("View - elemTop_%s : docViewTop%s", elemBottom, docViewTop )));
+					$elem.focus();					
+				}
+					
 			});	  	  
 		};		
 

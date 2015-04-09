@@ -34,6 +34,7 @@
 				var container = document.querySelector($matrix.selector);
 				var msnry = Masonry.data(container);			
 				
+				if(smkCommon.debugLog()) console.log(sprintf(sprintf("scroll_request - afterRequest: scrollTop_%s", $(window).scrollTop() )));
 				var $tiles = this.getTiles();
 				if(smkCommon.debugLog()) console.log(sprintf("scroll_request - afterRequest: getTiles"));
 				this.setReset(false);

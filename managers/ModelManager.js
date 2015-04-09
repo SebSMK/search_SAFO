@@ -122,6 +122,10 @@ var	ModelManager = {
 		get_lang: function(){
 			return smkCommon.isValidDataText(eval("smkCommon.enum_lang." + this.lang)) ? this.lang : smkCommon.enum_lang.def;			
 		},
+		
+		get_view: function(){
+			return this.view;			
+		},
 
 		/******************************
 		 * PRIVATE FUNCTIONS

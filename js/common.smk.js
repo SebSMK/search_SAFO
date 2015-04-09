@@ -223,11 +223,11 @@
 	};			
 	
 	common.debugTime = function(){		
-		return common.mode == "perf";			
+		return common.mode.indexOf("perf") >= 0;			
 	};	
 	
 	common.debugLog= function(){
-		return common.mode != "prod"			
+		return common.mode.indexOf("debug") >= 0			
 	};	
 	
 
