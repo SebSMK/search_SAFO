@@ -237,6 +237,10 @@
 
 			// reset scroll manager				
 			ViewManager.callWidgetFn('scroll_update', 'reset');
+			
+			// add current fq to scroll manager
+			
+			ViewManager.callWidgetFn('scroll_update', 'set_sub_manager_fq', {params: [model.fq]});
 
 			if(smkCommon.debugTime()) console.time("adresschanged-process_widgets-2");
 

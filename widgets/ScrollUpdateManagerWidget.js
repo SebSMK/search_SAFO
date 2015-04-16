@@ -150,6 +150,25 @@
 			}        
 		},
 
+		set_sub_manager_fq: function(fq){			
+			if(this.scrollManager != null && fq !== undefined && AjaxSolr.isArray(fq)){
+				for (var i = 0, l = fq.length; i < l; i++) {						
+					this.scrollManager.store.addByValue('fq', fq[i].value, fq[i].locals);
+				};											
+			};	
+		},
+		
+		reset: function(){			
+			var start = this.start_offset - this.scrollManager.store.scroll_rows_default + 1;
+			this.scrollManager.store.addByValue('start', start); 
+			this.scrollManager.store.remove('fq');
+			this.scrollManager.store.addByValue('fq', Manager.store.fq_default); 			
+			this.isRequestRunning = false;  
+			this.noMoreResults = false;  
+			this.isPreloading = false;
+			this.scroll_subWidget.isPreloading(false);
+			this.scroll_subWidget.setReset(true);
+		},
 
 		/*
 		 * EVENTS
@@ -219,16 +238,6 @@
 			default:				
 				this.scrollSpin.stop();				
 			}									
-		},
-
-		reset: function(){			
-			var start = this.start_offset - this.scrollManager.store.scroll_rows_default + 1;
-			this.scrollManager.store.addByValue('start', start);   
-			this.isRequestRunning = false;  
-			this.noMoreResults = false;  
-			this.isPreloading = false;
-			this.scroll_subWidget.isPreloading(false);
-			this.scroll_subWidget.setReset(true);
 		},
 
 		/*
