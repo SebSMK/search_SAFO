@@ -342,11 +342,6 @@
 
 								q.push(search_string); 			
 
-								/*
-				if (typeof _gaq !== undefined)
-					_gaq.push(['_trackEvent','Search', 'Regular search', search_string, 0, true]);
-								 */
-
 								var model = {};										
 								model.q = q;					
 								model.sort = ModelManager.current_value_joker;
@@ -391,17 +386,17 @@
 			var trigg_req = false;
 
 			if (params.selected !== undefined){
-				if (caller.add(params.selected)) //!! -> change fq param in Manager.store
+				if (caller.add(params.selected)) //!! -> add fq param in Manager.store
 					trigg_req = true;
 			}else if (params.deselected !== undefined){    		
-				if (caller.remove(params.deselected)) //!! -> change fq param in Manager.store
+				if (caller.remove(params.deselected)) //!! -> remove fq param in Manager.store
 					trigg_req = true;
 			};    	    	
 
 			if (trigg_req){				
 				ViewManager.callWidgetFn('currentsearch', 'setRefresh', {params: [false]});
 
-				var fqvalue = Manager.store.get('fq');				
+				var fqvalue = Manager.store.extract_fq_from_manager();	
 				var model = {};				
 				model.fq = fqvalue;
 				model.q = ModelManager.current_value_joker;
