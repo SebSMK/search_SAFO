@@ -230,7 +230,7 @@
 				self.showWidget($(self.callWidgetTarget('details', 'related_subWidget')));				
 
 				$(self.callWidgetTarget('details', 'related_subWidget')).find('h3.heading--l').hide(); // we don't want to see the title of "relatedwidget" now (only after "afterrequest")
-				$target.find('.view  #related-artworks .search-results .matrix').masonry('layout');
+//				$target.find('.view  #related-artworks .search-results .matrix').masonry('layout');
 
 				break;		  
 			} 	
@@ -258,7 +258,7 @@
 			this.showWidget($target.find("#search-filters"));
 			for (var i = 0, l = Manager.searchfilterList.length; i < l; i++) {				
 				if (this.callWidgetFn(Manager.searchfilterList[i], 'getRefresh'))					
-					this.callWidgetFn(Manager.searchfilterList[i], 'hide_drop')
+					this.callWidgetFn(Manager.searchfilterList[i], 'change_title')
 			};																				 
 
 //			if($(this.callWidgetTarget('teasers')).find('.matrix .matrix-tile').length > 0)

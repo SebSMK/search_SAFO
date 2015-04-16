@@ -281,6 +281,14 @@
 			$select.trigger("chosen:updated");
 
 			this.previous_values[this.field] = new Array();
+		},
+		
+		change_title: function () {
+			var self = this;
+			var $target = $(this.target);
+			var title = self.manager.translator.getLabel("tagcloud_" + this.field);
+			
+			$target.find('label').text(title);
 		}
 	});
 
