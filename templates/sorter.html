@@ -1,11 +1,14 @@
 <div>	
 	<script id="sorterItemsTemplate" type="text/template">		 		
-		<div class="sort-by-picker chosen--simple chosen--small">
-		  <label>{{{label}}}</label>
-		  <select>
-		    {{#options}}<option value="{{value}}" {{#selected}}selected{{/selected}}>{{{text}}}</option>{{/options}}		   
-		  </select>
-		</div>	 	
+	 <div class="search-utilities-sortby">
+	    <ul class="dropit dropit-sortby">
+	      <li class="dropit-trigger">
+	        <a href="#" data-label={{{label}}} class="dropit-toggle"><span>{{{label}}}</span><b></b></a>
+	        <ul class="dropit-submenu" style="display: none;">
+	        {{#options}}<li sort="{{value}}" {{#selected}}class="active"{{/selected}}><a href="#">{{{text}}}</a></li>{{/options}}
+	        </ul>
+	      </li>
+	    </ul>
+	  </div>	
 	</script>	
 </div>
-

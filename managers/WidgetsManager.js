@@ -231,7 +231,7 @@ var EventsManager;
 			id: 'sorter',
 			target: '#sorter',
 			options: {
-				'all': [{"value": "score desc", "selected": false},
+				'all': [{"value": "score desc", "selected": true},
 				        {"value": "object_production_date_earliest asc", "selected": false},
 				        {"value": "object_production_date_earliest desc", "selected": false},
 				        {"value": "artist_first_name asc", "selected": false},
