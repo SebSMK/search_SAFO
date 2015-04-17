@@ -75,22 +75,23 @@
 
 					var daterange = new Date(facet);
 					
-					objectedItems.push({ "value": facet, "text": this.getCentury(daterange.getFullYear()), "count": count, "i": i });
+					objectedItems.push({ "value": sprintf("[%1$s TO %1$s+100YEARS]", facet), "text": this.getCentury(daterange.getFullYear()), "count": count, "i": i });
+					//objectedItems.push({ "value": facet, "text": this.getCentury(daterange.getFullYear()), "count": count, "i": i });
 					i++;
 				};
-				if (self.manager.response.numFound > 0 && self.manager.response.facet_counts.facet_ranges[self.field].before !== undefined){
+				if (self.manager.response.facet_counts.facet_ranges[self.field].before !== undefined && self.manager.response.facet_counts.facet_ranges[self.field].before > 0){
 					var count = self.manager.response.facet_counts.facet_ranges[self.field].before;				
-					var last_facet = objectedItems[0].value;
-					var daterange = new Date(last_facet);
-					var text = sprintf("%s %s",  self.manager.translator.getLabel("search_filter_before"), this.getCentury(daterange.getFullYear()));
+					var first_facet = self.manager.response.facet_counts.facet_ranges[self.field].start;
+					var datefirst_facet = new Date(first_facet);
+					var text = sprintf("%s %s",  self.manager.translator.getLabel("search_filter_before"), this.getCentury(datefirst_facet.getFullYear()));
 					
-					objectedItems.push({ "value": "< " + last_facet, "text": text, "count": count, "i": i });
+					objectedItems.push({ "value": sprintf("[* TO %s]", first_facet), "text": text, "count": count, "i": i });
 					i++;
 				}
 				
 				totalCount = i;
 				objectedItems.sort(function (a, b) {
-					return parseInt(b.value)-parseInt(a.value);	  	      
+					return parseInt(b.text)-parseInt(a.text);	  	      
 				});				  			  			  
 				break;	
 
