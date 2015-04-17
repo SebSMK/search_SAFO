@@ -3,15 +3,7 @@
 .opaque > *:not(.generalspinner) { 
 	background-color:rgba(255, 255, 255);
 	opacity: 0.5; 
-	}
-
-#currentsearch{
-    width: 60%;
-    padding-left: 15px;
-    padding-top: 3px;
-    position: absolute;
-    right: 0;    
-}    
+	}   
 
 .filter-group-pair label{
 	text-transform: capitalize;
