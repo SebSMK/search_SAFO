@@ -418,7 +418,7 @@
 		 * @result:  model update  
 		 * */
 		this.smk_search_sorter_changed = function(params, searchFieldsTypes){			
-			if (params.selected == undefined)																					
+			if (params == undefined)																					
 				return;	  
 
 			ViewManager.callWidgetFn('currentsearch', 'setRefresh', {params: [false]});
@@ -427,7 +427,7 @@
 				ViewManager.callWidgetFn(searchFieldsTypes[i], 'setRefresh', {params: [false]});
 			};	
 
-			var sortvalue = params.selected;
+			var sortvalue = params;
 			var model = {};
 			model.sort = sortvalue;
 			model.q = ModelManager.current_value_joker;

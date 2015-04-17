@@ -225,19 +225,26 @@ var EventsManager;
 			template: Mustache.getTemplate('templates/language_picker.html')
 		})); 
 
+//
+		var sorterOpt = {'all': 
+							[
+							 	{"value": "score desc"},
+						        {"value": "object_production_date_earliest asc"},
+						        {"value": "object_production_date_earliest desc"},
+						        {"value": "artist_first_name asc"},
+						        {"value": "artist_first_name desc"},
+						        {"value": "last_update desc"}
+						    ]};
 
-
+		for (var i = 0, l = sorterOpt.all.length; i < l; i++) {
+			if(ModelManager.getModel().sort == sorterOpt.all[i].value)
+				sorterOpt.all[i].selected = true;
+		};
+		
 		Manager.addWidget(new AjaxSolr.SorterWidget({
 			id: 'sorter',
 			target: '#sorter',
-			options: {
-				'all': [{"value": "score desc", "selected": true},
-				        {"value": "object_production_date_earliest asc", "selected": false},
-				        {"value": "object_production_date_earliest desc", "selected": false},
-				        {"value": "artist_first_name asc", "selected": false},
-				        {"value": "artist_first_name desc", "selected": false},
-				        {"value": "last_update desc", "selected": false}]
-			},	
+			options: sorterOpt,	
 			template: Mustache.getTemplate('templates/sorter.html')
 		})); 
 

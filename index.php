@@ -54,7 +54,6 @@
 	<script src="widgets/ViewPickerWidget.js" type="text/javascript"></script>
 	<script src="widgets/SorterWidget.js" type="text/javascript"></script>
 	
-	
 	<script src="js/jquery.tooltipster.js" type="text/javascript"></script>
 	<script src="js/imagesloaded.pkgd.min.js" type="text/javascript"></script>  
 	<script src="js/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script>
@@ -62,8 +61,7 @@
 	<script src="js/jquery.mousewheel.min.js" type="text/javascript"></script>
 	<script src="js/spin.min.js" type="text/javascript"></script>
 	<script src="js/queueProcessor.js" type="text/javascript"></script>	
-	<script src="js/app.js" type="text/javascript"></script>
-	<script src="js/dotdotdot.js" type="text/javascript"></script>	
+	<script src="js/sorter.js" type="text/javascript"></script>	
 	<script src="js/backtotop/js/main.js" type="text/javascript"></script>
 	<script src="js/backtotop/js/modernizr.js" type="text/javascript"></script>		
 	<script src="data/getData_Common_functions.js" type="text/javascript"></script>	
