@@ -236,10 +236,16 @@ var EventsManager;
 						        {"value": "last_update desc"}
 						    ]};
 
+		var optDef = true;
 		for (var i = 0, l = sorterOpt.all.length; i < l; i++) {
-			if(ModelManager.getModel().sort == sorterOpt.all[i].value)
+			if(ModelManager.getModel().sort == sorterOpt.all[i].value){
 				sorterOpt.all[i].selected = true;
+				optDef = false;
+				break;
+			}				
 		};
+		if(optDef)
+			sorterOpt.all[0].selected = true;
 		
 		Manager.addWidget(new AjaxSolr.SorterWidget({
 			id: 'sorter',
