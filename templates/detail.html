@@ -3,34 +3,25 @@
 <script id="detailTemplate" type="text/template">
 
 {{#detail}}
-<a class="back-button" href="#">Back</a>
-{{#media}}
-	<div id="media-container">
-	  <div class="gallery">
-	    <div class="gallery__main image_loading" src="{{image}}" title="{{title}}" alt="{{{alt}}}" img_id="{{img_id}}">
-			<a href="{{image}}" alt="{{title}}"></a>
-				{{#copyright}}
-				<span class="copyright-info">
-					<ul>
-						<li>{{{copyright}}}</li>
-					</ul>
-				</span>
-				{{/copyright}}
-		</div>
-	
-	    <!-- Copyright notice -->
-		{{#copyright_default}}
-	    	<div class="gallery__copyright"><a target="_blank" class="cc0" onclick="window.open('http://creativecommons.org/publicdomain/zero/1.0/')">&nbsp;</a></div>
-		{{/copyright_default}}
-		{{#copyright_valid}}
-	    	<div class="gallery__copyright">{{{copyright}}}</div>
-		{{/copyright_valid}}
-	
-		<!-- thumbnails -->
-		<div id="thumbnails"></div>  	  
+<article class="artwork">
+<div class="artwork-inner">
 
-	</div><!-- gallery -->
-  </div><!-- #media-container -->
+{{#media}}
+
+<div class="artwork-gallery">
+<div class="inline-gallery">
+<div class="inline-galler-inner">
+
+<div class="inline-gallery-main-image gallery__main image_loading" src="{{image}}" title="{{title}}" alt="{{{alt}}}" img_id="{{img_id}}>
+	<a href="{{image}}" alt="{{title}}"></a>
+</div>
+
+	
+  
+ </div>
+ </div>
+ </div>
+ 
 {{/media}}
 	
 {{#info}}
@@ -118,6 +109,9 @@
 	</div><!-- #info-container -->
 {{/info}}	
 {{/detail}}
+
+</div>
+</article>
 
 </script>
 
