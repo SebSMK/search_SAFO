@@ -29,7 +29,7 @@
 					info:{
 
 						title: this.getTitle(doc),	
-						artist: doc.artist_name === undefined ? '' : this.getArtist(doc),
+						artist: this.getListProducers(doc),
 						artwork_date: this.getObjectProdDate(doc),
 						description: this.getDescriptionNote(doc),
 						technique: {
@@ -224,6 +224,55 @@
 
 		};
 
+		this.getListProducers = function(doc){									
+			var res = new Array();
+			var list = new Array();
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.orig)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.orig));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.tilsk)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.tilsk));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.tidl)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.tidl));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.vaerksted)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.vaerksted));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.efterfoel)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.efterfoel));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.inventor)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.inventor));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.skole)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.skole));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.stil)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.stil));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.kopi)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.kopi));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.efterfor)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.efterfor));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.udgiver)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.udgiver));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.trykker)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.trykker));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.forfatter)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.forfatter));
+			
+			var max = 3;
+			
+			for (var i = 0, l = list.length; res.length < max && i < l; i++) {
+				
+				for (var j = 0, k = list[i].length; res.length < max && j < k ; j++) {
+					if (res.length == max - 1 && (j + 1 < k || i + 1 < l))
+						list[i][j].artist_data.etc = '(...)';
+						
+					
+					if(smkCommon.isValidDataText(list[i][j].artist_data.role))
+						list[i][j].artist_data.role = sprintf(' %s', list[i][j].artist_data.role);
+						
+					res.push(list[i][j]);
+				}				
+				
+			}
+			
+			return res; 
+		};
 
 		this.getArtist = function(doc){
 			var artistLabel = new Array();

@@ -25,10 +25,6 @@
 	opacity:0 !important;
 }
 
-.gallery__main{	
-	position:relative;
-}
-
 .matrix-tile .copyright-info,
 .gallery__main .copyright-info 
 {
@@ -170,6 +166,15 @@ a.divLink {
 }
 
 /* Modif of Jacques' code */
+
+.inline-gallery img {
+    opacity: 1;
+    margin-top: 1.5px;
+}
+
+.inline-gallery .inline-gallery-main {
+    height: auto;
+ }
 
 .matrix-tile:hover {
     border: 1px solid #1a1919;
