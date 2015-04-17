@@ -13,9 +13,8 @@
     right: 0;    
 }    
 
-#sorter{
-	display: block; 
-	margin-bottom: 20px; 	
+.filter-group-pair label{
+	text-transform: capitalize;
 }
 
 .matrix-tile-image{
