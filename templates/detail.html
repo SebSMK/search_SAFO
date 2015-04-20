@@ -21,86 +21,54 @@
     {{/media}}
     	
     {{#info}}
-    	<div id="info-container" class="artwork-content">
-    	
-    	  <!-- Sharing links -->
-    	  <div class="sharing--iconified">
-    	    <a target="_blank" href="http://www.facebook.com/sharer/sharer.php?s=100&u={{{media.fb}}}">Share on Facebook</a>
-    	    <a target="_blank" href="https://twitter.com/intent/tweet?url={{{media.twitter.url}}}&text={{{media.twitter.description}}}&amp;via=StatensMuseum">Tweet This</a>
-    	    <a target="_blank" href="https://plus.google.com/share?url={{{media.google}}}">Plus on Google+</a>
-    	    <a target="_blank" href="http://www.pinterest.com/pin/create/button/?url={{{media.pinterest.url}}}&media={{{media.pinterest.image}}}&description={{{media.pinterest.description}}}">Pin on Pinterest</a>
-    		<a target="_blank" onclick="window.print()" class="print">Print</a>
-    	  </div>
+    	<div id="info-container" class="artwork-content">    	    	 
     	
     	  <!-- Heading -->
-    	{{#artist}}
-    	  <h1 class="heading--m">{{{artist_data}}}</h1>
-     	{{/artist}}
-      
-    	  <h1 class="heading--m"><i>{{title}}</i><span>{{{artwork_date}}}</span></h1>
-    	
-    	  <div class="cutoff">{{description}} </div>
-    
-    	<!-- Data pairs (technique) -->
-    	  {{#technique}}
-    	  <div class="data-pairs">
-    	    <div class="data-pair">
-    	      <div class="data-pair__key">{{key}} </div>
-    	      <div class="data-pair__value">{{value}} </div>
-    	    </div>	    
-    	  </div><!-- data-pairs -->
-    	  {{/technique}}	
-    
-    
-    	  <!-- Data pairs (dimensions) -->
-    	  {{#dim}}
-    	  <div class="data-pairs">
-    	    <div class="data-pair">
-    	      <div class="data-pair__key">{{key}} </div>											      		
-    				<div class="data-pair__value">{{dim}} </div>			
-    	    </div>	    
-    	  </div><!-- data-pairs -->
-    	  {{/dim}}	
+		<ul class="artwork-artists">    	
+		{{#artist}}		
+    	  <li>{{{name}}}&nbsp;<i>{{{info}}}</i></li>
+		{{/artist}}
+		</ul>     	
+				
+      	{{#title_museum}}	
+		<h1 class="artwork-title">{{{title_museum}}}</h1>
+		{{/title_museum}}
+
+		{{#title_serie}}	
+		<h2 class="artwork-series-title">{{{title_serie}}}</h2>
+		{{/title_serie}}
+
+		<div class="artwork-data">
+		
+		{{#datering.value}}
+          <div class="data-section data-section-compact">
+            <h3>{{datering.key}}</h3>
+            <div class="data">{{{datering.value}}}</div>
+          </div><!-- /.data-section -->
+		{{/datering.value}}
+
+		{{#dim.dim}}
+          <div class="data-section data-section-compact">
+            <h3>{{dim.key}}</h3>
+            <div class="data">{{dim.dim}}</div>
+          </div><!-- /.data-section -->
+		{{/dim.dim}}
+		
+ 		{{#technique}}
+          <div class="data-section data-section-compact">
+            <h3>{{key}}</h3>
+            <div class="data">{{value}}</div>
+          </div><!-- /.data-section -->
+ 		{{/technique}}    	  
     	
     	  <!-- Data pairs (acquisition) -->
-    	  {{#acq}}
-    	  <div class="data-pairs">
-    	    <div class="data-pair">
-    	      <div class="data-pair__key">{{key}} </div>
-    	      <div class="data-pair__value">{{method}}{{source}}{{date}} </div>		  
-    	    </div>	    
-    	  </div><!-- data-pairs -->
-    	  {{/acq}}
+    	  {{#acq.value}}
+			<div class="data-section data-section-compact">
+            	<h3>{{acq.key}}</h3>
+            	<div class="data">{{{acq.value}}}</div>
+          	</div><!-- /.data-section -->    	 
+    	  {{/acq.value}}        	
     
-    	<!-- Data pairs (provenance) -->
-    	  {{#proveniens}}
-    	  <div class="data-pairs">
-    	    <div class="data-pair">
-    	      <div class="data-pair__key">{{key}} </div>
-    	      <div class="data-pair__value">{{value}} </div>		  
-    	    </div>	    
-    	  </div><!-- data-pairs -->
-    	  {{/proveniens}}
-    
-    	  <!-- Data pairs (inventar number) -->
-    	  {{#meta}}
-    	  <div class="data-pairs">
-    	    <div class="data-pair">
-    	      <div class="data-pair__key">{{key}} </div>
-    	      <div class="data-pair__value type--code">{{value}} </div>
-    	    </div>	    
-    	  </div><!-- data-pairs -->
-    	  {{/meta}}
-    
-    	  <!-- Data pairs (location) -->
-    	  {{#location}}
-    	  <div class="data-pairs">
-    	    <div class="data-pair">
-    	      <div class="data-pair__key">{{key}} </div>
-    	      <div class="data-pair__value">{{value}} </div>
-    	    </div>	    
-    	  </div><!-- data-pairs -->
-    	  {{/location}}
     	  
     	</div><!-- #info-container -->
     {{/info}}	

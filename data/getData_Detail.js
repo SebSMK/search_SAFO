@@ -252,29 +252,41 @@
 			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.trykker)))
 				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.trykker));
 			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.forfatter)))
-				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.forfatter));
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.forfatter));						
 			
-			var max = 3;
-			
-			for (var i = 0, l = list.length; res.length < max && i < l; i++) {
+			for (var i = 0, l = list.length; i < l; i++) {
 				
-				for (var j = 0, k = list[i].length; res.length < max && j < k ; j++) {
-					if (res.length == max - 1 && (j + 1 < k || i + 1 < l))
-						list[i][j].artist_data.etc = '(...)';
-						
+				for (var j = 0, k = list[i].length; j < k ; j++) {											
+//					if(smkCommon.isValidDataText(list[i][j].artist_data.role))
+//						list[i][j].artist_data.role = sprintf(' %s', list[i][j].artist_data.role);
+//						
+//					res.push(list[i][j]);
 					
-					if(smkCommon.isValidDataText(list[i][j].artist_data.role))
-						list[i][j].artist_data.role = sprintf(' %s', list[i][j].artist_data.role);
-						
-					res.push(list[i][j]);
-				}				
-				
+					var output = this.getArtistOutput(list[i][j].artist_data);
+					res.push(output);
+				}													
 			}
 			
 			return res; 
 		};
 
-		this.getArtist = function(doc){
+		this.getArtistOutput = function(doc){
+			var res = {};
+			
+			if (doc.name != undefined)
+				res.name = doc.name;
+			
+			var role = smkCommon.isValidDataText(doc.role) ? sprintf(', %s', doc.role) : "";
+			var dates = smkCommon.isValidDataText(doc.dates) ? sprintf(', %s', doc.dates) : "";
+			var nationality = smkCommon.isValidDataText(doc.nationality) ? sprintf('%s', doc.nationality) : "";												
+
+			res.info = sprintf('(%s%s%s)', nationality, dates, role);
+			
+
+			return res;
+		};	
+
+		this.getArtistOutputxxxxx = function(doc){
 			var artistLabel = new Array();
 			var docBirth;
 			var docDeath;

@@ -54,7 +54,7 @@
 			}			
 
 			var artwork_data = null;
-			var dataHandler = new getData_Detail.constructor(this);			
+			var dataHandler = new getData_Detail_Standard.constructor(this);			
 
 			for (var i = 0, l = this.manager.response.response.docs.length; i < l ; i++) {
 				var doc = this.manager.response.response.docs[i]; 												

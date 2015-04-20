@@ -265,10 +265,18 @@
 
 		var dimensions = new Array();			
 
+		if (doc.dimension_netto !== undefined)
+			dimensions.push( 
+					{
+						'type' : 'netto',
+						'dim' : doc.dimension_netto
+					}
+			);	
+		
 		if (doc.dimension_bladmaal !== undefined)
 			dimensions.push( 
 					{
-						'type' : 'bladm�l',
+						'type' : 'bladmaal',
 						'dim' : doc.dimension_bladmaal
 					}
 			);			
@@ -276,7 +284,7 @@
 		if (doc.dimension_plademaal!== undefined)
 			dimensions.push( 
 					{
-						'type' : 'pladem�l',
+						'type' : 'plademaal',
 						'dim' : doc.dimension_plademaal
 					}
 			);
@@ -519,9 +527,16 @@
 		}
 
 		return date;
-
 	};
 
+	getdatacommon.getErhverv_method = function(doc){						
+		return doc.acq_method === undefined ? null : doc.acq_method;
+	};
+	
+	getdatacommon.getErhverv_source= function(doc){						
+		return doc.acq_source === undefined ? null : doc.acq_source;
+	};							
+					
 	getdatacommon.getErhverv_proveniens = function(doc){	
 		if (doc.proveniens === undefined) 
 			return null;

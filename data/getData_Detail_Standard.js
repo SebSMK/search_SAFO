@@ -13,46 +13,48 @@
 }(this, function (getdatadetailstandard) {
 
 	getdatadetailstandard.constructor = function(caller){
-
+		
 		this.get_data = function (doc){
 			var data =  {
 
 					media:{
-						title: getData_Common.getTitle(doc, 'museum'),	
+						title: this.getDetailTitle(doc),	
 						alt: getData_Common.getMedia_alt(doc),
 						image: getData_Common.getMedia_image(doc, 'large', this.caller),						
 						copyright: getData_Common.getMedia_copyright(doc, this.caller),
 						copyright_default: !getData_Common.computeCopyright(doc) && doc.medium_image_url !== undefined,
 						copyright_valid: getData_Common.computeCopyright(doc),
 						img_id:doc.id
-					},
+					},					
 					
 					info:{
 						
 						ident_invnummer: getData_Common.getIdent_invnummer(doc),						
 						
-						producent_kunster: getData_Common.getProducent_producent(doc, getData_Common.enumProducent.orig),
-						producent_tilskrevet: getData_Common.getProducent_producent(doc, getData_Common.enumProducent.tilsk),
-						producent_tidltilskrvet: getData_Common.getProducent_producent(doc, getData_Common.enumProducent.tidl),
-						producent_vaerksted: getData_Common.getProducent_producent(doc, getData_Common.enumProducent.vaerksted),
-						producent_efterfoelger: getData_Common.getProducent_producent(doc, getData_Common.enumProducent.efterfoel),
-						producent_inventor: getData_Common.getProducent_producent(doc, getData_Common.enumProducent.inventor),						
-						producent_skole: getData_Common.getProducent_producent(doc, getData_Common.enumProducent.skole),
-						producent_stil: getData_Common.getProducent_producent(doc, getData_Common.enumProducent.stil),
-						producent_kopi: getData_Common.getProducent_producent(doc, getData_Common.enumProducent.kopi),
-						producent_forlaeg: getData_Common.getProducent_producent(doc, getData_Common.enumProducent.efterfor),
-						producent_udgiver: getData_Common.getProducent_producent(doc, getData_Common.enumProducent.udgiver),
-						producent_trykker: getData_Common.getProducent_producent(doc, getData_Common.enumProducent.trykker),
-						producent_forfatter: getData_Common.getProducent_producent(doc, getData_Common.enumProducent.forfatter),																																					
+						artist: this.getListProducers(doc),																																					
 						
-						title_museum: getData_Common.getTitle(doc, 'museum'),
-						title_serie: getData_Common.getTitle(doc, 'serie'),						
+						title_museum: this.getDetailTitle(doc),
+						title_serie: this.getDetailSerieTitle(doc),																							
 						
-						datering_production_vaerkdatering: getData_Common.getProduction_vaerkdatering(doc),		
-												
-						technique_technique: getData_Common.getTechnique_technique(doc),
-						technique_dimensions: getData_Common.getTechnique_dimensions(doc), 						
-														
+						datering: {
+							key: this.caller.manager.translator.getLabel('detail_date'),  
+							value: getData_Common.getProduction_vaerkdatering(doc)
+						},
+						
+						technique: {
+							key: this.caller.manager.translator.getLabel('detail_technique'),  
+							value: getData_Common.getTechnique_technique(doc)
+						},
+						
+						dim: {
+								key: this.caller.manager.translator.getLabel('detail_dimension'),			    	
+								dim : getData_Common.getTechnique_dimensions(doc).length > 0 ? getData_Common.getTechnique_dimensions(doc)[0].dim : null  
+						},
+						
+						acq: {
+							key: this.caller.manager.translator.getLabel('detail_acquisition'),			    	
+							value: this.getDetailAcq(doc)														
+						}
 					},
 
 					subwidget:{
@@ -62,140 +64,139 @@
 					}
 			};	
 
-			
-			/*
-			//* add acquisition data
-			if (doc.acq_date !== undefined || doc.acq_method !== undefined){
-				data.info.acq = {
-						key: this.caller.manager.translator.getLabel('detail_acquisition'),  
-						date: doc.acq_date,
-						method: doc.acq_method !== undefined ? sprintf('%s, ', smkCommon.firstCapital(doc.acq_method)) : null,
-								source: doc.acq_source !== undefined ? sprintf('%s - ', doc.acq_source) : null
-				};
-
-			};
-
-
-			//* add dimension data
-			if (doc.dimension_brutto !== undefined || 
-					doc.dimension_netto !== undefined || 
-					doc.dimension_billedmaal !== undefined || 
-					doc.dimension_bladmaal !== undefined){
-
-				data.info.dim = {
-						key: this.caller.manager.translator.getLabel('detail_dimension'),			    	
-						dim : doc.dimension_brutto !== undefined? doc.dimension_brutto : 
-							doc.dimension_netto !== undefined? doc.dimension_netto :
-								doc.dimension_billedmaal !== undefined? doc.dimension_billedmaal : doc.dimension_bladmaal  
-				};
-
-			};
-
-			//* add location	 
-			if (this.getlocation(doc.location_name))
-				data.info.location = {
-					key: this.caller.manager.translator.getLabel('detail_location'),
-					value:doc.location_name
-			};	  	  
-
-
-			//* add provenance	 
-			if (this.getProvenance(doc))	  
-				data.info.proveniens = {
-					key: this.caller.manager.translator.getLabel('detail_provenance'),
-					value: doc.proveniens
-			};	  	  
-
-*/
 			return data;	  
-
 		};
 		
-		this.getImage = function ($target){
-
-			var self = this.caller;
-
-			if ($target === undefined || $target.length == 0){
-				$(self).trigger({
-					type: "smk_teasers_this_img_loaded"
-				});  	
-				return;
+		this.getDetailAcq = function(doc){
+			var method = smkCommon.isValidDataText(getData_Common.getErhverv_method(doc)) ? sprintf('%s', getData_Common.getErhverv_method(doc)) : "";
+			var source = smkCommon.isValidDataText(getData_Common.getErhverv_source(doc)) ? sprintf(' %s', getData_Common.getErhverv_source(doc)) : "";
+			var dato = smkCommon.isValidDataText(getData_Common.getErhverv_dato(doc)) ? sprintf(' %s', getData_Common.getErhverv_dato(doc)) : "";	 
+			
+			return smkCommon.isValidDataText(getData_Common.getErhverv_method(doc)) || smkCommon.isValidDataText(getData_Common.getErhverv_source(doc)) || smkCommon.isValidDataText(getData_Common.getErhverv_dato(doc)) ? 
+					sprintf("%s%s%s", method, source, dato) : null;
+			
+		};
+		
+		this.getDetailTitle = function(doc){
+			var title_mus = getData_Common.getTitle(doc, 'museum');
+			var title_besk = getData_Common.getTitle(doc, 'beskriv');			
+			var title_teaser = title_mus || title_besk;
+			
+			var title = new String();
+			
+			if(title_teaser != null && title_teaser.length > 0){
+				switch(smkCommon.getCurrentLanguage()){
+				case "dk":		 		
+					title = title_teaser[0].title;
+					break;
+				case "en":
+					title = smkCommon.isValidDataText(title_teaser[0].trans) ? title_teaser[0].trans : title_teaser[0].title; 
+					break;
+				}									
+			}else{				
+				title = doc.title_first;
 			}
+						
+			return smkCommon.isValidDataText(title) ? title : null;
+		};
+		
 
-			var img_id = $target.attr("img_id");
-			var path = $target.attr("src");
-			var alt = $target.attr("alt");
-			var title = $target.attr("alt");
-			var img = new Image();
+		this.getDetailSerieTitle = function(doc){
+			var title_serie = getData_Common.getTitle(doc, 'serie');		
+			
+			var title = new String();			
+			
+			if(title_serie != null && title_serie.length > 0){
+				switch(smkCommon.getCurrentLanguage()){
+				case "dk":		 		
+					title = title_serie[0].title;
+					break;
+				case "en":
+					title = smkCommon.isValidDataText(title_serie[0].trans) ? title_serie[0].trans : title_serie[0].title; 
+					break;
+				}									
+			}
+						
+			return smkCommon.isValidDataText(title) ? title : null;
+		};		
+		
+		this.getListProducers = function(doc){									
+			var res = new Array();
+			var list = new Array();
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.orig)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.orig));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.tilsk)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.tilsk));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.tidl)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.tidl));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.vaerksted)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.vaerksted));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.efterfoel)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.efterfoel));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.inventor)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.inventor));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.skole)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.skole));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.stil)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.stil));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.kopi)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.kopi));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.efterfor)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.efterfor));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.udgiver)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.udgiver));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.trykker)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.trykker));
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.forfatter)))
+				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.forfatter));						
+			
+			for (var i = 0, l = list.length; i < l; i++) {
+				
+				for (var j = 0, k = list[i].length; j < k ; j++) {											
+//					if(smkCommon.isValidDataText(list[i][j].artist_data.role))
+//						list[i][j].artist_data.role = sprintf(' %s', list[i][j].artist_data.role);
+//						
+//					res.push(list[i][j]);
+					
+					var output = this.getArtistOutput(list[i][j].artist_data);
+					res.push(output);
+				}													
+			}
+			
+			return res; 
+		};
 
-			// wrap our new image in jQuery, then:
-			$(img)
-			// once the image has loaded, execute this code
-			.load(function () {
-				// set the image hidden by default    
-				$target.hide();
+		this.getArtistOutput = function(doc){
+			var res = {};
+			
+			if (doc.name != undefined)
+				res.name = doc.name;
+			
+			var role = smkCommon.isValidDataText(doc.role) ? sprintf(', %s', doc.role) : "";
+			var dates = smkCommon.isValidDataText(doc.dates) ? sprintf(', %s', doc.dates) : "";
+			var nationality = smkCommon.isValidDataText(doc.nationality) ? sprintf('%s', doc.nationality) : "";												
 
-				//* if not default picture
-				if ($(this).attr("src") != self.default_picture_path){
-					// with the holding div #loader, apply:
-					$target
-					// remove the loading class (so the ViewManager can remove background spinner), 
-					.removeClass('image_loading')
-					.find('a')
-					// then insert our image
-					.append(this);
+			res.info = sprintf('(%s%s%s)', nationality, dates, role);
+			
 
-					// add fancybox
-					$target.find('a').addClass('fancybox');
-					$(this).fancybox({
-						afterClose: function(){
-							$target.find('img').show();
-						}
-					});
-				}
-				//* default picture
-				else{
+			return res;
+		};					
+		
+		this.getImage = function ($src){			
 
-					$target
-					// remove the loading class (so the ViewManager can remove background spinner), 
-					.removeClass('image_loading')
-					// remove link
-					.remove('a')
-					// then insert our image
-					.append(this);
-				};	          
+			if ($src === undefined || $src.length == 0)				
+				return;			
+			
+			var path = $src.attr("src");
+			var alt = $src.attr("alt");
+			var title = $src.attr("alt");
+			
+			return '<img src="' + path + '" />'; 
+		};				  
 
-				// fade our image in to create a nice effect
-				$target.show();
-
-				// trig "this image is loaded" event	      
-				$(self).trigger({
-					type: "smk_detail_this_img_loaded"
-				}); 
-
-			})
-
-			// if there was an error loading the image, react accordingly
-			.error(function () {
-				$target
-				// remove the loading class (so no background spinner), 
-				.removeClass('image_loading')
-				.remove('a')
-				.append(sprintf('<img src="%s" />', self.default_picture_path));
-
-				$target.fadeIn();
-
-				// trig "this image is loaded" event	      
-				$(self).trigger({
-					type: "smk_detail_this_img_loaded"
-				});
-			})		
-
-			.attr('alt', alt)
-			.attr('title', title)
-
-			// *finally*, set the src attribute of the new image to our image
-			.attr('src', path);	  	   
-		};		  
+		/*
+		 * variables
+		 */
+		this.caller = caller;
 	}
 }));

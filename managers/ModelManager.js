@@ -174,7 +174,7 @@ var	ModelManager = {
 					break;
 									
 				case "detail":
-					model.q = sprintf('"%s"', decodeURIComponent(cats[i + 1]));
+					model.q = sprintf('%s', decodeURIComponent(cats[i + 1]));
 					model.view = cats[i];
 					this.setModelFromJson(model);
 					return;
