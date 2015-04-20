@@ -14,25 +14,18 @@
 
 			$target.html(html);	
 
-			$('#search-filters h2.heading--widgets').html(self.manager.translator.getLabel('search_filter'));
-
 			this.previous_values[this.field] = new Array(),
 
-			//* init 'chosen' plugin
-			self.init_chosen();
-
-			this.hide_drop();	  
+			//* init 'chosen' plugin			
+			$target.find('select').chosen({
+				width: "198px"
+			});
+  
 		},
 
 		beforeRequest: function(){			
 			var self = this;
-			var $target = $(this.target);
-
-//			if (!self.getRefresh())				
-//				return;	
-//			
-//			$target.find('.number-of-matches').text(self.manager.translator.getLabel('search_data_loading'));			
-			
+			var $target = $(this.target);					
 			
 			var $select = $(this.target).find('select');
 
@@ -44,6 +37,7 @@
 
 		},
 
+		//* processing is started after all images are loaded (managed by the EventManager)
 		process_filter: function () {
 			var self = this;
 			var $target = $(this.target);
@@ -61,10 +55,7 @@
 						
 			if (self.manager.response.facet_counts.facet_fields[self.field] === undefined &&
 				self.manager.response.facet_counts.facet_ranges[self.field] === undefined) {
-//				var template = Mustache.getTemplate(templ_path);			
-//				var html = Mustache.to_html($(template).find('#chosenTemplate').html(), json_data);
-//				$target.html(html);
-//				$('.chosen--multiple').chosen({no_results_text: "No results found."});
+
 				return;
 			};
 
@@ -76,7 +67,6 @@
 
 			switch (self.field){
 			case 'object_production_date_earliest':		 			  			  			  
-				//for (var facet in self.manager.response.facet_counts.facet_fields[self.field]) {
 				for (var facet in self.manager.response.facet_counts.facet_ranges[self.field].counts) {
 					var count = parseInt(self.manager.response.facet_counts.facet_ranges[self.field].counts[facet]);
 					if (count > maxCount) {
@@ -85,22 +75,23 @@
 
 					var daterange = new Date(facet);
 					
-					objectedItems.push({ "value": facet, "text": this.getCentury(daterange.getFullYear()), "count": count, "i": i });
+					objectedItems.push({ "value": sprintf("[%1$s TO %1$s+100YEARS]", facet), "text": this.getCentury(daterange.getFullYear()), "count": count, "i": i });
+					//objectedItems.push({ "value": facet, "text": this.getCentury(daterange.getFullYear()), "count": count, "i": i });
 					i++;
 				};
-				if (self.manager.response.numFound > 0 && self.manager.response.facet_counts.facet_ranges[self.field].before !== undefined){
+				if (self.manager.response.facet_counts.facet_ranges[self.field].before !== undefined && self.manager.response.facet_counts.facet_ranges[self.field].before > 0){
 					var count = self.manager.response.facet_counts.facet_ranges[self.field].before;				
-					var last_facet = objectedItems[0].value;
-					var daterange = new Date(last_facet);
-					var text = sprintf("%s %s",  self.manager.translator.getLabel("search_filter_before"), this.getCentury(daterange.getFullYear()));
+					var first_facet = self.manager.response.facet_counts.facet_ranges[self.field].start;
+					var datefirst_facet = new Date(first_facet);
+					var text = sprintf("%s %s",  self.manager.translator.getLabel("search_filter_before"), this.getCentury(datefirst_facet.getFullYear()));
 					
-					objectedItems.push({ "value": "< " + last_facet, "text": text, "count": count, "i": i });
+					objectedItems.push({ "value": sprintf("[* TO %s]", first_facet), "text": text, "count": count, "i": i });
 					i++;
 				}
 				
 				totalCount = i;
 				objectedItems.sort(function (a, b) {
-					return parseInt(b.value)-parseInt(a.value);	  	      
+					return parseInt(b.text)-parseInt(a.text);	  	      
 				});				  			  			  
 				break;	
 
@@ -160,15 +151,12 @@
 				self.previous_values[self.field].push(this.value.replace(/^"|"$/g, ''));	  		
 			});
 
-			//$target.hide(); // hide until all styling is ready
-
 			//* remove all options in 'select'...
 			$select.empty();	  	
 			//*... and copy the new option list
 			
 			$select.append($(html).find('option'));	  		  	
 			
-
 			//* add previous selected values in the target 'select' component
 			if (self.previous_values[self.field].length > 0){
 
@@ -200,36 +188,19 @@
 			$target.find('select').trigger("chosen:updated");		
 			if(smkCommon.debugTime()) console.timeEnd("SearchFilters - " + this.field + " - chosen - update");
 			
-			//* in the lines below, we're queuing process_multiple_select and showing of dropdown list,
-			//* so that they execute in a row with a 10ms interval
-			if(smkCommon.debugTime()) console.time("SearchFilters - " + this.field + " - chosen - open");	
-			$.taskQueue.add(self.process_multiple_select, this, 0);	
-			if(smkCommon.debugTime()) console.timeEnd("SearchFilters - " + this.field + " - chosen - open");
+			if(smkCommon.debugTime()) console.time("SearchFilters - " + this.field + " - chosen - show");			
 
-			
-			//* show component
-//			$target.show();
-//			$target.find('chosen-choices').blur();
-
-			//* show dropdownlist excepted if a filter is already selected
-			if (self.previous_values[self.field].length > 0){
-				this.hide_drop();
-			}else{
-				if(smkCommon.debugTime()) console.time("SearchFilters - " + this.field + " - chosen - show");			
-
-				var doQueueShow = function(target){				
-					var doShow= function() {
-						$(target).find('.chosen-drop').show();
-					};
-					$.taskQueue.add(doShow, this, 10);	
+			var doQueueShow = function(target){				
+				var doShow= function() {
+					$(target).find('.chosen-drop').show();
 				};
-											
-				doQueueShow(self.target);								
+				$.taskQueue.add(doShow, this, 10);	
+			};
+										
+			doQueueShow(self.target);								
 
-				if(smkCommon.debugTime()) console.timeEnd("SearchFilters - " + this.field + " - chosen - show");				
-			}			
-			
-
+			if(smkCommon.debugTime()) console.timeEnd("SearchFilters - " + this.field + " - chosen - show");				
+					
 			self.previous_values[self.field] = new Array();					
 			
 			if(smkCommon.debugTime()) console.timeEnd("SearchFilters - " + this.field + " - chosen");
@@ -274,7 +245,6 @@
 			var self = this, meth = this.multivalue ? 'add' : 'set';
 			return function (event, params) {
 				event.stopImmediatePropagation();     	    	
-				self.hide_drop();
 
 				$(self).trigger({
 					type: "smk_search_filter_changed",
@@ -289,58 +259,6 @@
 			var template = this.template; 	
 			var html = Mustache.to_html($(template).find(templ_id).html(), json_data);
 			return html;
-		},
-		/*
-		   § Chosen
-		  \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-		init_chosen: function() {
-			
-			var $target = $(this.target); 		
-
-			$target.find('.chosen select').chosen();
-
-			// Multiple select
-			$target.find('.chosen--multiple select').chosen({
-				width: "198px"
-			});
-
-		},
-
-		process_multiple_select: function(){
-
-			var $target = $(this.target); 
-			// Multiple select (always open).
-			$target.find('.chosen--multiple.chosen--open').each( function() {
-
-				// This 'fix' allows the user to see the select options before he has
-				// interacted with the select box.
-				// 
-				// Chosen do not show the contents of the select boxes by default, so we
-				// have to show them ourselves. In the code below we loop through the options
-				// in the select boxes, adds these to an array, and append each array item
-				// to the <ul> called .chosen-results. Chosen uses .chosen-results to show
-				// the options.
-
-				var chosenResults = $(this).find('.chosen-results');
-
-				// For each item in the array, append a <li> to .chosen-results
-				var i = 0;
-				var doQueueProcess = function(i, text){
-					setTimeout(function () {
-						chosenResults.append('<li class="active-result" data-option-array-index="' + i + '">' + text + '</li>');
-					}, 10);
-					
-				};
-				$(this).find('select option').each( function() {
-					doQueueProcess(i, $(this).text());
-					i++;
-				});
-			
-			});    	  	  
-		},
-
-		hide_drop: function(){	  	
-			$(this.target).find('.chosen-drop').hide();	  
 		},
 
 		/**
@@ -364,6 +282,14 @@
 			$select.trigger("chosen:updated");
 
 			this.previous_values[this.field] = new Array();
+		},
+		
+		change_title: function () {
+			var self = this;
+			var $target = $(this.target);
+			var title = self.manager.translator.getLabel("tagcloud_" + this.field);
+			
+			$target.find('label').text(title);
 		}
 	});
 

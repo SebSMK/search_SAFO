@@ -3,121 +3,111 @@
 <script id="detailTemplate" type="text/template">
 
 {{#detail}}
-<a class="back-button" href="#">Back</a>
-{{#media}}
-	<div id="media-container">
-	  <div class="gallery">
-	    <div class="gallery__main image_loading" src="{{image}}" title="{{title}}" alt="{{{alt}}}" img_id="{{img_id}}">
-			<a href="{{image}}" alt="{{title}}"></a>
-				{{#copyright}}
-				<span class="copyright-info">
-					<ul>
-						<li>{{{copyright}}}</li>
-					</ul>
-				</span>
-				{{/copyright}}
-		</div>
-	
-	    <!-- Copyright notice -->
-		{{#copyright_default}}
-	    	<div class="gallery__copyright"><a target="_blank" class="cc0" onclick="window.open('http://creativecommons.org/publicdomain/zero/1.0/')">&nbsp;</a></div>
-		{{/copyright_default}}
-		{{#copyright_valid}}
-	    	<div class="gallery__copyright">{{{copyright}}}</div>
-		{{/copyright_valid}}
-	
-		<!-- thumbnails -->
-		<div id="thumbnails"></div>  	  
-
-	</div><!-- gallery -->
-  </div><!-- #media-container -->
-{{/media}}
-	
-{{#info}}
-	<div id="info-container">
-	
-	  <!-- Sharing links -->
-	  <div class="sharing--iconified">
-	    <a target="_blank" href="http://www.facebook.com/sharer/sharer.php?s=100&u={{{media.fb}}}">Share on Facebook</a>
-	    <a target="_blank" href="https://twitter.com/intent/tweet?url={{{media.twitter.url}}}&text={{{media.twitter.description}}}&amp;via=StatensMuseum">Tweet This</a>
-	    <a target="_blank" href="https://plus.google.com/share?url={{{media.google}}}">Plus on Google+</a>
-	    <a target="_blank" href="http://www.pinterest.com/pin/create/button/?url={{{media.pinterest.url}}}&media={{{media.pinterest.image}}}&description={{{media.pinterest.description}}}">Pin on Pinterest</a>
-		<a target="_blank" onclick="window.print()" class="print">Print</a>
-	  </div>
-	
-	  <!-- Heading -->
-	{{#artist}}
-	  <h1 class="heading--m">{{{artist_data}}}</h1>
- 	{{/artist}}
+<article class="artwork">
+  <div class="artwork-inner">
+    
+    {{#media}}
+    
+    <div class="artwork-gallery">
+      <div class="inline-gallery">
+        <div class="inline-galler-inner">
+          <div class="inline-gallery-main">
+            <div class="inline-gallery-main-image gallery__main image_loading" src="{{image}}" title="{{title}}" alt="{{{alt}}}" img_id="{{img_id}}"></div>
+            </div> 
+         </div>
+       </div>
+     </div>
+     
+    {{/media}}
+    	
+    {{#info}}
+    	<div id="info-container" class="artwork-content">
+    	
+    	  <!-- Sharing links -->
+    	  <div class="sharing--iconified">
+    	    <a target="_blank" href="http://www.facebook.com/sharer/sharer.php?s=100&u={{{media.fb}}}">Share on Facebook</a>
+    	    <a target="_blank" href="https://twitter.com/intent/tweet?url={{{media.twitter.url}}}&text={{{media.twitter.description}}}&amp;via=StatensMuseum">Tweet This</a>
+    	    <a target="_blank" href="https://plus.google.com/share?url={{{media.google}}}">Plus on Google+</a>
+    	    <a target="_blank" href="http://www.pinterest.com/pin/create/button/?url={{{media.pinterest.url}}}&media={{{media.pinterest.image}}}&description={{{media.pinterest.description}}}">Pin on Pinterest</a>
+    		<a target="_blank" onclick="window.print()" class="print">Print</a>
+    	  </div>
+    	
+    	  <!-- Heading -->
+    	{{#artist}}
+    	  <h1 class="heading--m">{{{artist_data}}}</h1>
+     	{{/artist}}
+      
+    	  <h1 class="heading--m"><i>{{title}}</i><span>{{{artwork_date}}}</span></h1>
+    	
+    	  <div class="cutoff">{{description}} </div>
+    
+    	<!-- Data pairs (technique) -->
+    	  {{#technique}}
+    	  <div class="data-pairs">
+    	    <div class="data-pair">
+    	      <div class="data-pair__key">{{key}} </div>
+    	      <div class="data-pair__value">{{value}} </div>
+    	    </div>	    
+    	  </div><!-- data-pairs -->
+    	  {{/technique}}	
+    
+    
+    	  <!-- Data pairs (dimensions) -->
+    	  {{#dim}}
+    	  <div class="data-pairs">
+    	    <div class="data-pair">
+    	      <div class="data-pair__key">{{key}} </div>											      		
+    				<div class="data-pair__value">{{dim}} </div>			
+    	    </div>	    
+    	  </div><!-- data-pairs -->
+    	  {{/dim}}	
+    	
+    	  <!-- Data pairs (acquisition) -->
+    	  {{#acq}}
+    	  <div class="data-pairs">
+    	    <div class="data-pair">
+    	      <div class="data-pair__key">{{key}} </div>
+    	      <div class="data-pair__value">{{method}}{{source}}{{date}} </div>		  
+    	    </div>	    
+    	  </div><!-- data-pairs -->
+    	  {{/acq}}
+    
+    	<!-- Data pairs (provenance) -->
+    	  {{#proveniens}}
+    	  <div class="data-pairs">
+    	    <div class="data-pair">
+    	      <div class="data-pair__key">{{key}} </div>
+    	      <div class="data-pair__value">{{value}} </div>		  
+    	    </div>	    
+    	  </div><!-- data-pairs -->
+    	  {{/proveniens}}
+    
+    	  <!-- Data pairs (inventar number) -->
+    	  {{#meta}}
+    	  <div class="data-pairs">
+    	    <div class="data-pair">
+    	      <div class="data-pair__key">{{key}} </div>
+    	      <div class="data-pair__value type--code">{{value}} </div>
+    	    </div>	    
+    	  </div><!-- data-pairs -->
+    	  {{/meta}}
+    
+    	  <!-- Data pairs (location) -->
+    	  {{#location}}
+    	  <div class="data-pairs">
+    	    <div class="data-pair">
+    	      <div class="data-pair__key">{{key}} </div>
+    	      <div class="data-pair__value">{{value}} </div>
+    	    </div>	    
+    	  </div><!-- data-pairs -->
+    	  {{/location}}
+    	  
+    	</div><!-- #info-container -->
+    {{/info}}	
+    {{/detail}}
   
-	  <h1 class="heading--m"><i>{{title}}</i><span>{{{artwork_date}}}</span></h1>
-	
-	  <div class="cutoff">{{description}}</div>
-
-	<!-- Data pairs (technique) -->
-	  {{#technique}}
-	  <div class="data-pairs">
-	    <div class="data-pair">
-	      <div class="data-pair__key">{{key}}</div>
-	      <div class="data-pair__value">{{value}}</div>
-	    </div>	    
-	  </div><!-- data-pairs -->
-	  {{/technique}}	
-
-
-	  <!-- Data pairs (dimensions) -->
-	  {{#dim}}
-	  <div class="data-pairs">
-	    <div class="data-pair">
-	      <div class="data-pair__key">{{key}}</div>											      		
-				<div class="data-pair__value">{{dim}}</div>			
-	    </div>	    
-	  </div><!-- data-pairs -->
-	  {{/dim}}	
-	
-	  <!-- Data pairs (acquisition) -->
-	  {{#acq}}
-	  <div class="data-pairs">
-	    <div class="data-pair">
-	      <div class="data-pair__key">{{key}}</div>
-	      <div class="data-pair__value">{{method}}{{source}}{{date}}</div>		  
-	    </div>	    
-	  </div><!-- data-pairs -->
-	  {{/acq}}
-
-	<!-- Data pairs (provenance) -->
-	  {{#proveniens}}
-	  <div class="data-pairs">
-	    <div class="data-pair">
-	      <div class="data-pair__key">{{key}}</div>
-	      <div class="data-pair__value">{{value}}</div>		  
-	    </div>	    
-	  </div><!-- data-pairs -->
-	  {{/proveniens}}
-
-	  <!-- Data pairs (inventar number) -->
-	  {{#meta}}
-	  <div class="data-pairs">
-	    <div class="data-pair">
-	      <div class="data-pair__key">{{key}}</div>
-	      <div class="data-pair__value type--code">{{value}}</div>
-	    </div>	    
-	  </div><!-- data-pairs -->
-	  {{/meta}}
-
-	  <!-- Data pairs (location) -->
-	  {{#location}}
-	  <div class="data-pairs">
-	    <div class="data-pair">
-	      <div class="data-pair__key">{{key}}</div>
-	      <div class="data-pair__value">{{value}}</div>
-	    </div>	    
-	  </div><!-- data-pairs -->
-	  {{/location}}
-	  
-	</div><!-- #info-container -->
-{{/info}}	
-{{/detail}}
+  </div>
+</article>
 
 </script>
 

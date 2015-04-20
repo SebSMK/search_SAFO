@@ -80,10 +80,10 @@
 	  
 	  "sorter_sort":			"sortér:",
 	  "sorter_score desc":		"relevans",
-	  "sorter_object_production_date_earliest asc":		"dato (nyest først)",
-	  "sorter_object_production_date_earliest desc":	"dato (ældst først)",
-	  "sorter_artist_first_name asc":		"navn (Å to A)",
-	  "sorter_artist_first_name desc":		"navn (A to Å)",
+	  "sorter_object_production_date_earliest desc":	"dato (nyest først)",
+	  "sorter_object_production_date_earliest asc":		"dato (ældst først)",
+	  "sorter_artist_first_name desc":		"navn (Å to A)",
+	  "sorter_artist_first_name asc":		"navn (A to Å)",
 	  "sorter_last_update desc":	"sidst opdateret",	
 	  
 	  "sorter_last_updated":	"sidst opdateret",
@@ -173,10 +173,10 @@
 	  
 	  "sorter_sort":			"sort:",
 	  "sorter_score desc":		"relevance",
-	  "sorter_object_production_date_earliest asc":		"date (most recent first)",
-	  "sorter_object_production_date_earliest desc":		"date (older first)",
-	  "sorter_artist_first_name asc":		"name (Å to A)",
-	  "sorter_artist_first_name desc":		"name (A to Å)",
+	  "sorter_object_production_date_earliest desc":	"date (most recent first)",
+	  "sorter_object_production_date_earliest asc":		"date (older first)",
+	  "sorter_artist_first_name desc":		"name (Å to A)",
+	  "sorter_artist_first_name asc":		"name (A to Å)",
 	  "sorter_last_update desc":	"last updated",
 	  
 	  "teaser_reference":		"reference",

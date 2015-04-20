@@ -186,17 +186,16 @@
 	};	
 
 
-	common.removeA = function (arr) {
+	common.removeFirstFromArray = function (arr) {
 		if (!AjaxSolr.isArray(arr))
 			return [];
 
 		var what, a = arguments, L = a.length, ax;
-		while (L > 1 && arr.length) {
-			what = a[--L];
-			while ((ax= arr.indexOf(what)) !== -1) {
-				arr.splice(ax, 1);
-			}
-		}
+		what = a[--L];
+		
+		if(arr.length > 0 && arr[0].value == what)
+			arr.splice(0, 1);
+		
 		return arr;
 	};	
 	

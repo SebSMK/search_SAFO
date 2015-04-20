@@ -28,54 +28,29 @@ AjaxSolr.SorterWidget = AjaxSolr.AbstractFacetWidget.extend({
     			'#sorterItemsTemplate');
       $target.html(html);
       
-      $target.find('select').val(ModelManager.getModel().sort); 
-      
-      //* add behaviour on select change
-      $target.find('select').change(self.clickHandler());
-      
-      self.init_chosen();
-  },	         
-  
-  
-  afterRequest: function(){
-	  
-	  var self = this;
-	  var $target = $(this.target);	   
-	  var $select = $target.find('select');
-	  
-	  if (!self.getRefresh()){
-		self.setRefresh(true);
-		return;
-	  }
-	  
-	  var currentCategory = ModelManager.getModel().category;	  
-	  var options = this.options[currentCategory !== undefined ? currentCategory : "all"];	  	  	  
-	  var objectedItems = new Array(); 
-	  
-	  $target.hide();	  
-      
-      for (var i = 0, l = options.length; i < l; i++) {
-    	  options[i].text = smkCommon.firstCapital(self.manager.translator.getLabel("sorter_" + options[i].value));
-    	  objectedItems.push(options[i]);    	  
-      }
- 
-      var html = self.template_integration_json(
-    		  {	"options": objectedItems}, 
-    			'#sorterItemsTemplate');
-                
-      //* set label text
-      $target.find('label').text(smkCommon.firstCapital(this.manager.translator.getLabel("sorter_sort")));      
-      
-      //* remove all options in 'select'...
-      $target.find('select').empty();	  	
-	  //*... and copy the new option list
-	  $target.find('select').append($(html).find('option'));	  	      
-      
-      $target.find('select').val(ModelManager.getModel().sort); 	
-            
-      $target.find('select').trigger("chosen:updated");
-      
-      $target.show();      	  	  
+      $(".dropit-sortby").dropit(), // Add active submenu item's text to trigger link.
+      // So that you can see what's active.
+      $(".dropit-sortby .dropit-toggle span").text($(".dropit-sortby li.active a").text()), 
+      // Prevent default when selecting
+      $(".dropit ul li a").click(function(a) {
+          a.preventDefault();
+      }), // Make the selected li active
+      $(".dropit ul li").click(function() {
+          var a = $(this).closest(".dropit");
+          // Remove other active classes
+          $(this).siblings().each(function() {
+              // console.log(el);
+              $(this).removeClass("active");
+          }), // Make the selected active
+          $(this).addClass("active"), // Show the selected text
+          a.find(".dropit-toggle span").text($(this).find("a").text());
+          
+          $(self).trigger({
+  			type: "smk_search_sorter_changed",
+  			params: $(this).attr("sort")
+  		  });  
+          
+      });
   },
 
   /**

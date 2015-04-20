@@ -237,6 +237,10 @@
 
 			// reset scroll manager				
 			ViewManager.callWidgetFn('scroll_update', 'reset');
+			
+			// add current fq to scroll manager
+			
+			ViewManager.callWidgetFn('scroll_update', 'set_sub_manager_fq', {params: [model.fq]});
 
 			if(smkCommon.debugTime()) console.time("adresschanged-process_widgets-2");
 
@@ -342,11 +346,6 @@
 
 								q.push(search_string); 			
 
-								/*
-				if (typeof _gaq !== undefined)
-					_gaq.push(['_trackEvent','Search', 'Regular search', search_string, 0, true]);
-								 */
-
 								var model = {};										
 								model.q = q;					
 								model.sort = ModelManager.current_value_joker;
@@ -391,17 +390,17 @@
 			var trigg_req = false;
 
 			if (params.selected !== undefined){
-				if (caller.add(params.selected)) //!! -> change fq param in Manager.store
+				if (caller.add(params.selected)) //!! -> add fq param in Manager.store
 					trigg_req = true;
 			}else if (params.deselected !== undefined){    		
-				if (caller.remove(params.deselected)) //!! -> change fq param in Manager.store
+				if (caller.remove(params.deselected)) //!! -> remove fq param in Manager.store
 					trigg_req = true;
 			};    	    	
 
 			if (trigg_req){				
 				ViewManager.callWidgetFn('currentsearch', 'setRefresh', {params: [false]});
 
-				var fqvalue = Manager.store.get('fq');				
+				var fqvalue = Manager.store.extract_fq_from_manager();	
 				var model = {};				
 				model.fq = fqvalue;
 				model.q = ModelManager.current_value_joker;
@@ -419,7 +418,7 @@
 		 * @result:  model update  
 		 * */
 		this.smk_search_sorter_changed = function(params, searchFieldsTypes){			
-			if (params.selected == undefined)																					
+			if (params == undefined)																					
 				return;	  
 
 			ViewManager.callWidgetFn('currentsearch', 'setRefresh', {params: [false]});
@@ -428,7 +427,7 @@
 				ViewManager.callWidgetFn(searchFieldsTypes[i], 'setRefresh', {params: [false]});
 			};	
 
-			var sortvalue = params.selected;
+			var sortvalue = params;
 			var model = {};
 			model.sort = sortvalue;
 			model.q = ModelManager.current_value_joker;

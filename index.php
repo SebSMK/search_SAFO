@@ -54,7 +54,6 @@
 	<script src="widgets/ViewPickerWidget.js" type="text/javascript"></script>
 	<script src="widgets/SorterWidget.js" type="text/javascript"></script>
 	
-	
 	<script src="js/jquery.tooltipster.js" type="text/javascript"></script>
 	<script src="js/imagesloaded.pkgd.min.js" type="text/javascript"></script>  
 	<script src="js/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script>
@@ -62,6 +61,7 @@
 	<script src="js/jquery.mousewheel.min.js" type="text/javascript"></script>
 	<script src="js/spin.min.js" type="text/javascript"></script>
 	<script src="js/queueProcessor.js" type="text/javascript"></script>	
+	<script src="js/sorter.js" type="text/javascript"></script>	
 	<script src="js/backtotop/js/main.js" type="text/javascript"></script>
 	<script src="js/backtotop/js/modernizr.js" type="text/javascript"></script>		
 	<script src="data/getData_Common_functions.js" type="text/javascript"></script>	
@@ -78,7 +78,6 @@
 	<link rel="stylesheet" type="text/css" href="js/fancybox/source/jquery.fancybox.css" media="all" />	
 	<link rel="stylesheet" type="text/css" href="js/backtotop/css/style.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="css/app.css" media="all" />
-<link rel="stylesheet" type="text/css" href="css/chosen.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="css/smk_modif.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="css/smk_print.css" media="print" />
 

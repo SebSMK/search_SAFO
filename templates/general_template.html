@@ -1,47 +1,66 @@
 <div>
 	<script id="generalTemplate" type="text/template">
 
-	<div id="smk_search_version"></div>
-	<div class="view">
+	
 
 		<div class="container">
 
-
-			<section class="section--list" role="list">
-
-				<header class="main-header">
-					<div class="main-header-topshelf">
-						<div class="back-to-site">						
-							<a href="http://smk.dk"><i></i> SMK.dk</a>
-						</div>
-
-						<div id="lang-picker"/>
+			<header class="main-header">
+				<div class="main-header-topshelf">
+					<div class="back-to-site">						
+						<a href="http://smk.dk"><i></i> SMK.dk</a>
 					</div>
-
-					<h1 class="branding">
-						<a href="/">Statens Museum for Kunst</a> <i>Search the collection</i>						
-					</h1>
-					
-					<div id="searchbox"/>											
-
-				</header>
-
-				<div class="search-type-selector">
-					<div id="category" class="search-tabs"></div>
-					<div id="searchinfo"></div>
-					<div class="extra-controls">
-						<a onclick="window.print();" href="#" class="print"><i></i>
-							Print this page</a>
-					</div>
+	
+					<div id="lang-picker"/>
 				</div>
-
+	
+				<h1 class="branding">
+					<a href="/">Statens Museum for Kunst</a> <i>Search the collection</i>						
+				</h1>
 				
+				<div class="print">
+				    <a onclick="window.print();" href="#"><i></i> Print</a>
+				  </div>										
+	
+			</header>
+	
 
+			<div class="search-type-selector">
+				<div id="category" class="search-tabs"></div>
+			</div>
+
+			<div id="searchbox"/>
+			
+			<section class="section--list" role="list">
 				<div class="search-actions">
-					<div id="sorter"></div>					
+					
+					
+					<div class="search-utilities">
+
+					  
+					    
+					  <div id="searchinfo"></div>
+					    
+					  <div id="sorter"></div>
+
+					  <div class="search-utilities-booleans">
+					    <div class="filter filter-boolean">
+					      <input type="checkbox" value="has-image" name="has-image" id="has-image">
+					      <label for="has-image"><i></i> Has image <span class="number-of-matches">(45)</span></label>
+					    </div>
+
+					    <div class="filter filter-boolean">
+					      <input type="checkbox" value="is-on-display" name="is-on-display" id="is-on-display">
+					      <label for="is-on-display"><i></i> On display <span class="number-of-matches">(23)</span></label>
+					    </div>
+					  </div>
+
+					</div>
+					
 				</div>
 
-				<div id="search-filters" class="filters">
+				<div id="search-filters" class="filters filters-simple-search">
+					<div class="filters-selected"><ul></ul></div>
   					<div class="filters-inner">
 						<div id="artist_name" ></div>
 						<div id="artist_natio_dk"  lang="dk"></div>
@@ -72,7 +91,6 @@
 
 
 		</div>
-	</div>
 
 	</script>
 

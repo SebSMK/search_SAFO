@@ -3,19 +3,10 @@
 .opaque > *:not(.generalspinner) { 
 	background-color:rgba(255, 255, 255);
 	opacity: 0.5; 
-	}
+	}   
 
-#currentsearch{
-    width: 60%;
-    padding-left: 15px;
-    padding-top: 3px;
-    position: absolute;
-    right: 0;    
-}    
-
-#sorter{
-	display: block; 
-	margin-bottom: 20px; 	
+.filter-group-pair label{
+	text-transform: capitalize;
 }
 
 .matrix-tile-image{
@@ -32,10 +23,6 @@
 
 .preloaded{
 	opacity:0 !important;
-}
-
-.gallery__main{	
-	position:relative;
 }
 
 .matrix-tile .copyright-info,
@@ -179,6 +166,15 @@ a.divLink {
 }
 
 /* Modif of Jacques' code */
+
+.inline-gallery img {
+    opacity: 1;
+    margin-top: 1.5px;
+}
+
+.inline-gallery .inline-gallery-main {
+    height: auto;
+ }
 
 .matrix-tile:hover {
     border: 1px solid #1a1919;
