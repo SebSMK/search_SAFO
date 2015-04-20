@@ -9,7 +9,8 @@
 				"dk":
 				{
 					"facets":
-						["artist_name", 
+						["artist_name",
+						"artist_auth", 
 		                "artist_natio_dk", 		                
 		                "object_type_dk",
 		                "prod_technique_dk",
@@ -26,7 +27,8 @@
 		         "en":
 		         {
 					"facets":
-						["artist_name", 			                 
+						["artist_name",
+						"artist_auth", 			                 
 		                "artist_natio_en", 		                 			                
 		                "object_type_en",
 		                "prod_technique_en",
@@ -40,7 +42,8 @@
 		             }	
 		         },
 		         		         		          
-		         "all":["artist_name", 			                 
+		         "all":["artist_name", 
+		         		"artist_auth",			                 
 		                "artist_natio_dk", 
 		                "artist_natio_en", 
 		                "object_production_date_earliest", 			                

@@ -10,6 +10,7 @@
       "copyright_def":			"CC0 - Public Domain",
       
       "tagcloud_artist_name": 		"kunstner",
+      "tagcloud_artist_auth": 		"rolle",      
 	  "tagcloud_object_production_date_earliest": 		"periode",
 	  "tagcloud_artist_natio_dk": 		"nationalitet",
 	  "tagcloud_object_type_dk": 		"værktype",
@@ -17,6 +18,7 @@
 	  "tagcloud_collection":		"samling",
           
       "search_artist_name_lab": 		"Indtast kunstner",
+      "search_artist_auth_lab": 		"Indast rolle",
       "search_object_production_date_earliest_lab": 		"Indtast periode",
       "search_artist_natio_dk_lab": 	"Indtast kunstners nationalitet",
       "search_object_type_dk_lab":	"Indtast værktype",
@@ -103,6 +105,7 @@
       "copyright_def":			"CC0 - Public Domain",			
 
 	  "tagcloud_artist_name": 		"artist",
+	  "tagcloud_artist_auth": 		"role",
 	  "tagcloud_object_production_date_earliest": 		"period",
 	  "tagcloud_artist_natio_en":	"nationality",
 	  "tagcloud_object_type_en": 		"artwork type",
@@ -110,6 +113,7 @@
 	  "tagcloud_collection":		"collection",
 	  
 	  "search_artist_name_lab": 		"Select artist",
+	  "search_artist_auth_lab": 		"Select role",
 	  "search_object_production_date_earliest_lab": 		"Select period",
 	  "search_artist_natio_en_lab": 	"Select nationality",
 	  "search_prod_technique_en_lab":	"Select technique",
