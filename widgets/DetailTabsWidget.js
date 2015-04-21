@@ -19,6 +19,8 @@
 		current_language: null,
 
 		default_picture_path: null, 
+		
+		related_id_req: null,
 
 		init: function(){	  	    
 			var self = this;
@@ -151,7 +153,7 @@
 			var tab_requests = null;
 			var dataHandler = new getData_Detail_Tabs.constructor(this);
 			var multi_work_ref_req = null;
-			var related_id_req = null;
+			this.related_id_req = null;
 			var original_id_req = null;
 
 			for (var i = 0, l = this.manager.response.response.docs.length; i < l ; i++) {
@@ -168,7 +170,7 @@
 				multi_work_ref_req = tab_requests.subwidget.req_multiwork;
 	
 				//* process related
-				related_id_req = tab_requests.subwidget.req_relatedid;	
+				this.related_id_req = tab_requests.subwidget.req_relatedid;	
 				
 				
 
@@ -188,14 +190,7 @@
 				var param = new AjaxSolr.Parameter({name: "q", value: multi_work_ref_req });					  					
 				this.thumbnailsManager.store.add(param.name, param);	 			
 				this.thumbnailsManager.doRequest();				
-			}	
-			
-			if(related_id_req != null){				
-				//* start thumbnail sub request
-				var param = new AjaxSolr.Parameter({name: "q", value: related_id_req });					  					
-				this.relatedManager.store.add(param.name, param);	 			
-				this.relatedManager.doRequest();
-			}
+			}							
 			
 			if(original_id_req != null){	
 				//* start original  sub request
@@ -226,8 +221,16 @@
 		
 		removeAllRelated: function(){
 			this.related_subWidget.removeAllArticles();
-		}
-
+		},
+		
+		process_related: function(){
+			if(this.related_id_req != null){				
+				//* start related sub request
+				var param = new AjaxSolr.Parameter({name: "q", value: this.related_id_req });					  					
+				this.relatedManager.store.add(param.name, param);	 			
+				this.relatedManager.doRequest();
+			}
+		}				
 	});
 
 })(jQuery);

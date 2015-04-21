@@ -543,6 +543,19 @@
 		this.smk_detail_this_img_loaded = function(){						
 			ViewManager.smk_detail_this_img_loaded();
 			this.wigdetLoaded();
+			
+			var self = this;
+			// start details_tabs processing
+			// we're queuing processing of each tab, so that they're processed in a row with a 10ms interval
+			var doQueueProcess = function(tab){				
+				var doQueue= function() {
+					ViewManager.callWidgetFn('details_tabs', tab);
+				};
+				$.taskQueue.add(doQueue, this, 10);	
+			};
+							
+			doQueueProcess('process_related');										
+			
 		};
 
 		//* a new image has finished loading in "related"
