@@ -706,16 +706,17 @@
 			return null;
 
 		var multi_works = doc.multi_work_ref.split(';-;');						
-		var allworksRequest = null;
-
-		if(multi_works.length > 0){
-			var work = multi_works[0].split(';--;');
-			if(work.length > 2){
-				allworksRequest = sprintf('id:"%s"', work[1].split('/')[0]);	
-			}					
+		var allworksRequest = [];		
+		
+		for ( var i = 0, l = multi_works.length; i<l; ++i ) {
+			var work = multi_works[i].split(';--;');
+			if(work.length > 0)
+				allworksRequest.push(sprintf('id:%s', work[1]));	
 		}
-
-		return allworksRequest;
+		var res = allworksRequest.length == 0 ? null : allworksRequest.join(' OR ');
+		
+		return res == null ? null : sprintf('%s -id:%s', res, doc.id);
+		
 	};
 
 	/* Request for Related works */

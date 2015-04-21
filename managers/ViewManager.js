@@ -148,26 +148,6 @@
 				this.callWidgetFn('pager', 'refreshDisplay', {params: [added]});
 		},
 
-		//* related
-		this.smk_related_this_img_loaded = function(){
-			//$(this.callWidgetTarget('details', 'related_subWidget')).find('.matrix').masonry('layout');  
-
-//			//* check if there are still images loading in "related"
-//			if ($(this.callWidgetTarget('details', 'related_subWidget')).find('.image_loading').length == 0){    		
-//			// if all images are loaded, we stop the modal "waiting image" for this widget
-//			this.remove_modal_loading_from_widget(this.callWidgetTarget('details', 'related_subWidget'));
-//			this.wigdetLoaded();
-//			} 	
-		};
-
-		//* thumbs
-		this.smk_thumbs_img_loaded = function(){
-			//* check if there are still images loading in "teaser"
-			if ($(this.callWidgetTarget('details', 'thumbnails_subWidget')).find('.image_loading').length == 0){				 
-				this.callWidgetFn('details', 'verticalAlignThumbs');
-			}  	  
-		};
-
 		//* detail
 		this.smk_detail_this_img_loaded = function(){			
 			this.remove_modal_loading_from_widget(this.callWidgetTarget('details'));												
@@ -212,7 +192,10 @@
 			case "detail":										 
 				
 				self.callWidgetFn('details_tabs', 'removeAllRelated');
+				self.callWidgetFn('details_tabs', 'removeAllParts');
 
+				
+				
 				$target.find("section.section--list").hide();
 
 				$target.find("section.section--detail").show();

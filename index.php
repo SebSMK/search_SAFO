@@ -68,10 +68,8 @@
 	<script src="data/getData_Detail_Tabs.js" type="text/javascript"></script>
 	<script src="data/getData_Detail_Standard.js" type="text/javascript"></script>
 	<script src="data/getData_Original.js" type="text/javascript"></script>
-	<script src="data/getData_Detail_Extented.js" type="text/javascript"></script>	
-	<script src="data/getData_Related.js" type="text/javascript"></script>	
-	<script src="data/getData_Teasers.js" type="text/javascript"></script>	
-	<script src="data/getData_Thumbs.js" type="text/javascript"></script>	
+	<script src="data/getData_Detail_Extented.js" type="text/javascript"></script>		
+	<script src="data/getData_Teasers.js" type="text/javascript"></script>		
 	
 	<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/themes/smoothness/jquery-ui.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="js/fancybox/source/jquery.fancybox.css" media="all" />	

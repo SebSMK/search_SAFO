@@ -2,18 +2,6 @@
 
 	AjaxSolr.DetailWidget = AjaxSolr.AbstractWidget.extend({
 
-		constructor: function (attributes) {
-			AjaxSolr.DetailWidget.__super__.constructor.apply(this, arguments);
-			AjaxSolr.extend(this, {
-				thumbnailsManager:null,
-				thumbnails_subWidget:null,
-				relatedManager: null,
-				related_subWidget: null,
-				originalManager: null,
-				original_subWidget: null
-			}, attributes);
-		},	
-
 		start: 0,
 
 		current_language: null,

@@ -280,11 +280,19 @@ var EventsManager;
 			}));
 		};				
 
-		//* Detail / Thumbs / Related widgets 
-		var sub_thumbsWidget = new AjaxSolr.ThumbsWidget({
-			id: 'thumbs',
-			target: '#thumbnails',
-			template: Mustache.getTemplate('templates/thumb.html')
+		//* Detail widget		
+		Manager.addWidget(new AjaxSolr.DetailWidget({
+			id: 'details',
+			target: '#smk_detail',
+			template: Mustache.getTemplate('templates/detail.html')
+		}));
+		
+		//* Parts / Related widgets 		
+		var sub_partsWidget = new AjaxSolr.TeasersWidget({
+			id: 'parts',
+			target: '#parts',
+			template: Mustache.getTemplate('templates/teasers.html'),
+			initTemplate:'#relatedInitTemplate'
 		});
 		
 		var sub_relatedWidget = new AjaxSolr.TeasersWidget({
@@ -304,25 +312,13 @@ var EventsManager;
 			id: 'details_tabs',
 			target: '#smk_detail_tabs',
 			template: Mustache.getTemplate('templates/detail_tabs.html'),
-			thumbnailsManager: thumbnailsManager,
-			thumbnails_subWidget: sub_thumbsWidget,
+			partsManager: thumbnailsManager,
+			parts_subWidget: sub_partsWidget,
 			relatedManager: relatedManager,
 			related_subWidget: sub_relatedWidget,
 			originalManager: getDetailManager,
 			original_subWidget: sub_originalWidget
 		}));	
-
-		Manager.addWidget(new AjaxSolr.DetailWidget({
-			id: 'details',
-			target: '#smk_detail',
-			template: Mustache.getTemplate('templates/detail.html'),
-			thumbnailsManager: thumbnailsManager,
-			thumbnails_subWidget: sub_thumbsWidget,
-			relatedManager: relatedManager,
-			related_subWidget: sub_relatedWidget,
-			originalManager: getDetailManager,
-			original_subWidget: sub_originalWidget
-		}));
 
 
 		//* scroll widget
@@ -448,15 +444,6 @@ var EventsManager;
 			EventsManager.smk_teasers_all_images_loaded(searchFieldsTypes);
 		});		
 
-		//* a new image has finished loading in "related"
-		$(Manager.widgets['details']).on('smk_related_this_img_loaded', function(event){   
-			EventsManager.smk_related_this_img_loaded();
-		}); 
-
-		//* a new image has finished loading in "thumbs"
-		$(Manager.widgets['details']).on('smk_thumbs_img_loaded', function(event){
-			EventsManager.smk_thumbs_img_loaded();  		  	    
-		});
 
 		//* image has finished loading in "detail"
 		$(Manager.widgets['details']).on('smk_detail_this_img_loaded', function(event){ 

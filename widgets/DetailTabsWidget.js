@@ -5,8 +5,8 @@
 		constructor: function (attributes) {
 			AjaxSolr.DetailTabsWidget.__super__.constructor.apply(this, arguments);
 			AjaxSolr.extend(this, {
-				thumbnailsManager:null,
-				thumbnails_subWidget:null,
+				partsManager:null,
+				parts_subWidget:null,
 				relatedManager: null,
 				related_subWidget: null,
 				originalManager: null,
@@ -21,6 +21,8 @@
 		default_picture_path: null, 
 		
 		related_id_req: null,
+		
+		multi_work_ref_req: null,
 
 		init: function(){	  	    
 			var self = this;
@@ -42,7 +44,8 @@
 					"thumbs": {					
 								'rows':500,					
 								'start': 0,
-								'fl': self.thumbnailsManager.store.fl_options.thumbs,
+								'sort': "id asc",
+								'fl': self.partsManager.store.fl_options.thumbs,
 								'json.nl': 'map'
 								},
 						
@@ -60,7 +63,7 @@
 			}   						
 			
 			for (var name in params.thumbs) {
-				self.thumbnailsManager.store.addByValue(name, params.thumbs[name]);			
+				self.partsManager.store.addByValue(name, params.thumbs[name]);			
 			}   
 			
 			for (var name in params.detail) {				
@@ -79,13 +82,6 @@
 			//* sub widget coupling
 			self.relatedManager.addWidget(self.related_subWidget); 				
 
-			//* a new image has been displayed in "scroll teaser"
-			$(self.related_subWidget).on('smk_related_this_img_loaded', function(event){     	            								
-				$(self).trigger({
-					type: "smk_related_this_img_loaded"
-				});
-			});	
-			
 			// click on a related artwork
 			$(self.related_subWidget).on('smk_search_call_detail', function(event){ 								
 				$(self).trigger({
@@ -93,32 +89,20 @@
 					event: event
 				});
 			});
-
+			
 			//***
-			//* thumbnail sub widget
+			//* part sub widget
 			//***
 			//* sub widget coupling
-			self.thumbnailsManager.addWidget(self.thumbnails_subWidget); 				
-
-			// a new image has been displayed in "scroll teaser"
-			$(self.thumbnails_subWidget).on('smk_thumbs_img_loaded', function(event){     	            								
-				$(self).trigger({
-					type: "smk_thumbs_img_loaded"
-				});
-			});	
+			self.partsManager.addWidget(self.parts_subWidget); 							
 			
-			// click on a thumb
-			$(self.thumbnails_subWidget).on('smk_search_call_detail', function(event){ 
-				
-				self.setCurrentThumb_selec(event.detail_id);  
-				
+			// click on a part of the artwork
+			$(self.parts_subWidget).on('smk_search_call_detail', function(event){ 								
 				$(self).trigger({
 					type: "smk_search_call_detail",
-					event_caller: event
+					event: event
 				});
 			});
-
-			self.thumbnailsManager.init();
 			
 			//* merge data and template
 			var html = self.template_integration_json({}, '#detailTemplate');    
@@ -135,8 +119,6 @@
 				return;
 			}	
 
-			//$target.empty();
-
 			// in case there are no results
 			if (this.manager.response.response.docs.length == 0){
 				$target
@@ -152,7 +134,7 @@
 			
 			var tab_requests = null;
 			var dataHandler = new getData_Detail_Tabs.constructor(this);
-			var multi_work_ref_req = null;
+			this.multi_work_ref_req = null;
 			this.related_id_req = null;
 			var original_id_req = null;
 
@@ -166,31 +148,14 @@
 				//øøøøøøøøøøøø//
 				
 				tab_requests = dataHandler.get_data(doc);  
-				//* process thumbnails
-				multi_work_ref_req = tab_requests.subwidget.req_multiwork;
+				//* get parts request
+				this.multi_work_ref_req = tab_requests.subwidget.req_multiwork;
 	
-				//* process related
-				this.related_id_req = tab_requests.subwidget.req_relatedid;	
-				
-				
-
-			}
+				//* get related request
+				this.related_id_req = tab_requests.subwidget.req_relatedid;									
+			}			     				
 			
-//			//* merge data and template
-//			var html = self.template_integration_json({"detail": tab_requests}, '#detailTemplate');    
-//			$target.html(html);    
-
-//			//* add main image
-//			$target.find('.gallery__main.image_loading').each(function() {    	    	
-//				dataHandler.getImage($(this));
-//			});      				
-			
-			if(multi_work_ref_req != null){				
-				//* start thumbnail sub request
-				var param = new AjaxSolr.Parameter({name: "q", value: multi_work_ref_req });					  					
-				this.thumbnailsManager.store.add(param.name, param);	 			
-				this.thumbnailsManager.doRequest();				
-			}							
+								
 			
 			if(original_id_req != null){	
 				//* start original  sub request
@@ -205,18 +170,14 @@
 			var template = this.template; 	
 			var html = Mustache.to_html($(template).find(templ_id).html(), json_data);
 			return html;
-		},
-		
-		setCurrentThumb_selec: function(selec){
-			this.thumbnails_subWidget.setCurrent_selec(selec);
-		},
-		
-		getCurrentThumb_selec: function(){
-			return this.thumbnails_subWidget.getCurrent_selec();
-		},
-		
+		},				
+				
 		verticalAlignThumbs: function(){
-			this.thumbnails_subWidget.verticalAlign();
+			this.parts_subWidget.verticalAlign();
+		},
+		
+		removeAllParts: function(){
+			this.parts_subWidget.removeAllArticles();
 		},
 		
 		removeAllRelated: function(){
@@ -230,7 +191,16 @@
 				this.relatedManager.store.add(param.name, param);	 			
 				this.relatedManager.doRequest();
 			}
-		}				
+		},	
+		
+		process_parts: function(){
+			if(this.multi_work_ref_req != null){				
+				//* start part sub request
+				var param = new AjaxSolr.Parameter({name: "q", value: this.multi_work_ref_req });					  					
+				this.partsManager.store.add(param.name, param);	 			
+				this.partsManager.doRequest();				
+			}		
+		}	
 	});
 
 })(jQuery);

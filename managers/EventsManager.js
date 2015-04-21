@@ -103,8 +103,6 @@
 			if(model.category !== undefined){
 				if (model.view != 'detail'){			    		
 					ViewManager.categoryChanged({'category': model.category});
-				}else{
-					ViewManager.callWidgetFn('details', 'setCurrentThumb_selec', {params:[null]});						
 				}
 			}else if(model.category == undefined && model.view != 'detail'){
 				ViewManager.categoryChanged({'category': "all"});
@@ -221,9 +219,7 @@
 			if(smkCommon.debugTime()) console.timeEnd("adresschanged-process_widgets-1-2");
 			if(smkCommon.debugTime()) console.timeEnd("adresschanged-process_widgets-1");
 
-			if(smkCommon.debugTime()) console.time("adresschanged-process_widgets-2");
-			// reinit thumbs current selected
-			ViewManager.callWidgetFn('details', 'setCurrentThumb_selec');	
+			if(smkCommon.debugTime()) console.time("adresschanged-process_widgets-2");				
 
 			// copy "q" values in Currentsearch widget (without q default)	
 			ViewManager.callWidgetFn('currentsearch', 'removeAllCurrentSearch');			
@@ -554,19 +550,9 @@
 				$.taskQueue.add(doQueue, this, 10);	
 			};
 							
-			doQueueProcess('process_related');										
+			doQueueProcess('process_related');
+			doQueueProcess('process_parts');
 			
 		};
-
-		//* a new image has finished loading in "related"
-		this.smk_related_this_img_loaded = function(){
-			ViewManager.smk_related_this_img_loaded();
-		};
-
-		//* a new image has finished loading in "thumbs"
-		this.smk_thumbs_img_loaded = function(){
-			ViewManager.smk_thumbs_img_loaded();
-		};
-
 	}
 }));
