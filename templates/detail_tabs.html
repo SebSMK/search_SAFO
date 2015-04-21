@@ -2,115 +2,336 @@
 
 <script id="detailTemplate" type="text/template">
 
-{{#detail}}
-<a class="back-button" href="#">Back</a>
-{{#media}}
-	<div id="media-container">
-	  <div class="gallery">
-	    <div class="gallery__main image_loading" src="{{image}}" title="{{title}}" alt="{{{alt}}}" img_id="{{img_id}}">
-			<a href="{{image}}" alt="{{title}}"></a>
-		</div>
-	
-	    <!-- Copyright notice -->
-		{{#copyright_default}}
-	    	<div class="gallery__copyright"><a target="_blank" class="cc0" onclick="window.open('http://creativecommons.org/publicdomain/zero/1.0/')">&nbsp;</a></div>
-		{{/copyright_default}}
-		{{#copyright_valid}}
-	    	<div class="gallery__copyright">{{{copyright}}}</div>
-		{{/copyright_valid}}
-	
-		<!-- thumbnails -->
-		<div id="thumbnails"></div>  	  
 
-	</div><!-- gallery -->
-  </div><!-- #media-container -->
-{{/media}}
-	
-{{#info}}
-	<div id="info-container">
-	
-	  <!-- Sharing links -->
-	  <div class="sharing--iconified">
-	    <a target="_blank" href="http://www.facebook.com/sharer/sharer.php?s=100&u={{{media.fb}}}">Share on Facebook</a>
-	    <a target="_blank" href="https://twitter.com/intent/tweet?url={{{media.twitter.url}}}&text={{{media.twitter.description}}}&amp;via=StatensMuseum">Tweet This</a>
-	    <a target="_blank" href="https://plus.google.com/share?url={{{media.google}}}">Plus on Google+</a>
-	    <a target="_blank" href="http://www.pinterest.com/pin/create/button/?url={{{media.pinterest.url}}}&media={{{media.pinterest.image}}}&description={{{media.pinterest.description}}}">Pin on Pinterest</a>
-		<a target="_blank" onclick="window.print()" class="print">Print</a>
-	  </div>
-	
-	  <!-- Heading -->
-	{{#artist}}
-	  <h1 class="heading--m">{{{artist_data}}}</h1>
- 	{{/artist}}
-  
-	  <h1 class="heading--m"><i>{{title}}</i><span>{{{artwork_date}}}</span></h1>
-	
-	  <div class="cutoff">{{description}}</div>
+	<section class="single-artwork-tabs">
 
-	<!-- Data pairs (technique) -->
-	  {{#technique}}
-	  <div class="data-pairs">
-	    <div class="data-pair">
-	      <div class="data-pair__key">{{key}}</div>
-	      <div class="data-pair__value">{{value}}</div>
-	    </div>	    
-	  </div><!-- data-pairs -->
-	  {{/technique}}	
+  <div data-tabs-id="artwork-tabs" class="tabs">
+    <a href="#description">Værktekst</a>
+    <a href="#parts">Værkdele</a>
+    <a href="#details" class="">Detaljer</a>
+    <a class="active" href="#related">Relaterede værker</a>
+  </div>
 
+  <div data-tabs-id="artwork-tabs" id="description" class="tab-content">
+    <div class="tabs print-tabs">
+      <a class="active" href="#description">Værktekst</a>
+    </div>
 
-	  <!-- Data pairs (dimensions) -->
-	  {{#dim}}
-	  <div class="data-pairs">
-	    <div class="data-pair">
-	      <div class="data-pair__key">{{key}}</div>											      		
-				<div class="data-pair__value">{{dim}}</div>			
-	    </div>	    
-	  </div><!-- data-pairs -->
-	  {{/dim}}	
-	
-	  <!-- Data pairs (acquisition) -->
-	  {{#acq}}
-	  <div class="data-pairs">
-	    <div class="data-pair">
-	      <div class="data-pair__key">{{key}}</div>
-	      <div class="data-pair__value">{{method}}{{source}}{{date}}</div>		  
-	    </div>	    
-	  </div><!-- data-pairs -->
-	  {{/acq}}
+    <div class="copy">
+      <p>Indgår i en gruppe på 172 løsblade med i alt 180 anvendte og ikke anvendte illustrationer til ”Saxo. Danmarks Riges Krønike”, Gyldendalske Boghandel / Nyt Nordisk Forlag A/S, København 1970 (kks1968-26 &ndash; kks1968-83; kks1972-302 &ndash; kks1972-405). En del af bladene er forsynede med håndskrevne numre, der henviser til kunstnerens egen fortegnelse, hvoraf en kopi findes i Danmarks Kunstbibliotek under titlen ”Brev fra Sigurd Vasegaard til direktør Jørgen Sthyr, Ny Carlsbergfondet, samt Vasegaards egen fortegnelse over træsnittene til Saxo, formentlig såvidt de var færdige i 1962”.</p>
+      <p>Udover Jørgen Sthyr, Ny Carlsbergfondet, samt Vasegaards egen fortegnelse de 171 løsblade findes der i KKS et indbundet eksemplar af udgivelsen fra 1970.</p>
+      <p>Indgår i en gruppe på 172 løsblade med i alt 180 anvendte og ikke anvendte illustrationer til ”Saxo. Danmarks Riges Krønike”, Gyldendalske Boghandel / Nyt Nordisk Forlag A/S, København 1970 (kks1968-26 &ndash; kks1968-83; kks1972-302 &ndash; kks1972-405). En del af bladene er forsynede med håndskrevne numre.</p>
+    </div><!-- /.copy -->
+  </div><!-- /.tab-content -->
 
-	<!-- Data pairs (provenance) -->
-	  {{#proveniens}}
-	  <div class="data-pairs">
-	    <div class="data-pair">
-	      <div class="data-pair__key">{{key}}</div>
-	      <div class="data-pair__value">{{value}}</div>		  
-	    </div>	    
-	  </div><!-- data-pairs -->
-	  {{/proveniens}}
+  <div class="print-page-break"></div>
 
-	  <!-- Data pairs (inventar number) -->
-	  {{#meta}}
-	  <div class="data-pairs">
-	    <div class="data-pair">
-	      <div class="data-pair__key">{{key}}</div>
-	      <div class="data-pair__value type--code">{{value}}</div>
-	    </div>	    
-	  </div><!-- data-pairs -->
-	  {{/meta}}
+  <div data-tabs-id="artwork-tabs" id="parts" class="tab-content">
+    <div class="tabs print-tabs">
+      <a class="active" href="#description">Værkdele</a>
+    </div>
 
-	  <!-- Data pairs (location) -->
-	  {{#location}}
-	  <div class="data-pairs">
-	    <div class="data-pair">
-	      <div class="data-pair__key">{{key}}</div>
-	      <div class="data-pair__value">{{value}}</div>
-	    </div>	    
-	  </div><!-- data-pairs -->
-	  {{/location}}
-	  
-	</div><!-- #info-container -->
-{{/info}}	
-{{/detail}}
+    <div class="matrix matrix-equalized matrix-five-columns thumbnail-gallery">
+      <div class="matrix-tile">
+  <div class="matrix-tile-inner">
+    <div class="matrix-tile-image">
+      <a href="single-artwork.html"><img src="content/david-thumb-8.jpeg" style="opacity: 1; margin-top: 0px; height: 158px; width: auto;" data-has-been-layouted="true"></a>
+    </div>
+
+    <div class="matrix-tile-header">
+      <h3 style="word-wrap: break-word; white-space: normal;">Michelangelo</h3>
+      <h2><a href="single-artwork.html" style="word-wrap: break-word;">Kongens Have med kvinde med barnevogn og en kæmpe madpakke i det grønne og det lyseblå og det fløjelsbløde</a></h2>
+    </div>
+
+    <ul class="matrix-tile-meta">
+      <li class="matrix-tile-meta-date">Dating: 1930</li>
+      <li class="matrix-tile-meta-id"><span>ID:</span> kks62920</li>
+      <li class="matrix-tile-meta-location">On display in Studiesalen</li>
+    </ul>
+  </div>
+</div>
+
+<div class="matrix-tile">
+  <div class="matrix-tile-inner">
+    <div class="matrix-tile-image">
+      <a href="single-artwork.html"><img src="content/david-thumb-5.jpeg" style="opacity: 1; margin-top: 0px; height: 158px; width: auto;" data-has-been-layouted="true"></a>
+    </div>
+
+    <div class="matrix-tile-header">
+      <h3 style="word-wrap: break-word; white-space: normal;">Michelangelo</h3>
+      <h2><a href="single-artwork.html" style="word-wrap: break-word;">Stående nøgen pige</a></h2>
+    </div>
+
+    <ul class="matrix-tile-meta">
+      <li class="matrix-tile-meta-date">Dating: 1930</li>
+      <li class="matrix-tile-meta-id"><span>ID:</span> kks62920</li>
+      <li class="matrix-tile-meta-location">On display in Studiesalen</li>
+    </ul>
+  </div>
+</div>
+
+<div class="matrix-tile">
+  <div class="matrix-tile-inner">
+    <div class="matrix-tile-image">
+      <a href="single-artwork.html"><img src="content/david-thumb-6.jpeg" style="opacity: 1; margin-top: 0px; height: 158px; width: auto;" data-has-been-layouted="true"></a>
+    </div>
+
+    <div class="matrix-tile-header">
+      <h3 style="word-wrap: break-word; white-space: normal;">Michelangelo</h3>
+      <h2><a href="single-artwork.html" style="word-wrap: break-word;">Pige ved vandfald iført uldsokker og kedeldragt</a></h2>
+    </div>
+
+    <ul class="matrix-tile-meta">
+      <li class="matrix-tile-meta-date">Dating: 1930</li>
+      <li class="matrix-tile-meta-id"><span>ID:</span> kks62920</li>
+      <li class="matrix-tile-meta-location">On display in Studiesalen</li>
+    </ul>
+  </div>
+</div>
+
+<div class="matrix-tile">
+  <div class="matrix-tile-inner">
+    <div class="matrix-tile-image">
+      <a href="single-artwork.html"><img src="content/david-thumb-3.jpeg" style="opacity: 1; margin-top: 0px; height: 158px; width: auto;" data-has-been-layouted="true"></a>
+    </div>
+
+    <div class="matrix-tile-header">
+      <h3 style="word-wrap: break-word; white-space: normal;">Michelangelo</h3>
+      <h2><a href="single-artwork.html" style="word-wrap: break-word;">Komposition med to dansende kvindefigurer og en knivspids salt samt gurgemeje og syltede rodfrugter med ølklejnemarmelade</a></h2>
+    </div>
+
+    <ul class="matrix-tile-meta">
+      <li class="matrix-tile-meta-date">Dating: 1930</li>
+      <li class="matrix-tile-meta-id"><span>ID:</span> kks62920</li>
+      <li class="matrix-tile-meta-location">On display in Studiesalen</li>
+    </ul>
+  </div>
+</div>
+
+<div class="matrix-tile">
+  <div class="matrix-tile-inner">
+    <div class="matrix-tile-image">
+      <a href="single-artwork.html"><img src="content/david-thumb-4.jpeg" style="opacity: 1; margin-top: 0px; height: 158px; width: auto;" data-has-been-layouted="true"></a>
+    </div>
+
+    <div class="matrix-tile-header">
+      <h3 style="word-wrap: break-word; white-space: normal;">Michelangelo</h3>
+      <h2><a href="single-artwork.html" style="word-wrap: break-word;">Ansigt af mand med mørke øjne set forfra</a></h2>
+    </div>
+
+    <ul class="matrix-tile-meta">
+      <li class="matrix-tile-meta-date">Dating: 1930</li>
+      <li class="matrix-tile-meta-id"><span>ID:</span> kks62920</li>
+      <li class="matrix-tile-meta-location">On display in Studiesalen</li>
+    </ul>
+  </div>
+</div>
+
+<div class="matrix-tile">
+  <div class="matrix-tile-inner">
+    <div class="matrix-tile-image">
+      <a href="single-artwork.html"><img src="content/david-thumb-1.jpeg" style="opacity: 1; margin-top: 0px; height: 158px; width: auto;" data-has-been-layouted="true"></a>
+    </div>
+
+    <div class="matrix-tile-header">
+      <h3 style="word-wrap: break-word; white-space: normal;">Michelangelo</h3>
+      <h2><a href="single-artwork.html" style="word-wrap: break-word;">Ung pige ved halvrundt bord</a></h2>
+    </div>
+
+    <ul class="matrix-tile-meta">
+      <li class="matrix-tile-meta-date">Dating: 1930</li>
+      <li class="matrix-tile-meta-id"><span>ID:</span> kks62920</li>
+      <li class="matrix-tile-meta-location">On display in Studiesalen</li>
+    </ul>
+  </div>
+</div>
+
+<div class="matrix-tile">
+  <div class="matrix-tile-inner">
+    <div class="matrix-tile-image">
+      <a href="single-artwork.html"><img src="content/david-thumb-2.jpeg" style="opacity: 1; margin-top: 0px; height: 158px; width: auto;" data-has-been-layouted="true"></a>
+    </div>
+
+    <div class="matrix-tile-header">
+      <h3 style="word-wrap: break-word; white-space: normal;">Michelangelo</h3>
+      <h2><a href="single-artwork.html" style="word-wrap: break-word;">Festudsmykning ved Nyhavn, set fra vandet mod den gamle botaniske have hvor Jens sad og fik en fadbamse det vi malede det her skønne billede</a></h2>
+    </div>
+
+    <ul class="matrix-tile-meta">
+      <li class="matrix-tile-meta-date">Dating: 1930</li>
+      <li class="matrix-tile-meta-id"><span>ID:</span> kks62920</li>
+      <li class="matrix-tile-meta-location">On display in Studiesalen</li>
+    </ul>
+  </div>
+</div>
+
+<div class="matrix-tile">
+  <div class="matrix-tile-inner">
+    <div class="matrix-tile-image">
+      <a href="single-artwork.html"><img src="content/david-thumb-7.jpeg" style="opacity: 1; margin-top: 0px; height: 158px; width: auto;" data-has-been-layouted="true"></a>
+    </div>
+
+    <div class="matrix-tile-header">
+      <h3 style="word-wrap: break-word; white-space: normal;">Michelangelo</h3>
+      <h2><a href="single-artwork.html" style="word-wrap: break-word;">Titelblad til "Københavnske Samlinger af rare Trykte- og Utrykte- Piecer som har en rigtig lang titel"</a></h2>
+    </div>
+
+    <ul class="matrix-tile-meta">
+      <li class="matrix-tile-meta-date">Dating: 1930</li>
+      <li class="matrix-tile-meta-id"><span>ID:</span> kks62920</li>
+      <li class="matrix-tile-meta-location">On display in Studiesalen</li>
+    </ul>
+  </div>
+</div>
+
+    </div><!-- /.matrix -->
+  </div><!-- /.tab-content -->
+
+  <div class="print-page-break"></div>
+
+  <div data-tabs-id="artwork-tabs" id="details" class="tab-content">
+    <div class="tabs print-tabs">
+      <a class="active" href="#description">Detaljer</a>
+    </div>
+
+    <div class="data-section">
+      <h3>Identifikation</h3>
+
+      <div class="data-pair">
+        <h4 class="data-pair-key">Værktype</h4>
+        <div class="data-pair-value">
+          Grafik, Dybtryk, Radering, Koldnål-tørnål.
+        </div><!-- /.data-pair-value -->
+      </div><!-- /.data-pair -->
+
+      <div class="data-pair">
+        <h4 class="data-pair-key">Test key</h4>
+        <div class="data-pair-value">
+          Test value
+        </div><!-- /.data-pair-value -->
+      </div><!-- /.data-pair -->
+
+      <div class="data-pair">
+        <h4 class="data-pair-key">Antal dele</h4>
+        <div class="data-pair-value">
+          5
+        </div><!-- /.data-pair-value -->
+      </div><!-- /.data-pair -->
+
+      <div class="data-pair">
+        <h4 class="data-pair-key">Samling</h4>
+        <div class="data-pair-value">
+          Den Kongelige Kobberstiksamling
+        </div><!-- /.data-pair-value -->
+      </div><!-- /.data-pair -->
+
+      <div class="data-pair">
+        <h4 class="data-pair-key">Inventarnummer</h4>
+        <div class="data-pair-value">
+          kksgb3925
+        </div><!-- /.data-pair-value -->
+      </div><!-- /.data-pair -->
+    </div><!-- /.data-section -->
+
+    <div class="data-section">
+      <h3>Kunster / Producent</h3>
+
+      <div class="data-pair">
+        <h4 class="data-pair-key">Kunstner</h4>
+        <div class="data-pair-value">
+          Christian Købke <i>(dansk, 1810-1848)</i>
+        </div><!-- /.data-pair-value -->
+      </div><!-- /.data-pair -->
+
+      <div class="data-pair">
+        <h4 class="data-pair-key">Tilskrevet</h4>
+        <div class="data-pair-value">
+          Constantin Hansen <i>(dansk, 1810-1848)</i>
+        </div><!-- /.data-pair-value -->
+      </div><!-- /.data-pair -->
+
+      <div class="data-pair">
+        <h4 class="data-pair-key">Udgiver</h4>
+        <div class="data-pair-value">
+          Christoffer Eckersberg <i>(dansk, 1810-1848)</i>
+        </div><!-- /.data-pair-value -->
+      </div><!-- /.data-pair -->
+
+      <div class="data-pair">
+        <h4 class="data-pair-key">Ophavsbeskrivelse</h4>
+        <div class="data-pair-value">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </div><!-- /.data-pair-value -->
+      </div><!-- /.data-pair -->
+
+      <div class="data-pair">
+        <h4 class="data-pair-key">Test test test</h4>
+        <div class="data-pair-value">
+          Christoffer Eckersberg <i>(dansk, 1810-1848)</i>
+        </div><!-- /.data-pair-value -->
+      </div><!-- /.data-pair -->
+
+      <div class="data-pair">
+        <h4 class="data-pair-key">Ophavsbeskrivelse</h4>
+        <div class="data-pair-value">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </div><!-- /.data-pair-value -->
+      </div><!-- /.data-pair -->
+    </div><!-- /.data-section -->
+
+    <div class="data-section">
+      <h3>Værkdele</h3>
+
+      <div class="data-pair">
+        <h4 class="data-pair-key">kksgb10978/2</h4>
+        <div class="data-pair-value">
+          Lodsbåd på Københavns red
+        </div><!-- /.data-pair-value -->
+      </div><!-- /.data-pair -->
+
+      <div class="data-pair">
+        <h4 class="data-pair-key">kksgb10978/3</h4>
+        <div class="data-pair-value">
+          Det er nemmere for en kamel at passere et nåleøje end det er at indberette til Skat.
+        </div><!-- /.data-pair-value -->
+      </div><!-- /.data-pair -->
+
+      <div class="data-pair">
+        <h4 class="data-pair-key">kksgb10978/4</h4>
+        <div class="data-pair-value">
+          Korsfæstelsen
+        </div><!-- /.data-pair-value -->
+      </div><!-- /.data-pair -->
+
+      <div class="data-pair">
+        <h4 class="data-pair-key">kksgb10978/5</h4>
+        <div class="data-pair-value">
+          Jesus helbreder den blinde
+        </div><!-- /.data-pair-value -->
+      </div><!-- /.data-pair -->
+
+      <div class="data-pair">
+        <h4 class="data-pair-key">kksgb10978/6</h4>
+        <div class="data-pair-value">
+          Tempelskatten. Peter finder mønten i sin lomme og køber et fladsskærmstv.
+        </div><!-- /.data-pair-value -->
+      </div><!-- /.data-pair -->
+
+      <div class="data-pair">
+        <h4 class="data-pair-key">kksgb10978/7</h4>
+        <div class="data-pair-value">
+          Hvem tog fusen på Lone?
+        </div><!-- /.data-pair-value -->
+      </div><!-- /.data-pair -->
+
+    </div><!-- /.data-section -->
+
+  </div><!-- /#details.tab-content -->
+
+  <div data-tabs-id="artwork-tabs" id="related" class="tab-content tab-content--open">    
+  </div><!-- /.tab-content -->
+
+</section>	
 
 </script>
 

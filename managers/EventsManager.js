@@ -326,6 +326,15 @@
 			var detail_url = event.detail_url + '&fl=detail';
 			window.open(event.detail_url);			
 		};	
+		
+		/*
+		 * call to detail view
+		 * @result:  open detail in the same window
+		 * */  
+		this.smk_search_call_detail_same = function(event){						 		  
+			var detail_url = event.detail_url;
+			ModelManager.update_url(detail_url);			
+		};	
 
 		/*
 		 * a search string has been added in SearchBox

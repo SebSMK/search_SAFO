@@ -286,9 +286,15 @@ var EventsManager;
 			template: Mustache.getTemplate('templates/thumb.html')
 		});
 
-		var sub_relatedWidget = new AjaxSolr.RelatedWidget({
+//		var sub_relatedWidget = new AjaxSolr.RelatedWidget({
+//			id: 'related',
+//			target: '#related',
+//			template: Mustache.getTemplate('templates/related.html')
+//		});
+		
+		var sub_relatedWidget = new AjaxSolr.TeasersWidget({
 			id: 'related',
-			target: '#related-artworks',
+			target: '#related',
 			template: Mustache.getTemplate('templates/related.html')
 		});
 
@@ -394,6 +400,10 @@ var EventsManager;
 		//* calls to detail view
 		$(Manager.widgets['teasers']).on('smk_search_call_detail', function(event){     	
 			EventsManager.smk_search_call_detail(event);
+		});
+		
+		$(Manager.widgets['details_tabs']).on('smk_search_call_detail', function(event){     	
+			EventsManager.smk_search_call_detail_same(event.event);
 		});
 
 		$(Manager.widgets['scroll_update']).on('smk_search_call_detail', function(event){     	

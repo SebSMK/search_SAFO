@@ -88,7 +88,7 @@
 			$(self.related_subWidget).on('smk_search_call_detail', function(event){ 								
 				$(self).trigger({
 					type: "smk_search_call_detail",
-					event_caller: event
+					event: event
 				});
 			});
 
@@ -117,6 +117,10 @@
 			});
 
 			self.thumbnailsManager.init();
+			
+			//* merge data and template
+			var html = self.template_integration_json({}, '#detailTemplate');    
+			$(self.target).html(html);    
 		}, 
 
 		afterRequest: function () {	  
@@ -129,7 +133,7 @@
 				return;
 			}	
 
-			$target.empty();
+			//$target.empty();
 
 			// in case there are no results
 			if (this.manager.response.response.docs.length == 0){
@@ -154,7 +158,7 @@
 				var doc = this.manager.response.response.docs[i]; 
 				
 				//øøøøøøøøøøøø//
-				var dataHandler_test = new getData_Detail_Extended.constructor(this);
+				var dataHandler_test = new getData_Detail_Tabs.constructor(this);
 				var artwork_data_test = dataHandler_test.get_data(doc); 
 																
 				//øøøøøøøøøøøø//
@@ -170,27 +174,14 @@
 
 			}
 			
-			//* merge data and template
-			var html = self.template_integration_json({"detail": tab_requests}, '#detailTemplate');    
-			$target.html(html);    
+//			//* merge data and template
+//			var html = self.template_integration_json({"detail": tab_requests}, '#detailTemplate');    
+//			$target.html(html);    
 
-			//* add main image
-			$target.find('.gallery__main.image_loading').each(function() {    	    	
-				dataHandler.getImage($(this));
-			});      	
-
-			//* add link to back button	  
-			//$target.find('a.back-button').css('opacity', '1');
-			$target.find('a.back-button').click(
-					function (event) {
-						event.preventDefault();
-						// send call to teaser view restoring (but without sending a request to Solr)
-						$(self).trigger({
-							type: "smk_search_call_teasers"
-						});  		    		    		    			
-						return;  		    		            
-					}
-			);
+//			//* add main image
+//			$target.find('.gallery__main.image_loading').each(function() {    	    	
+//				dataHandler.getImage($(this));
+//			});      				
 			
 			if(multi_work_ref_req != null){				
 				//* start thumbnail sub request

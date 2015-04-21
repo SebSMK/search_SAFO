@@ -210,8 +210,8 @@
 				break;
 
 			case "detail":										 
-
-				self.callWidgetFn('details', 'removeAllRelated');
+				
+				self.callWidgetFn('details_tabs', 'removeAllRelated');
 
 				$target.find("section.section--list").hide();
 
@@ -246,7 +246,7 @@
 			if (stateChange["category"] === undefined )
 				return;			
 
-			this.callWidgetFn('teasers', 'removeAllArticles');
+			this.callWidgetFn('teasers', 'removeAllArticles');						
 
 			if(smkCommon.debugTime()) console.time("categoryChanged1");
 			this.showWidget($(this.callWidgetTarget('teasers')));

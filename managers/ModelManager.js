@@ -110,6 +110,10 @@ var	ModelManager = {
 			this.setModel(model);			
 			window.location.href = this.buildURLFromModel(this.getModel());
 		},
+		
+		update_url: function(url){						
+			window.location.href = url;
+		},
 				
 		get_q: function(){
 			return smkCommon.isValidDataText(this.q) ? this.q : [];			

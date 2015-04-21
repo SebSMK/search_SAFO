@@ -163,7 +163,14 @@ a.divLink {
     width: 25%;
     padding: 15px;
   }
+  
+  .matrix-five-columns .matrix-tile-size {
+    width: 20%;
 }
+  
+}
+
+
 
 /* Modif of Jacques' code */
 
