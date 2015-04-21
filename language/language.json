@@ -18,7 +18,7 @@
 	  "tagcloud_collection":		"samling",
           
       "search_artist_name_lab": 		"Indtast kunstner",
-      "search_artist_auth_lab": 		"Indast rolle",
+      "search_artist_auth_lab": 		"Indtast rolle",
       "search_object_production_date_earliest_lab": 		"Indtast periode",
       "search_artist_natio_dk_lab": 	"Indtast kunstners nationalitet",
       "search_object_type_dk_lab":	"Indtast værktype",

@@ -26,7 +26,6 @@
 	<script src="widgets/OriginalWidget.js" type="text/javascript"></script>
 	<script src="widgets/ThumbsWidget.js" type="text/javascript"></script>
 	<script src="widgets/TeasersWidget.js" type="text/javascript"></script>	
-	<script src="widgets/RelatedWidget.js" type="text/javascript"></script>
 	<script src="widgets/PagerWidget.js" type="text/javascript"></script>
 	<script src="widgets/SearchInfoWidget.js" type="text/javascript"></script>	
 	<script src="widgets/ScrollWidget.js" type="text/javascript"></script>

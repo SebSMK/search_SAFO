@@ -2,6 +2,14 @@
 
 	AjaxSolr.TeasersWidget = AjaxSolr.AbstractWidget.extend({  
 
+		constructor: function (attributes) {
+			AjaxSolr.AbstractWidget.__super__.constructor.apply(this, arguments);
+			AjaxSolr.extend(this, {
+				initTemplate:null
+			}, attributes);
+		},
+		
+		
 		start: 0,		  
 
 		default_picture_path: null, 
@@ -16,7 +24,7 @@
 
 			//* load empty template
 			var html = self.template;     
-			$target.html($(html).find('#teaserInitTemplate').html());														
+			$target.html($(html).find(this.initTemplate).html());														
 			
 			this.default_picture_path = smkCommon.getDefaultPicture('medium');      	
 

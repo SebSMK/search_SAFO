@@ -267,7 +267,8 @@ var EventsManager;
 		Manager.addWidget(new AjaxSolr.TeasersWidget({
 			id: 'teasers',
 			target: '#smk_teasers',
-			template: Mustache.getTemplate('templates/teasers.html')
+			template: Mustache.getTemplate('templates/teasers.html'),
+			initTemplate:'#teaserInitTemplate'
 		}));
 
 		for (var i = 0, l = searchFieldsTypes.length; i < l; i++) {
@@ -285,17 +286,12 @@ var EventsManager;
 			target: '#thumbnails',
 			template: Mustache.getTemplate('templates/thumb.html')
 		});
-
-//		var sub_relatedWidget = new AjaxSolr.RelatedWidget({
-//			id: 'related',
-//			target: '#related',
-//			template: Mustache.getTemplate('templates/related.html')
-//		});
 		
 		var sub_relatedWidget = new AjaxSolr.TeasersWidget({
 			id: 'related',
 			target: '#related',
-			template: Mustache.getTemplate('templates/related.html')
+			template: Mustache.getTemplate('templates/teasers.html'),
+			initTemplate:'#relatedInitTemplate'
 		});
 
 		var sub_originalWidget = new AjaxSolr.OriginalWidget({
