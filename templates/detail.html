@@ -24,12 +24,12 @@
     	<div id="info-container" class="artwork-content">    	    	 
     	
     	  <!-- Heading -->
-		<ul class="artwork-artists">    	
-		{{#artist}}		
-    	  <li>{{{name}}}&nbsp;<i>{{{info}}}</i></li>
-		{{/artist}}
+		{{#artist}}			
+		<ul class="artwork-artists">    				
+    	  <li>{{{name}}}&nbsp;<i>{{{info}}}</i></li>		
 		</ul>     	
-				
+		{{/artist}}
+		
       	{{#title_museum}}	
 		<h1 class="artwork-title">{{{title_museum}}}</h1>
 		{{/title_museum}}
@@ -69,7 +69,22 @@
           	</div><!-- /.data-section -->    	 
     	  {{/acq.value}}        	
     
-    	  
+		  <!-- Data pairs (ref number) -->
+    	  {{#ident_invnummer.value}}
+			<div class="data-section data-section-compact">
+            	<h3>{{ident_invnummer.key}}</h3>
+            	<div class="data">{{{ident_invnummer.value}}}</div>
+          	</div><!-- /.data-section -->    	 
+    	  {{/ident_invnummer.value}}        	
+    
+		<!-- location) -->
+		{{#location}}
+		<br>			
+		<ul class="artwork-artists">    				
+    	  <li><i>{{{location}}}</i></li>		
+		</ul>     	
+		{{/location}}
+
     	</div><!-- #info-container -->
     {{/info}}	
     {{/detail}}

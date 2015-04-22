@@ -18,18 +18,65 @@
 			var data =  {
 
 					info:{
-
-						ident_vaerktype: getData_Common.getIdent_vaerktype(doc),
-						ident_dele: getData_Common.getIdent_dele(doc),
-						ident_invnummer: getData_Common.getIdent_invnummer(doc),
-						ident_samling: getData_Common.getIdent_samling(doc),
-						ident_andet_inv: getData_Common.getIdent_andet_inv(doc),																								
 						
-						producent_kunster: getData_Common.getProducent_producent(doc, getData_Common.enumProducent.orig),
-						producent_tilskrevet: getData_Common.getProducent_producent(doc, getData_Common.enumProducent.tilsk),
-						producent_tidltilskrvet: getData_Common.getProducent_producent(doc, getData_Common.enumProducent.tidl),
-						producent_vaerksted: getData_Common.getProducent_producent(doc, getData_Common.enumProducent.vaerksted),
-						producent_efterfoelger: getData_Common.getProducent_producent(doc, getData_Common.enumProducent.efterfoel),
+						ident_lab: this.caller.manager.translator.getLabel('detail_ident_lab'),
+						
+						ident_vaerktype: {
+							key: this.caller.manager.translator.getLabel('detail_ident_vaerktype'),  
+							value: getData_Common.getIdent_vaerktype(doc)
+						},
+            
+			            ident_dele: {
+							key: this.caller.manager.translator.getLabel('detail_ident_dele'),  
+							value: getData_Common.getIdent_dele(doc)
+						},
+			            
+			            ident_invnummer: {
+							key: this.caller.manager.translator.getLabel('detail_ident_invnummer'),  
+							value: getData_Common.getIdent_invnummer(doc)
+						},
+			            
+			            ident_samling: {
+							key: this.caller.manager.translator.getLabel('detail_ident_samling'),  
+							value: getData_Common.getIdent_samling(doc)
+						},
+			            
+			            ident_andet_inv: {
+							key: this.caller.manager.translator.getLabel('detail_ident_andet_inv'),  
+							value: getData_Common.getIdent_andet_inv(doc)
+						},
+						
+						
+						producent_lab: this.caller.manager.translator.getLabel('detail_producent_lab'),
+						
+						producent_kunster: {
+							key: this.caller.manager.translator.getLabel('detail_producent_kunster'),  
+							value: this.getListProducers(doc, getData_Common.enumProducent.orig),
+							show: this.getListProducers(doc, getData_Common.enumProducent.orig).length > 0 ? true : false
+						},
+            
+						producent_tilskrevet: {
+							key: this.caller.manager.translator.getLabel('detail_producent_tilskrevet'),  
+							value: this.getListProducers(doc, getData_Common.enumProducent.tilsk),
+							show: this.getListProducers(doc, getData_Common.enumProducent.tilsk).length > 0 ? true : false
+						},
+			            
+						producent_tidltilskrvet: {
+							key: this.caller.manager.translator.getLabel('detail_producent_tidltilskrvet'),  
+							value: this.getListProducers(doc, getData_Common.enumProducent.tidl),
+						},
+			            
+						producent_vaerksted: {
+							key: this.caller.manager.translator.getLabel('detail_producent_vaerksted'),  
+							value: this.getListProducers(doc, getData_Common.enumProducent.vaerksted),
+						},
+			            
+						producent_efterfoelger: {
+							key: this.caller.manager.translator.getLabel('detail_producent_efterfoelger'),  
+							value: this.getListProducers(doc, getData_Common.enumProducent.efterfoel),
+						},
+            
+						
 						producent_inventor: getData_Common.getProducent_producent(doc, getData_Common.enumProducent.inventor),						
 						producent_skole: getData_Common.getProducent_producent(doc, getData_Common.enumProducent.skole),
 						producent_stil: getData_Common.getProducent_producent(doc, getData_Common.enumProducent.stil),
@@ -102,6 +149,40 @@
 			return data;	  
 
 		};   
+		
+		this.getListProducers = function(doc, type){									
+			var res = new Array();
+			var list = new Array();
+			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, type))){				
+				for (var j = 0, k = getData_Common.getProducent_producent(doc, type).length; j < k ; j++) {																
+					var output = this.getArtistOutput(getData_Common.getProducent_producent(doc, type)[j].artist_data);
+					res.push(output);
+				}													
+			}
+			
+			return res; 
+		};
+		
+		this.getArtistOutput = function(doc){
+			var res = {};
+			
+			if (doc.name != undefined)
+				res.name = doc.name;
+			
+			var role = smkCommon.isValidDataText(doc.role) ? sprintf(', %s', doc.role) : "";
+			var dates = smkCommon.isValidDataText(doc.dates) ? sprintf(', %s', doc.dates) : "";
+			var nationality = smkCommon.isValidDataText(doc.nationality) ? sprintf('%s', doc.nationality) : "";												
+
+			res.info = sprintf('(%s%s%s)', nationality, dates, role);
+			
+
+			return res;
+		};			
+		
+		/*
+		 * variables
+		 */
+		this.caller = caller;
 
 	}
 

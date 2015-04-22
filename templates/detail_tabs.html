@@ -8,6 +8,120 @@
 {{/info.references_texts}}
 </script>
 
+<script id="detailDetailTemplate" type="text/template">	
+<div data-tabs-id="artwork-tabs" id="details" class="tab-content tab-content--open">
+	
+<!-- identification -->
+
+	<div class="data-section">
+      <h3>{{{ident_lab}}}</h3>
+
+      {{#ident_vaerktype.value}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{ident_vaerktype.key}}}</h4>
+        <div class="data-pair-value">{{{ident_vaerktype.value}}}
+        </div><!-- /.data-pair-value -->
+      </div><!-- /.data-pair -->
+      {{/ident_vaerktype.value}}
+
+	{{#ident_dele.value}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{ident_dele.key}}}</h4>
+        <div class="data-pair-value">{{{ident_dele.value}}}
+        </div><!-- /.data-pair-value -->
+      </div><!-- /.data-pair -->
+      {{/ident_dele.value}}
+      
+	{{#ident_invnummer.value}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{ident_invnummer.key}}}</h4>
+        <div class="data-pair-value">{{{ident_invnummer.value}}}
+        </div><!-- /.data-pair-value -->
+      </div><!-- /.data-pair -->
+      {{/ident_invnummer.value}}
+      
+	{{#ident_samling.value}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{ident_samling.key}}}</h4>
+        <div class="data-pair-value">{{{ident_samling.value}}}
+        </div><!-- /.data-pair-value -->
+      </div><!-- /.data-pair -->
+      {{/ident_samling.value}}
+      
+	{{#ident_andet_inv.value}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{ident_andet_inv.key}}}</h4>
+        <div class="data-pair-value">{{{ident_andet_inv.value}}}
+        </div><!-- /.data-pair-value -->
+      </div><!-- /.data-pair -->
+      {{/ident_andet_inv.value}}      
+    </div>
+
+<!-- /.identification -->
+
+
+<!-- producent -->
+
+	<div class="data-section">
+      <h3>{{{producent_lab}}}</h3>
+
+      {{#producent_kunster.show}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{producent_kunster.key}}}</h4>
+		{{#producent_kunster.value}}        
+			<div class="data-pair-value">{{{name}}}&nbsp;<i>{{{info}}}</i></li>		
+        	</div><!-- /.data-pair-value -->
+		{{/producent_kunster.value}}
+      </div><!-- /.data-pair -->
+      {{/producent_kunster.show}}
+
+	{{#producent_tilskrevet.show}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{producent_tilskrevet.key}}}</h4>
+        {{#producent_tilskrevet.value}}        
+			<div class="data-pair-value">{{{name}}}&nbsp;<i>{{{info}}}</i></li>		
+        	</div><!-- /.data-pair-value -->
+		{{/producent_tilskrevet.value}}
+      </div><!-- /.data-pair -->
+      {{/producent_tilskrevet.show}}
+      
+	{{#producent_tidltilskrvet.value.show}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{producent_tidltilskrvet.key}}}</h4>
+        {{#producent_tidltilskrvet.value}}        
+			<div class="data-pair-value">{{{name}}}&nbsp;<i>{{{info}}}</i></li>		
+        	</div><!-- /.data-pair-value -->
+		{{/producent_tidltilskrvet.value}}
+      </div><!-- /.data-pair -->
+      {{/producent_tidltilskrvet.value.show}}
+      
+	{{#producent_vaerksted.value.show}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{producent_vaerksted.key}}}</h4>
+        {{#producent_vaerksted.value}}        
+			<div class="data-pair-value">{{{name}}}&nbsp;<i>{{{info}}}</i></li>		
+        	</div><!-- /.data-pair-value -->
+		{{/producent_vaerksted.value}}
+      </div><!-- /.data-pair -->
+      {{/producent_vaerksted.value.show}}
+      
+	{{#producent_efterfoelger.value.show}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{producent_efterfoelger.key}}}</h4>
+        {{#producent_efterfoelger.value}}        
+			<div class="data-pair-value">{{{name}}}&nbsp;<i>{{{info}}}</i></li>		
+        	</div><!-- /.data-pair-value -->
+		{{/producent_efterfoelger.value}}
+      </div><!-- /.data-pair -->
+      {{/producent_efterfoelger.value.show}}      
+    </div>
+
+<!-- /.producent -->            
+
+</div>
+</script>
+
+
 <script id="detailTemplate" type="text/template">
 
 
@@ -15,8 +129,8 @@
 
   <div data-tabs-id="artwork-tabs" class="tabs">
     <a href="#description">Værktekst</a>
-    <a class="active" href="#parts">Værkdele</a>
-    <a href="#details" class="">Detaljer</a>
+    <a href="#parts">Værkdele</a>
+    <a class="active" href="#details" class="">Detaljer</a>
     <a href="#related">Relaterede værker</a>
   </div>
 
@@ -29,147 +143,9 @@
 
   <div class="print-page-break"></div>
 
-  <div data-tabs-id="artwork-tabs" id="details" class="tab-content">
-    <div class="tabs print-tabs">
-      <a class="active" href="#description">Detaljer</a>
-    </div>
+  <div id="details_tab"></div><!-- /.tab-content -->  
 
-    <div class="data-section">
-      <h3>Identifikation</h3>
-
-      <div class="data-pair">
-        <h4 class="data-pair-key">Værktype</h4>
-        <div class="data-pair-value">
-          Grafik, Dybtryk, Radering, Koldnål-tørnål.
-        </div><!-- /.data-pair-value -->
-      </div><!-- /.data-pair -->
-
-      <div class="data-pair">
-        <h4 class="data-pair-key">Test key</h4>
-        <div class="data-pair-value">
-          Test value
-        </div><!-- /.data-pair-value -->
-      </div><!-- /.data-pair -->
-
-      <div class="data-pair">
-        <h4 class="data-pair-key">Antal dele</h4>
-        <div class="data-pair-value">
-          5
-        </div><!-- /.data-pair-value -->
-      </div><!-- /.data-pair -->
-
-      <div class="data-pair">
-        <h4 class="data-pair-key">Samling</h4>
-        <div class="data-pair-value">
-          Den Kongelige Kobberstiksamling
-        </div><!-- /.data-pair-value -->
-      </div><!-- /.data-pair -->
-
-      <div class="data-pair">
-        <h4 class="data-pair-key">Inventarnummer</h4>
-        <div class="data-pair-value">
-          kksgb3925
-        </div><!-- /.data-pair-value -->
-      </div><!-- /.data-pair -->
-    </div><!-- /.data-section -->
-
-    <div class="data-section">
-      <h3>Kunster / Producent</h3>
-
-      <div class="data-pair">
-        <h4 class="data-pair-key">Kunstner</h4>
-        <div class="data-pair-value">
-          Christian Købke <i>(dansk, 1810-1848)</i>
-        </div><!-- /.data-pair-value -->
-      </div><!-- /.data-pair -->
-
-      <div class="data-pair">
-        <h4 class="data-pair-key">Tilskrevet</h4>
-        <div class="data-pair-value">
-          Constantin Hansen <i>(dansk, 1810-1848)</i>
-        </div><!-- /.data-pair-value -->
-      </div><!-- /.data-pair -->
-
-      <div class="data-pair">
-        <h4 class="data-pair-key">Udgiver</h4>
-        <div class="data-pair-value">
-          Christoffer Eckersberg <i>(dansk, 1810-1848)</i>
-        </div><!-- /.data-pair-value -->
-      </div><!-- /.data-pair -->
-
-      <div class="data-pair">
-        <h4 class="data-pair-key">Ophavsbeskrivelse</h4>
-        <div class="data-pair-value">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </div><!-- /.data-pair-value -->
-      </div><!-- /.data-pair -->
-
-      <div class="data-pair">
-        <h4 class="data-pair-key">Test test test</h4>
-        <div class="data-pair-value">
-          Christoffer Eckersberg <i>(dansk, 1810-1848)</i>
-        </div><!-- /.data-pair-value -->
-      </div><!-- /.data-pair -->
-
-      <div class="data-pair">
-        <h4 class="data-pair-key">Ophavsbeskrivelse</h4>
-        <div class="data-pair-value">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </div><!-- /.data-pair-value -->
-      </div><!-- /.data-pair -->
-    </div><!-- /.data-section -->
-
-    <div class="data-section">
-      <h3>Værkdele</h3>
-
-      <div class="data-pair">
-        <h4 class="data-pair-key">kksgb10978/2</h4>
-        <div class="data-pair-value">
-          Lodsbåd på Københavns red
-        </div><!-- /.data-pair-value -->
-      </div><!-- /.data-pair -->
-
-      <div class="data-pair">
-        <h4 class="data-pair-key">kksgb10978/3</h4>
-        <div class="data-pair-value">
-          Det er nemmere for en kamel at passere et nåleøje end det er at indberette til Skat.
-        </div><!-- /.data-pair-value -->
-      </div><!-- /.data-pair -->
-
-      <div class="data-pair">
-        <h4 class="data-pair-key">kksgb10978/4</h4>
-        <div class="data-pair-value">
-          Korsfæstelsen
-        </div><!-- /.data-pair-value -->
-      </div><!-- /.data-pair -->
-
-      <div class="data-pair">
-        <h4 class="data-pair-key">kksgb10978/5</h4>
-        <div class="data-pair-value">
-          Jesus helbreder den blinde
-        </div><!-- /.data-pair-value -->
-      </div><!-- /.data-pair -->
-
-      <div class="data-pair">
-        <h4 class="data-pair-key">kksgb10978/6</h4>
-        <div class="data-pair-value">
-          Tempelskatten. Peter finder mønten i sin lomme og køber et fladsskærmstv.
-        </div><!-- /.data-pair-value -->
-      </div><!-- /.data-pair -->
-
-      <div class="data-pair">
-        <h4 class="data-pair-key">kksgb10978/7</h4>
-        <div class="data-pair-value">
-          Hvem tog fusen på Lone?
-        </div><!-- /.data-pair-value -->
-      </div><!-- /.data-pair -->
-
-    </div><!-- /.data-section -->
-
-  </div><!-- /#details.tab-content -->
-
-  <div data-tabs-id="artwork-tabs" id="related" class="tab-content tab-content--open">    
-  </div><!-- /.tab-content -->
+  <div data-tabs-id="artwork-tabs" id="related" class="tab-content"></div><!-- /.tab-content -->
 
 </section>	
 

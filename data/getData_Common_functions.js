@@ -568,6 +568,9 @@
 	};
 	
 	getdatacommon.getReferences_texts = function(doc){
+		if(doc.reference_texts === undefined)
+			return null;
+		
 		
 		var split = doc.reference_texts.split(smkCommon.split_1_niv);
 		var arrayLength = split.length;
@@ -579,23 +582,25 @@
 			var source = smkCommon.getValueFromSplit(values, 0);
 			var text = smkCommon.getValueFromSplit(values, 1);
 			
-			text = text.replace(/\r\n\r\n/g, "</p><p>").replace(/\n\n/g, "</p><p>");
-			text = text.replace(/\r\n/g, "<br />").replace(/\n/g, "<br />");
-			
-			var lang = smkCommon.getValueFromSplit(values, 2);
-			var current_lang = "";
-			
-			switch(smkCommon.getCurrentLanguage()){
-			case "dk":		 			  			  			  
-				current_lang = "dansk";
-				break;
-			case "en":
-				current_lang = "englesk";
-				break;
+			if(smkCommon.isValidDataText(text)){
+				text = text.replace(/\r\n\r\n/g, "</p><p>").replace(/\n\n/g, "</p><p>");
+				text = text.replace(/\r\n/g, "<br />").replace(/\n/g, "<br />");
+									
+				var lang = smkCommon.getValueFromSplit(values, 2);
+				var current_lang = "";
+				
+				switch(smkCommon.getCurrentLanguage()){
+				case "dk":		 			  			  			  
+					current_lang = "dansk";
+					break;
+				case "en":
+					current_lang = "englesk";
+					break;
+				}
+				
+				if(smkCommon.isValidDataText(lang) && lang.indexOf(current_lang) > -1)
+					reference_texts.push(text);	
 			}
-			
-			if(lang.indexOf(current_lang) > -1)
-				reference_texts.push(text);													
 		}				
 			
 		return reference_texts.length == 0 ? null : reference_texts;

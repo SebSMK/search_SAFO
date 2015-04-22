@@ -29,7 +29,10 @@
 					
 					info:{
 						
-						ident_invnummer: getData_Common.getIdent_invnummer(doc),						
+						ident_invnummer: {
+							key: this.caller.manager.translator.getLabel('detail_reference'),  
+							value: getData_Common.getIdent_invnummer(doc)
+						},
 						
 						artist: this.getListProducers(doc),																																					
 						
@@ -54,7 +57,9 @@
 						acq: {
 							key: this.caller.manager.translator.getLabel('detail_acquisition'),			    	
 							value: this.getDetailAcq(doc)														
-						}
+						},
+						
+						location: this.getListLocation(doc, this.caller)
 					},
 
 					subwidget:{
@@ -65,6 +70,17 @@
 			};	
 
 			return data;	  
+		};
+		
+		this.getListLocation = function (doc, caller){
+			var location = smkCommon.firstCapital(doc.location_name);
+			var location_inhouse = smkCommon.isValidDataText(location) ? caller.manager.translator.getCollection(smkCommon.replace_dansk_char(location)) : ''; 
+			var label = smkCommon.isValidDataText(location_inhouse) ? 
+					sprintf('%s %s', caller.manager.translator.getLabel("teaser_on_display"), location) 
+						: 
+					caller.manager.translator.getLabel("teaser_appoint");
+			
+			return label;
 		};
 		
 		this.getDetailAcq = function(doc){

@@ -166,8 +166,16 @@ a.divLink {
   
   .matrix-five-columns .matrix-tile-size {
     width: 20%;
-}
+	}
   
+}
+
+.data-section .data-pair .data-pair-key {
+   text-transform: capitalize;
+}
+
+.data-section .data-pair .data-pair-value {
+  text-transform: capitalize;
 }
 
 
