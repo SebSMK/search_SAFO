@@ -33,12 +33,12 @@ $.fn.masonryImagesReveal = function(msnry, $tiles, onComplete, caller, onClickLi
 			// add click on image
 			$imgcontainer.click({detail_url: $imgcontainer.find('a').attr('href'), caller: caller}, 
 					function (event) {onClickLink(event);}
-			)
+			);
 
 			// add click on title
 			$tile.find('.artwork-title').click({detail_url: $tile.find('.artwork-title').attr('href'), caller: caller}, 
 					function (event) {onClickLink(event);}
-			)
+			);
 
 			// add copyright info on image
 			$imgcontainer.find('a').mouseenter(function (event) {$tile.find('span.copyright-info').css('opacity', 1);});

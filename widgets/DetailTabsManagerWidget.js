@@ -106,7 +106,16 @@
 			
 			//* merge data and template
 			var html = self.template_integration_json({}, '#detailTemplate');    
-			$(self.target).html(html);    
+			$(self.target).html(html); 
+			
+			$(self.target).find(".tabs a").click(function (event) {
+				event.preventDefault();
+				$(self.target).find(".tabs a").removeClass("active");
+				$(this).addClass("active");
+				
+				$(self.target).find(".tab-content").removeClass("tab-content--open");
+				$(self.target).find($(this).attr("href")).addClass("tab-content--open");
+			});
 		}, 
 
 		afterRequest: function () {	  
@@ -132,30 +141,32 @@
 				return;		
 			}			
 			
-			var tab_requests = null;
-			var dataHandler = new getData_Detail_Tabs.constructor(this);
+			var tab_data = null;
+			var dataHandler = new getData_Detail_Extended.constructor(this);
 			this.multi_work_ref_req = null;
 			this.related_id_req = null;
 			var original_id_req = null;
 
 			for (var i = 0, l = this.manager.response.response.docs.length; i < l ; i++) {
-				var doc = this.manager.response.response.docs[i]; 
-				
-				//øøøøøøøøøøøø//
-				var dataHandler_test = new getData_Detail_Tabs.constructor(this);
-				var artwork_data_test = dataHandler_test.get_data(doc); 
-																
-				//øøøøøøøøøøøø//
-				
-				tab_requests = dataHandler.get_data(doc);  
+				var doc = this.manager.response.response.docs[i]; 												
+				tab_data = dataHandler.get_data(doc);  
 				//* get parts request
-				this.multi_work_ref_req = tab_requests.subwidget.req_multiwork;
-	
+				this.multi_work_ref_req = tab_data.subwidget.req_multiwork;	
 				//* get related request
-				this.related_id_req = tab_requests.subwidget.req_relatedid;									
-			}			     				
-			
-								
+				this.related_id_req = tab_data.subwidget.req_relatedid;
+				
+				
+				// process description tab
+				var html = self.template_integration_json(tab_data, '#detailDescriptionTemplate');    
+				$target.find("#description_tab").html(html); 
+				
+				
+//				var references_texts = tab_data.info.references_texts;
+//				
+//				if(references_texts != null)
+//					$target.find("#description .copy").text(references_texts);								
+				 
+			}			     															
 			
 			if(original_id_req != null){	
 				//* start original  sub request
@@ -171,10 +182,6 @@
 			var html = Mustache.to_html($(template).find(templ_id).html(), json_data);
 			return html;
 		},				
-				
-		verticalAlignThumbs: function(){
-			this.parts_subWidget.verticalAlign();
-		},
 		
 		removeAllParts: function(){
 			this.parts_subWidget.removeAllArticles();

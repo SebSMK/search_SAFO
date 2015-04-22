@@ -565,8 +565,43 @@
 
 	getdatacommon.getReferences_beckett = function(doc){			
 		return doc.other_numbers_beckett === undefined ? null : doc.other_numbers_beckett;
-	};		
-
+	};
+	
+	getdatacommon.getReferences_texts = function(doc){
+		
+		var split = doc.reference_texts.split(smkCommon.split_1_niv);
+		var arrayLength = split.length;
+		var default_value = null;
+		var reference_texts = [];
+		
+		for (var i = 0; i < arrayLength; i++) {	
+			var values = split[i].split(smkCommon.split_2_niv);
+			var source = smkCommon.getValueFromSplit(values, 0);
+			var text = smkCommon.getValueFromSplit(values, 1);
+			
+			text = text.replace(/\r\n\r\n/g, "</p><p>").replace(/\n\n/g, "</p><p>");
+			text = text.replace(/\r\n/g, "<br />").replace(/\n/g, "<br />");
+			
+			var lang = smkCommon.getValueFromSplit(values, 2);
+			var current_lang = "";
+			
+			switch(smkCommon.getCurrentLanguage()){
+			case "dk":		 			  			  			  
+				current_lang = "dansk";
+				break;
+			case "en":
+				current_lang = "englesk";
+				break;
+			}
+			
+			if(lang.indexOf(current_lang) > -1)
+				reference_texts.push(text);													
+		}				
+			
+		return reference_texts.length == 0 ? null : reference_texts;
+						
+	};	
+	
 	getdatacommon.getReferences_litteratur = function(doc){			
 		if (doc.citations === undefined) 
 			return null;

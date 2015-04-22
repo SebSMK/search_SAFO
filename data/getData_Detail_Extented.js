@@ -81,6 +81,7 @@
 						references_gernsheim: getData_Common.getReferences_gernsheim(doc),						
 						references_beckett: getData_Common.getReferences_beckett(doc),
 						references_litteratur: getData_Common.getReferences_litteratur(doc),
+						references_texts: getData_Common.getReferences_texts(doc),
 						 
 						udstilling_udstilling: getData_Common.getUdstilling_udstilling(doc),
 						
@@ -89,54 +90,15 @@
 						motiv_topografisk: getData_Common.getMotiv_topografisk(doc),
 						motiv_portraet: getData_Common.getMotiv_portraet(doc),
 						motiv_note: getData_Common.getMotiv_note(doc),															
+					},
+					
+					subwidget:{
+						req_original: getData_Common.getSubWidgReq_original(doc),
+						req_multiwork: getData_Common.getSubWidgReq_vaerkdele(doc),
+						req_relatedid: getData_Common.getSubWidgReq_relatere(doc)									
 					}
 			};	
-
-			
-			/*
-			//* add acquisition data
-			if (doc.acq_date !== undefined || doc.acq_method !== undefined){
-				data.info.acq = {
-						key: this.caller.manager.translator.getLabel('detail_acquisition'),  
-						date: doc.acq_date,
-						method: doc.acq_method !== undefined ? sprintf('%s, ', smkCommon.firstCapital(doc.acq_method)) : null,
-								source: doc.acq_source !== undefined ? sprintf('%s - ', doc.acq_source) : null
-				};
-
-			};
-
-
-			//* add dimension data
-			if (doc.dimension_brutto !== undefined || 
-					doc.dimension_netto !== undefined || 
-					doc.dimension_billedmaal !== undefined || 
-					doc.dimension_bladmaal !== undefined){
-
-				data.info.dim = {
-						key: this.caller.manager.translator.getLabel('detail_dimension'),			    	
-						dim : doc.dimension_brutto !== undefined? doc.dimension_brutto : 
-							doc.dimension_netto !== undefined? doc.dimension_netto :
-								doc.dimension_billedmaal !== undefined? doc.dimension_billedmaal : doc.dimension_bladmaal  
-				};
-
-			};
-
-			//* add location	 
-			if (this.getlocation(doc.location_name))
-				data.info.location = {
-					key: this.caller.manager.translator.getLabel('detail_location'),
-					value:doc.location_name
-			};	  	  
-
-
-			//* add provenance	 
-			if (this.getProvenance(doc))	  
-				data.info.proveniens = {
-					key: this.caller.manager.translator.getLabel('detail_provenance'),
-					value: doc.proveniens
-			};	  	  
-
-*/
+						
 			return data;	  
 
 		};   

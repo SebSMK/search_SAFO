@@ -22,9 +22,8 @@
 	<script src="core/smkParameterStore.js" type="text/javascript"></script>
 	<script src="core/AbstractWidget.js" type="text/javascript"></script>
 	<script src="widgets/DetailWidget.js" type="text/javascript"></script>
-	<script src="widgets/DetailTabsWidget.js" type="text/javascript"></script>
-	<script src="widgets/OriginalWidget.js" type="text/javascript"></script>
-	<script src="widgets/ThumbsWidget.js" type="text/javascript"></script>
+	<script src="widgets/DetailTabsManagerWidget.js" type="text/javascript"></script>
+	<script src="widgets/OriginalWidget.js" type="text/javascript"></script>	
 	<script src="widgets/TeasersWidget.js" type="text/javascript"></script>	
 	<script src="widgets/PagerWidget.js" type="text/javascript"></script>
 	<script src="widgets/SearchInfoWidget.js" type="text/javascript"></script>	
@@ -63,9 +62,7 @@
 	<script src="js/sorter.js" type="text/javascript"></script>	
 	<script src="js/backtotop/js/main.js" type="text/javascript"></script>
 	<script src="js/backtotop/js/modernizr.js" type="text/javascript"></script>		
-	<script src="data/getData_Common_functions.js" type="text/javascript"></script>	
-	<script src="data/getData_Detail.js" type="text/javascript"></script>
-	<script src="data/getData_Detail_Tabs.js" type="text/javascript"></script>
+	<script src="data/getData_Common_functions.js" type="text/javascript"></script>			
 	<script src="data/getData_Detail_Standard.js" type="text/javascript"></script>
 	<script src="data/getData_Original.js" type="text/javascript"></script>
 	<script src="data/getData_Detail_Extented.js" type="text/javascript"></script>		

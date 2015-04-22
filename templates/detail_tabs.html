@@ -1,5 +1,13 @@
 <div>
 
+<script id="detailDescriptionTemplate" type="text/template">	
+{{#info.references_texts}}
+	<div data-tabs-id="artwork-tabs" id="description" class="tab-content">
+    	<div class="copy">{{{info.references_texts}}}</div>
+  	</div>
+{{/info.references_texts}}
+</script>
+
 <script id="detailTemplate" type="text/template">
 
 
@@ -12,17 +20,7 @@
     <a href="#related">Relaterede værker</a>
   </div>
 
-  <div data-tabs-id="artwork-tabs" id="description" class="tab-content">
-    <div class="tabs print-tabs">
-      <a class="active" href="#description">Værktekst</a>
-    </div>
-
-    <div class="copy">
-      <p>Indgår i en gruppe på 172 løsblade med i alt 180 anvendte og ikke anvendte illustrationer til ”Saxo. Danmarks Riges Krønike”, Gyldendalske Boghandel / Nyt Nordisk Forlag A/S, København 1970 (kks1968-26 &ndash; kks1968-83; kks1972-302 &ndash; kks1972-405). En del af bladene er forsynede med håndskrevne numre, der henviser til kunstnerens egen fortegnelse, hvoraf en kopi findes i Danmarks Kunstbibliotek under titlen ”Brev fra Sigurd Vasegaard til direktør Jørgen Sthyr, Ny Carlsbergfondet, samt Vasegaards egen fortegnelse over træsnittene til Saxo, formentlig såvidt de var færdige i 1962”.</p>
-      <p>Udover Jørgen Sthyr, Ny Carlsbergfondet, samt Vasegaards egen fortegnelse de 171 løsblade findes der i KKS et indbundet eksemplar af udgivelsen fra 1970.</p>
-      <p>Indgår i en gruppe på 172 løsblade med i alt 180 anvendte og ikke anvendte illustrationer til ”Saxo. Danmarks Riges Krønike”, Gyldendalske Boghandel / Nyt Nordisk Forlag A/S, København 1970 (kks1968-26 &ndash; kks1968-83; kks1972-302 &ndash; kks1972-405). En del af bladene er forsynede med håndskrevne numre.</p>
-    </div><!-- /.copy -->
-  </div><!-- /.tab-content -->
+  <div id="description_tab"></div><!-- /.tab-content -->
 
   <div class="print-page-break"></div>
 
