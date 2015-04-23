@@ -55,8 +55,8 @@
         </div><!-- /.data-pair-value -->
       </div><!-- /.data-pair -->
       {{/ident_andet_inv.value}}      
-    </div>
-
+    
+</div>
 <!-- /.identification -->
 
 
@@ -224,7 +224,6 @@
       {{/producent_objectophavsbeskrivelse.show}}
 
 </div>
-
 <!-- /.producent -->            
 
 <!-- title -->
@@ -311,10 +310,56 @@
 		
       </div><!-- /.data-pair -->
       {{/title_beskrivelse.value}}						
+ 
+</div>
+<!-- /.title -->
 
-<!-- /.title --> 
+<!-- datering -->
+<div class="data-section">
+  <h3>{{{datering_lab}}}</h3>  
+  
+  {{#datering_production_vaerkdatering.value}}
+  <div class="data-pair">
+    <h4 class="data-pair-key">{{{datering_production_vaerkdatering.key}}}</h4>
+    {{#datering_production_vaerkdatering.value}}        
+    <div class="data-pair-value">{{{datering_production_vaerkdatering.value}}}	
+    </div><!-- /.data-pair-value -->
+  {{/datering_production_vaerkdatering.value}}
+  </div><!-- /.data-pair -->
+  {{/datering_production_vaerkdatering.value}}
+  
+ {{#datering_production_udgivet_place.value}}
+  <div class="data-pair">
+    <h4 class="data-pair-key">{{{datering_production_udgivet_place.key}}}</h4>
+    {{#datering_production_udgivet_place.value}}        
+    <div class="data-pair-value">{{{datering_production_udgivet_place.value}}}
+    </div><!-- /.data-pair-value -->
+  {{/datering_production_udgivet_place.value}}
+  </div><!-- /.data-pair -->
+  {{/datering_production_udgivet_place.value}}
+					
+  {{#datering_production_udfoert_place.value}}
+  <div class="data-pair">
+    <h4 class="data-pair-key">{{{datering_production_udfoert_place.key}}}</h4>
+    {{#datering_production_udfoert_place.value}}        
+    <div class="data-pair-value">{{{datering_production_udfoert_place.value}}}
+    </div><!-- /.data-pair-value -->
+  {{/datering_production_udfoert_place.value}}
+  </div><!-- /.data-pair -->
+  {{/datering_production_udfoert_place.value}}
+  
+  {{#datering_production_note.value}}
+  <div class="data-pair">
+    <h4 class="data-pair-key">{{{datering_production_note.key}}}</h4>
+    {{#datering_production_note.value}}        
+    <div class="data-pair-value">{{{datering_production_note.value}}}	
+    </div><!-- /.data-pair-value -->
+  {{/datering_production_note.value}}
+  </div><!-- /.data-pair -->
+  {{/datering_production_note.value}} 
 
 </div>
+<!-- /.datering -->
 </script>
 
 

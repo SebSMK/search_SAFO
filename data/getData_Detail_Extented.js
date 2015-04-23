@@ -166,10 +166,27 @@
 							key_trans_note: (this.caller.manager.translator.getLabel('detail_title_translation_note'))								
 						},
 						
-						datering_production_vaerkdatering: getData_Common.getProduction_vaerkdatering(doc),		
-						datering_production_udgivet_place: getData_Common.getProduction_udgivet_place(doc),						
-						datering_production_udfoert_place: getData_Common.getProduction_udfoert_place(doc),
-						datering_production_note: getData_Common.getProduction_note(doc),
+						datering_lab: this.caller.manager.translator.getLabel('detail_datering_lab'),
+						
+						datering_production_vaerkdatering: {
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_datering_production_vaerkdatering')),  
+							value: getData_Common.getProduction_vaerkdatering(doc)											
+						},
+						
+						datering_production_udgivet_place: {
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_datering_production_udgivet_place')),  
+							value: getData_Common.getProduction_udgivet_place(doc)												
+						},
+            
+						datering_production_udfoert_place: {
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_datering_production_udfoert_place')),  
+							value: getData_Common.getProduction_udfoert_place(doc)											
+						},
+            
+						datering_production_note: {
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_datering_production_note')),  
+							value: getData_Common.getProduction_note(doc)												
+						},
 						
 						technique_technique: getData_Common.getTechnique_technique(doc),
 						technique_dimensions: getData_Common.getTechnique_dimensions(doc), 
