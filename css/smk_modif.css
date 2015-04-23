@@ -5,9 +5,10 @@
 	opacity: 0.5; 
 	}   
 
-.filter-group-pair label{
-	text-transform: capitalize;
+.data-section .data-pair .data-pair-key.indent{  
+  text-indent: 10px;
 }
+
 
 .matrix-tile-image{
 	position: relative;		
@@ -169,15 +170,6 @@ a.divLink {
 	}
   
 }
-
-.data-section .data-pair .data-pair-key {
-   text-transform: capitalize;
-}
-
-.data-section .data-pair .data-pair-value {
-  text-transform: capitalize;
-}
-
 
 
 /* Modif of Jacques' code */

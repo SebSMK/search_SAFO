@@ -160,7 +160,7 @@
 				}        	  		  
 
 				tmp = {'title' : title};
-
+				
 				if(smkCommon.isValidDataText(title_note))
 					tmp.note = title_note;
 

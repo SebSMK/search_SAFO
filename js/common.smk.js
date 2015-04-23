@@ -26,7 +26,7 @@
 	};
 	
 	common.firstCapital = function(string){				
-		return string === undefined ? '' : string.charAt(0).toUpperCase() + string.slice(1)		
+		return !this.isValidDataText(string) ? '' : string.charAt(0).toUpperCase() + string.slice(1)		
 	};
 	
 	common.isValidDataText = function(text, field){
