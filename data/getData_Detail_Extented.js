@@ -64,29 +64,77 @@
 						producent_tidltilskrvet: {
 							key: this.caller.manager.translator.getLabel('detail_producent_tidltilskrvet'),  
 							value: this.getListProducers(doc, getData_Common.enumProducent.tidl),
+							show: this.getListProducers(doc, getData_Common.enumProducent.tilsk).length > 0 ? true : false
 						},
 			            
 						producent_vaerksted: {
 							key: this.caller.manager.translator.getLabel('detail_producent_vaerksted'),  
 							value: this.getListProducers(doc, getData_Common.enumProducent.vaerksted),
+							show: this.getListProducers(doc, getData_Common.enumProducent.vaerksted).length > 0 ? true : false
 						},
 			            
 						producent_efterfoelger: {
 							key: this.caller.manager.translator.getLabel('detail_producent_efterfoelger'),  
 							value: this.getListProducers(doc, getData_Common.enumProducent.efterfoel),
+							show: this.getListProducers(doc, getData_Common.enumProducent.efterfoel).length > 0 ? true : false
 						},
             
-						
-						producent_inventor: getData_Common.getProducent_producent(doc, getData_Common.enumProducent.inventor),						
-						producent_skole: getData_Common.getProducent_producent(doc, getData_Common.enumProducent.skole),
-						producent_stil: getData_Common.getProducent_producent(doc, getData_Common.enumProducent.stil),
-						producent_kopi: getData_Common.getProducent_producent(doc, getData_Common.enumProducent.kopi),
-						producent_forlaeg: getData_Common.getProducent_producent(doc, getData_Common.enumProducent.efterfor),
-						producent_udgiver: getData_Common.getProducent_producent(doc, getData_Common.enumProducent.udgiver),
-						producent_trykker: getData_Common.getProducent_producent(doc, getData_Common.enumProducent.trykker),
-						producent_forfatter: getData_Common.getProducent_producent(doc, getData_Common.enumProducent.forfatter),						
-						producent_formeri: getData_Common.getProducent_formeri(doc),
-						producent_objectophavsbeskrivelse: getData_Common.getProducent_objectophavsbeskrivelse(doc),											
+						producent_inventor: {
+							key: this.caller.manager.translator.getLabel('detail_producent_inventor'),  
+							value: this.getListProducers(doc, getData_Common.enumProducent.inventor),
+							show: this.getListProducers(doc, getData_Common.enumProducent.inventor).length > 0 ? true : false
+						},
+            
+			            producent_skole: {
+							key: this.caller.manager.translator.getLabel('detail_producent_skole'),  
+							value: this.getListProducers(doc, getData_Common.enumProducent.skole),
+							show: this.getListProducers(doc, getData_Common.enumProducent.skole).length > 0 ? true : false
+						},
+			            producent_stil: {
+							key: this.caller.manager.translator.getLabel('detail_producent_stil'),  
+							value: this.getListProducers(doc, getData_Common.enumProducent.stil),
+							show: this.getListProducers(doc, getData_Common.enumProducent.stil).length > 0 ? true : false
+						},
+			            producent_kopi: {
+							key: this.caller.manager.translator.getLabel('detail_producent_kopi'),  
+							value: this.getListProducers(doc, getData_Common.enumProducent.kopi),
+							show: this.getListProducers(doc, getData_Common.enumProducent.tilsk).kopi > 0 ? true : false
+						},
+			            producent_forlaeg: {
+							key: this.caller.manager.translator.getLabel('detail_producent_forlaeg'),  
+							value: this.getListProducers(doc, getData_Common.enumProducent.forlaeg),
+							show: this.getListProducers(doc, getData_Common.enumProducent.forlaeg).length > 0 ? true : false
+						},
+			            producent_udgiver: {
+							key: this.caller.manager.translator.getLabel('detail_producent_udgiver'),  
+							value: this.getListProducers(doc, getData_Common.enumProducent.udgiver),
+							show: this.getListProducers(doc, getData_Common.enumProducent.udgiver).length > 0 ? true : false
+						},
+			            producent_trykker: {
+							key: this.caller.manager.translator.getLabel('detail_producent_trykker'),  
+							value: this.getListProducers(doc, getData_Common.enumProducent.trykker),
+							show: this.getListProducers(doc, getData_Common.enumProducent.trykker).length > 0 ? true : false
+						},
+			            producent_forfatter: {
+							key: this.caller.manager.translator.getLabel('detail_producent_forfatter'),  
+							value: this.getListProducers(doc, getData_Common.enumProducent.forfatter),
+							show: this.getListProducers(doc, getData_Common.enumProducent.forfatter).length > 0 ? true : false
+						},
+			            producent_forfatter: {
+							key: this.caller.manager.translator.getLabel('detail_producent_forfatter'),  
+							value: this.getListProducers(doc, getData_Common.enumProducent.forfatter),
+							show: this.getListProducers(doc, getData_Common.enumProducent.forfatter).length > 0 ? true : false
+						},
+			            producent_formeri: {
+							key: this.caller.manager.translator.getLabel('detail_producent_formeri'),  
+							value: this.getListProducers(doc, getData_Common.enumProducent.formeri),
+							show: this.getListProducers(doc, getData_Common.enumProducent.formeri).length > 0 ? true : false
+						},
+			            producent_objectophavsbeskrivelse: {
+							key: this.caller.manager.translator.getLabel('detail_producent_objectophavsbeskrivelse'),  
+							value: this.getListProducers(doc, getData_Common.enumProducent.objectophavsbeskrivelse),
+							show: this.getListProducers(doc, getData_Common.enumProducent.objectophavsbeskrivelse).length > 0 ? true : false
+						},                        			            																											
 						
 						title_museum: getData_Common.getTitle(doc, 'museum'),
 						title_serie: getData_Common.getTitle(doc, 'serie'),
@@ -168,12 +216,11 @@
 			
 			if (doc.name != undefined)
 				res.name = doc.name;
-			
-			var role = smkCommon.isValidDataText(doc.role) ? sprintf(', %s', doc.role) : "";
+						
 			var dates = smkCommon.isValidDataText(doc.dates) ? sprintf(', %s', doc.dates) : "";
 			var nationality = smkCommon.isValidDataText(doc.nationality) ? sprintf('%s', doc.nationality) : "";												
 
-			res.info = sprintf('(%s%s%s)', nationality, dates, role);
+			res.info = sprintf('(%s%s)', nationality, dates);
 			
 
 			return res;
