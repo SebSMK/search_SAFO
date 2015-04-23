@@ -179,6 +179,8 @@
 				}													
 			}
 			
+			res.show = res.length > 0 ? true : false;
+			
 			return res; 
 		};
 

@@ -285,31 +285,31 @@
       {{/title_beskrivelse.value}}
 
 
-	{{#title_beskrivelse.value}}
+	{{#title_serie.value}}
       <div class="data-pair">
-		<h4 class="data-pair-key">{{{title_beskrivelse.key}}}</h4>
-		{{#title_beskrivelse.value}}         
+		<h4 class="data-pair-key">{{{title_serie.key}}}</h4>
+		{{#title_serie.value}}         
 			<div class="data-pair-value">{{{title}}}</div><!-- /.data-pair-value -->
 			
 			{{#note}}
-				<h4 class="data-pair-key indent">{{{title_beskrivelse.key_note}}}</h4>		         
+				<h4 class="data-pair-key indent">{{{title_serie.key_note}}}</h4>		         
 				<div class="data-pair-value">{{{note}}}</div><!-- /.data-pair-value -->
 			{{/note}}
 
 			{{#trans}}
-				<h4 class="data-pair-key indent">{{{title_beskrivelse.key_trans}}}</h4>		     
+				<h4 class="data-pair-key indent">{{{title_serie.key_trans}}}</h4>		     
 				<div class="data-pair-value">{{{trans}}}</div><!-- /.data-pair-value -->
 			{{/trans}}
 
 			{{#trans_note}}
-				<h4 class="data-pair-key indent">{{{title_beskrivelse.key_trans_note}}}</h4>		  
+				<h4 class="data-pair-key indent">{{{title_serie.key_trans_note}}}</h4>		  
 				<div class="data-pair-value">{{{trans_note}}}</div><!-- /.data-pair-value -->
 			{{/trans_note}}
 
-		{{/title_beskrivelse.value}}
+		{{/title_serie.value}}
 		
       </div><!-- /.data-pair -->
-      {{/title_beskrivelse.value}}						
+      {{/title_serie.value}}						
  
 </div>
 <!-- /.title -->
@@ -360,6 +360,164 @@
 
 </div>
 <!-- /.datering -->
+
+
+<!-- technique -->
+<div class="data-section">
+  <h3>{{{technique_lab}}}</h3>  
+  
+  {{#technique_technique.show}}
+  <div class="data-pair">
+    <h4 class="data-pair-key">{{{technique_technique.key}}}</h4>
+    {{#technique_technique.value}}        
+    <div class="data-pair-value">{{{technique_technique.value}}}	
+    </div><!-- /.data-pair-value -->
+  {{/technique_technique.value}}
+  </div><!-- /.data-pair -->
+  {{/technique_technique.show}}
+
+{{#technique_dimensions.show}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{technique_dimensions.key}}}</h4>
+        {{#technique_dimensions.value}}        
+			<div class="data-pair-value">{{{dim}}}&nbsp;<i>({{{type}}})</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/technique_dimensions.value}}
+      </div><!-- /.data-pair -->
+ {{/technique_dimensions.show}} 
+
+{{#technique_diameter.value}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{technique_diameter.key}}}</h4>
+        {{#technique_diameter.value}}        
+			<div class="data-pair-value">{{{technique_diameter.value}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/technique_diameter.value}}
+      </div><!-- /.data-pair -->
+ {{/technique_diameter.value}} 
+
+{{#technique_vaegt.value}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{technique_vaegt.key}}}</h4>
+        {{#technique_vaegt.value}}        
+			<div class="data-pair-value">{{{technique_vaegt.value}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/technique_vaegt.value}}
+      </div><!-- /.data-pair -->
+ {{/technique_vaegt.value}} 
+
+{{#technique_materiale.show}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{technique_materiale.key}}}</h4>
+        {{#technique_materiale.value}}        
+			<div class="data-pair-value">{{{value}}}&nbsp;<i>({{{type}}})</i>		
+        	</div><!-- /.data-pair-value -->
+		{{/technique_materiale.value}}
+      </div><!-- /.data-pair -->
+ {{/technique_materiale.show}} 
+
+{{#technique_format.value}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{technique_format.key}}}</h4>
+        {{#technique_format.value}}        
+			<div class="data-pair-value">{{{technique_format.value}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/technique_format.value}}
+      </div><!-- /.data-pair -->
+ {{/technique_format.value}} 
+
+{{#technique_watermark.value}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{technique_watermark.key}}}</h4>
+        {{#technique_watermark.value}}        
+			<div class="data-pair-value">{{{technique_watermark.value}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/technique_watermark.value}}
+      </div><!-- /.data-pair -->
+ {{/technique_watermark.value}} 
+
+{{#technique_tilstand.value}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{technique_tilstand.key}}}</h4>
+        {{#technique_tilstand.value}}        
+			<div class="data-pair-value">{{{technique_tilstand.value}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/technique_tilstand.value}}
+      </div><!-- /.data-pair -->
+ {{/technique_tilstand.value}} 
+
+{{#technique_vaerkstatus.show}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{technique_vaerkstatus.key}}}</h4>
+        {{#technique_vaerkstatus.value}}        
+			<div class="data-pair-value">{{{value}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/technique_vaerkstatus.value}}
+      </div><!-- /.data-pair -->
+ {{/technique_vaerkstatus.show}} 
+
+{{#technique_eksemplar.value}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{technique_eksemplar.key}}}</h4>
+        {{#technique_eksemplar.value}}        
+			<div class="data-pair-value">{{{technique_eksemplar.value}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/technique_eksemplar.value}}
+      </div><!-- /.data-pair -->
+ {{/technique_eksemplar.value}} 
+
+{{#technique_bladnummer.value}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{technique_bladnummer.key}}}</h4>
+        {{#technique_bladnummer.value}}        
+			<div class="data-pair-value">{{{technique_bladnummer.value}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/technique_bladnummer.value}}
+      </div><!-- /.data-pair -->
+ {{/technique_bladnummer.value}} 
+
+{{#technique_sidetal.value}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{technique_sidetal.key}}}</h4>
+        {{#technique_sidetal.value}}        
+			<div class="data-pair-value">{{{technique_sidetal.value}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/technique_sidetal.value}}
+      </div><!-- /.data-pair -->
+ {{/technique_sidetal.value}} 
+
+{{#technique_omslag.value}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{technique_omslag.key}}}</h4>
+        {{#technique_omslag.value}}        
+			<div class="data-pair-value">{{{technique_omslag.value}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/technique_omslag.value}}
+      </div><!-- /.data-pair -->
+ {{/technique_omslag.value}} 
+
+{{#technique_stadium.value}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{technique_stadium.key}}}</h4>
+        {{#technique_stadium.value}}        
+			<div class="data-pair-value">{{{technique_stadium.value}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/technique_stadium.value}}
+      </div><!-- /.data-pair -->
+ {{/technique_stadium.value}} 
+
+{{#technique_kollation.show}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{technique_kollation.key}}}</h4>
+        {{#technique_kollation.value}}        
+			<div class="data-pair-value">{{{value}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/technique_kollation.value}}
+      </div><!-- /.data-pair -->
+ {{/technique_kollation.show}} 
+ 
+</div>
+<!-- /.technique -->
 </script>
 
 

@@ -188,21 +188,89 @@
 							value: getData_Common.getProduction_note(doc)												
 						},
 						
-						technique_technique: getData_Common.getTechnique_technique(doc),
-						technique_dimensions: getData_Common.getTechnique_dimensions(doc), 
-						technique_diameter: getData_Common.getTechnique_diameter(doc), 
-						technique_vaegt: getData_Common.getTechnique_vaegt(doc), 
-						technique_materiale: getData_Common.getTechnique_materiale(doc),
-						technique_format: getData_Common.getTechnique_format(doc), 
-						technique_watermark: getData_Common.getTechnique_watermark(doc), 
-						technique_tilstand: getData_Common.getTechnique_tilstand(doc), 
-						technique_vaerkstatus: getData_Common.getTechnique_vaerkstatus(doc), 
-						technique_eksemplar: getData_Common.getTechnique_eksemplar(doc), 
-						technique_bladnummer: getData_Common.getTechnique_bladnummer(doc), 
-						technique_sidetal: getData_Common.getTechnique_sidetal(doc), 
-						technique_omslag: getData_Common.getTechnique_omslag(doc), 
-						technique_stadium: getData_Common.getTechnique_stadium(doc), 
-						technique_kollation: getData_Common.getTechnique_kollation(doc), 
+						technique_lab: this.caller.manager.translator.getLabel('detail_technique_lab'),
+						
+						technique_technique: {
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_technique')),  
+							value: getData_Common.getTechnique_technique(doc),
+							show: getData_Common.getTechnique_technique(doc) !== null? true : false,
+						},
+						
+						
+						technique_dimensions: {
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_dimensions')),  
+							value: this.getDim(doc),
+							show: this.getDim(doc).length > 0 ? true : false,
+						},
+						
+						technique_diameter: {
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_diameter')),  
+							value: getData_Common.getTechnique_diameter(doc)
+						},
+						
+						technique_vaegt: {
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_vaegt')),  
+							value: getData_Common.getTechnique_vaegt(doc)
+						},
+						
+						technique_materiale: {
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_materiale')),  
+							value: this.getMateriale(doc),
+							show: this.getMateriale(doc).length > 0 ? true : false,
+						},
+						
+						technique_format: {
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_format')),  
+							value: getData_Common.getTechnique_format(doc)
+						},
+						
+						technique_watermark: {
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_watermark')),  
+							value: getData_Common.getTechnique_watermark(doc)
+						},
+						
+						technique_tilstand: {
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_tilstand')),  
+							value: getData_Common.getTechnique_tilstand(doc)
+						},
+						
+						technique_vaerkstatus: {
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_vaerkstatus')),  
+							value: getData_Common.getTechnique_vaerkstatus(doc),
+							show: getData_Common.getTechnique_vaerkstatus(doc) != null ? true : false,
+						},
+						
+						technique_eksemplar: {
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_eksemplar')),  
+							value: getData_Common.getTechnique_eksemplar(doc)
+						},
+						
+						technique_bladnummer: {
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_bladnummer')),  
+							value: getData_Common.getTechnique_bladnummer(doc)
+						},
+						
+						technique_sidetal: {
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_sidetal')),  
+							value: getData_Common.getTechnique_sidetal(doc)
+						},
+						
+						technique_omslag: {
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_omslag')),  
+							value: getData_Common.getTechnique_omslag(doc)
+						},
+						
+						technique_stadium: {
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_stadium')),  
+							value: getData_Common.getTechnique_stadium(doc)
+						},
+						
+						technique_kollation: {
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_kollation')),  
+							value: getData_Common.getTechnique_kollation(doc),
+							show: getData_Common.getTechnique_kollation(doc) != null ? true : false,
+						},
+						
 						technique_note_vaerkstatus: getData_Common.getTechnique_note_vaerkstatus(doc), 
 						technique_opstilling: getData_Common.getTechnique_opstilling(doc), 
 						technique_note_elementer: getData_Common.getTechnique_note_elementer(doc), 
@@ -240,6 +308,50 @@
 			return data;	  
 
 		};   
+		
+		this.getDim = function(doc){
+			var res = [];
+			
+			for (var i = 0; i < getData_Common.getTechnique_dimensions(doc).length; i++) {	
+			
+				var tmp = {dim: getData_Common.getTechnique_dimensions(doc)[i].dim,
+							type: this.caller.manager.translator.getLabel('detail_technique_dimensions_' + getData_Common.getTechnique_dimensions(doc)[i].type)
+				};
+				
+				res.push(tmp);
+				
+			}
+			
+			return res;
+			
+		};
+		
+		this.getMateriale = function(doc){
+			var res = [];
+			
+			for (var i = 0; i < getData_Common.getTechnique_materiale(doc).length; i++) {	
+				
+				var type;
+				
+				if(getData_Common.getTechnique_materiale(doc)[i].mat_type.indexOf('material') > 0)
+					type = 'detail_technique_materiale_material';
+				
+				if(getData_Common.getTechnique_materiale(doc)[i].mat_type.indexOf('medium') > 0)
+					type = 'detail_technique_materiale_medium';
+				
+				if(getData_Common.getTechnique_materiale(doc)[i].mat_type.indexOf('grundering') > 0)
+					type = 'detail_technique_materiale_grundering';
+				
+				var tmp = {value: getData_Common.getTechnique_materiale(doc)[i].mat_val,
+							type: type !== undefined ? this.caller.manager.translator.getLabel(type) : type
+				};
+				
+				res.push(tmp);				
+			}			
+			return res;			
+		};
+		
+		
 		
 		this.getListProducers = function(doc, type){									
 			var res = new Array();

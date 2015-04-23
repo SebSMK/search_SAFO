@@ -141,6 +141,19 @@
     "detail_technique_opstilling": "opstilling",
     "detail_technique_note_elementer": "note til elementer",
     
+    "detail_technique_dimensions_netto": "netto",
+    "detail_technique_dimensions_brutto": "brutto",
+    "detail_technique_dimensions_bladmaal": "bladmål",
+    "detail_technique_dimensions_plademaal": "plademål",
+    "detail_technique_dimensions_billedmaal": "billedmål",
+    "detail_technique_dimensions_monteringsmaal": "monteringsmål",
+    
+    
+    "detail_technique_materiale_material": "bærende underlag",
+    "detail_technique_materiale_medium": "farvelag",
+    "detail_technique_materiale_grundering": "grundering",			
+
+     
     "detail_inscription_lab": "signatur | betegnelse | samlermærke",
     "detail_inscription_signatur": "signatur",
     "detail_inscription_paaskrift": "påskrift",

@@ -289,6 +289,30 @@
 					}
 			);
 
+		if (doc.dimension_brutto !== undefined)
+			dimensions.push( 
+					{
+						'type' : 'brutto',
+						'dim' : doc.dimension_brutto
+					}
+			);	
+		
+		if (doc.dimension_billedmaal !== undefined)
+			dimensions.push( 
+					{
+						'type' : 'billedmaal',
+						'dim' : doc.dimension_billedmaal
+					}
+			);	
+		
+		if (doc.dimension_monteringsmaal!== undefined)
+			dimensions.push( 
+					{
+						'type' : 'monteringsmaal',
+						'dim' : doc.dimension_monteringsmaal
+					}
+			);	
+		
 		return dimensions;
 	};				
 
@@ -301,9 +325,6 @@
 	};
 
 	getdatacommon.getTechnique_materiale = function(doc){
-		if (doc.materiale === undefined && doc.materiale_en === undefined) 
-			return null;
-
 		var mat;
 		var mat_all = [];
 		var default_value = null;						
@@ -327,8 +348,9 @@
 			for (var i = 0; i < arrayLength; i++) {	
 				var values = mat_split[i].split(smkCommon.split_2_niv); 					 										
 				var mat_val = smkCommon.getValueFromSplit(values, 0) != null ? smkCommon.getValueFromSplit(values, 0) : "";
-				var mat_type = smkCommon.getValueFromSplit(values, 1) != null ? sprintf("(%s)", smkCommon.getValueFromSplit(values, 1)) : "";					
-				var res = sprintf("%s%s", mat_val, mat_type);
+				var mat_type = smkCommon.getValueFromSplit(values, 1) != null ? smkCommon.getValueFromSplit(values, 1) : "";					
+				var res = {	mat_val: mat_val, 
+							mat_type: mat_type};
 
 				mat_all.push(res);					
 			}				
@@ -358,7 +380,7 @@
 		var arrayLength = split.length;
 
 		for (var i = 0; i < arrayLength; i++) {	
-			res.push(split[i]);					
+			res.push({value:split[i]});					
 		}				
 
 		return res.length > 0 ? res : null;
@@ -384,8 +406,20 @@
 		return doc.stadium === undefined ? null : doc.stadium;
 	};
 
-	getdatacommon.getTechnique_kollation = function(doc){			
-		return doc.object_briefdescriptions === undefined ? null : doc.object_briefdescriptions;
+	getdatacommon.getTechnique_kollation = function(doc){
+		if (doc.object_briefdescriptions === undefined) 
+			return null;
+
+		var res = [];
+		var split = doc.object_briefdescriptions.split(smkCommon.split_1_niv);							
+		var arrayLength = split.length;
+
+		for (var i = 0; i < arrayLength; i++) {	
+			res.push({value:split[i]});					
+		}				
+
+		return res.length > 0 ? res : null;
+		
 	};
 
 	getdatacommon.getTechnique_note_vaerkstatus = function (doc){			

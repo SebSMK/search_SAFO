@@ -24,11 +24,14 @@
     	<div id="info-container" class="artwork-content">    	    	 
     	
     	  <!-- Heading -->
-		{{#artist}}			
-		<ul class="artwork-artists">    				
-    	  <li>{{{name}}}&nbsp;<i>{{{info}}}</i></li>		
-		</ul>     	
-		{{/artist}}
+
+	{{#artist.show}}	
+		<ul class="artwork-artists">
+		{{#artist}}	    				
+    	  <li>{{{name}}}&nbsp;<i>{{{info}}}</i></li>	
+		{{/artist}}			
+		</ul> 
+	{{/artist.show}}
 		
       	{{#title_museum}}	
 		<h1 class="artwork-title">{{{title_museum}}}</h1>
