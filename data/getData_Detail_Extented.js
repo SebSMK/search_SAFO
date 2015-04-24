@@ -359,15 +359,43 @@
 						references_texts: {  
 							value: getData_Common.getReferences_texts(doc),
 							show: getData_Common.getReferences_texts(doc) != null ? true : false,
-						},											
-						 
-						udstilling_udstilling: getData_Common.getUdstilling_udstilling(doc),
+						},
 						
-						bemaerk_anden_litt: getData_Common.getBemaerk_anden_litt(doc),
+						udstilling_lab: this.caller.manager.translator.getLabel('detail_udstilling_lab'),
 						
-						motiv_topografisk: getData_Common.getMotiv_topografisk(doc),
-						motiv_portraet: getData_Common.getMotiv_portraet(doc),
-						motiv_note: getData_Common.getMotiv_note(doc),															
+						udstilling_udstilling: {
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_udstilling_udstilling')),  
+							value: getData_Common.getUdstilling_udstilling(doc),
+							show: getData_Common.getUdstilling_udstilling(doc) != null ? true : false,
+						},	
+						
+						bemaerk_lab: this.caller.manager.translator.getLabel('detail_bemaerk_lab'),
+						
+						bemaerk_anden_litt: {
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_bemaerk_anden_litt')),  
+							value: getData_Common.getBemaerk_anden_litt(doc),
+							show: getData_Common.getBemaerk_anden_litt(doc) != null ? true : false,
+						},	
+						
+						motiv_lab: this.caller.manager.translator.getLabel('detail_motiv_lab'),
+						
+						motiv_topografisk: {
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_motiv_topografisk')),  
+							value: getData_Common.getMotiv_topografisk(doc),
+							show: getData_Common.getMotiv_topografisk(doc) != null ? true : false,
+						},	
+						
+						motiv_portraet: {
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_motiv_portraet')),  
+							value: getData_Common.getMotiv_portraet(doc),
+							show: getData_Common.getMotiv_portraet(doc) != null ? true : false,
+						},
+						
+						motiv_note: { 
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_motiv_note')),  
+							value: getData_Common.getMotiv_note(doc),
+							show: getData_Common.getMotiv_note(doc) != null ? true : false,
+						}																									
 					},
 					
 					subwidget:{

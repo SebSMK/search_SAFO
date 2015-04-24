@@ -697,18 +697,18 @@
 				var date_end = smkCommon.getValueFromSplit(values, 3);   
 				var tmp;
 
-				tmp = sprintf('%s : %s : %s %s' , 							
+				tmp = sprintf('<span>%s</span> : %s : %s %s' , 							
 						title, 
 						place, 
 						date_start, 
 						date_end);
 
 				if (smkCommon.isValidDataText(title))
-					exhibitions_data.push(tmp);	      			
+					exhibitions_data.push({value:tmp});	      			
 			}	      			      
 		};
-
-		return exhibitions_data;
+		
+		return exhibitions_data.length == 0 ? null : exhibitions_data;
 	}
 
 	/**
@@ -723,7 +723,7 @@
 		var arrayLength = split.length;
 
 		for (var i = 0; i < arrayLength; i++) {	
-			res.push(split[i]);					
+			res.push({value:split[i]});					
 		}				
 
 		return res.length > 0 ? res : null;		
@@ -741,7 +741,7 @@
 		var arrayLength = split.length;
 
 		for (var i = 0; i < arrayLength; i++) {	
-			res.push(split[i]);					
+			res.push({value:split[i]});						
 		}				
 
 		return res.length > 0 ? res : null;		
@@ -756,7 +756,7 @@
 		var arrayLength = split.length;
 
 		for (var i = 0; i < arrayLength; i++) {	
-			res.push(split[i]);					
+			res.push({value:split[i]});					
 		}				
 
 		return res.length > 0 ? res : null;	

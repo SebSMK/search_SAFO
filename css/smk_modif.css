@@ -9,6 +9,9 @@
   text-indent: 10px;
 }
 
+.data-section .data-pair .data-pair-value span{
+  font-weight: bold;
+}
 
 .matrix-tile-image{
 	position: relative;		

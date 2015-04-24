@@ -687,6 +687,76 @@
 </div>
 <!-- /.references -->
 
+<!-- exhibitions -->
+<div class="data-section">
+  <h3>{{{udstilling_lab}}}</h3>  
+
+{{#udstilling_udstilling.show}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{udstilling_udstilling.key}}}</h4>
+        {{#udstilling_udstilling.value}}        
+			<div class="data-pair-value">{{{value}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/udstilling_udstilling.value}}
+      </div><!-- /.data-pair -->
+ {{/udstilling_udstilling.show}} 
+
+</div>
+<!-- /.exhibitions -->
+
+<!-- remarks -->
+<div class="data-section">
+  <h3>{{{bemaerk_lab}}}</h3>  
+
+{{#bemaerk_anden_litt.show}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{bemaerk_anden_litt.key}}}</h4>
+        {{#bemaerk_anden_litt.value}}        
+			<div class="data-pair-value">{{{value}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/bemaerk_anden_litt.value}}
+      </div><!-- /.data-pair -->
+ {{/bemaerk_anden_litt.show}} 
+
+</div>
+<!-- /.remarks -->
+
+<!-- motiv -->
+<div class="data-section">
+  <h3>{{{motiv_lab}}}</h3>  
+
+{{#motiv_topografisk.show}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{motiv_topografisk.key}}}</h4>
+        {{#motiv_topografisk.value}}        
+			<div class="data-pair-value">{{{value}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/motiv_topografisk.value}}
+      </div><!-- /.data-pair -->
+ {{/motiv_topografisk.show}} 
+
+{{#motiv_portraet.show}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{motiv_portraet.key}}}</h4>
+        {{#motiv_portraet.value}}        
+			<div class="data-pair-value">{{{value}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/motiv_portraet.value}}
+      </div><!-- /.data-pair -->
+ {{/motiv_portraet.show}} 
+
+{{#motiv_note.value}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{motiv_note.key}}}</h4>
+        {{#motiv_note.value}}        
+			<div class="data-pair-value">{{{motiv_note.value}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/motiv_note.value}}
+      </div><!-- /.data-pair -->
+ {{/motiv_note.value}}
+
+</div>
+<!-- /.motiv -->
 
 </div>
 </script>
