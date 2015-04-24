@@ -664,7 +664,7 @@
 						smkCommon.isValidDataText(agent, 'agent') ? sprintf('%s : ', agent ) : '',
 						smkCommon.isValidDataText(title) ? sprintf('<span>%s</span> : ', title ) : '',						
 						smkCommon.isValidDataText(place) ? sprintf('%s ', place ) : '',
-						smkCommon.isValidDataText(date) ? sprintf('%s :', date ) : ' :',
+						smkCommon.isValidDataText(date) ? sprintf('<i>%s</i> :', date ) : ' :',
 						smkCommon.isValidDataText(refnote) ? sprintf('%s', refnote ) : '');
 
 				citations_data.push({value:tmp});
@@ -697,7 +697,7 @@
 				var date_end = smkCommon.getValueFromSplit(values, 3);   
 				var tmp;
 
-				tmp = sprintf('<span>%s</span> : %s : %s %s' , 							
+				tmp = sprintf('<span>%s</span> : %s : <i>%s | %s</i>' , 							
 						title, 
 						place, 
 						date_start, 
