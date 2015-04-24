@@ -447,7 +447,7 @@
 			var arrayLength = status_split.length;
 
 			for (var i = 0; i < arrayLength; i++) {	
-				status_all.push(status_split[i]);					
+				status_all.push({value: status_split[i]});					
 			}				
 		}
 

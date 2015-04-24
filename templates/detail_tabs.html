@@ -515,7 +515,39 @@
 		{{/technique_kollation.value}}
       </div><!-- /.data-pair -->
  {{/technique_kollation.show}} 
+
+{{#technique_note_vaerkstatus.show}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{technique_note_vaerkstatus.key}}}</h4>
+        {{#technique_note_vaerkstatus.value}}        
+			<div class="data-pair-value">{{{value}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/technique_note_vaerkstatus.value}}
+      </div><!-- /.data-pair -->
+ {{/technique_note_vaerkstatus.show}} 
+
+{{#technique_opstilling.value}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{technique_opstilling.key}}}</h4>
+        {{#technique_opstilling.value}}        
+			<div class="data-pair-value">{{{technique_opstilling.value}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/technique_opstilling.value}}
+      </div><!-- /.data-pair -->
+ {{/technique_opstilling.value}} 
+
+
+{{#technique_note_elementer.value}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{technique_note_elementer.key}}}</h4>
+        {{#technique_note_elementer.value}}        
+			<div class="data-pair-value">{{{technique_note_elementer.value}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/technique_note_elementer.value}}
+      </div><!-- /.data-pair -->
+ {{/technique_note_elementer.value}} 
  
+
 </div>
 <!-- /.technique -->
 </script>

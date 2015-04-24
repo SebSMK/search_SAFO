@@ -194,8 +194,7 @@
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_technique')),  
 							value: getData_Common.getTechnique_technique(doc),
 							show: getData_Common.getTechnique_technique(doc) !== null? true : false,
-						},
-						
+						},						
 						
 						technique_dimensions: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_dimensions')),  
@@ -271,9 +270,22 @@
 							show: getData_Common.getTechnique_kollation(doc) != null ? true : false,
 						},
 						
-						technique_note_vaerkstatus: getData_Common.getTechnique_note_vaerkstatus(doc), 
-						technique_opstilling: getData_Common.getTechnique_opstilling(doc), 
-						technique_note_elementer: getData_Common.getTechnique_note_elementer(doc), 
+						technique_note_vaerkstatus: {
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_note_vaerkstatus')),  
+							value: getData_Common.getTechnique_note_vaerkstatus(doc),
+							show: getData_Common.getTechnique_note_vaerkstatus(doc) != null ? true : false,
+						},												
+						
+						technique_opstilling: {
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_opstilling')),  
+							value: getData_Common.getTechnique_opstilling(doc)
+						},
+						
+						technique_note_elementer: {
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_note_elementer')),  
+							value: getData_Common.getTechnique_note_elementer(doc)
+						},
+						
 						
 						inscription_signatur: getData_Common.getInscription_signatur(doc),
 						inscription_paaskrift: getData_Common.getInscription_paaskrift(doc),
