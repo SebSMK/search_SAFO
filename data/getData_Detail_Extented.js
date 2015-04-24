@@ -287,10 +287,38 @@
 						},
 						
 						
-						inscription_signatur: getData_Common.getInscription_signatur(doc),
-						inscription_paaskrift: getData_Common.getInscription_paaskrift(doc),
-						inscription_trykttekst: getData_Common.getInscription_trykttekst(doc),
-						inscription_samlermaerke: getData_Common.getInscription_samlermaerke(doc),
+						inscription_lab: this.caller.manager.translator.getLabel('detail_inscription_lab'),
+						
+						inscription_signatur: {
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_inscription_signatur')),  
+							value: getData_Common.getInscription_signatur(doc),
+							show: getData_Common.getInscription_signatur(doc) != null ? true : false,
+						},
+
+
+						inscription_tryktsignatur: {
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_inscription_tryktsignatur')),  
+							value: getData_Common.getInscription_tryktsignatur(doc),
+							show: getData_Common.getInscription_tryktsignatur(doc) != null ? true : false,
+						},
+
+						inscription_paaskrift: {
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_inscription_paaskrift')),  
+							value: getData_Common.getInscription_paaskrift(doc),
+							show: getData_Common.getInscription_paaskrift(doc) != null ? true : false,
+						},
+
+						inscription_trykttekst: {
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_inscription_trykttekst')),  
+							value: getData_Common.getInscription_trykttekst(doc),
+							show: getData_Common.getInscription_trykttekst(doc) != null ? true : false,
+						},
+
+						inscription_samlermaerke: {
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_inscription_samlermaerke')),  
+							value: getData_Common.getInscription_samlermaerke(doc),
+							show: getData_Common.getInscription_samlermaerke(doc) != null ? true : false,
+						},						                    
 						
 						erhverv_dato: getData_Common.getErhverv_dato(doc),
 						erhverv_proveniens: getData_Common.getErhverv_proveniens(doc),

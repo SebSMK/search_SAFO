@@ -475,7 +475,7 @@
 		var arrayLength = inscr_split.length;
 
 		for (var i = 0; i < arrayLength; i++) {	
-			res.push(inscr_split[i]);					
+			res.push({value:inscr_split[i]});					
 		}				
 
 		return res.length > 0 ? res : null;
@@ -490,7 +490,7 @@
 		var arrayLength = inscr_split.length;
 
 		for (var i = 0; i < arrayLength; i++) {	
-			res.push(inscr_split[i]);					
+			res.push({value:inscr_split[i]});					
 		}				
 
 		return res.length > 0 ? res : null;
@@ -505,7 +505,7 @@
 		var arrayLength = inscr_split.length;
 
 		for (var i = 0; i < arrayLength; i++) {	
-			res.push(inscr_split[i]);					
+			res.push({value:inscr_split[i]});					
 		}				
 
 		return res.length > 0 ? res : null;
@@ -520,7 +520,7 @@
 		var arrayLength = inscr_split.length;
 
 		for (var i = 0; i < arrayLength; i++) {	
-			res.push(inscr_split[i]);					
+			res.push({value:inscr_split[i]});					
 		}				
 
 		return res.length > 0 ? res : null;
@@ -535,7 +535,7 @@
 		var arrayLength = inscr_split.length;
 
 		for (var i = 0; i < arrayLength; i++) {	
-			res.push(inscr_split[i]);					
+			res.push({value:inscr_split[i]});					
 		}				
 
 		return res.length > 0 ? res : null;

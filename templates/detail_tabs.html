@@ -550,6 +550,66 @@
 
 </div>
 <!-- /.technique -->
+
+
+<!-- inscription -->
+<div class="data-section">
+  <h3>{{{inscription_lab}}}</h3>  
+  
+{{#inscription_signatur.show}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{inscription_signatur.key}}}</h4>
+        {{#inscription_signatur.value}}        
+			<div class="data-pair-value">{{{value}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/inscription_signatur.value}}
+      </div><!-- /.data-pair -->
+ {{/inscription_signatur.show}}  
+            
+ {{#inscription_tryktsignatur.show}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{inscription_tryktsignatur.key}}}</h4>
+        {{#inscription_tryktsignatur.value}}        
+			<div class="data-pair-value">{{{value}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/inscription_tryktsignatur.value}}
+      </div><!-- /.data-pair -->
+ {{/inscription_tryktsignatur.show}}  
+ 
+ {{#inscription_paaskrift.show}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{inscription_paaskrift.key}}}</h4>
+        {{#inscription_paaskrift.value}}        
+			<div class="data-pair-value">{{{value}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/inscription_paaskrift.value}}
+      </div><!-- /.data-pair -->
+ {{/inscription_paaskrift.show}}      
+ 
+  {{#inscription_trykttekst.show}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{inscription_trykttekst.key}}}</h4>
+        {{#inscription_trykttekst.value}}        
+			<div class="data-pair-value">{{{value}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/inscription_trykttekst.value}}
+      </div><!-- /.data-pair -->
+ {{/inscription_trykttekst.show}}   
+ 
+  {{#inscription_samlermaerke.show}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{inscription_samlermaerke.key}}}</h4>
+        {{#inscription_samlermaerke.value}}        
+			<div class="data-pair-value">{{{value}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/inscription_samlermaerke.value}}
+      </div><!-- /.data-pair -->
+ {{/inscription_samlermaerke.show}}  
+
+</div>
+<!-- /.inscription -->
+
+</div>
 </script>
 
 
