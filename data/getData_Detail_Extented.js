@@ -291,26 +291,26 @@
 						
 						inscription_signatur: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_inscription_signatur')),  
-							value: getData_Common.getInscription_signatur(doc),
+							value: this.getInscription_transl(getData_Common.getInscription_signatur(doc)),
 							show: getData_Common.getInscription_signatur(doc) != null ? true : false,
 						},
 
 
 						inscription_tryktsignatur: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_inscription_tryktsignatur')),  
-							value: getData_Common.getInscription_tryktsignatur(doc),
+							value: this.getInscription_transl(getData_Common.getInscription_tryktsignatur(doc)),
 							show: getData_Common.getInscription_tryktsignatur(doc) != null ? true : false,
 						},
 
 						inscription_paaskrift: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_inscription_paaskrift')),  
-							value: getData_Common.getInscription_paaskrift(doc),
+							value: this.getInscription_transl(getData_Common.getInscription_paaskrift(doc)),
 							show: getData_Common.getInscription_paaskrift(doc) != null ? true : false,
 						},
 
 						inscription_trykttekst: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_inscription_trykttekst')),  
-							value: getData_Common.getInscription_trykttekst(doc),
+							value: this.getInscription_transl(getData_Common.getInscription_trykttekst(doc)),
 							show: getData_Common.getInscription_trykttekst(doc) != null ? true : false,
 						},
 
@@ -408,6 +408,56 @@
 			return data;	  
 
 		}; 
+		
+		this.getInscription_transl = function(inscription_arr){
+			var res = inscription_arr;
+			if(smkCommon.getCurrentLanguage() == "en"){
+				
+				for (var i = 0; i < inscription_arr.length; i++) {
+					var inscription = inscription_arr[i];
+					var values = inscription.value.split(":"); 					 										
+					var place = smkCommon.getValueFromSplit(values, 0) != null ? smkCommon.getValueFromSplit(values, 0) : "";						
+					var trans = new String();
+					var place_sw = smkCommon.replace_non_alpha_char(smkCommon.replace_dansk_char(place));
+								
+					switch(place_sw){
+						case "f_n_":
+						case "f_n_m_f_":
+						case "f_n_t_h_":
+						case "f_n_t_h_f_m_":
+						case "f_n_t_v_":
+						case "f_n_t_v_f_m_":
+						case "f_o_":
+						case "f_o_m_f_":
+						case "f_o_t_h_":
+						case "f_o_t_v_":
+						case "i_bunden_":
+						case "m_f_":
+						case "n_":
+						case "n_t_h_":
+						case "n_t_v_":
+						case "o_m_":
+						case "t_h_":
+						case "t_h_f_m_":
+						case "t_h_m_f_":
+						case "t_v_":
+						case "t_v_f_m_":
+						case "t_v_m_f_":
+						case "u_m_":
+						case "oe_":
+						case "oe_t_h_":
+						case "oe_t_v_":
+							trans = this.caller.manager.translator.getLabel('inscription_' + place_sw);			
+					}
+					
+					if(smkCommon.isValidDataText(trans))
+						res[i].value = inscription.value.replace(place, trans);											
+				}										
+			}
+			
+			return res;			
+		};
+		
 		
 		this.getDetailAcq = function(doc){
 			var method = smkCommon.isValidDataText(getData_Common.getErhverv_method(doc)) ? sprintf('%s', getData_Common.getErhverv_method(doc)) : "";

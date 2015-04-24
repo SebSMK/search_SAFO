@@ -104,6 +104,18 @@
 
 		return res;
 	};
+	
+	common.replace_non_alpha_char = function(text) {				
+
+		if (text === undefined)
+			return text;			
+
+		text = text.toLowerCase();
+		
+		var res = text.replace( /[^a-zA-Z]/g, "_" );												
+
+		return res;
+	};
 
 	common.getDefaultPicture = function(size){		
 		var picturePath = ""

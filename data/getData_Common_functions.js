@@ -466,6 +466,7 @@
 	/**
 	 * Inscription
 	 * */
+		
 	getdatacommon.getInscription_signatur = function(doc){
 		if (doc.inscription_signatur === undefined) 
 			return null;
@@ -475,7 +476,7 @@
 		var arrayLength = inscr_split.length;
 
 		for (var i = 0; i < arrayLength; i++) {	
-			res.push({value:inscr_split[i]});					
+			res.push({value:inscr_split[i]});				
 		}				
 
 		return res.length > 0 ? res : null;
