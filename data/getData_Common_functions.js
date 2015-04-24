@@ -633,7 +633,7 @@
 				}
 				
 				if(smkCommon.isValidDataText(lang) && lang.indexOf(current_lang) > -1)
-					reference_texts.push(text);	
+					reference_texts.push({value:text});					
 			}
 		}				
 			
@@ -662,16 +662,17 @@
 
 				tmp = sprintf('%s%s%s%s%s' , 
 						smkCommon.isValidDataText(agent, 'agent') ? sprintf('%s : ', agent ) : '',
-								smkCommon.isValidDataText(title) ? sprintf('%s : ', title ) : '',						
-										smkCommon.isValidDataText(place) ? sprintf('%s ', place ) : '',
-												smkCommon.isValidDataText(date) ? sprintf('%s :', date ) : ' :',
-														smkCommon.isValidDataText(refnote) ? sprintf('%s', refnote ) : '');
+						smkCommon.isValidDataText(title) ? sprintf('<span>%s</span> : ', title ) : '',						
+						smkCommon.isValidDataText(place) ? sprintf('%s ', place ) : '',
+						smkCommon.isValidDataText(date) ? sprintf('%s :', date ) : ' :',
+						smkCommon.isValidDataText(refnote) ? sprintf('%s', refnote ) : '');
 
-				citations_data.push(tmp);
+				citations_data.push({value:tmp});
 			}
 		};
 
-		return citations_data;
+		return citations_data.length == 0 ? null : citations_data;
+		
 	};
 
 	/**

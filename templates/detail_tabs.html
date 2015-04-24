@@ -1,11 +1,13 @@
 <div>
 
 <script id="detailDescriptionTemplate" type="text/template">	
-{{#info.references_texts}}
+{{#info.references_texts.show}}
 	<div data-tabs-id="artwork-tabs" id="description" class="tab-content">
-    	<div class="copy">{{{info.references_texts}}}</div>
+    	{{#info.references_texts.value}}
+			<div class="copy">{{{value}}}</div>
+		{{/info.references_texts.value}}
   	</div>
-{{/info.references_texts}}
+{{/info.references_texts.show}}
 </script>
 
 <script id="detailDetailTemplate" type="text/template">	
@@ -636,6 +638,55 @@
 
 </div>
 <!-- /.acquisition -->
+
+<!-- references -->
+<div class="data-section">
+  <h3>{{{references_lab}}}</h3>  
+
+
+{{#references_vaerkfortegn.value}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{references_vaerkfortegn.key}}}</h4>
+        {{#references_vaerkfortegn.value}}        
+			<div class="data-pair-value">{{{references_vaerkfortegn.value}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/references_vaerkfortegn.value}}
+      </div><!-- /.data-pair -->
+ {{/references_vaerkfortegn.value}} 
+
+{{#references_gernsheim.value}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{references_gernsheim.key}}}</h4>
+        {{#references_gernsheim.value}}        
+			<div class="data-pair-value">{{{references_gernsheim.value}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/references_gernsheim.value}}
+      </div><!-- /.data-pair -->
+ {{/references_gernsheim.value}} 
+
+{{#references_beckett.value}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{references_beckett.key}}}</h4>
+        {{#references_beckett.value}}        
+			<div class="data-pair-value">{{{references_beckett.value}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/references_beckett.value}}
+      </div><!-- /.data-pair -->
+ {{/references_beckett.value}} 
+
+{{#references_litteratur.show}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{references_litteratur.key}}}</h4>
+        {{#references_litteratur.value}}        
+			<div class="data-pair-value">{{{value}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/references_litteratur.value}}
+      </div><!-- /.data-pair -->
+ {{/references_litteratur.show}} 
+
+</div>
+<!-- /.references -->
+
 
 </div>
 </script>

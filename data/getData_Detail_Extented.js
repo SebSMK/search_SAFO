@@ -333,11 +333,33 @@
 							show: getData_Common.getErhverv_proveniens(doc) != null ? true : false,
 						},																						
 						
-						references_vaerkfortegn: getData_Common.getReferences_vaerkfortegn(doc),
-						references_gernsheim: getData_Common.getReferences_gernsheim(doc),						
-						references_beckett: getData_Common.getReferences_beckett(doc),
-						references_litteratur: getData_Common.getReferences_litteratur(doc),
-						references_texts: getData_Common.getReferences_texts(doc),
+						references_lab: this.caller.manager.translator.getLabel('detail_references_lab'),
+						
+						references_vaerkfortegn: {
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_references_vaerkfortegn')),  
+							value: getData_Common.getReferences_vaerkfortegn(doc)
+						},
+						
+						references_gernsheim: {
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_references_gernsheim')),  
+							value: getData_Common.getReferences_gernsheim(doc)
+						},
+						
+						references_beckett: {
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_references_beckett')),  
+							value: getData_Common.getReferences_beckett(doc)
+						},
+						
+						references_litteratur: {
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_references_litteratur')),  
+							value: getData_Common.getReferences_litteratur(doc),
+							show: getData_Common.getReferences_litteratur(doc) != null ? true : false,
+						},
+						
+						references_texts: {  
+							value: getData_Common.getReferences_texts(doc),
+							show: getData_Common.getReferences_texts(doc) != null ? true : false,
+						},											
 						 
 						udstilling_udstilling: getData_Common.getUdstilling_udstilling(doc),
 						
