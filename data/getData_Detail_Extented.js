@@ -318,10 +318,20 @@
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_inscription_samlermaerke')),  
 							value: getData_Common.getInscription_samlermaerke(doc),
 							show: getData_Common.getInscription_samlermaerke(doc) != null ? true : false,
-						},						                    
+						},
 						
-						erhverv_dato: getData_Common.getErhverv_dato(doc),
-						erhverv_proveniens: getData_Common.getErhverv_proveniens(doc),
+						erhverv_lab: this.caller.manager.translator.getLabel('detail_erhverv_lab'),
+						
+						erhverv_erhverv: {
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_erhverv_erhverv')),  
+							value: this.getDetailAcq(doc)
+						},
+						
+						erhverv_proveniens: {
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_erhverv_proveniens')),  
+							value: getData_Common.getErhverv_proveniens(doc),
+							show: getData_Common.getErhverv_proveniens(doc) != null ? true : false,
+						},																						
 						
 						references_vaerkfortegn: getData_Common.getReferences_vaerkfortegn(doc),
 						references_gernsheim: getData_Common.getReferences_gernsheim(doc),						
@@ -347,7 +357,17 @@
 						
 			return data;	  
 
-		};   
+		}; 
+		
+		this.getDetailAcq = function(doc){
+			var method = smkCommon.isValidDataText(getData_Common.getErhverv_method(doc)) ? sprintf('%s', getData_Common.getErhverv_method(doc)) : "";
+			var source = smkCommon.isValidDataText(getData_Common.getErhverv_source(doc)) ? sprintf(' %s', getData_Common.getErhverv_source(doc)) : "";
+			var dato = smkCommon.isValidDataText(getData_Common.getErhverv_dato(doc)) ? sprintf(' %s', getData_Common.getErhverv_dato(doc)) : "";	 
+			
+			return smkCommon.isValidDataText(getData_Common.getErhverv_method(doc)) || smkCommon.isValidDataText(getData_Common.getErhverv_source(doc)) || smkCommon.isValidDataText(getData_Common.getErhverv_dato(doc)) ? 
+					sprintf("%s%s%s", method, source, dato) : null;
+			
+		};
 		
 		this.getDim = function(doc){
 			var res = [];

@@ -609,6 +609,34 @@
 </div>
 <!-- /.inscription -->
 
+<!-- acquisition -->
+<div class="data-section">
+  <h3>{{{erhverv_lab}}}</h3>  
+
+
+{{#erhverv_erhverv.value}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{erhverv_erhverv.key}}}</h4>
+        {{#erhverv_erhverv.value}}        
+			<div class="data-pair-value">{{{erhverv_erhverv.value}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/erhverv_erhverv.value}}
+      </div><!-- /.data-pair -->
+ {{/erhverv_erhverv.value}} 
+
+{{#erhverv_proveniens.show}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{erhverv_proveniens.key}}}</h4>
+        {{#erhverv_proveniens.value}}        
+			<div class="data-pair-value">{{{value}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/erhverv_proveniens.value}}
+      </div><!-- /.data-pair -->
+ {{/erhverv_proveniens.show}} 
+
+</div>
+<!-- /.acquisition -->
+
 </div>
 </script>
 
