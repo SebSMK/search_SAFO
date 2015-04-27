@@ -100,7 +100,7 @@
 			//* sub widget coupling
 			self.partsManager.addWidget(self.parts_subWidget); 							
 			
-			// click on a part of the artwork
+			// click on a component of the artwork
 			$(self.parts_subWidget).on('smk_search_call_detail', function(event){ 								
 				$(self).trigger({
 					type: "smk_search_call_detail",
@@ -219,23 +219,23 @@
 		process_init_tabs: function(){				
 			var self = this;
 			var $target = $(self.target);
+								
 			
-			$target.hide();
-			
-			//* merge data and template
-			var html = self.template_integration_json({}, '#detailTemplate');    
-			$target.html(html); 
-			
-			//* click on tab
-			$target.find(".tabs a").click(function (event) {
-				event.preventDefault();
-				$target.find(".tabs a").removeClass("active");
-				$(this).addClass("active");
+			if ($target.is(':empty')){
+				//* merge data and template
+				var html = self.template_integration_json({}, '#detailTemplate');    
+				$target.html(html); 						
 				
-				$target.find(".tab-content").removeClass("tab-content--open");
-				$target.find($(this).attr("href")).addClass("tab-content--open");
-			});									
-			
+				//* click on tab
+				$target.find(".tabs a").click(function (event) {
+					event.preventDefault();
+					$target.find(".tabs a").removeClass("active");
+					$(this).addClass("active");												
+					$target.find(".tab-content").removeClass("tab-content--open");
+					$target.find($(this).attr("href")).addClass("tab-content--open");
+				});													
+			}
+						
 		},
 		
 		process_show_tabs: function(){				
@@ -243,20 +243,26 @@
 			var $target = $(self.target);						
 			var i = 0;			
 			//* hide non used tabs
-			$target.find(".tabs a").each(function(){				
+			$target.find(".tabs a").each(function(){
+				
+				$(this).removeClass('active');
+				//* add text to tabs
+				$(this).text(self.manager.translator.getLabel($(this).attr('class')));
+				
 				if($target.find($(this).attr('href')).children().length == 0){
 					$(this).hide();
-				}else if(i == 0){
-					$(this).addClass('active');
-					$target.find($(this).attr('href')).addClass("tab-content--open");
-					i++;
-				}																			
+				}else{
+					$(this).show();
+					if(i == 0){
+						$(this).addClass('active');
+						$target.find($(this).attr('href')).addClass("tab-content--open");
+						i++;
+					}						
+				} 																		
 			})	
 						
-			//* show tabs
-			$target.show();
-			$target.find('section.single-artwork-tabs').show();			
-			
+			//* show tabs			
+			$target.find('section.single-artwork-tabs').show();						
 		}
 						
 	});

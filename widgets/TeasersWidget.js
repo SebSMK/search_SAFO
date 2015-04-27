@@ -21,7 +21,6 @@
 			var self = this;
 			var $target = $(this.target);	
 			
-
 			//* load empty template
 			var html = self.template;     
 			$target.html($(html).find(this.initTemplate).html());														

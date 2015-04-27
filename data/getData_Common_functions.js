@@ -629,7 +629,7 @@
 					current_lang = "dansk";
 					break;
 				case "en":
-					current_lang = "englesk";
+					current_lang = "engelsk";
 					break;
 				}
 				

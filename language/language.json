@@ -74,6 +74,13 @@
     "detail_ident_samling": "samling",
     "detail_ident_andet_inv": "andet inventar nr",
     
+    	  
+	  "detail_tab_reference":		"værktekst",
+	  "detail_tab_components":		"værkdele",
+	  "detail_tab_extended":		"detaljer",
+	  "detail_tab_related":			"relaterede værker",
+
+    
     "detail_producent_lab": "kunstner | producent",
     "detail_producent_kunster": "kunstner",
     "detail_producent_tilskrevet": "tilskrevet",
@@ -278,6 +285,12 @@
 	  "detail_location":		"location",
 	  "detail_provenance":		"provenance",
 	  "detail_no_photo":		"The work is not photographed. Please feel free to contact the photo unit at SMK and hear about the opportunities for an additional fee to book a photography.",
+	  
+	  
+	  "detail_tab_reference":		"text",
+	  "detail_tab_components":		"components",
+	  "detail_tab_extended":		"details",
+	  "detail_tab_related":			"related artworks",
 	  
 	  "detail_bemaerk_lab":	"comments",
 		"detail_datering_lab":	"date/place of production",
