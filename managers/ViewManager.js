@@ -161,6 +161,10 @@
 			if (stateChange["view"] === undefined)
 				return;
 
+			
+			//* hide widgets that aren't in the current language
+			this.hideWidgetsNotInCurrentLanguage(smkCommon.getCurrentLanguage());
+			
 			switch(stateChange["view"]){
 			case "teasers":			  
 
@@ -180,7 +184,6 @@
 				self.showWidget($target.find("#pager-viser"));
 				self.showWidget($(self.callWidgetTarget('currentsearch')));
 				self.showWidget($(self.callWidgetTarget('category')));
-				//self.showWidget($(self.callWidgetTarget('viewpicker')));
 				self.showWidget($(self.callWidgetTarget('sorter')));
 				self.showWidget($(self.callWidgetTarget('pager')));				
 				self.showWidget($(self.callWidgetTarget('teasers')));
@@ -199,12 +202,17 @@
 				$target.find("section.section--list").hide();
 
 				$target.find("section.section--detail").show();
+				
+				$target.find('section.single-artwork-tabs').hide();
 
+				for (var i = 0, l = Manager.searchfilterList.length; i < l; i++) {				
+					self.hideWidget($(self.callWidgetTarget(Manager.searchfilterList[i])));							
+				};		
+				
 				self.hideWidget($target.find("#pager-viser"));
 				self.hideWidget($target.find("#search-filters"));				
 				self.hideWidget($(self.callWidgetTarget('currentsearch')));																			
-				self.hideWidget($(self.callWidgetTarget('category')));
-				//self.hideWidget($(self.callWidgetTarget('viewpicker')));
+				self.hideWidget($(self.callWidgetTarget('category')));				
 				self.hideWidget($(self.callWidgetTarget('sorter')));
 				self.hideWidget($(self.callWidgetTarget('pager')));							
 				self.hideWidget($(self.callWidgetTarget('teasers')));
@@ -217,8 +225,6 @@
 
 				break;		  
 			} 	
-
-			this.setLanguage(smkCommon.getCurrentLanguage());
 
 			return;
 		};
@@ -354,7 +360,7 @@
 			$(this.target).empty().html(sprintf('%s &nbsp;&nbsp; returned:&nbsp;&nbsp; %s<br>Please contact website administrator.', Manager.solrUrl, e)); 
 		};
 
-		this.setLanguage = function(lang){
+		this.hideWidgetsNotInCurrentLanguage = function(lang){
 			var setLang;
 
 			switch(lang){
@@ -369,8 +375,8 @@
 				setLang = smkCommon.enum_lang.def;											
 			}			
 
-			$(this.target).find("[lang][lang='"+setLang+"']").show();
-			$(this.target).find("[lang][lang!='"+setLang+"']").hide();
+			this.hideWidget($(this.target).find("[lang][lang!='"+setLang+"']"));
+			this.showWidget($(this.target).find("[lang][lang='"+setLang+"']"));						
 		};
 	}
 }));

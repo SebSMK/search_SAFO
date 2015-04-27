@@ -20,9 +20,13 @@
 
 		default_picture_path: null, 
 		
-		related_id_req: null,
+		tab_related_id_req: null,
 		
-		multi_work_ref_req: null,
+		tab_multi_work_ref_req: null,
+		
+		tab_extended_html: null,
+		
+		tab_reference_html: null,
 
 		init: function(){	  	    
 			var self = this;
@@ -102,20 +106,7 @@
 					type: "smk_search_call_detail",
 					event: event
 				});
-			});
-			
-			//* merge data and template
-			var html = self.template_integration_json({}, '#detailTemplate');    
-			$(self.target).html(html); 
-			
-			$(self.target).find(".tabs a").click(function (event) {
-				event.preventDefault();
-				$(self.target).find(".tabs a").removeClass("active");
-				$(this).addClass("active");
-				
-				$(self.target).find(".tab-content").removeClass("tab-content--open");
-				$(self.target).find($(this).attr("href")).addClass("tab-content--open");
-			});
+			});						
 		}, 
 
 		afterRequest: function () {	  
@@ -143,32 +134,24 @@
 			
 			var tab_data = null;
 			var dataHandler = new getData_Detail_Extended.constructor(this);
-			this.multi_work_ref_req = null;
-			this.related_id_req = null;
+			this.tab_multi_work_ref_req = null;
+			this.tab_related_id_req = null;
 			var original_id_req = null;
 
 			for (var i = 0, l = this.manager.response.response.docs.length; i < l ; i++) {
 				var doc = this.manager.response.response.docs[i]; 												
 				tab_data = dataHandler.get_data(doc);  
 				//* get parts request
-				this.multi_work_ref_req = tab_data.subwidget.req_multiwork;	
+				this.tab_multi_work_ref_req = tab_data.subwidget.req_multiwork;	
 				//* get related request
-				this.related_id_req = tab_data.subwidget.req_relatedid;
+				this.tab_related_id_req = tab_data.subwidget.req_relatedid;
 								
-				// process description tab
-				var html = self.template_integration_json(tab_data, '#detailDescriptionTemplate');    
-				$target.find("#description_tab").html(html);
+				// get reference text
+				this.tab_reference_html = self.template_integration_json(tab_data, '#detailDescriptionTemplate');    				
 				
-				// process detail tab
-				html = self.template_integration_json(tab_data.info, '#detailDetailTemplate');    
-				$target.find("#details_tab").html(html);
-				
-				
-//				var references_texts = tab_data.info.references_texts;
-//				
-//				if(references_texts != null)
-//					$target.find("#description .copy").text(references_texts);								
-				 
+				// get extended text
+				this.tab_extended_html = self.template_integration_json(tab_data.info, '#detailDetailTemplate'); 				
+												
 			}			     															
 			
 			if(original_id_req != null){	
@@ -195,22 +178,87 @@
 		},
 		
 		process_related: function(){
-			if(this.related_id_req != null){				
+			if(this.tab_related_id_req != null){				
 				//* start related sub request
-				var param = new AjaxSolr.Parameter({name: "q", value: this.related_id_req });					  					
+				var param = new AjaxSolr.Parameter({name: "q", value: this.tab_related_id_req });					  					
 				this.relatedManager.store.add(param.name, param);	 			
 				this.relatedManager.doRequest();
 			}
 		},	
 		
 		process_parts: function(){
-			if(this.multi_work_ref_req != null){				
+			if(this.tab_multi_work_ref_req != null){				
 				//* start part sub request
-				var param = new AjaxSolr.Parameter({name: "q", value: this.multi_work_ref_req });					  					
+				var param = new AjaxSolr.Parameter({name: "q", value: this.tab_multi_work_ref_req });					  					
 				this.partsManager.store.add(param.name, param);	 			
 				this.partsManager.doRequest();				
 			}		
-		}	
+		},
+		
+		process_extended: function(){
+			if(this.tab_extended_html != null){				
+				$(this.target).find("#details_tab").html(this.tab_extended_html);																					
+			}		
+		},
+		
+		process_reference: function(){
+			if(this.tab_reference_html != null){				
+				$(this.target).find("#description_tab").html(this.tab_reference_html);
+			}		
+		},				
+		
+		process_show_extended_titles: function(){			
+			var $target = $(this.target);
+			$target.find("#details_tab .data-section").each(function(){				
+				if($(this).find(".data-pair").length == 0)										
+					// hide title
+					$(this).hide();					
+			})																								
+		},
+		
+		process_init_tabs: function(){				
+			var self = this;
+			var $target = $(self.target);
+			
+			$target.hide();
+			
+			//* merge data and template
+			var html = self.template_integration_json({}, '#detailTemplate');    
+			$target.html(html); 
+			
+			//* click on tab
+			$target.find(".tabs a").click(function (event) {
+				event.preventDefault();
+				$target.find(".tabs a").removeClass("active");
+				$(this).addClass("active");
+				
+				$target.find(".tab-content").removeClass("tab-content--open");
+				$target.find($(this).attr("href")).addClass("tab-content--open");
+			});									
+			
+		},
+		
+		process_show_tabs: function(){				
+			var self = this;
+			var $target = $(self.target);						
+			var i = 0;			
+			//* hide non used tabs
+			$target.find(".tabs a").each(function(){				
+				if($target.find($(this).attr('href')).children().length == 0){
+					$(this).hide();
+				}else if(i == 0){
+					$(this).addClass('active');
+					$target.find($(this).attr('href')).addClass("tab-content--open");
+					i++;
+				}																			
+			})	
+						
+			//* show tabs
+			$target.show();
+			$target.find('section.single-artwork-tabs').show();			
+			
+		}
+						
 	});
 
 })(jQuery);

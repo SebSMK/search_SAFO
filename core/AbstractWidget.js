@@ -78,7 +78,8 @@ AjaxSolr.AbstractWidget = AjaxSolr.Class.extend(
   
   
   getRefresh: function(){	  
-	  if ($(this.target).is(':hidden') || $(this.target).hasClass('no_refresh')){		  
+	  //if ($(this.target).is(':hidden') || $(this.target).hasClass('no_refresh')){
+	  if ($(this.target).hasClass('no_refresh')){
 		  return false;
 	  }
 	  return true;	  	  

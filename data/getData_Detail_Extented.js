@@ -411,7 +411,7 @@
 		
 		this.getInscription_transl = function(inscription_arr){
 			var res = inscription_arr;
-			if(smkCommon.getCurrentLanguage() == "en"){
+			if(smkCommon.getCurrentLanguage() == "en" && inscription_arr != null){
 				
 				for (var i = 0; i < inscription_arr.length; i++) {
 					var inscription = inscription_arr[i];

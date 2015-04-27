@@ -1,12 +1,6 @@
 (function ($) {
 
-AjaxSolr.CategoryWidget = AjaxSolr.AbstractFacetWidget.extend({	
-	
-  init: function () {        
-	  	var labels = {'simple': this.manager.translator.getLabel('category_simple'),'advanced': this.manager.translator.getLabel('category_advanced')};
-        var html = this.template_integration_json(labels, '#categoryItemsTemplate');
-        $(this.target).html(html);
-  },
+AjaxSolr.CategoryWidget = AjaxSolr.AbstractFacetWidget.extend({		 
   
   afterRequest: function () { 
 	  

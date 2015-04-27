@@ -549,9 +549,15 @@
 				};
 				$.taskQueue.add(doQueue, this, 10);	
 			};
-							
+						
+			doQueueProcess('process_init_tabs');
+			doQueueProcess('process_reference');
 			doQueueProcess('process_related');
 			doQueueProcess('process_parts');
+			doQueueProcess('process_extended');
+			doQueueProcess('process_show_extended_titles');	
+			doQueueProcess('process_show_tabs');
+				
 			
 		};
 	}
