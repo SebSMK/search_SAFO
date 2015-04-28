@@ -60,7 +60,9 @@
  		{{#technique}}
           <div class="data-section data-section-compact">
             <h3>{{key}}</h3>
-            <div class="data">{{value}}</div>
+			{{#technique.value}}
+            <div class="data">{{{value}}}</div>
+			{{/technique.value}}
           </div><!-- /.data-section -->
  		{{/technique}}    	  
     	

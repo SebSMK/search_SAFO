@@ -304,8 +304,8 @@ var EventsManager;
 
 		var sub_originalWidget = new AjaxSolr.OriginalWidget({
 			id: 'original',
-			target: '#original',
-			template: Mustache.getTemplate('templates/original.html')
+			target: '#tab_original',
+			template: Mustache.getTemplate('templates/detail_tabs.html')
 		});
 
 		Manager.addWidget(new AjaxSolr.DetailTabsWidget({

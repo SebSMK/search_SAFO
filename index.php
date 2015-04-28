@@ -64,7 +64,7 @@
 	<script src="js/backtotop/js/modernizr.js" type="text/javascript"></script>		
 	<script src="data/getData_Common_functions.js" type="text/javascript"></script>			
 	<script src="data/getData_Detail_Standard.js" type="text/javascript"></script>
-	<script src="data/getData_Original.js" type="text/javascript"></script>
+	<script src="data/getData_Detail_Original.js" type="text/javascript"></script>
 	<script src="data/getData_Detail_Extented.js" type="text/javascript"></script>		
 	<script src="data/getData_Teasers.js" type="text/javascript"></script>		
 	

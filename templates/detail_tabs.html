@@ -364,6 +364,11 @@
 <!-- /.datering -->
 
 
+<!-- original -->
+<div id="tab_original" class="data-section"></div>
+<!-- /.original -->
+
+
 <!-- technique -->
 <div class="data-section">
   <h3>{{{technique_lab}}}</h3>  
@@ -372,7 +377,7 @@
   <div class="data-pair">
     <h4 class="data-pair-key">{{{technique_technique.key}}}</h4>
     {{#technique_technique.value}}        
-    <div class="data-pair-value">{{{technique_technique.value}}}	
+    <div class="data-pair-value">{{{value}}}	
     </div><!-- /.data-pair-value -->
   {{/technique_technique.value}}
   </div><!-- /.data-pair -->
@@ -788,6 +793,199 @@
   <div data-tabs-id="artwork-tabs" id="related" class="tab-content"></div><!-- /.tab-content -->
 
 </section>	
+
+</script>
+
+
+<script id="detailOriginalTemplate" type="text/template">
+	<h3>{{{original_placering_lab}}}</h3>  
+  
+  {{#original_placering.value}}
+  <div class="data-pair">
+    <h4 class="data-pair-key">{{{original_placering.key}}}</h4>
+    {{#original_placering.value}}        
+    <div class="data-pair-value">{{{original_placering.value}}}	
+    </div><!-- /.data-pair-value -->
+  {{/original_placering.value}}
+  </div><!-- /.data-pair -->
+  {{/original_placering.value}}
+
+  {{#original_invnummer.value}}
+  <div class="data-pair">
+    <h4 class="data-pair-key">{{{original_invnummer.key}}}</h4>
+    {{#original_invnummer.value}}        
+    <div class="data-pair-value">{{{original_invnummer.value}}}	
+    </div><!-- /.data-pair-value -->
+  {{/original_invnummer.value}}
+  </div><!-- /.data-pair -->
+  {{/original_invnummer.value}}
+
+
+{{#original_proveniens.show}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{original_proveniens.key}}}</h4>
+        {{#original_proveniens.value}}        
+			<div class="data-pair-value">{{{value}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/original_proveniens.value}}
+      </div><!-- /.data-pair -->
+ {{/original_proveniens.show}} 
+
+{{#original_producent_kunster.show}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{original_producent_kunster.key}}}</h4>
+		{{#original_producent_kunster.value}}        
+			<div class="data-pair-value">{{{name}}}&nbsp;<i>{{{info}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/original_producent_kunster.value}}
+      </div><!-- /.data-pair -->
+      {{/original_producent_kunster.show}}
+
+	{{#original_producent_tilskrevet.show}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{original_producent_tilskrevet.key}}}</h4>
+        {{#original_producent_tilskrevet.value}}        
+			<div class="data-pair-value">{{{name}}}&nbsp;<i>{{{info}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/original_producent_tilskrevet.value}}
+      </div><!-- /.data-pair -->
+      {{/original_producent_tilskrevet.show}}
+      
+	{{#original_producent_tidltilskrvet.show}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{original_producent_tidltilskrvet.key}}}</h4>
+        {{#original_producent_tidltilskrvet.value}}        
+			<div class="data-pair-value">{{{name}}}&nbsp;<i>{{{info}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/original_producent_tidltilskrvet.value}}
+      </div><!-- /.data-pair -->
+      {{/original_producent_tidltilskrvet.show}}
+      
+	{{#original_producent_vaerksted.show}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{original_producent_vaerksted.key}}}</h4>
+        {{#original_producent_vaerksted.value}}        
+			<div class="data-pair-value">{{{name}}}&nbsp;<i>{{{info}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/original_producent_vaerksted.value}}
+      </div><!-- /.data-pair -->
+      {{/original_producent_vaerksted.show}}
+      
+	{{#original_producent_efterfoelger.show}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{original_producent_efterfoelger.key}}}</h4>
+        {{#original_producent_efterfoelger.value}}        
+			<div class="data-pair-value">{{{name}}}&nbsp;<i>{{{info}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/original_producent_efterfoelger.value}}
+      </div><!-- /.data-pair -->
+      {{/original_producent_efterfoelger.show}}      
+    
+ 
+	{{#original_producent_inventor.show}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{original_producent_inventor.key}}}</h4>
+        {{#original_producent_inventor.value}}        
+			<div class="data-pair-value">{{{name}}}&nbsp;<i>{{{info}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/original_producent_inventor.value}}
+      </div><!-- /.data-pair -->
+      {{/original_producent_inventor.show}}      
+    
+    
+    {{#original_producent_skole.show}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{original_producent_skole.key}}}</h4>
+        {{#original_producent_skole.value}}        
+			<div class="data-pair-value">{{{name}}}&nbsp;<i>{{{info}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/original_producent_skole.value}}
+      </div><!-- /.data-pair -->
+      {{/original_producent_skole.show}}      
+    
+    
+    {{#original_producent_stil.show}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{original_producent_stil.key}}}</h4>
+        {{#original_producent_stil.value}}        
+			<div class="data-pair-value">{{{name}}}&nbsp;<i>{{{info}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/original_producent_stil.value}}
+      </div><!-- /.data-pair -->
+      {{/original_producent_stil.show}}      
+    
+    
+    {{#original_producent_kopi.show}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{original_producent_kopi.key}}}</h4>
+        {{#original_producent_kopi.value}}        
+			<div class="data-pair-value">{{{name}}}&nbsp;<i>{{{info}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/original_producent_kopi.value}}
+      </div><!-- /.data-pair -->
+      {{/original_producent_kopi.show}}  
+
+
+	{{#original_autenticitet.show}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{original_autenticitet.key}}}</h4>
+        {{#original_autenticitet.value}}        
+			<div class="data-pair-value">{{{value}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/original_autenticitet.value}}
+      </div><!-- /.data-pair -->
+ 	{{/original_autenticitet.show}} 
+
+  {{#original_tilstand.value}}
+  <div class="data-pair">
+    <h4 class="data-pair-key">{{{original_tilstand.key}}}</h4>
+    {{#original_tilstand.value}}        
+    <div class="data-pair-value">{{{original_tilstand.value}}}	
+    </div><!-- /.data-pair-value -->
+  {{/original_tilstand.value}}
+  </div><!-- /.data-pair -->
+  {{/original_tilstand.value}}
+
+	{{#original_indskrift.show}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{original_indskrift.key}}}</h4>
+        {{#original_indskrift.value}}        
+			<div class="data-pair-value">{{{value}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/original_indskrift.value}}
+      </div><!-- /.data-pair -->
+ 	{{/original_indskrift.show}} 
+
+{{#original_vaerkdatering.value}}
+  <div class="data-pair">
+    <h4 class="data-pair-key">{{{original_vaerkdatering.key}}}</h4>
+    {{#original_vaerkdatering.value}}        
+    <div class="data-pair-value">{{{original_vaerkdatering.value}}}	
+    </div><!-- /.data-pair-value -->
+  {{/original_vaerkdatering.value}}
+  </div><!-- /.data-pair -->
+  {{/original_vaerkdatering.value}}
+
+{{#original_technique.show}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{original_technique.key}}}</h4>
+        {{#original_technique.value}}        
+			<div class="data-pair-value">{{{value}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/original_technique.value}}
+      </div><!-- /.data-pair -->
+ {{/original_technique.show}} 
+
+{{#original_bemaerk.show}}
+      <div class="data-pair">
+        <h4 class="data-pair-key">{{{original_bemaerk.key}}}</h4>
+        {{#original_bemaerk.value}}        
+			<div class="data-pair-value">{{{value}}}</i>	
+        	</div><!-- /.data-pair-value -->
+		{{/original_bemaerk.value}}
+      </div><!-- /.data-pair -->
+ {{/original_bemaerk.show}} 
+
 
 </script>
 

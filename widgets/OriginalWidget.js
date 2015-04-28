@@ -7,7 +7,7 @@
 			var self = this;		
 			var $target = $(this.target);
 
-			if (!self.getRefresh() ||  $(this.target).length == 0){
+			if (!self.getRefresh()){
 				self.setRefresh(true);
 				return;
 			}	 		  
@@ -23,7 +23,7 @@
 			}
 
 			//* merge data and template						    			
-			var html = self.template_integration_json({"detail": artwork_data}, '#originalTemplate');    
+			var html = self.template_integration_json(artwork_data.info, '#detailOriginalTemplate');    
 			$target.html(html);  
 		},  	  
 

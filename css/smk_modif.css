@@ -5,6 +5,10 @@
 	opacity: 0.5; 
 	}   
 
+.data-section .data-pair:nth-child(odd) {
+  background: #fff8ed;
+}
+
 .data-section .data-pair .data-pair-key.indent{  
   text-indent: 10px;
 }

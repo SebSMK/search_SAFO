@@ -555,6 +555,7 @@
 			doQueueProcess('process_related');
 			doQueueProcess('process_parts');
 			doQueueProcess('process_extended');
+			doQueueProcess('process_extended_original');
 			doQueueProcess('process_show_extended_titles');	
 			doQueueProcess('process_show_tabs');
 				

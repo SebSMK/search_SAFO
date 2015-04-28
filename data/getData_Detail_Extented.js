@@ -114,12 +114,7 @@
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_trykker')),  
 							value: this.getListProducers(doc, getData_Common.enumProducent.trykker),
 							show: this.getListProducers(doc, getData_Common.enumProducent.trykker).length > 0 ? true : false
-						},
-			            producent_forfatter: {
-							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_forfatter')),  
-							value: this.getListProducers(doc, getData_Common.enumProducent.forfatter),
-							show: this.getListProducers(doc, getData_Common.enumProducent.forfatter).length > 0 ? true : false
-						},
+						},			            
 			            producent_forfatter: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_forfatter')),  
 							value: this.getListProducers(doc, getData_Common.enumProducent.forfatter),

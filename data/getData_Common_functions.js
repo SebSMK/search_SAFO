@@ -122,7 +122,7 @@
 		var arrayLength = split.length;
 
 		for (var i = 0; i < arrayLength; i++) {	
-			res.push(split[i]);					
+			res.push({value:split[i]});					
 		}				
 
 		return res.length > 0 ? res : null;		
@@ -253,7 +253,7 @@
 			var arrayLength = tech_split.length;
 
 			for (var i = 0; i < arrayLength; i++) {	
-				technique_all.push(tech_split[i]);					
+				technique_all.push({value:tech_split[i]});					
 			}				
 		}
 

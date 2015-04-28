@@ -375,8 +375,8 @@
 				setLang = smkCommon.enum_lang.def;											
 			}			
 
-			this.hideWidget($(this.target).find("[lang][lang!='"+setLang+"']"));
-			this.showWidget($(this.target).find("[lang][lang='"+setLang+"']"));						
+			this.hideWidget($(this.target).find("[lang][lang*!='"+setLang+"']"));
+			this.showWidget($(this.target).find("[lang][lang*='"+setLang+"']"));						
 		};
 	}
 }));
