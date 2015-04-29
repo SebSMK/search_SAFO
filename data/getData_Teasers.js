@@ -91,6 +91,7 @@
 				title = title.length > max ? sprintf('%s(...)', title.substring(0, max)) : title;
 				
 			return smkCommon.isValidDataText(title) ? title : null;
+			//return "Lorem ipsum dolor sit amet, et imperdiet adipiscing iaculis consequat, sit interdum, faucibus aliquam sem aspernatur aliquet, vestibulum vitae vehicula dui ut amet hendrerit, vitae elit pulvinar. Ut ligula ipsum, nec enim, vestibulum vestibulum sodales aliquam, et minim magna at vitae mauris arcu. Lacinia ante, imperdiet a in maecenas quam arcu, bibendum condimentum, cursus morbi quis felis ultrices ullamcorper, neque nulla consequat. Sit fusce proin viverra dictum risus, mauris iaculis est odio in, metus dapibus, lacus maecenas est. Nonummy vestibulum, metus phasellus et, class volutpat eget, ut sollicitudin nec felis conubia cras, sed libero pede."
 		};
 		
 		this.getListLocation = function (doc, caller){
