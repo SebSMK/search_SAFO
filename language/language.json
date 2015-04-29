@@ -7,7 +7,8 @@
     
       "no_results":				"Desværre kan vi ikke finde nogle resultater til din søgning.",	
               
-      "copyright_def":			"Dette billede er i Public Domain, og du kan derfor frit benytte det til alle formål.",
+      "detail_copyright_def":			"Dette billede er i Public Domain, og du kan derfor frit benytte det til alle formål.",
+      "teaser_copyright_def":	"cc0 | Public Domain",
       "copyright_link":			"http://creativecommons.org/publicdomain/zero/1.0/",
       
       "tagcloud_artist_name": 		"kunstner",
@@ -186,7 +187,7 @@
     "detail_udstilling_udstilling": "udstillinger",
     
     "detail_bemaerk_lab": "bemærkninger",
-    "detail_bemaerk_anden_litt": "",
+    "detail_bemaerk_anden_litt": "bemærkninger",
     
     "detail_motiv_lab": "motiv",
     "detail_motiv_topografisk": "topografisk motiv",
@@ -231,7 +232,8 @@
       
       "no_results":				"No results were found. Please try a different search.",
       
-      "copyright_def":			"This image is in the Public Domain so you may freely use it for any purpose.",	
+      "detail_copyright_def":	"This image is in the Public Domain so you may freely use it for any purpose.",
+      "teaser_copyright_def":	"cc0 | Public Domain",	
       "copyright_link":			"http://creativecommons.org/publicdomain/zero/1.0/",		
 
 	  "tagcloud_artist_name": 		"artist",
@@ -300,7 +302,7 @@
 	  "detail_tab_related":			"related artworks",
 	  
 	  "detail_bemaerk_lab":	"comments",
-	  "detail_bemaerk_anden_litt": "",
+	  "detail_bemaerk_anden_litt": "comments",
 		"detail_datering_lab":	"date/place of production",
 		"detail_datering_production_note":	"notes",
 		"detail_datering_production_udfoert_place":	"publication date",

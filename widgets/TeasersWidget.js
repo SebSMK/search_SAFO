@@ -10,11 +10,7 @@
 		},
 		
 		
-		start: 0,		  
-
-		default_picture_path: null, 
-
-		//teaser_article_class: null, // current article visualization classes	
+		start: 0,		   	
 
 		init: function(){
 
@@ -23,9 +19,7 @@
 			
 			//* load empty template
 			var html = self.template;     
-			$target.html($(html).find(this.initTemplate).html());														
-			
-			this.default_picture_path = smkCommon.getDefaultPicture('medium');      	
+			$target.html($(html).find(this.initTemplate).html());																				      	
 
 		},  
 
@@ -80,9 +74,11 @@
 				 
 				// add image					
 				var $imgcontainer = $tile.find('.matrix-tile-image');												
-				var img = dataHandler.getImage($imgcontainer);				
-				$imgcontainer.prepend($(img));
-				$imgcontainer.find('img').addClass('image-loading');
+				if(!$imgcontainer.hasClass('matrix-tile-image-missing')){
+					var img = dataHandler.getImage($imgcontainer);				
+					$imgcontainer.prepend($(img));
+					$imgcontainer.find('img').addClass('image-loading');
+				}				
 				
 				tiles += $tile[0].outerHTML;										
 			}									

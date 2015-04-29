@@ -23,10 +23,10 @@
 					media:{
 						title: getData_Common.getTitle(doc, 'museum'),	
 						alt: getData_Common.getMedia_alt(doc),
-						image: getData_Common.getMedia_image(doc, 'medium', this.caller),						
-						copyright: getData_Common.getMedia_copyright(doc, this.caller),
-						copyright_default: !getData_Common.computeCopyright(doc) && doc.medium_image_url !== undefined,
-						copyright_valid: getData_Common.computeCopyright(doc),
+						image: getData_Common.getMedia_image(doc, 'medium'),
+						no_image: doc.medium_image_url === undefined ? true : false,
+						copyright: getData_Common.getMedia_copyright(doc, this.caller),	
+						copyright_text_cc0: this.caller.manager.translator.getLabel('teaser_copyright_def'),
 						img_id: doc.id,
 						url: this.getDetailUrl(doc)
 						

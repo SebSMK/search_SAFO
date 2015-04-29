@@ -21,18 +21,28 @@
 			<div class="matrix-tile-inner">				
 	
 				{{#media}}
-				<div class="matrix-tile-image" src="{{image}}" img_id="{{img_id}}">
-
+				<div class="matrix-tile-image {{#no_image}}matrix-tile-image-missing{{/no_image}}" {{#image}}src="{{image}}" img_id="{{img_id}}"{{/image}}>
+				<i></i>
 				<!-- invisible link - make the whole div container clickable -->
 					<a class="divLink" href="{{url}}">&nbsp;</a>
 
-					{{#copyright}}
+					{{#copyright.show}}
 					<span class="copyright-info">
 						<ul>
-							<li>{{{copyright}}}</li>
+							<li>&#169;&nbsp;{{{copyright.text}}}</li>
 						</ul>
 					</span>
-					{{/copyright}}
+					{{/copyright.show}}
+
+
+					{{#copyright.img_cc0}}
+					<span class="copyright-info">
+						<ul>
+							<li>{{{media.copyright_text_cc0}}}</li>
+						</ul>
+					</span>
+						
+					{{/copyright.img_cc0}}	
 
 				</div>
 				{{/media}}

@@ -16,9 +16,7 @@
 
 		start: 0,
 
-		current_language: null,
-
-		default_picture_path: null, 
+		current_language: null, 
 
 		tab_related_id_req: null,
 		
@@ -34,8 +32,7 @@
 
 		init: function(){	  	    
 			var self = this;
-
-			self.default_picture_path = smkCommon.getDefaultPicture('large');
+			
 			self.current_language = self.manager.translator.getLanguage();
 
 			//* related              
@@ -153,10 +150,10 @@
 				this.tab_original_id_req = tab_data.subwidget.req_original;
 
 				// get reference text
-				this.tab_reference_html = self.template_integration_json(tab_data, '#detailDescriptionTemplate');    				
+				this.tab_reference_html = self.template_integration_json(tab_data, '#detailReferenceTemplate');    				
 
 				// get extended text
-				this.tab_extended_html = self.template_integration_json(tab_data.info, '#detailDetailTemplate'); 
+				this.tab_extended_html = self.template_integration_json(tab_data.info, '#detailExtendedTemplate'); 
 			}			     															
 		},  
 

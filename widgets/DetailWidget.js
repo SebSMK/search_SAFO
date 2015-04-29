@@ -6,14 +6,10 @@
 
 		current_language: null,
 
-		default_picture_path: null, 
-
 		init: function(){	  	    
 			var self = this;
-
-			self.default_picture_path = smkCommon.getDefaultPicture('large');
+			
 			self.current_language = self.manager.translator.getLanguage();
-
 		}, 
 
 		afterRequest: function () {	  
@@ -53,37 +49,48 @@
 			var html = self.template_integration_json({"detail": artwork_data}, '#detailTemplate'); 
 			var $html = $(html);
 			
-			// add image					
+			// add image
+			
 			var $imgcontainer = $html.find('.gallery__main');												
-			var img = dataHandler.getImage($imgcontainer);				
-			$imgcontainer.prepend($(img));
-			$imgcontainer.find('img').addClass('image-loading');			
+			if(!$imgcontainer.hasClass('matrix-tile-image-missing')){
+				var img = dataHandler.getImage($imgcontainer);				
+				$imgcontainer.prepend($(img));
+				$imgcontainer.find('img').addClass('image-loading');			
 
-			$imgcontainer.find('img').imagesLoaded().progress( function( imgLoad, image ) {
-  						
-				// add copyright info on image
-				$(image.img).mouseenter(function (event) {
-					$html.find('span.copyright-info').css('opacity', 1);}
-				);
-				$(image.img).mouseleave(function (event) {$html.find('span.copyright-info').css('opacity', 0);});
+				$imgcontainer.find('img').imagesLoaded().progress( function( imgLoad, image ) {
+	  						
+//					// add copyright info on image
+//					$(image.img).mouseenter(function (event) {
+//						$html.find('span.copyright-info').css('opacity', 1);}
+//					);
+//					$(image.img).mouseleave(function (event) {$html.find('span.copyright-info').css('opacity', 0);});
 
-				$(image.img).removeClass('image-loading');					
-				
+					$(image.img).removeClass('image-loading');					
+					
+					//* add data to template
+					$target.prepend($html); 				
+
+					// add fancybox
+					$target.find('.fancybox').fancybox({
+						afterClose: function(){
+							$target.find('img').show();
+						}
+					});
+									
+					//* send loaded event
+					$(self).trigger({
+						type: "smk_detail_this_img_loaded"
+					});
+				});	
+			}else{
 				//* add data to template
-				$target.prepend($html); 				
-
-				// add fancybox
-				$target.find('.fancybox').fancybox({
-					afterClose: function(){
-						$target.find('img').show();
-					}
-				});
-								
+				$target.prepend($html); 
+				
 				//* send loaded event
 				$(self).trigger({
 					type: "smk_detail_this_img_loaded"
-				});
-			});	    	
+				});				
+			}																		    	
 		},  
 
 		template_integration_json: function (json_data, templ_id){	  

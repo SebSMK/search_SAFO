@@ -137,7 +137,7 @@
 						title_museum: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_title_museum')),  
 							value: getData_Common.getTitle(doc, 'museum'),
-							show: getData_Common.getTitle(doc, 'museum') !== undefined ? true : false,
+							show: getData_Common.getTitle(doc, 'museum') != null ? true : false,
 							key_note: (this.caller.manager.translator.getLabel('detail_title_note')),
 							key_trans: (this.caller.manager.translator.getLabel('detail_title_translation')),
 							key_trans_note: (this.caller.manager.translator.getLabel('detail_title_translation_note'))
@@ -146,7 +146,7 @@
 						title_serie: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_title_serie')),  
 							value: getData_Common.getTitle(doc, 'serie'),
-							show: getData_Common.getTitle(doc, 'serie') !== undefined ? true : false,
+							show: getData_Common.getTitle(doc, 'serie') != null ? true : false,
 							key_note: (this.caller.manager.translator.getLabel('detail_title_note')),
 							key_trans: (this.caller.manager.translator.getLabel('detail_title_translation')),
 							key_trans_note: (this.caller.manager.translator.getLabel('detail_title_translation_note'))
@@ -155,7 +155,7 @@
 						title_beskrivelse: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_title_beskrivelse')),  
 							value: getData_Common.getTitle(doc, 'beskrivelse'),
-							show: getData_Common.getTitle(doc, 'beskrivelse') !== undefined? true : false,
+							show: getData_Common.getTitle(doc, 'beskrivelse') != null? true : false,
 							key_note: (this.caller.manager.translator.getLabel('detail_title_note')),
 							key_trans: (this.caller.manager.translator.getLabel('detail_title_translation')),
 							key_trans_note: (this.caller.manager.translator.getLabel('detail_title_translation_note'))								

@@ -4,11 +4,7 @@
 
 		/*
 		 * PUBLIC FUNCTIONS
-		 * **/
-		
-		init: function(){		
-			this.default_picture_path = smkCommon.getDefaultPicture('medium');      	
-		},  		
+		 * **/					
 		
 		afterRequest: function () {  
 			var self = this;
@@ -99,12 +95,13 @@
 				$tile.addClass('scroll_add');
 				
 				// add image					
-				var $imgcontainer = $tile.find('.matrix-tile-image');				  
-				
-				var img = dataHandler.getImage($imgcontainer);				
-				$imgcontainer.prepend( $(img) );
-				$imgcontainer.find('img').addClass('image-loading');
-				
+				var $imgcontainer = $tile.find('.matrix-tile-image');												
+				if(!$imgcontainer.hasClass('matrix-tile-image-missing')){
+					var img = dataHandler.getImage($imgcontainer);				
+					$imgcontainer.prepend( $(img) );
+					$imgcontainer.find('img').addClass('image-loading');
+				}
+								
 				tiles += $tile[0].outerHTML;										
 			}									
 			
@@ -114,9 +111,7 @@
 		
 		/*
 		 * PRIVATE VARIABLES
-		 * **/
-		
-		default_picture_path: null, 
+		 * **/		
 		
 		preloading: false,
 		

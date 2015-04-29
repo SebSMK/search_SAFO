@@ -1,6 +1,6 @@
 <div>
 
-<script id="detailDescriptionTemplate" type="text/template">	
+<script id="detailReferenceTemplate" type="text/template">	
 {{#info.references_texts.show}}
 	<div data-tabs-id="artwork-tabs" id="description" class="tab-content">
     	{{#info.references_texts.value}}
@@ -10,7 +10,7 @@
 {{/info.references_texts.show}}
 </script>
 
-<script id="detailDetailTemplate" type="text/template">	
+<script id="detailExtendedTemplate" type="text/template">	
 <div data-tabs-id="artwork-tabs" id="details" class="tab-content">
 	
 <!-- identification -->
@@ -233,10 +233,11 @@
 	<div class="data-section">
       <h3>{{{title_lab}}}</h3>
 
-      {{#title_museum.value}}
-      <div class="data-pair">
+    {{#title_museum.show}}
+     {{#title_museum.value}}  
+	 <div class="data-pair">
 		<h4 class="data-pair-key">{{{title_museum.key}}}</h4>
-		{{#title_museum.value}}         
+		        
 			<div class="data-pair-value">{{{title}}}</div><!-- /.data-pair-value -->
 			
 			{{#note}}
@@ -254,16 +255,18 @@
 				<div class="data-pair-value">{{{trans_note}}}</div><!-- /.data-pair-value -->
 			{{/trans_note}}
 
-		{{/title_museum.value}}
+		
 		
       </div><!-- /.data-pair -->
-      {{/title_museum.value}}
+	{{/title_museum.value}}
+   {{/title_museum.show}}
 
 
-	{{#title_beskrivelse.value}}
+	{{#title_beskrivelse.show}}
+	{{#title_beskrivelse.value}} 
       <div class="data-pair">
 		<h4 class="data-pair-key">{{{title_beskrivelse.key}}}</h4>
-		{{#title_beskrivelse.value}}         
+		        
 			<div class="data-pair-value">{{{title}}}</div><!-- /.data-pair-value -->
 			
 			{{#note}}
@@ -279,18 +282,18 @@
 			{{#trans_note}}
 				<h4 class="data-pair-key indent">{{{title_beskrivelse.key_trans_note}}}</h4>		  
 				<div class="data-pair-value">{{{trans_note}}}</div><!-- /.data-pair-value -->
-			{{/trans_note}}
-
-		{{/title_beskrivelse.value}}
+			{{/trans_note}}		
 		
       </div><!-- /.data-pair -->
-      {{/title_beskrivelse.value}}
+	  {{/title_beskrivelse.value}}
+     {{/title_beskrivelse.show}}
 
 
-	{{#title_serie.value}}
+	{{#title_serie.show}}
+	{{#title_serie.value}}  
       <div class="data-pair">
 		<h4 class="data-pair-key">{{{title_serie.key}}}</h4>
-		{{#title_serie.value}}         
+		       
 			<div class="data-pair-value">{{{title}}}</div><!-- /.data-pair-value -->
 			
 			{{#note}}
@@ -306,12 +309,11 @@
 			{{#trans_note}}
 				<h4 class="data-pair-key indent">{{{title_serie.key_trans_note}}}</h4>		  
 				<div class="data-pair-value">{{{trans_note}}}</div><!-- /.data-pair-value -->
-			{{/trans_note}}
-
-		{{/title_serie.value}}
+			{{/trans_note}}	
 		
       </div><!-- /.data-pair -->
-      {{/title_serie.value}}						
+	  {{/title_serie.value}}
+      {{/title_serie.show}}						
  
 </div>
 <!-- /.title -->

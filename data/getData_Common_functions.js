@@ -823,9 +823,8 @@
 		return  copyright == false ? sprintf('%s%s', artist, title) : sprintf('%s - %s', copyright, title); 	  
 	};
 	
-	getdatacommon.getMedia_image = function (doc, size, caller){	  
-		//return doc.medium_image_url !== undefined ? doc.medium_image_url : caller.default_picture_path;	
-		return doc.medium_image_url !== undefined ? smkCommon.getScaledPicture(doc.medium_image_url, size) : caller.default_picture_path;
+	getdatacommon.getMedia_image = function (doc, size){	  			
+		return doc.medium_image_url !== undefined ? smkCommon.getScaledPicture(doc.medium_image_url, size) : null;
 	};
 	
 	getdatacommon.getMedia_copyright = function (doc, caller){	  
@@ -833,16 +832,17 @@
 		
 		
 		copyright.link = caller.manager.translator.getLabel('copyright_link');
-		copyright.show = doc.medium_image_url !== undefined;
+		copyright.show = doc.medium_image_url !== undefined && this.computeCopyright(doc);
 		copyright.img_cc0 = this.computeCopyright(doc) == false;
 		
 		copyright.text = doc.medium_image_url !== undefined ? 
 							this.computeCopyright(doc) != false ?
-									this.computeCopyright(doc)
+									this.computeCopyright(doc).trim()
 								:
-									caller.manager.translator.getLabel('copyright_def')
+									null
 							: 
 								caller.manager.translator.getLabel('detail_no_photo');
+		
 											 		
 		return copyright; 	  
 	};
