@@ -87,10 +87,36 @@
 			
 		},				
 
-		onComplete: function onComplete() {										
+		onComplete: function onComplete() {	
+			var $tiles = $(this.target).find('.matrix-tile');
+			var self = this;
+
+			//* add click on image / title + hover on copyright
+			$tiles.each(function() {
+				var $tile = $(this);
+				
+				// image
+				$tile.find('a').click({detail_url: $tile.find('a').attr('href'), caller: self}, 
+					function (event) {self.onClickLink(event);}
+				);
+				
+				// title
+				$tile.find('.artwork-title').click({detail_url: $tile.find('.artwork-title').attr('href'), caller: self}, 
+					function (event) {self.onClickLink(event);}
+				);								 					  						
+
+				// copyright
+				var $imgcontainer = $tile.find('.matrix-tile-image').not('.matrix-tile-image-missing');
+				if($imgcontainer.length > 0){
+					$imgcontainer.find('a').mouseenter(function (event) {$tile.find('span.copyright-info').css('opacity', 1);});
+					$imgcontainer.find('a').mouseleave(function (event) {$tile.find('span.copyright-info').css('opacity', 0);});
+				}				
+			});
+			
 			$(this).trigger({
 				type: "smk_teasers_all_images_loaded"
 			});	
+			
 			return true;
 		},
 

@@ -23,6 +23,7 @@
 						image: getData_Common.getMedia_image(doc, 'large'),						
 						image_full_path: doc.medium_image_url,
 						no_image: doc.medium_image_url === undefined ? true : false,
+						no_image_text: this.caller.manager.translator.getLabel('detail_no_photo'),
 						copyright: getData_Common.getMedia_copyright(doc, this.caller),
 						copyright_text_cc0: this.caller.manager.translator.getLabel('detail_copyright_def'),
 						img_id:doc.id,

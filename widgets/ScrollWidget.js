@@ -52,6 +52,30 @@
 		 * **/
 		
 		onAllImagesLoaded: function onComplete() {	
+			var $tiles = $(this.target).find('.matrix-tile.scroll_add');
+			var self = this;
+
+			//* add click on image + title + hover on copyright
+			$tiles.each(function() {
+				var $tile = $(this);
+				
+				// image
+				$tile.find('a').click({detail_url: $tile.find('a').attr('href'), caller: self}, 
+					function (event) {self.onClickLink(event);}
+				);
+				
+				// title
+				$tile.find('.artwork-title').click({detail_url: $tile.find('.artwork-title').attr('href'), caller: self}, 
+					function (event) {self.onClickLink(event);}
+				);								 					  						
+
+				// copyright
+				var $imgcontainer = $tile.find('.matrix-tile-image');
+				$imgcontainer.find('a').mouseenter(function (event) {$tile.find('span.copyright-info').css('opacity', 1);});
+				$imgcontainer.find('a').mouseleave(function (event) {$tile.find('span.copyright-info').css('opacity', 0);});
+
+			});
+			
 			if(smkCommon.debugLog()) console.log(sprintf("scroll_request - onComplete: isPreloading_%s", this.preloading));
 			$(this).trigger({
 				type: this.preloading == true ? "smk_scroll_all_images_preloaded" :  "smk_scroll_all_images_loaded"

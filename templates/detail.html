@@ -14,6 +14,12 @@
           <div class="inline-gallery-main">
             <div class="inline-gallery-main-image gallery__main {{#no_image}}matrix-tile-image-missing{{/no_image}}" {{#image}}src="{{image}}"{{/image}} title="{{title}}" img_id="{{img_id}}"><i></i></div>			
             
+			{{#no_image}}
+			<div target="_blank" class="inline-gallery-copyright-show-hide">								
+				{{{no_image_text}}}																			
+			</div>
+			{{/no_image}}
+
 			{{#image}}
 			<a target="_blank" class="inline-gallery-copyright-show-hide {{#copyright.img_cc0}}cc0active{{/copyright.img_cc0}}" {{#copyright.img_cc0}} onclick="window.open('{{{copyright.link}}}')"{{/copyright.img_cc0}}>
 				{{#copyright.show}}

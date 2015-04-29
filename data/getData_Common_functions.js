@@ -829,20 +829,11 @@
 	
 	getdatacommon.getMedia_copyright = function (doc, caller){	  
 		var copyright = {};
-		
-		
+				
 		copyright.link = caller.manager.translator.getLabel('copyright_link');
 		copyright.show = doc.medium_image_url !== undefined && this.computeCopyright(doc);
-		copyright.img_cc0 = this.computeCopyright(doc) == false;
-		
-		copyright.text = doc.medium_image_url !== undefined ? 
-							this.computeCopyright(doc) != false ?
-									this.computeCopyright(doc).trim()
-								:
-									null
-							: 
-								caller.manager.translator.getLabel('detail_no_photo');
-		
+		copyright.img_cc0 = this.computeCopyright(doc) == false;		
+		copyright.text = this.computeCopyright(doc) != false ?	this.computeCopyright(doc).trim() : null;
 											 		
 		return copyright; 	  
 	};
