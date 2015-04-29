@@ -7,7 +7,8 @@
     
       "no_results":				"Desværre kan vi ikke finde nogle resultater til din søgning.",	
               
-      "copyright_def":			"CC0 - Public Domain",
+      "copyright_def":			"Dette billede er i Public Domain, og du kan derfor frit benytte det til alle formål.",
+      "copyright_link":			"http://creativecommons.org/publicdomain/zero/1.0/",
       
       "tagcloud_artist_name": 		"kunstner",
       "tagcloud_artist_auth": 		"rolle",      
@@ -53,6 +54,8 @@
 	  "label_type_exhibition":	"udstilling",
 	  
 	  "list_reference":			"inv.nr.",
+	  
+	  "detail_fullsize_lab": 	"Se fuld størrelse",
 	  	   	  
 	  "detail_date":			"datering",
 	  "detail_technique":		"teknik",
@@ -183,7 +186,7 @@
     "detail_udstilling_udstilling": "udstillinger",
     
     "detail_bemaerk_lab": "bemærkninger",
-    "detail_bemaerk_anden_litt": "anden litt",
+    "detail_bemaerk_anden_litt": "",
     
     "detail_motiv_lab": "motiv",
     "detail_motiv_topografisk": "topografisk motiv",
@@ -228,7 +231,8 @@
       
       "no_results":				"No results were found. Please try a different search.",
       
-      "copyright_def":			"CC0 - Public Domain",			
+      "copyright_def":			"This image is in the Public Domain so you may freely use it for any purpose.",	
+      "copyright_link":			"http://creativecommons.org/publicdomain/zero/1.0/",		
 
 	  "tagcloud_artist_name": 		"artist",
 	  "tagcloud_artist_auth": 		"role",
@@ -274,6 +278,9 @@
 	  "label_type_exhibition":	"exhibition",
 	  
 	  "list_reference":			"ref.",
+	  	  
+	  
+	  "detail_fullsize_lab":	"Zoom",
 	  
 	  "detail_date":			"date",
 	  "detail_technique":		"technique",
@@ -293,6 +300,7 @@
 	  "detail_tab_related":			"related artworks",
 	  
 	  "detail_bemaerk_lab":	"comments",
+	  "detail_bemaerk_anden_litt": "",
 		"detail_datering_lab":	"date/place of production",
 		"detail_datering_production_note":	"notes",
 		"detail_datering_production_udfoert_place":	"publication date",
@@ -333,6 +341,7 @@
 		"detail_producent_forfatter":	"author",
 		"detail_producent_forlaeg":	"after",
 		"detail_producent_formeri":	"moulder",
+		"detail_producent_inventor": "inventor",
 		"detail_producent_kopi":	"copy after",
 		"detail_producent_kunster":	"artist",
 		"detail_producent_lab":	"artist / maker",
@@ -362,6 +371,7 @@
 		"detail_technique_format":	"shape",
 		"detail_technique_kollation":	"contents",
 		"detail_technique_lab":	"technique",
+		"detail_technique_materiale": "materialstechnique_all",
 		"detail_technique_materiale_grundering":	"priming",
 		"detail_technique_materiale_material":	"support",
 		"detail_technique_materiale_medium":	"coat of paint",

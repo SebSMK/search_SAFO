@@ -13,7 +13,22 @@
         <div class="inline-galler-inner">
           <div class="inline-gallery-main">
             <div class="inline-gallery-main-image gallery__main image_loading" src="{{image}}" title="{{title}}" alt="{{{alt}}}" img_id="{{img_id}}"></div>
-            </div> 
+            
+			<a target="_blank" class="inline-gallery-copyright-show-hide {{#copyright.img_cc0}}cc0active{{/copyright.img_cc0}}" {{#copyright.img_cc0}} onclick="window.open('{{{copyright.link}}}')"{{/copyright.img_cc0}}>
+				{{#copyright.show}}<i {{#copyright.img_cc0}}class = "cc0"{{/copyright.img_cc0}} ></i>{{/copyright.show}}				
+				{{{copyright.text}}}
+			</a>
+			
+			{{#image_full_path}}
+			<a class="inline-gallery-view-full fancybox" href="{{{image_full_path}}}">
+				{{{fullsizeText}}}
+			<i></i>
+			</a>
+			{{/image_full_path}}
+
+
+
+			</div> 
          </div>
        </div>
      </div>

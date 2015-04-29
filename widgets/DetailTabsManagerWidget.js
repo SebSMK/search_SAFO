@@ -49,7 +49,7 @@
 						'json.nl': 'map'
 					},
 
-					"thumbs": {					
+					"multi_work": {					
 						'rows':500,					
 						'start': 0,
 						'sort': "id asc",
@@ -70,8 +70,8 @@
 				self.relatedManager.store.addByValue(name, params.related[name]);				
 			}   						
 
-			for (var name in params.thumbs) {
-				self.partsManager.store.addByValue(name, params.thumbs[name]);			
+			for (var name in params.multi_work) {
+				self.partsManager.store.addByValue(name, params.multi_work[name]);			
 			}   
 
 			for (var name in params.detail) {				
@@ -150,7 +150,7 @@
 				//* get related request
 				this.tab_related_id_req = tab_data.subwidget.req_relatedid;
 				//* get original request
-				this.tab_original_id_req = tab_data.subwidget.req_relatedid;
+				this.tab_original_id_req = tab_data.subwidget.req_original;
 
 				// get reference text
 				this.tab_reference_html = self.template_integration_json(tab_data, '#detailDescriptionTemplate');    				
@@ -252,6 +252,8 @@
 			$target.find(".tabs a").each(function(){
 
 				$(this).removeClass('active');
+				$target.find($(this).attr('href')).removeClass("tab-content--open");
+				
 				//* add text to tabs
 				$(this).text(self.manager.translator.getLabel($(this).attr('class')));
 

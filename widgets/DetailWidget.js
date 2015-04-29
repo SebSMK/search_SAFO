@@ -72,6 +72,13 @@
 				//* add data to template
 				$target.prepend($html); 				
 
+				// add fancybox
+				$target.find('.fancybox').fancybox({
+					afterClose: function(){
+						$target.find('img').show();
+					}
+				});
+								
 				//* send loaded event
 				$(self).trigger({
 					type: "smk_detail_this_img_loaded"

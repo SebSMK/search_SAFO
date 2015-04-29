@@ -257,7 +257,7 @@
 			}				
 		}
 
-		return technique_all;
+		return technique_all.length == 0 ? null : technique_all;
 
 	};
 
@@ -829,20 +829,29 @@
 	};
 	
 	getdatacommon.getMedia_copyright = function (doc, caller){	  
-		return doc.medium_image_url !== undefined ? 
-				this.computeCopyright(doc) != false ?
-						this.computeCopyright(doc)
-					:
-						caller.manager.translator.getLabel('copyright_def')
-				: 
-					null;	 	  
+		var copyright = {};
+		
+		
+		copyright.link = caller.manager.translator.getLabel('copyright_link');
+		copyright.show = doc.medium_image_url !== undefined;
+		copyright.img_cc0 = this.computeCopyright(doc) == false;
+		
+		copyright.text = doc.medium_image_url !== undefined ? 
+							this.computeCopyright(doc) != false ?
+									this.computeCopyright(doc)
+								:
+									caller.manager.translator.getLabel('copyright_def')
+							: 
+								caller.manager.translator.getLabel('detail_no_photo');
+											 		
+		return copyright; 	  
 	};
 	
 	/**
 	 * Utils
 	 * */
 	getdatacommon.computeCopyright = function(doc) {
-		return doc.copyright !== undefined ? doc.copyright : false;
+		return doc.copyright !== undefined ? doc.copyright.replace(String.fromCharCode(169), "") : false;
 	};
 	
 	/**

@@ -134,16 +134,6 @@ a.divLink {
     background-color: #fff8ac;
 }
 
-.cc0 {
-    background-image: url("../images/cc0.png");
-    cursor: pointer;
-    display: block;
-    height: 31px;
-    opacity: 0.2;
-    text-indent: -9999em;
-    width: 88px;
-}
-
 .scroll-spinning {		
 	background: url("../images/scroll_spinning.gif") no-repeat fixed 57% bottom rgba(255, 255, 255, 1);
     bottom: 0;
@@ -215,4 +205,37 @@ a.divLink {
 
 .matrix-equalized .matrix-tile-image img[src*="default_picture"] {
     opacity: 0.3;
+}
+
+.inline-gallery .inline-gallery-copyright-show-hide i.cc0 {  
+  background-image: url(../images/cc0.png); 
+  background-position: 0px 0px;
+  background-size: 88px 31px; 
+  width: 88px;
+  height: 31px;
+  opacity: 0.2;
+}
+
+
+
+.inline-gallery .inline-gallery-copyright-show-hide.cc0active {   
+  cursor: pointer;
+}
+
+
+.inline-gallery .inline-gallery-copyright-show-hide.cc0active:hover {   
+  cursor: pointer;
+  color: #5f5f60;
+}
+
+.inline-gallery .inline-gallery-copyright-show-hide:hover {
+    color: #a2a2a5;
+    cursor: default;
+}
+
+.inline-gallery .inline-gallery-copyright-show-hide:hover i.cc0 {
+    opacity: 0.6;
+}
+.inline-gallery .inline-gallery-copyright-show-hide:hover i {
+    opacity: 0.4;
 }

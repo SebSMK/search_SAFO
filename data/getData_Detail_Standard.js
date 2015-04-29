@@ -20,11 +20,11 @@
 					media:{
 						title: this.getDetailTitle(doc),	
 						alt: getData_Common.getMedia_alt(doc),
-						image: getData_Common.getMedia_image(doc, 'large', this.caller),						
-						copyright: getData_Common.getMedia_copyright(doc, this.caller),
-						copyright_default: !getData_Common.computeCopyright(doc) && doc.medium_image_url !== undefined,
-						copyright_valid: getData_Common.computeCopyright(doc),
-						img_id:doc.id
+						image: getData_Common.getMedia_image(doc, 'large', this.caller),
+						image_full_path: doc.medium_image_url,
+						copyright: getData_Common.getMedia_copyright(doc, this.caller),						
+						img_id:doc.id,
+						fullsizeText: this.caller.manager.translator.getLabel('detail_fullsize_lab') 
 					},					
 					
 					info:{
