@@ -136,13 +136,14 @@
 		},
 
 		removeAllArticles: function(){
-			
+			var self = this;
 			var $target = $(this.target); 
 			var $all_articles = $target.find('.matrix .matrix-tile');
 			
 			if($all_articles.length > 0 ){
 				$target.find('.matrix').masonry('remove', $all_articles);
 				//$target.find('.matrix').masonry('destroy');
+				self.refreshLayout();
 			};
 			
 			// in case of some articles were in the matrix but not yet in masonry, remove it "manually"
@@ -152,11 +153,7 @@
 		},
 		
 		refreshLayout: function(){
-			var $matrix = $(this.target).find('.matrix')			
-			var container = document.querySelector($matrix.selector);
-			var msnry = Masonry.data(container);
-			if (msnry != null)
-				msnry.layout();			
+			$(this.target).find('.matrix').masonry('layout');					
 		}
 
 	});

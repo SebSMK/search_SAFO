@@ -345,10 +345,10 @@
 				var words = [];
 
 				for (var i = 0, l = vArray.length; i < l; i++) {    				
-					words = words.concat(vArray[i].trim().split(" "));    				
+					words = words.concat(vArray[i].trim().replace('*', "").split(" "));    				
 				};
 
-				$(this.callWidgetTarget('teasers')).find('.matrix-tile-header').highlight(words);
+				$(this.callWidgetTarget('teasers')).find('.matrix-tile').highlight(words);
 			}    
 		};
 

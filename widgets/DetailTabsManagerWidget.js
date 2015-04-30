@@ -257,12 +257,13 @@
 			var self = this;
 			var $target = $(self.target);						
 			var i = 0;			
-			//* hide unsused tabs
+			
 			$target.find(".tabs a").each(function(){
 				
 				if($target.find($(this).attr('href')).find('.data-pair').length == 0 
 					&& $target.find($(this).attr('href')).find('.matrix-tile').length == 0
 					&& $target.find($(this).attr('href')).find('.copy').length == 0){
+					//* hide empty tabs
 					$(this).hide();
 				}else{
 					$(this).show();
@@ -277,8 +278,7 @@
 			self.refreshLayout();
 
 			//* show tabs	
-			$target.css('visibility', 'visible');
-//			$target.find('section.single-artwork-tabs').show();						
+			$target.css('visibility', 'visible');						
 		},
 		
 		
@@ -289,16 +289,12 @@
 
 				$(this).removeClass('active');
 				$target.find($(this).attr('href')).removeClass("tab-content--open");
-			});
-			
+			});			
 		},
 		
 		refreshLayout: function(){
 			var self = this;
 			var $target = $(self.target);
-//			
-//			$target.find(".tab-content").not(".tab-content--open").hide();
-//			$target.find(".tab-content--open").show();
 
 			this.related_subWidget.refreshLayout();
 			this.parts_subWidget.refreshLayout();
