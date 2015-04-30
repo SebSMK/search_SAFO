@@ -793,6 +793,8 @@
 		
 		return res == null ? null : sprintf('%s -id:%s', res, doc.id);
 		
+		//return res == null ? null : sprintf('id:%s/*', doc.id);
+		
 	};
 
 	/* Request for Related works */

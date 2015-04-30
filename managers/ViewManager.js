@@ -203,7 +203,7 @@
 
 				$target.find("section.section--detail").show();
 				
-				$target.find('section.single-artwork-tabs').hide();
+//				$target.find('section.single-artwork-tabs').hide();
 
 				for (var i = 0, l = Manager.searchfilterList.length; i < l; i++) {				
 					self.hideWidget($(self.callWidgetTarget(Manager.searchfilterList[i])));							

@@ -26,8 +26,6 @@
 
 		tab_extended_html: null,
 		
-		
-
 		tab_reference_html: null,
 
 		init: function(){	  	    
@@ -223,7 +221,8 @@
 			var self = this;
 			var $target = $(self.target);
 
-
+			$target.css('visibility', 'hidden');
+			
 			if ($target.is(':empty')){
 				//* merge data and template
 				var html = self.template_integration_json({}, '#detailTemplate');    
@@ -236,6 +235,9 @@
 					$(this).addClass("active");												
 					$target.find(".tab-content").removeClass("tab-content--open");
 					$target.find($(this).attr("href")).addClass("tab-content--open");
+					
+					self.refreshLayout();
+					
 				});													
 			}
 
@@ -245,7 +247,7 @@
 			var self = this;
 			var $target = $(self.target);						
 			var i = 0;			
-			//* hide non used tabs
+			//* hide unsused tabs
 			$target.find(".tabs a").each(function(){
 
 				$(this).removeClass('active');
@@ -264,12 +266,25 @@
 						i++;
 					}						
 				} 																		
-			})	
+			});
+			
+			self.refreshLayout();
 
-			//* show tabs			
-			$target.find('section.single-artwork-tabs').show();						
+			//* show tabs	
+			$target.css('visibility', 'visible');
+//			$target.find('section.single-artwork-tabs').show();						
+		},
+		
+		refreshLayout: function(){
+			var self = this;
+			var $target = $(self.target);
+//			
+//			$target.find(".tab-content").not(".tab-content--open").hide();
+//			$target.find(".tab-content--open").show();
+
+			this.related_subWidget.refreshLayout();
+			this.parts_subWidget.refreshLayout();
 		}
-
 	});
 
 })(jQuery);

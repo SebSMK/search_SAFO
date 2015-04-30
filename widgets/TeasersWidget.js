@@ -19,7 +19,14 @@
 			
 			//* load empty template
 			var html = self.template;     
-			$target.html($(html).find(this.initTemplate).html());																				      	
+			$target.html($(html).find(this.initTemplate).html());
+			
+			//* init masonry*/	
+			var $matrix = $target.find('.matrix');
+			$matrix.masonry( {
+				itemSelector: '.matrix-tile',
+				columnWidth: '.matrix-tile-size'
+			});
 
 		},  
 
@@ -34,9 +41,7 @@
 			}	 		  						
 			
 			if(smkCommon.debugTime()) console.time("Teasers");									
-			
-			
-			
+									
 			if (this.manager.response.response.docs.length == 0){
 				// trig "is loaded" event	      
 				$(self).trigger({
@@ -45,13 +50,7 @@
 				return;		
 			}
 			else{																														
-				var $tiles = this.getTiles();	
-				//* init masonry*/	
-				//var $matrix = $target.find('.matrix');
-				$matrix.masonry( {
-					itemSelector: '.matrix-tile',
-					columnWidth: '.matrix-tile-size'
-				});
+				var $tiles = this.getTiles();					
 				var container = document.querySelector($matrix.selector);
 				var msnry = Masonry.data(container);
 				$(msnry.element).masonryImagesReveal(msnry, $tiles,  $.proxy(this.onComplete, self), self, this.onClickLink);				
@@ -111,7 +110,7 @@
 					$imgcontainer.find('a').mouseenter(function (event) {$tile.find('span.copyright-info').css('opacity', 1);});
 					$imgcontainer.find('a').mouseleave(function (event) {$tile.find('span.copyright-info').css('opacity', 0);});
 				}				
-			});
+			});						
 			
 			$(this).trigger({
 				type: "smk_teasers_all_images_loaded"
@@ -143,13 +142,21 @@
 			
 			if($all_articles.length > 0 ){
 				$target.find('.matrix').masonry('remove', $all_articles);
-				$target.find('.matrix').masonry('destroy');
+				//$target.find('.matrix').masonry('destroy');
 			};
 			
 			// in case of some articles were in the matrix but not yet in masonry, remove it "manually"
 			//$target.empty();
 			
 			$all_articles.remove();
+		},
+		
+		refreshLayout: function(){
+			var $matrix = $(this.target).find('.matrix')			
+			var container = document.querySelector($matrix.selector);
+			var msnry = Masonry.data(container);
+			if (msnry != null)
+				msnry.layout();			
 		}
 
 	});

@@ -44,6 +44,8 @@ $.fn.masonryImagesReveal = function(msnry, $tiles, onComplete, caller, onClickLi
 						msnry.appended(this);						
 					});			
 					
+					//msnry.layout();
+					
 					onComplete();				
 					
 				}	    	

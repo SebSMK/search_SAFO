@@ -2,27 +2,28 @@
 	<script id="teaserInitTemplate" type="text/template">	
 			<div class="matrix matrix-equalized">         	
 				<div class="matrix-tile-size"></div>			
-			</div>		
-		
-	 </script>
-	<script id="relatedInitTemplate" type="text/template">	
-			<div class="matrix matrix-equalized matrix-five-columns">         	
+			</div>				
+	</script>
+	
+  	<script id="relatedInitTemplate" type="text/template">	
+			<div class="matrix matrix-equalized matrix-five-columns thumbnail-gallery">         	
 				<div class="matrix-tile-size"></div>			
-			</div>		
-		
-	 </script>
+			</div>				
+	</script>
 
 	<script id="teaserArticleTemplate" type="text/template">	
 	
-		{{#artworks}}	
-	
+		{{#artworks}}		
 		<div id="{{media.img_id}}" class="matrix-tile">
+	    
+      <!-- matrix-tile-inner -->
+		<div class="matrix-tile-inner">				
 	
-			<div class="matrix-tile-inner">				
-	
-				{{#media}}
-				<div class="matrix-tile-image {{#no_image}}matrix-tile-image-missing{{/no_image}}" {{#image}}src="{{image}}" img_id="{{img_id}}"{{/image}}>
-				<i></i>
+		{{#media}}
+        <!-- matrix-image -->
+        <div class="matrix-tile-image {{#no_image}}matrix-tile-image-missing{{/no_image}}" {{#image}}src="{{image}}" img_id="{{img_id}}"{{/image}}>
+		
+        <i></i>
 				<!-- invisible link - make the whole div container clickable -->
 					<a class="divLink" href="{{url}}">&nbsp;</a>
 
@@ -40,13 +41,14 @@
 						<ul>
 							<li>{{{media.copyright_text_cc0}}}</li>
 						</ul>
-					</span>
-						
+					</span>						
 					{{/copyright.img_cc0}}	
 
 				</div>
+        <!-- /.matrix-image -->
 				{{/media}}
 	
+        <!-- matrix-header -->
 				<div class="matrix-tile-header">
 					{{#info}} 
 						{{#producent_kunster}}
@@ -57,50 +59,38 @@
 	
 						{{#title_museum}}
 							<h2>
-								<a href="{{url}}" class="artwork-title" href="{{url}}">
-									
-									{{title_museum}}
-									
-									{{#datering_production_vaerkdatering}}
-										<span class="matrix-tile-date">{{{datering_production_vaerkdatering}}}</span>
-									{{/datering_production_vaerkdatering}}
-								</a>
+								<a href="{{url}}" class="artwork-title" href="{{url}}">{{title_museum}}</a>
 							</h2>
 						{{/title_museum}}
 					{{/info}}
-	
-					<!-- inventar number -->
-					{{#info.ident_invnummer}}
-					<ul class="matrix-tile-meta">
-						<li class="matrix-tile-meta-id"><span>{{{info.label_ref}}}:&nbsp;</span>{{{info.ident_invnummer}}}</li>
-					</ul>
-					{{/info.ident_invnummer}}
-	
-					<!-- location -->
-					{{#info.location_location}}
-					<ul class="matrix-tile-meta-location">
-						<li>{{{info.location_location}}}</li>
-					</ul>
-					{{/info.location_location}}
-	
-					<!-- debug -->
-					{{#debug.score}}
-					<ul class="matrix-tile-meta-location">
-						<li>{{{debug.score}}}</li>
-					</ul>
-					{{/debug.score}}
-	
-				</div>
-				<!-- teaser__content -->
+          </div>
+          <!-- /.matrix-header -->
+          
+          <!-- matrix-meta -->
+          <ul class="matrix-tile-meta">
+            {{#info.datering_production_vaerkdatering}}
+							<li class="matrix-tile-meta-date">{{{info.datering_production_vaerkdatering}}}</li>
+						{{/info.datering_production_vaerkdatering}}            
+            <!-- inventar number -->
+  					{{#info.ident_invnummer}}					
+  						<li class="matrix-tile-meta-id"><span>{{{info.label_ref}}}:&nbsp;</span>{{{info.ident_invnummer}}}</li>					
+  					{{/info.ident_invnummer}}
+            <!-- location -->
+  					{{#info.location_location}}					
+  						<li class="matrix-tile-meta-location">{{{info.location_location}}}</li>					
+  					{{/info.location_location}}
+            <!-- debug -->
+  					{{#debug.score}}					
+  						<li class="matrix-tile-meta-location">{{{debug.score}}}</li>					
+  					{{/debug.score}}  
+          </ul>
+  			<!-- /.matrix-meta -->
 	
 			</div>
-			<!-- matrix-tile-inner -->
+			<!-- /.matrix-tile-inner -->
 	
 		</div>
 		<!-- matrix-tile -->
-
-
-
 	{{/artworks}}
 	</script>
 </div>
