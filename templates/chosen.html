@@ -1,15 +1,15 @@
-<div>	
-	 <script id="chosenTemplate" type="text/template">
-    	{{#options}}
-    <div class="filter-group-pair">
-      <label for="{{title}}">{{title}}</label>
-      <select multiple="" data-placeholder="{{{search_lab}}}" class="chosen-select" id="{{title}}">
-        <option value=""></option>
-        {{#values}}
-        <option value="{{value}}">{{{text}}} {{#count}}({{count}}){{/count}}</option>
-        {{/values}} 
-      </select>
-    </div>
-    {{/options}}
+<div>
+	<script id="chosenTemplate" type="text/template">
+	{{#options}}
+	<div class="filter-group-pair">
+		<label for="{{title}}">{{title}}</label> <select multiple=""
+			data-placeholder="{{{search_lab}}}" class="chosen-select"
+			id="{{title}}">
+			<option value=""></option> {{#values}}
+			<option value="{{value}}">{{{text}}}
+				{{#count}}({{count}}){{/count}}</option> {{/values}}
+		</select>
+	</div>
+	{{/options}}
 	</script>
 </div>

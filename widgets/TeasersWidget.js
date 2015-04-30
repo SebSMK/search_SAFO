@@ -112,6 +112,8 @@
 				}				
 			});						
 			
+			self.refreshLayout();
+			
 			$(this).trigger({
 				type: "smk_teasers_all_images_loaded"
 			});	
