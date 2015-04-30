@@ -70,10 +70,11 @@
 				);								 					  						
 
 				// copyright
-				var $imgcontainer = $tile.find('.matrix-tile-image');
-				$imgcontainer.find('a').mouseenter(function (event) {$tile.find('span.copyright-info').css('opacity', 1);});
-				$imgcontainer.find('a').mouseleave(function (event) {$tile.find('span.copyright-info').css('opacity', 0);});
-
+				var $imgcontainer = $tile.find('.matrix-tile-image').not('.matrix-tile-image-missing');
+				if($imgcontainer.length > 0){
+					$imgcontainer.find('a').mouseenter(function (event) {$tile.find('span.copyright-info').css('opacity', 1);});
+					$imgcontainer.find('a').mouseleave(function (event) {$tile.find('span.copyright-info').css('opacity', 0);});
+				}								
 			});
 			
 			if(smkCommon.debugLog()) console.log(sprintf("scroll_request - onComplete: isPreloading_%s", this.preloading));

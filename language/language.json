@@ -225,6 +225,8 @@
 	  "teaser_on_display": 		"vises i",
 	  "teaser_last_update":		"sidst opdateret",
 	  "teaser_event_date":		"dato",
+	  "teaser_date_lab":		"datering",
+	  
 	  
 	  "thumbs_label":	 		"Værkets dele" 
     },
@@ -458,6 +460,7 @@
 	  "teaser_on_display": 		"on display in",
 	  "teaser_last_update":		"last updated",
 	  "teaser_event_date":		"dato",
+	  "teaser_date_lab":		"date",
 	  
 	  "thumbs_label":	 		"associated works"  		
     }

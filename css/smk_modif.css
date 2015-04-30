@@ -3,7 +3,11 @@
 .opaque > *:not(.generalspinner) { 
 	background-color:rgba(255, 255, 255);
 	opacity: 0.5; 
-	}   
+}
+
+.no-touch .cd-top:hover {
+    background-color: #fff;
+}   
 
 .data-section .data-pair:nth-child(odd) {
   background: #fff8ed;

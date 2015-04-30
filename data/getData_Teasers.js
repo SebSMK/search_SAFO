@@ -35,14 +35,10 @@
 					info:{
 						producent_kunster: this.getListProducers(doc),																																
 						title_museum: this.getTeaserTitle(doc),															
-						datering_production_vaerkdatering: getData_Common.getProduction_vaerkdatering(doc),		
-						ident_invnummer: getData_Common.getIdent_invnummer(doc),	
-						location_location: this.getListLocation(doc, this.caller),
-						url: this.getDetailUrl(doc),
-						
-						title_pad: smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.orig)) ? false : true,						
-						
-						label_ref: this.caller.manager.translator.getLabel("list_reference")
+						datering_production_vaerkdatering:{'lab': smkCommon.firstCapital(this.caller.manager.translator.getLabel('teaser_date_lab')), 'value':getData_Common.getProduction_vaerkdatering(doc)},		
+						ident_invnummer: {'lab': smkCommon.firstCapital(this.caller.manager.translator.getLabel("list_reference")), 'value': getData_Common.getIdent_invnummer(doc)},	
+						location_location: smkCommon.firstCapital(this.getListLocation(doc, this.caller)),
+						url: this.getDetailUrl(doc)
 					},
 					
 					debug:{
