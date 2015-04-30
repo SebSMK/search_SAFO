@@ -208,6 +208,7 @@
 			}		
 		},				
 
+		// in the extended tab, show/hide titles of each sub-section
 		process_show_extended_titles: function(){			
 			var $target = $(this.target);
 			$target.find("#details_tab .data-section").each(function(){				
@@ -240,6 +241,15 @@
 					
 				});													
 			}
+			
+			$target.find(".tabs a").each(function(){
+
+				$(this).removeClass('active');
+				$target.find($(this).attr('href')).removeClass("tab-content--open");
+				
+				//* add text to tabs
+				$(this).text(self.manager.translator.getLabel($(this).attr('class')));
+			});
 
 		},
 
@@ -249,14 +259,10 @@
 			var i = 0;			
 			//* hide unsused tabs
 			$target.find(".tabs a").each(function(){
-
-				$(this).removeClass('active');
-				$target.find($(this).attr('href')).removeClass("tab-content--open");
 				
-				//* add text to tabs
-				$(this).text(self.manager.translator.getLabel($(this).attr('class')));
-
-				if($target.find($(this).attr('href')).children().length == 0){
+				if($target.find($(this).attr('href')).find('.data-pair').length == 0 
+					&& $target.find($(this).attr('href')).find('.matrix-tile').length == 0
+					&& $target.find($(this).attr('href')).find('.copy').length == 0){
 					$(this).hide();
 				}else{
 					$(this).show();
@@ -273,6 +279,18 @@
 			//* show tabs	
 			$target.css('visibility', 'visible');
 //			$target.find('section.single-artwork-tabs').show();						
+		},
+		
+		
+		hideTabs: function(){
+			var self = this;
+			var $target = $(self.target);
+			$target.find(".tabs a").each(function(){
+
+				$(this).removeClass('active');
+				$target.find($(this).attr('href')).removeClass("tab-content--open");
+			});
+			
 		},
 		
 		refreshLayout: function(){
