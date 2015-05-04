@@ -64,7 +64,7 @@
 						producent_tidltilskrvet: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_tidltilskrvet')),  
 							value: this.getListProducers(doc, getData_Common.enumProducent.tidl),
-							show: this.getListProducers(doc, getData_Common.enumProducent.tilsk).length > 0 ? true : false
+							show: this.getListProducers(doc, getData_Common.enumProducent.tidl).length > 0 ? true : false
 						},
 			            
 						producent_vaerksted: {
