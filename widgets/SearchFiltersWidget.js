@@ -9,7 +9,7 @@
 			var $target = $(this.target);
 			var title = self.manager.translator.getLabel("tagcloud_" + this.field);
 
-			var json_data = {"options" : new Array({title:title, search_lab:self.manager.translator.getLabel(sprintf('search_%s_lab', this.id)), values:[{ "value": 'value', "text": ''}]})};	 
+			var json_data = {"options" : new Array({title:title, search_lab:self.manager.translator.getLabel(sprintf('search_%s_lab', this.field)), values:[{ "value": 'value', "text": ''}]})};	 
 			var html = self.template_integration_json(json_data, '#chosenTemplate'); 	
 
 			$target.html(html);	
@@ -180,8 +180,7 @@
 			$target.find('select').change(self.clickHandler());
 
 			//* change default text			
-			$select.attr('data-placeholder', self.manager.translator.getLabel(sprintf('search_%s_lab', this.id)));
-
+			$select.attr('data-placeholder', self.manager.translator.getLabel(sprintf('search_%s_lab', this.field)));
 			
 			if(smkCommon.debugTime()) console.time("SearchFilters - " + this.field + " - chosen - update");
 			//* update 'chosen' plugin		

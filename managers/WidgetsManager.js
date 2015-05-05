@@ -213,12 +213,6 @@ var EventsManager;
 			}
 		}));
 
-//		Manager.addWidget(new AjaxSolr.ViewPickerWidget({
-//		id: 'viewpicker',
-//		target: '#viewpicker',
-//		template: Mustache.getTemplate('templates/view_picker.html')
-//		})); 
-
 		Manager.addWidget(new AjaxSolr.LanguagePickerWidget({
 			id: 'lang-picker',
 			target: '#lang-picker',
@@ -270,11 +264,29 @@ var EventsManager;
 			template: Mustache.getTemplate('templates/teasers.html'),
 			initTemplate:'#teaserInitTemplate'
 		}));
-
+		
+		//* advanced search panel
+		Manager.addWidget(new AjaxSolr.AdvancedSearchWidget({
+			id: 'advanced',
+			target: '#advanced',
+			template: Mustache.getTemplate('templates/advancedsearch.html'),
+			facets_list: Manager.store.facets_default[current_language]['advanced'] 
+		}));
+		
+		//* filters
 		for (var i = 0, l = searchFieldsTypes.length; i < l; i++) {
+			// facets filters
 			Manager.addWidget(new AjaxSolr.SearchFiltersWidget({
 				id: searchFieldsTypes[i],
 				target: '#' + searchFieldsTypes[i],
+				field: searchFieldsTypes[i],
+				template: Mustache.getTemplate('templates/chosen.html')
+			}));
+			
+			// advanced search filters
+			Manager.addWidget(new AjaxSolr.SearchFiltersWidget({
+				id: 'adv_' + searchFieldsTypes[i],
+				target: '#adv_' + searchFieldsTypes[i],
 				field: searchFieldsTypes[i],
 				template: Mustache.getTemplate('templates/chosen.html')
 			}));
@@ -347,15 +359,6 @@ var EventsManager;
 		 * 
 		 * */		
 
-		///* switch grid/list in teasers view
-//		$(Manager.widgets['viewpicker']).on('view_picker', function(event){ 
-//		EventsManager.switch_list_grid(event.value);
-//		}); 
-
-//		$(ViewManager).on('current_view_mode', function(event){ 
-//		EventsManager.switch_list_grid(event.value);
-//		});
-
 		//* selected category changed
 		$(Manager.widgets['category']).on('smk_search_category_changed', function(event){     	
 			EventsManager.smk_search_category_changed(event);
@@ -387,7 +390,6 @@ var EventsManager;
 		$(Manager.widgets['currentsearch']).on('smk_search_remove_one_search_string', function(event){     	
 			EventsManager.smk_search_remove_one_search_string(event);
 		});	
-
 
 		//* calls to detail view
 		$(Manager.widgets['teasers']).on('smk_search_call_detail', function(event){     	

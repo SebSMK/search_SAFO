@@ -137,25 +137,57 @@
 			Manager.store.remove('facet.field');
 			if (model.view != 'detail'){
 				Manager.store.addByValue('facet', true);
-				Manager.store.addByValue('facet.field', Manager.store.facets_default[model.lang]['facets']);
+								
+				if (model.view != 'advanced'){
+					// advanced search
+					var adv_data = Manager.store.facets_default[model.lang]['advanced'];
+					if(adv_data !== undefined){
+						for (var i = 0, l = adv_data.length; i < l; i++) {
+							var values = [];
+							var ranges = [];
+							for (var m = 0, n = adv_data[i]['values'].length; m < n; m++) {
+								
+								if(adv_data[i]['values'][m]['ranges'] === undefined)
+									values.push(adv_data[i]['values'][m]['id']);
+								else{
+									var adv_range = adv_data[i]['values'][m]['ranges'];
+									var opt = sprintf('f.%s.facet.range.', adv_range['range']);
 
-				if (Manager.store.facets_default[model.lang]['ranges'] !== undefined){
-					var range = Manager.store.facets_default[model.lang]['ranges']['range'];
-					var opt = sprintf('f.%s.facet.range.', range);
+									ranges.push({id: 'facet.range', value: adv_range['range']});				 
+									ranges.push({id: opt + 'start', value: adv_range['start']});
+									ranges.push({id: opt + 'end', value: adv_range['end']});
+									ranges.push({id: opt + 'gap', value: adv_range['gap']});
+									if(adv_range['other'] !== undefined)
+										ranges.push({id:opt + 'other', value: adv_range['other']});														
+								}
+							}
+							
+							if (values.length > 0)
+								Manager.store.addByValue('facet.field', values);
+							if (ranges.length > 0)
+								for (var m = 0, n = ranges.length; m < n; m++) {
+									Manager.store.addByValue(ranges[m]['id'],ranges[m]['value'] );									
+								}
+																																						
+						}				
+					};						
+				}
+				else{
+					// filters
+					Manager.store.addByValue('facet.field', Manager.store.facets_default[model.lang]['facets']);
 
-					Manager.store.addByValue('facet.range', range);				 
-					Manager.store.addByValue(opt + 'start', Manager.store.facets_default[model.lang]['ranges']['start']);
-					Manager.store.addByValue(opt + 'end', Manager.store.facets_default[model.lang]['ranges']['end']);
-					Manager.store.addByValue(opt + 'gap', Manager.store.facets_default[model.lang]['ranges']['gap']);
-					if(Manager.store.facets_default[model.lang]['ranges']['other'] !== undefined)
-						Manager.store.addByValue(opt + 'other', Manager.store.facets_default[model.lang]['ranges']['other']);					
-				}												
+					if (Manager.store.facets_default[model.lang]['ranges'] !== undefined){
+						var range = Manager.store.facets_default[model.lang]['ranges']['range'];
+						var opt = sprintf('f.%s.facet.range.', range);
 
-//				Manager.store.add('facet.field', 
-//				new AjaxSolr.Parameter({ name:'facet.field', 
-//				value: 'category', 
-//				locals: { ex:'category' } }));
-
+						Manager.store.addByValue('facet.range', range);				 
+						Manager.store.addByValue(opt + 'start', Manager.store.facets_default[model.lang]['ranges']['start']);
+						Manager.store.addByValue(opt + 'end', Manager.store.facets_default[model.lang]['ranges']['end']);
+						Manager.store.addByValue(opt + 'gap', Manager.store.facets_default[model.lang]['ranges']['gap']);
+						if(Manager.store.facets_default[model.lang]['ranges']['other'] !== undefined)
+							Manager.store.addByValue(opt + 'other', Manager.store.facets_default[model.lang]['ranges']['other']);					
+					}						
+				}															
 			}																				
 
 			// fq param						
@@ -531,7 +563,8 @@
 			};
 
 			for (var i = 0, l = searchFieldsTypes.length; i < l; i++) {				
-				doQueueProcess(searchFieldsTypes[i]);								
+				doQueueProcess(searchFieldsTypes[i]);
+				doQueueProcess(searchFieldsTypes[i] + "_adv");
 			};			
 		};			
 

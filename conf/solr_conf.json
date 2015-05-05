@@ -15,13 +15,73 @@
 		                "object_type_dk",
 		                "prod_technique_dk",
 		                "collection"],
-		             "ranges":{
-		             	"range": "object_production_date_earliest",
-		             	"start": "1400-01-01T00:00:00.001Z",
-						"end": "NOW",
-						"gap": "+100YEARS",
-						"other": "before"		             
-		             }		             	
+		             
+		             "advanced":[{
+					             	"lab":		"artist",
+									"values":[
+												{
+													"id":	"artist_name", 
+													"lang": "en dk"
+												},
+												
+												{
+													"id":	"artist_auth", 
+													"lang": "en dk"
+												},
+												{
+													"id":	"artist_natio_dk", 
+													"lang": "dk"
+												}
+											]
+						              },
+						              
+						              {
+						              	"lab":		"artwork",
+							            "values":[
+							            			{
+							              				"id":	"object_type_dk", 
+							              				"lang": "en dk"
+							              			},
+							              			{
+							              				"id":	"prod_technique_dk", 
+							              				"lang": "en dk"
+							              			},
+							              			{
+							              				"id":	"object_production_date_earliest",
+							              				"ranges":{
+											             	"range": "object_production_date_earliest",
+											             	"start": "1400-01-01T00:00:00.001Z",
+															"end": "NOW",
+															"gap": "+100YEARS",
+															"other": "before"		             
+											             },	 
+							              				"lang": "en dk"
+							              			}
+												]														
+						              },
+						              
+						              {
+						              	"lab":		"acq",
+						              	"values":[
+						              				{
+						              					"id":	"collection", 
+						              					"lang": "en dk"
+						              				},
+													{
+														"id":	"prod_technique_dk", 
+														"lang": "dk"
+													}
+												]
+						              }			              
+			              		],
+			             
+			             "ranges":{
+			             	"range": "object_production_date_earliest",
+			             	"start": "1400-01-01T00:00:00.001Z",
+							"end": "NOW",
+							"gap": "+100YEARS",
+							"other": "before"		             
+			             	}		             	
 		         },
 		                
 		         "en":
@@ -39,7 +99,7 @@
 						"end": "NOW",
 						"gap": "+100YEARS",
 						"other": "before"		             
-		             }	
+		             	}	
 		         },
 		         		         		          
 		         "all":["artist_name", 

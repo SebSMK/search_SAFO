@@ -18,6 +18,13 @@
 	  "tagcloud_object_type_dk": 		"værktype",
 	  "tagcloud_prod_technique_dk":		"teknik",
 	  "tagcloud_collection":		"samling",
+      
+      "adv_artist_column_title": 	"kunstner | producent",
+      "adv_artwork_column_title": 	"værk",
+      "adv_technic_column_title": 	"teknik",
+      "adv_acq_column_title": 		"erhvervelse",
+      "adv_motiv_column_title": 	"motiv", 
+      "adv_object_production_date_earliest": 		"periode",                 
           
       "search_artist_name_lab": 		"Indtast kunstner",
       "search_artist_auth_lab": 		"Indtast rolle",

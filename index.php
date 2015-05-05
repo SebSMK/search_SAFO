@@ -29,10 +29,11 @@
 	<script src="widgets/SearchInfoWidget.js" type="text/javascript"></script>	
 	<script src="widgets/ScrollWidget.js" type="text/javascript"></script>
 	<script src="widgets/LanguagePickerWidget.js" type="text/javascript"></script>	
-	<script src="widgets/ScrollUpdateManagerWidget.js" type="text/javascript"></script>		
+	<script src="widgets/ScrollUpdateManagerWidget.js" type="text/javascript"></script>	
 	<script src="js/jquery/jquery.highlight.js" type="text/javascript"></script>		
 	<script src="core/AbstractFacetWidget.js" type="text/javascript"></script>
 	<script src="widgets/SearchFiltersWidget.js" type="text/javascript"></script>
+	<script src="widgets/AdvancedSearchWidget.js" type="text/javascript"></script>
 	<script src="widgets/CategoryWidget.js" type="text/javascript"></script>
 	<script src="widgets/CurrentSearchWidget.js" type="text/javascript"></script>
 	<script src="managers/EventsManager.js" type="text/javascript"></script>
@@ -66,7 +67,8 @@
 	<script src="data/getData_Detail_Standard.js" type="text/javascript"></script>
 	<script src="data/getData_Detail_Original.js" type="text/javascript"></script>
 	<script src="data/getData_Detail_Extented.js" type="text/javascript"></script>		
-	<script src="data/getData_Teasers.js" type="text/javascript"></script>		
+	<script src="data/getData_Teasers.js" type="text/javascript"></script>
+	<script src="data/getData_Advanced.js" type="text/javascript"></script>			
 	
 	<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/themes/smoothness/jquery-ui.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="js/fancybox/source/jquery.fancybox.css" media="all" />	
