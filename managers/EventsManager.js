@@ -564,7 +564,7 @@
 
 			for (var i = 0, l = searchFieldsTypes.length; i < l; i++) {				
 				doQueueProcess(searchFieldsTypes[i]);
-				doQueueProcess(searchFieldsTypes[i] + "_adv");
+				doQueueProcess("adv_" + searchFieldsTypes[i]);
 			};			
 		};			
 

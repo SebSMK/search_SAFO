@@ -37,15 +37,7 @@
 						              
 						              {
 						              	"lab":		"artwork",
-							            "values":[
-							            			{
-							              				"id":	"object_type_dk", 
-							              				"lang": "en dk"
-							              			},
-							              			{
-							              				"id":	"prod_technique_dk", 
-							              				"lang": "en dk"
-							              			},
+							            "values":[							            			
 							              			{
 							              				"id":	"object_production_date_earliest",
 							              				"ranges":{
@@ -55,6 +47,16 @@
 															"gap": "+100YEARS",
 															"other": "before"		             
 											             },	 
+							              				"lang": "en dk"
+							              			}
+												]														
+						              },
+						              
+						              {
+						              	"lab":		"technic",
+							            "values":[
+							            			{
+							              				"id":	"object_type_dk", 
 							              				"lang": "en dk"
 							              			}
 												]														
@@ -72,6 +74,14 @@
 														"lang": "dk"
 													}
 												]
+						              },
+						              
+						              {
+						              	"lab":		"motiv",
+							            "values":[
+							            			{
+							              			}
+												]														
 						              }			              
 			              		],
 			             
