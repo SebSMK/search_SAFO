@@ -27,7 +27,8 @@
 	  "tagcloud_portrait_person": 		"portrætteret",
 	  "tagcloud_topografisk_motiv": 	"topografisk motiv",
 	  "tagcloud_materiale": 			"materiale",
-	  "tagcloud_acq_date_earliest": 	"dato", 	  	  
+	  "tagcloud_acq_date_earliest": 	"erhvervelsesdato", 
+	  "tagcloud_vaerkstatus": 			"værkstatus", 	  	  
           
       "search_artist_name_lab": 		"Indtast kunstner",
       "search_artist_auth_lab": 		"Indtast rolle",
@@ -39,7 +40,8 @@
       "search_portrait_person_lab":		"Indtast navn",
       "search_topografisk_motiv_lab":	"Indtast sted",
       "search_materiale_lab":			"Indtast materiale",      
-      "search_acq_date_earliest_lab":			"Indtast dato",
+      "search_acq_date_earliest_lab":	"Indtast dato",
+      "search_vaerkstatus_lab":			"Indtast værkstatus",
       
       
           

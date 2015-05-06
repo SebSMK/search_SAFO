@@ -369,6 +369,9 @@ var EventsManager;
 			$(Manager.widgets[searchFieldsTypes[i]]).on('smk_search_filter_changed', {self: Manager.widgets[searchFieldsTypes[i]]}, function(event){    		
 				EventsManager.smk_search_filter_changed(event.data.self, event.params);    		    		    		    		
 			});
+			$(Manager.widgets["adv_" + searchFieldsTypes[i]]).on('smk_search_filter_changed', {self: Manager.widgets["adv_" + searchFieldsTypes[i]]}, function(event){    		
+				EventsManager.smk_search_filter_changed(event.data.self, event.params);    		    		    		    		
+			});
 		};
 
 		//* pager changed

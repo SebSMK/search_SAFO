@@ -138,7 +138,7 @@
 			if (model.view != 'detail'){
 				Manager.store.addByValue('facet', true);
 								
-				if (model.view != 'advanced'){
+				
 					// advanced search
 					var adv_data = Manager.store.facets_default[model.lang]['advanced'];
 					if(adv_data !== undefined){
@@ -171,23 +171,22 @@
 																																						
 						}				
 					};						
-				}
-				else{
-					// filters
-					Manager.store.addByValue('facet.field', Manager.store.facets_default[model.lang]['filters']);
-
-					if (Manager.store.facets_default[model.lang]['ranges'] !== undefined){
-						var range = Manager.store.facets_default[model.lang]['ranges']['range'];
-						var opt = sprintf('f.%s.facet.range.', range);
-
-						Manager.store.addByValue('facet.range', range);				 
-						Manager.store.addByValue(opt + 'start', Manager.store.facets_default[model.lang]['ranges']['start']);
-						Manager.store.addByValue(opt + 'end', Manager.store.facets_default[model.lang]['ranges']['end']);
-						Manager.store.addByValue(opt + 'gap', Manager.store.facets_default[model.lang]['ranges']['gap']);
-						if(Manager.store.facets_default[model.lang]['ranges']['other'] !== undefined)
-							Manager.store.addByValue(opt + 'other', Manager.store.facets_default[model.lang]['ranges']['other']);					
-					}						
-				}															
+				
+//					// filters
+//					Manager.store.addByValue('facet.field', Manager.store.facets_default[model.lang]['filters']);
+//
+//					if (Manager.store.facets_default[model.lang]['ranges'] !== undefined){
+//						var range = Manager.store.facets_default[model.lang]['ranges']['range'];
+//						var opt = sprintf('f.%s.facet.range.', range);
+//
+//						Manager.store.addByValue('facet.range', range);				 
+//						Manager.store.addByValue(opt + 'start', Manager.store.facets_default[model.lang]['ranges']['start']);
+//						Manager.store.addByValue(opt + 'end', Manager.store.facets_default[model.lang]['ranges']['end']);
+//						Manager.store.addByValue(opt + 'gap', Manager.store.facets_default[model.lang]['ranges']['gap']);
+//						if(Manager.store.facets_default[model.lang]['ranges']['other'] !== undefined)
+//							Manager.store.addByValue(opt + 'other', Manager.store.facets_default[model.lang]['ranges']['other']);					
+//					}						
+																			
 			}																				
 
 			// fq param						

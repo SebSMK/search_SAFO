@@ -9,7 +9,11 @@
 			var $target = $(this.target);
 			var title = self.manager.translator.getLabel("tagcloud_" + this.field);
 
-			var json_data = {"options" : new Array({title:title, search_lab:self.manager.translator.getLabel(sprintf('search_%s_lab', this.field)), values:[{ "value": 'value', "text": ''}]})};	 
+			var json_data = {"options" : new Array({'title': title, 
+													'target_drop_id': this.target.replace('#', '') + "_drop",
+													'search_lab': self.manager.translator.getLabel(sprintf('search_%s_lab', this.field)), 
+													'values':[{ "value": 'value', "text": ''}]})};
+			
 			var html = self.template_integration_json(json_data, '#chosenTemplate'); 	
 
 			$target.html(html);	

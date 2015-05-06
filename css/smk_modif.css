@@ -167,7 +167,7 @@ a.divLink {
     padding: 15px;
   }
   
-  .matrix-five-columns .matrix-tile-size {
+  .matrix-five-columns .matrix-tile-size, .search-results-full-width .matrix-tile-size{
     width: 20%;
 	}
   

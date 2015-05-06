@@ -87,11 +87,8 @@
 				}, this)
 			});  
 		};
-
-		/*
-		 * get qf_default in the language passed as parameter 
-		 */		
-		this.get_qf_default = function(lang){
+				
+		this.get_qf_default = function(){
 			return this.qf_default;		
 		};
 
@@ -166,6 +163,17 @@
 		this.get_version = function(){
 			return this.version;
 		};
+		
+		this.get_all_standard_filters = function(){			
+			if(this.facets != null)
+				return this.facets.all.filters										
+		};
+		
+		this.get_all_advanced_filters = function(){			
+			if(this.facets != null)
+				return this.facets.all.advanced
+		};
+
 		
 		/*
 		 * variables
