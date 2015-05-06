@@ -8,7 +8,7 @@
     "facets":{
 				"dk":
 				{
-					"facets":
+					"filters":
 						["artist_name",
 						"artist_auth", 
 		                "artist_natio_dk", 		                
@@ -57,8 +57,16 @@
 							            "values":[
 							            			{
 							              				"id":	"object_type_dk", 
-							              				"lang": "en dk"
-							              			}
+							              				"lang": "dk"
+							              			},
+							              			{
+							              				"id":	"prod_technique_dk", 
+							              				"lang": "dk"
+							              			},
+							              			{
+							              				"id":	"materiale", 
+							              				"lang": "dk"
+							              			}						              			
 												]														
 						              },
 						              
@@ -70,7 +78,14 @@
 						              					"lang": "en dk"
 						              				},
 													{
-														"id":	"prod_technique_dk", 
+														"id":	"acq_date_earliest", 
+														"ranges":{
+											             	"range": "acq_date_earliest",
+											             	"start": "1700-01-01T00:00:00.001Z",
+															"end": "NOW",
+															"gap": "+100YEARS",
+															"other": "before"		             
+											             },	 
 														"lang": "dk"
 													}
 												]
@@ -80,7 +95,13 @@
 						              	"lab":		"motiv",
 							            "values":[
 							            			{
-							              			}
+							            				"id": "portrait_person",
+							            				"lang": "en dk"
+							              			},
+							              			{
+							            				"id": "topografisk_motiv",
+							            				"lang": "en dk"
+							              			}							              										              			
 												]														
 						              }			              
 			              		],
@@ -121,7 +142,12 @@
 		                "object_type_en",
 		                "prod_technique_dk",
 		                "prod_technique_en",
-		                "collection"]			                
+		                "collection",
+		                "portrait_person",
+		                "topografisk_motiv",
+		                "materiale",
+		                "materiale_en",
+		                "acq_date_earliest"]			                
 		          },
 							                
     "exposed": 							["fq", "q", "start", "limit", "sort", "qf"],

@@ -174,7 +174,7 @@
 				}
 				else{
 					// filters
-					Manager.store.addByValue('facet.field', Manager.store.facets_default[model.lang]['facets']);
+					Manager.store.addByValue('facet.field', Manager.store.facets_default[model.lang]['filters']);
 
 					if (Manager.store.facets_default[model.lang]['ranges'] !== undefined){
 						var range = Manager.store.facets_default[model.lang]['ranges']['range'];

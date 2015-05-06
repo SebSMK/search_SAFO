@@ -66,7 +66,9 @@
 			var objectedItems = [];
 
 			switch (self.field){
-			case 'object_production_date_earliest':		 			  			  			  
+			case 'object_production_date_earliest':
+			case 'acq_date_earliest':
+				
 				for (var facet in self.manager.response.facet_counts.facet_ranges[self.field].counts) {
 					var count = parseInt(self.manager.response.facet_counts.facet_ranges[self.field].counts[facet]);
 					if (count > maxCount) {
