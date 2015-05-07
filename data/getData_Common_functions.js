@@ -341,12 +341,11 @@
 		break;		  
 		}
 
-		if(smkCommon.isValidDataText(mat)){
-			var mat_split = mat.split(smkCommon.split_1_niv);							
-			var arrayLength = mat_split.length;
+		if( Object.prototype.toString.call( mat ) === '[object Array]' ){									
+			var arrayLength = mat.length;
 
 			for (var i = 0; i < arrayLength; i++) {	
-				var values = mat_split[i].split(smkCommon.split_2_niv); 					 										
+				var values = mat[i].split(smkCommon.split_2_niv); 					 										
 				var mat_val = smkCommon.getValueFromSplit(values, 0) != null ? smkCommon.getValueFromSplit(values, 0) : "";
 				var mat_type = smkCommon.getValueFromSplit(values, 1) != null ? smkCommon.getValueFromSplit(values, 1) : "";					
 				var res = {	mat_val: mat_val, 
@@ -738,7 +737,7 @@
 			return null;
 
 		var res = [];
-		var split = doc.topografisk_motiv.split(smkCommon.split_1_niv);							
+		var split = doc.topografisk_motiv;							
 		var arrayLength = split.length;
 
 		for (var i = 0; i < arrayLength; i++) {	
@@ -753,7 +752,7 @@
 			return null;
 
 		var res = [];
-		var split = doc.portrait_person.split(smkCommon.split_1_niv);							
+		var split = doc.portrait_person;							
 		var arrayLength = split.length;
 
 		for (var i = 0; i < arrayLength; i++) {	
