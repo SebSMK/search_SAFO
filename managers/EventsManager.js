@@ -43,18 +43,18 @@
 		 * */			        		           
 		this.scrollStart = function(event) {		        															
 
+			
 			if (ModelManager.get_view() != 'detail' 
-				&& $('.generalspinner').length == 0) {
-				//&& $('.scrollspinner').length == 0){
+				&& $('.generalspinner').length == 0
+				&& event.deltaY < 0 // scrolling down
+				&& !$(event.target).hasClass('active-result') // user is not scrolling a facet-list				
+			){
+					//* start scroll request
+					ViewManager.callWidgetFn('scroll_update', 'start_scroll_request');	        																	        		    
 
-
-				//if(smkCommon.debugLog()) console.log(sprintf("scrollspinner value: %s : %s : %s ", event.deltaX, event.deltaY, event.deltaFactor));	
-
-				//* start scroll request
-				ViewManager.callWidgetFn('scroll_update', 'start_scroll_request');	        																	        		    
-
-				//* start preloading of teaser's images				
-				ViewManager.callWidgetFn('scroll_update', 'start_scroll_preload_request');					
+					//* start preloading of teaser's images				
+					ViewManager.callWidgetFn('scroll_update', 'start_scroll_preload_request');					
+								
 			}																				
 		};							
 

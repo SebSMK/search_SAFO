@@ -49,7 +49,6 @@
 	<script src="js/masonry.smk.extend.js" type="text/javascript"></script>
 
 	<script src="js/chosen.jquery.min.js" type="text/javascript"></script>
-	<script src="js/jquery.dimensions.js" type="text/javascript"></script>
 	<script src="widgets/ViewPickerWidget.js" type="text/javascript"></script>
 	<script src="widgets/SorterWidget.js" type="text/javascript"></script>
 	

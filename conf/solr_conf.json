@@ -40,7 +40,11 @@
                   {
                      "id":"vaerkstatus",
                      "lang":"en dk"
-                  }                 
+                  },
+                  {
+                     "id":"prod_technique_dk",
+                     "lang":"dk"
+                  }                                   
                ]
             },
             {
