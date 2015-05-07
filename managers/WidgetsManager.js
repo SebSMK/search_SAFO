@@ -248,15 +248,15 @@ var EventsManager;
 			template: Mustache.getTemplate('templates/sorter.html')
 		})); 
 
-		Manager.addWidget(new AjaxSolr.CategoryWidget({
-			id: 'category',
-			target: '#category',
-			field: 'category',
-			multivalue:false,	    
-			categoryList: {"all":translator.getLabel('category_all'), "collections":translator.getLabel('category_artwork'), "nyheder":translator.getLabel('category_news'), "kalender":translator.getLabel('category_calendar'), "praktisk":translator.getLabel('category_info')},
-			activeCategory: "all",
-			template: Mustache.getTemplate('templates/category.html')
-		}));	
+//		Manager.addWidget(new AjaxSolr.CategoryWidget({
+//			id: 'category',
+//			target: '#category',
+//			field: 'category',
+//			multivalue:false,	    
+//			categoryList: {"all":translator.getLabel('category_all'), "collections":translator.getLabel('category_artwork'), "nyheder":translator.getLabel('category_news'), "kalender":translator.getLabel('category_calendar'), "praktisk":translator.getLabel('category_info')},
+//			activeCategory: "all",
+//			template: Mustache.getTemplate('templates/category.html')
+//		}));	
 
 		Manager.addWidget(new AjaxSolr.TeasersWidget({
 			id: 'teasers',
