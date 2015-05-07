@@ -250,11 +250,13 @@
 			this.showWidget($target.find("#search-filters"));
 			for (var i = 0, l = Manager.searchfilterList.length; i < l; i++) {				
 				if (this.callWidgetFn(Manager.searchfilterList[i], 'getRefresh'))					
-					this.callWidgetFn(Manager.searchfilterList[i], 'change_title')
-			};																				 
-
-//			if($(this.callWidgetTarget('teasers')).find('.matrix .matrix-tile').length > 0)
-//			$(this.callWidgetTarget('teasers')).find('.matrix').masonry('layout');
+					this.callWidgetFn(Manager.searchfilterList[i], 'change_title');
+				
+				if (this.callWidgetFn('adv_' + Manager.searchfilterList[i], 'getRefresh'))					
+					this.callWidgetFn('adv_' + Manager.searchfilterList[i], 'change_title');
+			};	
+			
+			this.callWidgetFn('advanced', 'change_columns_titles');
 
 			if(smkCommon.debugTime()) console.timeEnd("categoryChanged2");
 

@@ -31,12 +31,12 @@
 						values.push(value);
 					}		
 					
-					columns.push({lab: lab, values: values});
+					columns.push({lab: lab, lab_tag: "adv_" + list[i]['lab'] + "_column_title", values: values});
 				}				
 			};
 			
 			return columns;
-		}
+		};				
 		
 		/*
 		 * variables

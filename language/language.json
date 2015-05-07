@@ -17,8 +17,8 @@
       "adv_acq_column_title": 		"erhvervelse",
       "adv_motiv_column_title": 	"motiv", 
       
-      "tagcloud_artist_name": 		"kunstner",
-      "tagcloud_artist_auth": 		"rolle",      
+      "tagcloud_artist_name": 			"kunstner",
+      "tagcloud_artist_auth": 			"rolle",      
 	  "tagcloud_object_production_date_earliest": 		"periode",
 	  "tagcloud_artist_natio_dk": 		"nationalitet",
 	  "tagcloud_object_type_dk": 		"værktype",
@@ -27,7 +27,7 @@
 	  "tagcloud_portrait_person": 		"portrætteret",
 	  "tagcloud_topografisk_motiv": 	"topografisk motiv",
 	  "tagcloud_materiale": 			"materiale",
-	  "tagcloud_acq_date_earliest": 	"erhvervelsesdato", 
+	  "tagcloud_acq_date_earliest": 	"dato", 
 	  "tagcloud_vaerkstatus": 			"værkstatus", 	  	  
           
       "search_artist_name_lab": 		"Indtast kunstner",
@@ -41,9 +41,7 @@
       "search_topografisk_motiv_lab":	"Indtast sted",
       "search_materiale_lab":			"Indtast materiale",      
       "search_acq_date_earliest_lab":	"Indtast dato",
-      "search_vaerkstatus_lab":			"Indtast værkstatus",
-      
-      
+      "search_vaerkstatus_lab":			"Indtast værkstatus",            
           
       "search_filter":			"Afgræns din søgning",      	  
 	  "search_filter_cent":		"tallet",
@@ -257,6 +255,12 @@
       "teaser_copyright_def":	"cc0 | Public Domain",	
       "copyright_link":			"http://creativecommons.org/publicdomain/zero/1.0/",		
 
+ 	  "adv_artist_column_title": 	"artist | producer",
+      "adv_artwork_column_title": 	"artwork",
+      "adv_technic_column_title": 	"technique",
+      "adv_acq_column_title": 		"acquisition",
+      "adv_motiv_column_title": 	"motive",      
+
 	  "tagcloud_artist_name": 		"artist",
 	  "tagcloud_artist_auth": 		"role",
 	  "tagcloud_object_production_date_earliest": 		"period",
@@ -264,14 +268,25 @@
 	  "tagcloud_object_type_en": 		"artwork type",
 	  "tagcloud_prod_technique_en": 		"technique",
 	  "tagcloud_collection":		"collection",
+	  "tagcloud_portrait_person": 		"portrait",
+	  "tagcloud_topografisk_motiv": 	"topografical motive",
+	  "tagcloud_materiale": 			"material",
+	  "tagcloud_acq_date_earliest": 	"date", 
+	  "tagcloud_vaerkstatus": 			"status", 	  	
 	  
 	  "search_artist_name_lab": 		"Select artist",
 	  "search_artist_auth_lab": 		"Select role",
 	  "search_object_production_date_earliest_lab": 		"Select period",
 	  "search_artist_natio_en_lab": 	"Select nationality",
 	  "search_prod_technique_en_lab":	"Select technique",
-	  "search_object_type_en_lab":	"Select artwork type",
-	  "search_collection_lab":	"Select collection",
+	  "search_object_type_en_lab":		"Select artwork type",
+	  "search_collection_lab":			"Select collection",
+	  "search_portrait_person_lab":		"Select name",
+      "search_topografisk_motiv_lab":	"Select place",
+      "search_materiale_lab":			"Select material",      
+      "search_acq_date_earliest_lab":	"Select date",
+      "search_vaerkstatus_lab":			"Select status",
+	    
 	  "search_filter":			"Filter your search",	  	  
 	  "search_filter_cent":		" c.",
 	  "search_filter_before":	"before ",

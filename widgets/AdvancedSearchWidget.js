@@ -9,13 +9,15 @@
 			}, attributes);
 		},
 
+		panel_data: null,
+		
 		init: function () { 
 
 			var self = this;							 
 			var dataHandler = new getData_Advanced.constructor(this);
-			var panel_data = dataHandler.getData(this.facets_list);
+			this.panel_data = dataHandler.getData(this.facets_list);
 			
-			var html = self.template_integration_json({list:panel_data}, '#advancedSearchTemplate');
+			var html = self.template_integration_json({list:this.panel_data}, '#advancedSearchTemplate');
 			$(self.target).html(html);
 			
 			$(self.target).find(".advanced-search-panel-show-hide a").click(function(a) {
@@ -32,6 +34,18 @@
 		            // Toggle class to show/hide
 		            $(".advanced-search-panel").toggleClass("advanced-search-panel-hidden");
 		        });
+		},
+		
+		change_columns_titles: function(){
+			var self = this;
+			var i = 0;
+			$(self.target).find(".filter-group h3").each(function (){
+				if(self.panel_data[i] !== undefined)
+					$(this).text(self.manager.translator.getLabel(self.panel_data[i].lab_tag)); 				
+				i++;
+				
+			});
+			
 		},
 
 		template_integration_json: function (json_data, templ_id){	  

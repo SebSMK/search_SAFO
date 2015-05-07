@@ -10,10 +10,10 @@
 			var title = self.manager.translator.getLabel("tagcloud_" + this.field);
 
 			var json_data = {"options" : new Array({'title': title, 
-													'target_drop_id': this.target.replace('#', '') + "_drop",
-													'search_lab': self.manager.translator.getLabel(sprintf('search_%s_lab', this.field)), 
-													'values':[{ "value": 'value', "text": ''}]})};
-			
+				'target_drop_id': this.target.replace('#', '') + "_drop",
+				'search_lab': self.manager.translator.getLabel(sprintf('search_%s_lab', this.field)), 
+				'values':[{ "value": 'value', "text": ''}]})};
+
 			var html = self.template_integration_json(json_data, '#chosenTemplate'); 	
 
 			$target.html(html);	
@@ -21,16 +21,21 @@
 			this.previous_values[this.field] = new Array(),
 
 			//* init 'chosen' plugin			
-			$target.find('select').chosen({
-				width: "198px"
+			$target.find('select').chosen({				
+				disable_search_threshold: 10,			        
+				width: "100%",
+				disable_search: !0,
+				// When set to true, Chosen will not display the search field (single selects only).
+				allow_single_deselect: !0
+
 			});
-  
+
 		},
 
 		beforeRequest: function(){			
 			var self = this;
 			var $target = $(this.target);					
-			
+
 			var $select = $(this.target).find('select');
 
 			if (!self.getRefresh())				
@@ -54,11 +59,11 @@
 			};	 		  	  			  		
 
 			if(smkCommon.debugTime()) console.time("SearchFilters - " + this.field);	
-			
+
 			if(smkCommon.debugTime()) console.time("SearchFilters - " + this.field + " - process");
-						
+
 			if (self.manager.response.facet_counts.facet_fields[self.field] === undefined &&
-				self.manager.response.facet_counts.facet_ranges[self.field] === undefined) {
+					self.manager.response.facet_counts.facet_ranges[self.field] === undefined) {
 
 				return;
 			};
@@ -72,7 +77,7 @@
 			switch (self.field){
 			case 'object_production_date_earliest':
 			case 'acq_date_earliest':
-				
+
 				for (var facet in self.manager.response.facet_counts.facet_ranges[self.field].counts) {
 					var count = parseInt(self.manager.response.facet_counts.facet_ranges[self.field].counts[facet]);
 					if (count > maxCount) {
@@ -80,7 +85,7 @@
 					};	
 
 					var daterange = new Date(facet);
-					
+
 					objectedItems.push({ "value": sprintf("[%1$s TO %1$s+100YEARS]", facet), "text": this.getCentury(daterange.getFullYear()), "count": count, "i": i });
 					//objectedItems.push({ "value": facet, "text": this.getCentury(daterange.getFullYear()), "count": count, "i": i });
 					i++;
@@ -90,11 +95,11 @@
 					var first_facet = self.manager.response.facet_counts.facet_ranges[self.field].start;
 					var datefirst_facet = new Date(first_facet);
 					var text = sprintf("%s %s",  self.manager.translator.getLabel("search_filter_before"), this.getCentury(datefirst_facet.getFullYear()));
-					
+
 					objectedItems.push({ "value": sprintf("[* TO %s]", first_facet), "text": text, "count": count, "i": i });
 					i++;
 				}
-				
+
 				totalCount = i;
 				objectedItems.sort(function (a, b) {
 					return parseInt(b.text)-parseInt(a.text);	  	      
@@ -148,10 +153,10 @@
 			//* merge facet data and template			
 			var json_data = {"options" : new Array({title:title, totalCount:totalCount, values:objectedItems})};	    	    	    
 			var html = self.template_integration_json(json_data, '#chosenTemplate'); 			
-			
+
 			if(smkCommon.debugTime()) console.timeEnd("SearchFilters - " + this.field + " - process");						
 			if(smkCommon.debugTime()) console.time("SearchFilters - " + this.field + " - chosen");
-			
+
 			//* save previous selected values in the target 'select' component	  	 
 			$select.find("option:selected").each(function (){
 				self.previous_values[self.field].push(this.value.replace(/^"|"$/g, ''));	  		
@@ -160,9 +165,9 @@
 			//* remove all options in 'select'...
 			$select.empty();	  	
 			//*... and copy the new option list
-			
+
 			$select.append($(html).find('option'));	  		  	
-			
+
 			//* add previous selected values in the target 'select' component
 			if (self.previous_values[self.field].length > 0){
 
@@ -187,30 +192,30 @@
 
 			//* change default text			
 			$select.attr('data-placeholder', self.manager.translator.getLabel(sprintf('search_%s_lab', this.field)));
-			
+
 			if(smkCommon.debugTime()) console.time("SearchFilters - " + this.field + " - chosen - update");
 			//* update 'chosen' plugin		
 			$target.find('select').trigger("chosen:updated");		
 			if(smkCommon.debugTime()) console.timeEnd("SearchFilters - " + this.field + " - chosen - update");
-			
+
 			if(smkCommon.debugTime()) console.time("SearchFilters - " + this.field + " - chosen - show");			
 
-			var doQueueShow = function(target){				
-				var doShow= function() {
-					$(target).find('.chosen-drop').show();
-				};
-				$.taskQueue.add(doShow, this, 10);	
-			};
-										
-			doQueueShow(self.target);								
+//			var doQueueShow = function(target){				
+//			var doShow= function() {
+//			$(target).find('.chosen-drop').show();
+//			};
+//			$.taskQueue.add(doShow, this, 10);	
+//			};
+
+//			doQueueShow(self.target);								
 
 			if(smkCommon.debugTime()) console.timeEnd("SearchFilters - " + this.field + " - chosen - show");				
-					
+
 			self.previous_values[self.field] = new Array();					
-			
+
 			if(smkCommon.debugTime()) console.timeEnd("SearchFilters - " + this.field + " - chosen");
 			if(smkCommon.debugTime()) console.timeEnd("SearchFilters - " + this.field);	
-			
+
 			//* send "loaded" event
 			$(this).trigger({
 				type: "smk_search_filter_loaded"
@@ -288,12 +293,12 @@
 
 			this.previous_values[this.field] = new Array();
 		},
-		
+
 		change_title: function () {
 			var self = this;
 			var $target = $(this.target);
 			var title = self.manager.translator.getLabel("tagcloud_" + this.field);
-			
+
 			$target.find('label').text(title);
 		}
 	});
