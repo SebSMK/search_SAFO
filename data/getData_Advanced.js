@@ -14,8 +14,16 @@
 
 	getdataadvanced.constructor = function(caller){
 
-		this.getData = function (list){			
-			return this.proceedList(list);
+		this.getData = function (list){
+			var show_panel_lab = this.caller.manager.translator.getLabel("advanced_search_panel_show");
+			var hide_panel_lab = this.caller.manager.translator.getLabel("advanced_search_panel_hide");
+			var res = {
+					'show_panel_lab': show_panel_lab,
+					'hide_panel_lab': hide_panel_lab,
+					'filters': this.proceedList(list)
+				}; 
+			return res; 
+			
 		};  										
 		
 		this.proceedList = function(list){

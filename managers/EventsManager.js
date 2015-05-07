@@ -140,7 +140,7 @@
 								
 				
 					// advanced search
-					var adv_data = Manager.store.facets_default[model.lang]['advanced'];
+					var adv_data = Manager.store.facets_default['advanced'];
 					if(adv_data !== undefined){
 						for (var i = 0, l = adv_data.length; i < l; i++) {
 							var values = [];

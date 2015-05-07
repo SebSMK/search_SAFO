@@ -3,206 +3,111 @@
    "mode":"perf debug",
    "server":"http://csdev-seb:8180/solr-example/dev_SAFO/",
    "facets":{
-      "dk":{
-         "filters":[],
-         "advanced":[            
-            {
-               "lab":"artist",
-               "values":[
-                  {
-                     "id":"artist_name",
-                     "lang":"en dk"
-                  },                  
-                  {
-                     "id":"artist_auth",
-                     "lang":"en dk"
-                  },                  
-                  {
-                     "id":"artist_natio_dk",
-                     "lang":"dk"
-                  }                  
-               ]
-            },
-            {
-               "lab":"artwork",
-               "values":[
-                  {
-                     "id":"object_production_date_earliest",
-                     "ranges":{
-                        "range":"object_production_date_earliest",
-			            "start":"1400-01-01T00:00:00.001Z",
-			            "end":"NOW",
-			            "gap":"+100YEARS",
-			            "other":"before"
-                     },
-                     "lang":"en dk"
-                  },                  
-                  {
-                     "id":"vaerkstatus",
-                     "lang":"en dk"
-                  }                                
-               ]
-            },
-            {
-               "lab":"technic",
-               "values":[                                 
-                  {
-                     "id":"object_type_dk",
-                     "lang":"dk"
+      "advanced":[
+         {
+            "lab":"artist",
+            "values":[
+               {
+                  "id":"artist_name",
+                  "lang":"en dk"
+               },
+               {
+                  "id":"artist_auth",
+                  "lang":"en dk"
+               },
+               {
+                  "id":"artist_natio_dk",
+                  "lang":"dk"
+               },
+               {
+                  "id":"artist_natio_en",
+                  "lang":"en"
+               }
+            ]
+         },
+         {
+            "lab":"artwork",
+            "values":[
+               {
+                  "id":"object_production_date_earliest",
+                  "ranges":{
+                     "range":"object_production_date_earliest",
+                     "start":"1400-01-01T00:00:00.001Z",
+                     "end":"NOW",
+                     "gap":"+100YEARS",
+                     "other":"before"
                   },
-                  {
-                     "id":"materiale",
-                     "lang":"dk"
+                  "lang":"en dk"
+               },
+               {
+                  "id":"vaerkstatus",
+                  "lang":"en dk"
+               }
+            ]
+         },
+         {
+            "lab":"technic",
+            "values":[
+               {
+                  "id":"object_type_dk",
+                  "lang":"dk"
+               },
+               {
+                  "id":"object_type_en",
+                  "lang":"en"
+               },
+               {
+                  "id":"materiale",
+                  "lang":"dk"
+               },
+               {
+                  "id":"materiale_en",
+                  "lang":"en"
+               },
+               {
+                  "id":"prod_technique_dk",
+                  "lang":"dk"
+               },
+               {
+                  "id":"prod_technique_en",
+                  "lang":"en"
+               }
+            ]
+         },
+         {
+            "lab":"acq",
+            "values":[
+               {
+                  "id":"acq_date_earliest",
+                  "ranges":{
+                     "range":"acq_date_earliest",
+                     "start":"1700-01-01T00:00:00.001Z",
+                     "end":"NOW",
+                     "gap":"+100YEARS",
+                     "other":"before"
                   },
-                  {
-                     "id":"prod_technique_dk",
-                     "lang":"dk"
-                  }   
-               ]
-            },
-            {
-               "lab":"acq",
-               "values":[                  
-                  {
-                     "id":"acq_date_earliest",
-                     "ranges":{
-                        "range":"acq_date_earliest",
-                        "start":"1700-01-01T00:00:00.001Z",
-                        "end":"NOW",
-                        "gap":"+100YEARS",
-                        "other":"before"
-                     },
-                     "lang":"dk"
-                  },
-                  {
-                     "id":"collection",
-                     "lang":"en dk"
-                  }
-                  
-               ]
-            },
-            {
-               "lab":"motiv",
-               "values":[
-                  {
-                     "id":"portrait_person",
-                     "lang":"en dk"
-                  },
-                  {
-                     "id":"topografisk_motiv",
-                     "lang":"en dk"
-                  }
-               ]
-            }
-         ],
-         "ranges":{
-            "range":"object_production_date_earliest",
-            "start":"1400-01-01T00:00:00.001Z",
-            "end":"NOW",
-            "gap":"+100YEARS",
-            "other":"before"
+                  "lang":"dk"
+               },
+               {
+                  "id":"collection",
+                  "lang":"en dk"
+               }
+            ]
+         },
+         {
+            "lab":"motiv",
+            "values":[
+               {
+                  "id":"portrait_person",
+                  "lang":"en dk"
+               },
+               {
+                  "id":"topografisk_motiv",
+                  "lang":"en dk"
+               }
+            ]
          }
-      },
-      "en":{
-         "filters":[],
-         "advanced":[            
-            {
-               "lab":"artist",
-               "values":[
-                  {
-                     "id":"artist_name",
-                     "lang":"en dk"
-                  },                  
-                  {
-                     "id":"artist_auth",
-                     "lang":"en dk"
-                  },                  
-                  {
-                     "id":"artist_natio_dk",
-                     "lang":"dk"
-                  }                  
-               ]
-            },
-            {
-               "lab":"artwork",
-               "values":[
-                  {
-                     "id":"object_production_date_earliest",
-                     "ranges":{
-                        "range":"object_production_date_earliest",
-			            "start":"1400-01-01T00:00:00.001Z",
-			            "end":"NOW",
-			            "gap":"+100YEARS",
-			            "other":"before"
-                     },
-                     "lang":"en dk"
-                  },                  
-                  {
-                     "id":"vaerkstatus",
-                     "lang":"en dk"
-                  }                                
-               ]
-            },
-            {
-               "lab":"technic",
-               "values":[                                 
-                  {
-                     "id":"object_type_dk",
-                     "lang":"dk"
-                  },
-                  {
-                     "id":"materiale",
-                     "lang":"dk"
-                  },
-                  {
-                     "id":"prod_technique_dk",
-                     "lang":"dk"
-                  }   
-               ]
-            },
-            {
-               "lab":"acq",
-               "values":[                  
-                  {
-                     "id":"acq_date_earliest",
-                     "ranges":{
-                        "range":"acq_date_earliest",
-                        "start":"1700-01-01T00:00:00.001Z",
-                        "end":"NOW",
-                        "gap":"+100YEARS",
-                        "other":"before"
-                     },
-                     "lang":"dk"
-                  },
-                  {
-                     "id":"collection",
-                     "lang":"en dk"
-                  }
-                  
-               ]
-            },
-            {
-               "lab":"motiv",
-               "values":[
-                  {
-                     "id":"portrait_person",
-                     "lang":"en dk"
-                  },
-                  {
-                     "id":"topografisk_motiv",
-                     "lang":"en dk"
-                  }
-               ]
-            }
-         ],
-         "ranges":{
-            "range":"object_production_date_earliest",
-            "start":"1400-01-01T00:00:00.001Z",
-            "end":"NOW",
-            "gap":"+100YEARS",
-            "other":"before"
-         }
-      },
+      ],
       "all":[
          "artist_name",
          "artist_auth",

@@ -1,13 +1,13 @@
 <div class="search-type-selector">
 	<script id="advancedSearchTemplate" type="text/template">	
 		<div class="advanced-search-panel-wrapper">
-			<div class="advanced-search-panel" style="height: auto;" data-height="354.95">
+			<div class="advanced-search-panel advanced-search-panel-hidden" style="height: 6px;" data-height="354.95">
 	
 				<form method="post" action="index.html">
 	
 					<div class="column-wrapper">
 						
-						{{#list}}
+						{{#list.filters}}
 						<div class="column">
 							<div class="filter-group">
 								<h3>{{{lab}}}</h3>
@@ -18,7 +18,7 @@
 								
 							</div>
 						</div>
-						{{/list}}
+						{{/list.filters}}
 	
 					</div>
 					<!-- /.column-wrapper -->					
@@ -26,8 +26,8 @@
 				</form>
 	
 				<div class="advanced-search-panel-show-hide">
-					<a data-label-open="Vis filtre" data-label-close="Skjul filtre"
-						href="#">Skjul filtre</a>
+					<a data-label-open="{{{list.show_panel_lab}}}" data-label-close="{{{list.hide_panel_lab}}}"
+						href="#">{{{list.show_panel_lab}}}</a>
 				</div>
 	
 			</div>

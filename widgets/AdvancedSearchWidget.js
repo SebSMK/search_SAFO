@@ -36,15 +36,26 @@
 		        });
 		},
 		
-		change_columns_titles: function(){
+		refresh_language: function(){
 			var self = this;
 			var i = 0;
+
+			// change_columns_titles
 			$(self.target).find(".filter-group h3").each(function (){
-				if(self.panel_data[i] !== undefined)
-					$(this).text(self.manager.translator.getLabel(self.panel_data[i].lab_tag)); 				
+				if(self.panel_data.filters[i] !== undefined)
+					$(this).text(self.manager.translator.getLabel(self.panel_data.filters[i].lab_tag)); 				
 				i++;
 				
 			});
+			
+			// panel switch
+			var show_panel_lab = this.manager.translator.getLabel("advanced_search_panel_show");
+			var hide_panel_lab = this.manager.translator.getLabel("advanced_search_panel_hide");
+			var text = $(self.target).find('.advanced-search-panel-hidden').lenght > 0 ? hide_panel_lab : show_panel_lab;
+			$(self.target).find('.advanced-search-panel-show-hide a')
+			.attr('data-label-open', show_panel_lab)
+			.attr('data-label-close', hide_panel_lab)
+			.text(text);
 			
 		},
 

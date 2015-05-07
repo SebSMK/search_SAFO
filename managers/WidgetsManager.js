@@ -270,7 +270,7 @@ var EventsManager;
 			id: 'advanced',
 			target: '#advanced',
 			template: Mustache.getTemplate('templates/advancedsearch.html'),
-			facets_list: Manager.store.facets_default[current_language]['advanced'] 
+			facets_list: Manager.store.facets_default['advanced'] 
 		}));
 		
 		//* filters

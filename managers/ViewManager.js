@@ -256,7 +256,7 @@
 					this.callWidgetFn('adv_' + Manager.searchfilterList[i], 'change_title');
 			};	
 			
-			this.callWidgetFn('advanced', 'change_columns_titles');
+			this.callWidgetFn('advanced', 'refresh_language');
 
 			if(smkCommon.debugTime()) console.timeEnd("categoryChanged2");
 
