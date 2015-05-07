@@ -43,18 +43,18 @@
 		 * */			        		           
 		this.scrollStart = function(event) {		        															
 
-			
+
 			if (ModelManager.get_view() != 'detail' 
 				&& $('.generalspinner').length == 0
 				&& event.deltaY < 0 // scrolling down
 				&& !$(event.target).hasClass('active-result') // user is not scrolling a facet-list				
 			){
-					//* start scroll request
-					ViewManager.callWidgetFn('scroll_update', 'start_scroll_request');	        																	        		    
+				//* start scroll request
+				ViewManager.callWidgetFn('scroll_update', 'start_scroll_request');	        																	        		    
 
-					//* start preloading of teaser's images				
-					ViewManager.callWidgetFn('scroll_update', 'start_scroll_preload_request');					
-								
+				//* start preloading of teaser's images				
+				ViewManager.callWidgetFn('scroll_update', 'start_scroll_preload_request');					
+
 			}																				
 		};							
 
@@ -130,66 +130,48 @@
 					q = sprintf('id:%s', model.q);			    	
 			};
 
-			Manager.store.addByValue('q', q);
+			Manager.store.addByValue('q', q);			
 
 			// facets
 			Manager.store.remove('facet');
 			Manager.store.remove('facet.field');
 			if (model.view != 'detail'){
 				Manager.store.addByValue('facet', true);
-								
-				
-					// advanced search
-					var adv_data = Manager.store.facets_default['advanced'];
-					if(adv_data !== undefined){
-						for (var i = 0, l = adv_data.length; i < l; i++) {
-							var values = [];
-							var ranges = [];
-							for (var m = 0, n = adv_data[i]['values'].length; m < n; m++) {
-								
-								if(adv_data[i]['values'][m]['ranges'] === undefined)
-									values.push(adv_data[i]['values'][m]['id']);
-								else{
-									var adv_range = adv_data[i]['values'][m]['ranges'];
-									var opt = sprintf('f.%s.facet.range.', adv_range['range']);
 
-									ranges.push({id: 'facet.range', value: adv_range['range']});				 
-									ranges.push({id: opt + 'start', value: adv_range['start']});
-									ranges.push({id: opt + 'end', value: adv_range['end']});
-									ranges.push({id: opt + 'gap', value: adv_range['gap']});
-									if(adv_range['other'] !== undefined)
-										ranges.push({id:opt + 'other', value: adv_range['other']});														
-								}
+				// advanced search
+				var adv_data = Manager.store.facets_default['advanced'];
+				if(adv_data !== undefined){
+					for (var i = 0, l = adv_data.length; i < l; i++) {
+						var values = [];
+						var ranges = [];
+						for (var m = 0, n = adv_data[i]['values'].length; m < n; m++) {
+
+							if(adv_data[i]['values'][m]['ranges'] === undefined)
+								values.push(adv_data[i]['values'][m]['id']);
+							else{
+								var adv_range = adv_data[i]['values'][m]['ranges'];
+								var opt = sprintf('f.%s.facet.range.', adv_range['range']);
+
+								ranges.push({id: 'facet.range', value: adv_range['range']});				 
+								ranges.push({id: opt + 'start', value: adv_range['start']});
+								ranges.push({id: opt + 'end', value: adv_range['end']});
+								ranges.push({id: opt + 'gap', value: adv_range['gap']});
+								if(adv_range['other'] !== undefined)
+									ranges.push({id:opt + 'other', value: adv_range['other']});														
 							}
-							
-							if (values.length > 0)
-								Manager.store.addByValue('facet.field', values);
-							if (ranges.length > 0)
-								for (var m = 0, n = ranges.length; m < n; m++) {
-									Manager.store.addByValue(ranges[m]['id'],ranges[m]['value'] );									
-								}
-																																						
-						}				
-					};						
-				
-//					// filters
-//					Manager.store.addByValue('facet.field', Manager.store.facets_default[model.lang]['filters']);
-//
-//					if (Manager.store.facets_default[model.lang]['ranges'] !== undefined){
-//						var range = Manager.store.facets_default[model.lang]['ranges']['range'];
-//						var opt = sprintf('f.%s.facet.range.', range);
-//
-//						Manager.store.addByValue('facet.range', range);				 
-//						Manager.store.addByValue(opt + 'start', Manager.store.facets_default[model.lang]['ranges']['start']);
-//						Manager.store.addByValue(opt + 'end', Manager.store.facets_default[model.lang]['ranges']['end']);
-//						Manager.store.addByValue(opt + 'gap', Manager.store.facets_default[model.lang]['ranges']['gap']);
-//						if(Manager.store.facets_default[model.lang]['ranges']['other'] !== undefined)
-//							Manager.store.addByValue(opt + 'other', Manager.store.facets_default[model.lang]['ranges']['other']);					
-//					}						
-																			
+						}
+
+						if (values.length > 0)
+							Manager.store.addByValue('facet.field', values);
+						if (ranges.length > 0)
+							for (var m = 0, n = ranges.length; m < n; m++) {
+								Manager.store.addByValue(ranges[m]['id'],ranges[m]['value'] );									
+							}												
+					}				
+				};						
 			}																				
 
-			// fq param						
+			// fq param	
 			if (model.view != 'detail')				
 				Manager.store.addByValue('fq', Manager.store.fq_default);			
 
@@ -264,9 +246,9 @@
 
 			// reset scroll manager				
 			ViewManager.callWidgetFn('scroll_update', 'reset');
-			
+
 			// add current fq to scroll manager
-			
+
 			ViewManager.callWidgetFn('scroll_update', 'set_sub_manager_fq', {params: [model.fq]});
 
 			if(smkCommon.debugTime()) console.time("adresschanged-process_widgets-2");
@@ -310,28 +292,60 @@
 			ModelManager.update(model);
 		};
 
+//		/*
+//		* Category changed
+//		* @result:  model update 
+//		* */
+//		this.smk_search_category_changed = function(event){
+
+//		var category = event.category;
+//		var view = event.view;  	  	  
+
+//		if (ViewManager.callWidgetFn('category', 'set', {params: [category]})){   				
+//		ViewManager.callWidgetFn('category', 'setActiveTab', {params: [category]});
+
+//		ViewManager.callWidgetFn('currentsearch', 'setRefresh', {params: [false]});
+
+//		var model = {};
+//		model.q = ModelManager.current_value_joker;
+//		model.category = category;
+//		model.lang = ModelManager.current_value_joker;
+
+//		ModelManager.update(model); 
+//		};
+//		};
+
+
 		/*
-		 * Category changed
+		 * Checkbox changed
 		 * @result:  model update 
 		 * */
-		this.smk_search_category_changed = function(event){
+		this.smk_checkbox_changed = function(value){
+			
+			var search_string = 'medium_image_url:';			
+			var q = new Array()
+			if (search_string != '') {																																									
+				var default_teaser_view = ModelManager.getModel().view == 'detail';
 
-			var category = event.category;
-			var view = event.view;  	  	  
+				if (!default_teaser_view)
+					q = AjaxSolr.isArray(ModelManager.get_q()) ? ModelManager.get_q() : ModelManager.get_q() === undefined ? new Array() : new Array(ModelManager.get_q());				
 
-			if (ViewManager.callWidgetFn('category', 'set', {params: [category]})){   				
-				ViewManager.callWidgetFn('category', 'setActiveTab', {params: [category]});
+				q.push(search_string); 			
 
-				ViewManager.callWidgetFn('currentsearch', 'setRefresh', {params: [false]});
-
-				var model = {};
-				model.q = ModelManager.current_value_joker;
-				model.category = category;
+				var model = {};										
+				model.q = q;					
+				model.sort = ModelManager.current_value_joker;
+				model.view = default_teaser_view ? "teasers" : ModelManager.current_value_joker;
+				model.category = default_teaser_view ? "all" : ModelManager.current_value_joker;
 				model.lang = ModelManager.current_value_joker;
 
-				ModelManager.update(model); 
+				if (!default_teaser_view)
+					model.fq = ModelManager.current_value_joker;
+
+				ModelManager.update(model);					
 			};
 		};
+
 
 		/*
 		 * call to teaser view
@@ -353,7 +367,7 @@
 			var detail_url = event.detail_url + '&fl=detail';
 			window.open(event.detail_url);			
 		};	
-		
+
 		/*
 		 * call to detail view
 		 * @result:  open detail in the same window
@@ -375,24 +389,21 @@
 				var default_teaser_view = ModelManager.getModel().view == 'detail';
 
 				if (!default_teaser_view)
-					q = AjaxSolr.isArray(ModelManager.get_q()) ?  
-							ModelManager.get_q() 
-							: 
-								ModelManager.get_q() === undefined ? new Array() : new Array(ModelManager.get_q());				
+					q = AjaxSolr.isArray(ModelManager.get_q()) ? ModelManager.get_q() : ModelManager.get_q() === undefined ? new Array() : new Array(ModelManager.get_q());				
 
-								q.push(search_string); 			
+				q.push(search_string); 			
 
-								var model = {};										
-								model.q = q;					
-								model.sort = ModelManager.current_value_joker;
-								model.view = default_teaser_view ? "teasers" : ModelManager.current_value_joker;
-								model.category = default_teaser_view ? "all" : ModelManager.current_value_joker;
-								model.lang = ModelManager.current_value_joker;
+				var model = {};										
+				model.q = q;					
+				model.sort = ModelManager.current_value_joker;
+				model.view = default_teaser_view ? "teasers" : ModelManager.current_value_joker;
+				model.category = default_teaser_view ? "all" : ModelManager.current_value_joker;
+				model.lang = ModelManager.current_value_joker;
 
-								if (!default_teaser_view)
-									model.fq = ModelManager.current_value_joker;
+				if (!default_teaser_view)
+					model.fq = ModelManager.current_value_joker;
 
-								ModelManager.update(model);					
+				ModelManager.update(model);					
 			};
 		};
 
@@ -516,11 +527,11 @@
 
 			this.allWidgetProcessed = false;
 			if(smkCommon.debugLog()) console.log(sprintf(sprintf("Events - allWidgetsLoaded b4 - scrollTop_%s", $(window).scrollTop() )));
-			
+
 			ViewManager.allWidgetsLoaded();
 
 			if(smkCommon.debugLog()) console.log(sprintf(sprintf("Events - allWidgetsLoaded - scrollTop_%s", $(window).scrollTop() )));
-			
+
 			this.startScroll = true;
 			//* start preloading of teaser's images 
 //			ViewManager.callWidgetFn('scroll_update', 'start_scroll_preload_request');		
@@ -571,7 +582,7 @@
 		this.smk_detail_this_img_loaded = function(){						
 			ViewManager.smk_detail_this_img_loaded();
 			this.wigdetLoaded();
-			
+
 			var self = this;
 			// start details_tabs processing
 			// we're queuing processing of each tab, so that they're processed in a row with a 10ms interval
@@ -581,7 +592,7 @@
 				};
 				$.taskQueue.add(doQueue, this, 10);	
 			};
-						
+
 			doQueueProcess('process_init_tabs');
 			doQueueProcess('process_reference');
 			doQueueProcess('process_related');
@@ -590,8 +601,8 @@
 			doQueueProcess('process_extended_original');
 			doQueueProcess('process_show_extended_titles');	
 			doQueueProcess('process_show_tabs');
-				
-			
+
+
 		};
 	}
 }));

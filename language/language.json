@@ -17,6 +17,8 @@
       "adv_acq_column_title": 		"erhvervelse",
       "adv_motiv_column_title": 	"motiv", 
       
+      "checkbox_hasimage": 			"med optagelse", 
+      
       "tagcloud_artist_name": 			"kunstner",
       "tagcloud_artist_auth": 			"rolle",      
 	  "tagcloud_object_production_date_earliest": 		"periode",
@@ -257,6 +259,8 @@
       "detail_copyright_def":	"This image is in the Public Domain so you may freely use it for any purpose.",
       "teaser_copyright_def":	"cc0 | Public Domain",	
       "copyright_link":			"http://creativecommons.org/publicdomain/zero/1.0/",		
+
+	  "checkbox_hasimage": 			"has image", 
 
  	  "adv_artist_column_title": 	"artist | producer",
       "adv_artwork_column_title": 	"artwork",

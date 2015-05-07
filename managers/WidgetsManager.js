@@ -247,6 +247,15 @@ var EventsManager;
 			options: sorterOpt,	
 			template: Mustache.getTemplate('templates/sorter.html')
 		})); 
+		
+		Manager.addWidget(new AjaxSolr.CheckBoxWidget({
+			id: 'checkbox',
+			target: '#checkbox',
+			field: 'medium_image_url',
+			template: Mustache.getTemplate('templates/checkbox.html')
+		})); 
+		
+		
 
 //		Manager.addWidget(new AjaxSolr.CategoryWidget({
 //			id: 'category',
@@ -359,10 +368,15 @@ var EventsManager;
 		 * 
 		 * */		
 
-		//* selected category changed
-		$(Manager.widgets['category']).on('smk_search_category_changed', function(event){     	
-			EventsManager.smk_search_category_changed(event);
-		});     
+//		//* selected category changed
+//		$(Manager.widgets['category']).on('smk_search_category_changed', function(event){     	
+//			EventsManager.smk_search_category_changed(event);
+//		});     
+		
+		//* checkbox changed 				
+		$(Manager.widgets['checkbox']).on('hasimage', {self: Manager.widgets['checkbox']}, function(event){    		
+			EventsManager.smk_search_filter_changed(event.data.self, event.params);    		    		    		    		
+		});
 
 		//* searchfilters changed
 		for (var i = 0, l = searchFieldsTypes.length; i < l; i++) {

@@ -36,7 +36,7 @@
 		        });
 		},
 		
-		refresh_language: function(){
+		beforeRequest: function(){
 			var self = this;
 			var i = 0;
 

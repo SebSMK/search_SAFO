@@ -238,27 +238,9 @@
 			if (stateChange["category"] === undefined )
 				return;			
 
-			this.callWidgetFn('teasers', 'removeAllArticles');						
-
-			if(smkCommon.debugTime()) console.time("categoryChanged1");
+			this.callWidgetFn('teasers', 'removeAllArticles');									
 			this.showWidget($(this.callWidgetTarget('teasers')));
-			if(smkCommon.debugTime()) console.timeEnd("categoryChanged1");
-
-			if(smkCommon.debugTime()) console.time("categoryChanged2");
-//			$(this.callWidgetTarget('teasers')).find('.matrix').addClass('full-width').hide();							
-
-			this.showWidget($target.find("#search-filters"));
-			for (var i = 0, l = Manager.searchfilterList.length; i < l; i++) {				
-				if (this.callWidgetFn(Manager.searchfilterList[i], 'getRefresh'))					
-					this.callWidgetFn(Manager.searchfilterList[i], 'change_title');
-				
-				if (this.callWidgetFn('adv_' + Manager.searchfilterList[i], 'getRefresh'))					
-					this.callWidgetFn('adv_' + Manager.searchfilterList[i], 'change_title');
-			};	
-			
-			this.callWidgetFn('advanced', 'refresh_language');
-
-			if(smkCommon.debugTime()) console.timeEnd("categoryChanged2");
+			this.showWidget($target.find("#search-filters"));							
 
 			return;
 		};

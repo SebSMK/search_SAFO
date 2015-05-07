@@ -1,6 +1,7 @@
 <div>
 
 	<script id="generalTemplate" type="text/template">
+
 		<div class="container">
 	
 			<header class="main-header">
@@ -16,19 +17,20 @@
 					<a href="#">Statens Museum for Kunst</a> <i>Search the
 						collection</i>
 				</h1>
+				<section class="section--detail" role="detail">
+					<div class="print">
+						<a onclick="window.print();" href="#"><i></i> Print</a>
+					</div>
+				<section>
 	
-				<div class="print">
-					<a onclick="window.print();" href="#"><i></i> Print</a>
-				</div>
-	
-			</header>				
+			</header>
 	
 			<div id="searchbox" />
 	
 			<section class="section--list" role="list">
-
-				<div id="advanced" />	
-			
+	
+				<div id="advanced" />
+	
 				<div class="search-actions">
 	
 					<div class="search-utilities">
@@ -36,12 +38,15 @@
 						<div id="searchinfo"></div>
 	
 						<div id="sorter"></div>
+
+						<div id="checkbox"></div>						
 	
 					</div>
 	
-				</div>				
+				</div>
 	
-				<div id="smk_teasers" class="search-results search-results-full-width"></div>
+				<div id="smk_teasers"
+					class="search-results search-results-full-width"></div>
 				<div id="pager-viser"></div>
 	
 				<a href="#0" class="cd-top">Top</a>
