@@ -76,7 +76,7 @@
 	<link rel="stylesheet" type="text/css" href="js/backtotop/css/style.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="css/app.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="css/smk_modif.css" media="all" />
-	<link rel="stylesheet" type="text/css" href="css/smk_print.css" media="print" />
+	<link rel="stylesheet" type="text/css" href="css/print.css" media="print" />
 
 </head>
   <body>

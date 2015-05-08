@@ -243,11 +243,10 @@
 			}
 			
 			$target.find(".tabs a").each(function(){
-
 				$(this).removeClass('active');
 				$target.find($(this).attr('href')).removeClass("tab-content--open");
 				
-				//* add text to tabs
+				//* add text to tabs (and change language if needed)
 				$(this).text(self.manager.translator.getLabel($(this).attr('class')));
 			});
 
@@ -266,12 +265,19 @@
 					//* hide empty tabs
 					$(this).hide();
 				}else{
+					//* tab in use - show it
 					$(this).show();
 					if(i == 0){
 						$(this).addClass('active');
 						$target.find($(this).attr('href')).addClass("tab-content--open");
 						i++;
-					}						
+					}	
+					
+					//* add html-code for print
+					var print_tab = '<div class="tabs print-tabs"><a class="active" href="#description">Værkdele</a></div>';
+					var print_break = '<div class="print-page-break"></div>';					
+					$target.find($(this).attr('href')).prepend(print_tab).append(print_break);
+					
 				} 																		
 			});
 			

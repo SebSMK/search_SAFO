@@ -38,8 +38,12 @@
 
 		
 		beforeRequest: function(){						
-			var q = ModelManager.get_q();
-			$(this.target).find('input').val(q).attr('placeholder', this.manager.translator.getLabel("search_box_default"));
+			if(ModelManager.get_view() != 'detail'){
+				var q = ModelManager.get_q();
+				$(this.target).find('input').val(q);
+			}
+			
+			$(this.target).attr('placeholder', this.manager.translator.getLabel("search_box_default"));
 		},
 
 		template_integration_json: function (json_data, templ_id){	  
