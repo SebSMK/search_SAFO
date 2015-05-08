@@ -81,8 +81,8 @@
 			this.reset();
 
 			// add current fq to scroll manager
-			var facets = ModelManager.get_facets();			
-			this.set_sub_manager_fq(facets);			
+			var fq = ModelManager.get_fq();			
+			this.set_sub_manager_fq(fq);			
 		},
 
 		start_scroll_request: function(){
