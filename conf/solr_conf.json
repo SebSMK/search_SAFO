@@ -1,6 +1,6 @@
 {
    "version":"0.000.000.0183 mvc NO proxy",
-   "mode":"perf debug",
+   "mode":"debug",
    "server":"http://csdev-seb:8180/solr-example/dev_SAFO/",
    "facets":{
       "advanced":[

@@ -7,21 +7,32 @@
 			AjaxSolr.extend(this, {
 				options:{}
 			}, attributes);
-		},		
-
-		init: function () {                  	  
+		},						
+		
+		beforeRequest: function () {                  	  
 			var self = this;
-			var $target = $(this.target);
-
-			//* init template
-			var objectedItems = new Array();
-			var options = this.options.all;
-
-			for (var i = 0, l = options.length; i < l; i++) {
-				options[i].text = smkCommon.firstCapital(self.manager.translator.getLabel("sorter_" + options[i].value));
-				objectedItems.push(options[i]);    	  
+			var $target = $(this.target);			
+			var objectedItems = new Array();			
+			var all_options = jQuery.extend(true, {}, this.options); // clone json
+			var optDef = true;
+			
+			// get current selected option
+			for (var i = 0, l = all_options.all.length; i < l; i++) {
+				if(ModelManager.getModel().sort == all_options.all[i].value){
+					all_options.all[i].selected = true;
+					optDef = false;
+					break;
+				}				
+			};			
+			if(optDef)
+				all_options.all[0].selected = true;
+			
+			for (var i = 0, l = all_options.all.length; i < l; i++) {
+				all_options.all[i].text = smkCommon.firstCapital(self.manager.translator.getLabel("sorter_" + all_options.all[i].value));
+				objectedItems.push(all_options.all[i]);    	  
 			}
 
+			//* init template
 			var html = self.template_integration_json(
 					{	"label": smkCommon.firstCapital(this.manager.translator.getLabel("sorter_sort")),
 					"options": objectedItems}, 
@@ -52,11 +63,7 @@
 
 			});
 		},
-
-		beforeRequest: function(){
-			this.setOption(ModelManager.get_sort());
-		},
-
+		
 		/**
 		 * @returns {Function} Sends a request to Solr if it successfully adds a
 		 *   filter query with the given value.
@@ -90,18 +97,7 @@
 		setOption: function(option) {
 			$(this.target).find('select').val(option);
 			$(this.target).find('select').trigger("chosen:updated");
-		},   
-
-		init_chosen: function() {
-			var $target = $(this.target); 			  
-
-			// Subtle select
-			$target.find('.chosen--simple select').chosen({
-				disable_search: true
-			});
-
-		}    
-
+		}
 	});
 
 })(jQuery);

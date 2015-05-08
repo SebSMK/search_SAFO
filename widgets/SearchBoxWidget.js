@@ -36,19 +36,6 @@
 					}); // end binded action.
 		},	
 
-
-		afterRequest : function() {
-
-			var self = this;
-
-			if (!self.getRefresh()){
-				self.setRefresh(true);
-				return;
-			}	 		  	
-
-			
-
-		},  
 		
 		beforeRequest: function(){						
 			var q = ModelManager.get_q();
