@@ -223,9 +223,6 @@
 				self.showWidget($(self.callWidgetTarget('details', 'thumbnails_subWidget')));
 				self.showWidget($(self.callWidgetTarget('details', 'related_subWidget')));				
 
-				$(self.callWidgetTarget('details', 'related_subWidget')).find('h3.heading--l').hide(); // we don't want to see the title of "relatedwidget" now (only after "afterrequest")
-//				$target.find('.view  #related-artworks .search-results .matrix').masonry('layout');
-
 				break;		  
 			} 	
 

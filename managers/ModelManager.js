@@ -119,6 +119,10 @@ var	ModelManager = {
 			return smkCommon.isValidDataText(this.q) ? this.q : [];			
 		},
 		
+		get_fq: function(){
+			return smkCommon.isValidDataText(this.fq) ? this.fq : [];			
+		},
+		
 		get_sort: function(){
 			return smkCommon.isValidDataText(this.sort) ? this.sort : "";			
 		},
