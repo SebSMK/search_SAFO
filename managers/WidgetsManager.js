@@ -196,11 +196,11 @@ var EventsManager;
 			fields: params["facet.field"]
 		}));
 		 */
-		Manager.addWidget(new AjaxSolr.CurrentSearchWidget({
-			id: 'currentsearch',
-			target: '#currentsearch',
-			template: Mustache.getTemplate('templates/current.html')
-		})); 
+//		Manager.addWidget(new AjaxSolr.CurrentSearchWidget({
+//			id: 'currentsearch',
+//			target: '#currentsearch',
+//			template: Mustache.getTemplate('templates/current.html')
+//		})); 
 
 		Manager.addWidget(new AjaxSolr.PagerWidget({
 			id: 'pager',
@@ -403,10 +403,10 @@ var EventsManager;
 			EventsManager.smk_search_q_added(event);	    	
 		});	
 
-		//* a search string has been removed in current search
-		$(Manager.widgets['currentsearch']).on('smk_search_remove_one_search_string', function(event){     	
-			EventsManager.smk_search_remove_one_search_string(event);
-		});	
+//		//* a search string has been removed in current search
+//		$(Manager.widgets['currentsearch']).on('smk_search_remove_one_search_string', function(event){     	
+//			EventsManager.smk_search_remove_one_search_string(event);
+//		});	
 
 		//* calls to detail view
 		$(Manager.widgets['teasers']).on('smk_search_call_detail', function(event){     	

@@ -208,19 +208,6 @@
 
 			if(smkCommon.debugTime()) console.timeEnd("adresschanged-process_q");
 
-			//* process widgets
-
-			// copy "q" values in Currentsearch widget (without q default)	
-			ViewManager.callWidgetFn('currentsearch', 'removeAllCurrentSearch');			
-			var q_wout_q_def = ModelManager.get_q();									
-			for (var i = 0, l = q_wout_q_def.length; i < l; i++) {				
-				ViewManager.callWidgetFn('currentsearch', 'add_q', {params: [q_wout_q_def[i], q_wout_q_def[i]]} );
-			};	
-
-//			// select "sort" option in sorterWidget
-//			ViewManager.callWidgetFn('sorter', 'setOption', {params: [Manager.store.get('sort').val()]});
-
-
 			//**> start Solr request 
 			if(smkCommon.debugLog()) console.log(sprintf("adresschanged - request: %s", model.q));
 			Manager.doRequest();
@@ -241,8 +228,8 @@
 		 * @result:  model update
 		 * */
 		this.smk_search_pager_changed = function(start, searchFieldsTypes){			
-			ViewManager.callWidgetFn('currentsearch', 'setRefresh', {params: [false]});
-			ViewManager.callWidgetFn('category', 'setRefresh', {params: [false]});
+//			ViewManager.callWidgetFn('currentsearch', 'setRefresh', {params: [false]});
+//			ViewManager.callWidgetFn('category', 'setRefresh', {params: [false]});
 			for (var i = 0, l = searchFieldsTypes.length; i < l; i++) {				
 				ViewManager.callWidgetFn(searchFieldsTypes[i], 'setRefresh', {params: [false]});
 			};			
@@ -350,17 +337,11 @@
 		this.smk_search_q_added = function(event){
 			if(smkCommon.debugTime()) console.time("smk_search_q_added");
 			var search_string = jQuery.trim(event.val);			
-			var q = new Array()
+
 			if (search_string != '') {																																									
 				var default_teaser_view = ModelManager.getModel().view == 'detail';
-
-				if (!default_teaser_view)
-					q = AjaxSolr.isArray(ModelManager.get_q()) ? ModelManager.get_q() : ModelManager.get_q() === undefined ? new Array() : new Array(ModelManager.get_q());				
-
-				q.push(search_string); 			
-
 				var model = {};										
-				model.q = q;					
+				model.q = [search_string];					
 				model.sort = ModelManager.current_value_joker;
 				model.view = default_teaser_view ? "teasers" : ModelManager.current_value_joker;
 				model.category = default_teaser_view ? "all" : ModelManager.current_value_joker;
@@ -434,8 +415,8 @@
 			if (params == undefined)																					
 				return;	  
 
-			ViewManager.callWidgetFn('currentsearch', 'setRefresh', {params: [false]});
-			ViewManager.callWidgetFn('category', 'setRefresh', {params: [false]});			
+//			ViewManager.callWidgetFn('currentsearch', 'setRefresh', {params: [false]});
+			
 			for (var i = 0, l = searchFieldsTypes.length; i < l; i++) {				
 				ViewManager.callWidgetFn(searchFieldsTypes[i], 'setRefresh', {params: [false]});
 			};	

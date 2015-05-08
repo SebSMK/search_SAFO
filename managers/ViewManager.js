@@ -189,7 +189,7 @@
 				self.callWidgetFn('details', 'removeAllRelated');				
 
 				self.showWidget($target.find("#pager-viser"));
-				self.showWidget($(self.callWidgetTarget('currentsearch')));
+//				self.showWidget($(self.callWidgetTarget('currentsearch')));
 				self.showWidget($(self.callWidgetTarget('category')));
 				self.showWidget($(self.callWidgetTarget('sorter')));
 				self.showWidget($(self.callWidgetTarget('pager')));				
@@ -214,7 +214,7 @@
 								
 				self.hideWidget($target.find("#pager-viser"));
 				self.hideWidget($target.find("#search-filters"));				
-				self.hideWidget($(self.callWidgetTarget('currentsearch')));																			
+//				self.hideWidget($(self.callWidgetTarget('currentsearch')));																			
 				self.hideWidget($(self.callWidgetTarget('category')));				
 				self.hideWidget($(self.callWidgetTarget('sorter')));
 				self.hideWidget($(self.callWidgetTarget('pager')));							

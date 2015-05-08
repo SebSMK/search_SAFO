@@ -24,8 +24,8 @@
 
 			var html = self.template_integration_json(
 					{	"label": smkCommon.firstCapital(this.manager.translator.getLabel("sorter_sort")),
-						"options": objectedItems}, 
-			'#sorterItemsTemplate');
+					"options": objectedItems}, 
+				'#sorterItemsTemplate');
 			$target.html(html);
 
 			$(".dropit-sortby").dropit(), // Add active submenu item's text to trigger link.

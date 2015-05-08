@@ -8,21 +8,12 @@
 			var $target = $(this.target);		  
 			var json_data = {"default_text" : this.manager.translator.getLabel("search_box_default"), 'search': this.manager.translator.getLabel("search_box_button")};	 
 			var html = self.template_integration_json(json_data, '#searchboxTemplate');		  		  
-			$target.html(html);		
-		},	
-
-
-		afterRequest : function() {
-
-			var self = this;
-
-			if (!self.getRefresh()){
-				self.setRefresh(true);
-				return;
-			}	 		  	
-
-			$(this.target).find('input#search-bar').val('');
-
+			$target.html(html);	
+			
+			$(this.target).find('input').on("click", function () {
+				   $(this).select();
+				});
+			
 			$(this.target).find('form').bind(
 					'submit',
 					{
@@ -43,8 +34,26 @@
 						});		
 
 					}); // end binded action.
+		},	
+
+
+		afterRequest : function() {
+
+			var self = this;
+
+			if (!self.getRefresh()){
+				self.setRefresh(true);
+				return;
+			}	 		  	
+
+			
 
 		},  
+		
+		beforeRequest: function(){						
+			var q = ModelManager.get_q();
+			$(this.target).find('input').val(q);
+		},
 
 		template_integration_json: function (json_data, templ_id){	  
 			var template = this.template; 	
