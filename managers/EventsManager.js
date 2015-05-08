@@ -209,30 +209,6 @@
 			if(smkCommon.debugTime()) console.timeEnd("adresschanged-process_q");
 
 			//* process widgets
-			if(smkCommon.debugTime()) console.time("adresschanged-process_widgets");
-			if(smkCommon.debugTime()) console.time("adresschanged-process_widgets-1");
-//			if(smkCommon.debugTime()) console.time("adresschanged-process_widgets-1-1");
-//			// remove all previous search filters - only if search filters is set to "getRefresh"					
-//			for (var i = 0, l = Manager.searchfilterList.length; i < l; i++) {				
-//			if(ViewManager.callWidgetFn(Manager.searchfilterList[i], 'getRefresh'))
-//			ViewManager.callWidgetFn(Manager.searchfilterList[i], 'removeAllSelectedFilters', {params:[false]});	
-
-//			};
-//			if(smkCommon.debugTime()) console.timeEnd("adresschanged-process_widgets-1-1");
-			if(smkCommon.debugTime()) console.time("adresschanged-process_widgets-1-2");
-			if (model.fq !== undefined){
-				// add selected filters in searchFiltersWidget
-				for (var i = 0, l = model.fq.length; i < l; i++) {
-					if(model.fq[i].value !== undefined){
-						var field = model.fq[i].value.split(':')[0]; 
-						ViewManager.callWidgetFn(field, 'addSelectedFilter', {params: [model.fq[i].value.split(':')[1]]});
-					}															
-				}			    			
-			}
-			if(smkCommon.debugTime()) console.timeEnd("adresschanged-process_widgets-1-2");
-			if(smkCommon.debugTime()) console.timeEnd("adresschanged-process_widgets-1");
-
-			if(smkCommon.debugTime()) console.time("adresschanged-process_widgets-2");				
 
 			// copy "q" values in Currentsearch widget (without q default)	
 			ViewManager.callWidgetFn('currentsearch', 'removeAllCurrentSearch');			
@@ -241,19 +217,9 @@
 				ViewManager.callWidgetFn('currentsearch', 'add_q', {params: [q_wout_q_def[i], q_wout_q_def[i]]} );
 			};	
 
-			// select "sort" option in sorterWidget
-			ViewManager.callWidgetFn('sorter', 'setOption', {params: [Manager.store.get('sort').val()]});
+//			// select "sort" option in sorterWidget
+//			ViewManager.callWidgetFn('sorter', 'setOption', {params: [Manager.store.get('sort').val()]});
 
-			// reset scroll manager				
-			ViewManager.callWidgetFn('scroll_update', 'reset');
-						
-			// add current fq to scroll manager
-
-			ViewManager.callWidgetFn('scroll_update', 'set_sub_manager_fq', {params: [model.fq]});
-
-			if(smkCommon.debugTime()) console.time("adresschanged-process_widgets-2");
-
-			if(smkCommon.debugTime()) console.timeEnd("adresschanged-process_widgets");
 
 			//**> start Solr request 
 			if(smkCommon.debugLog()) console.log(sprintf("adresschanged - request: %s", model.q));

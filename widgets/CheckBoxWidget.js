@@ -26,18 +26,8 @@
 		},
 
 		beforeRequest: function () {
-			$(this.target).find('label').html('<i></i>' + smkCommon.firstCapital(this.manager.translator.getLabel('checkbox_hasimage')));
-			
-			var check = false;
-			var fq = ModelManager.get_fq();
-			for (var i = 0, l = fq.length; i < l; i++) {
-				if(fq[i].value == 'medium_image_url:[* TO *]'){
-					check = true;
-					break;
-				} 								
-			}
-			
-			$(this.target).find('input').prop('checked', check);
+			$(this.target).find('label').html('<i></i>' + smkCommon.firstCapital(this.manager.translator.getLabel('checkbox_hasimage')));						
+			$(this.target).find('input').prop('checked', ModelManager.get_hasimage());
 		},
 
 		template_integration_json: function (json_data, templ_id){	  

@@ -74,6 +74,16 @@
 			self.scrollManager.init(); 
 
 		},
+		
+		beforeRequest: function(){
+			
+			// reset scroll manager				
+			this.reset();
+
+			// add current fq to scroll manager
+			var facets = ModelManager.get_facets();			
+			this.set_sub_manager_fq(facets);			
+		},
 
 		start_scroll_request: function(){
 			var self = this;						

@@ -6,10 +6,10 @@
 
 			var self = this;
 			var $target = $(this.target);		
-			var lg_en = ModelManager.get_lang() == smkCommon.enum_lang.en;
-			var lg_dk = ModelManager.get_lang() == smkCommon.enum_lang.dk;
-			var html = self.template_integration_json({lg_en:lg_en, lg_dk:lg_dk}, '#langpickerTemplate');
+			var html = self.template_integration_json({}, '#langpickerTemplate');
 			$target.html(html);	  	  	  
+
+			this.set_language();
 
 			$target.find('li.lang').click(function(e) {					
 				if (!$(this).hasClass('active')){
@@ -27,12 +27,17 @@
 
 				return false;
 			});
+		},
 
+		beforeRequest: function () {
+			this.set_language();			
+		},
 
-//			$target.mouseout(function() {
-//			$target.find('label').removeAttr( 'data-tip' );
-//			});
-
+		set_language: function(){
+			$(this.target).find('li.lang[lang_radio!=' + ModelManager.get_lang() + ']')
+			.removeClass('active');
+			$(this.target).find('li.lang[lang_radio=' + ModelManager.get_lang() + ']')
+			.addClass('active');						
 		},
 
 		template_integration_json: function (json_data, templ_id){	  

@@ -119,8 +119,39 @@ var	ModelManager = {
 			return smkCommon.isValidDataText(this.q) ? this.q : [];			
 		},
 		
-		get_fq: function(){
+		get_fq: function(){			 
 			return smkCommon.isValidDataText(this.fq) ? this.fq : [];			
+		},
+		
+		get_facets: function(){						
+			var self = this;
+			var facets =  !smkCommon.isValidDataText(this.fq) ? [] : this.fq.slice();
+			var index = -1;
+			// we remove 'has image' request from facets
+			for (var i = 0, l = facets.length; i < l; i++) {				
+				if(facets[i].value !== undefined && facets[i].value == this._has_image_req){
+					index = i;
+					break;
+				} 								
+			}
+			
+			if(index > -1)
+				facets.splice(index, 1);
+			
+			return facets;
+		},
+		
+		get_hasimage: function(){
+			var fq =  !smkCommon.isValidDataText(this.fq) ? [] : this.fq;
+			var check = false;
+			for (var i = 0, l = fq.length; i < l; i++) {				
+				if(fq[i].value !== undefined && fq[i].value == this._has_image_req){
+					check = true;
+					break;
+				} 								
+			}
+			
+			return check;					
 		},
 		
 		get_sort: function(){
@@ -328,6 +359,7 @@ var	ModelManager = {
 		_fq_separator: ',',		
 		_default_category: 'all',		
 		_default_view: 'teasers',
-		_stored_model: null
+		_stored_model: null,
+		_has_image_req: 'medium_image_url:[* TO *]'
 
 };
