@@ -189,7 +189,7 @@
 
 		process_extended: function(){
 			if(this.tab_extended_html != null){				
-				$(this.target).find("#details_tab").html(this.tab_extended_html);																					
+				$(this.target).find("#extended_tab").html(this.tab_extended_html);																					
 			}		
 		},
 
@@ -204,14 +204,14 @@
 
 		process_reference: function(){
 			if(this.tab_reference_html != null){				
-				$(this.target).find("#description_tab").html(this.tab_reference_html);
+				$(this.target).find("#reference_tab").html(this.tab_reference_html);
 			}		
 		},				
 
 		// in the extended tab, show/hide titles of each sub-section
 		process_show_extended_titles: function(){			
 			var $target = $(this.target);
-			$target.find("#details_tab .data-section").each(function(){				
+			$target.find("#extended_tab .data-section").each(function(){				
 				if($(this).find(".data-pair").length == 0)										
 					// hide title
 					$(this).hide();					
@@ -247,7 +247,7 @@
 				$target.find($(this).attr('href')).removeClass("tab-content--open");
 				
 				//* add text to tabs (and change language if needed)
-				$(this).text(self.manager.translator.getLabel($(this).attr('class')));
+				$(this).text(self.manager.translator.getLabel($(this).attr('lab-id')));
 			});
 
 		},
@@ -273,11 +273,16 @@
 						i++;
 					}	
 					
-					//* add html-code for print
-					var print_tab = '<div class="tabs print-tabs"><a class="active" href="#description">Værkdele</a></div>';
-					var print_break = '<div class="print-page-break"></div>';					
-					$target.find($(this).attr('href')).prepend(print_tab).append(print_break);
-					
+					//* if required, add html-code for print
+					if ($(this).hasClass('to-print')){
+						var print_tab = sprintf('<div class="tabs print-tabs"><a class="active" href="#">%s</a></div>', $(this).text());
+						var print_break = '<div class="print-page-break"></div>';						
+						
+						$target.find($(this).attr('href')).prepend(print_tab);
+						
+						if ($(this).hasClass('break'))
+							$target.find($(this).attr('href')).append(print_break); 
+					}										
 				} 																		
 			});
 			

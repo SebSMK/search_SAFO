@@ -300,7 +300,7 @@ var EventsManager;
 		//* Parts / Related widgets 		
 		var sub_partsWidget = new AjaxSolr.TeasersWidget({
 			id: 'parts',
-			target: '#parts',
+			target: '#components',
 			template: Mustache.getTemplate('templates/teasers.html'),
 			initTemplate:'#relatedInitTemplate'
 		});

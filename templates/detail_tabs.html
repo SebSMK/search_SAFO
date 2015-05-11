@@ -1,994 +1,1071 @@
 <div>
 
-<script id="detailReferenceTemplate" type="text/template">	
-{{#info.references_texts.show}}
-	<div data-tabs-id="artwork-tabs" id="description" class="tab-content">
-    	{{#info.references_texts.value}}
-			<div class="copy">{{{value}}}</div>
-		{{/info.references_texts.value}}
-  	</div>
-{{/info.references_texts.show}}
-</script>
-
-<script id="detailExtendedTemplate" type="text/template">	
-<div data-tabs-id="artwork-tabs" id="details" class="tab-content">
+	<script id="detailTemplate" type="text/template">
+		<section class="single-artwork-tabs">
 	
-<!-- identification -->
-
-	<div class="data-section">
-      <h3>{{{ident_lab}}}</h3>
-
-      {{#ident_vaerktype.value}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{ident_vaerktype.key}}}</h4>
-        <div class="data-pair-value">{{{ident_vaerktype.value}}}
-        </div><!-- /.data-pair-value -->
-      </div><!-- /.data-pair -->
-      {{/ident_vaerktype.value}}
-
-	{{#ident_dele.value}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{ident_dele.key}}}</h4>
-        <div class="data-pair-value">{{{ident_dele.value}}}
-        </div><!-- /.data-pair-value -->
-      </div><!-- /.data-pair -->
-      {{/ident_dele.value}}
-      
-	{{#ident_invnummer.value}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{ident_invnummer.key}}}</h4>
-        <div class="data-pair-value">{{{ident_invnummer.value}}}
-        </div><!-- /.data-pair-value -->
-      </div><!-- /.data-pair -->
-      {{/ident_invnummer.value}}
-      
-	{{#ident_samling.value}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{ident_samling.key}}}</h4>
-        <div class="data-pair-value">{{{ident_samling.value}}}
-        </div><!-- /.data-pair-value -->
-      </div><!-- /.data-pair -->
-      {{/ident_samling.value}}
-      
-	{{#ident_andet_inv.value}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{ident_andet_inv.key}}}</h4>
-        <div class="data-pair-value">{{{ident_andet_inv.value}}}
-        </div><!-- /.data-pair-value -->
-      </div><!-- /.data-pair -->
-      {{/ident_andet_inv.value}}      
-    
-</div>
-<!-- /.identification -->
-
-
-<!-- producent -->
-
-	<div class="data-section">
-      <h3>{{{producent_lab}}}</h3>
-
-      {{#producent_kunster.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{producent_kunster.key}}}</h4>
-		{{#producent_kunster.value}}        
-			<div class="data-pair-value">{{{name}}}&nbsp;<i>{{{info}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/producent_kunster.value}}
-      </div><!-- /.data-pair -->
-      {{/producent_kunster.show}}
-
-	{{#producent_tilskrevet.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{producent_tilskrevet.key}}}</h4>
-        {{#producent_tilskrevet.value}}        
-			<div class="data-pair-value">{{{name}}}&nbsp;<i>{{{info}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/producent_tilskrevet.value}}
-      </div><!-- /.data-pair -->
-      {{/producent_tilskrevet.show}}
-      
-	{{#producent_tidltilskrvet.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{producent_tidltilskrvet.key}}}</h4>
-        {{#producent_tidltilskrvet.value}}        
-			<div class="data-pair-value">{{{name}}}&nbsp;<i>{{{info}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/producent_tidltilskrvet.value}}
-      </div><!-- /.data-pair -->
-      {{/producent_tidltilskrvet.show}}
-      
-	{{#producent_vaerksted.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{producent_vaerksted.key}}}</h4>
-        {{#producent_vaerksted.value}}        
-			<div class="data-pair-value">{{{name}}}&nbsp;<i>{{{info}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/producent_vaerksted.value}}
-      </div><!-- /.data-pair -->
-      {{/producent_vaerksted.show}}
-      
-	{{#producent_efterfoelger.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{producent_efterfoelger.key}}}</h4>
-        {{#producent_efterfoelger.value}}        
-			<div class="data-pair-value">{{{name}}}&nbsp;<i>{{{info}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/producent_efterfoelger.value}}
-      </div><!-- /.data-pair -->
-      {{/producent_efterfoelger.show}}      
-    
- 
-	{{#producent_inventor.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{producent_inventor.key}}}</h4>
-        {{#producent_inventor.value}}        
-			<div class="data-pair-value">{{{name}}}&nbsp;<i>{{{info}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/producent_inventor.value}}
-      </div><!-- /.data-pair -->
-      {{/producent_inventor.show}}      
-    
-    
-    {{#producent_skole.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{producent_skole.key}}}</h4>
-        {{#producent_skole.value}}        
-			<div class="data-pair-value">{{{name}}}&nbsp;<i>{{{info}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/producent_skole.value}}
-      </div><!-- /.data-pair -->
-      {{/producent_skole.show}}      
-    
-    
-    {{#producent_stil.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{producent_stil.key}}}</h4>
-        {{#producent_stil.value}}        
-			<div class="data-pair-value">{{{name}}}&nbsp;<i>{{{info}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/producent_stil.value}}
-      </div><!-- /.data-pair -->
-      {{/producent_stil.show}}      
-    
-    
-    {{#producent_kopi.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{producent_kopi.key}}}</h4>
-        {{#producent_kopi.value}}        
-			<div class="data-pair-value">{{{name}}}&nbsp;<i>{{{info}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/producent_kopi.value}}
-      </div><!-- /.data-pair -->
-      {{/producent_kopi.show}}      
-    
-   
-   {{#producent_forlaeg.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{producent_forlaeg.key}}}</h4>
-        {{#producent_forlaeg.value}}        
-			<div class="data-pair-value">{{{name}}}&nbsp;<i>{{{info}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/producent_forlaeg.value}}
-      </div><!-- /.data-pair -->
-      {{/producent_forlaeg.show}} 
-      
-      {{#producent_udgiver.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{producent_udgiver.key}}}</h4>
-        {{#producent_udgiver.value}}        
-			<div class="data-pair-value">{{{name}}}&nbsp;<i>{{{info}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/producent_udgiver.value}}
-      </div><!-- /.data-pair -->
-      {{/producent_udgiver.show}} 
-      
-      {{#producent_trykker.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{producent_trykker.key}}}</h4>
-        {{#producent_trykker.value}}        
-			<div class="data-pair-value">{{{name}}}&nbsp;<i>{{{info}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/producent_trykker.value}}
-      </div><!-- /.data-pair -->
-      {{/producent_trykker.show}} 
-      
-      {{#producent_forfatter.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{producent_forfatter.key}}}</h4>
-        {{#producent_forfatter.value}}        
-			<div class="data-pair-value">{{{name}}}&nbsp;<i>{{{info}}}</i>		
-        	</div><!-- /.data-pair-value -->
-		{{/producent_forfatter.value}}
-      </div><!-- /.data-pair -->
-      {{/producent_forfatter.show}}  
- 
-      
-      {{#producent_formeri.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{producent_formeri.key}}}</h4>
-        {{#producent_formeri.value}}        
-			<div class="data-pair-value">{{{name}}}&nbsp;<i>{{{info}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/producent_formeri.value}}
-      </div><!-- /.data-pair -->
-      {{/producent_formeri.show}}
-      
-      
-         
-    {{#producent_objectophavsbeskrivelse.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{producent_objectophavsbeskrivelse.key}}}</h4>
-        {{#producent_objectophavsbeskrivelse.value}}        
-			<div class="data-pair-value">{{{name}}}&nbsp;<i>{{{info}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/producent_objectophavsbeskrivelse.value}}
-      </div><!-- /.data-pair -->
-      {{/producent_objectophavsbeskrivelse.show}}
-
-</div>
-<!-- /.producent -->            
-
-<!-- title -->
-
-	<div class="data-section">
-      <h3>{{{title_lab}}}</h3>
-
-    {{#title_museum.show}}
-     {{#title_museum.value}}  
-	 <div class="data-pair">
-		<h4 class="data-pair-key">{{{title_museum.key}}}</h4>
-		        
-			<div class="data-pair-value">{{{title}}}</div><!-- /.data-pair-value -->
-			
-			{{#note}}
-				<h4 class="data-pair-key indent">{{{title_museum.key_note}}}</h4>		         
-				<div class="data-pair-value">{{{note}}}</div><!-- /.data-pair-value -->
-			{{/note}}
-
-			{{#trans}}
-				<h4 class="data-pair-key indent">{{{title_museum.key_trans}}}</h4>		     
-				<div class="data-pair-value">{{{trans}}}</div><!-- /.data-pair-value -->
-			{{/trans}}
-
-			{{#trans_note}}
-				<h4 class="data-pair-key indent">{{{title_museum.key_trans_note}}}</h4>		  
-				<div class="data-pair-value">{{{trans_note}}}</div><!-- /.data-pair-value -->
-			{{/trans_note}}
-
-		
-		
-      </div><!-- /.data-pair -->
-	{{/title_museum.value}}
-   {{/title_museum.show}}
-
-
-	{{#title_beskrivelse.show}}
-	{{#title_beskrivelse.value}} 
-      <div class="data-pair">
-		<h4 class="data-pair-key">{{{title_beskrivelse.key}}}</h4>
-		        
-			<div class="data-pair-value">{{{title}}}</div><!-- /.data-pair-value -->
-			
-			{{#note}}
-				<h4 class="data-pair-key indent">{{{title_beskrivelse.key_note}}}</h4>		         
-				<div class="data-pair-value">{{{note}}}</div><!-- /.data-pair-value -->
-			{{/note}}
-
-			{{#trans}}
-				<h4 class="data-pair-key indent">{{{title_beskrivelse.key_trans}}}</h4>		     
-				<div class="data-pair-value">{{{trans}}}</div><!-- /.data-pair-value -->
-			{{/trans}}
-
-			{{#trans_note}}
-				<h4 class="data-pair-key indent">{{{title_beskrivelse.key_trans_note}}}</h4>		  
-				<div class="data-pair-value">{{{trans_note}}}</div><!-- /.data-pair-value -->
-			{{/trans_note}}		
-		
-      </div><!-- /.data-pair -->
-	  {{/title_beskrivelse.value}}
-     {{/title_beskrivelse.show}}
-
-
-	{{#title_serie.show}}
-	{{#title_serie.value}}  
-      <div class="data-pair">
-		<h4 class="data-pair-key">{{{title_serie.key}}}</h4>
-		       
-			<div class="data-pair-value">{{{title}}}</div><!-- /.data-pair-value -->
-			
-			{{#note}}
-				<h4 class="data-pair-key indent">{{{title_serie.key_note}}}</h4>		         
-				<div class="data-pair-value">{{{note}}}</div><!-- /.data-pair-value -->
-			{{/note}}
-
-			{{#trans}}
-				<h4 class="data-pair-key indent">{{{title_serie.key_trans}}}</h4>		     
-				<div class="data-pair-value">{{{trans}}}</div><!-- /.data-pair-value -->
-			{{/trans}}
-
-			{{#trans_note}}
-				<h4 class="data-pair-key indent">{{{title_serie.key_trans_note}}}</h4>		  
-				<div class="data-pair-value">{{{trans_note}}}</div><!-- /.data-pair-value -->
-			{{/trans_note}}	
-		
-      </div><!-- /.data-pair -->
-	  {{/title_serie.value}}
-      {{/title_serie.show}}						
- 
-</div>
-<!-- /.title -->
-
-<!-- datering -->
-<div class="data-section">
-  <h3>{{{datering_lab}}}</h3>  
-  
-  {{#datering_production_vaerkdatering.value}}
-  <div class="data-pair">
-    <h4 class="data-pair-key">{{{datering_production_vaerkdatering.key}}}</h4>
-    {{#datering_production_vaerkdatering.value}}        
-    <div class="data-pair-value">{{{datering_production_vaerkdatering.value}}}	
-    </div><!-- /.data-pair-value -->
-  {{/datering_production_vaerkdatering.value}}
-  </div><!-- /.data-pair -->
-  {{/datering_production_vaerkdatering.value}}
-  
- {{#datering_production_udgivet_place.value}}
-  <div class="data-pair">
-    <h4 class="data-pair-key">{{{datering_production_udgivet_place.key}}}</h4>
-    {{#datering_production_udgivet_place.value}}        
-    <div class="data-pair-value">{{{datering_production_udgivet_place.value}}}
-    </div><!-- /.data-pair-value -->
-  {{/datering_production_udgivet_place.value}}
-  </div><!-- /.data-pair -->
-  {{/datering_production_udgivet_place.value}}
-					
-  {{#datering_production_udfoert_place.value}}
-  <div class="data-pair">
-    <h4 class="data-pair-key">{{{datering_production_udfoert_place.key}}}</h4>
-    {{#datering_production_udfoert_place.value}}        
-    <div class="data-pair-value">{{{datering_production_udfoert_place.value}}}
-    </div><!-- /.data-pair-value -->
-  {{/datering_production_udfoert_place.value}}
-  </div><!-- /.data-pair -->
-  {{/datering_production_udfoert_place.value}}
-  
-  {{#datering_production_note.value}}
-  <div class="data-pair">
-    <h4 class="data-pair-key">{{{datering_production_note.key}}}</h4>
-    {{#datering_production_note.value}}        
-    <div class="data-pair-value">{{{datering_production_note.value}}}	
-    </div><!-- /.data-pair-value -->
-  {{/datering_production_note.value}}
-  </div><!-- /.data-pair -->
-  {{/datering_production_note.value}} 
-
-</div>
-<!-- /.datering -->
-
-
-<!-- original -->
-<div id="tab_original" class="data-section"></div>
-<!-- /.original -->
-
-
-<!-- technique -->
-<div class="data-section">
-  <h3>{{{technique_lab}}}</h3>  
-  
-  {{#technique_technique.show}}
-  <div class="data-pair">
-    <h4 class="data-pair-key">{{{technique_technique.key}}}</h4>
-    {{#technique_technique.value}}        
-    <div class="data-pair-value">{{{value}}}	
-    </div><!-- /.data-pair-value -->
-  {{/technique_technique.value}}
-  </div><!-- /.data-pair -->
-  {{/technique_technique.show}}
-
-{{#technique_dimensions.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{technique_dimensions.key}}}</h4>
-        {{#technique_dimensions.value}}        
-			<div class="data-pair-value">{{{dim}}}&nbsp;<i>({{{type}}})</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/technique_dimensions.value}}
-      </div><!-- /.data-pair -->
- {{/technique_dimensions.show}} 
-
-{{#technique_diameter.value}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{technique_diameter.key}}}</h4>
-        {{#technique_diameter.value}}        
-			<div class="data-pair-value">{{{technique_diameter.value}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/technique_diameter.value}}
-      </div><!-- /.data-pair -->
- {{/technique_diameter.value}} 
-
-{{#technique_vaegt.value}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{technique_vaegt.key}}}</h4>
-        {{#technique_vaegt.value}}        
-			<div class="data-pair-value">{{{technique_vaegt.value}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/technique_vaegt.value}}
-      </div><!-- /.data-pair -->
- {{/technique_vaegt.value}} 
-
-{{#technique_materiale.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{technique_materiale.key}}}</h4>
-        {{#technique_materiale.value}}        
-			<div class="data-pair-value">{{{value}}}&nbsp;<i>({{{type}}})</i>		
-        	</div><!-- /.data-pair-value -->
-		{{/technique_materiale.value}}
-      </div><!-- /.data-pair -->
- {{/technique_materiale.show}} 
-
-{{#technique_format.value}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{technique_format.key}}}</h4>
-        {{#technique_format.value}}        
-			<div class="data-pair-value">{{{technique_format.value}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/technique_format.value}}
-      </div><!-- /.data-pair -->
- {{/technique_format.value}} 
-
-{{#technique_watermark.value}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{technique_watermark.key}}}</h4>
-        {{#technique_watermark.value}}        
-			<div class="data-pair-value">{{{technique_watermark.value}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/technique_watermark.value}}
-      </div><!-- /.data-pair -->
- {{/technique_watermark.value}} 
-
-{{#technique_tilstand.value}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{technique_tilstand.key}}}</h4>
-        {{#technique_tilstand.value}}        
-			<div class="data-pair-value">{{{technique_tilstand.value}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/technique_tilstand.value}}
-      </div><!-- /.data-pair -->
- {{/technique_tilstand.value}} 
-
-{{#technique_vaerkstatus.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{technique_vaerkstatus.key}}}</h4>
-        {{#technique_vaerkstatus.value}}        
-			<div class="data-pair-value">{{{value}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/technique_vaerkstatus.value}}
-      </div><!-- /.data-pair -->
- {{/technique_vaerkstatus.show}} 
-
-{{#technique_eksemplar.value}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{technique_eksemplar.key}}}</h4>
-        {{#technique_eksemplar.value}}        
-			<div class="data-pair-value">{{{technique_eksemplar.value}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/technique_eksemplar.value}}
-      </div><!-- /.data-pair -->
- {{/technique_eksemplar.value}} 
-
-{{#technique_bladnummer.value}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{technique_bladnummer.key}}}</h4>
-        {{#technique_bladnummer.value}}        
-			<div class="data-pair-value">{{{technique_bladnummer.value}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/technique_bladnummer.value}}
-      </div><!-- /.data-pair -->
- {{/technique_bladnummer.value}} 
-
-{{#technique_sidetal.value}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{technique_sidetal.key}}}</h4>
-        {{#technique_sidetal.value}}        
-			<div class="data-pair-value">{{{technique_sidetal.value}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/technique_sidetal.value}}
-      </div><!-- /.data-pair -->
- {{/technique_sidetal.value}} 
-
-{{#technique_omslag.value}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{technique_omslag.key}}}</h4>
-        {{#technique_omslag.value}}        
-			<div class="data-pair-value">{{{technique_omslag.value}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/technique_omslag.value}}
-      </div><!-- /.data-pair -->
- {{/technique_omslag.value}} 
-
-{{#technique_stadium.value}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{technique_stadium.key}}}</h4>
-        {{#technique_stadium.value}}        
-			<div class="data-pair-value">{{{technique_stadium.value}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/technique_stadium.value}}
-      </div><!-- /.data-pair -->
- {{/technique_stadium.value}} 
-
-{{#technique_kollation.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{technique_kollation.key}}}</h4>
-        {{#technique_kollation.value}}        
-			<div class="data-pair-value">{{{value}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/technique_kollation.value}}
-      </div><!-- /.data-pair -->
- {{/technique_kollation.show}} 
-
-{{#technique_note_vaerkstatus.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{technique_note_vaerkstatus.key}}}</h4>
-        {{#technique_note_vaerkstatus.value}}        
-			<div class="data-pair-value">{{{value}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/technique_note_vaerkstatus.value}}
-      </div><!-- /.data-pair -->
- {{/technique_note_vaerkstatus.show}} 
-
-{{#technique_opstilling.value}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{technique_opstilling.key}}}</h4>
-        {{#technique_opstilling.value}}        
-			<div class="data-pair-value">{{{technique_opstilling.value}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/technique_opstilling.value}}
-      </div><!-- /.data-pair -->
- {{/technique_opstilling.value}} 
-
-
-{{#technique_note_elementer.value}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{technique_note_elementer.key}}}</h4>
-        {{#technique_note_elementer.value}}        
-			<div class="data-pair-value">{{{technique_note_elementer.value}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/technique_note_elementer.value}}
-      </div><!-- /.data-pair -->
- {{/technique_note_elementer.value}} 
- 
-
-</div>
-<!-- /.technique -->
-
-
-<!-- inscription -->
-<div class="data-section">
-  <h3>{{{inscription_lab}}}</h3>  
-  
-{{#inscription_signatur.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{inscription_signatur.key}}}</h4>
-        {{#inscription_signatur.value}}        
-			<div class="data-pair-value">{{{value}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/inscription_signatur.value}}
-      </div><!-- /.data-pair -->
- {{/inscription_signatur.show}}  
-            
- {{#inscription_tryktsignatur.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{inscription_tryktsignatur.key}}}</h4>
-        {{#inscription_tryktsignatur.value}}        
-			<div class="data-pair-value">{{{value}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/inscription_tryktsignatur.value}}
-      </div><!-- /.data-pair -->
- {{/inscription_tryktsignatur.show}}  
- 
- {{#inscription_paaskrift.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{inscription_paaskrift.key}}}</h4>
-        {{#inscription_paaskrift.value}}        
-			<div class="data-pair-value">{{{value}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/inscription_paaskrift.value}}
-      </div><!-- /.data-pair -->
- {{/inscription_paaskrift.show}}      
- 
-  {{#inscription_trykttekst.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{inscription_trykttekst.key}}}</h4>
-        {{#inscription_trykttekst.value}}        
-			<div class="data-pair-value">{{{value}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/inscription_trykttekst.value}}
-      </div><!-- /.data-pair -->
- {{/inscription_trykttekst.show}}   
- 
-  {{#inscription_samlermaerke.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{inscription_samlermaerke.key}}}</h4>
-        {{#inscription_samlermaerke.value}}        
-			<div class="data-pair-value">{{{value}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/inscription_samlermaerke.value}}
-      </div><!-- /.data-pair -->
- {{/inscription_samlermaerke.show}}  
-
-</div>
-<!-- /.inscription -->
-
-<!-- acquisition -->
-<div class="data-section">
-  <h3>{{{erhverv_lab}}}</h3>  
-
-
-{{#erhverv_erhverv.value}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{erhverv_erhverv.key}}}</h4>
-        {{#erhverv_erhverv.value}}        
-			<div class="data-pair-value">{{{erhverv_erhverv.value}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/erhverv_erhverv.value}}
-      </div><!-- /.data-pair -->
- {{/erhverv_erhverv.value}} 
-
-{{#erhverv_proveniens.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{erhverv_proveniens.key}}}</h4>
-        {{#erhverv_proveniens.value}}        
-			<div class="data-pair-value">{{{value}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/erhverv_proveniens.value}}
-      </div><!-- /.data-pair -->
- {{/erhverv_proveniens.show}} 
-
-</div>
-<!-- /.acquisition -->
-
-<!-- references -->
-<div class="data-section">
-  <h3>{{{references_lab}}}</h3>  
-
-
-{{#references_vaerkfortegn.value}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{references_vaerkfortegn.key}}}</h4>
-        {{#references_vaerkfortegn.value}}        
-			<div class="data-pair-value">{{{references_vaerkfortegn.value}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/references_vaerkfortegn.value}}
-      </div><!-- /.data-pair -->
- {{/references_vaerkfortegn.value}} 
-
-{{#references_gernsheim.value}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{references_gernsheim.key}}}</h4>
-        {{#references_gernsheim.value}}        
-			<div class="data-pair-value">{{{references_gernsheim.value}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/references_gernsheim.value}}
-      </div><!-- /.data-pair -->
- {{/references_gernsheim.value}} 
-
-{{#references_beckett.value}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{references_beckett.key}}}</h4>
-        {{#references_beckett.value}}        
-			<div class="data-pair-value">{{{references_beckett.value}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/references_beckett.value}}
-      </div><!-- /.data-pair -->
- {{/references_beckett.value}} 
-
-{{#references_litteratur.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{references_litteratur.key}}}</h4>
-        {{#references_litteratur.value}}        
-			<div class="data-pair-value">{{{value}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/references_litteratur.value}}
-      </div><!-- /.data-pair -->
- {{/references_litteratur.show}} 
-
-</div>
-<!-- /.references -->
-
-<!-- exhibitions -->
-<div class="data-section">
-  <h3>{{{udstilling_lab}}}</h3>  
-
-{{#udstilling_udstilling.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{udstilling_udstilling.key}}}</h4>
-        {{#udstilling_udstilling.value}}        
-			<div class="data-pair-value">{{{value}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/udstilling_udstilling.value}}
-      </div><!-- /.data-pair -->
- {{/udstilling_udstilling.show}} 
-
-</div>
-<!-- /.exhibitions -->
-
-<!-- remarks -->
-<div class="data-section">
-  <h3>{{{bemaerk_lab}}}</h3>  
-
-{{#bemaerk_anden_litt.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{bemaerk_anden_litt.key}}}</h4>
-        {{#bemaerk_anden_litt.value}}        
-			<div class="data-pair-value">{{{value}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/bemaerk_anden_litt.value}}
-      </div><!-- /.data-pair -->
- {{/bemaerk_anden_litt.show}} 
-
-</div>
-<!-- /.remarks -->
-
-<!-- motiv -->
-<div class="data-section">
-  <h3>{{{motiv_lab}}}</h3>  
-
-{{#motiv_topografisk.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{motiv_topografisk.key}}}</h4>
-        {{#motiv_topografisk.value}}        
-			<div class="data-pair-value">{{{value}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/motiv_topografisk.value}}
-      </div><!-- /.data-pair -->
- {{/motiv_topografisk.show}} 
-
-{{#motiv_portraet.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{motiv_portraet.key}}}</h4>
-        {{#motiv_portraet.value}}        
-			<div class="data-pair-value">{{{value}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/motiv_portraet.value}}
-      </div><!-- /.data-pair -->
- {{/motiv_portraet.show}} 
-
-{{#motiv_note.value}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{motiv_note.key}}}</h4>
-        {{#motiv_note.value}}        
-			<div class="data-pair-value">{{{motiv_note.value}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/motiv_note.value}}
-      </div><!-- /.data-pair -->
- {{/motiv_note.value}}
-
-</div>
-<!-- /.motiv -->
-
-</div>
-</script>
-
-
-<script id="detailTemplate" type="text/template">
-
-
-	<section class="single-artwork-tabs">
-
-  <div data-tabs-id="artwork-tabs" class="tabs">
-    <a href="#description" class="detail_tab_reference"></a>
-    <a href="#parts" class="detail_tab_components"></a>
-    <a href="#details" class="detail_tab_extended"></a>
-    <a href="#related" class="detail_tab_related"></a>
-  </div>
-
-  <div id="description_tab"></div><!-- /.tab-content -->
-
-  <div class="print-page-break"></div>
-
-  <div data-tabs-id="artwork-tabs" id="parts" class="tab-content ">    
-  </div><!-- /.tab-content -->
-
-  <div class="print-page-break"></div>
-
-  <div id="details_tab"></div><!-- /.tab-content -->  
-
-  <div data-tabs-id="artwork-tabs" id="related" class="tab-content"></div><!-- /.tab-content -->
-
-</section>	
-
-</script>
-
-
-<script id="detailOriginalTemplate" type="text/template">
-	<h3>{{{original_placering_lab}}}</h3>  
-  
-  {{#original_placering.value}}
-  <div class="data-pair">
-    <h4 class="data-pair-key">{{{original_placering.key}}}</h4>
-    {{#original_placering.value}}        
-    <div class="data-pair-value">{{{original_placering.value}}}	
-    </div><!-- /.data-pair-value -->
-  {{/original_placering.value}}
-  </div><!-- /.data-pair -->
-  {{/original_placering.value}}
-
-  {{#original_invnummer.value}}
-  <div class="data-pair">
-    <h4 class="data-pair-key">{{{original_invnummer.key}}}</h4>
-    {{#original_invnummer.value}}        
-    <div class="data-pair-value">{{{original_invnummer.value}}}	
-    </div><!-- /.data-pair-value -->
-  {{/original_invnummer.value}}
-  </div><!-- /.data-pair -->
-  {{/original_invnummer.value}}
-
-
-{{#original_proveniens.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{original_proveniens.key}}}</h4>
-        {{#original_proveniens.value}}        
-			<div class="data-pair-value">{{{value}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/original_proveniens.value}}
-      </div><!-- /.data-pair -->
- {{/original_proveniens.show}} 
-
-{{#original_producent_kunster.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{original_producent_kunster.key}}}</h4>
-		{{#original_producent_kunster.value}}        
-			<div class="data-pair-value">{{{name}}}&nbsp;<i>{{{info}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/original_producent_kunster.value}}
-      </div><!-- /.data-pair -->
-      {{/original_producent_kunster.show}}
-
-	{{#original_producent_tilskrevet.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{original_producent_tilskrevet.key}}}</h4>
-        {{#original_producent_tilskrevet.value}}        
-			<div class="data-pair-value">{{{name}}}&nbsp;<i>{{{info}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/original_producent_tilskrevet.value}}
-      </div><!-- /.data-pair -->
-      {{/original_producent_tilskrevet.show}}
-      
-	{{#original_producent_tidltilskrvet.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{original_producent_tidltilskrvet.key}}}</h4>
-        {{#original_producent_tidltilskrvet.value}}        
-			<div class="data-pair-value">{{{name}}}&nbsp;<i>{{{info}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/original_producent_tidltilskrvet.value}}
-      </div><!-- /.data-pair -->
-      {{/original_producent_tidltilskrvet.show}}
-      
-	{{#original_producent_vaerksted.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{original_producent_vaerksted.key}}}</h4>
-        {{#original_producent_vaerksted.value}}        
-			<div class="data-pair-value">{{{name}}}&nbsp;<i>{{{info}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/original_producent_vaerksted.value}}
-      </div><!-- /.data-pair -->
-      {{/original_producent_vaerksted.show}}
-      
-	{{#original_producent_efterfoelger.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{original_producent_efterfoelger.key}}}</h4>
-        {{#original_producent_efterfoelger.value}}        
-			<div class="data-pair-value">{{{name}}}&nbsp;<i>{{{info}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/original_producent_efterfoelger.value}}
-      </div><!-- /.data-pair -->
-      {{/original_producent_efterfoelger.show}}      
-    
- 
-	{{#original_producent_inventor.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{original_producent_inventor.key}}}</h4>
-        {{#original_producent_inventor.value}}        
-			<div class="data-pair-value">{{{name}}}&nbsp;<i>{{{info}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/original_producent_inventor.value}}
-      </div><!-- /.data-pair -->
-      {{/original_producent_inventor.show}}      
-    
-    
-    {{#original_producent_skole.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{original_producent_skole.key}}}</h4>
-        {{#original_producent_skole.value}}        
-			<div class="data-pair-value">{{{name}}}&nbsp;<i>{{{info}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/original_producent_skole.value}}
-      </div><!-- /.data-pair -->
-      {{/original_producent_skole.show}}      
-    
-    
-    {{#original_producent_stil.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{original_producent_stil.key}}}</h4>
-        {{#original_producent_stil.value}}        
-			<div class="data-pair-value">{{{name}}}&nbsp;<i>{{{info}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/original_producent_stil.value}}
-      </div><!-- /.data-pair -->
-      {{/original_producent_stil.show}}      
-    
-    
-    {{#original_producent_kopi.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{original_producent_kopi.key}}}</h4>
-        {{#original_producent_kopi.value}}        
-			<div class="data-pair-value">{{{name}}}&nbsp;<i>{{{info}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/original_producent_kopi.value}}
-      </div><!-- /.data-pair -->
-      {{/original_producent_kopi.show}}  
-
-
-	{{#original_autenticitet.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{original_autenticitet.key}}}</h4>
-        {{#original_autenticitet.value}}        
-			<div class="data-pair-value">{{{value}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/original_autenticitet.value}}
-      </div><!-- /.data-pair -->
- 	{{/original_autenticitet.show}} 
-
-  {{#original_tilstand.value}}
-  <div class="data-pair">
-    <h4 class="data-pair-key">{{{original_tilstand.key}}}</h4>
-    {{#original_tilstand.value}}        
-    <div class="data-pair-value">{{{original_tilstand.value}}}	
-    </div><!-- /.data-pair-value -->
-  {{/original_tilstand.value}}
-  </div><!-- /.data-pair -->
-  {{/original_tilstand.value}}
-
-	{{#original_indskrift.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{original_indskrift.key}}}</h4>
-        {{#original_indskrift.value}}        
-			<div class="data-pair-value">{{{value}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/original_indskrift.value}}
-      </div><!-- /.data-pair -->
- 	{{/original_indskrift.show}} 
-
-{{#original_vaerkdatering.value}}
-  <div class="data-pair">
-    <h4 class="data-pair-key">{{{original_vaerkdatering.key}}}</h4>
-    {{#original_vaerkdatering.value}}        
-    <div class="data-pair-value">{{{original_vaerkdatering.value}}}	
-    </div><!-- /.data-pair-value -->
-  {{/original_vaerkdatering.value}}
-  </div><!-- /.data-pair -->
-  {{/original_vaerkdatering.value}}
-
-{{#original_technique.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{original_technique.key}}}</h4>
-        {{#original_technique.value}}        
-			<div class="data-pair-value">{{{value}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/original_technique.value}}
-      </div><!-- /.data-pair -->
- {{/original_technique.show}} 
-
-{{#original_bemaerk.show}}
-      <div class="data-pair">
-        <h4 class="data-pair-key">{{{original_bemaerk.key}}}</h4>
-        {{#original_bemaerk.value}}        
-			<div class="data-pair-value">{{{value}}}</i>	
-        	</div><!-- /.data-pair-value -->
-		{{/original_bemaerk.value}}
-      </div><!-- /.data-pair -->
- {{/original_bemaerk.show}} 
-
-
-</script>
+			<div data-tabs-id="artwork-tabs" class="tabs">
+				<a href="#reference" lab-id="detail_tab_reference" class="to-print break"></a> 
+				<a href="#components" lab-id="detail_tab_components"></a> 
+				<a href="#extended"lab-id="detail_tab_extended" class="to-print"></a> 
+				<a href="#related" lab-id="detail_tab_related"></a>
+			</div>
+	
+			<div id="reference_tab"></div>
+			<!-- /.tab-content -->
+
+			<div data-tabs-id="artwork-tabs" id="components" class="tab-content ">
+			</div>
+			<!-- /.tab-content -->
+	
+			<div id="extended_tab"></div>
+			<!-- /.tab-content -->
+	
+			<div data-tabs-id="artwork-tabs" id="related" class="tab-content"></div>
+			<!-- /.tab-content -->
+	
+		</section>
+	</script>
+
+
+	<script id="detailReferenceTemplate" type="text/template">	
+		{{#info.references_texts.show}}	
+		<div data-tabs-id="artwork-tabs" id="reference" class="tab-content">
+			{{#info.references_texts.value}}
+			<div class="copy">{{{value}}}</div>
+			{{/info.references_texts.value}}
+		</div>
+		{{/info.references_texts.show}}
+	</script>
+
+	<script id="detailExtendedTemplate" type="text/template">	
+		<div data-tabs-id="artwork-tabs" id="extended" class="tab-content">
+	
+			<!-- identification -->
+	
+			<div class="data-section">
+				<h3>{{{ident_lab}}}</h3>
+	
+				{{#ident_vaerktype.value}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{ident_vaerktype.key}}}</h4>
+					<div class="data-pair-value">{{{ident_vaerktype.value}}}</div>
+					<!-- /.data-pair-value -->
+				</div>
+				<!-- /.data-pair -->
+				{{/ident_vaerktype.value}} {{#ident_dele.value}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{ident_dele.key}}}</h4>
+					<div class="data-pair-value">{{{ident_dele.value}}}</div>
+					<!-- /.data-pair-value -->
+				</div>
+				<!-- /.data-pair -->
+				{{/ident_dele.value}} {{#ident_invnummer.value}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{ident_invnummer.key}}}</h4>
+					<div class="data-pair-value">{{{ident_invnummer.value}}}</div>
+					<!-- /.data-pair-value -->
+				</div>
+				<!-- /.data-pair -->
+				{{/ident_invnummer.value}} {{#ident_samling.value}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{ident_samling.key}}}</h4>
+					<div class="data-pair-value">{{{ident_samling.value}}}</div>
+					<!-- /.data-pair-value -->
+				</div>
+				<!-- /.data-pair -->
+				{{/ident_samling.value}} {{#ident_andet_inv.value}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{ident_andet_inv.key}}}</h4>
+					<div class="data-pair-value">{{{ident_andet_inv.value}}}</div>
+					<!-- /.data-pair-value -->
+				</div>
+				<!-- /.data-pair -->
+				{{/ident_andet_inv.value}}
+	
+			</div>
+			<!-- /.identification -->
+	
+	
+			<!-- producent -->
+	
+			<div class="data-section">
+				<h3>{{{producent_lab}}}</h3>
+	
+				{{#producent_kunster.show}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{producent_kunster.key}}}</h4>
+					{{#producent_kunster.value}}
+					<div class="data-pair-value">
+						{{{name}}}&nbsp;<i>{{{info}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/producent_kunster.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/producent_kunster.show}} {{#producent_tilskrevet.show}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{producent_tilskrevet.key}}}</h4>
+					{{#producent_tilskrevet.value}}
+					<div class="data-pair-value">
+						{{{name}}}&nbsp;<i>{{{info}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/producent_tilskrevet.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/producent_tilskrevet.show}} {{#producent_tidltilskrvet.show}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{producent_tidltilskrvet.key}}}</h4>
+					{{#producent_tidltilskrvet.value}}
+					<div class="data-pair-value">
+						{{{name}}}&nbsp;<i>{{{info}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/producent_tidltilskrvet.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/producent_tidltilskrvet.show}} {{#producent_vaerksted.show}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{producent_vaerksted.key}}}</h4>
+					{{#producent_vaerksted.value}}
+					<div class="data-pair-value">
+						{{{name}}}&nbsp;<i>{{{info}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/producent_vaerksted.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/producent_vaerksted.show}} {{#producent_efterfoelger.show}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{producent_efterfoelger.key}}}</h4>
+					{{#producent_efterfoelger.value}}
+					<div class="data-pair-value">
+						{{{name}}}&nbsp;<i>{{{info}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/producent_efterfoelger.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/producent_efterfoelger.show}} {{#producent_inventor.show}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{producent_inventor.key}}}</h4>
+					{{#producent_inventor.value}}
+					<div class="data-pair-value">
+						{{{name}}}&nbsp;<i>{{{info}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/producent_inventor.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/producent_inventor.show}} {{#producent_skole.show}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{producent_skole.key}}}</h4>
+					{{#producent_skole.value}}
+					<div class="data-pair-value">
+						{{{name}}}&nbsp;<i>{{{info}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/producent_skole.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/producent_skole.show}} {{#producent_stil.show}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{producent_stil.key}}}</h4>
+					{{#producent_stil.value}}
+					<div class="data-pair-value">
+						{{{name}}}&nbsp;<i>{{{info}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/producent_stil.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/producent_stil.show}} {{#producent_kopi.show}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{producent_kopi.key}}}</h4>
+					{{#producent_kopi.value}}
+					<div class="data-pair-value">
+						{{{name}}}&nbsp;<i>{{{info}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/producent_kopi.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/producent_kopi.show}} {{#producent_forlaeg.show}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{producent_forlaeg.key}}}</h4>
+					{{#producent_forlaeg.value}}
+					<div class="data-pair-value">
+						{{{name}}}&nbsp;<i>{{{info}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/producent_forlaeg.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/producent_forlaeg.show}} {{#producent_udgiver.show}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{producent_udgiver.key}}}</h4>
+					{{#producent_udgiver.value}}
+					<div class="data-pair-value">
+						{{{name}}}&nbsp;<i>{{{info}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/producent_udgiver.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/producent_udgiver.show}} {{#producent_trykker.show}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{producent_trykker.key}}}</h4>
+					{{#producent_trykker.value}}
+					<div class="data-pair-value">
+						{{{name}}}&nbsp;<i>{{{info}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/producent_trykker.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/producent_trykker.show}} {{#producent_forfatter.show}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{producent_forfatter.key}}}</h4>
+					{{#producent_forfatter.value}}
+					<div class="data-pair-value">
+						{{{name}}}&nbsp;<i>{{{info}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/producent_forfatter.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/producent_forfatter.show}} {{#producent_formeri.show}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{producent_formeri.key}}}</h4>
+					{{#producent_formeri.value}}
+					<div class="data-pair-value">
+						{{{name}}}&nbsp;<i>{{{info}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/producent_formeri.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/producent_formeri.show}}
+	
+	
+	
+				{{#producent_objectophavsbeskrivelse.show}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{producent_objectophavsbeskrivelse.key}}}</h4>
+					{{#producent_objectophavsbeskrivelse.value}}
+					<div class="data-pair-value">
+						{{{name}}}&nbsp;<i>{{{info}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/producent_objectophavsbeskrivelse.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/producent_objectophavsbeskrivelse.show}}
+	
+			</div>
+			<!-- /.producent -->
+	
+			<!-- title -->
+	
+			<div class="data-section">
+				<h3>{{{title_lab}}}</h3>
+	
+				{{#title_museum.show}} {{#title_museum.value}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{title_museum.key}}}</h4>
+	
+					<div class="data-pair-value">{{{title}}}</div>
+					<!-- /.data-pair-value -->
+	
+					{{#note}}
+					<h4 class="data-pair-key indent">{{{title_museum.key_note}}}</h4>
+					<div class="data-pair-value">{{{note}}}</div>
+					<!-- /.data-pair-value -->
+					{{/note}} {{#trans}}
+					<h4 class="data-pair-key indent">{{{title_museum.key_trans}}}</h4>
+					<div class="data-pair-value">{{{trans}}}</div>
+					<!-- /.data-pair-value -->
+					{{/trans}} {{#trans_note}}
+					<h4 class="data-pair-key indent">{{{title_museum.key_trans_note}}}</h4>
+					<div class="data-pair-value">{{{trans_note}}}</div>
+					<!-- /.data-pair-value -->
+					{{/trans_note}}
+	
+	
+	
+				</div>
+				<!-- /.data-pair -->
+				{{/title_museum.value}} {{/title_museum.show}}
+	
+	
+				{{#title_beskrivelse.show}} {{#title_beskrivelse.value}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{title_beskrivelse.key}}}</h4>
+	
+					<div class="data-pair-value">{{{title}}}</div>
+					<!-- /.data-pair-value -->
+	
+					{{#note}}
+					<h4 class="data-pair-key indent">{{{title_beskrivelse.key_note}}}</h4>
+					<div class="data-pair-value">{{{note}}}</div>
+					<!-- /.data-pair-value -->
+					{{/note}} {{#trans}}
+					<h4 class="data-pair-key indent">{{{title_beskrivelse.key_trans}}}</h4>
+					<div class="data-pair-value">{{{trans}}}</div>
+					<!-- /.data-pair-value -->
+					{{/trans}} {{#trans_note}}
+					<h4 class="data-pair-key indent">{{{title_beskrivelse.key_trans_note}}}</h4>
+					<div class="data-pair-value">{{{trans_note}}}</div>
+					<!-- /.data-pair-value -->
+					{{/trans_note}}
+	
+				</div>
+				<!-- /.data-pair -->
+				{{/title_beskrivelse.value}} {{/title_beskrivelse.show}}
+	
+	
+				{{#title_serie.show}} {{#title_serie.value}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{title_serie.key}}}</h4>
+	
+					<div class="data-pair-value">{{{title}}}</div>
+					<!-- /.data-pair-value -->
+	
+					{{#note}}
+					<h4 class="data-pair-key indent">{{{title_serie.key_note}}}</h4>
+					<div class="data-pair-value">{{{note}}}</div>
+					<!-- /.data-pair-value -->
+					{{/note}} {{#trans}}
+					<h4 class="data-pair-key indent">{{{title_serie.key_trans}}}</h4>
+					<div class="data-pair-value">{{{trans}}}</div>
+					<!-- /.data-pair-value -->
+					{{/trans}} {{#trans_note}}
+					<h4 class="data-pair-key indent">{{{title_serie.key_trans_note}}}</h4>
+					<div class="data-pair-value">{{{trans_note}}}</div>
+					<!-- /.data-pair-value -->
+					{{/trans_note}}
+	
+				</div>
+				<!-- /.data-pair -->
+				{{/title_serie.value}} {{/title_serie.show}}
+	
+			</div>
+			<!-- /.title -->
+	
+			<!-- datering -->
+			<div class="data-section">
+				<h3>{{{datering_lab}}}</h3>
+	
+				{{#datering_production_vaerkdatering.value}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{datering_production_vaerkdatering.key}}}</h4>
+					{{#datering_production_vaerkdatering.value}}
+					<div class="data-pair-value">{{{datering_production_vaerkdatering.value}}}
+					</div>
+					<!-- /.data-pair-value -->
+					{{/datering_production_vaerkdatering.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/datering_production_vaerkdatering.value}}
+	
+				{{#datering_production_udgivet_place.value}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{datering_production_udgivet_place.key}}}</h4>
+					{{#datering_production_udgivet_place.value}}
+					<div class="data-pair-value">{{{datering_production_udgivet_place.value}}}
+					</div>
+					<!-- /.data-pair-value -->
+					{{/datering_production_udgivet_place.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/datering_production_udgivet_place.value}}
+	
+				{{#datering_production_udfoert_place.value}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{datering_production_udfoert_place.key}}}</h4>
+					{{#datering_production_udfoert_place.value}}
+					<div class="data-pair-value">{{{datering_production_udfoert_place.value}}}
+					</div>
+					<!-- /.data-pair-value -->
+					{{/datering_production_udfoert_place.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/datering_production_udfoert_place.value}}
+	
+				{{#datering_production_note.value}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{datering_production_note.key}}}</h4>
+					{{#datering_production_note.value}}
+					<div class="data-pair-value">{{{datering_production_note.value}}}
+					</div>
+					<!-- /.data-pair-value -->
+					{{/datering_production_note.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/datering_production_note.value}}
+	
+			</div>
+			<!-- /.datering -->
+	
+	
+			<!-- original -->
+			<div id="tab_original" class="data-section"></div>
+			<!-- /.original -->
+	
+	
+			<!-- technique -->
+			<div class="data-section">
+				<h3>{{{technique_lab}}}</h3>
+	
+				{{#technique_technique.show}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{technique_technique.key}}}</h4>
+					{{#technique_technique.value}}
+					<div class="data-pair-value">{{{value}}}</div>
+					<!-- /.data-pair-value -->
+					{{/technique_technique.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/technique_technique.show}} {{#technique_dimensions.show}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{technique_dimensions.key}}}</h4>
+					{{#technique_dimensions.value}}
+					<div class="data-pair-value">
+						{{{dim}}}&nbsp;<i>({{{type}}})</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/technique_dimensions.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/technique_dimensions.show}} {{#technique_diameter.value}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{technique_diameter.key}}}</h4>
+					{{#technique_diameter.value}}
+					<div class="data-pair-value">
+						{{{technique_diameter.value}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/technique_diameter.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/technique_diameter.value}} {{#technique_vaegt.value}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{technique_vaegt.key}}}</h4>
+					{{#technique_vaegt.value}}
+					<div class="data-pair-value">
+						{{{technique_vaegt.value}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/technique_vaegt.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/technique_vaegt.value}} {{#technique_materiale.show}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{technique_materiale.key}}}</h4>
+					{{#technique_materiale.value}}
+					<div class="data-pair-value">
+						{{{value}}}&nbsp;<i>({{{type}}})</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/technique_materiale.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/technique_materiale.show}} {{#technique_format.value}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{technique_format.key}}}</h4>
+					{{#technique_format.value}}
+					<div class="data-pair-value">
+						{{{technique_format.value}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/technique_format.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/technique_format.value}} {{#technique_watermark.value}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{technique_watermark.key}}}</h4>
+					{{#technique_watermark.value}}
+					<div class="data-pair-value">
+						{{{technique_watermark.value}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/technique_watermark.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/technique_watermark.value}} {{#technique_tilstand.value}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{technique_tilstand.key}}}</h4>
+					{{#technique_tilstand.value}}
+					<div class="data-pair-value">
+						{{{technique_tilstand.value}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/technique_tilstand.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/technique_tilstand.value}} {{#technique_vaerkstatus.show}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{technique_vaerkstatus.key}}}</h4>
+					{{#technique_vaerkstatus.value}}
+					<div class="data-pair-value">
+						{{{value}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/technique_vaerkstatus.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/technique_vaerkstatus.show}} {{#technique_eksemplar.value}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{technique_eksemplar.key}}}</h4>
+					{{#technique_eksemplar.value}}
+					<div class="data-pair-value">
+						{{{technique_eksemplar.value}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/technique_eksemplar.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/technique_eksemplar.value}} {{#technique_bladnummer.value}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{technique_bladnummer.key}}}</h4>
+					{{#technique_bladnummer.value}}
+					<div class="data-pair-value">
+						{{{technique_bladnummer.value}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/technique_bladnummer.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/technique_bladnummer.value}} {{#technique_sidetal.value}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{technique_sidetal.key}}}</h4>
+					{{#technique_sidetal.value}}
+					<div class="data-pair-value">
+						{{{technique_sidetal.value}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/technique_sidetal.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/technique_sidetal.value}} {{#technique_omslag.value}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{technique_omslag.key}}}</h4>
+					{{#technique_omslag.value}}
+					<div class="data-pair-value">
+						{{{technique_omslag.value}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/technique_omslag.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/technique_omslag.value}} {{#technique_stadium.value}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{technique_stadium.key}}}</h4>
+					{{#technique_stadium.value}}
+					<div class="data-pair-value">
+						{{{technique_stadium.value}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/technique_stadium.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/technique_stadium.value}} {{#technique_kollation.show}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{technique_kollation.key}}}</h4>
+					{{#technique_kollation.value}}
+					<div class="data-pair-value">
+						{{{value}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/technique_kollation.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/technique_kollation.show}} {{#technique_note_vaerkstatus.show}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{technique_note_vaerkstatus.key}}}</h4>
+					{{#technique_note_vaerkstatus.value}}
+					<div class="data-pair-value">
+						{{{value}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/technique_note_vaerkstatus.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/technique_note_vaerkstatus.show}} {{#technique_opstilling.value}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{technique_opstilling.key}}}</h4>
+					{{#technique_opstilling.value}}
+					<div class="data-pair-value">
+						{{{technique_opstilling.value}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/technique_opstilling.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/technique_opstilling.value}} {{#technique_note_elementer.value}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{technique_note_elementer.key}}}</h4>
+					{{#technique_note_elementer.value}}
+					<div class="data-pair-value">
+						{{{technique_note_elementer.value}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/technique_note_elementer.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/technique_note_elementer.value}}
+	
+	
+			</div>
+			<!-- /.technique -->
+	
+	
+			<!-- inscription -->
+			<div class="data-section">
+				<h3>{{{inscription_lab}}}</h3>
+	
+				{{#inscription_signatur.show}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{inscription_signatur.key}}}</h4>
+					{{#inscription_signatur.value}}
+					<div class="data-pair-value">
+						{{{value}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/inscription_signatur.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/inscription_signatur.show}} {{#inscription_tryktsignatur.show}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{inscription_tryktsignatur.key}}}</h4>
+					{{#inscription_tryktsignatur.value}}
+					<div class="data-pair-value">
+						{{{value}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/inscription_tryktsignatur.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/inscription_tryktsignatur.show}} {{#inscription_paaskrift.show}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{inscription_paaskrift.key}}}</h4>
+					{{#inscription_paaskrift.value}}
+					<div class="data-pair-value">
+						{{{value}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/inscription_paaskrift.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/inscription_paaskrift.show}} {{#inscription_trykttekst.show}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{inscription_trykttekst.key}}}</h4>
+					{{#inscription_trykttekst.value}}
+					<div class="data-pair-value">
+						{{{value}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/inscription_trykttekst.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/inscription_trykttekst.show}} {{#inscription_samlermaerke.show}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{inscription_samlermaerke.key}}}</h4>
+					{{#inscription_samlermaerke.value}}
+					<div class="data-pair-value">
+						{{{value}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/inscription_samlermaerke.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/inscription_samlermaerke.show}}
+	
+			</div>
+			<!-- /.inscription -->
+	
+			<!-- acquisition -->
+			<div class="data-section">
+				<h3>{{{erhverv_lab}}}</h3>
+	
+	
+				{{#erhverv_erhverv.value}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{erhverv_erhverv.key}}}</h4>
+					{{#erhverv_erhverv.value}}
+					<div class="data-pair-value">
+						{{{erhverv_erhverv.value}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/erhverv_erhverv.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/erhverv_erhverv.value}} {{#erhverv_proveniens.show}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{erhverv_proveniens.key}}}</h4>
+					{{#erhverv_proveniens.value}}
+					<div class="data-pair-value">
+						{{{value}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/erhverv_proveniens.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/erhverv_proveniens.show}}
+	
+			</div>
+			<!-- /.acquisition -->
+	
+			<!-- references -->
+			<div class="data-section">
+				<h3>{{{references_lab}}}</h3>
+	
+	
+				{{#references_vaerkfortegn.value}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{references_vaerkfortegn.key}}}</h4>
+					{{#references_vaerkfortegn.value}}
+					<div class="data-pair-value">
+						{{{references_vaerkfortegn.value}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/references_vaerkfortegn.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/references_vaerkfortegn.value}} {{#references_gernsheim.value}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{references_gernsheim.key}}}</h4>
+					{{#references_gernsheim.value}}
+					<div class="data-pair-value">
+						{{{references_gernsheim.value}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/references_gernsheim.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/references_gernsheim.value}} {{#references_beckett.value}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{references_beckett.key}}}</h4>
+					{{#references_beckett.value}}
+					<div class="data-pair-value">
+						{{{references_beckett.value}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/references_beckett.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/references_beckett.value}} {{#references_litteratur.show}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{references_litteratur.key}}}</h4>
+					{{#references_litteratur.value}}
+					<div class="data-pair-value">
+						{{{value}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/references_litteratur.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/references_litteratur.show}}
+	
+			</div>
+			<!-- /.references -->
+	
+			<!-- exhibitions -->
+			<div class="data-section">
+				<h3>{{{udstilling_lab}}}</h3>
+	
+				{{#udstilling_udstilling.show}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{udstilling_udstilling.key}}}</h4>
+					{{#udstilling_udstilling.value}}
+					<div class="data-pair-value">
+						{{{value}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/udstilling_udstilling.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/udstilling_udstilling.show}}
+	
+			</div>
+			<!-- /.exhibitions -->
+	
+			<!-- remarks -->
+			<div class="data-section">
+				<h3>{{{bemaerk_lab}}}</h3>
+	
+				{{#bemaerk_anden_litt.show}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{bemaerk_anden_litt.key}}}</h4>
+					{{#bemaerk_anden_litt.value}}
+					<div class="data-pair-value">
+						{{{value}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/bemaerk_anden_litt.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/bemaerk_anden_litt.show}}
+	
+			</div>
+			<!-- /.remarks -->
+	
+			<!-- motiv -->
+			<div class="data-section">
+				<h3>{{{motiv_lab}}}</h3>
+	
+				{{#motiv_topografisk.show}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{motiv_topografisk.key}}}</h4>
+					{{#motiv_topografisk.value}}
+					<div class="data-pair-value">
+						{{{value}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/motiv_topografisk.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/motiv_topografisk.show}} {{#motiv_portraet.show}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{motiv_portraet.key}}}</h4>
+					{{#motiv_portraet.value}}
+					<div class="data-pair-value">
+						{{{value}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/motiv_portraet.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/motiv_portraet.show}} {{#motiv_note.value}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{motiv_note.key}}}</h4>
+					{{#motiv_note.value}}
+					<div class="data-pair-value">
+						{{{motiv_note.value}}}</i>
+					</div>
+					<!-- /.data-pair-value -->
+					{{/motiv_note.value}}
+				</div>
+				<!-- /.data-pair -->
+				{{/motiv_note.value}}
+	
+			</div>
+			<!-- /.motiv -->
+	
+		</div>
+	</script>
+
+	<script id="detailOriginalTemplate" type="text/template">
+		<h3>{{{original_placering_lab}}}</h3>
+	
+		{{#original_placering.value}}
+		<div class="data-pair">
+			<h4 class="data-pair-key">{{{original_placering.key}}}</h4>
+			{{#original_placering.value}}
+			<div class="data-pair-value">{{{original_placering.value}}}</div>
+			<!-- /.data-pair-value -->
+			{{/original_placering.value}}
+		</div>
+		<!-- /.data-pair -->
+		{{/original_placering.value}} {{#original_invnummer.value}}
+		<div class="data-pair">
+			<h4 class="data-pair-key">{{{original_invnummer.key}}}</h4>
+			{{#original_invnummer.value}}
+			<div class="data-pair-value">{{{original_invnummer.value}}}</div>
+			<!-- /.data-pair-value -->
+			{{/original_invnummer.value}}
+		</div>
+		<!-- /.data-pair -->
+		{{/original_invnummer.value}} {{#original_proveniens.show}}
+		<div class="data-pair">
+			<h4 class="data-pair-key">{{{original_proveniens.key}}}</h4>
+			{{#original_proveniens.value}}
+			<div class="data-pair-value">
+				{{{value}}}</i>
+			</div>
+			<!-- /.data-pair-value -->
+			{{/original_proveniens.value}}
+		</div>
+		<!-- /.data-pair -->
+		{{/original_proveniens.show}} {{#original_producent_kunster.show}}
+		<div class="data-pair">
+			<h4 class="data-pair-key">{{{original_producent_kunster.key}}}</h4>
+			{{#original_producent_kunster.value}}
+			<div class="data-pair-value">
+				{{{name}}}&nbsp;<i>{{{info}}}</i>
+			</div>
+			<!-- /.data-pair-value -->
+			{{/original_producent_kunster.value}}
+		</div>
+		<!-- /.data-pair -->
+		{{/original_producent_kunster.show}}
+	
+		{{#original_producent_tilskrevet.show}}
+		<div class="data-pair">
+			<h4 class="data-pair-key">{{{original_producent_tilskrevet.key}}}</h4>
+			{{#original_producent_tilskrevet.value}}
+			<div class="data-pair-value">
+				{{{name}}}&nbsp;<i>{{{info}}}</i>
+			</div>
+			<!-- /.data-pair-value -->
+			{{/original_producent_tilskrevet.value}}
+		</div>
+		<!-- /.data-pair -->
+		{{/original_producent_tilskrevet.show}}
+	
+		{{#original_producent_tidltilskrvet.show}}
+		<div class="data-pair">
+			<h4 class="data-pair-key">{{{original_producent_tidltilskrvet.key}}}</h4>
+			{{#original_producent_tidltilskrvet.value}}
+			<div class="data-pair-value">
+				{{{name}}}&nbsp;<i>{{{info}}}</i>
+			</div>
+			<!-- /.data-pair-value -->
+			{{/original_producent_tidltilskrvet.value}}
+		</div>
+		<!-- /.data-pair -->
+		{{/original_producent_tidltilskrvet.show}}
+	
+		{{#original_producent_vaerksted.show}}
+		<div class="data-pair">
+			<h4 class="data-pair-key">{{{original_producent_vaerksted.key}}}</h4>
+			{{#original_producent_vaerksted.value}}
+			<div class="data-pair-value">
+				{{{name}}}&nbsp;<i>{{{info}}}</i>
+			</div>
+			<!-- /.data-pair-value -->
+			{{/original_producent_vaerksted.value}}
+		</div>
+		<!-- /.data-pair -->
+		{{/original_producent_vaerksted.show}}
+	
+		{{#original_producent_efterfoelger.show}}
+		<div class="data-pair">
+			<h4 class="data-pair-key">{{{original_producent_efterfoelger.key}}}</h4>
+			{{#original_producent_efterfoelger.value}}
+			<div class="data-pair-value">
+				{{{name}}}&nbsp;<i>{{{info}}}</i>
+			</div>
+			<!-- /.data-pair-value -->
+			{{/original_producent_efterfoelger.value}}
+		</div>
+		<!-- /.data-pair -->
+		{{/original_producent_efterfoelger.show}}
+	
+	
+		{{#original_producent_inventor.show}}
+		<div class="data-pair">
+			<h4 class="data-pair-key">{{{original_producent_inventor.key}}}</h4>
+			{{#original_producent_inventor.value}}
+			<div class="data-pair-value">
+				{{{name}}}&nbsp;<i>{{{info}}}</i>
+			</div>
+			<!-- /.data-pair-value -->
+			{{/original_producent_inventor.value}}
+		</div>
+		<!-- /.data-pair -->
+		{{/original_producent_inventor.show}}
+	
+	
+		{{#original_producent_skole.show}}
+		<div class="data-pair">
+			<h4 class="data-pair-key">{{{original_producent_skole.key}}}</h4>
+			{{#original_producent_skole.value}}
+			<div class="data-pair-value">
+				{{{name}}}&nbsp;<i>{{{info}}}</i>
+			</div>
+			<!-- /.data-pair-value -->
+			{{/original_producent_skole.value}}
+		</div>
+		<!-- /.data-pair -->
+		{{/original_producent_skole.show}} {{#original_producent_stil.show}}
+		<div class="data-pair">
+			<h4 class="data-pair-key">{{{original_producent_stil.key}}}</h4>
+			{{#original_producent_stil.value}}
+			<div class="data-pair-value">
+				{{{name}}}&nbsp;<i>{{{info}}}</i>
+			</div>
+			<!-- /.data-pair-value -->
+			{{/original_producent_stil.value}}
+		</div>
+		<!-- /.data-pair -->
+		{{/original_producent_stil.show}} {{#original_producent_kopi.show}}
+		<div class="data-pair">
+			<h4 class="data-pair-key">{{{original_producent_kopi.key}}}</h4>
+			{{#original_producent_kopi.value}}
+			<div class="data-pair-value">
+				{{{name}}}&nbsp;<i>{{{info}}}</i>
+			</div>
+			<!-- /.data-pair-value -->
+			{{/original_producent_kopi.value}}
+		</div>
+		<!-- /.data-pair -->
+		{{/original_producent_kopi.show}} {{#original_autenticitet.show}}
+		<div class="data-pair">
+			<h4 class="data-pair-key">{{{original_autenticitet.key}}}</h4>
+			{{#original_autenticitet.value}}
+			<div class="data-pair-value">
+				{{{value}}}</i>
+			</div>
+			<!-- /.data-pair-value -->
+			{{/original_autenticitet.value}}
+		</div>
+		<!-- /.data-pair -->
+		{{/original_autenticitet.show}} {{#original_tilstand.value}}
+		<div class="data-pair">
+			<h4 class="data-pair-key">{{{original_tilstand.key}}}</h4>
+			{{#original_tilstand.value}}
+			<div class="data-pair-value">{{{original_tilstand.value}}}</div>
+			<!-- /.data-pair-value -->
+			{{/original_tilstand.value}}
+		</div>
+		<!-- /.data-pair -->
+		{{/original_tilstand.value}} {{#original_indskrift.show}}
+		<div class="data-pair">
+			<h4 class="data-pair-key">{{{original_indskrift.key}}}</h4>
+			{{#original_indskrift.value}}
+			<div class="data-pair-value">
+				{{{value}}}</i>
+			</div>
+			<!-- /.data-pair-value -->
+			{{/original_indskrift.value}}
+		</div>
+		<!-- /.data-pair -->
+		{{/original_indskrift.show}} {{#original_vaerkdatering.value}}
+		<div class="data-pair">
+			<h4 class="data-pair-key">{{{original_vaerkdatering.key}}}</h4>
+			{{#original_vaerkdatering.value}}
+			<div class="data-pair-value">{{{original_vaerkdatering.value}}}
+			</div>
+			<!-- /.data-pair-value -->
+			{{/original_vaerkdatering.value}}
+		</div>
+		<!-- /.data-pair -->
+		{{/original_vaerkdatering.value}} {{#original_technique.show}}
+		<div class="data-pair">
+			<h4 class="data-pair-key">{{{original_technique.key}}}</h4>
+			{{#original_technique.value}}
+			<div class="data-pair-value">
+				{{{value}}}</i>
+			</div>
+			<!-- /.data-pair-value -->
+			{{/original_technique.value}}
+		</div>
+		<!-- /.data-pair -->
+		{{/original_technique.show}} {{#original_bemaerk.show}}
+		<div class="data-pair">
+			<h4 class="data-pair-key">{{{original_bemaerk.key}}}</h4>
+			{{#original_bemaerk.value}}
+			<div class="data-pair-value">
+				{{{value}}}</i>
+			</div>
+			<!-- /.data-pair-value -->
+			{{/original_bemaerk.value}}
+		</div>
+		<!-- /.data-pair -->
+		{{/original_bemaerk.show}}
+
+
+	</script>
 
 </div>

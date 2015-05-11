@@ -47,10 +47,9 @@
 
 			//* merge data and template
 			var html = self.template_integration_json({"detail": artwork_data}, '#detailTemplate'); 
-			var $html = $(html);
+			var $html = $(html);						
 			
-			// add image
-			
+			// add image			
 			var $imgcontainer = $html.find('.gallery__main');												
 			if(!$imgcontainer.hasClass('matrix-tile-image-missing')){
 				var img = dataHandler.getImage($imgcontainer);				
@@ -68,7 +67,10 @@
 					$(image.img).removeClass('image-loading');					
 					
 					//* add data to template
-					$target.prepend($html); 				
+					$target.prepend($html); 
+					
+					//* add current url to print button					
+					$($.find('.print a')).attr('href', window.location.href);
 
 					// add fancybox
 					$target.find('.fancybox').fancybox({
