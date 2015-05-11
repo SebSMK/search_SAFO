@@ -41,26 +41,26 @@
 			if (!self.getRefresh())				
 				return;			
 
-			
+
 			// set label 	
 			$target.find('label').text(self.manager.translator.getLabel("tagcloud_" + this.field));
-			
+
 			// set textbox's text
 			$select.attr('data-placeholder', self.manager.translator.getLabel('search_data_loading'));	
-			
+
 			this.update_filters();
-			
+
 			$target.find('select').trigger("chosen:updated");
 
 		},
-		
+
 		update_filters: function(){
-			
+
 			var facets = ModelManager.get_facets();
-			
+
 			// remove all filters
 			this.removeAllSelectedFilters();
-			
+
 			// add current filters
 			if (facets !== undefined){
 				// add selected filters in searchFiltersWidget
@@ -136,8 +136,6 @@
 
 			case 'artist_natio_en':
 			case 'artist_natio_dk':
-			case 'object_type_dk':
-			case 'object_type_en':
 			case 'prod_technique_dk':
 			case 'prod_technique_en':
 				for (var facet in self.manager.response.facet_counts.facet_fields[self.field]) {
@@ -159,7 +157,35 @@
 
 						return typeof (a.text === 'string') && typeof (b.text === 'string') ? (a.text.trim() < b.text.trim() ? -1 : 1) : (a.text < b.text ? -1 : 1);
 				});	  	 		  	  
-				break;					  
+				break;	
+
+			case 'object_type_dk':
+			case 'object_type_en':
+				for (var facet in self.manager.response.facet_counts.facet_fields[self.field]) {
+					var count = parseInt(self.manager.response.facet_counts.facet_fields[self.field][facet]);
+					if (count > maxCount) {
+						maxCount = count;
+					};
+
+					var arttype_hierarchi = self.manager.translator.getLabel('arttype_hierarchi');		
+					var parent = self.getParentType(arttype_hierarchi, facet.trim());
+					var nodevalue = parent != null ? self.getNodeValue(arttype_hierarchi, parent.id) : null;
+					var request = parent != null ? self.getParentRequest(arttype_hierarchi[parent], parent.id) : null;										
+
+					if(smkCommon.isValidDataText(facet)){
+						objectedItems.push({ "value": facet, "text": smkCommon.firstCapital(facet).trim(), "count": count, "i": i }); 
+						i++;
+					}
+
+				};
+				totalCount = i;
+				objectedItems.sort(function (a, b) {
+					if (self.manager.translator.getLanguage() == 'dk')
+						return typeof (a.value === 'string') && typeof (b.value === 'string') ? (a.value.trim() < b.value.trim() ? -1 : 1) : (a.value < b.value ? -1 : 1);
+
+						return typeof (a.text === 'string') && typeof (b.text === 'string') ? (a.text.trim() < b.text.trim() ? -1 : 1) : (a.text < b.text ? -1 : 1);
+				});	  	 		  	  
+				break;		
 
 			default:		    			  			   							  
 				for (var facet in self.manager.response.facet_counts.facet_fields[self.field]) {
@@ -310,14 +336,85 @@
 			$select.find("option:selected").each(function (){
 				$(this).removeAttr("selected");
 //				if(removeFromStore == true)
-//					self.manager.store.removeByValue('fq', self.fq(this.value));
+//				self.manager.store.removeByValue('fq', self.fq(this.value));
 			});	
 
 			//* update 'chosen' plugin		
 			$select.trigger("chosen:updated");
 
 			this.previous_values[this.field] = new Array();
+		},
+
+		getParentType: function (tree, childNode)
+		{
+			var i, res;
+			if (!tree || !tree.value) {
+				return null;
+			}
+			if( Object.prototype.toString.call(tree.value) === '[object Array]' ) {
+				for (i in tree.value) {
+					if (tree.value[i].id === childNode) {
+						return tree;
+					}
+					res = this.getParentType(tree.value[i], childNode);
+					if (res) {
+						return res;
+					}
+				}
+				return null;
+			} else {
+				if (tree.value.id === childNode) {
+					return tree;
+				}
+				return this.getParentType(tree.value, childNode);
+			}
+		},
+		
+		getNodeValue: function(tree, nodeId){
+			var i, res;
+			if (!tree || !tree.value) {
+				return false;
+			}
+						
+			if(tree.id == nodeId){				
+				res = true;
+			}else{
+				if( Object.prototype.toString.call(tree.value) === '[object Array]' ) {
+					for (i in tree.value) {
+						if(this.getNodeValue({'value' : tree.value[i].value}, nodeId)){
+							return tree.value[i][tree.value[i].id].value;
+						}													
+					}										
+				}
+			}
+			
+			return res;
+			
+		},
+		
+		
+		getParentRequest: function (tree, parentNode)
+		{
+			var i, res;
+			if (!tree || !tree.value) {
+				return null;
+			}
+			
+			if( tree.value === undefined) {				
+				res = tree.id;								
+			}else{
+				if( Object.prototype.toString.call(tree.value) === '[object Array]' ) {
+					for (i in tree.value) {
+						res += ' OR ' + this.getParentRequest({'value' : tree.value[i]}, tree.value[i].id);													
+					}
+					
+					res += ' OR ' + tree.id;					
+				}
+			}
+			
+			return res;
 		}
+		
 	});
 
 })(jQuery);
