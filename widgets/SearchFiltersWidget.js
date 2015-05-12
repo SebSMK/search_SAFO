@@ -56,7 +56,7 @@
 
 		update_filters: function(){
 			var self = this;
-			var facets = ModelManager.get_facets_OR();
+			var facets = ModelManager.get_facets_for_search_component();
 
 			// remove all filters
 			this.removeAllSelectedFilters();

@@ -27,11 +27,40 @@
 					}, attributes);
 				},	 			
 
-				
+
 				/******************************
 				 * PUBLIC FUNCTIONS
 				 * * ****************************/	
-				
+
+				/**
+				 * Finds all parameters with matching values.
+				 *
+				 * @param {String} name The name of the parameter.
+				 * @param {String|Number|String[]|Number[]|RegExp} value The value.
+				 * @returns {String|Number[]} The indices of the parameters found.
+				 */
+				//---> overwrite ParameterStore function
+				find: function (name, value) {
+					if (this.params[name] !== undefined) {
+						if (this.isMultiple(name)) {
+							var indices = [];
+							for (var i = 0, l = this.params[name].length; i < l; i++) {
+								//if (AjaxSolr.equals(this.params[name][i].val(), value)) { --> 
+								if (this.params[name][i].val().indexOf(value) > -1) {
+									indices.push(i);
+								}
+							}
+							return indices.length ? indices : false;
+						}
+						else {
+							if (AjaxSolr.equals(this.params[name].val(), value)) {
+								return name;
+							}
+						}
+					}
+					return false;
+				},
+
 				/**
 				 * see removeByvalue function in ParameterStore
 				 */
@@ -63,21 +92,21 @@
 
 					return res;
 				},
-				
+
 				set_current_lang: function(lang){
 					this.current_lang = lang;										
 				},
-				
+
 				extract_fq_from_manager: function(){	  
 					var res = '';
 					var fq_all = this.get('fq') == null ? [] : this.get('fq');
 					return smkCommon.removeFirstFromArray(fq_all, this.fq_default);
 				},
-				
+
 				/******************************
 				 * PRIVATE FUNCTIONS
 				 * * ****************************/	
-				
+
 				/**
 				 * see remove function in ParameterStore
 				 */
@@ -117,6 +146,6 @@
 					}
 					return false;
 				}
-				
+
 			});
 }));

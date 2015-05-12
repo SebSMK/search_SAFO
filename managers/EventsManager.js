@@ -396,9 +396,12 @@
 						trigg_req = true;
 				}
 				
-			}else if (params.deselected !== undefined){    		
-				if (caller.remove(params.deselected)) //!! -> remove fq param in Manager.store
-					trigg_req = true;
+			}else if (params.deselected !== undefined){
+				var deselected =  params.deselected.split(' OR ');
+				for (var i = 0, l = deselected.length; i < l; i++) {	
+					if (caller.remove(deselected[i])) //!! -> remove fq param in Manager.store
+						trigg_req = true;
+				}
 			};    	    	
 
 			if (trigg_req){				

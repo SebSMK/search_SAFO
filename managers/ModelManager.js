@@ -156,14 +156,14 @@ var	ModelManager = {
 			return facets;
 		},
 		
-		get_facets_OR: function(){			
+		get_facets_for_search_component: function(){			
 			var facets = this.get_facets();
 			var facets_OR = {};
 			for (var i = 0, l = facets.length; i < l; i++) {	
 				if(facets[i].value !== undefined){					
 					var split = facets[i].value.split(/:(.+)?/);
 					var key = split[0];
-					var value = split[1];
+					var value = split[1].replace(/^"|"$/g, ''); // trim '"'
 					facets_OR[key] = facets_OR[key] === undefined ? value : sprintf('%s OR %s', facets_OR[key], value);  
 				} 								
 			}
