@@ -123,6 +123,21 @@ var	ModelManager = {
 			return smkCommon.isValidDataText(this.fq) ? this.fq : [];			
 		},
 		
+		get_fq_OR: function(){			
+			var fq = !smkCommon.isValidDataText(this.fq) ? [] : this.fq.slice();
+			var fq_OR = {};
+			for (var i = 0, l = fq.length; i < l; i++) {	
+				if(fq[i].value !== undefined){					
+					var split = fq[i].value.split(/:(.+)?/);
+					var key = split[0];
+					var value = split[1];
+					fq_OR[key] = fq_OR[key] === undefined ? sprintf('%s:%s', key, value) : sprintf('%s OR %s:%s', fq_OR[key], key, value);  
+				} 								
+			}
+			
+			return fq_OR;			
+		},
+		
 		get_facets: function(){						
 			var self = this;
 			var facets =  !smkCommon.isValidDataText(this.fq) ? [] : this.fq.slice();
@@ -139,6 +154,21 @@ var	ModelManager = {
 				facets.splice(index, 1);
 			
 			return facets;
+		},
+		
+		get_facets_OR: function(){			
+			var facets = this.get_facets();
+			var facets_OR = {};
+			for (var i = 0, l = facets.length; i < l; i++) {	
+				if(facets[i].value !== undefined){					
+					var split = facets[i].value.split(/:(.+)?/);
+					var key = split[0];
+					var value = split[1];
+					facets_OR[key] = facets_OR[key] === undefined ? value : sprintf('%s OR %s', facets_OR[key], value);  
+				} 								
+			}
+			
+			return facets_OR;			
 		},
 		
 		get_hasimage: function(){

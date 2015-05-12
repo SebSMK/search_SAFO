@@ -55,22 +55,19 @@
 		},
 
 		update_filters: function(){
-
-			var facets = ModelManager.get_facets();
+			var self = this;
+			var facets = ModelManager.get_facets_OR();
 
 			// remove all filters
 			this.removeAllSelectedFilters();
 
-			// add current filters
+			// add current filters 
 			if (facets !== undefined){
-				// add selected filters in searchFiltersWidget
-				for (var i = 0, l = facets.length; i < l; i++) {
-					if(facets[i].value !== undefined){
-						var field = facets[i].value.split(':')[0]; 
-						if(field == this.field)
-							this.addSelectedFilter(facets[i].value.split(':')[1]);						
-					}															
-				}			    			
+				
+				$.each( facets, function( key, value ) {
+					if(key == self.field)
+						self.addSelectedFilter(value);		 					
+				});	    			
 			}			
 		},
 
@@ -169,22 +166,23 @@
 
 					var arttype_hierarchi = self.manager.translator.getLabel('arttype_hierarchi');		
 					var parent = self.getParentType(arttype_hierarchi, facet.trim());
-					var nodevalue = parent != null ? self.getNodeValue(arttype_hierarchi, parent.id) : null;
-					var request = parent != null ? self.getParentRequest(arttype_hierarchi[parent], parent.id) : null;										
-
-					if(smkCommon.isValidDataText(facet)){
-						objectedItems.push({ "value": facet, "text": smkCommon.firstCapital(facet).trim(), "count": count, "i": i }); 
-						i++;
+					if(parent == null || parent.id === undefined){
+						var nodevalue = self.getNodeValue(arttype_hierarchi, facet.trim());
+						var request = [facet];
+						jQuery.merge(request, self.getAllValuesFromNode({value:nodevalue}));	
+						if(smkCommon.isValidDataText(facet)){
+							objectedItems.push({ "value": request.join(' OR '), "text": smkCommon.firstCapital(facet).trim(), "i": i }); 
+							i++;
+						}
 					}
-
 				};
 				totalCount = i;
-				objectedItems.sort(function (a, b) {
-					if (self.manager.translator.getLanguage() == 'dk')
-						return typeof (a.value === 'string') && typeof (b.value === 'string') ? (a.value.trim() < b.value.trim() ? -1 : 1) : (a.value < b.value ? -1 : 1);
-
-						return typeof (a.text === 'string') && typeof (b.text === 'string') ? (a.text.trim() < b.text.trim() ? -1 : 1) : (a.text < b.text ? -1 : 1);
-				});	  	 		  	  
+//				objectedItems.sort(function (a, b) {
+//					if (self.manager.translator.getLanguage() == 'dk')
+//						return typeof (a.value === 'string') && typeof (b.value === 'string') ? (a.value.trim() < b.value.trim() ? -1 : 1) : (a.value < b.value ? -1 : 1);
+//
+//						return typeof (a.text === 'string') && typeof (b.text === 'string') ? (a.text.trim() < b.text.trim() ? -1 : 1) : (a.text < b.text ? -1 : 1);
+//				});	  	 		  	  
 				break;		
 
 			default:		    			  			   							  
@@ -369,52 +367,52 @@
 				return this.getParentType(tree.value, childNode);
 			}
 		},
-		
-		getNodeValue: function(tree, nodeId){
+
+		getNodeValue: function(treeRoot, nodeId){
 			var i, res;
-			if (!tree || !tree.value) {
+			if (!treeRoot || !treeRoot.value) {
 				return false;
 			}
-						
-			if(tree.id == nodeId){				
-				res = true;
-			}else{
-				if( Object.prototype.toString.call(tree.value) === '[object Array]' ) {
-					for (i in tree.value) {
-						if(this.getNodeValue({'value' : tree.value[i].value}, nodeId)){
-							return tree.value[i][tree.value[i].id].value;
-						}													
-					}										
+
+			for (i in treeRoot.value) {
+				var tree = treeRoot.value[i];
+				if(tree.id == nodeId){				
+					return tree.value;
+				}else{
+					if(tree.value !== undefined && jQuery.isArray(tree.value)){
+						res = this.getNodeValue({'value' : tree.value}, nodeId);
+						if(res)
+							return res;
+					}													
 				}
 			}
-			
-			return res;
-			
+
+			return false;
 		},
-		
-		
-		getParentRequest: function (tree, parentNode)
-		{
-			var i, res;
-			if (!tree || !tree.value) {
-				return null;
+
+
+		getAllValuesFromNode: function(treeRoot){
+			var i;
+			var res = [];
+			if (!treeRoot || !treeRoot.value) {
+				return false;
 			}
-			
-			if( tree.value === undefined) {				
-				res = tree.id;								
-			}else{
-				if( Object.prototype.toString.call(tree.value) === '[object Array]' ) {
-					for (i in tree.value) {
-						res += ' OR ' + this.getParentRequest({'value' : tree.value[i]}, tree.value[i].id);													
-					}
-					
-					res += ' OR ' + tree.id;					
+
+			for (i in treeRoot.value) {
+				var tree = treeRoot.value[i];
+
+				if(tree.value === undefined){				
+					res.push(tree.id);
+				}else{
+					var subres = this.getAllValuesFromNode({'value' : tree.value});
+					if(subres)
+						jQuery.merge(res, subres);
 				}
 			}
-			
+
 			return res;
 		}
-		
+
 	});
 
 })(jQuery);

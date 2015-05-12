@@ -175,11 +175,17 @@
 			if (model.view != 'detail')				
 				Manager.store.addByValue('fq', Manager.store.fq_default);			
 
-			if(model.fq !== undefined && AjaxSolr.isArray(model.fq)){
-				for (var i = 0, l = model.fq.length; i < l; i++) {						
-					Manager.store.addByValue('fq', model.fq[i].value, model.fq[i].locals);
-				};											
-			};	
+			var fq = ModelManager.get_fq_OR();
+			
+			jQuery.each(fq, function(key, value) {
+				  Manager.store.addByValue('fq', value);
+			});
+			
+//			if(model.fq !== undefined && AjaxSolr.isArray(model.fq)){
+//				for (var i = 0, l = model.fq.length; i < l; i++) {						
+//					Manager.store.addByValue('fq', model.fq[i].value, model.fq[i].locals);
+//				};											
+//			};	
 
 			// qf param
 			if(model.view != "detail")
@@ -384,8 +390,12 @@
 			var trigg_req = false;
 
 			if (params.selected !== undefined){
-				if (caller.add(params.selected)) //!! -> add fq param in Manager.store
-					trigg_req = true;
+				var selected =  params.selected.split(' OR ');
+				for (var i = 0, l = selected.length; i < l; i++) {	
+					if (caller.add(selected[i])) //!! -> add fq param in Manager.store
+						trigg_req = true;
+				}
+				
 			}else if (params.deselected !== undefined){    		
 				if (caller.remove(params.deselected)) //!! -> remove fq param in Manager.store
 					trigg_req = true;
