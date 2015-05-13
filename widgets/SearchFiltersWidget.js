@@ -56,18 +56,18 @@
 
 		update_filters: function(){
 			var self = this;
-			var facets = ModelManager.get_facets_for_search_component();
+			var facets = ModelManager.get_facets_lab_for_search_component();
 
 			// remove all filters
 			this.removeAllSelectedFilters();
 
 			// add current filters 
-			if (facets !== undefined){
-				
-				$.each( facets, function( key, value ) {
-					if(key == self.field)
-						self.addSelectedFilter(value);		 					
-				});	    			
+			if (facets !== undefined){	
+				for (var i = 0, l = facets.length; i < l; i++) {
+					if(facets[i].id == self.field)
+						self.addSelectedFilter(facets[i]);						
+				}
+							
 			}			
 		},
 
@@ -227,15 +227,19 @@
 				if (objectedItems.length == 0){
 					for (var i = 0, l = self.previous_values[self.field].length; i < l; i++) {
 						var facet = self.previous_values[self.field][i];
-						objectedItems.push({ "value": facet, "text": smkCommon.firstCapital(facet), "count": '0' });					
+						objectedItems.push({ "value": facet.value, "text": smkCommon.firstCapital(facet.text), "count": '0' });					
 					}	
 					var json_data = {"options" : new Array({title:this.title, values:objectedItems})};	    	    	    
 					var html = self.template_integration_json(json_data, '#chosenTemplate');
 					$select.append($(html).find('option'));
 				}
 
-				// add previous selected values 
-				$(this.target).find('select').val(self.previous_values[self.field]); 	
+				// add previous selected values
+				var previous_val = [];
+				for (var i = 0, l = self.previous_values[self.field].length; i < l; i++) {
+					previous_val.push(self.previous_values[self.field][i].value);					
+				}
+				$(this.target).find('select').val(previous_val); 	
 
 			}			
 
@@ -323,8 +327,9 @@
 			return html;
 		},
 
-		addSelectedFilter: function (value){	 
-			this.previous_values[this.field].push(value.replace(/^"|"$/g, ''));
+		addSelectedFilter: function (filter){	 
+			filter.text.replace(/^"|"$/g, '');
+			this.previous_values[filter.id].push(filter);
 		},
 
 		removeAllSelectedFilters: function(){

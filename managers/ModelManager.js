@@ -156,19 +156,23 @@ var	ModelManager = {
 			return facets;
 		},
 		
-		get_facets_for_search_component: function(){			
+		get_facets_lab_for_search_component: function(){			
 			var facets = this.get_facets();
-			var facets_OR = {};
+			var facets_text = {};
+			var facets_req = {};
+			var facets_data = [];
 			for (var i = 0, l = facets.length; i < l; i++) {	
 				if(facets[i].value !== undefined){					
 					var split = facets[i].value.split(/:(.+)?/);
-					var key = split[0];
-					var value = sprintf('%s:%s', key, split[1].replace(/^"|"$/g, '')); // trim '"'
-					facets_OR[key] = facets_OR[key] === undefined ? value : sprintf('%s OR %s', facets_OR[key], value);  
+					var key = split[0];					
+					var text = split[1].split(' OR ')[0].replace(/^"|"$/g, ''); // trim '"'					
+					//facets_req[key] = facets_req[key] === undefined ? facets[i].value : facets_req[key];
+					facets[i]['text'] = facets[i]['text']  === undefined ? text : facets[i]['text'] ;
+					facets[i]['id'] = facets[i]['id']  === undefined ? key : facets[i]['id'] ;
 				} 								
 			}
 			
-			return facets_OR;			
+			return facets;			
 		},
 		
 		get_hasimage: function(){
