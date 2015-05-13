@@ -175,17 +175,17 @@
 			if (model.view != 'detail')				
 				Manager.store.addByValue('fq', Manager.store.fq_default);			
 
-			var fq = ModelManager.get_fq_OR();
+//			var fq = ModelManager.get_fq_OR();
 
-			jQuery.each(fq, function(key, value) {
-				Manager.store.addByValue('fq', value);
-			});
+//			jQuery.each(fq, function(key, value) {
+//			Manager.store.addByValue('fq', value);
+//			});
 
-//			if(model.fq !== undefined && AjaxSolr.isArray(model.fq)){
-//			for (var i = 0, l = model.fq.length; i < l; i++) {						
-//			Manager.store.addByValue('fq', model.fq[i].value, model.fq[i].locals);
-//			};											
-//			};	
+			if(model.fq !== undefined && AjaxSolr.isArray(model.fq)){
+				for (var i = 0, l = model.fq.length; i < l; i++) {						
+					Manager.store.addByValue('fq', model.fq[i].value, model.fq[i].locals);
+				};											
+			};	
 
 			// qf param
 			if(model.view != "detail")

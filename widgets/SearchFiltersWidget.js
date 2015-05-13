@@ -22,7 +22,8 @@
 
 			//* init 'chosen' plugin			
 			$target.find('select').chosen({				
-				disable_search_threshold: 10,			        
+				disable_search_threshold: 10,	
+				no_results_text: "Oops, nothing found!",
 				width: "100%",
 				disable_search: !0,
 				// When set to true, Chosen will not display the search field (single selects only).
@@ -418,7 +419,9 @@
 			return res;
 		},
 		
-		formatRequest: function(facet){			
+		formatRequest: function(facet){	
+			if(facet.indexOf(' ') > 0)
+				facet = sprintf('"%s"', facet);
 			return sprintf('%s:%s', this.field, facet);						
 		}
 

@@ -123,20 +123,20 @@ var	ModelManager = {
 			return smkCommon.isValidDataText(this.fq) ? this.fq : [];			
 		},
 		
-		get_fq_OR: function(){			
-			var fq = !smkCommon.isValidDataText(this.fq) ? [] : this.fq.slice();
-			var fq_OR = {};
-			for (var i = 0, l = fq.length; i < l; i++) {	
-				if(fq[i].value !== undefined){					
-					var split = fq[i].value.split(/:(.+)?/);
-					var key = split[0];
-					var value = split[1];
-					fq_OR[key] = fq_OR[key] === undefined ? sprintf('%s:%s', key, value) : sprintf('%s OR %s:%s', fq_OR[key], key, value);  
-				} 								
-			}
-			
-			return fq_OR;			
-		},
+//		get_fq_OR: function(){			
+//			var fq = !smkCommon.isValidDataText(this.fq) ? [] : this.fq.slice();
+//			var fq_OR = {};
+//			for (var i = 0, l = fq.length; i < l; i++) {	
+//				if(fq[i].value !== undefined){					
+//					var split = fq[i].value.split(/:(.+)?/);
+//					var key = split[0];
+//					var value = split[1];
+//					fq_OR[key] = fq_OR[key] === undefined ? sprintf('%s:%s', key, value) : sprintf('%s OR %s:%s', fq_OR[key], key, value);  
+//				} 								
+//			}
+//			
+//			return fq_OR;			
+//		},
 		
 		get_facets: function(){						
 			var self = this;
