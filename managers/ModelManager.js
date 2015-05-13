@@ -163,7 +163,7 @@ var	ModelManager = {
 				if(facets[i].value !== undefined){					
 					var split = facets[i].value.split(/:(.+)?/);
 					var key = split[0];
-					var value = split[1].replace(/^"|"$/g, ''); // trim '"'
+					var value = sprintf('%s:%s', key, split[1].replace(/^"|"$/g, '')); // trim '"'
 					facets_OR[key] = facets_OR[key] === undefined ? value : sprintf('%s OR %s', facets_OR[key], value);  
 				} 								
 			}

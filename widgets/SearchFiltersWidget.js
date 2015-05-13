@@ -121,7 +121,7 @@
 					var datefirst_facet = new Date(first_facet);
 					var text = sprintf("%s %s",  self.manager.translator.getLabel("search_filter_before"), this.getCentury(datefirst_facet.getFullYear()));
 
-					objectedItems.push({ "value": sprintf("[* TO %s]", first_facet), "text": text, "count": count, "i": i });
+					objectedItems.push({ "value": self.formatRequest(sprintf("[* TO %s]", first_facet)), "text": text, "count": count, "i": i });
 					i++;
 				}
 
@@ -142,7 +142,7 @@
 					};
 
 					if(smkCommon.isValidDataText(facet)){
-						objectedItems.push({ "value": facet, "text": smkCommon.firstCapital(facet).trim(), "count": count, "i": i }); 
+						objectedItems.push({ "value": self.formatRequest(facet), "text": smkCommon.firstCapital(facet).trim(), "count": count, "i": i }); 
 						i++;
 					}
 
@@ -168,8 +168,8 @@
 					var parent = self.getParentType(arttype_hierarchi, facet.trim());
 					if(parent == null || parent.id === undefined){
 						var nodevalue = self.getNodeValue(arttype_hierarchi, facet.trim());
-						var request = [facet];
-						jQuery.merge(request, self.getAllValuesFromNode({value:nodevalue}));	
+						var request = [self.formatRequest(facet)];
+						jQuery.merge(request, self.getSubRequestFromNode({value:nodevalue}));	
 						if(smkCommon.isValidDataText(facet)){
 							objectedItems.push({ "value": request.join(' OR '), "text": smkCommon.firstCapital(facet).trim(), "i": i }); 
 							i++;
@@ -192,7 +192,7 @@
 						maxCount = count;
 					};
 
-					objectedItems.push({ "value": facet, "text": smkCommon.firstCapital(facet).trim(), "count": count, "i": i }); 
+					objectedItems.push({ "value": self.formatRequest(facet), "text": smkCommon.firstCapital(facet).trim(), "count": count, "i": i }); 
 					i++;	    	  	  	      	  	      
 				};
 				totalCount = i;
@@ -391,7 +391,7 @@
 		},
 
 
-		getAllValuesFromNode: function(treeRoot){
+		getSubRequestFromNode: function(treeRoot){
 			var i;
 			var res = [];
 			if (!treeRoot || !treeRoot.value) {
@@ -402,15 +402,19 @@
 				var tree = treeRoot.value[i];
 
 				if(tree.value === undefined){				
-					res.push(tree.id);
+					res.push(this.formatRequest(tree.id));
 				}else{
-					var subres = this.getAllValuesFromNode({'value' : tree.value});
+					var subres = this.getSubRequestFromNode({'value' : tree.value});
 					if(subres)
 						jQuery.merge(res, subres);
 				}
 			}
 
 			return res;
+		},
+		
+		formatRequest: function(facet){			
+			return sprintf('%s:%s', this.field, facet);						
 		}
 
 	});

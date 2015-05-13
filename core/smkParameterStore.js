@@ -97,7 +97,7 @@
 					this.current_lang = lang;										
 				},
 
-				extract_fq_from_manager: function(){	  
+				extract_fq_without_default: function(){	  
 					var res = '';
 					var fq_all = this.get('fq') == null ? [] : this.get('fq');
 					return smkCommon.removeFirstFromArray(fq_all, this.fq_default);

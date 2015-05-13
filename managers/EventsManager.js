@@ -388,26 +388,28 @@
 		this.smk_search_filter_changed = function (caller, params){
 
 			var trigg_req = false;
+			
+			ViewManager.callWidgetFn('currentsearch', 'setRefresh', {params: [false]});
 
 			if (params.selected !== undefined){
 				var selected =  params.selected.split(' OR ');
 				for (var i = 0, l = selected.length; i < l; i++) {	
-					if (caller.add(selected[i])) //!! -> add fq param in Manager.store
+					if (Manager.store.addByValue('fq', selected[i])) //!! -> add fq param in Manager.store
 						trigg_req = true;
 				}
 				
 			}else if (params.deselected !== undefined){
 				var deselected =  params.deselected.split(' OR ');
 				for (var i = 0, l = deselected.length; i < l; i++) {	
-					if (caller.remove(deselected[i])) //!! -> remove fq param in Manager.store
+					if (Manager.store.removeByValue('fq', deselected[i])) //!! -> remove fq param in Manager.store
 						trigg_req = true;
 				}
-			};    	    	
-
-			if (trigg_req){				
-				ViewManager.callWidgetFn('currentsearch', 'setRefresh', {params: [false]});
-
-				var fqvalue = Manager.store.extract_fq_from_manager();	
+			};    
+			
+			if (trigg_req){	
+			
+				var fqvalue = Manager.store.extract_fq_without_default();	
+			
 				var model = {};				
 				model.fq = fqvalue;
 				model.q = ModelManager.current_value_joker;
@@ -415,9 +417,41 @@
 				model.view = ModelManager.current_value_joker;
 				model.category = ModelManager.current_value_joker;
 				model.lang = ModelManager.current_value_joker;
-
+	
 				ModelManager.update(model);
 			}
+			
+//			var trigg_req = false;
+//
+//			if (params.selected !== undefined){
+//				var selected =  params.selected.split(' OR ');
+//				for (var i = 0, l = selected.length; i < l; i++) {	
+//					if (caller.add(selected[i])) //!! -> add fq param in Manager.store
+//						trigg_req = true;
+//				}
+//				
+//			}else if (params.deselected !== undefined){
+//				var deselected =  params.deselected.split(' OR ');
+//				for (var i = 0, l = deselected.length; i < l; i++) {	
+//					if (caller.remove(deselected[i])) //!! -> remove fq param in Manager.store
+//						trigg_req = true;
+//				}
+//			};    	    	
+//
+//			if (trigg_req){				
+//				ViewManager.callWidgetFn('currentsearch', 'setRefresh', {params: [false]});
+//
+//				var fqvalue = Manager.store.extract_fq_without_default();	
+//				var model = {};				
+//				model.fq = fqvalue;
+//				model.q = ModelManager.current_value_joker;
+//				model.sort = ModelManager.current_value_joker;
+//				model.view = ModelManager.current_value_joker;
+//				model.category = ModelManager.current_value_joker;
+//				model.lang = ModelManager.current_value_joker;
+//
+//				ModelManager.update(model);
+//			}
 		};
 
 		/*
