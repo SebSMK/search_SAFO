@@ -233,23 +233,23 @@
 		 * current page changed
 		 * @result:  model update
 		 * */
-		this.smk_search_pager_changed = function(start, searchFieldsTypes){			
-//			ViewManager.callWidgetFn('currentsearch', 'setRefresh', {params: [false]});
-//			ViewManager.callWidgetFn('category', 'setRefresh', {params: [false]});
-			for (var i = 0, l = searchFieldsTypes.length; i < l; i++) {				
-				ViewManager.callWidgetFn(searchFieldsTypes[i], 'setRefresh', {params: [false]});
-			};			
-
-			var model = {};
-			model.q = ModelManager.current_value_joker;
-			model.fq = ModelManager.current_value_joker;
-			model.start = start;
-			model.sort = ModelManager.current_value_joker;
-			model.category = ModelManager.current_value_joker;
-			model.lang = ModelManager.current_value_joker;
-
-			ModelManager.update(model);
-		};
+//		this.smk_search_pager_changed = function(start, searchFieldsTypes){			
+////			ViewManager.callWidgetFn('currentsearch', 'setRefresh', {params: [false]});
+////			ViewManager.callWidgetFn('category', 'setRefresh', {params: [false]});
+//			for (var i = 0, l = searchFieldsTypes.length; i < l; i++) {				
+//				ViewManager.callWidgetFn(searchFieldsTypes[i], 'setRefresh', {params: [false]});
+//			};			
+//
+//			var model = {};
+//			model.q = ModelManager.current_value_joker;
+//			model.fq = ModelManager.current_value_joker;
+//			model.start = start;
+//			model.sort = ModelManager.current_value_joker;
+//			model.category = ModelManager.current_value_joker;
+//			model.lang = ModelManager.current_value_joker;
+//
+//			ModelManager.update(model);
+//		};
 
 //		/*
 //		* Category changed
@@ -276,7 +276,7 @@
 
 
 		/*
-		 * Checkbox changed
+		 * Checkbox changed (has image)
 		 * @result:  model update 
 		 * */
 		this.smk_checkbox_changed = function(value){
@@ -487,7 +487,7 @@
 			model.lang = lang;
 			model.sort = ModelManager.current_value_joker;
 			model.q = ModelManager.current_value_joker;
-			model.fq = ModelManager.current_value_joker;	
+			//model.fq = ModelManager.current_value_joker;	
 			model.view = ModelManager.current_value_joker;
 			model.category = ModelManager.current_value_joker;
 

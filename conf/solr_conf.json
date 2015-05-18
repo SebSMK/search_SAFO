@@ -86,7 +86,7 @@
                      "gap":"+100YEARS",
                      "other":"before"
                   },
-                  "lang":"dk"
+                  "lang":"en dk"
                },
                {
                   "id":"collection",
@@ -136,7 +136,7 @@
       "qf"
    ],
    
-   "fq_default":"-(id:(*verso))",
+   "fq_default":"-(id:(*verso)) -(medium_image_url:[* TO *])",
    "fq_default_debug":"-(id:(*/*)) -(id:(*verso)) -(medium_image_url:[* TO *])",
    "fq_default_prod":"-(id:(*verso))",
    
