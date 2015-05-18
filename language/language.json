@@ -914,7 +914,406 @@
 	  "teaser_event_date":		"dato",
 	  "teaser_date_lab":		"date",
 	  
-	  "thumbs_label":	 		"associated works"  		
+	  "thumbs_label":	 		"associated works",
+	  							
+	  "arttype_hierarchi":	  {
+									   "value":[
+									      {
+									         "id":"Collage",
+									         "value":[
+									            {
+									               "id":"Collage-painting"
+									            },
+									            {
+									               "id":"Décollage"
+									            }
+									         ]
+									      },
+									      {
+									         "id":"Film/video/sound/computer",
+									         "value":[
+									            {
+									               "id":"Video"
+									            }
+									         ]
+									      },
+									      {
+									         "id":"Installation",
+									         "value":[
+									            {
+									               "id":"Audio-visuel"
+									            },
+									            {
+									               "id":"Wall piece"
+									            }
+									         ]
+									      },
+									      {
+									         "id":"Drawing",
+									         "value":[
+									            {
+									               "id":"Pencil"
+									            },
+									            {
+									               "id":"Chalk"
+									            },
+									            {
+									               "id":"Crayon"
+									            },
+									            {
+									               "id":"Pastel crayon"
+									            },
+									            {
+									               "id":"Charcoal"
+									            },
+									            {
+									               "id":"Pen"
+									            },
+									            {
+									               "id":"Brush"
+									            },
+									            {
+									               "id":"Silverpoint"
+									            }
+									         ]
+									      },
+									      {
+									         "id":"Sculpture",
+									         "value":[
+									            {
+									               "id":"Altar"
+									            },
+									            {
+									               "id":"Alterpiece"
+									            },
+									            {
+									               "id":"Predella"
+									            },
+									            {
+									               "id":"Ciborium"
+									            },
+									            {
+									               "id":"Sculpture related to architecture"
+									            },
+									            {
+									               "id":"Canopy"
+									            },
+									            {
+									               "id":"Overdoor"
+									            },
+									            {
+									               "id":"Consol"
+									            },
+									            {
+									               "id":"Podium"
+									            },
+									            {
+									               "id":"Spout"
+									            },
+									            {
+									               "id":"Column"
+									            },
+									            {
+									               "id":"Capital"
+									            },
+									            {
+									               "id":"Base of a column"
+									            },
+									            {
+									               "id":"Tympanum"
+									            },
+									            {
+									               "id":"Sculpture in the round"
+									            },
+									            {
+									               "id":"Ash-chest"
+									            },
+									            {
+									               "id":"Assemblage (sculpture)"
+									            },
+									            {
+									               "id":"Bust"
+									            },
+									            {
+									               "id":"Font (babtismal)"
+									            },
+									            {
+									               "id":"Half figure"
+									            },
+									            {
+									               "id":"Herm"
+									            },
+									            {
+									               "id":"Head (representation)"
+									            },
+									            {
+									               "id":"Kinetic"
+									            },
+									            {
+									               "id":"Crucifix"
+									            },
+									            {
+									               "id":"Mask"
+									            },
+									            {
+									               "id":"Mobile"
+									            },
+									            {
+									               "id":"Equestrian statue"
+									            },
+									            {
+									               "id":"Equestrian statuette"
+									            },
+									            {
+									               "id":"Pedestal"
+									            },
+									            {
+									               "id":"Statue"
+									            },
+									            {
+									               "id":"Kore"
+									            },
+									            {
+									               "id":"Kouros"
+									            },
+									            {
+									               "id":"Sphinx"
+									            },
+									            {
+									               "id":"Torso"
+									            },
+									            {
+									               "id":"Statues"
+									            },
+									            {
+									               "id":"Figurine/statuette"
+									            },
+									            {
+									               "id":"Figurines/statuettes"
+									            },
+									            {
+									               "id":"Vase"
+									            },
+									            {            
+									               "id":"Holy-water font"
+									            },
+									            {
+									               "id":"Monument"
+									            },
+									            {
+									               "id":"Sepulchral monument"
+									            },
+									            {
+									               "id":"Obelisk"
+									            },
+									            {
+									               "id":"Stele/stelae"
+									            },
+									            {
+									               "id":"Object"
+									            },
+									            {
+									               "id":"Objet trouvé"
+									            },
+									            {
+									               "id":"Relief"
+									            },
+									            {
+									               "id":"Book cover"
+									            },
+									            {
+									               "id":"Diptych"
+									            },
+									            {
+									               "id":"Discus"
+									            },
+									            {
+									               "id":"Frieze"
+									            },
+									            {
+									               "id":"Cameo"
+									            },
+									            {
+									               "id":"Medal"
+									            },
+									            {
+									               "id":"Medallion (medal)"
+									            },
+									            {
+									               "id":"Coin"
+									            },
+									            {
+									               "id":"Plaquette"
+									            },
+									            {
+									               "id":"Seal"
+									            },
+									            {
+									               "id":"Signet"
+									            },
+									            {
+									               "id":"Mirror case"
+									            },
+									            {
+									               "id":"Table"
+									            }
+									         ]
+									      },
+									      {
+									         "id":"Decorative arts",
+									         "value":[
+									            {
+									               "id":"Books"
+									            },
+									            {
+									               "id":"Ceramics"
+									            },
+									            {
+									               "id":"Textil"
+									            },
+									            {
+									               "id":"Tapestry"
+									            }
+									         ]
+									      },
+									      {
+									         "id":"Painting",
+									         "value":[
+									            {
+									               "id":"Alterpiece"
+									            },
+									            {
+									               "id":"Predella"
+									            },
+									            {
+									               "id":"Arkitekturrelateret maleri"
+									            },
+									            {
+									               "id":"Overdoor"
+									            },
+									            {
+									               "id":"Ceiling painting"
+									            },
+									            {
+									               "id":"Mural painting"
+									            },
+									            {
+									               "id":"Cassone"
+									            },
+									            {
+									               "id":"Icon"
+									            },
+									            {
+									               "id":"Miniatures"
+									            }
+									         ]
+									      },
+									      {
+									         "id":"Print",
+									         "value":[
+									            {
+									               "id":"Intaglio printing"
+									            },
+									            {
+									               "id":"Aquatint"
+									            },
+									            {
+									               "id":"Crayon manner"
+									            },
+									            {
+									               "id":"Photogravure-heliogravure"
+									            },
+									            {
+									               "id":"Engraving"
+									            },
+									            {
+									               "id":"Mezzotint"
+									            },
+									            {
+									               "id":"Etching"
+									            },
+									            {
+									               "id":"Drypoint"
+									            },
+									            {
+									               "id":"Etching"
+									            },
+									            {
+									               "id":"Line block"
+									            },
+									            {
+									               "id":"Silverpoint"
+									            },
+									            {
+									               "id":"Vernis mou"
+									            },
+									            {
+									               "id":"Zinkography"
+									            },
+									            {
+									               "id":"Zinc engraving"
+									            },
+									            {
+									               "id":"Relief printing"
+									            },
+									            {
+									               "id":"Line block"
+									            },
+									            {
+									               "id":"Linocut"
+									            },
+									            {
+									               "id":"Metalcut"
+									            },
+									            {
+									               "id":"Relief etching"
+									            },
+									            {
+									               "id":"Woodcut"
+									            },
+									            {
+									               "id":"Chiaroscuro woodcut"
+									            },
+									            {
+									               "id":"Xylography"
+									            },
+									            {
+									               "id":"Planographic printing"
+									            },
+									            {
+									               "id":"Transfer lithography"
+									            },
+									            {
+									               "id":"Computer print"
+									            },
+									            {
+									               "id":"Lithography"
+									            },									            
+									            {
+									               "id":"Collotype"
+									            },
+									            {
+									               "id":"Monotype"
+									            },
+									            {
+									               "id":"Offset lithography"
+									            },
+									            {
+									               "id":"Oleograph"
+									            },
+									            {
+									               "id":"Serigraphy"
+									            },
+									            {
+									               "id":"Photo serigraphy"
+									            },
+									            {
+									               "id":"Stencil print"
+									            }
+									         ]
+									      }
+									   ]
+									}  		
     }
   },
   

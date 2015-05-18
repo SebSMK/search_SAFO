@@ -169,7 +169,7 @@
 
 					var arttype_hierarchi = self.manager.translator.getLabel('arttype_hierarchi');							
 					var parent =  self.getParentType(arttype_hierarchi, facet.trim());
-					var root_category = parent != null && parent.id !== undefined ? parent.id : facet;
+					var root_category = parent != null && parent.id !== undefined ? parent.id : facet.trim();
 					// iterate the object_type tree until we find a root category
 					while (parent != null && parent.id !== undefined){
 						root_category = parent.id;

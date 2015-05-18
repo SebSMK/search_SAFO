@@ -135,7 +135,11 @@
       "sort",
       "qf"
    ],
-   "fq_default":"-(id:(*/*)) -(id:(*verso)) -(medium_image_url:[* TO *])",
+   
+   "fq_default":"-(id:(*verso))",
+   "fq_default_debug":"-(id:(*/*)) -(id:(*verso)) -(medium_image_url:[* TO *])",
+   "fq_default_prod":"-(id:(*verso))",
+   
    "q_default":"*:*",
    "sort_default":"score desc",
    "fl_options":{
