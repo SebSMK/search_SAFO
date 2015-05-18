@@ -68,7 +68,7 @@
 					if(facets[i].id == self.field)
 						self.addSelectedFilter(facets[i]);						
 				}
-							
+
 			}			
 		},
 
@@ -159,31 +159,46 @@
 
 			case 'object_type_dk':
 			case 'object_type_en':
+
+				var root_categories = {};
 				for (var facet in self.manager.response.facet_counts.facet_fields[self.field]) {
 					var count = parseInt(self.manager.response.facet_counts.facet_fields[self.field][facet]);
 					if (count > maxCount) {
 						maxCount = count;
 					};
 
-					var arttype_hierarchi = self.manager.translator.getLabel('arttype_hierarchi');		
-					var parent = self.getParentType(arttype_hierarchi, facet.trim());
-					if(parent == null || parent.id === undefined){
-						var nodevalue = self.getNodeValue(arttype_hierarchi, facet.trim());
-						var request = [self.formatRequest(facet)];
-						jQuery.merge(request, self.getSubRequestFromNode({value:nodevalue}));	
-						if(smkCommon.isValidDataText(facet)){
-							objectedItems.push({ "value": request.join(' OR '), "text": smkCommon.firstCapital(facet).trim(), "i": i }); 
-							i++;
-						}
+					var arttype_hierarchi = self.manager.translator.getLabel('arttype_hierarchi');							
+					var parent =  self.getParentType(arttype_hierarchi, facet.trim());
+					var root_category = parent != null && parent.id !== undefined ? parent.id : facet;
+					// iterate the object_type tree until we find a root category
+					while (parent != null && parent.id !== undefined){
+						root_category = parent.id;
+						parent = self.getParentType(arttype_hierarchi, parent.id.trim());
 					}
+
+					// save root category
+					if (root_categories[root_category] === undefined) root_categories[root_category] = true;
 				};
+
+				// iterate root categories and create the list of facets
+				$.each(root_categories, function( facet, value ) {
+					var nodevalue = self.getNodeValue(arttype_hierarchi, facet.trim());
+					var request = [self.formatRequest(facet)];
+					jQuery.merge(request, self.getSubRequestFromNode({value:nodevalue}));			
+					if(smkCommon.isValidDataText(facet)){
+						objectedItems.push({ "value": request.join(' OR '), "text": smkCommon.firstCapital(facet).trim(), "i": i }); 
+						i++;
+					}
+				});
+
 				totalCount = i;
-//				objectedItems.sort(function (a, b) {
-//					if (self.manager.translator.getLanguage() == 'dk')
-//						return typeof (a.value === 'string') && typeof (b.value === 'string') ? (a.value.trim() < b.value.trim() ? -1 : 1) : (a.value < b.value ? -1 : 1);
-//
-//						return typeof (a.text === 'string') && typeof (b.text === 'string') ? (a.text.trim() < b.text.trim() ? -1 : 1) : (a.text < b.text ? -1 : 1);
-//				});	  	 		  	  
+
+				objectedItems.sort(function (a, b) {
+					if (self.manager.translator.getLanguage() == 'dk')
+						return typeof (a.value === 'string') && typeof (b.value === 'string') ? (a.value.trim() < b.value.trim() ? -1 : 1) : (a.value < b.value ? -1 : 1);
+
+						return typeof (a.text === 'string') && typeof (b.text === 'string') ? (a.text.trim() < b.text.trim() ? -1 : 1) : (a.text < b.text ? -1 : 1);
+				});	  	 		  	  
 				break;		
 
 			default:		    			  			   							  
@@ -418,7 +433,7 @@
 
 			return res;
 		},
-		
+
 		formatRequest: function(facet){	
 			if(facet.indexOf(' ') > 0)
 				facet = sprintf('"%s"', facet);
