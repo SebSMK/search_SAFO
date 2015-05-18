@@ -2,12 +2,14 @@
 	<script id="chosenTemplate" type="text/template">
 	{{#options}}
 	<div class="filter-group-pair">
-		<label for="{{title}}">{{title}}</label> <select multiple=""
+		<label for="{{title}}">{{title}}</label> 
+		<select multiple=""
 			data-placeholder="{{{search_lab}}}" class="chosen-select"
 			id="{{target_drop_id}}">
-			<option value=""></option> {{#values}}
-			<option value="{{value}}">{{{text}}}
-				{{#count}}({{count}}){{/count}}</option> {{/values}}
+			<option value=""></option> 
+			{{#values}}
+			<option value="{{value}}">{{{text}}} {{#count}}({{count}}){{/count}}</option> 
+			{{/values}}
 		</select>
 	</div>
 	{{/options}}

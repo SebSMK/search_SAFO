@@ -262,8 +262,17 @@
 			//* add behaviour on select change
 			$target.find('select').change(self.clickHandler());
 
-			//* change default text			
-			$select.attr('data-placeholder', self.manager.translator.getLabel(sprintf('search_%s_lab', this.field)));
+			//* set default text / enabling	
+			if (objectedItems.length == 0){
+				$select.attr('data-placeholder', self.manager.translator.getLabel(sprintf('search_disab_lab', this.field)));
+				$select.prop('disabled', true);
+				
+			}else{
+				$select.attr('data-placeholder', self.manager.translator.getLabel(sprintf('search_%s_lab', this.field)));
+				$select.prop('disabled', false);
+			}
+			
+			
 
 			if(smkCommon.debugTime()) console.time("SearchFilters - " + this.field + " - chosen - update");
 			//* update 'chosen' plugin		

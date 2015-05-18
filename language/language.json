@@ -49,6 +49,7 @@
 	  "search_filter_cent":		"tallet",
 	  "search_filter_before":	"før ",
       "search_data_loading":	"loading data...",
+      "search_disab_lab":		"Ingen filter",
       
       "advanced_search_panel_show": "Vise filtre",
 	  "advanced_search_panel_hide": "Skjul filtre",
@@ -704,6 +705,7 @@
 	  "search_filter_cent":		" c.",
 	  "search_filter_before":	"before ",
 	  "search_data_loading":	"loading data...",
+	  "search_disab_lab":		"No filter",
 	  
 	  "advanced_search_panel_show": "Show filters",
 	  "advanced_search_panel_hide": "Hide filters",
