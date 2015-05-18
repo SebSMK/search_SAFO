@@ -112,10 +112,12 @@
 
 					var daterange = new Date(facet);
 
-					objectedItems.push({ "value": sprintf("[%1$s TO %1$s+100YEARS]", facet), "text": this.getCentury(daterange.getFullYear()), "count": count, "i": i });
+					objectedItems.push({ "value": self.formatRequest(sprintf("[%1$s TO %1$s+100YEARS]", facet), false), "text": this.getCentury(daterange.getFullYear()), "count": count, "i": i });
 					//objectedItems.push({ "value": facet, "text": this.getCentury(daterange.getFullYear()), "count": count, "i": i });
 					i++;
 				};
+				
+				// add lower range bound
 				if (self.manager.response.facet_counts.facet_ranges[self.field].before !== undefined && self.manager.response.facet_counts.facet_ranges[self.field].before > 0){
 					var count = self.manager.response.facet_counts.facet_ranges[self.field].before;				
 					var first_facet = self.manager.response.facet_counts.facet_ranges[self.field].start;
@@ -143,7 +145,7 @@
 					};
 
 					if(smkCommon.isValidDataText(facet)){
-						objectedItems.push({ "value": self.formatRequest(facet), "text": smkCommon.firstCapital(facet).trim(), "count": count, "i": i }); 
+						objectedItems.push({ "value": self.formatRequest(facet, true), "text": smkCommon.firstCapital(facet).trim(), "count": count, "i": i }); 
 						i++;
 					}
 
@@ -183,7 +185,7 @@
 				// iterate root categories and create the list of facets
 				$.each(root_categories, function( facet, value ) {
 					var nodevalue = self.getNodeValue(arttype_hierarchi, facet.trim());
-					var request = [self.formatRequest(facet)];
+					var request = [self.formatRequest(facet, true)];
 					jQuery.merge(request, self.getSubRequestFromNode({value:nodevalue}));			
 					if(smkCommon.isValidDataText(facet)){
 						objectedItems.push({ "value": request.join(' OR '), "text": smkCommon.firstCapital(facet).trim(), "i": i }); 
@@ -208,7 +210,7 @@
 						maxCount = count;
 					};
 
-					objectedItems.push({ "value": self.formatRequest(facet), "text": smkCommon.firstCapital(facet).trim(), "count": count, "i": i }); 
+					objectedItems.push({ "value": self.formatRequest(facet, true), "text": smkCommon.firstCapital(facet).trim(), "count": count, "i": i }); 
 					i++;	    	  	  	      	  	      
 				};
 				totalCount = i;
@@ -443,8 +445,8 @@
 			return res;
 		},
 
-		formatRequest: function(facet){	
-			if(facet.indexOf(' ') > 0)
+		formatRequest: function(facet, marks){	
+			if(marks && facet.indexOf(' ') > 0)
 				facet = sprintf('"%s"', facet);
 			return sprintf('%s:%s', this.field, facet);						
 		}
