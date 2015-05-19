@@ -40,9 +40,14 @@
 				select: function(event, ui) {
 				if (ui.item) {
 					self.requestSent = true;
-					if (self.manager.store.addByValue('fq', ui.item.field + ':' + AjaxSolr.Parameter.escapeValue(ui.item.value))) {
-						self.doRequest();
-					}
+					//if (self.manager.store.addByValue('fq', ui.item.field + ':' + AjaxSolr.Parameter.escapeValue(ui.item.value))) {
+						//self.doRequest();
+						
+						$(self).trigger({
+							type: "smk_search_filter_changed",
+							params: {selected: ui.item.field + ':' + AjaxSolr.Parameter.escapeValue(ui.item.value)}
+						});   
+					//}
 				}
 			}
 			});
@@ -52,7 +57,14 @@
 				if (self.requestSent === false && e.which == 13) {
 					var value = $(this).val();
 					if (value && self.set(value)) {
-						self.doRequest();
+						//self.doRequest();
+						
+						$(self).trigger({
+							type: "smk_search_q_added",
+							val: value
+						});		
+
+						
 					}
 				}
 			});

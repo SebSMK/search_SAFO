@@ -139,7 +139,7 @@
 				Manager.store.addByValue('facet', true);
 
 				// advanced search
-				var adv_data = Manager.store.facets_default['advanced'];
+				var adv_data = Manager.store.facets_default;
 				if(adv_data !== undefined){
 					for (var i = 0, l = adv_data.length; i < l; i++) {
 						var values = [];
@@ -228,52 +228,6 @@
 		 * UI events
 		 * 
 		 * */
-
-		/*
-		 * current page changed
-		 * @result:  model update
-		 * */
-//		this.smk_search_pager_changed = function(start, searchFieldsTypes){			
-////			ViewManager.callWidgetFn('currentsearch', 'setRefresh', {params: [false]});
-////			ViewManager.callWidgetFn('category', 'setRefresh', {params: [false]});
-//			for (var i = 0, l = searchFieldsTypes.length; i < l; i++) {				
-//				ViewManager.callWidgetFn(searchFieldsTypes[i], 'setRefresh', {params: [false]});
-//			};			
-//
-//			var model = {};
-//			model.q = ModelManager.current_value_joker;
-//			model.fq = ModelManager.current_value_joker;
-//			model.start = start;
-//			model.sort = ModelManager.current_value_joker;
-//			model.category = ModelManager.current_value_joker;
-//			model.lang = ModelManager.current_value_joker;
-//
-//			ModelManager.update(model);
-//		};
-
-//		/*
-//		* Category changed
-//		* @result:  model update 
-//		* */
-//		this.smk_search_category_changed = function(event){
-
-//		var category = event.category;
-//		var view = event.view;  	  	  
-
-//		if (ViewManager.callWidgetFn('category', 'set', {params: [category]})){   				
-//		ViewManager.callWidgetFn('category', 'setActiveTab', {params: [category]});
-
-//		ViewManager.callWidgetFn('currentsearch', 'setRefresh', {params: [false]});
-
-//		var model = {};
-//		model.q = ModelManager.current_value_joker;
-//		model.category = category;
-//		model.lang = ModelManager.current_value_joker;
-
-//		ModelManager.update(model); 
-//		};
-//		};
-
 
 		/*
 		 * Checkbox changed (has image)
@@ -451,18 +405,12 @@
 		 * sorting changed
 		 * @result:  model update  
 		 * */
-		this.smk_search_sorter_changed = function(params, searchFieldsTypes){			
+		this.smk_search_sorter_changed = function(params, all_facets){			
 			if (params == undefined)																					
 				return;	  
 
-//			ViewManager.callWidgetFn('currentsearch', 'setRefresh', {params: [false]});
-
-			for (var i = 0, l = searchFieldsTypes.length; i < l; i++) {				
-				ViewManager.callWidgetFn(searchFieldsTypes[i], 'setRefresh', {params: [false]});
-			};	
-
-			for (var i = 0, l = searchFieldsTypes.length; i < l; i++) {				
-				ViewManager.callWidgetFn("adv_" + searchFieldsTypes[i], 'setRefresh', {params: [false]});
+			for (var i = 0, l = all_facets.length; i < l; i++) {				
+				ViewManager.callWidgetFn("adv_" + all_facets[i], 'setRefresh', {params: [false]});
 			};	
 
 			var sortvalue = params;
@@ -549,7 +497,7 @@
 		};	
 
 		//* all image have finished loading in "teaser"
-		this.smk_teasers_all_images_loaded = function(searchFieldsTypes){			
+		this.smk_teasers_all_images_loaded = function(all_facets){			
 			ViewManager.smk_teasers_all_images_loaded();
 			this.wigdetLoaded();
 			var self = this;
@@ -563,9 +511,9 @@
 				$.taskQueue.add(doQueue, this, 10);	
 			};
 
-			for (var i = 0, l = searchFieldsTypes.length; i < l; i++) {				
-				doQueueProcess(searchFieldsTypes[i]);
-				doQueueProcess("adv_" + searchFieldsTypes[i]);
+			for (var i = 0, l = all_facets.length; i < l; i++) {				
+				doQueueProcess(all_facets[i]);
+				doQueueProcess("adv_" + all_facets[i]);
 			};			
 		};			
 

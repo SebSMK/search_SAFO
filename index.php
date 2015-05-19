@@ -6,6 +6,7 @@
   
 
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
 	
 	<script src="js/common.smk.js" type="text/javascript"></script>
 	<script src="js/language.js" type="text/javascript"></script>
@@ -70,7 +71,7 @@
 	<script src="data/getData_Teasers.js" type="text/javascript"></script>
 	<script src="data/getData_Advanced.js" type="text/javascript"></script>			
 	
-	
+	<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/themes/smoothness/jquery-ui.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="js/fancybox/source/jquery.fancybox.css" media="all" />	
 	<link rel="stylesheet" type="text/css" href="js/backtotop/css/style.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="css/app.css" media="all" />

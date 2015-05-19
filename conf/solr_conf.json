@@ -108,6 +108,17 @@
             ]
          }
       ],
+      "autocomplete":[
+         "artist_name",         
+         "object_type_dk",
+         "object_type_en",
+         "portrait_person",
+         "topografisk_motiv",
+         "materiale",
+         "materiale_en",
+         "title_en",
+         "title_first"
+      ],
       "all":[
          "artist_name",
          "artist_auth",
@@ -136,7 +147,7 @@
       "qf"
    ],
    
-   "fq_default":"-(id:(*verso)) -(medium_image_url:[* TO *])",
+   "fq_default":"-(id:(*verso))",
    "fq_default_debug":"-(id:(*/*)) -(id:(*verso)) -(medium_image_url:[* TO *])",
    "fq_default_prod":"-(id:(*verso))",
    

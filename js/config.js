@@ -102,8 +102,22 @@
 		/*
 		 *
 		 */
-		this.get_facets = function(){
-			return this.facets;					
+		this.get_filter_facets = function(){
+			return this.facets["advanced"];					
+		};
+		
+		/*
+		 *
+		 */
+		this.get_autocomplete_facets = function(){
+			return this.facets["autocomplete"]; 			
+		};
+		
+		/*
+		 *
+		 */
+		this.get_all_facets = function(){
+			return this.facets["all"]; 			
 		};
 
 		/*

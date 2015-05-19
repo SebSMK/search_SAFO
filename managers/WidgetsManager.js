@@ -25,7 +25,10 @@ var EventsManager;
 		var qf_default = solr_conf.get_qf_default();
 		var scroll_rows_default = solr_conf.get_scroll_rows_default();
 		var rows_default = solr_conf.get_rows_default();
-		var facets_default = solr_conf.get_facets();
+		var filter_facets = solr_conf.get_filter_facets();
+		var autocomplete_facets = solr_conf.get_autocomplete_facets();		
+		var all_facets = solr_conf.get_all_facets();
+		
 		smkCommon.setMode(solr_conf.get_mode());
 		smkCommon.setVersion(solr_conf.get_version());
 
@@ -34,8 +37,7 @@ var EventsManager;
 		translator.load_json("language/language.json");	
 		translator.setLanguage(current_language);	
 
-		//** load all searchFields (in all languages)
-		var searchFieldsTypes = facets_default['all'];
+		
 
 		//** create state manager
 		ViewManager = new ViewManager.constructor({				
@@ -63,10 +65,10 @@ var EventsManager;
 				q_default: q_default,
 				qf_default: qf_default,
 				sort_default: sort_default,
-				facets_default: facets_default,
+				facets_default: filter_facets,
 				current_lang: current_language
 			}),
-			searchfilterList: searchFieldsTypes,
+			searchfilterList: all_facets,
 			allWidgetsProcessed: allWidgetsProcessedBound,
 			generalSolrError: generalSolrErrorProcessedBound,
 			translator: translator
@@ -74,21 +76,11 @@ var EventsManager;
 
 		//* set and save default request parameters                
 		var params = {
-//				'fq': Manager.store.fq_default,	
-//				'fl': Manager.store.fl_options.default,					
-//				'facet': true,
-//				'facet.field': Manager.store.facets_default[current_language],
 				'facet.limit': -1,
 				'facet.mincount': 1,
-//				'facet.range': 'object_production_date_earliest',
-//				'f.object_production_date_earliest.facet.range.start': '0000-01-01T00:00:00.001Z',
-//				'f.object_production_date_earliest.facet.range.end': 'NOW',
-//				'f.object_production_date_earliest.facet.range.gap': '+100YEARS',
 				'rows':rows_default,
 				'defType': 'edismax',      
-//				'qf': Manager.store.qf_default[current_language],
 				'start': 0,
-//				'sort': Manager.store.sort_default,
 				'json.nl': 'map'
 		};
 		for (var name in params) {
@@ -188,14 +180,14 @@ var EventsManager;
 			template: Mustache.getTemplate('templates/search_info.html')
 		}));
 
-		/*
+		
 		Manager.addWidget(new AjaxSolr.SearchBoxAutoWidget({
 			id: 'searchboxauto',
 			target: '#searchboxauto',			
 			template: Mustache.getTemplate('templates/search_box.html'),
-			fields: params["facet.field"]
+			fields: autocomplete_facets 
 		}));
-		 */
+		
 //		Manager.addWidget(new AjaxSolr.CurrentSearchWidget({
 //			id: 'currentsearch',
 //			target: '#currentsearch',
@@ -242,19 +234,7 @@ var EventsManager;
 			target: '#checkbox',
 			field: 'medium_image_url',
 			template: Mustache.getTemplate('templates/checkbox.html')
-		})); 
-		
-		
-
-//		Manager.addWidget(new AjaxSolr.CategoryWidget({
-//			id: 'category',
-//			target: '#category',
-//			field: 'category',
-//			multivalue:false,	    
-//			categoryList: {"all":translator.getLabel('category_all'), "collections":translator.getLabel('category_artwork'), "nyheder":translator.getLabel('category_news'), "kalender":translator.getLabel('category_calendar'), "praktisk":translator.getLabel('category_info')},
-//			activeCategory: "all",
-//			template: Mustache.getTemplate('templates/category.html')
-//		}));	
+		})); 	
 
 		Manager.addWidget(new AjaxSolr.TeasersWidget({
 			id: 'teasers',
@@ -268,24 +248,16 @@ var EventsManager;
 			id: 'advanced',
 			target: '#advanced',
 			template: Mustache.getTemplate('templates/advancedsearch.html'),
-			facets_list: Manager.store.facets_default['advanced'] 
+			facets_list: Manager.store.facets_default 
 		}));
 		
 		//* filters
-		for (var i = 0, l = searchFieldsTypes.length; i < l; i++) {
-			// facets filters
-			Manager.addWidget(new AjaxSolr.SearchFiltersWidget({
-				id: searchFieldsTypes[i],
-				target: '#' + searchFieldsTypes[i],
-				field: searchFieldsTypes[i],
-				template: Mustache.getTemplate('templates/chosen.html')
-			}));
-			
+		for (var i = 0, l = all_facets.length; i < l; i++) {						
 			// advanced search filters
 			Manager.addWidget(new AjaxSolr.SearchFiltersWidget({
-				id: 'adv_' + searchFieldsTypes[i],
-				target: '#adv_' + searchFieldsTypes[i],
-				field: searchFieldsTypes[i],
+				id: 'adv_' + all_facets[i],
+				target: '#adv_' + all_facets[i],
+				field: all_facets[i],
 				template: Mustache.getTemplate('templates/chosen.html')
 			}));
 		};				
@@ -355,12 +327,7 @@ var EventsManager;
 		/*
 		 * UI events
 		 * 
-		 * */		
-
-//		//* selected category changed
-//		$(Manager.widgets['category']).on('smk_search_category_changed', function(event){     	
-//			EventsManager.smk_search_category_changed(event);
-//		});     
+		 * */		   
 		
 		//* checkbox changed 				
 		$(Manager.widgets['checkbox']).on('hasimage', {self: Manager.widgets['checkbox']}, function(event){    		
@@ -368,29 +335,33 @@ var EventsManager;
 		});
 
 		//* searchfilters changed
-		for (var i = 0, l = searchFieldsTypes.length; i < l; i++) {
-			$(Manager.widgets[searchFieldsTypes[i]]).on('smk_search_filter_changed', {self: Manager.widgets[searchFieldsTypes[i]]}, function(event){    		
+		for (var i = 0, l = all_facets.length; i < l; i++) {			
+			$(Manager.widgets["adv_" + all_facets[i]]).on('smk_search_filter_changed', {self: Manager.widgets["adv_" + all_facets[i]]}, function(event){    		
 				EventsManager.smk_search_filter_changed(event.data.self, event.params);    		    		    		    		
 			});
-			$(Manager.widgets["adv_" + searchFieldsTypes[i]]).on('smk_search_filter_changed', {self: Manager.widgets["adv_" + searchFieldsTypes[i]]}, function(event){    		
-				EventsManager.smk_search_filter_changed(event.data.self, event.params);    		    		    		    		
-			});
-		};
-
-		//* pager changed
-		$(Manager.widgets['pager']).on('smk_search_pager_changed', function(event){  
-			EventsManager.smk_search_pager_changed(event.start, searchFieldsTypes);
-		}); 
+		};		
 
 		//* sorter changed
 		$(Manager.widgets['sorter']).on('smk_search_sorter_changed', function(event){     	
-			EventsManager.smk_search_sorter_changed(event.params, searchFieldsTypes);
+			EventsManager.smk_search_sorter_changed(event.params, all_facets);
 		});         
 
-		//* new search term input in search box
+		//* new free search term input in search box
 		$(Manager.widgets['searchbox']).on('smk_search_q_added', function(event){
 			EventsManager.smk_search_q_added(event);	    	
-		});	
+		});
+		
+		
+		
+		//* new facet search term input in autocomplete search box
+		$(Manager.widgets['searchboxauto']).on('smk_search_filter_changed', function(event){			
+			EventsManager.smk_search_filter_changed(null, event.params);
+		});
+		
+		//* new free search term input in autocomplete search box
+		$(Manager.widgets['searchboxauto']).on('smk_search_q_added', function(event){
+			EventsManager.smk_search_q_added(event);	    	
+		});
 
 //		//* a search string has been removed in current search
 //		$(Manager.widgets['currentsearch']).on('smk_search_remove_one_search_string', function(event){     	
@@ -441,15 +412,15 @@ var EventsManager;
 		});
 
 		//* searchfilters has finished loading
-		for (var i = 0, l = searchFieldsTypes.length; i < l; i++) {
-			$(Manager.widgets[searchFieldsTypes[i]]).on('smk_search_filter_loaded', function(event){
+		for (var i = 0, l = all_facets.length; i < l; i++) {
+			$(Manager.widgets[all_facets[i]]).on('smk_search_filter_loaded', function(event){
 				EventsManager.smk_search_filter_loaded(event.currentTarget.target);
 			});
 		};	
 
 		//* all images loaded in "teaser"
 		$(Manager.widgets['teasers']).on('smk_teasers_all_images_loaded', function(event){     	            	
-			EventsManager.smk_teasers_all_images_loaded(searchFieldsTypes);
+			EventsManager.smk_teasers_all_images_loaded(all_facets);
 		});		
 
 
