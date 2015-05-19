@@ -50,6 +50,7 @@
 	  "search_filter_before":	"f√∏r ",
       "search_data_loading":	"loading data...",
       "search_disab_lab":		"Ingen filter",
+      "search_no_results": 		"ingen resultater for",
       
       "advanced_search_panel_show": "Vise filtre",
 	  "advanced_search_panel_hide": "Skjul filtre",
@@ -705,7 +706,8 @@
 	  "search_filter_cent":		" c.",
 	  "search_filter_before":	"before ",
 	  "search_data_loading":	"loading data...",
-	  "search_disab_lab":		"No filter",
+	  "search_disab_lab":		"no filter",
+	  "search_no_results": 		"no results match",
 	  
 	  "advanced_search_panel_show": "Show filters",
 	  "advanced_search_panel_hide": "Hide filters",
@@ -925,7 +927,7 @@
 									               "id":"Collage-painting"
 									            },
 									            {
-									               "id":"DÈcollage"
+									               "id":"D√©collage"
 									            }
 									         ]
 									      },
@@ -1113,7 +1115,7 @@
 									               "id":"Object"
 									            },
 									            {
-									               "id":"Objet trouvÈ"
+									               "id":"Objet trouv√©"
 									            },
 									            {
 									               "id":"Relief"

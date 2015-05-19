@@ -23,7 +23,7 @@
 			//* init 'chosen' plugin			
 			$target.find('select').chosen({				
 				disable_search_threshold: 10,	
-				no_results_text: "Oops, nothing found!",
+				no_results_text:self.manager.translator.getLabel('search_no_results'),
 				width: "100%",
 				disable_search: !0,
 				// When set to true, Chosen will not display the search field (single selects only).
