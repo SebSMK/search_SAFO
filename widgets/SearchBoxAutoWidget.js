@@ -1,23 +1,7 @@
 (function ($) {
 
 	AjaxSolr.SearchBoxAutoWidget = AjaxSolr.AbstractTextWidget.extend({
-		
-		states: 		
-		[
-		  {
-		    "Id": "d99d4138-640d-4a2c-a1a5-0269ed817f9d",
-		    "Name": "Ben Gibbard"
-		  },
-		 {
-		    "Id": "43f19a29-7980-4ed1-af41-538244477d1a",
-		    "Name": "Breaking Benjamin"
-		  },
-		 {
-		    "Id": "13d34403-12af-4aab-97b7-a712c2ac83c4",
-		    "Name": "The Bends"
-		  }
-		],
-		
+			
 		init: function () {						
 			var self = this;
 			var $target = $(this.target);		  
@@ -34,25 +18,60 @@
 			$(this.target).find('input').attr('placeholder', this.manager.translator.getLabel("search_box_default"));
 			
 			
-			var artists = new Bloodhound({
-			    datumTokenizer: Bloodhound.tokenizers.obj.whitespace("name"),
-			    queryTokenizer: Bloodhound.tokenizers.whitespace,
-			    local:this.states,
-			    limit: 10
-			});
-//			artists.initialize();
-//			
-//			$(".search-bar .search-bar-field").typeahead({
-//			    hint: !0,
-//			    highlight: !0,
-//			    minLength: 3
-//			}, {
-//			    name: "result",
-//			    displayKey: "Name",			    
-//			    source: artists.ttAdapter()
-//			}).bind("typeahead:selected", function(obj, datum, name) {
-//			    $(this).data("seletectedId", datum.Id);
-//			});
+			 var films = new Bloodhound({
+				    datumTokenizer: function(d) { return Bloodhound.tokenizers.whitespace(d.value); },
+				    queryTokenizer: Bloodhound.tokenizers.whitespace,
+					limit: 10,
+
+				     local: [
+					{
+						  "year": "1961",
+						  "value": "Test Side Story",
+						  "tokens": [
+						    "West",
+						    "Side",
+						    "Story"
+						  ]
+						},
+						{
+						  "year": "1962",
+						  "value": "Tawrence of Arabia",
+						  "tokens": [
+						    "Lawrence",
+						    "of",
+						    "Arabia"
+						  ]
+						},
+						{
+						  "year": "1963",
+						  "value": "Tom Jones",
+						  "tokens": [
+						    "Tom",
+						    "Jones"
+						  ]
+						},
+						{
+						  "year": "2012",
+						  "value": "Argo",
+						  "tokens": [
+						    "Argo"
+						  ]
+						}
+						]
+				  });
+
+				  films.initialize();
+
+				  $('.films .typeahead').typeahead(null, {
+				     name: 'film',
+					displayKey: 'value',
+				    source: films.ttAdapter()
+				  }).bind("typeahead:selected", function(obj, datum, name) {
+				    $(this).data("seletectedId", datum.year);
+				});
+ 
+
+									
 		},
 
 		afterRequest: function () {
