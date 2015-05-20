@@ -9,11 +9,11 @@
 			var json_data = {"default_text" : this.manager.translator.getLabel("search_box_default"), 'search': this.manager.translator.getLabel("search_box_button")};	 
 			var html = self.template_integration_json(json_data, '#searchboxTemplate');		  		  
 			$target.html(html);	
-			
+
 			$(this.target).find('input').on("click", function () {
-				   $(this).select();
-				});
-			
+				$(this).select();
+			});
+
 			$(this.target).find('form').bind(
 					'submit',
 					{
@@ -36,13 +36,13 @@
 					}); // end binded action.
 		},	
 
-		
+
 		beforeRequest: function(){						
 			if(ModelManager.get_view() != 'detail'){
 				var q = ModelManager.get_q();
 				$(this.target).find('input').val(q);
 			}
-			
+
 			$(this.target).attr('placeholder', this.manager.translator.getLabel("search_box_default"));
 		},
 

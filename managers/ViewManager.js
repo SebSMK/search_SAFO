@@ -298,7 +298,7 @@
 		this.set_focus = function(){
 			var self = this;
 			$(document).ready(function () {				
-				var $elem = $(self.callWidgetTarget('searchbox')).find('#search-bar');
+				var $elem = $(self.callWidgetTarget('searchboxauto')).find('#search-bar');
 				var $window = $(window);
 
 				var docViewTop = $window.scrollTop();

@@ -54,7 +54,6 @@
 
 				//* start preloading of teaser's images				
 				ViewManager.callWidgetFn('scroll_update', 'start_scroll_preload_request');					
-
 			}																				
 		};							
 
@@ -185,7 +184,14 @@
 				for (var i = 0, l = model.fq.length; i < l; i++) {						
 					Manager.store.addByValue('fq', model.fq[i].value, model.fq[i].locals);
 				};											
-			};	
+			};
+			
+			// auto param (auto parameter is in fact a fq param called from autocomplete box)
+			if(model.auto !== undefined && AjaxSolr.isArray(model.auto)){
+				for (var i = 0, l = model.auto.length; i < l; i++) {						
+					Manager.store.addByValue('fq', model.auto[i].value, model.auto[i].locals);
+				};											
+			};
 
 			// qf param
 			if(model.view != "detail")
@@ -280,16 +286,7 @@
 			var detail_url = event.detail_url + '&fl=detail';
 			window.open(event.detail_url);			
 		};	
-
-		/*
-		 * call to detail view
-		 * @result:  open detail in the same window
-		 * */  
-		this.smk_search_call_detail_same = function(event){						 		  
-			var detail_url = event.detail_url;
-			ModelManager.update_url(detail_url);			
-		};	
-
+		
 		/*
 		 * a search string has been added in SearchBox
 		 * @result:  model update 
@@ -351,7 +348,10 @@
 			}else if (params.deselected !== undefined){
 				if (Manager.store.removeByValue('fq', params.deselected)) //!! -> remove fq param in Manager.store
 					trigg_req = true;
+			}else if (params.auto !== undefined){				
+				trigg_req = true;
 			};    
+			
 
 			if (trigg_req){	
 
@@ -359,7 +359,8 @@
 
 				var model = {};				
 				model.fq = fqvalue;
-				model.q = ModelManager.current_value_joker;
+				model.auto = [new AjaxSolr.Parameter({ name: 'fq', value: params.auto})];
+				model.q = params.auto === undefined ? ModelManager.current_value_joker : null;
 				model.sort = ModelManager.current_value_joker;
 				model.view = ModelManager.current_value_joker;
 				model.category = ModelManager.current_value_joker;
@@ -434,7 +435,7 @@
 			var model = {};
 			model.lang = lang;
 			model.sort = ModelManager.current_value_joker;
-			model.q = ModelManager.current_value_joker;
+			//model.q = ModelManager.current_value_joker;
 			//model.fq = ModelManager.current_value_joker;	
 			model.view = ModelManager.current_value_joker;
 			model.category = ModelManager.current_value_joker;

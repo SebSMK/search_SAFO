@@ -45,7 +45,10 @@ var	ModelManager = {
 
 			if (smkCommon.isValidDataText(this.fq))
 				model.fq = this.fq;
-			
+
+			if (smkCommon.isValidDataText(this.auto))
+				model.auto = this.auto;
+
 			if (smkCommon.isValidDataText(this.fl))
 				model.fl = this.fl;
 
@@ -57,7 +60,7 @@ var	ModelManager = {
 
 			if (smkCommon.isValidDataText(this.sort))
 				model.sort = this.sort;
-			
+
 			model.lang = smkCommon.isValidDataText(eval("smkCommon.enum_lang." + this.lang)) ? this.lang : smkCommon.enum_lang.def;
 
 			return model;
@@ -94,11 +97,12 @@ var	ModelManager = {
 				var cat = model.category != undefined && model.category != '' && model.category != 'all' ? sprintf('%1$scategory%1$s%2$s%1$s', this._cat_separator, model.category) : '';
 				var q =  model.q != undefined &&  this.encode_q(model.q) != '' ? sprintf('%sq=%s', this._separator, encodeURIComponent(this.encode_q(model.q))) : '';
 				var fq =  model.fq != undefined && this.encode_fq(model.fq) != '' ? sprintf('%sfq=%s', this._separator, encodeURIComponent(this.encode_fq(model.fq))) : '';
+				var auto =  model.auto != undefined && this.encode_fq(model.auto) != '' ? sprintf('%sauto=%s', this._separator, encodeURIComponent(this.encode_fq(model.auto))) : '';
 				var start =  model.start != undefined && model.start != 0 ? sprintf('%sstart=%s', this._separator, encodeURIComponent(model.start)) : '';
 				var sort =  model.sort != undefined && model.sort != "score desc" ? sprintf('%ssort=%s', this._separator, encodeURIComponent(model.sort)) : '';				
 				var lang = smkCommon.isValidDataText(eval("smkCommon.enum_lang." + model.lang)) && smkCommon.enum_lang.def != model.lang ? sprintf('%1$s%2$s%1$s', this._cat_separator, model.lang) : '';
 
-				uniqueURL = sprintf('%s%s%s%s%s%s', lang, cat, q, fq, start, sort);
+				uniqueURL = sprintf('%s%s%s%s%s%s%s', lang, cat, q, fq, auto, start, sort);
 
 			}; 	  
 
@@ -110,34 +114,50 @@ var	ModelManager = {
 			this.setModel(model);			
 			window.location.href = this.buildURLFromModel(this.getModel());
 		},
-		
+
 		update_url: function(url){						
 			window.location.href = url;
 		},
-				
+
 		get_q: function(){
 			return smkCommon.isValidDataText(this.q) ? this.q : [];			
 		},
-		
+
 		get_fq: function(){			 
-			return smkCommon.isValidDataText(this.fq) ? this.fq : [];			
+			return this.fq !== undefined ? this.fq : [];			
+		},
+
+		get_auto: function(){			 
+			return this.auto !== undefined ? this.auto : [];			
 		},
 		
+		get_auto_values: function(){
+			var res = new String();
+			
+			if (jQuery.isArray(this.auto)){
+				for (var i = 0, l = this.auto.length; i < l; i++) {
+					res += this.auto[i].value.split(':')[1];				
+				}
+			}
+			
+			return res;			
+		},
+
 //		get_fq_OR: function(){			
-//			var fq = !smkCommon.isValidDataText(this.fq) ? [] : this.fq.slice();
-//			var fq_OR = {};
-//			for (var i = 0, l = fq.length; i < l; i++) {	
-//				if(fq[i].value !== undefined){					
-//					var split = fq[i].value.split(/:(.+)?/);
-//					var key = split[0];
-//					var value = split[1];
-//					fq_OR[key] = fq_OR[key] === undefined ? sprintf('%s:%s', key, value) : sprintf('%s OR %s:%s', fq_OR[key], key, value);  
-//				} 								
-//			}
-//			
-//			return fq_OR;			
+//		var fq = !smkCommon.isValidDataText(this.fq) ? [] : this.fq.slice();
+//		var fq_OR = {};
+//		for (var i = 0, l = fq.length; i < l; i++) {	
+//		if(fq[i].value !== undefined){					
+//		var split = fq[i].value.split(/:(.+)?/);
+//		var key = split[0];
+//		var value = split[1];
+//		fq_OR[key] = fq_OR[key] === undefined ? sprintf('%s:%s', key, value) : sprintf('%s OR %s:%s', fq_OR[key], key, value);  
+//		} 								
+//		}
+
+//		return fq_OR;			
 //		},
-		
+
 		get_facets: function(){						
 			var self = this;
 			var facets =  !smkCommon.isValidDataText(this.fq) ? [] : this.fq.slice();
@@ -149,13 +169,13 @@ var	ModelManager = {
 					break;
 				} 								
 			}
-			
+
 			if(index > -1)
 				facets.splice(index, 1);
-			
+
 			return facets;
 		},
-		
+
 		get_facets_lab_for_search_component: function(){			
 			var facets = this.get_facets();
 			var facets_text = {};
@@ -171,10 +191,10 @@ var	ModelManager = {
 					facets[i]['id'] = facets[i]['id']  === undefined ? key : facets[i]['id'] ;
 				} 								
 			}
-			
+
 			return facets;			
 		},
-		
+
 		get_hasimage: function(){
 			var fq =  !smkCommon.isValidDataText(this.fq) ? [] : this.fq;
 			var check = false;
@@ -184,18 +204,18 @@ var	ModelManager = {
 					break;
 				} 								
 			}
-			
+
 			return check;					
 		},
-		
+
 		get_sort: function(){
 			return smkCommon.isValidDataText(this.sort) ? this.sort : "";			
 		},
-		
+
 		get_lang: function(){
 			return smkCommon.isValidDataText(eval("smkCommon.enum_lang." + this.lang)) ? this.lang : smkCommon.enum_lang.def;			
 		},
-		
+
 		get_view: function(){
 			return this.view;			
 		},
@@ -213,6 +233,7 @@ var	ModelManager = {
 			this.category = this.getModelValue(model, "category");
 			this.q = this.getModelValue(model, "q");
 			this.fq = this.getModelValue(model, "fq");
+			this.auto = this.getModelValue(model, "auto");
 			this.qf = this.getModelValue(model, "qf");
 			this.start = this.getModelValue(model, "start");
 			this.fl = this.getModelValue(model, "fl");
@@ -233,11 +254,11 @@ var	ModelManager = {
 			var model = {};
 
 			var cats = url.replace(this._cat_separator, '').split(this._cat_separator);
-			
+
 			var i = 0;
-			
+
 			while (i < cats.length){
-				
+
 				switch(cats[i]){
 				case smkCommon.enum_lang.en:
 				case smkCommon.enum_lang.dk:
@@ -245,7 +266,7 @@ var	ModelManager = {
 					model.lang = cats[i];
 					i++;
 					break;
-									
+
 				case "detail":
 					model.q = sprintf('%s', decodeURIComponent(cats[i + 1]));
 					model.view = cats[i];
@@ -260,11 +281,11 @@ var	ModelManager = {
 					this.extract_params(cats[i + 2].split(this._separator), model);						
 					this.setModelFromJson(model);
 					return;
-					
+
 				default:
 					this.extract_params(cats[i].split(this._separator), model);
-					this.setModelFromJson(model);
-					return;
+				this.setModelFromJson(model);
+				return;
 				}					
 			}		
 		},
@@ -296,7 +317,7 @@ var	ModelManager = {
 						value = params[i].replace('start=', '');
 						model.start = decodeURIComponent(value);						   	 
 						break;	
-						
+
 					case "fl":
 						value = params[i].replace('fl=', '');
 						model.fl = decodeURIComponent(value);						   	 
@@ -305,6 +326,22 @@ var	ModelManager = {
 					case "sort":
 						value = params[i].replace('sort=', '');
 						model.sort = decodeURIComponent(value);						   	 
+						break;	
+
+					case "auto":						  						  
+						value = params[i].replace('auto=', '');
+
+						var auto = decodeURIComponent(value).split(this._fq_separator);
+
+						for (var j = 0, k = auto.length; j < k; j++) {
+							var autoval= this.decode_fq(auto[j]);
+							if (AjaxSolr.isArray(model.auto)){
+								model.auto = model.auto.concat(autoval);
+							}else{
+								model.auto = [autoval]; 
+							}
+						}					   	 
+
 						break;	
 
 					case "fq":						  						  
@@ -322,9 +359,10 @@ var	ModelManager = {
 						}					   	 
 
 						break;	
-					}
-				}						
-			};	
+					}				
+				}
+			}						
+
 		},		
 
 		decode_fq: function(fq){
@@ -378,6 +416,7 @@ var	ModelManager = {
 		category: null,
 		q: null,
 		fq: null,
+		auto: null,
 		qf: null,
 		start: null,
 		fl: null,

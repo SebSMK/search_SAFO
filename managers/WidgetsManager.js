@@ -351,8 +351,6 @@ var EventsManager;
 			EventsManager.smk_search_q_added(event);	    	
 		});
 		
-		
-		
 		//* new facet search term input in autocomplete search box
 		$(Manager.widgets['searchboxauto']).on('smk_search_filter_changed', function(event){			
 			EventsManager.smk_search_filter_changed(null, event.params);
@@ -371,11 +369,7 @@ var EventsManager;
 		//* calls to detail view
 		$(Manager.widgets['teasers']).on('smk_search_call_detail', function(event){     	
 			EventsManager.smk_search_call_detail(event);
-		});
-		
-		$(Manager.widgets['details_tabs']).on('smk_search_call_detail', function(event){     	
-			EventsManager.smk_search_call_detail_same(event.event);
-		});
+		});				
 
 		$(Manager.widgets['scroll_update']).on('smk_search_call_detail', function(event){     	
 			EventsManager.smk_search_call_detail(event);
