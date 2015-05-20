@@ -76,7 +76,7 @@
 				if(Manager.widgets[Manager.searchfilterList[i]] != null)
 					this.add_modal_loading_to_widget(Manager.widgets[Manager.searchfilterList[i]].field);
 			};
-			
+
 			//* advanced filters
 			for (var i = 0, l = Manager.searchfilterList.length; i < l; i++) {
 				if(Manager.widgets["adv_" + Manager.searchfilterList[i]] != null)
@@ -168,10 +168,10 @@
 			if (stateChange["view"] === undefined)
 				return;
 
-			
+
 			//* hide widgets that aren't in the current language
 			this.hideWidgetsNotInCurrentLanguage(smkCommon.getCurrentLanguage());
-			
+
 			switch(stateChange["view"]){
 			case "teasers":			  
 
@@ -200,18 +200,18 @@
 				break;
 
 			case "detail":										 
-				
+
 				self.callWidgetFn('details_tabs', 'removeAllRelated');
 				self.callWidgetFn('details_tabs', 'removeAllParts');
 				self.callWidgetFn('details_tabs', 'hideTabs');
-				
+
 				$target.find("section.section--list").hide();
 				$target.find("section.section--detail").show();				
 
 				for (var i = 0, l = Manager.searchfilterList.length; i < l; i++) {				
 					self.hideWidget($(self.callWidgetTarget(Manager.searchfilterList[i])));							
 				};		
-								
+
 				self.hideWidget($target.find("#pager-viser"));
 				self.hideWidget($target.find("#search-filters"));				
 //				self.hideWidget($(self.callWidgetTarget('currentsearch')));																			
@@ -299,20 +299,24 @@
 			var self = this;
 			$(document).ready(function () {				
 				var $elem = $(self.callWidgetTarget('searchboxauto')).find('#search-bar');
-				var $window = $(window);
 
-				var docViewTop = $window.scrollTop();
-				var docViewBottom = docViewTop + $window.height();		    
+				if($elem.length > 0){
+					var $window = $(window);
 
-				var elemTop = $elem.offset().top;
-				var elemBottom = elemTop + $elem.height();
+					var docViewTop = $window.scrollTop();
+					var docViewBottom = docViewTop + $window.height();		    
 
-				// we set focus only if the searchbox is visible (otherwise Firefox scrolls up automatically to the element!!)
-				if ((elemBottom > docViewTop)){
-					if(smkCommon.debugLog()) console.log(sprintf(sprintf("View - elemTop_%s : docViewTop%s", elemBottom, docViewTop )));
-					$elem.focus();					
+					var elemTop = $elem.offset().top;
+					var elemBottom = elemTop + $elem.height();
+
+					// we set focus only if the searchbox is visible (otherwise Firefox scrolls up automatically to the element!!)
+					if ((elemBottom > docViewTop)){
+						if(smkCommon.debugLog()) console.log(sprintf(sprintf("View - elemTop_%s : docViewTop%s", elemBottom, docViewTop )));
+						$elem.focus();					
+					}					
 				}
-					
+
+
 			});	  	  
 		};		
 
@@ -335,7 +339,7 @@
 				for (var i = 0, l = vArray.length; i < l; i++) {    				
 					words = words.concat(vArray[i].trim().replace('*', "").split(" "));    				
 				};
-				
+
 				$(this.callWidgetTarget('teasers')).find('.matrix-tile-header').highlight(words);
 				$(this.callWidgetTarget('teasers')).find('.matrix-tile-meta').highlight(words);
 			}    
@@ -360,7 +364,7 @@
 				setLang = smkCommon.enum_lang.def;											
 			}			
 
-			this.hideWidget($(this.target).find("[lang][lang*!='"+setLang+"']"));
+			this.hideWidget($(this.target).not("[lang][lang*='"+setLang+"']"));
 			this.showWidget($(this.target).find("[lang][lang*='"+setLang+"']"));						
 		};
 	}

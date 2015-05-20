@@ -5,7 +5,8 @@
   <title>SMK Søg i Samling</title>
   
 
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
 	
 	<script src="js/common.smk.js" type="text/javascript"></script>
@@ -61,7 +62,8 @@
 	<script src="js/jquery.mousewheel.min.js" type="text/javascript"></script>
 	<script src="js/spin.min.js" type="text/javascript"></script>
 	<script src="js/queueProcessor.js" type="text/javascript"></script>	
-	<script src="js/sorter.js" type="text/javascript"></script>	
+	<script src="js/sorter.js" type="text/javascript"></script>
+	<script src="js/typeahead.js" type="text/javascript"></script>
 	<script src="js/backtotop/js/main.js" type="text/javascript"></script>
 	<script src="js/backtotop/js/modernizr.js" type="text/javascript"></script>		
 	<script src="data/getData_Common_functions.js" type="text/javascript"></script>			
