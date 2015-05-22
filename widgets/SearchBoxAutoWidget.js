@@ -47,6 +47,11 @@
 //				}
 //				}
 
+				var params = [ 'facet=true&facet.limit=-1&facet.mincount=1&json.nl=map' ];
+				for (var i = 0; i < self.fields.length; i++) {
+					params.push('facet.field=' + self.fields[i]);
+				}
+				
 				var films = new Bloodhound({
 					datumTokenizer: function(d) { return Bloodhound.tokenizers.whitespace(d.value); },
 					queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -71,7 +76,8 @@
 //					}
 					remote: {
 						//url: 'http://api.themoviedb.org/3/search/movie?query=%QUERY&api_key=470fd2ec8853e25d2f8d86f685d2270e',
-						url: 'http://csdev-seb:8180/solr-example/dev_SAFO/select?facet=true&facet.limit=-1&facet.mincount=1&json.nl=map&facet.field=artist_name&facet.field=object_type_dk&facet.field=object_type_en&facet.field=portrait_person&facet.field=topografisk_motiv&facet.field=materiale&facet.field=materiale_en&facet.field=title_en&facet.field=title_first&q=id:KMS1',
+						//url: 'http://csdev-seb:8180/solr-example/dev_SAFO/select?facet=true&facet.limit=-1&facet.mincount=1&json.nl=map&facet.field=artist_name&facet.field=object_type_dk&facet.field=object_type_en&facet.field=portrait_person&facet.field=topografisk_motiv&facet.field=materiale&facet.field=materiale_en&facet.field=title_en&facet.field=title_first&q=id:KMS1',
+						url: self.manager.solrUrl + 'select?' + params.join('&') + '&q=id:%QUERY', 
 						ajax: {
 							dataType: 'jsonp',
 
