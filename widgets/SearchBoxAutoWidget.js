@@ -35,23 +35,40 @@
 
 			var callback = function (response) {
 				var list = [];
-				for (var i = 0; i < self.fields.length; i++) {
-					var field = self.fields[i];
-					for (var facet in response.facet_counts.facet_fields[field]) {
-						list.push({
-							field: field,
-							facet: facet,
-							count: response.facet_counts.facet_fields[field][facet],
-							value: facet + ' (' + response.facet_counts.facet_fields[field][facet] + ') - ' + field
-						});
-					}
-				}
+//				for (var i = 0; i < self.fields.length; i++) {
+//				var field = self.fields[i];
+//				for (var facet in response.facet_counts.facet_fields[field]) {
+//				list.push({
+//				field: field,
+//				facet: facet,
+//				count: response.facet_counts.facet_fields[field][facet],
+//				value: facet + ' (' + response.facet_counts.facet_fields[field][facet] + ') - ' + field
+//				});
+//				}
+//				}
 
 				var films = new Bloodhound({
 					datumTokenizer: function(d) { return Bloodhound.tokenizers.whitespace(d.value); },
 					queryTokenizer: Bloodhound.tokenizers.whitespace,
 					limit: 10,
-					local: list
+					prefetch: {
+						url: "http://vocab.nic.in/rest.php/country/json",
+						filter: function(responses) { 
+
+							for (var i = 0; i < self.fields.length; i++) {
+								var field = self.fields[i];
+								//for (var facet in responses.countries) {
+								for (var j = 0; j < responses.countries.length; j++) {
+									list.push({
+										field: field,
+										facet: responses.countries[j].country.country_name,										
+										value: responses.countries[j].country.country_id
+									});
+								}
+							}
+							return list;
+						}
+					}
 				});
 
 				films.initialize();
