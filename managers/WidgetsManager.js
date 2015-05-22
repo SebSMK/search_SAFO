@@ -117,9 +117,9 @@ var EventsManager;
 
 
 		//******************************
-		//** init thumbnailsManager
+		//** init partsManager
 		//******************************    
-		var thumbnailsManager = new AjaxSolr.smkManager({			
+		var partsManager = new AjaxSolr.smkManager({			
 			solrUrl: server, 
 			//proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
 			store: new AjaxSolr.smkParameterStore({
@@ -163,6 +163,20 @@ var EventsManager;
 			generalSolrError: generalSolrErrorProcessedBound,
 			translator: translator
 		});	
+		
+		//******************************
+		//** init autoCompManager
+		//******************************    
+		var autoCompManager = new AjaxSolr.smkManager({
+			solrUrl: server, 
+			//proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
+			store: new AjaxSolr.smkParameterStore({
+				exposed: exposed
+			}),
+			allWidgetsProcessed: allWidgetsProcessedBound,
+			generalSolrError: generalSolrErrorProcessedBound,
+			translator: translator
+		});	
 
 		//******************************
 		//** load widgets
@@ -178,15 +192,7 @@ var EventsManager;
 			id: 'search-info',
 			target: '#searchinfo',			
 			template: Mustache.getTemplate('templates/search_info.html')
-		}));
-
-		
-		Manager.addWidget(new AjaxSolr.SearchBoxAutoWidget({
-			id: 'searchboxauto',
-			target: '#searchboxauto',			
-			template: Mustache.getTemplate('templates/search_box.html'),
-			fields: autocomplete_facets 
-		}));
+		}));				
 		
 //		Manager.addWidget(new AjaxSolr.CurrentSearchWidget({
 //			id: 'currentsearch',
@@ -294,7 +300,7 @@ var EventsManager;
 			id: 'details_tabs',
 			target: '#smk_detail_tabs',
 			template: Mustache.getTemplate('templates/detail_tabs.html'),
-			partsManager: thumbnailsManager,
+			partsManager: partsManager,
 			parts_subWidget: sub_partsWidget,
 			relatedManager: relatedManager,
 			related_subWidget: sub_relatedWidget,
@@ -318,6 +324,30 @@ var EventsManager;
 			start_offset:parseInt(Manager.store.get('start').val()) + parseInt(Manager.store.get('rows').val())
 		}));
 
+		
+		//* autocomplete widget
+		// sub widget (managed by scrollManagerWidget)
+//		
+//		Manager.addWidget(new AjaxSolr.SearchBoxAutoWidget({
+//			id: 'searchboxauto',
+//			target: '#searchboxauto',			
+//			template: Mustache.getTemplate('templates/search_box.html'),
+//			fields: autocomplete_facets 
+//		}));
+		
+		var sub_autoCompWidget = new AjaxSolr.SearchBoxAutoWidget({
+			id: 'sub_autocomplete',
+			target: '#searchboxauto',
+			template: Mustache.getTemplate('templates/teasers.html')
+		});
+
+		Manager.addWidget( new AjaxSolr.SearchBoxAutoManagerWidget({
+			id: 'autocomplete',
+			autoCompManager: autoCompManager, 
+			sub_autoCompWidget: sub_autoCompWidget
+		}));
+		
+		autoCompManager
 
 
 		//******************************

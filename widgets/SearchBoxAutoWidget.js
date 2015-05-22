@@ -1,8 +1,7 @@
 (function ($) {
 
-	AjaxSolr.SearchBoxAutoWidget = AjaxSolr.AbstractTextWidget.extend({
-
-
+	AjaxSolr.SearchBoxAutoWidget = AjaxSolr.AbstractTextWidget.extend({		
+		
 		init: function () {						
 			var self = this;
 			var $target = $(this.target);		  
