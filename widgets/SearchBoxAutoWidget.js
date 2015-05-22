@@ -51,24 +51,38 @@
 					datumTokenizer: function(d) { return Bloodhound.tokenizers.whitespace(d.value); },
 					queryTokenizer: Bloodhound.tokenizers.whitespace,
 					limit: 10,
-					prefetch: {
-						url: "http://vocab.nic.in/rest.php/country/json",
-						filter: function(responses) { 
-
-							for (var i = 0; i < self.fields.length; i++) {
-								var field = self.fields[i];
-								//for (var facet in responses.countries) {
-								for (var j = 0; j < responses.countries.length; j++) {
-									list.push({
-										field: field,
-										facet: responses.countries[j].country.country_name,										
-										value: responses.countries[j].country.country_id
-									});
-								}
-							}
-							return list;
-						}
-					}
+//					prefetch: {
+//						url: "http://vocab.nic.in/rest.php/country/json",
+//						filter: function(responses) { 
+//
+//							for (var i = 0; i < self.fields.length; i++) {
+//								var field = self.fields[i];
+//								//for (var facet in responses.countries) {
+//								for (var j = 0; j < responses.countries.length; j++) {
+//									list.push({
+//										field: field,
+//										facet: responses.countries[j].country.country_name,										
+//										value: responses.countries[j].country.country_id
+//									});
+//								}
+//							}
+//							return list;
+//						}
+//					}
+					remote: {
+				        url: 'http://api.themoviedb.org/3/search/movie?query=%QUERY&api_key=470fd2ec8853e25d2f8d86f685d2270e',
+				        filter: function (movies) {
+				            // Map the remote source JSON array to a JavaScript object array
+				            return $.map(movies.results, function (movie) {
+				                return {
+				                	field: 'coco',
+									facet: movie.original_title,										
+				                    value: movie.original_title
+				                };
+				            });
+				        }
+				    }
+					
 				});
 
 				films.initialize();
