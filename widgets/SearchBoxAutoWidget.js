@@ -8,7 +8,9 @@
 			var $target = $(this.target);		  
 			var json_data = {"default_text" : this.manager.translator.getLabel("search_box_default"), 'search': this.manager.translator.getLabel("search_box_button")};	 
 			var html = self.template_integration_json(json_data, '#searchboxTemplate');		  
-			$target.html(html);				
+			$target.html(html);	
+			
+			$target.find('input.search-bar-field').typeahead({});
 		},		    
 
 		beforeRequest: function(){						
@@ -23,13 +25,16 @@
 
 			// add "text auto selection" on box click
 			$(this.target).find('input').on("click", function () {$(this).select();});
+			
+			// clear typeahead list
+			$(this.target).find('input.search-bar-field').typeahead('destroy');
 		},
 
 		afterRequest: function () {
 
 			var self = this;	  
 			if (!self.getRefresh()){
-				//self.setRefresh(true);
+				self.setRefresh(true);
 				return;
 			}								
 
@@ -87,7 +92,7 @@
 			$(self.target).find('input.search-bar-field').typeahead({
 				hint: !0,
 				highlight: !0,
-				minLength: 3
+				minLength: 1
 			}, {
 				name: 'autosearch',
 				displayKey: 'facet',
@@ -108,7 +113,7 @@
 
 			$(self.target).find('input').bind("keydown", function (e) {
 				if (self.requestSent === false && e.which == 13) {										
-					var value = AjaxSolr.Parameter.escapeValue($(this).val());
+					var value = $(this).val();
 					$(self).trigger({
 						type: "smk_search_q_added",
 						val: value
