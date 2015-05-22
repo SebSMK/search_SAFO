@@ -52,37 +52,56 @@
 					queryTokenizer: Bloodhound.tokenizers.whitespace,
 					limit: 10,
 //					prefetch: {
-//						url: "http://vocab.nic.in/rest.php/country/json",
-//						filter: function(responses) { 
-//
-//							for (var i = 0; i < self.fields.length; i++) {
-//								var field = self.fields[i];
-//								//for (var facet in responses.countries) {
-//								for (var j = 0; j < responses.countries.length; j++) {
-//									list.push({
-//										field: field,
-//										facet: responses.countries[j].country.country_name,										
-//										value: responses.countries[j].country.country_id
-//									});
-//								}
-//							}
-//							return list;
-//						}
+//					url: "http://vocab.nic.in/rest.php/country/json",
+//					filter: function(responses) { 
+
+//					for (var i = 0; i < self.fields.length; i++) {
+//					var field = self.fields[i];
+//					//for (var facet in responses.countries) {
+//					for (var j = 0; j < responses.countries.length; j++) {
+//					list.push({
+//					field: field,
+//					facet: responses.countries[j].country.country_name,										
+//					value: responses.countries[j].country.country_id
+//					});
+//					}
+//					}
+//					return list;
+//					}
 //					}
 					remote: {
-				        url: 'http://api.themoviedb.org/3/search/movie?query=%QUERY&api_key=470fd2ec8853e25d2f8d86f685d2270e',
-				        filter: function (movies) {
-				            // Map the remote source JSON array to a JavaScript object array
-				            return $.map(movies.results, function (movie) {
-				                return {
-				                	field: 'coco',
-									facet: movie.original_title,										
-				                    value: movie.original_title
-				                };
-				            });
-				        }
-				    }
-					
+						//url: 'http://api.themoviedb.org/3/search/movie?query=%QUERY&api_key=470fd2ec8853e25d2f8d86f685d2270e',
+						url: 'http://csdev-seb:8180/solr-example/dev_SAFO/select?facet=true&facet.limit=-1&facet.mincount=1&json.nl=map&facet.field=artist_name&facet.field=object_type_dk&facet.field=object_type_en&facet.field=portrait_person&facet.field=topografisk_motiv&facet.field=materiale&facet.field=materiale_en&facet.field=title_en&facet.field=title_first&q=id:KMS1',
+						ajax: {
+							dataType: 'jsonp',
+
+							data: {
+								'wt': 'json',
+								'rows': 5
+							},
+
+							jsonp: 'json.wrf'
+						},
+
+						filter: function (response) {
+							// Map the remote source JSON array to a JavaScript object array
+
+							for (var i = 0; i < self.fields.length; i++) {
+								var field = self.fields[i];								
+
+								for (var facet in response.facet_counts.facet_fields[field]) {
+									list.push({
+										facet: facet,
+										field: field,										
+										count: response.facet_counts.facet_fields[field][facet],
+										value: facet + ' (' + response.facet_counts.facet_fields[field][facet] + ') - ' + field
+									});
+								}
+							}
+							return list;				        					           
+						}
+					}
+
 				});
 
 				films.initialize();
