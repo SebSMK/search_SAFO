@@ -60,7 +60,7 @@
 			var facets = ModelManager.get_facets_lab_for_search_component();
 
 			// remove all filters
-			this.removeAllSelectedFilters();
+			//this.removeAllSelectedFilters();
 
 			// add current filters 
 			if (facets !== undefined){	

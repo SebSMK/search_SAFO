@@ -124,11 +124,11 @@ var	ModelManager = {
 		},
 
 		get_fq: function(){			 
-			return this.fq !== undefined ? this.fq : [];			
+			return smkCommon.isValidDataText(this.fq) ? this.fq : [];			
 		},
 
 		get_auto: function(){			 
-			return this.auto !== undefined ? this.auto : [];			
+			return smkCommon.isValidDataText(this.auto)? this.auto : [];			
 		},
 		
 		get_auto_values: function(){
@@ -136,7 +136,8 @@ var	ModelManager = {
 			
 			if (jQuery.isArray(this.auto)){
 				for (var i = 0, l = this.auto.length; i < l; i++) {
-					res += this.auto[i].value.split(':')[1];				
+					if (smkCommon.isValidDataText(this.auto[i].value))
+						res += this.auto[i].value.replace(this.auto[i].value.split(':')[0] + ':', '');				
 				}
 			}
 			
@@ -427,9 +428,9 @@ var	ModelManager = {
 
 		_separator: '&',		
 		_cat_separator: '/',		
-		_q_separator: ',',		
-		_fq_locals_separator: ';',
-		_fq_separator: ',',		
+		_q_separator: ',-,',		
+		_fq_locals_separator: ';-;',
+		_fq_separator: ',-,',		
 		_default_category: 'all',		
 		_default_view: 'teasers',
 		_stored_model: null,

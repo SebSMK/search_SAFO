@@ -185,7 +185,7 @@
 					Manager.store.addByValue('fq', model.fq[i].value, model.fq[i].locals);
 				};											
 			};
-			
+
 			// auto param (auto parameter is in fact a fq param called from autocomplete box)
 			if(model.auto !== undefined && AjaxSolr.isArray(model.auto)){
 				for (var i = 0, l = model.auto.length; i < l; i++) {						
@@ -286,7 +286,7 @@
 			var detail_url = event.detail_url + '&fl=detail';
 			window.open(event.detail_url);			
 		};	
-		
+
 		/*
 		 * a search string has been added in SearchBox
 		 * @result:  model update 
@@ -339,26 +339,23 @@
 		this.smk_search_filter_changed = function (caller, params){
 
 			var trigg_req = false;
+			var current_fqs = ModelManager.get_fq(); // get all current fq ()
 
-			ViewManager.callWidgetFn('currentsearch', 'setRefresh', {params: [false]});
-
-			if (params.selected !== undefined){				
-				if (Manager.store.addByValue('fq', params.selected)) //!! -> add fq param in Manager.store
-					trigg_req = true;
-			}else if (params.deselected !== undefined){
-				if (Manager.store.removeByValue('fq', params.deselected)) //!! -> remove fq param in Manager.store
-					trigg_req = true;
+			if (params.selected !== undefined){								
+				current_fqs.push(new AjaxSolr.Parameter({ name: 'fq', value: params.selected})); 
+				trigg_req = true;
+			}else if (params.deselected !== undefined){ 
+				current_fqs = jQuery.grep(current_fqs, function(fq) {
+					return fq.value != params.deselected;
+				});
+				trigg_req = true;
 			}else if (params.auto !== undefined){				
 				trigg_req = true;
 			};    
-			
 
 			if (trigg_req){	
-
-				var fqvalue = Manager.store.extract_fq_without_default();	
-
 				var model = {};				
-				model.fq = fqvalue;
+				model.fq = current_fqs;
 				model.auto = [new AjaxSolr.Parameter({ name: 'fq', value: params.auto})];
 				model.q = params.auto === undefined ? ModelManager.current_value_joker : null;
 				model.sort = ModelManager.current_value_joker;
@@ -368,38 +365,6 @@
 
 				ModelManager.update(model);
 			}
-
-//			var trigg_req = false;
-
-//			if (params.selected !== undefined){
-//			var selected =  params.selected.split(' OR ');
-//			for (var i = 0, l = selected.length; i < l; i++) {	
-//			if (caller.add(selected[i])) //!! -> add fq param in Manager.store
-//			trigg_req = true;
-//			}
-
-//			}else if (params.deselected !== undefined){
-//			var deselected =  params.deselected.split(' OR ');
-//			for (var i = 0, l = deselected.length; i < l; i++) {	
-//			if (caller.remove(deselected[i])) //!! -> remove fq param in Manager.store
-//			trigg_req = true;
-//			}
-//			};    	    	
-
-//			if (trigg_req){				
-//			ViewManager.callWidgetFn('currentsearch', 'setRefresh', {params: [false]});
-
-//			var fqvalue = Manager.store.extract_fq_without_default();	
-//			var model = {};				
-//			model.fq = fqvalue;
-//			model.q = ModelManager.current_value_joker;
-//			model.sort = ModelManager.current_value_joker;
-//			model.view = ModelManager.current_value_joker;
-//			model.category = ModelManager.current_value_joker;
-//			model.lang = ModelManager.current_value_joker;
-
-//			ModelManager.update(model);
-//			}
 		};
 
 		/*
