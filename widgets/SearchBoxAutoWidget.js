@@ -33,231 +33,88 @@
 				return;
 			}								
 
-			var callback = function (response) {
-				var list = [];
-//				for (var i = 0; i < self.fields.length; i++) {
-//				var field = self.fields[i];
-//				for (var facet in response.facet_counts.facet_fields[field]) {
-//				list.push({
-//				field: field,
-//				facet: facet,
-//				count: response.facet_counts.facet_fields[field][facet],
-//				value: facet + ' (' + response.facet_counts.facet_fields[field][facet] + ') - ' + field
-//				});
-//				}
-//				}
 
-				var params = [ 'facet=true&facet.limit=-1&facet.mincount=1&json.nl=map' ];
-				for (var i = 0; i < self.fields.length; i++) {
-					params.push('facet.field=' + self.fields[i]);
-				}
-				
-				var films = new Bloodhound({
-					datumTokenizer: function(d) { return Bloodhound.tokenizers.whitespace(d.value); },
-					queryTokenizer: Bloodhound.tokenizers.whitespace,
-					limit: 10,
-//					prefetch: {
-//					url: "http://vocab.nic.in/rest.php/country/json",
-//					filter: function(responses) { 
+			var list = [];
+			var params = [ 'facet=true&facet.limit=-1&facet.mincount=1&json.nl=map' ];
+			for (var i = 0; i < self.fields.length; i++) {
+				params.push('facet.field=' + self.fields[i]);
+			}
 
-//					for (var i = 0; i < self.fields.length; i++) {
-//					var field = self.fields[i];
-//					//for (var facet in responses.countries) {
-//					for (var j = 0; j < responses.countries.length; j++) {
-//					list.push({
-//					field: field,
-//					facet: responses.countries[j].country.country_name,										
-//					value: responses.countries[j].country.country_id
-//					});
-//					}
-//					}
-//					return list;
-//					}
-//					}
-					remote: {
-						//url: 'http://api.themoviedb.org/3/search/movie?query=%QUERY&api_key=470fd2ec8853e25d2f8d86f685d2270e',
-						//url: 'http://csdev-seb:8180/solr-example/dev_SAFO/select?facet=true&facet.limit=-1&facet.mincount=1&json.nl=map&facet.field=artist_name&facet.field=object_type_dk&facet.field=object_type_en&facet.field=portrait_person&facet.field=topografisk_motiv&facet.field=materiale&facet.field=materiale_en&facet.field=title_en&facet.field=title_first&q=id:KMS1',
-						url: self.manager.solrUrl + 'select?' + params.join('&') + '&q=id:%QUERY', 
-						ajax: {
-							dataType: 'jsonp',
+			var films = new Bloodhound({
+				datumTokenizer: function(d) { return Bloodhound.tokenizers.whitespace(d.value); },
+				queryTokenizer: Bloodhound.tokenizers.whitespace,
+				limit: 10,
+				remote: {
+					//url: 'http://api.themoviedb.org/3/search/movie?query=%QUERY&api_key=470fd2ec8853e25d2f8d86f685d2270e',
+					//url: 'http://csdev-seb:8180/solr-example/dev_SAFO/select?facet=true&facet.limit=-1&facet.mincount=1&json.nl=map&facet.field=artist_name&facet.field=object_type_dk&facet.field=object_type_en&facet.field=portrait_person&facet.field=topografisk_motiv&facet.field=materiale&facet.field=materiale_en&facet.field=title_en&facet.field=title_first&q=id:KMS1',
+					url: self.manager.solrUrl + 'select?' + params.join('&') + '&defType=edismax&qf=collector1&q=%QUERY', 
+					ajax: {
+						dataType: 'jsonp',
 
-							data: {
-								'wt': 'json',
-								'rows': 5
-							},
-
-							jsonp: 'json.wrf'
+						data: {
+							'wt': 'json',
+							'rows': 0
 						},
 
-						filter: function (response) {
-							// Map the remote source JSON array to a JavaScript object array
+						jsonp: 'json.wrf'
+					},
 
-							for (var i = 0; i < self.fields.length; i++) {
-								var field = self.fields[i];								
+					filter: function (response) {
+						// Map the remote source JSON array to a JavaScript object array
 
-								for (var facet in response.facet_counts.facet_fields[field]) {
+						for (var i = 0; i < self.fields.length; i++) {
+							var field = self.fields[i];								
+
+							for (var facet in response.facet_counts.facet_fields[field]) {
+								if(facet.toLowerCase().indexOf(response.responseHeader.params.q.toLowerCase()) > -1)									
 									list.push({
 										facet: facet,
 										field: field,										
 										count: response.facet_counts.facet_fields[field][facet],
 										value: facet + ' (' + response.facet_counts.facet_fields[field][facet] + ') - ' + field
 									});
-								}
 							}
-							return list;				        					           
 						}
+						return list;				        					           
 					}
+				}
 
-				});
+			});
 
-				films.initialize();
+			films.initialize();
 
-				self.requestSent = false;
-				$(self.target).find('input.search-bar-field').typeahead({
-					hint: !0,
-					highlight: !0,
-					minLength: 1
-				}, {
-					name: 'autosearch',
-					displayKey: 'facet',
-					source: films.ttAdapter(),
-					templates: {
-						suggestion: function(data){
-							return sprintf('<p>%s - %s</p>', data.facet, data.field);
-						}
+			self.requestSent = false;
+			$(self.target).find('input.search-bar-field').typeahead({
+				hint: !0,
+				highlight: !0,
+				minLength: 3
+			}, {
+				name: 'autosearch',
+				displayKey: 'facet',
+				source: films.ttAdapter(),
+				templates: {
+					suggestion: function(data){
+						return sprintf('<p>%s - %s</p>', data.facet, data.field);
 					}
+				}
 
-				}).bind("typeahead:selected", function(obj, data, name) {					
-					self.requestSent = true;
+			}).bind("typeahead:selected", function(obj, data, name) {					
+				self.requestSent = true;
+				$(self).trigger({
+					type: "smk_search_filter_changed",
+					params: {auto: sprintf('%s:%s', data.field, AjaxSolr.Parameter.escapeValue(data.facet))}
+				});					
+			});
+
+			$(self.target).find('input').bind("keydown", function (e) {
+				if (self.requestSent === false && e.which == 13) {										
+					var value = AjaxSolr.Parameter.escapeValue($(this).val());
 					$(self).trigger({
-						type: "smk_search_filter_changed",
-						params: {auto: sprintf('%s:%s', data.field, AjaxSolr.Parameter.escapeValue(data.facet))}
-					});					
-				});
-
-				$(self.target).find('input').bind("keydown", function (e) {
-					if (self.requestSent === false && e.which == 13) {										
-						var value = AjaxSolr.Parameter.escapeValue($(this).val());
-						$(self).trigger({
-							type: "smk_search_q_added",
-							val: value
-						});								
-					}
-				});
-
-				self.setRefresh(false); //loaded only the first time
-
-				/*//////øøøøøøøøøøøøøøøøøøøøøøøø
-				self.requestSent = false;
-				$(self.target).find('input').autocomplete('destroy').autocomplete({
-					source: list,
-					select: function(event, ui) {
-						if (ui.item) {
-							self.requestSent = true;
-							//if (self.manager.store.addByValue('fq', ui.item.field + ':' + AjaxSolr.Parameter.escapeValue(ui.item.value))) {
-							//self.doRequest();
-
-							$(self).trigger({
-								type: "smk_search_filter_changed",
-								params: {auto: ui.item.field + ':' + AjaxSolr.Parameter.escapeValue(ui.item.value)}
-							});   
-							//}
-						}
-					}
-				});
-
-				// This has lower priority so that requestSent is set.
-				$(self.target).find('input').bind('keydown', function(e) {
-					if (self.requestSent === false && e.which == 13) {
-						var value = $(this).val();
-						//if (value && self.set(value)) {
-						//self.doRequest();
-						$(self).trigger({
-							type: "smk_search_q_added",
-							val: value
-						});		
-						//}
-					}
-				});
-				////////øøøøøøøøøøøøøøøøøøøøøøøø*/
-
-			} // end callback
-
-			var params = [ 'rows=0&facet=true&facet.limit=-1&facet.mincount=1&json.nl=map' ];
-			for (var i = 0; i < this.fields.length; i++) {
-				params.push('facet.field=' + this.fields[i]);
-			}
-			params.push('q=*:*');
-			$.getJSON(this.manager.solrUrl + 'select?' + params.join('&') + '&wt=json&json.wrf=?', {}, callback);
-
-
-
-//			$(this.target).find('input').unbind().removeData('events'); //.val('');
-
-//			var self = this;
-
-//			var callback = function (response) {
-//			var list = [];
-//			for (var i = 0; i < self.fields.length; i++) {
-//			var field = self.fields[i];
-//			for (var facet in response.facet_counts.facet_fields[field]) {
-//			list.push({
-//			field: field,
-//			value: facet,
-//			label: facet + ' (' + response.facet_counts.facet_fields[field][facet] + ') - ' + field
-//			});
-//			}
-//			}
-
-//			self.requestSent = false;
-//			$(self.target).find('input').autocomplete('destroy').autocomplete({
-//			source: list,
-//			select: function(event, ui) {
-//			if (ui.item) {
-//			self.requestSent = true;
-//			//if (self.manager.store.addByValue('fq', ui.item.field + ':' + AjaxSolr.Parameter.escapeValue(ui.item.value))) {
-//			//self.doRequest();
-
-//			$(self).trigger({
-//			type: "smk_search_filter_changed",
-//			params: {auto: ui.item.field + ':' + AjaxSolr.Parameter.escapeValue(ui.item.value)}
-//			});   
-//			//}
-//			}
-//			}
-//			});
-
-//			// This has lower priority so that requestSent is set.
-//			$(self.target).find('input').bind('keydown', function(e) {
-//			if (self.requestSent === false && e.which == 13) {
-//			var value = $(this).val();
-//			//if (value && self.set(value)) {
-//			//self.doRequest();
-//			$(self).trigger({
-//			type: "smk_search_q_added",
-//			val: value
-//			});		
-//			//}
-//			}
-//			});
-
-//			// add "text auto selection" on box click
-//			$(self.target).find('input').on("click", function () {
-//			$(this).select();
-//			});
-//			} // end callback
-
-//			var params = [ 'rows=0&facet=true&facet.limit=-1&facet.mincount=1&json.nl=map' ];
-//			for (var i = 0; i < this.fields.length; i++) {
-//			params.push('facet.field=' + this.fields[i]);
-//			}
-////			var values = this.manager.store.values('fq');
-////			for (var i = 0; i < values.length; i++) {
-////			params.push('fq=' + encodeURIComponent(values[i]));
-////			}
-//			//params.push('q=' + this.manager.store.get('q').val());
-//			params.push('q=*:*');
-//			$.getJSON(this.manager.solrUrl + 'select?' + params.join('&') + '&wt=json&json.wrf=?', {}, callback);
+						type: "smk_search_q_added",
+						val: value
+					});								
+				}
+			});
 		},
 
 		template_integration_json: function (json_data, templ_id){	  
