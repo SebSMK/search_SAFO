@@ -298,9 +298,14 @@
 		this.set_focus = function(){
 			var self = this;
 			$(document).ready(function () {				
-				var $elem = $(self.callWidgetTarget('searchboxauto')).find('#search-bar');
+				var $elem = $(self.callWidgetTarget('searchboxauto')).find('input.search-bar-field.tt-input');
 
 				if($elem.length > 0){
+					if ($elem.val() != ""){
+						$elem.blur();
+						return;
+					}
+					
 					var $window = $(window);
 
 					var docViewTop = $window.scrollTop();
@@ -315,8 +320,6 @@
 						$elem.focus();					
 					}					
 				}
-
-
 			});	  	  
 		};		
 

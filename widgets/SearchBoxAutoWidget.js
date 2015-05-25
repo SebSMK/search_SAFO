@@ -2,6 +2,7 @@
 
 	AjaxSolr.SearchBoxAutoWidget = AjaxSolr.AbstractTextWidget.extend({
 
+		requestSent: false,
 
 		init: function () {						
 			var self = this;
@@ -9,11 +10,17 @@
 			var json_data = {"default_text" : this.manager.translator.getLabel("search_box_default"), 'search': this.manager.translator.getLabel("search_box_button")};	 
 			var html = self.template_integration_json(json_data, '#searchboxTemplate');		  
 			$target.html(html);	
-			
-			$target.find('input.search-bar-field').typeahead({});
-		},		    
 
-		beforeRequest: function(){						
+			$target.find('input.search-bar-field').typeahead({});
+
+			$(this.target).find('input.search-bar-field.tt-input').bind('input',function(){
+				self.requestSent = false;
+			});
+
+//			},		    
+
+//			beforeRequest: function(){						
+
 			// add current search string (whether it be q or fq search )
 			if(ModelManager.get_view() != 'detail'){
 				var searchstring = ModelManager.get_q().length != 0 ? ModelManager.get_q().toString() : AjaxSolr.Parameter.unescapeValue(ModelManager.get_auto_values().replace(/^"|"$/g, ''));
@@ -25,22 +32,22 @@
 
 			// add "text auto selection" on box click
 			$(this.target).find('input').on("click", function () {$(this).select();});
-			
-			// clear typeahead list
+
+			// clear typeahead
 			$(this.target).find('input.search-bar-field').typeahead('destroy');
-		},
 
-		afterRequest: function () {
+//			},
 
-			var self = this;	  
-			if (!self.getRefresh()){
-				self.setRefresh(true);
-				return;
-			}								
+//			afterRequest: function () {
 
+//			var self = this;	  
+//			if (!self.getRefresh()){
+//			self.setRefresh(true);
+//			return;
+//			}								
 
 			var list = [];
-			var params = [ 'facet=true&facet.limit=-1&facet.mincount=1&json.nl=map' ];
+			var params = [ 'sort=score desc&fl=*%2C score&facet=true&facet.limit=-1&facet.mincount=1&json.nl=map' ];
 			for (var i = 0; i < self.fields.length; i++) {
 				params.push('facet.field=' + self.fields[i]);
 			}
@@ -54,6 +61,14 @@
 					//url: 'http://csdev-seb:8180/solr-example/dev_SAFO/select?facet=true&facet.limit=-1&facet.mincount=1&json.nl=map&facet.field=artist_name&facet.field=object_type_dk&facet.field=object_type_en&facet.field=portrait_person&facet.field=topografisk_motiv&facet.field=materiale&facet.field=materiale_en&facet.field=title_en&facet.field=title_first&q=id:KMS1',
 					url: self.manager.solrUrl + 'select?' + params.join('&') + '&defType=edismax&qf=collector1&q=%QUERY', 
 					ajax: {
+						beforeSend: function(jqXhr, settings){
+							// clear typeahead list
+							list = [];
+							self.requestSent = false;
+						},
+						success: function(data, textStatus, jqXHR ){
+							//self.requestSent = true;
+						},
 						dataType: 'jsonp',
 
 						data: {
@@ -65,8 +80,7 @@
 					},
 
 					filter: function (response) {
-						// Map the remote source JSON array to a JavaScript object array
-
+						// Map the remote source JSON array to a JavaScript object array						
 						for (var i = 0; i < self.fields.length; i++) {
 							var field = self.fields[i];								
 
@@ -104,7 +118,7 @@
 				}
 
 			}).bind("typeahead:selected", function(obj, data, name) {					
-				self.requestSent = true;
+				self.requestSent = true;				
 				$(self).trigger({
 					type: "smk_search_filter_changed",
 					params: {auto: sprintf('%s:%s', data.field, AjaxSolr.Parameter.escapeValue(data.facet))}
@@ -120,6 +134,10 @@
 					});								
 				}
 			});
+		},
+
+		afterRequest: function () {
+			self.requestSent = false;	
 		},
 
 		template_integration_json: function (json_data, templ_id){	  

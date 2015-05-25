@@ -109,6 +109,7 @@
          }
       ],
       "autocomplete":[
+      	 "id",
          "artist_name",         
          "object_type_dk",
          "object_type_en",
