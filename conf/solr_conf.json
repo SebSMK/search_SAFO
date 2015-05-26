@@ -63,14 +63,6 @@
                {
                   "id":"materiale_en",
                   "lang":"en"
-               },
-               {
-                  "id":"prod_technique_dk",
-                  "lang":"dk"
-               },
-               {
-                  "id":"prod_technique_en",
-                  "lang":"en"
                }
             ]
          },
@@ -128,9 +120,7 @@
          "artist_natio_en",
          "object_production_date_earliest",
          "object_type_dk",
-         "object_type_en",
-         "prod_technique_dk",
-         "prod_technique_en",
+         "object_type_en",       
          "collection",
          "portrait_person",
          "topografisk_motiv",

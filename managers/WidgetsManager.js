@@ -406,11 +406,11 @@ var EventsManager;
 		});
 
 		//* searchfilters has finished loading
-		for (var i = 0, l = all_facets.length; i < l; i++) {
-			$(Manager.widgets[all_facets[i]]).on('smk_search_filter_loaded', function(event){
-				EventsManager.smk_search_filter_loaded(event.currentTarget.target);
-			});
-		};	
+//		for (var i = 0, l = all_facets.length; i < l; i++) {
+//			$(Manager.widgets[all_facets[i]]).on('smk_search_filter_loaded', function(event){
+//				EventsManager.smk_search_filter_loaded(event.currentTarget.target);
+//			});
+//		};	
 
 		//* all images loaded in "teaser"
 		$(Manager.widgets['teasers']).on('smk_teasers_all_images_loaded', function(event){     	            	

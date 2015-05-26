@@ -478,7 +478,7 @@
 			};
 
 			for (var i = 0, l = all_facets.length; i < l; i++) {				
-				doQueueProcess(all_facets[i]);
+				//doQueueProcess(all_facets[i]);
 				doQueueProcess("adv_" + all_facets[i]);
 			};			
 		};			
