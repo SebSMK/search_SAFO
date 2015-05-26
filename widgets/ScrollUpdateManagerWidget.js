@@ -81,8 +81,8 @@
 			this.reset();
 
 			// add current fq to scroll manager
-			var fq = ModelManager.get_fq();			
-			this.set_sub_manager_fq(fq);			
+			//var fq = ModelManager.get_fq();			
+			this.set_sub_manager_fq();			
 		},
 
 		start_scroll_request: function(){
@@ -106,32 +106,19 @@
 			else{		
 				if(!this.isRequestRunning && !this.noMoreResults && this.trigger_req()){
 					var params = {};					
+					var nber_rows_to_load = this.scrollManager.store.scroll_rows_default * 5;
 					
 					params.q = ModelManager.get_q();				
-					params.start = parseInt(this.scrollManager.store.get('start').val()) + parseInt(this.scrollManager.store.scroll_rows_default);			
+					params.start = $(this.scroll_subWidget.target).find('.matrix-tile').length;	//parseInt(this.scrollManager.store.get('start').val()) + 1;			
 					params.sort = smkCommon.isValidDataText(ModelManager.get_sort()) ? ModelManager.get_sort() : this.scrollManager.store.sort_default;				
-					params.rows = this.scrollManager.store.scroll_rows_default * 5; 
+					params.rows = nber_rows_to_load; 
 					
 					
 					this.scrollManager.store.addByValue('q', params.q !== undefined && params.q.length > 0  ? params.q : this.scrollManager.store.q_default);
 					this.scrollManager.store.addByValue('start', params.start);
 					this.scrollManager.store.addByValue('sort', params.sort);
 					this.scrollManager.store.addByValue('rows', params.rows);
-					
-					var model = ModelManager.getModel();
-					// fq param
-					if(model.fq !== undefined && AjaxSolr.isArray(model.fq)){
-						for (var i = 0, l = model.fq.length; i < l; i++) {						
-							this.scrollManager.store.addByValue('fq', model.fq[i].value, model.fq[i].locals);
-						};											
-					};
-					// auto param (auto parameter is in fact a fq param called from autocomplete box)
-					if(model.auto !== undefined && AjaxSolr.isArray(model.auto)){
-						for (var i = 0, l = model.auto.length; i < l; i++) {						
-							this.scrollManager.store.addByValue('fq', model.auto[i].value, model.auto[i].locals);
-						};											
-					};
-
+										
 					this.isRequestRunning = true;
 					this.isPreloading = false;
 					this.scroll_subWidget.isPreloading(false);
@@ -161,21 +148,7 @@
 				this.scrollManager.store.addByValue('q', params.q !== undefined && params.q.length > 0  ? params.q : this.scrollManager.store.q_default);
 				this.scrollManager.store.addByValue('start', params.start);
 				this.scrollManager.store.addByValue('sort', params.sort);
-				this.scrollManager.store.addByValue('rows', params.rows);
-				
-				var model = ModelManager.getModel();
-				// fq param
-				if(model.fq !== undefined && AjaxSolr.isArray(model.fq)){
-					for (var i = 0, l = model.fq.length; i < l; i++) {						
-						this.scrollManager.store.addByValue('fq', model.fq[i].value, model.fq[i].locals);
-					};											
-				};
-				// auto param (auto parameter is in fact a fq param called from autocomplete box)
-				if(model.auto !== undefined && AjaxSolr.isArray(model.auto)){
-					for (var i = 0, l = model.auto.length; i < l; i++) {						
-						this.scrollManager.store.addByValue('fq', model.auto[i].value, model.auto[i].locals);
-					};											
-				};
+				this.scrollManager.store.addByValue('rows', params.rows);							
 
 				this.isRequestRunning = true;
 				this.isPreloading = true;
@@ -188,12 +161,18 @@
 			}        
 		},
 
-		set_sub_manager_fq: function(fq){			
-			if(this.scrollManager != null && fq !== undefined && AjaxSolr.isArray(fq)){
-				for (var i = 0, l = fq.length; i < l; i++) {						
-					this.scrollManager.store.addByValue('fq', fq[i].value, fq[i].locals);
+		set_sub_manager_fq: function(){
+			var model = ModelManager.getModel();
+			if(this.scrollManager != null && model.fq !== undefined && AjaxSolr.isArray(model.fq)){
+				for (var i = 0, l = model.fq.length; i < l; i++) {						
+					this.scrollManager.store.addByValue('fq', model.fq[i].value, model.fq[i].locals);
 				};											
-			};	
+			};
+			if(this.scrollManager != null && model.auto !== undefined && AjaxSolr.isArray(model.auto)){
+				for (var i = 0, l = model.auto.length; i < l; i++) {						
+					this.scrollManager.store.addByValue('fq', model.auto[i].value, model.auto[i].locals);
+				};											
+			};
 		},
 		
 		reset: function(){			
