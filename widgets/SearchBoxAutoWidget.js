@@ -4,9 +4,71 @@
 
 		requestSent: false,
 
+		list: [],
+
 		init: function () {						
 			var self = this;
-			var $target = $(this.target);		  
+			var $target = $(this.target);	
+			self.requestSent = false;
+
+			self.create_typeahead();	
+			self.init_typeahead();			
+
+			// user chooses a result in dropdown list
+			$(self.target).find('input.search-bar-field').bind("typeahead:selected", function(obj, data, name) {					
+				self.requestSent = true;				
+				$(self).trigger({
+					type: "smk_search_filter_changed",
+					params: {auto: sprintf('%s:%s', data.field, AjaxSolr.Parameter.escapeValue(data.facet))}
+				});					
+			});
+			
+			// user validates a search string (lower priority than dropdown list)
+			$(self.target).find('input').bind("keydown", function (e) {
+				if (self.requestSent === false && e.which == 13) {										
+					var value = $(this).val();
+					$(self).trigger({
+						type: "smk_search_q_added",
+						val: value
+					});								
+				}
+			});
+		},
+
+		beforeRequest: function(){	
+			var self = this;
+			self.create_typeahead();	
+			self.init_typeahead();			
+
+			// user chooses a result in dropdown list
+			$(self.target).find('input.search-bar-field').bind("typeahead:selected", function(obj, data, name) {					
+				self.requestSent = true;				
+				$(self).trigger({
+					type: "smk_search_filter_changed",
+					params: {auto: sprintf('%s:%s', data.field, AjaxSolr.Parameter.escapeValue(data.facet))}
+				});					
+			});
+			
+			// user validates a search string (lower priority than dropdown list)
+			$(self.target).find('input').bind("keydown", function (e) {
+				if (self.requestSent === false && e.which == 13) {										
+					var value = $(this).val();
+					$(self).trigger({
+						type: "smk_search_q_added",
+						val: value
+					});								
+				}
+			});
+		},
+
+		afterRequest: function () {
+			var self = this;
+			self.requestSent = false;	
+		},
+
+		create_typeahead: function(){
+			var self = this;
+			var $target = $(this.target);
 			var json_data = {"default_text" : this.manager.translator.getLabel("search_box_default"), 'search': this.manager.translator.getLabel("search_box_button")};	 
 			var html = self.template_integration_json(json_data, '#searchboxTemplate');		  
 			$target.html(html);	
@@ -17,11 +79,6 @@
 				self.requestSent = false;
 			});
 
-//			},		    
-
-//			beforeRequest: function(){						
-
-			// add current search string (whether it be q or fq search )
 			if(ModelManager.get_view() != 'detail'){
 				var searchstring = ModelManager.get_q().length != 0 ? ModelManager.get_q().toString() : AjaxSolr.Parameter.unescapeValue(ModelManager.get_auto_values().replace(/^"|"$/g, ''));
 				$(this.target).find('input.search-bar-field').val(searchstring);
@@ -36,30 +93,46 @@
 			// clear typeahead
 			$(this.target).find('input.search-bar-field').typeahead('destroy');
 
-//			},
+		},
+		
+		init_typeahead: function(){
+			var self = this;
+			var dropdown_list = self.init_bloodhound();
+			dropdown_list.initialize();
 
-//			afterRequest: function () {
+			$(self.target).find('input.search-bar-field').typeahead({
+				hint: !0,
+				highlight: !0,
+				minLength: 1
+			}, {
+				name: 'autosearch',
+				displayKey: 'facet',
+				source: dropdown_list.ttAdapter(),
+				templates: {
+					suggestion: function(data){
+						return sprintf('<p>%s&nbsp;<i>(%s)</i></p>', data.facet, self.manager.translator.getLabel("autocomp_" +  data.field));
+					}
+				}
 
-//			var self = this;	  
-//			if (!self.getRefresh()){
-//			self.setRefresh(true);
-//			return;
-//			}								
+			});
+		},
 
-			var list = [];
+		init_bloodhound: function(){
+			var self = this;
+			self.list = [];
 			var params = [ 'sort=score desc&fl=*%2C score&facet=true&facet.limit=-1&facet.mincount=1&json.nl=map' ];
 			for (var i = 0; i < self.fields.length; i++) {
 				params.push('facet.field=' + self.fields[i]);
 			}
+			var url = self.manager.solrUrl + 'select?' + params.join('&') + '&defType=edismax&qf=collector1&q=%QUERY';
+			var solrurl = sprintf('%sselect?%s&defType=edismax&qf=%s&q=%%QUERY', self.manager.solrUrl, params.join('&'), self.manager.store.get_qf_string());			
 
-			var films = new Bloodhound({
+			return new Bloodhound({
 				datumTokenizer: function(d) { return Bloodhound.tokenizers.whitespace(d.value); },
 				queryTokenizer: Bloodhound.tokenizers.whitespace,
 				limit: 10,
 				remote: {
-					//url: 'http://api.themoviedb.org/3/search/movie?query=%QUERY&api_key=470fd2ec8853e25d2f8d86f685d2270e',
-					//url: 'http://csdev-seb:8180/solr-example/dev_SAFO/select?facet=true&facet.limit=-1&facet.mincount=1&json.nl=map&facet.field=artist_name&facet.field=object_type_dk&facet.field=object_type_en&facet.field=portrait_person&facet.field=topografisk_motiv&facet.field=materiale&facet.field=materiale_en&facet.field=title_en&facet.field=title_first&q=id:KMS1',
-					url: self.manager.solrUrl + 'select?' + params.join('&') + '&defType=edismax&qf=collector1&q=%QUERY', 
+					url: solrurl, 
 					ajax: {
 						beforeSend: function(jqXhr, settings){							
 							self.requestSent = false;
@@ -79,15 +152,15 @@
 
 					filter: function (response) {
 						// clear typeahead list
-						list = [];
-						
+						self.list = [];
+
 						// Map the remote source JSON array to a JavaScript object array						
 						for (var i = 0; i < self.fields.length; i++) {
 							var field = self.fields[i];								
 
 							for (var facet in response.facet_counts.facet_fields[field]) {
 								if(facet.toLowerCase().indexOf(response.responseHeader.params.q.toLowerCase()) > -1)									
-									list.push({
+									self.list.push({
 										facet: facet,
 										field: field,										
 										count: response.facet_counts.facet_fields[field][facet],
@@ -95,50 +168,12 @@
 									});
 							}
 						}
-						return list;				        					           
+						return self.list;				        					           
 					}
 				}
 
 			});
 
-			films.initialize();
-
-			self.requestSent = false;
-			$(self.target).find('input.search-bar-field').typeahead({
-				hint: !0,
-				highlight: !0,
-				minLength: 1
-			}, {
-				name: 'autosearch',
-				displayKey: 'facet',
-				source: films.ttAdapter(),
-				templates: {
-					suggestion: function(data){
-						return sprintf('<p>%s&nbsp;<i>(%s)</i></p>', data.facet, self.manager.translator.getLabel("autocomp_" +  data.field));
-					}
-				}
-
-			}).bind("typeahead:selected", function(obj, data, name) {					
-				self.requestSent = true;				
-				$(self).trigger({
-					type: "smk_search_filter_changed",
-					params: {auto: sprintf('%s:%s', data.field, AjaxSolr.Parameter.escapeValue(data.facet))}
-				});					
-			});
-
-			$(self.target).find('input').bind("keydown", function (e) {
-				if (self.requestSent === false && e.which == 13) {										
-					var value = $(this).val();
-					$(self).trigger({
-						type: "smk_search_q_added",
-						val: value
-					});								
-				}
-			});
-		},
-
-		afterRequest: function () {
-			self.requestSent = false;	
 		},
 
 		template_integration_json: function (json_data, templ_id){	  
