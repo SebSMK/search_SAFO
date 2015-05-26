@@ -61,9 +61,7 @@
 					//url: 'http://csdev-seb:8180/solr-example/dev_SAFO/select?facet=true&facet.limit=-1&facet.mincount=1&json.nl=map&facet.field=artist_name&facet.field=object_type_dk&facet.field=object_type_en&facet.field=portrait_person&facet.field=topografisk_motiv&facet.field=materiale&facet.field=materiale_en&facet.field=title_en&facet.field=title_first&q=id:KMS1',
 					url: self.manager.solrUrl + 'select?' + params.join('&') + '&defType=edismax&qf=collector1&q=%QUERY', 
 					ajax: {
-						beforeSend: function(jqXhr, settings){
-							// clear typeahead list
-							list = [];
+						beforeSend: function(jqXhr, settings){							
 							self.requestSent = false;
 						},
 						success: function(data, textStatus, jqXHR ){
@@ -80,6 +78,9 @@
 					},
 
 					filter: function (response) {
+						// clear typeahead list
+						list = [];
+						
 						// Map the remote source JSON array to a JavaScript object array						
 						for (var i = 0; i < self.fields.length; i++) {
 							var field = self.fields[i];								
@@ -113,7 +114,7 @@
 				source: films.ttAdapter(),
 				templates: {
 					suggestion: function(data){
-						return sprintf('<p>%s - %s</p>', data.facet, data.field);
+						return sprintf('<p>%s&nbsp;<i>(%s)</i></p>', data.facet, self.manager.translator.getLabel("autocomp_" +  data.field));
 					}
 				}
 

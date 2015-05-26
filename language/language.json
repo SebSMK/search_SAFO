@@ -19,7 +19,20 @@
       
       "checkbox_hasimage": 			"med optagelse", 
       
-      "tagcloud_artist_name": 			"kunstner",
+      "autocomp_id": 				"inventar nummer",
+      "autocomp_title_en": 			"titel",
+      "autocomp_title_first": 		"titel",
+	  "autocomp_artist_name": 		"producent",
+	  "autocomp_object_type_dk": 	"værktype",
+	  "autocomp_object_type_en": 	"værktype",	  
+	  "autocomp_portrait_person": 	"portrætteret",
+	  "autocomp_topografisk_motiv": "topografisk motiv",
+	  "autocomp_materiale": 		"materiale",
+	  "autocomp_materiale_en": 		"materiale",
+	  "autocomp_proveniens": 		"proveniens",
+      
+      
+      "tagcloud_artist_name": 			"producent",
       "tagcloud_artist_auth": 			"rolle",      
 	  "tagcloud_object_production_date_earliest": 		"periode",
 	  "tagcloud_artist_natio_dk": 		"nationalitet",
@@ -676,7 +689,19 @@
       "adv_acq_column_title": 		"acquisition",
       "adv_motiv_column_title": 	"motive",      
 
-	  "tagcloud_artist_name": 		"artist",
+	  "autocomp_id": 				"inventory number",
+      "autocomp_title_en": 			"title",
+      "autocomp_title_first": 		"title",
+	  "autocomp_artist_name": 		"producer",
+	  "autocomp_object_type_en": 	"artwork type",
+	  "autocomp_object_type_dk": 	"artwork type",	  
+	  "autocomp_portrait_person": 	"portrait",
+	  "autocomp_topografisk_motiv": "topografical motive",
+	  "autocomp_materiale": 		"material",
+	  "autocomp_materiale_en": 		"material",
+	  "autocomp_proveniens": 		"provenenance",
+
+	  "tagcloud_artist_name": 		"producer",
 	  "tagcloud_artist_auth": 		"role",
 	  "tagcloud_object_production_date_earliest": 		"period",
 	  "tagcloud_artist_natio_en":	"nationality",

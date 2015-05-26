@@ -173,6 +173,12 @@ a.divLink {
   
 }
 
+.tt-suggestion i {
+  color: #a2a2a5;
+  font-style: italic;
+  font-size: .8em;
+}
+
 
 /* Modif of Jacques' code */
 

@@ -118,7 +118,8 @@
          "materiale",
          "materiale_en",
          "title_en",
-         "title_first"
+         "title_first",
+         "proveniens"
       ],
       "all":[
          "artist_name",
