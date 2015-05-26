@@ -194,16 +194,16 @@ var EventsManager;
 //			template: Mustache.getTemplate('templates/current.html')
 //		})); 
 
-		Manager.addWidget(new AjaxSolr.PagerWidget({
-			id: 'pager',
-			target: '#pager',
-			prevLabel: '&lt;',
-			nextLabel: '&gt;',
-			innerWindow: 1,
-			renderHeader: function (perPage, offset, total) {
-				$('#pager-viser').html($('<li></li>').html( sprintf(' %s <span>%s</span> %s <span>%s</span> %s', translator.getLabel('pager_display'), Math.min(total, offset + perPage), translator.getLabel('pager_udaf'), total, translator.getLabel('pager_resultater'))));
-			}
-		}));
+//		Manager.addWidget(new AjaxSolr.PagerWidget({
+//			id: 'pager',
+//			target: '#pager',
+//			prevLabel: '&lt;',
+//			nextLabel: '&gt;',
+//			innerWindow: 1,
+//			renderHeader: function (perPage, offset, total) {
+//				$('#pager-viser').html($('<li></li>').html( sprintf(' %s <span>%s</span> %s <span>%s</span> %s', translator.getLabel('pager_display'), Math.min(total, offset + perPage), translator.getLabel('pager_udaf'), total, translator.getLabel('pager_resultater'))));
+//			}
+//		}));
 
 		Manager.addWidget(new AjaxSolr.LanguagePickerWidget({
 			id: 'lang-picker',

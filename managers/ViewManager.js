@@ -150,10 +150,10 @@
 		}				
 
 		//...efter scroll: all the new images loaded in teaser
-		this.smk_scroll_all_images_displayed = function(added){			
-			if (added !== undefined)
-				this.callWidgetFn('pager', 'refreshDisplay', {params: [added]});
-		},
+//		this.smk_scroll_all_images_displayed = function(added){			
+//			if (added !== undefined)
+//				this.callWidgetFn('pager', 'refreshDisplay', {params: [added]});
+//		},
 
 		//* detail
 		this.smk_detail_this_img_loaded = function(){			
@@ -188,11 +188,11 @@
 
 				self.callWidgetFn('details', 'removeAllRelated');				
 
-				self.showWidget($target.find("#pager-viser"));
+				//self.showWidget($target.find("#pager-viser"));
 //				self.showWidget($(self.callWidgetTarget('currentsearch')));
 				self.showWidget($(self.callWidgetTarget('category')));
 				self.showWidget($(self.callWidgetTarget('sorter')));
-				self.showWidget($(self.callWidgetTarget('pager')));				
+				//self.showWidget($(self.callWidgetTarget('pager')));				
 				self.showWidget($(self.callWidgetTarget('teasers')));
 
 				self.showWidget($target.find("#search-filters"));
@@ -212,12 +212,12 @@
 					self.hideWidget($(self.callWidgetTarget(Manager.searchfilterList[i])));							
 				};		
 
-				self.hideWidget($target.find("#pager-viser"));
+				//self.hideWidget($target.find("#pager-viser"));
 				self.hideWidget($target.find("#search-filters"));				
 //				self.hideWidget($(self.callWidgetTarget('currentsearch')));																			
 				self.hideWidget($(self.callWidgetTarget('category')));				
 				self.hideWidget($(self.callWidgetTarget('sorter')));
-				self.hideWidget($(self.callWidgetTarget('pager')));							
+				//self.hideWidget($(self.callWidgetTarget('pager')));							
 				self.hideWidget($(self.callWidgetTarget('teasers')));
 				self.showWidget($(self.callWidgetTarget('details')));
 				self.showWidget($(self.callWidgetTarget('details', 'thumbnails_subWidget')));
