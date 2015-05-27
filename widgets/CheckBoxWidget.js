@@ -14,9 +14,9 @@
 				var params = {};
 
 				if(this.checked)
-					params['selected'] = '[* TO *]';
+					params['selected'] = sprintf('%s:[* TO *]', self.field);
 				else
-					params['deselected'] = '[* TO *]';		  			  
+					params['deselected'] = sprintf('%s:[* TO *]', self.field);		  			  
 
 				$(self).trigger({
 					type: "hasimage",

@@ -236,49 +236,6 @@
 		 * */
 
 		/*
-		 * Checkbox changed (has image)
-		 * @result:  model update 
-		 * */
-		this.smk_checkbox_changed = function(value){
-
-			var search_string = 'medium_image_url:';			
-			var q = new Array()
-			if (search_string != '') {																																									
-				var default_teaser_view = ModelManager.getModel().view == 'detail';
-
-				if (!default_teaser_view)
-					q = AjaxSolr.isArray(ModelManager.get_q()) ? ModelManager.get_q() : ModelManager.get_q() === undefined ? new Array() : new Array(ModelManager.get_q());				
-
-					q.push(search_string); 			
-
-					var model = {};										
-					model.q = q;					
-					model.sort = ModelManager.current_value_joker;
-					model.view = default_teaser_view ? "teasers" : ModelManager.current_value_joker;
-					model.category = default_teaser_view ? "all" : ModelManager.current_value_joker;
-					model.lang = ModelManager.current_value_joker;
-
-					if (!default_teaser_view)
-						model.fq = ModelManager.current_value_joker;
-
-					ModelManager.update(model);					
-			};
-		};
-
-
-//		/*
-//		 * call to teaser view
-//		 * @result:  model update 
-//		 * */
-//		this.smk_search_call_teasers = function(){
-//
-//			//restore previous search params
-//			var model = ModelManager.loadStoredModel();
-//
-//			ModelManager.update(model); 			
-//		};	
-
-		/*
 		 * call to detail view
 		 * @result:  open detail in a new window
 		 * */  
@@ -455,7 +412,7 @@
 		//* scroll - all new pictures has been added (in teaser)		
 		this.smk_scroll_all_images_displayed = function(added){
 			ViewManager.highlightning(); // highlight search words
-			ViewManager.smk_scroll_all_images_displayed(added);	
+//			ViewManager.smk_scroll_all_images_displayed(added);	
 
 //			//* start preloading of teaser's images 
 //			if(this.startScroll)
