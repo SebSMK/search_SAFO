@@ -22,7 +22,7 @@
 					params: {auto: sprintf('%s:%s', data.field, AjaxSolr.Parameter.escapeValue(data.facet))}
 				});					
 			});
-			
+
 			// user validates a search string (lower priority than dropdown list)
 			$(self.target).find('input').bind("keydown", function (e) {
 				if (self.requestSent === false && e.which == 13) {										
@@ -48,7 +48,7 @@
 					params: {auto: sprintf('%s:%s', data.field, AjaxSolr.Parameter.escapeValue(data.facet))}
 				});					
 			});
-			
+
 			// user validates a search string (lower priority than dropdown list)
 			$(self.target).find('input').bind("keydown", function (e) {
 				if (self.requestSent === false && e.which == 13) {										
@@ -94,7 +94,7 @@
 			$(this.target).find('input.search-bar-field').typeahead('destroy');
 
 		},
-		
+
 		init_typeahead: function(){
 			var self = this;
 			var dropdown_list = self.init_bloodhound();
@@ -119,35 +119,44 @@
 
 		init_bloodhound: function(){
 			var self = this;
-			self.list = [];
-			var params = [ 'sort=score desc&fl=*%2C score&facet=true&facet.limit=-1&facet.mincount=1&json.nl=map' ];
+
+			var qf = (self.manager.store.get_qf_string());
+			self.list = [];			
+			params = [ 'facet=true', 
+			           'facet.limit=-1', 
+			           'facet.mincount=1', 
+			           'json.nl=map', 
+			           'sort=score desc',
+			           'rows=0',
+			           'defType=edismax'];
+
 			for (var i = 0; i < self.fields.length; i++) {
 				params.push('facet.field=' + self.fields[i]);
-			}
-			var url = self.manager.solrUrl + 'select?' + params.join('&') + '&defType=edismax&qf=collector1&q=%QUERY';
-			var solrurl = sprintf('%sselect?%s&defType=edismax&qf=%s&q=%%QUERY', self.manager.solrUrl, params.join('&'), self.manager.store.get_qf_string());			
+			}			
+
+			var locquery = encodeURIComponent(sprintf('&%s&qf=%s', params.join('&'), qf));								
+			var proxyurl = self.manager.proxyUrl + "?query=q%3D%QUERY"+ locquery + "&callback=" + function(data){};
 
 			return new Bloodhound({
 				datumTokenizer: function(d) { return Bloodhound.tokenizers.whitespace(d.value); },
 				queryTokenizer: Bloodhound.tokenizers.whitespace,
-				limit: 10,
+				limit: self.limit,
 				remote: {
-					url: solrurl, 
+					url: proxyurl, 
 					ajax: {
 						beforeSend: function(jqXhr, settings){							
 							self.requestSent = false;
 						},
-						success: function(data, textStatus, jqXHR ){
-							//self.requestSent = true;
-						},
+						success: function(data, textStatus, jqXHR ){},
 						dataType: 'jsonp',
 
 						data: {
 							'wt': 'json',
-							'rows': 0
+							'solrUrl': self.manager.solrUrl,
+							'language': smkCommon.getCurrentLanguage()
 						},
 
-						jsonp: 'json.wrf'
+						type: 'POST'
 					},
 
 					filter: function (response) {
@@ -166,21 +175,23 @@
 										count: response.facet_counts.facet_fields[field][facet],
 										value: facet + ' (' + response.facet_counts.facet_fields[field][facet] + ') - ' + field
 									});
+								if (self.list.length >= self.limit)
+									break;
 							}
 						}
 						return self.list;				        					           
 					}
 				}
-
 			});
-
-		},
+		},				
 
 		template_integration_json: function (json_data, templ_id){	  
 			var template = this.template; 	
 			var html = Mustache.to_html($(template).find(templ_id).html(), json_data);
 			return html;
-		}
+		},
+
+		limit: 10
 
 	});
 
