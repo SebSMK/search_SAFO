@@ -89,7 +89,8 @@
 			$(self.related_subWidget).on('smk_search_call_detail', function(event){ 								
 				$(self).trigger({
 					type: "smk_search_call_detail",
-					event: event
+					detail_url: event.detail_url,
+					samewin: true
 				});
 			});
 
@@ -103,9 +104,25 @@
 			$(self.parts_subWidget).on('smk_search_call_detail', function(event){ 								
 				$(self).trigger({
 					type: "smk_search_call_detail",
-					event: event
+					detail_url: event.detail_url,
+					samewin: true
 				});
-			});						
+			});		
+			
+			//***
+			//* events
+			//***
+			//* all images loaded in parts "teaser"
+			$(self.parts_subWidget).on('smk_teasers_all_images_loaded', function(event){     	            	
+				self.teasers_all_images_loaded();
+			});		
+
+			//* all images loaded in related "teaser"
+			$(self.related_subWidget).on('smk_teasers_all_images_loaded', function(event){     	            	
+				self.teasers_all_images_loaded();
+			});		
+
+			
 		}, 
 
 		afterRequest: function () {	  
@@ -168,6 +185,24 @@
 		removeAllRelated: function(){
 			this.related_subWidget.removeAllArticles();
 		},
+		
+		process_details_tabs: function(){
+			// we're queuing processing of each tab, so that they're processed in a row with a 10ms interval
+			var doQueueProcess = function(func){				
+				var doQueue= function() {
+					func();
+				};
+				$.taskQueue.add(doQueue, this, 10);	
+			};
+
+			doQueueProcess($.proxy(this.process_init_tabs, this));
+			doQueueProcess($.proxy(this.process_reference, this));
+			doQueueProcess($.proxy(this.process_related, this));
+			doQueueProcess($.proxy(this.process_parts, this));
+			doQueueProcess($.proxy(this.process_extended, this));
+			doQueueProcess($.proxy(this.process_extended_original, this));					
+		},
+		
 
 		process_related: function(){
 			if(this.tab_related_id_req != null && this.relatedManager != null){				
@@ -230,9 +265,9 @@
 				$target.html(html); 						
 
 				//* click on tab
-				$target.find(".tabs a").click(function (event) {
+				$target.find('.tabs').not('.print-tabs').find('a').click(function (event) {
 					event.preventDefault();
-					$target.find(".tabs a").removeClass("active");
+					$target.find('.tabs').not('.print-tabs').find('a').removeClass("active");
 					$(this).addClass("active");												
 					$target.find(".tab-content").removeClass("tab-content--open");
 					$target.find($(this).attr("href")).addClass("tab-content--open");
@@ -242,7 +277,7 @@
 				});													
 			}
 			
-			$target.find(".tabs a").each(function(){
+			$target.find('.tabs').not('.print-tabs').find('a').each(function(){
 				$(this).removeClass('active');
 				$target.find($(this).attr('href')).removeClass("tab-content--open");
 				
@@ -257,7 +292,7 @@
 			var $target = $(self.target);						
 			var i = 0;			
 			
-			$target.find(".tabs a").each(function(){
+			$target.find('.tabs').not('.print-tabs').find('a').each(function(){
 				
 				if($target.find($(this).attr('href')).find('.data-pair').length == 0 
 					&& $target.find($(this).attr('href')).find('.matrix-tile').length == 0
@@ -296,11 +331,17 @@
 		hideTabs: function(){
 			var self = this;
 			var $target = $(self.target);
-			$target.find(".tabs a").each(function(){
+			$target.find('.tabs').not('.print-tabs').find('a').each(function(){
+			//$target.find(".tabs a").each(function(){
 
 				$(this).removeClass('active');
 				$target.find($(this).attr('href')).removeClass("tab-content--open");
 			});			
+		},
+		
+		teasers_all_images_loaded: function(){
+			this.process_show_extended_titles();
+			this.process_show_tabs();							
 		},
 		
 		refreshLayout: function(){

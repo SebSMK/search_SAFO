@@ -71,17 +71,17 @@
 			// teasers			
 			this.add_modal_loading_to_widget('teasers');
 
-			//* filters
-			for (var i = 0, l = Manager.searchfilterList.length; i < l; i++) {		  	
-				if(Manager.widgets[Manager.searchfilterList[i]] != null)
-					this.add_modal_loading_to_widget(Manager.widgets[Manager.searchfilterList[i]].field);
-			};
-
-			//* advanced filters
-			for (var i = 0, l = Manager.searchfilterList.length; i < l; i++) {
-				if(Manager.widgets["adv_" + Manager.searchfilterList[i]] != null)
-					this.add_modal_loading_to_widget(Manager.widgets["adv_" + Manager.searchfilterList[i]].field);
-			};
+//			//* filters
+//			for (var i = 0, l = Manager.searchfilterList.length; i < l; i++) {		  	
+//				if(Manager.widgets[Manager.searchfilterList[i]] != null)
+//					this.add_modal_loading_to_widget(Manager.widgets[Manager.searchfilterList[i]].field);
+//			};
+//
+//			//* advanced filters
+//			for (var i = 0, l = Manager.searchfilterList.length; i < l; i++) {
+//				if(Manager.widgets["adv_" + Manager.searchfilterList[i]] != null)
+//					this.add_modal_loading_to_widget("adv_" + Manager.widgets["adv_" + Manager.searchfilterList[i]].field);
+//			};
 
 			// details
 			this.add_modal_loading_to_widget('details');	 

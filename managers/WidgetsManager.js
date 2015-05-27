@@ -375,14 +375,14 @@ var EventsManager;
 			EventsManager.smk_search_call_detail(event);
 		});
 
-		$(Manager.widgets['details']).on('smk_search_call_detail', function(event){     	
-			EventsManager.smk_search_call_detail(event.event_caller);
+		$(Manager.widgets['details_tabs']).on('smk_search_call_detail', function(event){     	
+			EventsManager.smk_search_call_detail(event);
 		});
 
-		//* calls to teasers view
-		$(Manager.widgets['details']).on('smk_search_call_teasers', function(event){  
-			EventsManager.smk_search_call_teasers();
-		});
+//		//* calls to teasers view
+//		$(Manager.widgets['details']).on('smk_search_call_teasers', function(event){  
+//			EventsManager.smk_search_call_teasers();
+//		});
 
 		//* change language
 		$(Manager.widgets['lang-picker']).on('smk_lang_changed', function(event){  

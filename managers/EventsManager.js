@@ -266,17 +266,17 @@
 		};
 
 
-		/*
-		 * call to teaser view
-		 * @result:  model update 
-		 * */
-		this.smk_search_call_teasers = function(){
-
-			//restore previous search params
-			var model = ModelManager.loadStoredModel();
-
-			ModelManager.update(model); 			
-		};	
+//		/*
+//		 * call to teaser view
+//		 * @result:  model update 
+//		 * */
+//		this.smk_search_call_teasers = function(){
+//
+//			//restore previous search params
+//			var model = ModelManager.loadStoredModel();
+//
+//			ModelManager.update(model); 			
+//		};	
 
 		/*
 		 * call to detail view
@@ -284,7 +284,14 @@
 		 * */  
 		this.smk_search_call_detail = function(event){						 		  
 			var detail_url = event.detail_url + '&fl=detail';
-			window.open(event.detail_url);			
+			if(event.samewin == true){
+				// open detail in the same window
+				ModelManager.update(event.detail_url, "url");
+			}
+			else{
+				// open detail in a new window
+				window.open(event.detail_url);
+			}						
 		};	
 
 		/*
@@ -488,26 +495,8 @@
 			ViewManager.smk_detail_this_img_loaded();
 			this.wigdetLoaded();
 
-			var self = this;
 			// start details_tabs processing
-			// we're queuing processing of each tab, so that they're processed in a row with a 10ms interval
-			var doQueueProcess = function(tab){				
-				var doQueue= function() {
-					ViewManager.callWidgetFn('details_tabs', tab);
-				};
-				$.taskQueue.add(doQueue, this, 10);	
-			};
-
-			doQueueProcess('process_init_tabs');
-			doQueueProcess('process_reference');
-			doQueueProcess('process_related');
-			doQueueProcess('process_parts');
-			doQueueProcess('process_extended');
-			doQueueProcess('process_extended_original');
-			doQueueProcess('process_show_extended_titles');	
-			doQueueProcess('process_show_tabs');
-
-
+			ViewManager.callWidgetFn('details_tabs', 'process_details_tabs');
 		};
 	}
 }));

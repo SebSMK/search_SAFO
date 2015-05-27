@@ -110,9 +110,13 @@ var	ModelManager = {
 
 		},
 
-		update: function(model){
-			this.setModel(model);			
-			window.location.href = this.buildURLFromModel(this.getModel());
+		update: function(model, type){
+			if(type == "url"){
+				window.location.href = model;				
+			}else{
+				this.setModel(model);			
+				window.location.href = this.buildURLFromModel(this.getModel());
+			}			
 		},
 
 		update_url: function(url){						
