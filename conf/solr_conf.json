@@ -2,6 +2,7 @@
    "version":"0.000.001.028 mvc NO proxy",
    "mode":"debug perf",
    "server":"http://csdev-seb:8180/solr-example/dev_SAFO/",
+   "server_proxy":"http://solr.smk.dk:8080/proxySolrPHP/proxy.php",
    "facets":{
       "advanced":[
          {

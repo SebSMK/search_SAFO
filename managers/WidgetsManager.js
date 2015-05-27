@@ -17,6 +17,7 @@ var EventsManager;
 		var solr_conf = new Configurator.constructor();
 		solr_conf.load_json("conf/solr_conf.json");
 		var server = solr_conf.get_server();
+		var server_proxy = solr_conf.get_server_proxy();		
 		var exposed = solr_conf.get_exposed_params();
 		var fq_default = solr_conf.get_fq_default();
 		var fl_options = solr_conf.get_fl_options();
@@ -57,7 +58,7 @@ var EventsManager;
 		//******************************    
 		Manager = new AjaxSolr.smkManager({
 			solrUrl: server, 
-			//proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
+			proxyUrl: server_proxy,
 			store: new AjaxSolr.smkParameterStore({
 				exposed: exposed,    		
 				fq_default: fq_default,
@@ -98,7 +99,7 @@ var EventsManager;
 		//******************************    
 		var scrollManager = new AjaxSolr.smkManager({
 			solrUrl: server,
-			//proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',
+			proxyUrl: server_proxy,
 			store: new AjaxSolr.smkParameterStore({
 				exposed: exposed,
 				start: 0,     		
@@ -137,7 +138,7 @@ var EventsManager;
 		//******************************    
 		var relatedManager = new AjaxSolr.smkManager({
 			solrUrl: server, 
-			//proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
+			proxyUrl: server_proxy,			
 			store: new AjaxSolr.smkParameterStore({
 				exposed: exposed,
 				fl_options: {"related": fl_options.related},
@@ -153,7 +154,7 @@ var EventsManager;
 		//******************************    
 		var getDetailManager = new AjaxSolr.smkManager({
 			solrUrl: server, 
-			//proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
+			proxyUrl: server_proxy,		
 			store: new AjaxSolr.smkParameterStore({
 				exposed: exposed,
 				fl_options: {"detail": fl_options.detail},

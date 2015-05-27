@@ -62,6 +62,10 @@
 						case "server":		 			  			  			  									  				    		
 							this.server = item;				  			  			  
 							break;
+							
+						case "server_proxy":		 			  			  			  									  				    		
+							this.server_proxy = item;				  			  			  
+							break;
 
 						case "scroll_rows_default":		 			  			  			  
 							this.scroll_rows_default = item;			  			  			  
@@ -154,6 +158,13 @@
 		this.get_server = function(){
 			return this.server;
 		};
+		
+		/*
+		 *
+		 */
+		this.get_server_proxy = function(){
+			return this.server_proxy;
+		};
 
 		/*
 		 *
@@ -201,6 +212,7 @@
 		this.exposed_params = null; // exposed parameters
 		this.facets = null; // facets
 		this.server = null;
+		this.server_proxy = null;
 		this.scroll_rows_default = null;
 		this.rows_default = null;
 		this.mode = "normal";
