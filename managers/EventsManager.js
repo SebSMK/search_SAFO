@@ -318,13 +318,14 @@
 			};    
 
 			if (trigg_req){	
-				var model = {};				
+				var model = {};	
+				
 				model.fq = params.selected !== undefined || params.deselected !== undefined ? current_fqs : ModelManager.current_value_joker;
 				model.auto = params.auto !== undefined ? [new AjaxSolr.Parameter({ name: 'fq', value: params.auto})] : ModelManager.current_value_joker;
 				model.q = params.auto === undefined ? ModelManager.current_value_joker : null;
 				model.sort = ModelManager.current_value_joker;
-				model.view = ModelManager.current_value_joker;
-				model.category = ModelManager.current_value_joker;
+				model.view = "teasers";
+				model.category = "all";
 				model.lang = ModelManager.current_value_joker;
 
 				ModelManager.update(model);
