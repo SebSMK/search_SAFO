@@ -779,7 +779,8 @@
 	getdatacommon.getSubWidgReq_vaerkdele = function(doc){
 		if(doc.multi_work_ref === undefined )
 			return null;
-
+		
+/*
 		var multi_works = doc.multi_work_ref.split(';-;');						
 		var allworksRequest = [];		
 		
@@ -791,8 +792,8 @@
 		var res = allworksRequest.length == 0 ? null : allworksRequest.join(' OR ');
 		
 		return res == null ? null : sprintf('%s -id:%s', res, doc.id);
-		
-		//return res == null ? null : sprintf('id:%s/*', doc.id);
+*/		
+		return sprintf('id:%s/*', doc.id.split('/')[0]);
 		
 	};
 

@@ -38,14 +38,14 @@
 
 			{
 					"related": {					
-						'rows':500,					
+						'rows':20,					
 						'start': 0,
 						'fl': self.relatedManager.store.fl_options.related,
 						'json.nl': 'map'
 					},
 
 					"multi_work": {					
-						'rows':500,					
+						'rows':20,					
 						'start': 0,
 						'sort': "id asc",
 						'fl': self.partsManager.store.fl_options.thumbs,
@@ -53,7 +53,7 @@
 					},
 
 					"detail": {					
-						'rows':500,					
+						'rows':20,					
 						'start': 0,
 						'fl': self.originalManager.store.fl_options.detail,
 						'json.nl': 'map'
