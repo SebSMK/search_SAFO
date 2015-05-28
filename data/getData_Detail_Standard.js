@@ -18,7 +18,7 @@
 			var data =  {
 
 					media:{
-						title: this.getDetailTitle(doc),	
+						title: getData_Common.getFirstTitle(doc),	
 						alt: getData_Common.getMedia_alt(doc),
 						image: getData_Common.getMedia_image(doc, 'large'),						
 						image_full_path: doc.medium_image_url,
@@ -39,7 +39,7 @@
 						
 						artist: this.getListProducers(doc),																																					
 						
-						title_museum: this.getDetailTitle(doc),
+						title_museum: getData_Common.getFirstTitle(doc),
 						title_serie: this.getDetailSerieTitle(doc),	
 						title_serie_label: this.caller.manager.translator.getLabel('detail_title_serie'),
 						
@@ -97,28 +97,25 @@
 			
 		};
 		
-		this.getDetailTitle = function(doc){
-			var title_mus = getData_Common.getTitle(doc, 'museum');
-			var title_besk = getData_Common.getTitle(doc, 'beskriv');			
-			var title_teaser = title_mus || title_besk;
-			
-			var title = new String();
-			
-			if(title_teaser != null && title_teaser.length > 0){
-				switch(smkCommon.getCurrentLanguage()){
-				case "dk":		 		
-					title = title_teaser[0].title;
-					break;
-				case "en":
-					title = smkCommon.isValidDataText(title_teaser[0].trans) ? title_teaser[0].trans : title_teaser[0].title; 
-					break;
-				}									
-			}else{				
-				title = doc.title_first;
-			}
-						
-			return smkCommon.isValidDataText(title) ? title : null;
-		};
+//		this.getDetailTitle = function(doc){			
+//			var title_teaser = getData_Common.getTitle(doc, 'first');			
+//			var title = new String();
+//			
+//			if(title_teaser != null && title_teaser.length > 0){
+//				switch(smkCommon.getCurrentLanguage()){
+//				case "dk":		 		
+//					title = title_teaser[0].title;
+//					break;
+//				case "en":
+//					title = smkCommon.isValidDataText(title_teaser[0].trans) ? title_teaser[0].trans : title_teaser[0].title; 
+//					break;
+//				}									
+//			}else{				
+//				title = doc.title_first;
+//			}
+//						
+//			return smkCommon.isValidDataText(title) ? title : null;
+//		};
 		
 
 		this.getDetailSerieTitle = function(doc){

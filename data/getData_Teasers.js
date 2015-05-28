@@ -21,7 +21,7 @@
 					url: this.getDetailUrl(doc),
 					
 					media:{
-						title: getData_Common.getTitle(doc, 'museum'),	
+						title: getData_Common.getFirstTitle(doc),	
 						alt: getData_Common.getMedia_alt(doc),
 						image: getData_Common.getMedia_image(doc, 'medium'),
 						no_image: doc.medium_image_url === undefined ? true : false,
@@ -34,7 +34,7 @@
 					
 					info:{
 						producent_kunster: this.getListProducers(doc),																																
-						title_museum: this.getTeaserTitle(doc),															
+						title_museum: getData_Common.getFirstTitle(doc), 															
 						datering_production_vaerkdatering:{'lab': smkCommon.firstCapital(this.caller.manager.translator.getLabel('teaser_date_lab')), 'value':getData_Common.getProduction_vaerkdatering(doc)},		
 						ident_invnummer: {'lab': smkCommon.firstCapital(this.caller.manager.translator.getLabel("list_reference")), 'value': getData_Common.getIdent_invnummer(doc)},	
 						location_location: smkCommon.firstCapital(this.getListLocation(doc, this.caller)),
@@ -58,37 +58,7 @@
 			model.lang = smkCommon.getCurrentLanguage();
 
 			return ModelManager.buildURLFromModel(model); 
-		};
-		
-		this.getTeaserTitle = function(doc){
-			var title_mus = getData_Common.getTitle(doc, 'museum');
-			var title_besk = getData_Common.getTitle(doc, 'beskriv');
-			var title_serie = getData_Common.getTitle(doc, 'serie');
-			var title_teaser = title_mus || title_besk || title_serie;
-			
-			var title = new String();
-			var max = 70;
-			var short;
-			
-			if(title_teaser != null && title_teaser.length > 0){
-				switch(smkCommon.getCurrentLanguage()){
-				case "dk":		 		
-					title = title_teaser[0].title;
-					break;
-				case "en":
-					title = smkCommon.isValidDataText(title_teaser[0].trans) ? title_teaser[0].trans : title_teaser[0].title; 
-					break;
-				}									
-			}else{				
-				title = doc.title_first;
-			}
-			
-			if (smkCommon.isValidDataText(title))
-				title = title.length > max ? sprintf('%s(...)', title.substring(0, max)) : title;
-				
-			return smkCommon.isValidDataText(title) ? title : null;
-			//return "Lorem ipsum dolor sit amet, et imperdiet adipiscing iaculis consequat, sit interdum, faucibus aliquam sem aspernatur aliquet, vestibulum vitae vehicula dui ut amet hendrerit, vitae elit pulvinar. Ut ligula ipsum, nec enim, vestibulum vestibulum sodales aliquam, et minim magna at vitae mauris arcu. Lacinia ante, imperdiet a in maecenas quam arcu, bibendum condimentum, cursus morbi quis felis ultrices ullamcorper, neque nulla consequat. Sit fusce proin viverra dictum risus, mauris iaculis est odio in, metus dapibus, lacus maecenas est. Nonummy vestibulum, metus phasellus et, class volutpat eget, ut sollicitudin nec felis conubia cras, sed libero pede."
-		};
+		};				
 		
 		this.getListLocation = function (doc, caller){
 			var location = smkCommon.firstCapital(doc.location_name);

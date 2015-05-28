@@ -143,7 +143,8 @@
 			var values = titles_split[i].split(smkCommon.split_2_niv);			
 			if(smkCommon.getValueFromSplit(values, 4) != null && smkCommon.getValueFromSplit(values, 4).indexOf(type) > -1 ||
 					(smkCommon.getValueFromSplit(values, 4) == null && type == 'museum') || 
-					(smkCommon.getValueFromSplit(values, 4) != null && smkCommon.getValueFromSplit(values, 4).indexOf('blank') > -1 && type == 'museum')){
+					(smkCommon.getValueFromSplit(values, 4) != null && smkCommon.getValueFromSplit(values, 4).indexOf('blank') > -1 && type == 'museum') ||
+					type == 'first'){
 				var title = smkCommon.getValueFromSplit(values, 0);
 				var title_note = smkCommon.getValueFromSplit(values, 1);
 				var title_lang = smkCommon.getValueFromSplit(values, 2);
@@ -167,12 +168,35 @@
 				if(smkCommon.isValidDataText(translation))
 					tmp.trans = translation;
 
-				titles_data.push(tmp);					
+				titles_data.push(tmp);	
+				
+				if(type == 'first')
+					break; // in this case, we want only the first title in the list
 			}				
 		};
 
 		return titles_data.length > 0 ? titles_data : null;			
-	}
+	};
+	
+	getdatacommon.getFirstTitle = function(doc){			
+		var title_teaser = getData_Common.getTitle(doc, 'first');			
+		var title = new String();
+		
+		if(title_teaser != null && title_teaser.length > 0){
+			switch(smkCommon.getCurrentLanguage()){
+			case "dk":		 		
+				title = title_teaser[0].title;
+				break;
+			case "en":
+				title = smkCommon.isValidDataText(title_teaser[0].trans) ? title_teaser[0].trans : title_teaser[0].title; 
+				break;
+			}									
+		}else{				
+			title = doc.title_first;
+		}
+					
+		return smkCommon.isValidDataText(title) ? title : null;
+	};
 
 	/**
 	 * Production date
