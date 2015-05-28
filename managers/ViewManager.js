@@ -208,9 +208,9 @@
 				$target.find("section.section--list").hide();
 				$target.find("section.section--detail").show();				
 
-				for (var i = 0, l = Manager.searchfilterList.length; i < l; i++) {				
-					self.hideWidget($(self.callWidgetTarget(Manager.searchfilterList[i])));							
-				};		
+//				for (var i = 0, l = Manager.searchfilterList.length; i < l; i++) {				
+//					self.hideWidget($(self.callWidgetTarget(Manager.searchfilterList[i])));							
+//				};		
 
 				//self.hideWidget($target.find("#pager-viser"));
 				self.hideWidget($target.find("#search-filters"));				

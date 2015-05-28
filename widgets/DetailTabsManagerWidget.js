@@ -114,12 +114,12 @@
 			//***
 			//* all images loaded in parts "teaser"
 			$(self.parts_subWidget).on('smk_teasers_all_images_loaded', function(event){     	            	
-				self.teasers_all_images_loaded();
+				self.end_tab_process(self.parts_subWidget.target);
 			});		
 
 			//* all images loaded in related "teaser"
 			$(self.related_subWidget).on('smk_teasers_all_images_loaded', function(event){     	            	
-				self.teasers_all_images_loaded();
+				self.end_tab_process(self.related_subWidget.target);
 			});		
 
 			
@@ -186,23 +186,14 @@
 			this.related_subWidget.removeAllArticles();
 		},
 		
-		process_details_tabs: function(){
-			// we're queuing processing of each tab, so that they're processed in a row with a 10ms interval
-			var doQueueProcess = function(func){				
-				var doQueue= function() {
-					func();
-				};
-				$.taskQueue.add(doQueue, this, 10);	
-			};
-
-			doQueueProcess($.proxy(this.process_init_tabs, this));
-			doQueueProcess($.proxy(this.process_reference, this));
-			doQueueProcess($.proxy(this.process_related, this));
-			doQueueProcess($.proxy(this.process_parts, this));
-			doQueueProcess($.proxy(this.process_extended, this));
-			doQueueProcess($.proxy(this.process_extended_original, this));					
-		},
-		
+		process_details_tabs: function(){			
+			this.process_init_tabs();
+			this.process_reference();
+			this.process_related();
+			this.process_parts();
+			this.process_extended();
+			this.process_extended_original();			
+		},		
 
 		process_related: function(){
 			if(this.tab_related_id_req != null && this.relatedManager != null){				
@@ -210,6 +201,8 @@
 				var param = new AjaxSolr.Parameter({name: "q", value: this.tab_related_id_req });					  					
 				this.relatedManager.store.add(param.name, param);	 			
 				this.relatedManager.doRequest();
+			}else{
+				this.end_tab_process('#related');
 			}
 		},	
 
@@ -219,13 +212,17 @@
 				var param = new AjaxSolr.Parameter({name: "q", value: this.tab_multi_work_ref_req });					  					
 				this.partsManager.store.add(param.name, param);	 			
 				this.partsManager.doRequest();				
+			}else{
+				this.end_tab_process('#components');
 			}		
 		},
 
 		process_extended: function(){
 			if(this.tab_extended_html != null){				
-				$(this.target).find("#extended_tab").html(this.tab_extended_html);																					
-			}		
+				$(this.target).find("#extended_tab").html(this.tab_extended_html);	
+				if(smkCommon.debugLog()) console.log('process_extended' + this.tab_extended_html.substring(0, 50));
+			}				
+			this.end_tab_process('#extended');
 		},
 
 		process_extended_original: function(){
@@ -240,7 +237,8 @@
 		process_reference: function(){
 			if(this.tab_reference_html != null){				
 				$(this.target).find("#reference_tab").html(this.tab_reference_html);
-			}		
+			}
+			this.end_tab_process('#reference');
 		},				
 
 		// in the extended tab, show/hide titles of each sub-section
@@ -270,7 +268,7 @@
 					$target.find('.tabs').not('.print-tabs').find('a').removeClass("active");
 					$(this).addClass("active");												
 					$target.find(".tab-content").removeClass("tab-content--open");
-					$target.find($(this).attr("href")).addClass("tab-content--open");
+					$target.find($(this).attr("href")).addClass("tab-content--open");					
 					
 					self.refreshLayout();
 					
@@ -279,7 +277,8 @@
 			
 			$target.find('.tabs').not('.print-tabs').find('a').each(function(){
 				$(this).removeClass('active');
-				$target.find($(this).attr('href')).removeClass("tab-content--open");
+				$(this).addClass('isloading');
+				$target.find($(this).attr('href')).removeClass("tab-content--open");				
 				
 				//* add text to tabs (and change language if needed)
 				$(this).text(self.manager.translator.getLabel($(this).attr('lab-id')));
@@ -305,6 +304,7 @@
 					if(i == 0){
 						$(this).addClass('active');
 						$target.find($(this).attr('href')).addClass("tab-content--open");
+						if(smkCommon.debugLog()) console.log('process_show_tabs ' + $target.find($(this).attr('href'))[0].outerHTML.substring(0, 50));
 						i++;
 					}	
 					
@@ -325,8 +325,7 @@
 
 			//* show tabs	
 			$target.css('visibility', 'visible');						
-		},
-		
+		},		
 		
 		hideTabs: function(){
 			var self = this;
@@ -339,9 +338,13 @@
 			$target.css('visibility', 'hidden');
 		},
 		
-		teasers_all_images_loaded: function(){
-			this.process_show_extended_titles();
-			this.process_show_tabs();							
+		end_tab_process: function(id){
+			$(this.target).find(sprintf('a[href=%s]', id)).removeClass('isloading');
+			if($(this.target).find('.isloading').length == 0){
+				if(smkCommon.debugLog()) console.log('teasers_all_images_loaded'); 
+				this.process_show_extended_titles();
+				this.process_show_tabs();				
+			}													
 		},
 		
 		refreshLayout: function(){

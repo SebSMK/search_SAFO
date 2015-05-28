@@ -40,7 +40,8 @@
 						artist: this.getListProducers(doc),																																					
 						
 						title_museum: this.getDetailTitle(doc),
-						title_serie: this.getDetailSerieTitle(doc),																							
+						title_serie: this.getDetailSerieTitle(doc),	
+						title_serie_label: this.caller.manager.translator.getLabel('detail_title_serie'),
 						
 						datering: {
 							key: this.caller.manager.translator.getLabel('detail_date'),  
