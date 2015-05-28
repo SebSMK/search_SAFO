@@ -267,6 +267,10 @@ a.divLink {
   height: 27px;
 }
 
+.artwork .artwork-artists {
+  font-size: 1.1em;
+}
+
 /*
 .tab-content {
   left: 0px !important;

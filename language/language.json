@@ -99,7 +99,7 @@
 	  "detail_technique":		"teknik",
 	  "detail_acquisition":		"erhvervelse",
 	  "detail_reference":		"inv.nr.",
-	  "detail_dimension":		"dimension",
+	  "detail_dimension":		"dimensioner",
 	  "detail_dimension_net":	"netto",
 	  "detail_dimension_brut":	"brutto",
 	  "detail_location":		"location",

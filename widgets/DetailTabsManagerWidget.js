@@ -333,10 +333,10 @@
 			var $target = $(self.target);
 			$target.find('.tabs').not('.print-tabs').find('a').each(function(){
 			//$target.find(".tabs a").each(function(){
-
 				$(this).removeClass('active');
-				$target.find($(this).attr('href')).removeClass("tab-content--open");
+				$target.find($(this).attr('href')).removeClass("tab-content--open");									
 			});			
+			$target.css('visibility', 'hidden');
 		},
 		
 		teasers_all_images_loaded: function(){

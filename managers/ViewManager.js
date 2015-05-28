@@ -178,10 +178,10 @@
 				$target.find("section.section--list").show();
 				$target.find("section.section--detail").hide();
 
-				$(self.callWidgetTarget('details', 'thumbnails_subWidget')).empty();
-				self.hideWidget($(self.callWidgetTarget('details', 'thumbnails_subWidget')));
-				$(self.callWidgetTarget('details', 'related_subWidget')).empty();
-				self.hideWidget($(self.callWidgetTarget('details', 'related_subWidget')));
+//				$(self.callWidgetTarget('details', 'thumbnails_subWidget')).empty();
+//				self.hideWidget($(self.callWidgetTarget('details', 'thumbnails_subWidget')));
+//				$(self.callWidgetTarget('details', 'related_subWidget')).empty();
+//				self.hideWidget($(self.callWidgetTarget('details', 'related_subWidget')));
 
 				$(self.callWidgetTarget('details')).empty();
 				self.hideWidget($(self.callWidgetTarget('details')));
@@ -220,8 +220,8 @@
 				//self.hideWidget($(self.callWidgetTarget('pager')));							
 				self.hideWidget($(self.callWidgetTarget('teasers')));
 				self.showWidget($(self.callWidgetTarget('details')));
-				self.showWidget($(self.callWidgetTarget('details', 'thumbnails_subWidget')));
-				self.showWidget($(self.callWidgetTarget('details', 'related_subWidget')));				
+//				self.showWidget($(self.callWidgetTarget('details', 'thumbnails_subWidget')));
+//				self.showWidget($(self.callWidgetTarget('details', 'related_subWidget')));				
 
 				break;		  
 			} 	
