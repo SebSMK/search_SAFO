@@ -138,47 +138,18 @@
 		};		
 		
 		this.getListProducers = function(doc){									
-			var res = new Array();
-			var list = new Array();
-			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.orig)))
-				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.orig));
-			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.tilsk)))
-				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.tilsk));
-			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.tidl)))
-				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.tidl));
-			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.vaerksted)))
-				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.vaerksted));
-			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.efterfoel)))
-				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.efterfoel));
-			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.inventor)))
-				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.inventor));
-			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.skole)))
-				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.skole));
-			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.stil)))
-				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.stil));
-			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.kopi)))
-				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.kopi));
-			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.efterfor)))
-				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.efterfor));
-			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.udgiver)))
-				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.udgiver));
-			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.trykker)))
-				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.trykker));
-			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.forfatter)))
-				list.push(getData_Common.getProducent_producent(doc, getData_Common.enumProducent.forfatter));						
+			var self = this;
+			var res = new Array();			
 			
-			for (var i = 0, l = list.length; i < l; i++) {
-				
-				for (var j = 0, k = list[i].length; j < k ; j++) {											
-//					if(smkCommon.isValidDataText(list[i][j].artist_data.role))
-//						list[i][j].artist_data.role = sprintf(' %s', list[i][j].artist_data.role);
-//						
-//					res.push(list[i][j]);
-					
-					var output = this.getArtistOutput(list[i][j].artist_data);
-					res.push(output);
-				}													
-			}
+			$.each(getData_Common.enumProducent, function( index, typeprod ) {
+				if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, typeprod))){
+					var data = getData_Common.getProducent_producent(doc, typeprod);					
+					$.each(data, function( sub_index, artist_data ) {
+						var output = self.getArtistOutput(artist_data.artist_data);
+						res.push(output);
+					});					
+				}												
+			});						
 			
 			res.show = res.length > 0 ? true : false;
 			
