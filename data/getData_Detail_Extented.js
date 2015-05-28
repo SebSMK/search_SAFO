@@ -518,52 +518,20 @@
 		};
 
 		this.getAllTitles = function(doc){
-			if (doc.title_all === undefined) 
-				return null;
-
 			var self = this;
-			var titles_split = doc.title_all.split(smkCommon.split_1_niv);
-			var titles_data = [];			
-			var arrayLength = titles_split.length;
-
-			for (var i = 0; i < arrayLength; i++) {					
-				var values = titles_split[i].split(smkCommon.split_2_niv);			
-
-				var title = smkCommon.getValueFromSplit(values, 0);
-				var title_note = smkCommon.getValueFromSplit(values, 1);
-				var title_lang = smkCommon.getValueFromSplit(values, 2);
-				var title_transl = smkCommon.getValueFromSplit(values, 3);
-				var title_type = smkCommon.getValueFromSplit(values, 4) == null ? 'museum' : smkCommon.getValueFromSplit(values, 4);					
-				var tmp;
-				var translation = new String();
-
-				// we take only the first translation
-				if(smkCommon.isValidDataText(title_transl)){
-					var split_trans = title_transl.split(smkCommon.split_3_niv); 	           
-					if (split_trans.length > 0)	
-						translation= split_trans[0].split(smkCommon.split_4_niv)[0];            					           		         	            				                       
-				}        	  		  
-
-				tmp = {'title' : title};
-
-				if(smkCommon.isValidDataText(title_note))
-					tmp.note = title_note;
-
-				if(smkCommon.isValidDataText(translation))
-					tmp.trans = translation;
-
-				jQuery.each(getData_Common.enumTitleTypes, function(key, val) {
-					if(title_type.indexOf(key) > -1){
-						tmp.type = smkCommon.firstCapital(self.caller.manager.translator.getLabel(val));
+			var alltitles = getData_Common.getTitle(doc, 'all');
+			
+			$.each(alltitles, function( index, value ) {
+				$.each(getData_Common.enumTitleTypes, function(key, val) {
+					if(smkCommon.isValidDataText(value.type) && value.type.indexOf(key) > -1){
+						value.type = smkCommon.firstCapital(self.caller.manager.translator.getLabel(val));
 						return false;//--> break from jQuery.each
 					}						
-				});
-				
-				titles_data.push(tmp);					
+				});			
+			
+			});
 
-			};
-
-			return titles_data.length > 0 ? titles_data : null;	
+			return alltitles;
 		};
 
 		/*

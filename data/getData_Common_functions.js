@@ -135,6 +135,7 @@
 		if (doc.title_all === undefined) 
 			return null;
 
+		var self = this;
 		var titles_split = doc.title_all.split(smkCommon.split_1_niv);
 		var titles_data = [];			
 		var arrayLength = titles_split.length;
@@ -144,12 +145,13 @@
 			if(smkCommon.getValueFromSplit(values, 4) != null && smkCommon.getValueFromSplit(values, 4).indexOf(type) > -1 ||
 					(smkCommon.getValueFromSplit(values, 4) == null && type == 'museum') || 
 					(smkCommon.getValueFromSplit(values, 4) != null && smkCommon.getValueFromSplit(values, 4).indexOf('blank') > -1 && type == 'museum') ||
-					type == 'first'){
+					type == 'first' ||
+					type == 'all'){
 				var title = smkCommon.getValueFromSplit(values, 0);
 				var title_note = smkCommon.getValueFromSplit(values, 1);
 				var title_lang = smkCommon.getValueFromSplit(values, 2);
-				var title_transl = smkCommon.getValueFromSplit(values, 3);
-				var title_type = smkCommon.getValueFromSplit(values, 4);					
+				var title_transl = smkCommon.getValueFromSplit(values, 3);				
+				var title_type = smkCommon.getValueFromSplit(values, 4) == null ? 'museum' : smkCommon.getValueFromSplit(values, 4);
 				var tmp;
 				var translation = new String();
 
@@ -160,13 +162,13 @@
 						translation= split_trans[0].split(smkCommon.split_4_niv)[0];            					           		         	            				                       
 				}        	  		  
 
-				tmp = {'title' : title};
+				tmp = {'title' : title, 'type':title_type};
 
 				if(smkCommon.isValidDataText(title_note))
 					tmp.note = title_note;
 
 				if(smkCommon.isValidDataText(translation))
-					tmp.trans = translation;
+					tmp.trans = translation;								
 
 				titles_data.push(tmp);	
 				
@@ -899,6 +901,7 @@
 			"beskriv":"title_beskriv",
 			"kunstner":"title_kunstner",
 			"museum":"title_museum",
+			"blank":"title_museum",
 			"oeuvre":"title_oeuvre",
 			"popu":"title_popu",
 			"samler":"title_samler",
