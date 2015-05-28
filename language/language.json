@@ -264,6 +264,18 @@
 	  "teaser_event_date":		"dato",
 	  "teaser_date_lab":		"datering",
 	  
+		"title_anden":		"anden bibliografisk titel",
+		"title_auktion":	"auktionskatalogtitel",
+		"title_beskriv":	"beskrivelse",
+		"title_kunstner":	"kunstnertitel",
+		"title_museum":		"museumstitel",
+		"title_oeuvre":		"oeuvrekatalogtitel",
+		"title_popu":		"populær titel",
+		"title_samler":		"samlertitel",
+		"title_serie":		"serietitel",
+		"title_tidlig":		"tidligere titel",
+		"title_udstill":	"udstillingskatalogtitelv",
+	  
 	  
 	  "thumbs_label":	 		"Værkets dele",
 	  
@@ -941,6 +953,18 @@
 	  "teaser_event_date":		"dato",
 	  "teaser_date_lab":		"date",
 	  
+	  "title_anden":		"other bibliographic title",
+		"title_auktion":	"auction catalogue title",
+		"title_beskriv":	"description",
+		"title_kunstner":	"artist's title",
+		"title_museum":		"museum title",
+		"title_oeuvre":		"reference catalogue title",
+		"title_popu":		"popular title",
+		"title_samler":		"collector's title",
+		"title_serie":		"series/cyklus",
+		"title_tidlig":		"former title",
+		"title_udstill":	"exhibition catalogue title",		
+	  
 	  "thumbs_label":	 		"associated works",
 	  							
 	  "arttype_hierarchi":	  {
@@ -1349,7 +1373,7 @@
 		"sal 100":	"Information desk",
 		"sal 111":	"Conservators work space",
 		"sal 114":	"x-rummet",
-		"sal 116":	"The children�s exhibition",
+		"sal 116":	"The children s exhibition",
 		"sal 120":	"Special exhibition",
 		"sal 200":	"Corridor",
 		"sal 201A":	"European Art 1300-1800",

@@ -270,84 +270,30 @@
 			<div class="data-section">
 				<h3>{{{title_lab}}}</h3>
 	
-				{{#title_museum.show}} {{#title_museum.value}}
+				{{#title_titles.show}} {{#title_titles.value}}
 				<div class="data-pair">
-					<h4 class="data-pair-key">{{{title_museum.key}}}</h4>
+					<h4 class="data-pair-key">{{{type}}}</h4>
 	
 					<div class="data-pair-value">{{{title}}}</div>
 					<!-- /.data-pair-value -->
 	
 					{{#note}}
-					<h4 class="data-pair-key indent">{{{title_museum.key_note}}}</h4>
+					<h4 class="data-pair-key indent">{{{title_titles.key_note}}}</h4>
 					<div class="data-pair-value">{{{note}}}</div>
 					<!-- /.data-pair-value -->
 					{{/note}} {{#trans}}
-					<h4 class="data-pair-key indent">{{{title_museum.key_trans}}}</h4>
+					<h4 class="data-pair-key indent">{{{title_titles.key_trans}}}</h4>
 					<div class="data-pair-value">{{{trans}}}</div>
 					<!-- /.data-pair-value -->
 					{{/trans}} {{#trans_note}}
-					<h4 class="data-pair-key indent">{{{title_museum.key_trans_note}}}</h4>
+					<h4 class="data-pair-key indent">{{{title_titles.key_trans_note}}}</h4>
 					<div class="data-pair-value">{{{trans_note}}}</div>
 					<!-- /.data-pair-value -->
 					{{/trans_note}}
-	
-	
-	
 				</div>
 				<!-- /.data-pair -->
-				{{/title_museum.value}} {{/title_museum.show}}
-	
-	
-				{{#title_beskrivelse.show}} {{#title_beskrivelse.value}}
-				<div class="data-pair">
-					<h4 class="data-pair-key">{{{title_beskrivelse.key}}}</h4>
-	
-					<div class="data-pair-value">{{{title}}}</div>
-					<!-- /.data-pair-value -->
-	
-					{{#note}}
-					<h4 class="data-pair-key indent">{{{title_beskrivelse.key_note}}}</h4>
-					<div class="data-pair-value">{{{note}}}</div>
-					<!-- /.data-pair-value -->
-					{{/note}} {{#trans}}
-					<h4 class="data-pair-key indent">{{{title_beskrivelse.key_trans}}}</h4>
-					<div class="data-pair-value">{{{trans}}}</div>
-					<!-- /.data-pair-value -->
-					{{/trans}} {{#trans_note}}
-					<h4 class="data-pair-key indent">{{{title_beskrivelse.key_trans_note}}}</h4>
-					<div class="data-pair-value">{{{trans_note}}}</div>
-					<!-- /.data-pair-value -->
-					{{/trans_note}}
-	
-				</div>
-				<!-- /.data-pair -->
-				{{/title_beskrivelse.value}} {{/title_beskrivelse.show}}
-	
-	
-				{{#title_serie.show}} {{#title_serie.value}}
-				<div class="data-pair">
-					<h4 class="data-pair-key">{{{title_serie.key}}}</h4>
-	
-					<div class="data-pair-value">{{{title}}}</div>
-					<!-- /.data-pair-value -->
-	
-					{{#note}}
-					<h4 class="data-pair-key indent">{{{title_serie.key_note}}}</h4>
-					<div class="data-pair-value">{{{note}}}</div>
-					<!-- /.data-pair-value -->
-					{{/note}} {{#trans}}
-					<h4 class="data-pair-key indent">{{{title_serie.key_trans}}}</h4>
-					<div class="data-pair-value">{{{trans}}}</div>
-					<!-- /.data-pair-value -->
-					{{/trans}} {{#trans_note}}
-					<h4 class="data-pair-key indent">{{{title_serie.key_trans_note}}}</h4>
-					<div class="data-pair-value">{{{trans_note}}}</div>
-					<!-- /.data-pair-value -->
-					{{/trans_note}}
-	
-				</div>
-				<!-- /.data-pair -->
-				{{/title_serie.value}} {{/title_serie.show}}
+				{{/title_titles.value}} {{/title_titles.show}}
+					
 	
 			</div>
 			<!-- /.title -->

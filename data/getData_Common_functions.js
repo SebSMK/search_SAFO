@@ -15,13 +15,13 @@
 	/**
 	 * Location
 	 * */
-	
+
 	getdatacommon.getLocation_location = function (doc, caller){
 		var location = smkCommon.firstCapital(doc.location_name);
 		var location_inhouse = smkCommon.isValidDataText(location) ? caller.manager.translator.getCollection(smkCommon.replace_dansk_char(location)) : ''; 
 		return smkCommon.isValidDataText(location_inhouse) ? location_inhouse : null;
 	};
-	
+
 	/**
 	 * Identification
 	 * */
@@ -38,7 +38,7 @@
 		}
 
 		return smkCommon.isValidDataText(vaerktype) ? vaerktype : null;
-		
+
 	};		
 
 	getdatacommon.getIdent_dele = function(doc){			
@@ -93,7 +93,7 @@
 					var death = smkCommon.isValidDataText(docDeath[i], 'date') ? docDeath[i] : (docBirth[i] < 1800) ? '(?)' : '';
 					var dates = smkCommon.isValidDataText(docDeath[i], 'date') || smkCommon.isValidDataText(docBirth[i], 'date') ? sprintf('%s - %s', birth, death) : '';
 					var auth = !smkCommon.isValidDataText(doc.artist_auth[i]) || doc.artist_auth[i] == 'original' ? '' : doc.artist_auth[i]; 
-					
+
 					artistData.push({'artist_data' : 
 					{'name' : name,
 						'nationality' : nationality,
@@ -101,7 +101,7 @@
 						'role': auth}
 					});
 					//artistData.push(name);
-					
+
 				}
 			}		  		  
 		}	  
@@ -160,7 +160,7 @@
 				}        	  		  
 
 				tmp = {'title' : title};
-				
+
 				if(smkCommon.isValidDataText(title_note))
 					tmp.note = title_note;
 
@@ -272,7 +272,7 @@
 						'dim' : doc.dimension_netto
 					}
 			);	
-		
+
 		if (doc.dimension_bladmaal !== undefined)
 			dimensions.push( 
 					{
@@ -296,7 +296,7 @@
 						'dim' : doc.dimension_brutto
 					}
 			);	
-		
+
 		if (doc.dimension_billedmaal !== undefined)
 			dimensions.push( 
 					{
@@ -304,7 +304,7 @@
 						'dim' : doc.dimension_billedmaal
 					}
 			);	
-		
+
 		if (doc.dimension_monteringsmaal!== undefined)
 			dimensions.push( 
 					{
@@ -312,7 +312,7 @@
 						'dim' : doc.dimension_monteringsmaal
 					}
 			);	
-		
+
 		return dimensions;
 	};				
 
@@ -349,7 +349,7 @@
 				var mat_val = smkCommon.getValueFromSplit(values, 0) != null ? smkCommon.getValueFromSplit(values, 0) : "";
 				var mat_type = smkCommon.getValueFromSplit(values, 1) != null ? smkCommon.getValueFromSplit(values, 1) : "";					
 				var res = {	mat_val: mat_val, 
-							mat_type: mat_type};
+						mat_type: mat_type};
 
 				mat_all.push(res);					
 			}				
@@ -418,7 +418,7 @@
 		}				
 
 		return res.length > 0 ? res : null;
-		
+
 	};
 
 	getdatacommon.getTechnique_note_vaerkstatus = function (doc){			
@@ -465,7 +465,7 @@
 	/**
 	 * Inscription
 	 * */
-		
+
 	getdatacommon.getInscription_signatur = function(doc){
 		if (doc.inscription_signatur === undefined) 
 			return null;
@@ -566,11 +566,11 @@
 	getdatacommon.getErhverv_method = function(doc){						
 		return doc.acq_method === undefined ? null : doc.acq_method;
 	};
-	
+
 	getdatacommon.getErhverv_source= function(doc){						
 		return doc.acq_source === undefined ? null : doc.acq_source;
 	};							
-					
+
 	getdatacommon.getErhverv_proveniens = function(doc){	
 		if (doc.proveniens === undefined) 
 			return null;
@@ -600,29 +600,29 @@
 	getdatacommon.getReferences_beckett = function(doc){			
 		return doc.other_numbers_beckett === undefined ? null : doc.other_numbers_beckett;
 	};
-	
+
 	getdatacommon.getReferences_texts = function(doc){
 		if(doc.reference_texts === undefined)
 			return null;
-		
-		
+
+
 		var split = doc.reference_texts.split(smkCommon.split_1_niv);
 		var arrayLength = split.length;
 		var default_value = null;
 		var reference_texts = [];
-		
+
 		for (var i = 0; i < arrayLength; i++) {	
 			var values = split[i].split(smkCommon.split_2_niv);
 			var source = smkCommon.getValueFromSplit(values, 0);
 			var text = smkCommon.getValueFromSplit(values, 1);
-			
+
 			if(smkCommon.isValidDataText(text)){
 				text = text.replace(/\r\n\r\n/g, "</p><p>").replace(/\n\n/g, "</p><p>");
 				text = text.replace(/\r\n/g, "<br />").replace(/\n/g, "<br />");
-									
+
 				var lang = smkCommon.getValueFromSplit(values, 2);
 				var current_lang = "";
-				
+
 				switch(smkCommon.getCurrentLanguage()){
 				case "dk":		 			  			  			  
 					current_lang = "dansk";
@@ -631,16 +631,16 @@
 					current_lang = "engelsk";
 					break;
 				}
-				
+
 				if(smkCommon.isValidDataText(lang) && lang.indexOf(current_lang) > -1)
 					reference_texts.push({value:text});					
 			}
 		}				
-			
+
 		return reference_texts.length == 0 ? null : reference_texts;
-						
+
 	};	
-	
+
 	getdatacommon.getReferences_litteratur = function(doc){			
 		if (doc.citations === undefined) 
 			return null;
@@ -662,17 +662,17 @@
 
 				tmp = sprintf('%s%s%s%s%s' , 
 						smkCommon.isValidDataText(agent, 'agent') ? sprintf('%s : ', agent ) : '',
-						smkCommon.isValidDataText(title) ? sprintf('<span>%s</span> : ', title ) : '',						
-						smkCommon.isValidDataText(place) ? sprintf('%s ', place ) : '',
-						smkCommon.isValidDataText(date) ? sprintf('<i>%s</i> :', date ) : ' :',
-						smkCommon.isValidDataText(refnote) ? sprintf('%s', refnote ) : '');
+								smkCommon.isValidDataText(title) ? sprintf('<span>%s</span> : ', title ) : '',						
+										smkCommon.isValidDataText(place) ? sprintf('%s ', place ) : '',
+												smkCommon.isValidDataText(date) ? sprintf('<i>%s</i> :', date ) : ' :',
+														smkCommon.isValidDataText(refnote) ? sprintf('%s', refnote ) : '');
 
 				citations_data.push({value:tmp});
 			}
 		};
 
 		return citations_data.length == 0 ? null : citations_data;
-		
+
 	};
 
 	/**
@@ -707,7 +707,7 @@
 					exhibitions_data.push({value:tmp});	      			
 			}	      			      
 		};
-		
+
 		return exhibitions_data.length == 0 ? null : exhibitions_data;
 	}
 
@@ -779,25 +779,25 @@
 	getdatacommon.getSubWidgReq_vaerkdele = function(doc){
 		if(doc.multi_work_ref === undefined )
 			return null;
-		
-/*
+
+		/*
 		var multi_works = doc.multi_work_ref.split(';-;');						
 		var allworksRequest = [];		
-		
+
 		for ( var i = 0, l = multi_works.length; i<l; ++i ) {
 			var work = multi_works[i].split(';--;');
 			if(work.length > 0)
 				allworksRequest.push(sprintf('id:%s', work[1]));	
 		}
 		var res = allworksRequest.length == 0 ? null : allworksRequest.join(' OR ');
-		
+
 		return res == null ? null : sprintf('%s -id:%s', res, doc.id);
-*/		
+		 */		
 		var rootId = smkCommon.getValueFromSplit(doc.id.split('/'), 0);
 		var partNr = smkCommon.getValueFromSplit(doc.id.split('/'), 1); 
 		var includeRootId = partNr != null ? sprintf('id:%s', rootId) : null;
 		return sprintf('id:%s/* -id:%s %s', rootId, doc.id, includeRootId);
-		
+
 	};
 
 	/* Request for Related works */
@@ -816,7 +816,7 @@
 
 		return allrelatedRequest.length == 0 ? null : allrelatedRequest.join(' OR ');
 	};	
-	
+
 	/**
 	 * Media
 	 * */
@@ -827,56 +827,70 @@
 
 		return  copyright == false ? sprintf('%s%s', artist, title) : sprintf('%s - %s', copyright, title); 	  
 	};
-	
+
 	getdatacommon.getMedia_image = function (doc, size){	  			
 		return doc.medium_image_url !== undefined ? smkCommon.getScaledPicture(doc.medium_image_url, size) : null;
 	};
-	
+
 	getdatacommon.getMedia_copyright = function (doc, caller){	  
 		var copyright = {};
-				
+
 		copyright.link = caller.manager.translator.getLabel('copyright_link');
 		copyright.show = doc.medium_image_url !== undefined && this.computeCopyright(doc);
 		copyright.img_cc0 = this.computeCopyright(doc) == false;		
 		copyright.text = this.computeCopyright(doc) != false ?	this.computeCopyright(doc).trim() : null;
-											 		
+
 		return copyright; 	  
 	};
-	
+
 	/**
 	 * Utils
 	 * */
 	getdatacommon.computeCopyright = function(doc) {
 		return doc.copyright !== undefined ? doc.copyright.replace(String.fromCharCode(169), "") : false;
 	};
-	
+
 	/**
 	 * Enum
 	 * */
 	getdatacommon.enumProducent = {			
-		'orig': 'original',
-		'tilsk': 'tilskrevet',
-		'tidl': 'tidl',
-		'vaerksted': 'værksted',
-		'efterfoel': 'efterf',
-		'inventor': 'inventor',
-		'skole': 'skole',
-		'stil': 'stil',
-		'kopi': 'kopi',
-		'efterfor': 'efter forlæg',
-		'udgiver': 'udgiver',
-		'trykker': 'trykker',
-		'forfatter': 'forfatter'									
+			'orig': 'original',
+			'tilsk': 'tilskrevet',
+			'tidl': 'tidl',
+			'vaerksted': 'værksted',
+			'efterfoel': 'efterf',
+			'inventor': 'inventor',
+			'skole': 'skole',
+			'stil': 'stil',
+			'kopi': 'kopi',
+			'efterfor': 'efter forlæg',
+			'udgiver': 'udgiver',
+			'trykker': 'trykker',
+			'forfatter': 'forfatter'									
 	};
-	
+
+	getdatacommon.enumTitleTypes = {			
+			"anden":"title_anden",
+			"auktion":"title_auktion",
+			"beskriv":"title_beskriv",
+			"kunstner":"title_kunstner",
+			"museum":"title_museum",
+			"oeuvre":"title_oeuvre",
+			"popu":"title_popu",
+			"samler":"title_samler",
+			"serie":"title_serie",		
+			"tidlig":"title_tidlig",		
+			"udstill":"title_udstill"									
+	};
+
 	/**
 	 * Debug
 	 * */
-	
+
 	getdatacommon.getScore = function(doc){
 		return doc.score;
-		
+
 	}
-	
-	
+
+
 }));

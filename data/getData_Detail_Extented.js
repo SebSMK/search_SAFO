@@ -18,272 +18,253 @@
 			var data =  {
 
 					info:{
-						
+
 						ident_lab: this.caller.manager.translator.getLabel('detail_ident_lab'),
-						
+
 						ident_vaerktype: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_ident_vaerktype')),  
 							value: getData_Common.getIdent_vaerktype(doc)
 						},
-            
-			            ident_dele: {
+
+						ident_dele: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_ident_dele')),  
 							value: getData_Common.getIdent_dele(doc)
 						},
-			            
-			            ident_invnummer: {
+
+						ident_invnummer: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_ident_invnummer')),  
 							value: getData_Common.getIdent_invnummer(doc)
 						},
-			            
-			            ident_samling: {
+
+						ident_samling: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_ident_samling')),  
 							value: getData_Common.getIdent_samling(doc)
 						},
-			            
-			            ident_andet_inv: {
+
+						ident_andet_inv: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_ident_andet_inv')),  
 							value: getData_Common.getIdent_andet_inv(doc)
 						},
-						
-						
+
+
 						producent_lab: this.caller.manager.translator.getLabel('detail_producent_lab'),
-						
+
 						producent_kunster: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_kunster')),  
 							value: this.getListProducers(doc, getData_Common.enumProducent.orig),
 							show: this.getListProducers(doc, getData_Common.enumProducent.orig).length > 0 ? true : false
 						},
-            
+
 						producent_tilskrevet: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_tilskrevet')),  
 							value: this.getListProducers(doc, getData_Common.enumProducent.tilsk),
 							show: this.getListProducers(doc, getData_Common.enumProducent.tilsk).length > 0 ? true : false
 						},
-			            
+
 						producent_tidltilskrvet: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_tidltilskrvet')),  
 							value: this.getListProducers(doc, getData_Common.enumProducent.tidl),
 							show: this.getListProducers(doc, getData_Common.enumProducent.tidl).length > 0 ? true : false
 						},
-			            
+
 						producent_vaerksted: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_vaerksted')),  
 							value: this.getListProducers(doc, getData_Common.enumProducent.vaerksted),
 							show: this.getListProducers(doc, getData_Common.enumProducent.vaerksted).length > 0 ? true : false
 						},
-			            
+
 						producent_efterfoelger: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_efterfoelger')),  
 							value: this.getListProducers(doc, getData_Common.enumProducent.efterfoel),
 							show: this.getListProducers(doc, getData_Common.enumProducent.efterfoel).length > 0 ? true : false
 						},
-            
+
 						producent_inventor: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_inventor')),  
 							value: this.getListProducers(doc, getData_Common.enumProducent.inventor),
 							show: this.getListProducers(doc, getData_Common.enumProducent.inventor).length > 0 ? true : false
 						},
-            
-			            producent_skole: {
+
+						producent_skole: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_skole')),  
 							value: this.getListProducers(doc, getData_Common.enumProducent.skole),
 							show: this.getListProducers(doc, getData_Common.enumProducent.skole).length > 0 ? true : false
 						},
-			            producent_stil: {
+						producent_stil: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_stil')),  
 							value: this.getListProducers(doc, getData_Common.enumProducent.stil),
 							show: this.getListProducers(doc, getData_Common.enumProducent.stil).length > 0 ? true : false
 						},
-			            producent_kopi: {
+						producent_kopi: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_kopi')),  
 							value: this.getListProducers(doc, getData_Common.enumProducent.kopi),
 							show: this.getListProducers(doc, getData_Common.enumProducent.tilsk).kopi > 0 ? true : false
 						},
-			            producent_forlaeg: {
+						producent_forlaeg: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_forlaeg')),  
 							value: this.getListProducers(doc, getData_Common.enumProducent.efterfor),
 							show: this.getListProducers(doc, getData_Common.enumProducent.efterfor).length > 0 ? true : false
 						},
-			            producent_udgiver: {
+						producent_udgiver: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_udgiver')),  
 							value: this.getListProducers(doc, getData_Common.enumProducent.udgiver),
 							show: this.getListProducers(doc, getData_Common.enumProducent.udgiver).length > 0 ? true : false
 						},
-			            producent_trykker: {
+						producent_trykker: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_trykker')),  
 							value: this.getListProducers(doc, getData_Common.enumProducent.trykker),
 							show: this.getListProducers(doc, getData_Common.enumProducent.trykker).length > 0 ? true : false
 						},			            
-			            producent_forfatter: {
+						producent_forfatter: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_forfatter')),  
 							value: this.getListProducers(doc, getData_Common.enumProducent.forfatter),
 							show: this.getListProducers(doc, getData_Common.enumProducent.forfatter).length > 0 ? true : false
 						},
-			            producent_formeri: {
+						producent_formeri: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_formeri')),  
 							value: this.getListProducers(doc, getData_Common.enumProducent.formeri),
 							show: this.getListProducers(doc, getData_Common.enumProducent.formeri).length > 0 ? true : false
 						},
-			            producent_objectophavsbeskrivelse: {
+						producent_objectophavsbeskrivelse: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_objectophavsbeskrivelse')),  
 							value: this.getListProducers(doc, getData_Common.enumProducent.objectophavsbeskrivelse),
 							show: this.getListProducers(doc, getData_Common.enumProducent.objectophavsbeskrivelse).length > 0 ? true : false
 						},       
-						
-						
+
+
 						title_lab: this.caller.manager.translator.getLabel('detail_title_lab'),
-						
-						title_museum: {
-							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_title_museum')),  
-							value: getData_Common.getTitle(doc, 'museum'),
-							show: getData_Common.getTitle(doc, 'museum') != null ? true : false,
+
+						title_titles: {							  
+							value: this.getAllTitles(doc),
+							show: true,
 							key_note: (this.caller.manager.translator.getLabel('detail_title_note')),
 							key_trans: (this.caller.manager.translator.getLabel('detail_title_translation')),
 							key_trans_note: (this.caller.manager.translator.getLabel('detail_title_translation_note'))
-						},																	
-						
-						title_serie: {
-							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_title_serie')),  
-							value: getData_Common.getTitle(doc, 'serie'),
-							show: getData_Common.getTitle(doc, 'serie') != null ? true : false,
-							key_note: (this.caller.manager.translator.getLabel('detail_title_note')),
-							key_trans: (this.caller.manager.translator.getLabel('detail_title_translation')),
-							key_trans_note: (this.caller.manager.translator.getLabel('detail_title_translation_note'))
-						},
-						
-						title_beskrivelse: {
-							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_title_beskrivelse')),  
-							value: getData_Common.getTitle(doc, 'beskrivelse'),
-							show: getData_Common.getTitle(doc, 'beskrivelse') != null? true : false,
-							key_note: (this.caller.manager.translator.getLabel('detail_title_note')),
-							key_trans: (this.caller.manager.translator.getLabel('detail_title_translation')),
-							key_trans_note: (this.caller.manager.translator.getLabel('detail_title_translation_note'))								
-						},
-						
+						},																							
+
 						datering_lab: this.caller.manager.translator.getLabel('detail_datering_lab'),
-						
+
 						datering_production_vaerkdatering: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_datering_production_vaerkdatering')),  
 							value: getData_Common.getProduction_vaerkdatering(doc)											
 						},
-						
+
 						datering_production_udgivet_place: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_datering_production_udgivet_place')),  
 							value: getData_Common.getProduction_udgivet_place(doc)												
 						},
-            
+
 						datering_production_udfoert_place: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_datering_production_udfoert_place')),  
 							value: getData_Common.getProduction_udfoert_place(doc)											
 						},
-            
+
 						datering_production_note: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_datering_production_note')),  
 							value: getData_Common.getProduction_note(doc)												
 						},
-						
+
 						technique_lab: this.caller.manager.translator.getLabel('detail_technique_lab'),
-						
+
 						technique_technique: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_technique')),  
 							value: getData_Common.getTechnique_technique(doc),
 							show: getData_Common.getTechnique_technique(doc) !== null? true : false,
 						},						
-						
+
 						technique_dimensions: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_dimensions')),  
 							value: this.getDim(doc),
 							show: this.getDim(doc).length > 0 ? true : false,
 						},
-						
+
 						technique_diameter: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_diameter')),  
 							value: getData_Common.getTechnique_diameter(doc)
 						},
-						
+
 						technique_vaegt: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_vaegt')),  
 							value: getData_Common.getTechnique_vaegt(doc)
 						},
-						
+
 						technique_materiale: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_materiale')),  
 							value: this.getMateriale(doc),
 							show: this.getMateriale(doc).length > 0 ? true : false,
 						},
-						
+
 						technique_format: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_format')),  
 							value: getData_Common.getTechnique_format(doc)
 						},
-						
+
 						technique_watermark: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_watermark')),  
 							value: getData_Common.getTechnique_watermark(doc)
 						},
-						
+
 						technique_tilstand: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_tilstand')),  
 							value: getData_Common.getTechnique_tilstand(doc)
 						},
-						
+
 						technique_vaerkstatus: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_vaerkstatus')),  
 							value: getData_Common.getTechnique_vaerkstatus(doc),
 							show: getData_Common.getTechnique_vaerkstatus(doc) != null ? true : false,
 						},
-						
+
 						technique_eksemplar: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_eksemplar')),  
 							value: getData_Common.getTechnique_eksemplar(doc)
 						},
-						
+
 						technique_bladnummer: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_bladnummer')),  
 							value: getData_Common.getTechnique_bladnummer(doc)
 						},
-						
+
 						technique_sidetal: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_sidetal')),  
 							value: getData_Common.getTechnique_sidetal(doc)
 						},
-						
+
 						technique_omslag: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_omslag')),  
 							value: getData_Common.getTechnique_omslag(doc)
 						},
-						
+
 						technique_stadium: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_stadium')),  
 							value: getData_Common.getTechnique_stadium(doc)
 						},
-						
+
 						technique_kollation: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_kollation')),  
 							value: getData_Common.getTechnique_kollation(doc),
 							show: getData_Common.getTechnique_kollation(doc) != null ? true : false,
 						},
-						
+
 						technique_note_vaerkstatus: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_note_vaerkstatus')),  
 							value: getData_Common.getTechnique_note_vaerkstatus(doc),
 							show: getData_Common.getTechnique_note_vaerkstatus(doc) != null ? true : false,
 						},												
-						
+
 						technique_opstilling: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_opstilling')),  
 							value: getData_Common.getTechnique_opstilling(doc)
 						},
-						
+
 						technique_note_elementer: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_note_elementer')),  
 							value: getData_Common.getTechnique_note_elementer(doc)
 						},
-						
-						
+
+
 						inscription_lab: this.caller.manager.translator.getLabel('detail_inscription_lab'),
-						
+
 						inscription_signatur: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_inscription_signatur')),  
 							value: this.getInscription_transl(getData_Common.getInscription_signatur(doc)),
@@ -314,200 +295,200 @@
 							value: getData_Common.getInscription_samlermaerke(doc),
 							show: getData_Common.getInscription_samlermaerke(doc) != null ? true : false,
 						},
-						
+
 						erhverv_lab: this.caller.manager.translator.getLabel('detail_erhverv_lab'),
-						
+
 						erhverv_erhverv: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_erhverv_erhverv')),  
 							value: this.getDetailAcq(doc)
 						},
-						
+
 						erhverv_proveniens: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_erhverv_proveniens')),  
 							value: getData_Common.getErhverv_proveniens(doc),
 							show: getData_Common.getErhverv_proveniens(doc) != null ? true : false,
 						},																						
-						
+
 						references_lab: this.caller.manager.translator.getLabel('detail_references_lab'),
-						
+
 						references_vaerkfortegn: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_references_vaerkfortegn')),  
 							value: getData_Common.getReferences_vaerkfortegn(doc)
 						},
-						
+
 						references_gernsheim: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_references_gernsheim')),  
 							value: getData_Common.getReferences_gernsheim(doc)
 						},
-						
+
 						references_beckett: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_references_beckett')),  
 							value: getData_Common.getReferences_beckett(doc)
 						},
-						
+
 						references_litteratur: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_references_litteratur')),  
 							value: getData_Common.getReferences_litteratur(doc),
 							show: getData_Common.getReferences_litteratur(doc) != null ? true : false,
 						},
-						
+
 						references_texts: {  
 							value: getData_Common.getReferences_texts(doc),
 							show: getData_Common.getReferences_texts(doc) != null ? true : false,
 						},
-						
+
 						udstilling_lab: this.caller.manager.translator.getLabel('detail_udstilling_lab'),
-						
+
 						udstilling_udstilling: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_udstilling_udstilling')),  
 							value: getData_Common.getUdstilling_udstilling(doc),
 							show: getData_Common.getUdstilling_udstilling(doc) != null ? true : false,
 						},	
-						
+
 						bemaerk_lab: this.caller.manager.translator.getLabel('detail_bemaerk_lab'),
-						
+
 						bemaerk_anden_litt: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_bemaerk_anden_litt')),  
 							value: getData_Common.getBemaerk_anden_litt(doc),
 							show: getData_Common.getBemaerk_anden_litt(doc) != null ? true : false,
 						},	
-						
+
 						motiv_lab: this.caller.manager.translator.getLabel('detail_motiv_lab'),
-						
+
 						motiv_topografisk: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_motiv_topografisk')),  
 							value: getData_Common.getMotiv_topografisk(doc),
 							show: getData_Common.getMotiv_topografisk(doc) != null ? true : false,
 						},	
-						
+
 						motiv_portraet: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_motiv_portraet')),  
 							value: getData_Common.getMotiv_portraet(doc),
 							show: getData_Common.getMotiv_portraet(doc) != null ? true : false,
 						},
-						
+
 						motiv_note: { 
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_motiv_note')),  
 							value: getData_Common.getMotiv_note(doc),
 							show: getData_Common.getMotiv_note(doc) != null ? true : false,
 						}																									
 					},
-					
+
 					subwidget:{
 						req_original: getData_Common.getSubWidgReq_original(doc),
 						req_multiwork: getData_Common.getSubWidgReq_vaerkdele(doc),
 						req_relatedid: getData_Common.getSubWidgReq_relatere(doc)									
 					}
 			};	
-						
+
 			return data;	  
 
 		}; 
-		
+
 		this.getInscription_transl = function(inscription_arr){
 			var res = inscription_arr;
 			if(smkCommon.getCurrentLanguage() == "en" && inscription_arr != null){
-				
+
 				for (var i = 0; i < inscription_arr.length; i++) {
 					var inscription = inscription_arr[i];
 					var values = inscription.value.split(":"); 					 										
 					var place = smkCommon.getValueFromSplit(values, 0) != null ? smkCommon.getValueFromSplit(values, 0) : "";						
 					var trans = new String();
 					var place_sw = smkCommon.replace_non_alpha_char(smkCommon.replace_dansk_char(place));
-								
+
 					switch(place_sw){
-						case "f_n_":
-						case "f_n_m_f_":
-						case "f_n_t_h_":
-						case "f_n_t_h_f_m_":
-						case "f_n_t_v_":
-						case "f_n_t_v_f_m_":
-						case "f_o_":
-						case "f_o_m_f_":
-						case "f_o_t_h_":
-						case "f_o_t_v_":
-						case "i_bunden_":
-						case "m_f_":
-						case "n_":
-						case "n_t_h_":
-						case "n_t_v_":
-						case "o_m_":
-						case "t_h_":
-						case "t_h_f_m_":
-						case "t_h_m_f_":
-						case "t_v_":
-						case "t_v_f_m_":
-						case "t_v_m_f_":
-						case "u_m_":
-						case "oe_":
-						case "oe_t_h_":
-						case "oe_t_v_":
-							trans = this.caller.manager.translator.getLabel('inscription_' + place_sw);			
+					case "f_n_":
+					case "f_n_m_f_":
+					case "f_n_t_h_":
+					case "f_n_t_h_f_m_":
+					case "f_n_t_v_":
+					case "f_n_t_v_f_m_":
+					case "f_o_":
+					case "f_o_m_f_":
+					case "f_o_t_h_":
+					case "f_o_t_v_":
+					case "i_bunden_":
+					case "m_f_":
+					case "n_":
+					case "n_t_h_":
+					case "n_t_v_":
+					case "o_m_":
+					case "t_h_":
+					case "t_h_f_m_":
+					case "t_h_m_f_":
+					case "t_v_":
+					case "t_v_f_m_":
+					case "t_v_m_f_":
+					case "u_m_":
+					case "oe_":
+					case "oe_t_h_":
+					case "oe_t_v_":
+						trans = this.caller.manager.translator.getLabel('inscription_' + place_sw);			
 					}
-					
+
 					if(smkCommon.isValidDataText(trans))
 						res[i].value = inscription.value.replace(place, trans);											
 				}										
 			}
-			
+
 			return res;			
 		};
-		
-		
+
+
 		this.getDetailAcq = function(doc){
 			var method = smkCommon.isValidDataText(getData_Common.getErhverv_method(doc)) ? sprintf('%s', getData_Common.getErhverv_method(doc)) : "";
 			var source = smkCommon.isValidDataText(getData_Common.getErhverv_source(doc)) ? sprintf(' %s', getData_Common.getErhverv_source(doc)) : "";
 			var dato = smkCommon.isValidDataText(getData_Common.getErhverv_dato(doc)) ? sprintf(' %s', getData_Common.getErhverv_dato(doc)) : "";	 
-			
+
 			return smkCommon.isValidDataText(getData_Common.getErhverv_method(doc)) || smkCommon.isValidDataText(getData_Common.getErhverv_source(doc)) || smkCommon.isValidDataText(getData_Common.getErhverv_dato(doc)) ? 
 					sprintf("%s%s%s", method, source, dato) : null;
-			
+
 		};
-		
+
 		this.getDim = function(doc){
 			var res = [];
-			
+
 			for (var i = 0; i < getData_Common.getTechnique_dimensions(doc).length; i++) {	
-			
+
 				var tmp = {dim: getData_Common.getTechnique_dimensions(doc)[i].dim,
-							type: this.caller.manager.translator.getLabel('detail_technique_dimensions_' + getData_Common.getTechnique_dimensions(doc)[i].type)
+						type: this.caller.manager.translator.getLabel('detail_technique_dimensions_' + getData_Common.getTechnique_dimensions(doc)[i].type)
 				};
-				
+
 				res.push(tmp);
-				
+
 			}
-			
+
 			return res;
-			
+
 		};
-		
+
 		this.getMateriale = function(doc){
 			var res = [];
-			
+
 			for (var i = 0; i < getData_Common.getTechnique_materiale(doc).length; i++) {	
-				
+
 				var type;
-				
+
 				if(getData_Common.getTechnique_materiale(doc)[i].mat_type.indexOf('material') > 0)
 					type = 'detail_technique_materiale_material';
-				
+
 				if(getData_Common.getTechnique_materiale(doc)[i].mat_type.indexOf('medium') > 0)
 					type = 'detail_technique_materiale_medium';
-				
+
 				if(getData_Common.getTechnique_materiale(doc)[i].mat_type.indexOf('grundering') > 0)
 					type = 'detail_technique_materiale_grundering';
-				
+
 				var tmp = {value: getData_Common.getTechnique_materiale(doc)[i].mat_val,
-							type: type !== undefined ? this.caller.manager.translator.getLabel(type) : type
+						type: type !== undefined ? this.caller.manager.translator.getLabel(type) : type
 				};
-				
+
 				res.push(tmp);				
 			}			
 			return res;			
 		};
-		
-		
-		
+
+
+
 		this.getListProducers = function(doc, type){									
 			var res = new Array();
 			var list = new Array();
@@ -517,25 +498,74 @@
 					res.push(output);
 				}													
 			}
-			
+
 			return res; 
 		};
-		
+
 		this.getArtistOutput = function(doc){
 			var res = {};
-			
+
 			if (doc.name != undefined)
 				res.name = doc.name;
-						
+
 			var dates = smkCommon.isValidDataText(doc.dates) ? sprintf(', %s', doc.dates) : "";
 			var nationality = smkCommon.isValidDataText(doc.nationality) ? sprintf('%s', doc.nationality) : "";												
 
 			res.info = sprintf('(%s%s)', nationality, dates);
-			
+
 
 			return res;
-		};			
-		
+		};
+
+		this.getAllTitles = function(doc){
+			if (doc.title_all === undefined) 
+				return null;
+
+			var self = this;
+			var titles_split = doc.title_all.split(smkCommon.split_1_niv);
+			var titles_data = [];			
+			var arrayLength = titles_split.length;
+
+			for (var i = 0; i < arrayLength; i++) {					
+				var values = titles_split[i].split(smkCommon.split_2_niv);			
+
+				var title = smkCommon.getValueFromSplit(values, 0);
+				var title_note = smkCommon.getValueFromSplit(values, 1);
+				var title_lang = smkCommon.getValueFromSplit(values, 2);
+				var title_transl = smkCommon.getValueFromSplit(values, 3);
+				var title_type = smkCommon.getValueFromSplit(values, 4) == null ? 'museum' : smkCommon.getValueFromSplit(values, 4);					
+				var tmp;
+				var translation = new String();
+
+				// we take only the first translation
+				if(smkCommon.isValidDataText(title_transl)){
+					var split_trans = title_transl.split(smkCommon.split_3_niv); 	           
+					if (split_trans.length > 0)	
+						translation= split_trans[0].split(smkCommon.split_4_niv)[0];            					           		         	            				                       
+				}        	  		  
+
+				tmp = {'title' : title};
+
+				if(smkCommon.isValidDataText(title_note))
+					tmp.note = title_note;
+
+				if(smkCommon.isValidDataText(translation))
+					tmp.trans = translation;
+
+				jQuery.each(getData_Common.enumTitleTypes, function(key, val) {
+					if(title_type.indexOf(key) > -1){
+						tmp.type = smkCommon.firstCapital(self.caller.manager.translator.getLabel(val));
+						return false;//--> break from jQuery.each
+					}						
+				});
+				
+				titles_data.push(tmp);					
+
+			};
+
+			return titles_data.length > 0 ? titles_data : null;	
+		};
+
 		/*
 		 * variables
 		 */
