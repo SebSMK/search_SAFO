@@ -125,7 +125,7 @@
 			
 		}, 
 
-		afterRequest: function () {	  
+		process_details_tabs: function () {	  
 
 			var self = this;		
 			var $target = $(this.target);
@@ -163,13 +163,18 @@
 				this.tab_related_id_req = tab_data.subwidget.req_relatedid;
 				//* get original request
 				this.tab_original_id_req = tab_data.subwidget.req_original;
-
 				// get reference text
 				this.tab_reference_html = self.template_integration_json(tab_data, '#detailReferenceTemplate');    				
-
 				// get extended text
 				this.tab_extended_html = self.template_integration_json(tab_data.info, '#detailExtendedTemplate'); 
-			}			     															
+			};
+			
+			this.process_init_tabs();
+			this.process_reference();
+			this.process_related();
+			this.process_parts();
+			this.process_extended();
+			this.process_extended_original();
 		},  
 
 		template_integration_json: function (json_data, templ_id){	  
@@ -185,15 +190,6 @@
 		removeAllRelated: function(){
 			this.related_subWidget.removeAllArticles();
 		},
-		
-		process_details_tabs: function(){			
-			this.process_init_tabs();
-			this.process_reference();
-			this.process_related();
-			this.process_parts();
-			this.process_extended();
-			this.process_extended_original();			
-		},		
 
 		process_related: function(){
 			if(this.tab_related_id_req != null && this.relatedManager != null){				
