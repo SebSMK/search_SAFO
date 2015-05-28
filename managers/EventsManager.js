@@ -260,7 +260,7 @@
 			var search_string = jQuery.trim(event.val);			
 
 
-			var default_teaser_view = ModelManager.getModel().view == 'detail';
+			var default_teaser_view = ModelManager.get_view() == 'detail';
 			var model = {};										
 			model.q = [search_string];					
 			model.sort = ModelManager.current_value_joker;
@@ -358,15 +358,17 @@
 
 		/* 
 		 * switch language
-		 * @result:  view changes  	 
+		 * @result:  view changes - reset all search and filters in teaser view
 		 */
 		this.smk_lang_changed = function(lang){ 
 
+			var default_teaser_view = ModelManager.get_view() == 'detail';
+			
 			var model = {};
 			model.lang = lang;
 			model.sort = ModelManager.current_value_joker;
-			//model.q = ModelManager.current_value_joker;
-			//model.fq = ModelManager.current_value_joker;	
+			if(ModelManager.get_view() == 'detail')				
+				model.q = ModelManager.current_value_joker;				
 			model.view = ModelManager.current_value_joker;
 			model.category = ModelManager.current_value_joker;
 
