@@ -102,8 +102,8 @@
 						},
 			            producent_forlaeg: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_forlaeg')),  
-							value: this.getListProducers(doc, getData_Common.enumProducent.forlaeg),
-							show: this.getListProducers(doc, getData_Common.enumProducent.forlaeg).length > 0 ? true : false
+							value: this.getListProducers(doc, getData_Common.enumProducent.efterfor),
+							show: this.getListProducers(doc, getData_Common.enumProducent.efterfor).length > 0 ? true : false
 						},
 			            producent_udgiver: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_udgiver')),  
