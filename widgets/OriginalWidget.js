@@ -25,6 +25,10 @@
 			//* merge data and template						    			
 			var html = self.template_integration_json(artwork_data.info, '#detailOriginalTemplate');    
 			$target.html(html);  
+			
+			$(self).trigger({
+				type: "smk_original_loaded"
+			});		
 		},  	  
 
 		template_integration_json: function (json_data, templ_id){	  

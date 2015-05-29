@@ -1,5 +1,5 @@
 {
-   "version":"0.000.001.033",
+   "version":"0.000.001.034",
    "mode":"proxy debug",
    "server":"http://csdev-seb:8180/solr-example/dev_SAFO/",
    "server_proxy":"http://solr.smk.dk:8080/proxySolrPHP/proxy.php",

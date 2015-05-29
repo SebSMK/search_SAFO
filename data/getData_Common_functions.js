@@ -108,6 +108,23 @@
 
 		return artistData;
 	};	
+	
+	getdatacommon.getProducent_all_producers = function(doc){		
+		var self = this;
+		var res = new Array();
+		var list = new Array();
+		
+		$.each(getdatacommon.enumProducent, function(key, type) {
+			var prod_datas = getdatacommon.getProducent_producent(doc, type);
+			
+			$.each(prod_datas, function(index, data) {
+				data.artist_data.type = key;
+				res.push(data.artist_data);					
+			});								
+		});			
+
+		return res; 			
+	};
 
 	getdatacommon.getProducent_formeri = function(doc){			
 		return doc.formeri === undefined ? null : doc.formeri;

@@ -33,7 +33,7 @@
 					},
 					
 					info:{
-						producent_kunster: this.getListProducers(doc),																																
+						producent_kunster: this.getListAllProducers(doc),																																
 						title_museum: getData_Common.getFirstTitle(doc), 															
 						datering_production_vaerkdatering:{'lab': smkCommon.firstCapital(this.caller.manager.translator.getLabel('teaser_date_lab')), 'value':getData_Common.getProduction_vaerkdatering(doc)},		
 						ident_invnummer: {'lab': smkCommon.firstCapital(this.caller.manager.translator.getLabel("list_reference")), 'value': getData_Common.getIdent_invnummer(doc)},	
@@ -70,6 +70,34 @@
 			
 			return label;
 		};
+		
+		this.getListAllProducers = function(doc){
+			var self = this;
+			var all_prod_datas = getData_Common.getProducent_all_producers(doc);
+			var res = [];
+			
+			$.each(all_prod_datas, function(index, data) {					
+				data.type = (data.type != 'orig') ? self.caller.manager.translator.getLabel('detail_producent_' + data.type) : null;
+				var output = {'artist_data': self.getArtistOutput(data)};				
+				res.push(output);					
+			});	
+			
+			res.show = res.length > 0 ? true : false;
+
+			return res; 			
+		};				
+
+		this.getArtistOutput = function(doc){
+			var res = {};
+			
+			if (doc.name != undefined)
+				res.name = doc.name;
+			
+			if (smkCommon.isValidDataText(doc.type))
+					res.role = doc.type;															
+			
+			return res;
+		};	
 		
 		this.getListProducers = function(doc){									
 			var res = new Array();

@@ -120,7 +120,12 @@
 			//* all images loaded in related "teaser"
 			$(self.related_subWidget).on('smk_teasers_all_images_loaded', function(event){     	            	
 				self.end_tab_process(self.related_subWidget.target);
-			});		
+			});	
+			
+			//* original data loaded
+			$(self.original_subWidget).on('smk_original_loaded', function(event){     	            	
+				self.end_tab_process(self.original_subWidget.target);
+			});	
 
 			
 		}, 
@@ -227,7 +232,10 @@
 				var param = new AjaxSolr.Parameter({name: "q", value: this.tab_original_id_req });					  					
 				this.originalManager.store.add(param.name, param);	 			
 				this.originalManager.doRequest();
+			}else{
+				this.end_tab_process('#tab_original');
 			}			
+						
 		},
 
 		process_reference: function(){
@@ -289,9 +297,11 @@
 			
 			$target.find('.tabs').not('.print-tabs').find('a').each(function(){
 				
-				if($target.find($(this).attr('href')).find('.data-pair').length == 0 
-					&& $target.find($(this).attr('href')).find('.matrix-tile').length == 0
-					&& $target.find($(this).attr('href')).find('.copy').length == 0){
+				var tab_content = $target.find($(this).attr('href'));
+				if(	$(this).hasClass('dontshow') ||
+					(tab_content.find('.data-pair').length == 0 
+					&& tab_content.find('.matrix-tile').length == 0
+					&& tab_content.find('.copy').length == 0)){
 					//* hide empty tabs
 					$(this).hide();
 				}else{

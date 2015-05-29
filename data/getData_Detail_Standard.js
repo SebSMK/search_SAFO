@@ -37,7 +37,7 @@
 							value: getData_Common.getIdent_invnummer(doc)
 						},
 						
-						artist: this.getListProducers(doc),																																					
+						artist: this.getListAllProducers(doc),																																					
 						
 						title_museum: getData_Common.getFirstTitle(doc),
 						title_serie: this.getDetailSerieTitle(doc),	
@@ -95,28 +95,7 @@
 			return smkCommon.isValidDataText(getData_Common.getErhverv_method(doc)) || smkCommon.isValidDataText(getData_Common.getErhverv_source(doc)) || smkCommon.isValidDataText(getData_Common.getErhverv_dato(doc)) ? 
 					sprintf("%s%s%s", method, source, dato) : null;
 			
-		};
-		
-//		this.getDetailTitle = function(doc){			
-//			var title_teaser = getData_Common.getTitle(doc, 'first');			
-//			var title = new String();
-//			
-//			if(title_teaser != null && title_teaser.length > 0){
-//				switch(smkCommon.getCurrentLanguage()){
-//				case "dk":		 		
-//					title = title_teaser[0].title;
-//					break;
-//				case "en":
-//					title = smkCommon.isValidDataText(title_teaser[0].trans) ? title_teaser[0].trans : title_teaser[0].title; 
-//					break;
-//				}									
-//			}else{				
-//				title = doc.title_first;
-//			}
-//						
-//			return smkCommon.isValidDataText(title) ? title : null;
-//		};
-		
+		};				
 
 		this.getDetailSerieTitle = function(doc){
 			var title_serie = getData_Common.getTitle(doc, 'serie');		
@@ -137,24 +116,21 @@
 			return smkCommon.isValidDataText(title) ? title : null;
 		};		
 		
-		this.getListProducers = function(doc){									
+		this.getListAllProducers = function(doc){
 			var self = this;
-			var res = new Array();			
+			var all_prod_datas = getData_Common.getProducent_all_producers(doc);
+			var res = [];
 			
-			$.each(getData_Common.enumProducent, function( index, typeprod ) {
-				if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, typeprod))){
-					var data = getData_Common.getProducent_producent(doc, typeprod);					
-					$.each(data, function( sub_index, artist_data ) {
-						var output = self.getArtistOutput(artist_data.artist_data);
-						res.push(output);
-					});					
-				}												
-			});						
+			$.each(all_prod_datas, function(index, data) {					
+				data.type = (data.type != 'orig') ? self.caller.manager.translator.getLabel('detail_producent_' + data.type) : null;
+				var output = self.getArtistOutput(data);				
+				res.push(output);					
+			});	
 			
 			res.show = res.length > 0 ? true : false;
-			
-			return res; 
-		};
+
+			return res; 			
+		};				
 
 		this.getArtistOutput = function(doc){
 			var res = {};
@@ -162,13 +138,12 @@
 			if (doc.name != undefined)
 				res.name = doc.name;
 			
-			var role = smkCommon.isValidDataText(doc.role) ? sprintf(', %s', doc.role) : "";
+			var role = smkCommon.isValidDataText(doc.type) ? sprintf(', %s', doc.type) : "";
 			var dates = smkCommon.isValidDataText(doc.dates) ? sprintf(', %s', doc.dates) : "";
 			var nationality = smkCommon.isValidDataText(doc.nationality) ? sprintf('%s', doc.nationality) : "";												
 
 			res.info = sprintf('(%s%s)%s', nationality, dates, role);
 			
-
 			return res;
 		};					
 		

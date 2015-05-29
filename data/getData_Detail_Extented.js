@@ -46,80 +46,13 @@
 							value: getData_Common.getIdent_andet_inv(doc)
 						},
 
+						producent_lab: this.caller.manager.translator.getLabel('detail_producent_lab'),						
 
-						producent_lab: this.caller.manager.translator.getLabel('detail_producent_lab'),
-
-						producent_kunster: {
-							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_kunster')),  
-							value: this.getListProducers(doc, getData_Common.enumProducent.orig),
-							show: this.getListProducers(doc, getData_Common.enumProducent.orig).length > 0 ? true : false
+						producent_producents: {							  							
+							value: this.getListAllProducers(doc),
+							show: doc.artist_name !== undefined ? true : false
 						},
 
-						producent_tilskrevet: {
-							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_tilskrevet')),  
-							value: this.getListProducers(doc, getData_Common.enumProducent.tilsk),
-							show: this.getListProducers(doc, getData_Common.enumProducent.tilsk).length > 0 ? true : false
-						},
-
-						producent_tidltilskrvet: {
-							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_tidltilskrvet')),  
-							value: this.getListProducers(doc, getData_Common.enumProducent.tidl),
-							show: this.getListProducers(doc, getData_Common.enumProducent.tidl).length > 0 ? true : false
-						},
-
-						producent_vaerksted: {
-							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_vaerksted')),  
-							value: this.getListProducers(doc, getData_Common.enumProducent.vaerksted),
-							show: this.getListProducers(doc, getData_Common.enumProducent.vaerksted).length > 0 ? true : false
-						},
-
-						producent_efterfoelger: {
-							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_efterfoelger')),  
-							value: this.getListProducers(doc, getData_Common.enumProducent.efterfoel),
-							show: this.getListProducers(doc, getData_Common.enumProducent.efterfoel).length > 0 ? true : false
-						},
-
-						producent_inventor: {
-							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_inventor')),  
-							value: this.getListProducers(doc, getData_Common.enumProducent.inventor),
-							show: this.getListProducers(doc, getData_Common.enumProducent.inventor).length > 0 ? true : false
-						},
-
-						producent_skole: {
-							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_skole')),  
-							value: this.getListProducers(doc, getData_Common.enumProducent.skole),
-							show: this.getListProducers(doc, getData_Common.enumProducent.skole).length > 0 ? true : false
-						},
-						producent_stil: {
-							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_stil')),  
-							value: this.getListProducers(doc, getData_Common.enumProducent.stil),
-							show: this.getListProducers(doc, getData_Common.enumProducent.stil).length > 0 ? true : false
-						},
-						producent_kopi: {
-							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_kopi')),  
-							value: this.getListProducers(doc, getData_Common.enumProducent.kopi),
-							show: this.getListProducers(doc, getData_Common.enumProducent.tilsk).kopi > 0 ? true : false
-						},
-						producent_forlaeg: {
-							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_forlaeg')),  
-							value: this.getListProducers(doc, getData_Common.enumProducent.efterfor),
-							show: this.getListProducers(doc, getData_Common.enumProducent.efterfor).length > 0 ? true : false
-						},
-						producent_udgiver: {
-							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_udgiver')),  
-							value: this.getListProducers(doc, getData_Common.enumProducent.udgiver),
-							show: this.getListProducers(doc, getData_Common.enumProducent.udgiver).length > 0 ? true : false
-						},
-						producent_trykker: {
-							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_trykker')),  
-							value: this.getListProducers(doc, getData_Common.enumProducent.trykker),
-							show: this.getListProducers(doc, getData_Common.enumProducent.trykker).length > 0 ? true : false
-						},			            
-						producent_forfatter: {
-							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_forfatter')),  
-							value: this.getListProducers(doc, getData_Common.enumProducent.forfatter),
-							show: this.getListProducers(doc, getData_Common.enumProducent.forfatter).length > 0 ? true : false
-						},
 						producent_formeri: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_formeri')),  
 							value: this.getListProducers(doc, getData_Common.enumProducent.formeri),
@@ -130,7 +63,6 @@
 							value: this.getListProducers(doc, getData_Common.enumProducent.objectophavsbeskrivelse),
 							show: this.getListProducers(doc, getData_Common.enumProducent.objectophavsbeskrivelse).length > 0 ? true : false
 						},       
-
 
 						title_lab: this.caller.manager.translator.getLabel('detail_title_lab'),
 
@@ -487,7 +419,19 @@
 			return res;			
 		};
 
+		this.getListAllProducers = function(doc){
+			var self = this;
+			var all_prod_datas = getData_Common.getProducent_all_producers(doc);
+			var res = [];
+			
+			$.each(all_prod_datas, function(index, data) {
+				var output = self.getArtistOutput(data);
+				output.type = smkCommon.firstCapital(self.caller.manager.translator.getLabel('detail_producent_' + data.type));
+				res.push(output);					
+			});								
 
+			return res; 			
+		};
 
 		this.getListProducers = function(doc, type){									
 			var res = new Array();
@@ -511,8 +455,7 @@
 			var dates = smkCommon.isValidDataText(doc.dates) ? sprintf(', %s', doc.dates) : "";
 			var nationality = smkCommon.isValidDataText(doc.nationality) ? sprintf('%s', doc.nationality) : "";												
 
-			res.info = sprintf('(%s%s)', nationality, dates);
-
+			res.info = sprintf('(%s%s)', nationality, dates);			
 
 			return res;
 		};
@@ -520,7 +463,7 @@
 		this.getAllTitles = function(doc){
 			var self = this;
 			var alltitles = getData_Common.getTitle(doc, 'all');
-			
+
 			$.each(alltitles, function( index, value ) {
 				$.each(getData_Common.enumTitleTypes, function(key, val) {
 					if(smkCommon.isValidDataText(value.type) && value.type.indexOf(key) > -1){
@@ -528,7 +471,7 @@
 						return false;//--> break from jQuery.each
 					}						
 				});			
-			
+
 			});
 
 			return alltitles;
