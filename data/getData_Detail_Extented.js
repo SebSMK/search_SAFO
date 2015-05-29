@@ -467,7 +467,7 @@
 			$.each(alltitles, function( index, value ) {
 				$.each(getData_Common.enumTitleTypes, function(key, val) {
 					if(smkCommon.isValidDataText(value.type) && value.type.indexOf(key) > -1){
-						value.type = smkCommon.firstCapital(self.caller.manager.translator.getLabel(val));
+						value.type = smkCommon.firstCapital(self.caller.manager.translator.getLabel('title_' + val));
 						return false;//--> break from jQuery.each
 					}						
 				});			

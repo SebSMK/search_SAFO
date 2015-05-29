@@ -913,18 +913,18 @@
 	};
 
 	getdatacommon.enumTitleTypes = {			
-			"anden":"title_anden",
-			"auktion":"title_auktion",
-			"beskriv":"title_beskriv",
-			"kunstner":"title_kunstner",
-			"museum":"title_museum",
-			"blank":"title_museum",
-			"oeuvre":"title_oeuvre",
-			"popu":"title_popu",
-			"samler":"title_samler",
-			"serie":"title_serie",		
-			"tidlig":"title_tidlig",		
-			"udstill":"title_udstill"									
+			"anden":"anden",
+			"auktion":"auktion",
+			"beskriv":"beskriv",
+			"kunstner":"kunstner",
+			"museum":"museum",
+			"blank":"museum",
+			"oeuvre":"oeuvre",
+			"popu":"popu",
+			"samler":"samler",
+			"serie":"serie",		
+			"tidlig":"tidlig",		
+			"udstill":"udstill"									
 	};
 
 	/**
