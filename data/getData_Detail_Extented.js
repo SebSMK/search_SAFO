@@ -55,13 +55,13 @@
 
 						producent_formeri: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_formeri')),  
-							value: this.getListProducers(doc, getData_Common.enumProducent.formeri),
-							show: this.getListProducers(doc, getData_Common.enumProducent.formeri).length > 0 ? true : false
+							value: getData_Common.getProducent_formeri(doc),							
 						},
+						
 						producent_objectophavsbeskrivelse: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_objectophavsbeskrivelse')),  
-							value: this.getListProducers(doc, getData_Common.enumProducent.objectophavsbeskrivelse),
-							show: this.getListProducers(doc, getData_Common.enumProducent.objectophavsbeskrivelse).length > 0 ? true : false
+							value: getData_Common.getProducent_objectophavsbeskrivelse(doc),
+							show: getData_Common.getProducent_objectophavsbeskrivelse(doc) !== null? true : false,
 						},       
 
 						title_lab: this.caller.manager.translator.getLabel('detail_title_lab'),

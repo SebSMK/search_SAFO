@@ -74,7 +74,8 @@
 					<!-- /.data-pair-value -->
 				</div>
 				<!-- /.data-pair -->
-				{{/ident_samling.value}} {{#ident_andet_inv.value}}
+				{{/ident_samling.value}} 
+				{{#ident_andet_inv.value}}
 				<div class="data-pair">
 					<h4 class="data-pair-key">{{{ident_andet_inv.key}}}</h4>
 					<div class="data-pair-value">{{{ident_andet_inv.value}}}</div>
@@ -107,26 +108,30 @@
 				{{/producent_producents.value}}
 				{{/producent_producents.show}} 
 
-				{{#producent_formeri.show}}
+
+				{{#ident_andet_inv.value}}
 				<div class="data-pair">
-					<h4 class="data-pair-key">{{{producent_formeri.key}}}</h4>
-					{{#producent_formeri.value}}
-					<div class="data-pair-value">
-						{{{name}}}&nbsp;<i>{{{info}}}</i>
-					</div>
+					<h4 class="data-pair-key">{{{ident_andet_inv.key}}}</h4>
+					<div class="data-pair-value">{{{ident_andet_inv.value}}}</div>
 					<!-- /.data-pair-value -->
-					{{/producent_formeri.value}}
 				</div>
 				<!-- /.data-pair -->
-				{{/producent_formeri.show}}
+				{{/ident_andet_inv.value}}
+
+				{{#producent_formeri.value}}
+				<div class="data-pair">
+					<h4 class="data-pair-key">{{{producent_formeri.key}}}</h4>					
+					<div class="data-pair-value">{{{producent_formeri.value}}}</div>
+					<!-- /.data-pair-value -->					
+				</div>
+				<!-- /.data-pair -->
+				{{/producent_formeri.value}}
 	
 				{{#producent_objectophavsbeskrivelse.show}}
 				<div class="data-pair">
 					<h4 class="data-pair-key">{{{producent_objectophavsbeskrivelse.key}}}</h4>
 					{{#producent_objectophavsbeskrivelse.value}}
-					<div class="data-pair-value">
-						{{{name}}}&nbsp;<i>{{{info}}}</i>
-					</div>
+					<div class="data-pair-value">{{{value}}}</div>
 					<!-- /.data-pair-value -->
 					{{/producent_objectophavsbeskrivelse.value}}
 				</div>
