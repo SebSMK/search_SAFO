@@ -128,6 +128,7 @@
     "detail_producent_tidl": "tidl. tilskrevet",
     "detail_producent_vaerksted": "værksted",
     "detail_producent_efterfoel": "efterfølger",
+    "detail_producent_efter": "efter",
     "detail_producent_inventor": "inventor",
     "detail_producent_skole": "skole",
     "detail_producent_stil": "stil",
@@ -835,6 +836,7 @@
 		"detail_original_vaerkdatering":	"date",
 		
 		"detail_producent_efterfoel":	"follower of",
+		"detail_producent_efter": "after",
 		"detail_producent_forfatter":	"author",
 		"detail_producent_efterfor":	"after",
 		"detail_producent_formeri":	"moulder",

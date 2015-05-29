@@ -203,6 +203,32 @@
 				});	  	 		  	  
 				break;		
 
+			case 'artist_auth':
+				for (var facet in self.manager.response.facet_counts.facet_fields[self.field]) {
+					var text = '';
+					index = 0;
+					var count = parseInt(self.manager.response.facet_counts.facet_fields[self.field][facet]);
+					if (count > maxCount) {
+						maxCount = count;
+					};
+										
+					$.each(getData_Common.enumProducent, function(key, type) {
+						if(facet == type){
+							text = smkCommon.firstCapital(self.manager.translator.getLabel('detail_producent_' + key));
+							return false; //break each loop
+						}
+						index++;
+					});
+					
+					objectedItems.push({ "value": self.formatRequest(facet, true), "text": text , "count": count, "i": i, "index": index }); 
+					i++;	    	  	  	      	  	      
+				};
+				totalCount = i;
+				objectedItems.sort(function (a, b) {
+					return (a.index < b.index ? -1 : 1);	  	      
+				});	  	 		  	  
+				break;	
+				
 			default:		    			  			   							  
 				for (var facet in self.manager.response.facet_counts.facet_fields[self.field]) {
 					var count = parseInt(self.manager.response.facet_counts.facet_fields[self.field][facet]);

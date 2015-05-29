@@ -86,7 +86,7 @@
 				return doc.artist_name;
 
 			for (var i = 0, l = doc.artist_name.length; i < l; i++) {
-				if(doc.artist_auth[i].indexOf(role) == 0){
+				if(doc.artist_auth[i] == role){
 					var name = doc.artist_name[i];						
 					var nationality = smkCommon.isValidDataText(docNatio[i], 'natio') ? docNatio[i] : '';
 					var birth = docBirth[i];
@@ -899,17 +899,18 @@
 	getdatacommon.enumProducent = {			
 			'orig': 'original',
 			'tilsk': 'tilskrevet',
-			'tidl': 'tidl',
+			'tidl': 'tidl. tilskrevet',
 			'vaerksted': 'værksted',
-			'efterfoel': 'efterf',
+			'efterfoel': 'efterfølger',
+			'efter': 'efter',
 			'inventor': 'inventor',
 			'skole': 'skole',
 			'stil': 'stil',
-			'kopi': 'kopi',
-			'efterfor': 'efter forlæg',
+			'kopi': 'kopi efter',
+			'efterfor': 'efter forlæg af',
 			'udgiver': 'udgiver',
 			'trykker': 'trykker',
-			'forfatter': 'forfatter'									
+			'forfatter': 'forfatter/redaktør'								
 	};
 
 	getdatacommon.enumTitleTypes = {			
