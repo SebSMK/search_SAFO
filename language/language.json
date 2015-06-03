@@ -45,7 +45,7 @@
 	  "tagcloud_acq_date_earliest": 	"dato", 
 	  "tagcloud_vaerkstatus": 			"værkstatus", 	  	  
           
-      "search_artist_name_lab": 		"Indtast kunstner",
+      "search_artist_name_lab": 		"Indtast navn",
       "search_artist_auth_lab": 		"Indtast rolle",
       "search_object_production_date_earliest_lab": 		"Indtast periode",
       "search_artist_natio_dk_lab": 	"Indtast kunstners nationalitet",
@@ -728,7 +728,7 @@
 	  "tagcloud_acq_date_earliest": 	"date", 
 	  "tagcloud_vaerkstatus": 			"status", 	  	
 	  
-	  "search_artist_name_lab": 		"Select artist",
+	  "search_artist_name_lab": 		"Select name",
 	  "search_artist_auth_lab": 		"Select role",
 	  "search_object_production_date_earliest_lab": 		"Select period",
 	  "search_artist_natio_en_lab": 	"Select nationality",

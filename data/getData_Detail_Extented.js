@@ -23,7 +23,7 @@
 
 						ident_vaerktype: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_ident_vaerktype')),  
-							value: getData_Common.getIdent_vaerktype(doc)
+							value: smkCommon.firstCapital(this.getRootArtType(doc))
 						},
 
 						ident_dele: {
@@ -475,6 +475,44 @@
 			});
 
 			return alltitles;
+		};
+		
+		this.getRootArtType = function(doc){
+			var arttype = getData_Common.getIdent_vaerktype(doc);						
+			var arttype_hierarchi = this.caller.manager.translator.getLabel('arttype_hierarchi');							
+			var parent =  this.getParentType(arttype_hierarchi, arttype.trim());
+			var root_category = parent != null && parent.id !== undefined ? parent.id : arttype.trim();
+			// iterate the object_type tree until we find a root category
+			while (parent != null && parent.id !== undefined){
+				root_category = parent.id;
+				parent = this.getParentType(arttype_hierarchi, parent.id.trim());
+			}
+
+			return root_category;
+		};
+		
+		this.getParentType = function (tree, childNode){
+			var i, res;
+			if (!tree || !tree.value) {
+				return null;
+			}
+			if( Object.prototype.toString.call(tree.value) === '[object Array]' ) {
+				for (i in tree.value) {
+					if (tree.value[i].id === childNode) {
+						return tree;
+					}
+					res = this.getParentType(tree.value[i], childNode);
+					if (res) {
+						return res;
+					}
+				}
+				return null;
+			} else {
+				if (tree.value.id === childNode) {
+					return tree;
+				}
+				return this.getParentType(tree.value, childNode);
+			}
 		};
 
 		/*

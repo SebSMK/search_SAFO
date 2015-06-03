@@ -139,46 +139,40 @@
 
 				// advanced search
 				var adv_data = Manager.store.facets_default;
-				if(adv_data !== undefined){
-					for (var i = 0, l = adv_data.length; i < l; i++) {
-						var values = [];
-						var ranges = [];
-						for (var m = 0, n = adv_data[i]['values'].length; m < n; m++) {
 
-							if(adv_data[i]['values'][m]['ranges'] === undefined)
-								values.push(adv_data[i]['values'][m]['id']);
-							else{
-								var adv_range = adv_data[i]['values'][m]['ranges'];
-								var opt = sprintf('f.%s.facet.range.', adv_range['range']);
+				$.each(adv_data, function( index, adv_values ){
+					var values = [];
+					var ranges = [];
+					
+					$.each(adv_values['values'], function( index1, value){
 
-								ranges.push({id: 'facet.range', value: adv_range['range']});				 
-								ranges.push({id: opt + 'start', value: adv_range['start']});
-								ranges.push({id: opt + 'end', value: adv_range['end']});
-								ranges.push({id: opt + 'gap', value: adv_range['gap']});
-								if(adv_range['other'] !== undefined)
-									ranges.push({id:opt + 'other', value: adv_range['other']});														
-							}
-						}
+						if(value['ranges'] === undefined)
+							values.push(value['id']);
+						else{
+							var adv_range = value['ranges'];
+							var opt = sprintf('f.%s.facet.range.', adv_range['range']);
 
-						if (values.length > 0)
-							Manager.store.addByValue('facet.field', values);
-						if (ranges.length > 0)
-							for (var m = 0, n = ranges.length; m < n; m++) {
-								Manager.store.addByValue(ranges[m]['id'],ranges[m]['value'] );									
-							}												
-					}				
-				};						
+							ranges.push({id: 'facet.range', value: adv_range['range']});				 
+							ranges.push({id: opt + 'start', value: adv_range['start']});
+							ranges.push({id: opt + 'end', value: adv_range['end']});
+							ranges.push({id: opt + 'gap', value: adv_range['gap']});
+							if(adv_range['other'] !== undefined)
+								ranges.push({id:opt + 'other', value: adv_range['other']});														
+						}												
+					});
+
+					if (values.length > 0)
+						Manager.store.addByValue('facet.field', values);
+					if (ranges.length > 0)
+						for (var m = 0, n = ranges.length; m < n; m++) {
+							Manager.store.addByValue(ranges[m]['id'],ranges[m]['value'] );									
+						}						
+				});					
 			}																				
 
 			// fq param	
 			if (model.view != 'detail')				
 				Manager.store.addByValue('fq', Manager.store.fq_default);			
-
-//			var fq = ModelManager.get_fq_OR();
-
-//			jQuery.each(fq, function(key, value) {
-//			Manager.store.addByValue('fq', value);
-//			});
 
 			if(model.fq !== undefined && AjaxSolr.isArray(model.fq)){
 				for (var i = 0, l = model.fq.length; i < l; i++) {						
