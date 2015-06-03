@@ -101,8 +101,10 @@
 			var objectedItems = [];
 
 			switch (self.field){
-			case 'object_production_date_earliest':
-			case 'acq_date_earliest':
+			case 'acq_date_earliest':		    			  			   							  				  	  
+				break;	
+
+			case 'object_production_date_earliest':			
 
 				for (var facet in self.manager.response.facet_counts.facet_ranges[self.field].counts) {
 					var count = parseInt(self.manager.response.facet_counts.facet_ranges[self.field].counts[facet]);
@@ -116,7 +118,7 @@
 					//objectedItems.push({ "value": facet, "text": this.getCentury(daterange.getFullYear()), "count": count, "i": i });
 					i++;
 				};
-				
+
 				// add lower range bound
 				if (self.manager.response.facet_counts.facet_ranges[self.field].before !== undefined && self.manager.response.facet_counts.facet_ranges[self.field].before > 0){
 					var count = self.manager.response.facet_counts.facet_ranges[self.field].before;				
@@ -158,7 +160,7 @@
 						return typeof (a.text === 'string') && typeof (b.text === 'string') ? (a.text.trim() < b.text.trim() ? -1 : 1) : (a.text < b.text ? -1 : 1);
 				});	  	 		  	  
 				break;	
-				
+
 			case 'artist_surname_firstname':
 				for (var facet in self.manager.response.facet_counts.facet_fields[self.field]) {
 					var count = parseInt(self.manager.response.facet_counts.facet_fields[self.field][facet]);
@@ -231,7 +233,7 @@
 					if (count > maxCount) {
 						maxCount = count;
 					};
-										
+
 					$.each(getData_Common.enumProducent, function(key, type) {
 						if(facet == type){
 							text = smkCommon.firstCapital(self.manager.translator.getLabel('detail_producent_' + key));
@@ -239,7 +241,7 @@
 						}
 						index++;
 					});
-					
+
 					objectedItems.push({ "value": self.formatRequest(facet, true), "text": text , "count": count, "i": i, "index": index }); 
 					i++;	    	  	  	      	  	      
 				};
@@ -248,7 +250,7 @@
 					return (a.index < b.index ? -1 : 1);	  	      
 				});	  	 		  	  
 				break;								
-				
+
 			default:		    			  			   							  
 				for (var facet in self.manager.response.facet_counts.facet_fields[self.field]) {
 					var count = parseInt(self.manager.response.facet_counts.facet_fields[self.field][facet]);
@@ -314,13 +316,13 @@
 			if (objectedItems.length == 0){
 				$select.attr('data-placeholder', self.manager.translator.getLabel(sprintf('search_disab_lab', this.field)));
 				$select.prop('disabled', true);
-				
+
 			}else{
 				$select.attr('data-placeholder', self.manager.translator.getLabel(sprintf('search_%s_lab', this.field)));
 				$select.prop('disabled', false);
 			}
-			
-			
+
+
 
 			if(smkCommon.debugTime()) console.time("SearchFilters - " + this.field + " - chosen - update");
 			//* update 'chosen' plugin		

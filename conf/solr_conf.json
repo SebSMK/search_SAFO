@@ -25,29 +25,9 @@
                   "lang":"en"
                }
             ]
-         },
+         },         
          {
             "lab":"artwork",
-            "values":[
-               {
-                  "id":"object_production_date_earliest",
-                  "ranges":{
-                     "range":"object_production_date_earliest",
-                     "start":"1400-01-01T00:00:00.001Z",
-                     "end":"NOW",
-                     "gap":"+100YEARS",
-                     "other":"before"
-                  },
-                  "lang":"en dk"
-               },
-               {
-                  "id":"vaerkstatus",
-                  "lang":"en dk"
-               }
-            ]
-         },
-         {
-            "lab":"technic",
             "values":[
                {
                   "id":"object_type_main_dk",
@@ -76,13 +56,13 @@
             ]
          },
          {
-            "lab":"acq",
+            "lab":"blank",
             "values":[
                {
-                  "id":"acq_date_earliest",
+                  "id":"object_production_date_earliest",
                   "ranges":{
-                     "range":"acq_date_earliest",
-                     "start":"1700-01-01T00:00:00.001Z",
+                     "range":"object_production_date_earliest",
+                     "start":"1400-01-01T00:00:00.001Z",
                      "end":"NOW",
                      "gap":"+100YEARS",
                      "other":"before"
@@ -90,7 +70,20 @@
                   "lang":"en dk"
                },
                {
-                  "id":"collection",
+                  "id":"vaerkstatus",
+                  "lang":"en dk"
+               },
+               {
+                  "id":"department",
+                  "lang":"en dk"
+               }
+            ]
+         },
+         {
+            "lab":"acq",
+            "values":[
+               {
+                  "id":"acq_date_earliest",                  
                   "lang":"en dk"
                }
             ]
@@ -133,13 +126,13 @@
          "object_type_main_en",
          "object_type_dk",
          "object_type_en",      
-         "collection",
+         "department",
          "portrait_person",
          "topografisk_motiv",
          "materiale",
          "materiale_en",
-         "acq_date_earliest",
-         "vaerkstatus"
+         "vaerkstatus",
+         "acq_date_earliest"
       ]
    },
    "exposed":[

@@ -13,6 +13,7 @@
 
 	  "adv_artist_column_title": 	"kunstner | producent",
       "adv_artwork_column_title": 	"værk",
+      "adv_blank_column_title": 	"&nbsp;",
       "adv_technic_column_title": 	"teknik",
       "adv_acq_column_title": 		"erhvervelse",
       "adv_motiv_column_title": 	"motiv", 
@@ -64,7 +65,7 @@
 	  "search_filter_cent":		"tallet",
 	  "search_filter_before":	"før ",
       "search_data_loading":	"loading data...",
-      "search_disab_lab":		"Ingen filter",
+      "search_disab_lab":		"Ingen aktive filter",
       "search_no_results": 		"ingen resultater for",
       
       "advanced_search_panel_show": "Vise filtre",
@@ -701,6 +702,7 @@
 
  	  "adv_artist_column_title": 	"artist | producer",
       "adv_artwork_column_title": 	"artwork",
+      "adv_blank_column_title": 	"&nbsp;",
       "adv_technic_column_title": 	"technique",
       "adv_acq_column_title": 		"acquisition",
       "adv_motiv_column_title": 	"motive",      
@@ -721,7 +723,8 @@
 	  "tagcloud_artist_auth": 		"role",
 	  "tagcloud_object_production_date_earliest": 		"period",
 	  "tagcloud_artist_natio_en":	"nationality",
-	  "tagcloud_object_type_en": 		"artwork type",
+	  "tagcloud_object_type_main_en": 		"artwork type",
+	  "tagcloud_object_type_en": 		"technique",
 	  "tagcloud_prod_technique_en": 		"technique",
 	  "tagcloud_collection":		"collection",
 	  "tagcloud_portrait_person": 		"portrait",
@@ -735,7 +738,8 @@
 	  "search_object_production_date_earliest_lab": 		"Select period",
 	  "search_artist_natio_en_lab": 	"Select nationality",
 	  "search_prod_technique_en_lab":	"Select technique",
-	  "search_object_type_en_lab":		"Select artwork type",
+	  "search_object_type_main_en_lab":		"Select artwork type",
+	  "search_object_type_en_lab":		"Select technique",
 	  "search_collection_lab":			"Select collection",
 	  "search_portrait_person_lab":		"Select name",
       "search_topografisk_motiv_lab":	"Select place",
@@ -747,7 +751,7 @@
 	  "search_filter_cent":		" c.",
 	  "search_filter_before":	"before ",
 	  "search_data_loading":	"loading data...",
-	  "search_disab_lab":		"no filter",
+	  "search_disab_lab":		"No active filter",
 	  "search_no_results": 		"no results match",
 	  
 	  "advanced_search_panel_show": "Show filters",

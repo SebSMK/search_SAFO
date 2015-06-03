@@ -43,7 +43,7 @@
 			// change_columns_titles
 			$(self.target).find(".filter-group h3").each(function (){
 				if(self.panel_data.filters[i] !== undefined)
-					$(this).text(self.manager.translator.getLabel(self.panel_data.filters[i].lab_tag)); 				
+					$(this).html(self.manager.translator.getLabel(self.panel_data.filters[i].lab_tag)); 				
 				i++;
 				
 			});
