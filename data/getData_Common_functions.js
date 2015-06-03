@@ -50,7 +50,7 @@
 	};
 
 	getdatacommon.getIdent_samling = function(doc){			
-		return doc.collection === undefined ? null : doc.collection;
+		return doc.department === undefined ? null : doc.department;
 	};
 
 	getdatacommon.getIdent_andet_inv = function(doc){			
@@ -896,6 +896,13 @@
 	/**
 	 * Enum
 	 * */
+	
+	getdatacommon.enumDepartment = {			
+			'kks': 'kks',
+			'kms': 'kms',
+			'kas': 'kas'
+	};
+	
 	getdatacommon.enumProducent = {			
 			'orig': 'original',
 			'tilsk': 'tilskrevet',
