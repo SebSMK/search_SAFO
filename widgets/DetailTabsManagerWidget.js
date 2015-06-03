@@ -47,7 +47,7 @@
 					"multi_work": {					
 						'rows':20,					
 						'start': 0,
-						'sort': "id asc",
+						'sort': "part_nr asc",
 						'fl': self.partsManager.store.fl_options.thumbs,
 						'json.nl': 'map'
 					},
