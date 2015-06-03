@@ -49,8 +49,18 @@
 		return doc.id === undefined ? null : doc.id;
 	};
 
-	getdatacommon.getIdent_samling = function(doc){			
-		return doc.department === undefined ? null : doc.department;
+	getdatacommon.getIdent_samling = function(doc, caller){	
+		if (doc.department === undefined) 
+			return null;		
+		
+		var dep;
+		$.each(getData_Common.enumDepartment, function(key, type) {
+			if(doc.department.indexOf(type) > -1){
+				dep = smkCommon.firstCapital(caller.manager.translator.getLabel('search_'+ key +'_lab'));;
+				return false; //break each loop
+			}			
+		});
+		return dep;
 	};
 
 	getdatacommon.getIdent_andet_inv = function(doc){			

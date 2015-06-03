@@ -38,7 +38,7 @@
 
 						ident_samling: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_ident_samling')),  
-							value: getData_Common.getIdent_samling(doc)
+							value: getData_Common.getIdent_samling(doc, caller)
 						},
 
 						ident_andet_inv: {
