@@ -1,5 +1,5 @@
 {
-   "version":"0.000.001.035",
+   "version":"0.000.001.036",
    "mode":"proxy debug perf",
    "server":"http://csdev-seb:8180/solr-example/dev_SAFO/",
    "server_proxy":"http://solr.smk.dk:8080/proxySolrPHP/proxy.php",
@@ -9,7 +9,7 @@
             "lab":"artist",
             "values":[
                {
-                  "id":"artist_name",
+                  "id":"artist_surname_firstname",
                   "lang":"en dk"
                },
                {
@@ -55,6 +55,14 @@
                },
                {
                   "id":"object_type_en",
+                  "lang":"en"
+               },
+               {
+                  "id":"prod_technique_dk",
+                  "lang":"dk"
+               },
+               {
+                  "id":"prod_technique_en",
                   "lang":"en"
                },
                {
@@ -115,13 +123,16 @@
          "proveniens"
       ],
       "all":[
-         "artist_name",
+         "artist",
+         "artist_surname_firstname",
          "artist_auth",
          "artist_natio_dk",
          "artist_natio_en",
          "object_production_date_earliest",
          "object_type_dk",
-         "object_type_en",       
+         "object_type_en",
+         "prod_technique_dk",
+         "prod_technique_en",       
          "collection",
          "portrait_person",
          "topografisk_motiv",

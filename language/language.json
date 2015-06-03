@@ -32,7 +32,7 @@
 	  "autocomp_proveniens": 		"proveniens",
       
       
-      "tagcloud_artist_name": 			"producent",
+      "tagcloud_artist_surname_firstname": 			"producent",
       "tagcloud_artist_auth": 			"rolle",      
 	  "tagcloud_object_production_date_earliest": 		"periode",
 	  "tagcloud_artist_natio_dk": 		"nationalitet",
@@ -45,7 +45,7 @@
 	  "tagcloud_acq_date_earliest": 	"dato", 
 	  "tagcloud_vaerkstatus": 			"værkstatus", 	  	  
           
-      "search_artist_name_lab": 		"Indtast navn",
+      "search_artist_surname_firstname_lab": 		"Indtast navn",
       "search_artist_auth_lab": 		"Indtast rolle",
       "search_object_production_date_earliest_lab": 		"Indtast periode",
       "search_artist_natio_dk_lab": 	"Indtast kunstners nationalitet",
@@ -715,7 +715,7 @@
 	  "autocomp_materiale_en": 		"material",
 	  "autocomp_proveniens": 		"provenenance",
 
-	  "tagcloud_artist_name": 		"producer",
+	  "tagcloud_artist_surname_firstname": 		"producer",
 	  "tagcloud_artist_auth": 		"role",
 	  "tagcloud_object_production_date_earliest": 		"period",
 	  "tagcloud_artist_natio_en":	"nationality",
@@ -728,7 +728,7 @@
 	  "tagcloud_acq_date_earliest": 	"date", 
 	  "tagcloud_vaerkstatus": 			"status", 	  	
 	  
-	  "search_artist_name_lab": 		"Select name",
+	  "search_artist_surname_firstname_lab": 		"Select name",
 	  "search_artist_auth_lab": 		"Select role",
 	  "search_object_production_date_earliest_lab": 		"Select period",
 	  "search_artist_natio_en_lab": 	"Select nationality",

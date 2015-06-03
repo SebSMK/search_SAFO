@@ -158,6 +158,26 @@
 						return typeof (a.text === 'string') && typeof (b.text === 'string') ? (a.text.trim() < b.text.trim() ? -1 : 1) : (a.text < b.text ? -1 : 1);
 				});	  	 		  	  
 				break;	
+				
+			case 'artist_surname_firstname':
+				for (var facet in self.manager.response.facet_counts.facet_fields[self.field]) {
+					var count = parseInt(self.manager.response.facet_counts.facet_fields[self.field][facet]);
+					if (count > maxCount) {
+						maxCount = count;
+					};
+
+					if(smkCommon.isValidDataText(facet)){
+						objectedItems.push({ "value": self.formatRequest(facet, true), "text": smkCommon.firstCapital(facet).trim(), "count": count, "i": i }); 
+						i++;
+					}
+
+				};
+				totalCount = i;
+				objectedItems.sort(function (a, b) {	
+					return typeof(a.text === 'string') && typeof (b.text === 'string') ? (a.text.trim() < b.text.trim() ? -1 : 1) : (a.text < b.text ? -1 : 1);						
+				});	  	 		  	  
+				break;		
+
 
 			case 'object_type_dk':
 			case 'object_type_en':
@@ -227,7 +247,7 @@
 				objectedItems.sort(function (a, b) {
 					return (a.index < b.index ? -1 : 1);	  	      
 				});	  	 		  	  
-				break;	
+				break;								
 				
 			default:		    			  			   							  
 				for (var facet in self.manager.response.facet_counts.facet_fields[self.field]) {
