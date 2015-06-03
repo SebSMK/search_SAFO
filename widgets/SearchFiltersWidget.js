@@ -136,8 +136,8 @@
 
 			case 'artist_natio_en':
 			case 'artist_natio_dk':
-			case 'prod_technique_dk':
-			case 'prod_technique_en':
+			case 'object_type_dk':
+			case 'object_type_en':
 				for (var facet in self.manager.response.facet_counts.facet_fields[self.field]) {
 					var count = parseInt(self.manager.response.facet_counts.facet_fields[self.field][facet]);
 					if (count > maxCount) {
@@ -179,8 +179,8 @@
 				break;		
 
 
-			case 'object_type_dk':
-			case 'object_type_en':
+			case 'object_type_main_dk':
+			case 'object_type_main_en':
 
 				var root_categories = {};
 				for (var facet in self.manager.response.facet_counts.facet_fields[self.field]) {
