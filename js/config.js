@@ -62,7 +62,7 @@
 						case "server":		 			  			  			  									  				    		
 							this.server = item;				  			  			  
 							break;
-							
+
 						case "server_proxy":		 			  			  			  									  				    		
 							this.server_proxy = item;				  			  			  
 							break;
@@ -74,11 +74,11 @@
 						case "rows_default":		 			  			  			  
 							this.rows_default = item;			  			  			  
 							break;
-							
+
 						case "mode":
 							this.mode = item;				  			  			  
 							break;
-						
+
 						case "version":
 							this.version = item;				  			  			  
 							break;
@@ -91,7 +91,7 @@
 				}, this)
 			});  
 		};
-				
+
 		this.get_qf_default = function(){
 			return this.qf_default;		
 		};
@@ -109,19 +109,19 @@
 		this.get_filter_facets = function(){
 			return this.facets["advanced"];					
 		};
-		
+
 		/*
 		 *
 		 */
 		this.get_autocomplete_facets = function(){
 			return this.facets["autocomplete"]; 			
 		};
-		
+
 		/*
 		 *
 		 */
 		this.get_all_facets = function(){
-			return this.facets["all"]; 			
+			return this.extract_facets(); // this.facets["all"]; 			
 		};
 
 		/*
@@ -158,7 +158,7 @@
 		this.get_server = function(){
 			return this.server;
 		};
-		
+
 		/*
 		 *
 		 */
@@ -180,26 +180,26 @@
 			return this.rows_default;
 		};	
 
-		
+
 		this.get_mode = function(){
 			return this.mode;
 		};
-		
+
 		this.get_version = function(){
 			return this.version;
 		};
-		
+
 		this.get_all_standard_filters = function(){			
 			if(this.facets != null)
 				return this.facets.all.filters										
 		};
-		
+
 		this.get_all_advanced_filters = function(){			
 			if(this.facets != null)
 				return this.facets.all.advanced
 		};
 
-		
+
 		/*
 		 * variables
 		 */
@@ -217,6 +217,22 @@
 		this.rows_default = null;
 		this.mode = "normal";
 		this.version = null;
+
+		/*
+		 * private functions		
+		 * */
+
+		this.extract_facets = function(){
+			var adv_data = this.facets["advanced"];
+			var facets = [];
+			$.each(adv_data, function( index, adv_facets ){											
+				$.each(adv_facets['values'], function( index1, value){					
+					facets.push(value['id']);
+				});
+			});
+			
+			return facets;
+		}
 	}
 
 }));

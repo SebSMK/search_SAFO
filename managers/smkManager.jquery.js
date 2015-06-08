@@ -19,7 +19,7 @@
 				constructor: function (attributes) {
 					AjaxSolr.smkManager.__super__.constructor.apply(this, arguments);
 					AjaxSolr.extend(this, {
-						searchfilterList: [],
+//						searchfilterList: [],
 						allWidgetsProcessed: null,
 						generalSolrError: null,
 						translator:null

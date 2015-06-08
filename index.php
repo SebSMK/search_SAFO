@@ -38,6 +38,7 @@
 	<script src="widgets/CategoryWidget.js" type="text/javascript"></script>
 	<script src="widgets/CurrentSearchWidget.js" type="text/javascript"></script>
 	<script src="widgets/CheckBoxWidget.js" type="text/javascript"></script>
+	<script src="widgets/DateRangeWidget.js" type="text/javascript"></script>
 		
 	<script src="managers/EventsManager.js" type="text/javascript"></script>
    

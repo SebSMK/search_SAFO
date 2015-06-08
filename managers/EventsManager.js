@@ -303,18 +303,30 @@
 				current_fqs.push(new AjaxSolr.Parameter({ name: 'fq', value: params.selected})); 
 				trigg_req = true;
 			}else if (params.deselected !== undefined){ 
+				// remove from fq list
 				current_fqs = jQuery.grep(current_fqs, function(fq) {
 					return fq.value != params.deselected;
 				});
 				trigg_req = true;
 			}else if (params.auto !== undefined){				
 				trigg_req = true;
+			}else if (params.date_range !== undefined){
+				$.each(params.date_range, function( key, value){
+					// remove from fq list
+					current_fqs = jQuery.grep(current_fqs, function(fq) {
+						return fq.value.indexOf(key) == -1;
+					});
+					// if it's valid, add the new value to fq
+					if(smkCommon.isValidDataText(value))
+						current_fqs.push(new AjaxSolr.Parameter({ name: 'fq', value: value}));																				
+				});
+					
+				trigg_req = true;
 			};    
 
 			if (trigg_req){	
-				var model = {};	
-				
-				model.fq = params.selected !== undefined || params.deselected !== undefined ? current_fqs : ModelManager.current_value_joker;
+				var model = {};					
+				model.fq = params.date_range !== undefined || params.selected !== undefined || params.deselected !== undefined ? current_fqs : ModelManager.current_value_joker;
 				model.auto = params.auto !== undefined ? [new AjaxSolr.Parameter({ name: 'fq', value: params.auto})] : ModelManager.current_value_joker;
 				model.q = params.auto === undefined ? ModelManager.current_value_joker : null;
 				model.sort = ModelManager.current_value_joker;

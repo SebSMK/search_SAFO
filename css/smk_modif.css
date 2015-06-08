@@ -5,6 +5,37 @@
 	opacity: 0.5; 
 }
 
+.filter-group-interval input[type="submit"] {
+  float: left;
+  width: 16%;
+/* 
+ background-color: #fff;
+    border: 1px solid #1a1919;
+    border-radius: 2px;
+    color: #1a1919;
+    display: inline-block;    
+    font-family: "hill demibold",sans-serif;
+    font-size: 14px;
+    margin: 0;
+    padding: 6px 15px;
+    text-transform: uppercase;*/
+    
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #bfbfbf;
+    box-shadow: 0 -2px 0 0 #bfbfbf inset;
+    color: #333;
+    font-family: "hill demibold",sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    margin-top: 0;
+    outline: medium none;
+    text-shadow: none;
+    padding: 7px 4px;
+    transition: background-color 0.2s ease 0s; 
+    margin-left: 10px;
+}
+
 .no-touch .cd-top:hover {
     background-color: #fff;
 }   
@@ -269,6 +300,11 @@ a.divLink {
 
 .artwork .artwork-artists {
   font-size: 1.1em;
+}
+
+.filter-group-interval input[type="text"] {
+  float: left;
+  width: 26%;
 }
 
 /*

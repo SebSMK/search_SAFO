@@ -1,8 +1,8 @@
 {
-   "version":"0.000.001.036",
-   "mode":"proxy debug perf",
+   "version":"0.000.001.039",
+   "mode":"NOproxy debug perf",
    "server":"http://csdev-seb:8180/solr-example/dev_SAFO/",
-   "server_proxy":"http://solr.smk.dk:8080/proxySolrPHP/proxy.php",
+   "server_proxyxxx":"http://solr.smk.dk:8080/proxySolrPHP/proxy.php",
    "facets":{
       "advanced":[
          {
@@ -83,7 +83,7 @@
             "lab":"acq",
             "values":[
                {
-                  "id":"acq_date_earliest",                  
+                  "id":"acq_date_range",                  
                   "lang":"en dk"
                }
             ]
@@ -114,25 +114,6 @@
          "title_en",
          "title_first",
          "proveniens"
-      ],
-      "all":[
-         "artist",
-         "artist_surname_firstname",
-         "artist_auth",
-         "artist_natio_dk",
-         "artist_natio_en",
-         "object_production_date_earliest",
-         "object_type_main_dk",
-         "object_type_main_en",
-         "object_type_dk",
-         "object_type_en",      
-         "department",
-         "portrait_person",
-         "topografisk_motiv",
-         "materiale",
-         "materiale_en",
-         "vaerkstatus",
-         "acq_date_earliest"
       ]
    },
    "exposed":[

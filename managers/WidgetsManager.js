@@ -69,7 +69,7 @@ var EventsManager;
 				facets_default: filter_facets,
 				current_lang: current_language
 			}),
-			searchfilterList: all_facets,
+//			searchfilterList: all_facets,
 			allWidgetsProcessed: allWidgetsProcessedBound,
 			generalSolrError: generalSolrErrorProcessedBound,
 			translator: translator
@@ -235,8 +235,8 @@ var EventsManager;
 			target: '#checkbox',
 			field: 'medium_image_url',
 			template: Mustache.getTemplate('templates/checkbox.html')
-		})); 	
-
+		})); 			
+		
 		Manager.addWidget(new AjaxSolr.TeasersWidget({
 			id: 'teasers',
 			target: '#smk_teasers',
@@ -261,7 +261,15 @@ var EventsManager;
 				field: all_facets[i],
 				template: Mustache.getTemplate('templates/chosen.html')
 			}));
-		};				
+		};	
+		
+		//* daterange -> overrides date filter, so it has to be declared after filters
+		Manager.addWidget(new AjaxSolr.DateRangeWidget({
+			id: 'adv_acq_date_range',
+			target: '#adv_acq_date_range',
+			field: {'earl': 'acq_date_earliest', 'late': 'acq_date_latest'},
+			template: Mustache.getTemplate('templates/daterange.html')
+		})); 
 
 		//* Detail widget		
 		Manager.addWidget(new AjaxSolr.DetailWidget({
