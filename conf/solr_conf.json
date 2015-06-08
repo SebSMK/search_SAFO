@@ -2,7 +2,7 @@
    "version":"0.000.001.040",
    "mode":"proxy debug",
    "server":"http://csdev-seb:8180/solr-example/dev_SAFO/",
-   "server_proxybb":"http://solr.smk.dk:8080/proxySolrPHP/proxy.php",
+   "server_proxyxxx":"http://solr.smk.dk:8080/proxySolrPHP/proxy.php",
    "facets":{
       "advanced":[
          {
@@ -125,7 +125,7 @@
       "qf"
    ],
    
-   "fq_default":"-(id:(*verso))",
+   "fq_default":"-(id:(*/*)) -(id:(*verso)) -(medium_image_url:[* TO *])",
    "fq_default_debug":"-(id:(*/*)) -(id:(*verso)) -(medium_image_url:[* TO *])",
    "fq_default_prod":"-(id:(*verso))",
    

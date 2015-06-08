@@ -31,7 +31,7 @@
 			if (facets !== undefined){	
 				for (var i = 0, l = facets.length; i < l; i++) {					
 					$.each(self.field, function( key, value ){
-						if(facets[i].id == key){
+						if(facets[i].id == value){
 							var date = facets[i].text.match(/\[(.*)-01-01T00:00:00.001Z TO/);
 							if(smkCommon.isValidDataText(date))
 								$(self.target).find('[name='+ key +']').val(date[1]);
@@ -54,16 +54,16 @@
 		format_request: function(self){			
 			var res = {};
 			var date_format = '%s-01-01T00:00:00.001Z';	
-			var sup = sprintf('%s:[%%s TO *]', self.field.acq_date_earliest);
-			var inf = sprintf('%s:[* TO %%s]', self.field.acq_date_latest);
+			var sup = sprintf('%s:[* TO %%s]', self.field.max);
+			var inf = sprintf('%s:[%%s TO *]', self.field.min);
 			
-			var max = $(self.target).find('[name=acq_date_latest]').val();
+			var max = $(self.target).find('[name=max]').val();
 			max = smkCommon.isValidDataText(max) ? sprintf(sup, sprintf(date_format, max)) : null;						
-			res[self.field.acq_date_earliest] = max;
+			res[self.field.max] = max;
 		
-			var min = $(self.target).find('[name=acq_date_earliest]').val();
+			var min = $(self.target).find('[name=min]').val();
 			min = smkCommon.isValidDataText(min) ? sprintf(inf, sprintf(date_format, min)) : null;
-			res[self.field.acq_date_latest] = min;
+			res[self.field.min] = min;
 			
 			return res;
 		}

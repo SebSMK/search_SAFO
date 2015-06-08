@@ -267,7 +267,7 @@ var EventsManager;
 		Manager.addWidget(new AjaxSolr.DateRangeWidget({
 			id: 'adv_acq_date_range',
 			target: '#adv_acq_date_range',
-			field: {'acq_date_earliest': 'acq_date_earliest', 'acq_date_latest': 'acq_date_latest'},
+			field: {'max': 'acq_date_earliest', 'min': 'acq_date_latest'},
 			template: Mustache.getTemplate('templates/daterange.html')
 		})); 
 
