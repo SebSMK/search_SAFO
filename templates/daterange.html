@@ -3,12 +3,12 @@
 	<script id="daterangeTemplate" type="text/template">
 		
 		<div class="filter-group-pair filter-group-interval">           
-			<label for="e100">Dating</label>
+			<label for="e100">{{label}}</label>
  			<form>
-            	<input name="earliest" type="text" placeholder="From..." id="e100">
+            	<input name="acq_date_earliest" type="text" placeholder="{{from}}">
 				<span>-</span>            	
-            	<input name="latest" type="text" placeholder="To..." id="e150">			
-				<input type="submit" value="Vis" name="name">
+            	<input name="acq_date_latest" type="text" placeholder="{{to}}">			
+				<input type="submit" value="{{show}}" name="name">
 			</form>
         </div>
 

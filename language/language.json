@@ -20,6 +20,11 @@
       
       "checkbox_hasimage": 			"med optagelse", 
       
+      "daterange_label":			"dato",
+      "daterange_to":				"til...",
+      "daterange_from":				"fra...",
+      "daterange_show":				"vis",
+      
       "autocomp_id": 				"inventar nummer",
       "autocomp_title_en": 			"titel",
       "autocomp_title_first": 		"titel",
@@ -702,6 +707,11 @@
       "copyright_link":			"http://creativecommons.org/publicdomain/zero/1.0/",		
 
 	  "checkbox_hasimage": 			"has image", 
+	  
+	  "daterange_label":			"date",
+      "daterange_to":				"to...",
+      "daterange_from":				"from...",
+      "daterange_show":				"ok",
 
  	  "adv_artist_column_title": 	"artist | producer",
       "adv_artwork_column_title": 	"artwork",
