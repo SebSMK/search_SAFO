@@ -23,6 +23,10 @@
     margin-left: 10px;
 }
 
+.filter-group {
+  margin-top: 10px;
+}
+
 .no-touch .cd-top:hover {
     background-color: #fff;
 }   

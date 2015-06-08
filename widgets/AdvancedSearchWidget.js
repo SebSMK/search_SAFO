@@ -30,7 +30,7 @@
 		            $(".advanced-search-panel-show-hide a").text($(".advanced-search-panel-show-hide a").attr("data-label-close")), 
 		            setTimeout(function() {
 		                $(".advanced-search-panel").height("auto");
-		            }, 200)) : ($(".advanced-search-panel").height("6px"), $(".advanced-search-panel-show-hide a").text($(".advanced-search-panel-show-hide a").attr("data-label-open"))), 
+		            }, 200)) : ($(".advanced-search-panel").height("1px"), $(".advanced-search-panel-show-hide a").text($(".advanced-search-panel-show-hide a").attr("data-label-open"))), 
 		            // Toggle class to show/hide
 		            $(".advanced-search-panel").toggleClass("advanced-search-panel-hidden");
 		        });
