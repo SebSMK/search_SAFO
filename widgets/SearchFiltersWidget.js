@@ -250,14 +250,14 @@
 					return (a.index < b.index ? -1 : 1);	  	      
 				});	  	 		  	  
 				break;								
-			
+
 			case "department":		    			  			   							  
 				for (var facet in self.manager.response.facet_counts.facet_fields[self.field]) {
 					var count = parseInt(self.manager.response.facet_counts.facet_fields[self.field][facet]);
 					if (count > maxCount) {
 						maxCount = count;
 					};
-					
+
 					$.each(getData_Common.enumDepartment, function(key, type) {
 						if(facet.indexOf(type) > -1){
 							text = smkCommon.firstCapital(self.manager.translator.getLabel('search_'+ key +'_lab'));
@@ -273,7 +273,28 @@
 				objectedItems.sort(function (a, b) {
 					return typeof (a.value === 'string') && typeof (b.value === 'string') ? (a.value.trim() < b.value.trim() ? -1 : 1) : (a.value < b.value ? -1 : 1);	  	      
 				});	  	 		  	  
-				break;		
+				break;	
+
+			case "materiale":		    			  			   							  
+				for (var facet in self.manager.response.facet_counts.facet_fields[self.field]) {
+					var count = parseInt(self.manager.response.facet_counts.facet_fields[self.field][facet]);
+					if (count > maxCount) {
+						maxCount = count;
+					};
+
+					var values = facet.split(smkCommon.split_2_niv); 					 										
+					text = smkCommon.isValidDataText(smkCommon.getValueFromSplit(values, 0)) ? smkCommon.firstCapital(smkCommon.getValueFromSplit(values, 0).trim()) : "";
+
+					objectedItems.push({ "value": self.formatRequest(facet, true), "text": text, "count": count, "i": i }); 
+					i++;	    	  	  	      	  	      
+				};
+				totalCount = i;
+				objectedItems.sort(function (a, b) {
+					return typeof (a.value === 'string') && typeof (b.value === 'string') ? (a.value.trim() < b.value.trim() ? -1 : 1) : (a.value < b.value ? -1 : 1);	  	      
+				});	  	 		  	  
+				break;		  
+
+
 			default:		    			  			   							  
 				for (var facet in self.manager.response.facet_counts.facet_fields[self.field]) {
 					var count = parseInt(self.manager.response.facet_counts.facet_fields[self.field][facet]);

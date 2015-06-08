@@ -883,7 +883,7 @@
 		"detail_technique_format":	"shape",
 		"detail_technique_kollation":	"contents",
 		"detail_technique_lab":	"technique",
-		"detail_technique_materiale": "materialstechnique_all",
+		"detail_technique_materiale": "material",
 		"detail_technique_materiale_grundering":	"priming",
 		"detail_technique_materiale_material":	"support",
 		"detail_technique_materiale_medium":	"coat of paint",
