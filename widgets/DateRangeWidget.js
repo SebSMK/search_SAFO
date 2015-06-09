@@ -13,11 +13,11 @@
 			$target.html(html);	  	  	  			
 
 			$(self.target).find('form').submit(function (e) {				
-				event.preventDefault();
+				e.preventDefault();				
 				$(self).trigger({
 					type: "smk_search_filter_changed",
 					params: {date_range: self.format_request(self)}					
-				});											
+				});	
 			});
 			
 			this.update_filters();
