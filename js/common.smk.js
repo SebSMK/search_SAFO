@@ -116,6 +116,19 @@
 
 		return res;
 	};
+	
+	common.isElemIntoView = function(elem){		   		    						
+		var $elem = $(elem);
+		var $window = $(window);
+
+		var docViewTop = $window.scrollTop();
+		var docViewBottom = docViewTop + window.outerHeight;// $window.height();		    
+
+		var elemTop = $elem.offset().top;
+		var elemBottom = elemTop + $elem.height();
+
+		return elemTop <= (docViewBottom);// && (elemTop >= docViewTop));
+	};			
 
 	common.getDefaultPicture = function(size){		
 		var picturePath = ""

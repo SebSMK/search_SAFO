@@ -53,7 +53,7 @@
 				ViewManager.callWidgetFn('scroll_update', 'start_scroll_request');	        																	        		    
 
 				//* start preloading of teaser's images				
-				ViewManager.callWidgetFn('scroll_update', 'start_scroll_preload_request');					
+				//ViewManager.callWidgetFn('scroll_update', 'start_scroll_preload_request');					
 			}																				
 		};							
 
@@ -412,7 +412,7 @@
 
 			this.startScroll = true;
 			//* start preloading of teaser's images 
-//			ViewManager.callWidgetFn('scroll_update', 'start_scroll_preload_request');		
+			ViewManager.callWidgetFn('scroll_update', 'start_scroll_preload_request');		
 		},
 
 		//* scroll - no more result to show		 
@@ -424,8 +424,8 @@
 //			ViewManager.smk_scroll_all_images_displayed(added);	
 
 //			//* start preloading of teaser's images 
-//			if(this.startScroll)
-//			ViewManager.callWidgetFn('scroll_update', 'start_scroll_preload_request');	
+			if(this.startScroll)
+				ViewManager.callWidgetFn('scroll_update', 'start_scroll_preload_request');	
 
 		},
 
@@ -442,7 +442,7 @@
 			var self = this;
 
 			// start searchFilters processing
-			// we're queuing processing of each searchField, so that they're processed in a row with a 10ms interval
+			// we're queuing processing of each advanced filter field, so that they're processed in a row with a 10ms interval
 			var doQueueProcess = function(field){				
 				var doQueue= function() {
 					ViewManager.callWidgetFn(field, 'process_filter');

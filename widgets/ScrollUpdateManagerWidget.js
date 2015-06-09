@@ -93,16 +93,16 @@
 			if ($(self.scroll_subWidget.target).find('.preloaded').length > 0){									
 
 				$(self.scroll_subWidget.target).find('.preloaded').each(function(){
-					if(self.isScrolledIntoView(this)){
+					if(smkCommon.isElemIntoView(this)){
 						$(this).removeClass('preloaded').show();
-						if(smkCommon.debugLog()) console.log(sprintf("start_scroll_request - show preloaded: %s", $(this).attr("id")));	
+						if(smkCommon.debugLog()) console.log(sprintf("start_scroll_request - remove preloaded: %s", $(this).attr("id")));	
 						newImg++;
 					}										
 				});
 				if (newImg > 0)
 					self.onFinishLoaded(newImg);				
 			}
-			// ...or start scroll request
+			// ...or, if there are no more preloaded images, start scroll request
 			else{		
 				if(!this.isRequestRunning && !this.noMoreResults && this.trigger_req()){
 					var params = {};					
@@ -154,7 +154,7 @@
 				this.isPreloading = true;
 				this.scroll_subWidget.isPreloading(true);
 				
-				if(smkCommon.debugLog()) console.log(sprintf("start_scroll_preload_request - doRequest: start_%s, rows_%s, isRequestRunning_%s - isPreloading_%s", params.start, params.rows, this.isRequestRunning, this.isPreloading));	
+				if(smkCommon.debugLog()) console.log(sprintf("start_scroll_preload_request - doRequest: preloaded back_%s, start_%s, rows_%s, isRequestRunning_%s - isPreloading_%s",$('.preloaded').length, params.start, params.rows, this.isRequestRunning, this.isPreloading));	
 
 				this.scrollManager.doRequest();	
 				this.show_infinite_scroll_spin('true');
@@ -215,18 +215,18 @@
 		 * PRIVATE FUNCTIONS
 		 * **/	
 
-		isScrolledIntoView: function(elem){		   		    						
-			var $elem = $(elem);
-			var $window = $(window);
-
-			var docViewTop = $window.scrollTop();
-			var docViewBottom = docViewTop + $window.height();		    
-
-			var elemTop = $elem.offset().top;
-			var elemBottom = elemTop + $elem.height();
-
-			return elemBottom <= (docViewBottom + 100);// && (elemTop >= docViewTop));
-		},				
+//		isScrolledIntoView: function(elem){		   		    						
+//			var $elem = $(elem);
+//			var $window = $(window);
+//
+//			var docViewTop = $window.scrollTop();
+//			var docViewBottom = docViewTop + window.outerHeight;// $window.height();		    
+//
+//			var elemTop = $elem.offset().top;
+//			var elemBottom = elemTop + $elem.height();
+//
+//			return elemTop <= (docViewBottom);// && (elemTop >= docViewTop));
+//		},				
 
 		onFinishLoaded: function(num) {	
 			$(this).trigger({

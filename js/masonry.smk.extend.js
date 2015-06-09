@@ -7,7 +7,13 @@ $.fn.masonryImagesReveal = function(msnry, $tiles, onComplete, caller, onClickLi
 	// hide by default
 	$tiles.hide();
 
-	if(preloading == true){$tiles.each(function() {$(this).addClass('preloaded');})}	
+//	var i = 0;
+//	if(preloading == true){$tiles.each(function() {
+//		$(this).addClass('preloaded');
+//		i++;
+//	})};			
+	
+//	if(smkCommon.debugLog()) console.log(sprintf("scroll_request - masonryImagesReveal: preloaded_proceeded_%s", i));
 	
 	// append to container
 	if(smkCommon.debugTime()) console.time(sprintf("scroll_request - masonryImagesReveal: append Tiles"));
@@ -30,21 +36,25 @@ $.fn.masonryImagesReveal = function(msnry, $tiles, onComplete, caller, onClickLi
 		$tiles.find('img').each(function() {
 			$(this).delay(10).imagesLoaded().progress( function( imgLoad, image ) {
 				
-				if(smkCommon.debugLog()) console.log(sprintf(sprintf("scroll_request - masonryImagesReveal - imagesLoaded: scrollTop_%s", $(window).scrollTop() )));
+				//if(smkCommon.debugLog()) console.log(sprintf(sprintf("scroll_request - masonryImagesReveal - imagesLoaded: scrollTop_%s", $(window).scrollTop() )));
 				
 				if (caller.reset == true)	// avoid infinite loop when a new request is send while preloading is still running
 					return this;
 				
-				$(image.img).removeClass('image-loading');
+				$(image.img).removeClass('image-loading');													
 				
 				// if all images are loaded, append to masonry
 				if ($(msnry.element).find('img.image-loading').length == 0){	    		    									
-					$tiles.each(function() {
+					$tiles.each(function() {												
 						$(this).show();		    			    			    			    					    		
 						msnry.appended(this);						
+						
+						if(!smkCommon.isElemIntoView($(this)))
+							$(this).addClass('preloaded');
 					});			
 					
 					//msnry.layout();
+					if(smkCommon.debugLog()) console.log(sprintf("scroll_request - masonryImagesReveal: preloaded_added_%s", $('.preloaded').length));
 					
 					onComplete();				
 					
