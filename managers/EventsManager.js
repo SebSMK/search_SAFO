@@ -16,6 +16,7 @@
 
 		this.allWidgetProcessed = false;
 		this.startScroll = false;
+		this.lastScrollTop = 0;
 
 		this.init = function(){
 			/*
@@ -30,7 +31,7 @@
 			$.address.strict(false);
 			$( document ).ready(function() {				  
 				$.address.externalChange(function(e){self.addressChange(e)});
-				$(window).mousewheel(function(event){self.scrollStart(event)});								
+				$(window).scroll({self: self}, function(event){self.scrollStart(event)});								
 			});	  	  
 		};
 
@@ -43,10 +44,12 @@
 		 * */			        		           
 		this.scrollStart = function(event) {		        															
 
-
+			var st = $(window).scrollTop();
+			
 			if (ModelManager.get_view() != 'detail' 
 				&& $('.generalspinner').length == 0
-				&& event.deltaY < 0 // scrolling down
+				//&& event.deltaY < 0 // scrolling down
+				&& st > event.data.self.lastScrollTop
 				&& !$(event.target).hasClass('active-result') // user is not scrolling a facet-list				
 			){
 				//* start scroll request
@@ -54,7 +57,9 @@
 
 				//* start preloading of teaser's images				
 				//ViewManager.callWidgetFn('scroll_update', 'start_scroll_preload_request');					
-			}																				
+			}	
+			
+			event.data.self.lastScrollTop = st;
 		};							
 
 		/*

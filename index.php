@@ -60,7 +60,6 @@
 	<script src="js/imagesloaded.pkgd.min.js" type="text/javascript"></script>  
 	<script src="js/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script>
 	<script src="js/jquery.address.js" type="text/javascript"></script>
-	<script src="js/jquery.mousewheel.min.js" type="text/javascript"></script>
 	<script src="js/spin.min.js" type="text/javascript"></script>
 	<script src="js/queueProcessor.js" type="text/javascript"></script>	
 	<script src="js/sorter.js" type="text/javascript"></script>
