@@ -74,7 +74,7 @@
 			self.scrollManager.init(); 
 			
 			$( document ).ready(function() {				  				
-				$(window).scroll({self: self}, function(event){self.scrollStart(event)});								
+				$(window).scroll(function(event){self.scrollStart(event)});								
 			});	  	
 
 		},
@@ -155,43 +155,31 @@
 				this.scroll_subWidget.isPreloading(false);			}			 		  			
 		},
 
+		
+		
+		
 		/*
 		 * PRIVATE FUNCTIONS
-		 * **/	
+		 * **/				
 
-//		isScrolledIntoView: function(elem){		   		    						
-//			var $elem = $(elem);
-//			var $window = $(window);
-//
-//			var docViewTop = $window.scrollTop();
-//			var docViewBottom = docViewTop + window.outerHeight;// $window.height();		    
-//
-//			var elemTop = $elem.offset().top;
-//			var elemBottom = elemTop + $elem.height();
-//
-//			return elemTop <= (docViewBottom);// && (elemTop >= docViewTop));
-//		},				
-
-		/*
-		 * page scrolled 
-		 * */			        		           
+		/* page scrolled */			        		           
 		scrollStart: function(event) {		        															
 
 			var st = $(window).scrollTop();
 			
 			if (ModelManager.get_view() != 'detail' 
 				&& $('.generalspinner').length == 0				
-				&& st > event.data.self.lastScrollTop
+				&& st > this.lastScrollTop
 				&& !$(event.target).hasClass('active-result') // user is not scrolling a facet-list				
 			){
 				//* start scroll request
-				event.data.self.start_scroll_request();	        																	        		    
+				this.start_scroll_request();	        																	        		    
 
 				//* start preloading of teaser's images				
 				//ViewManager.callWidgetFn('scroll_update', 'start_scroll_preload_request');					
 			}
 			
-			event.data.self.lastScrollTop = st;
+			this.lastScrollTop = st;
 		},
 		
 		start_scroll_request: function(){

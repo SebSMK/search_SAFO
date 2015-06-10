@@ -37,8 +37,8 @@
 			// sub widget (managed by scrollManagerWidget)
 			self.sub_scrollWidget = new AjaxSolr.ScrollWidget({
 				id: 'sub_scroll_teasers',
-				target: '#smk_teasers',
-				template: Mustache.getTemplate('templates/teasers.html')
+				target: self.target,
+				template: self.template
 			});
 			
 			self.scrollUpdateManager = new AjaxSolr.ScrollUpdateManagerWidget({
@@ -60,9 +60,13 @@
 			//* scroll has finished loading images
 			$(self.scrollUpdateManager).on('smk_scroll_all_images_displayed', function(event){     	            	
 				//EventsManager.smk_scroll_all_images_displayed(event.added);				
-				$(self).trigger({
-					type: "smk_teasers_all_images_loaded"
-				});
+				
+				
+//				$(self).trigger({
+//					type: "smk_teasers_all_images_loaded"
+//				});
+				
+				self.refreshLayout();
 				
 				//* once images are loaded, start preloading request
 				// (but preloading will start only under a given thresold of remaining number of preloaded images)
@@ -122,7 +126,8 @@
 		},			
 		
 		refreshLayout: function(){
-			$(this.target).find('.matrix').masonry('layout');					
+			$(this.target).find('.matrix').masonry('layout');
+			this.highlightning();
 		},
 		
 		/*
@@ -214,6 +219,21 @@
 			var template = this.template; 	
 			var html = Mustache.to_html($(template).find(templ_id).html(), json_data);
 			return html;
+		},
+		
+		highlightning: function(){
+			// highlight search string
+			var vArray = [].concat(Manager.store.get('q').value);
+			if (undefined !== vArray && vArray.length > 0){    			
+				var words = [];
+
+				for (var i = 0, l = vArray.length; i < l; i++) {    				
+					words = words.concat(vArray[i].trim().replace('*', "").split(" "));    				
+				};
+
+				$(this.target).find('.matrix-tile-header').highlight(words);
+				$(this.target).find('.matrix-tile-meta').highlight(words);
+			}    
 		}
 	});
 

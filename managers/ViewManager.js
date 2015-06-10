@@ -142,7 +142,7 @@
 
 			this.showWidget($(this.callWidgetTarget('teasers')));																			
 			// highlight search string in teasers
-			this.highlightning();
+			//this.highlightning();
 			// we stop the modal "waiting image" for Teaser
 			this.remove_modal_loading_from_widget(this.callWidgetTarget('teasers'));				
 
@@ -333,20 +333,20 @@
 			$target.hide();	  	  
 		};
 
-		this.highlightning = function(){
-			// highlight search string in teasers
-			var vArray = [].concat(Manager.store.get('q').value);
-			if (undefined !== vArray && vArray.length > 0){    			
-				var words = [];
-
-				for (var i = 0, l = vArray.length; i < l; i++) {    				
-					words = words.concat(vArray[i].trim().replace('*', "").split(" "));    				
-				};
-
-				$(this.callWidgetTarget('teasers')).find('.matrix-tile-header').highlight(words);
-				$(this.callWidgetTarget('teasers')).find('.matrix-tile-meta').highlight(words);
-			}    
-		};
+//		this.highlightning = function(){
+//			// highlight search string in teasers
+//			var vArray = [].concat(Manager.store.get('q').value);
+//			if (undefined !== vArray && vArray.length > 0){    			
+//				var words = [];
+//
+//				for (var i = 0, l = vArray.length; i < l; i++) {    				
+//					words = words.concat(vArray[i].trim().replace('*', "").split(" "));    				
+//				};
+//
+//				$(this.callWidgetTarget('teasers')).find('.matrix-tile-header').highlight(words);
+//				$(this.callWidgetTarget('teasers')).find('.matrix-tile-meta').highlight(words);
+//			}    
+//		};
 
 		this.generalSolrError = function(e){
 			$(this.target).empty().html(sprintf('%s &nbsp;&nbsp; returned:&nbsp;&nbsp; %s<br>Please contact website administrator.', Manager.solrUrl, e)); 
