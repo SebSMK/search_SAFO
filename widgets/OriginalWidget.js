@@ -13,8 +13,7 @@
 			}	 		  
 
 			$target.empty();
-
-			var thumbnails = [];
+			
 			var artwork_data;
 			var dataHandler = new getData_Original.constructor(this);
 			for (var i = 0, l = this.manager.response.response.docs.length; i < l ; i++) {

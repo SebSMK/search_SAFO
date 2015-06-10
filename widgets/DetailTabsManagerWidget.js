@@ -48,7 +48,7 @@
 						'rows':20,					
 						'start': 0,
 						'sort': "part_nr asc",
-						'fl': self.partsManager.store.fl_options.thumbs,
+						'fl': self.partsManager.store.fl_options.parts,
 						'json.nl': 'map'
 					},
 

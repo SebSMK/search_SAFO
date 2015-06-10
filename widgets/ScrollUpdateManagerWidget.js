@@ -72,11 +72,7 @@
 
 			this.scrollSpin = new Spinner(this.scrollSpinopts);			
 
-			self.scrollManager.init(); 
-			
-			$( document ).ready(function() {				  				
-				$(window).scroll(function(event){self.scrollStart(event)});								
-			});	  	
+			self.scrollManager.init(); 						
 
 		},
 		

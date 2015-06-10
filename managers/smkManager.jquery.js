@@ -22,7 +22,8 @@
 //						searchfilterList: [],
 						allWidgetsProcessed: null,
 						generalSolrError: null,
-						translator:null
+						translator:null,
+						id:null
 					}, attributes);
 				},	  	  
 

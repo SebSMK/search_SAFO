@@ -88,6 +88,11 @@
 			});
 			
 			self.scrollUpdateManager.init();
+			
+			$(document).ready(function() {
+				if (self.getRefresh() && !$(self.target).is(':hidden'))
+					$(window).scroll(function(event){self.scrollUpdateManager.scrollStart(event)});								
+			});	  	
 
 		},  
 

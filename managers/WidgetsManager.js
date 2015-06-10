@@ -72,7 +72,8 @@ var EventsManager;
 //			searchfilterList: all_facets,
 			allWidgetsProcessed: allWidgetsProcessedBound,
 			generalSolrError: generalSolrErrorProcessedBound,
-			translator: translator
+			translator: translator,
+			id: 'Manager'
 		});
 
 		//* set and save default request parameters                
@@ -113,24 +114,26 @@ var EventsManager;
 			}),
 			allWidgetsProcessed: allWidgetsProcessedBound,
 			generalSolrError: generalSolrErrorProcessedBound,
-			translator: translator
+			translator: translator,
+			id: 'scrollManager'
 		});
 
 
 		//******************************
-		//** init thumbnailsManager
+		//** init partsManager
 		//******************************    
-		var thumbnailsManager = new AjaxSolr.smkManager({			
+		var partsManager = new AjaxSolr.smkManager({			
 			solrUrl: server, 
 			//proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
 			store: new AjaxSolr.smkParameterStore({
 				exposed: exposed,
-				fl_options: {"thumbs": fl_options.thumbs},
+				fl_options: {"parts": fl_options.parts},
 				current_lang:current_language
 			}),
 			allWidgetsProcessed: allWidgetsProcessedBound,
 			generalSolrError: generalSolrErrorProcessedBound,
-			translator: translator
+			translator: translator,
+			id:'partsManager'
 		});	
 
 		//******************************
@@ -146,7 +149,8 @@ var EventsManager;
 			}),
 			allWidgetsProcessed: allWidgetsProcessedBound,
 			generalSolrError: generalSolrErrorProcessedBound,
-			translator: translator
+			translator: translator,
+			id:'relatedManager'
 		});	
 
 		//******************************
@@ -162,7 +166,8 @@ var EventsManager;
 			}),
 			allWidgetsProcessed: allWidgetsProcessedBound,
 			generalSolrError: generalSolrErrorProcessedBound,
-			translator: translator
+			translator: translator,
+			id: 'getDetailManager' 
 		});	
 
 		//******************************
@@ -180,7 +185,6 @@ var EventsManager;
 			target: '#searchinfo',			
 			template: Mustache.getTemplate('templates/search_info.html')
 		}));
-
 		
 		Manager.addWidget(new AjaxSolr.SearchBoxAutoWidget({
 			id: 'searchboxauto',
@@ -306,7 +310,7 @@ var EventsManager;
 			id: 'details_tabs',
 			target: '#smk_detail_tabs',
 			template: Mustache.getTemplate('templates/detail_tabs.html'),
-			partsManager: thumbnailsManager,
+			partsManager: partsManager,
 			parts_subWidget: sub_partsWidget,
 			relatedManager: relatedManager,
 			related_subWidget: sub_relatedWidget,
