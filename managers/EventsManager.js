@@ -15,8 +15,7 @@
 	eventsManager.constructor = function(){
 
 		this.allWidgetProcessed = false;
-		this.startScroll = false;
-		this.lastScrollTop = 0;
+		this.startScroll = false;		
 
 		this.init = function(){
 			/*
@@ -30,37 +29,13 @@
 
 			$.address.strict(false);
 			$( document ).ready(function() {				  
-				$.address.externalChange(function(e){self.addressChange(e)});
-				$(window).scroll({self: self}, function(event){self.scrollStart(event)});								
+				$.address.externalChange(function(e){self.addressChange(e)});												
 			});	  	  
 		};
 
 		/********
 		 * EVENTS
-		 * *******/
-
-		/*
-		 * page scrolled 
-		 * */			        		           
-		this.scrollStart = function(event) {		        															
-
-			var st = $(window).scrollTop();
-			
-			if (ModelManager.get_view() != 'detail' 
-				&& $('.generalspinner').length == 0
-				//&& event.deltaY < 0 // scrolling down
-				&& st > event.data.self.lastScrollTop
-				&& !$(event.target).hasClass('active-result') // user is not scrolling a facet-list				
-			){
-				//* start scroll request
-				ViewManager.callWidgetFn('scroll_update', 'start_scroll_request');	        																	        		    
-
-				//* start preloading of teaser's images				
-				//ViewManager.callWidgetFn('scroll_update', 'start_scroll_preload_request');					
-			}	
-			
-			event.data.self.lastScrollTop = st;
-		};							
+		 * *******/									
 
 		/*
 		 * change in address bar
@@ -417,22 +392,22 @@
 
 			this.startScroll = true;
 			//* start preloading of teaser's images 
-			ViewManager.callWidgetFn('scroll_update', 'start_scroll_preload_request');		
+//			ViewManager.callWidgetFn('scroll_update', 'start_scroll_preload_request');		
 		},
 
-		//* scroll - no more result to show		 
-		this.smk_scroll_no_more_results = function() {},
-
-		//* scroll - all new pictures has been added (in teaser)		
-		this.smk_scroll_all_images_displayed = function(added){
-			ViewManager.highlightning(); // highlight search words
-//			ViewManager.smk_scroll_all_images_displayed(added);	
-
-//			//* start preloading of teaser's images 
-			if(this.startScroll)
-				ViewManager.callWidgetFn('scroll_update', 'start_scroll_preload_request');	
-
-		},
+//		//* scroll - no more result to show		 
+//		this.smk_scroll_no_more_results = function() {},
+//
+//		//* scroll - all new pictures has been added (in teaser)		
+//		this.smk_scroll_all_images_displayed = function(added){
+//			ViewManager.highlightning(); // highlight search words
+////			ViewManager.smk_scroll_all_images_displayed(added);	
+//
+////			//* start preloading of teaser's images 
+////			if(this.startScroll)
+////				ViewManager.callWidgetFn('scroll_update', 'start_scroll_preload_request');	
+//
+//		},
 
 		//* a searchfilter has finished loading	
 		this.smk_search_filter_loaded = function(value){			

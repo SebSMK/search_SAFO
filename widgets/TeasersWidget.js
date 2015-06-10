@@ -5,12 +5,17 @@
 		constructor: function (attributes) {
 			AjaxSolr.AbstractWidget.__super__.constructor.apply(this, arguments);
 			AjaxSolr.extend(this, {
-				initTemplate:null
+				initTemplate:null, 
+				scrollmanager:null
 			}, attributes);
 		},
 		
 		
-		start: 0,		   	
+		start: 0,		
+		
+		scrollUpdateManager: null,
+		
+		sub_scrollWidget: null,
 
 		init: function(){
 
@@ -27,6 +32,44 @@
 				itemSelector: '.matrix-tile',
 				columnWidth: '.matrix-tile-size'
 			});
+			
+			//* scroll widget
+			// sub widget (managed by scrollManagerWidget)
+			self.sub_scrollWidget = new AjaxSolr.ScrollWidget({
+				id: 'sub_scroll_teasers',
+				target: '#smk_teasers',
+				template: Mustache.getTemplate('templates/teasers.html')
+			});
+			
+			self.scrollUpdateManager = new AjaxSolr.ScrollUpdateManagerWidget({
+				id: 'scroll_update',
+				scrollManager: self.scrollManager, 
+				scroll_subWidget: self.sub_scrollWidget,
+				start_offset: parseInt(Manager.store.get('start').val()) + parseInt(Manager.store.get('rows').val())
+			});
+			
+			/* events management*/	
+			$(self.scrollUpdateManager).on('smk_search_call_detail', function(event){     	
+				//EventsManager.smk_search_call_detail(event);
+				$(self).trigger({
+					type: "smk_search_call_detail",
+					detail_url: event.detail_url 
+				});
+			});						
+
+			//* scroll has finished loading images
+			$(self.scrollUpdateManager).on('smk_scroll_all_images_displayed', function(event){     	            	
+				//EventsManager.smk_scroll_all_images_displayed(event.added);				
+				$(self).trigger({
+					type: "smk_teasers_all_images_loaded"
+				});
+				
+				//* once images are loaded, start preloading request
+				// (but preloading will start only under a given thresold of remaining number of preloaded images)
+				self.scrollUpdateManager.start_scroll_preload_request();
+			});
+			
+			self.scrollUpdateManager.init();
 
 		},  
 
@@ -55,8 +98,89 @@
 				var msnry = Masonry.data(container);
 				$(msnry.element).masonryImagesReveal(msnry, $tiles,  $.proxy(this.onComplete, self), self, this.onClickLink);				
 			}	   
-		}, 				
+		}, 	
 		
+		beforeRequest: function(){
+			this.scrollUpdateManager.beforeRequest();						
+		},
+		
+		removeAllArticles: function(){
+			var self = this;
+			var $target = $(this.target); 
+			var $all_articles = $target.find('.matrix .matrix-tile');
+			
+			if($all_articles.length > 0 ){
+				$target.find('.matrix').masonry('remove', $all_articles);
+				//$target.find('.matrix').masonry('destroy');
+				self.refreshLayout();
+			};
+			
+			// in case of some articles were in the matrix but not yet in masonry, remove it "manually"
+			//$target.empty();
+			
+			$all_articles.remove();
+		},			
+		
+		refreshLayout: function(){
+			$(this.target).find('.matrix').masonry('layout');					
+		},
+		
+		/*
+		 * EVENTS
+		 * **/
+		onComplete: function onComplete() {	
+			var $tiles = $(this.target).find('.matrix-tile');
+			var self = this;
+
+			//* add click on image / title + hover on copyright
+			$tiles.each(function() {
+				var $tile = $(this);
+				
+				// image
+				$tile.find('a').click({detail_url: $tile.find('a').attr('href'), caller: self}, 
+					function (event) {self.onClickLink(event);}
+				);
+				
+				// title
+				$tile.find('.artwork-title').click({detail_url: $tile.find('.artwork-title').attr('href'), caller: self}, 
+					function (event) {self.onClickLink(event);}
+				);								 					  						
+
+				// copyright
+				var $imgcontainer = $tile.find('.matrix-tile-image').not('.matrix-tile-image-missing');
+				if($imgcontainer.length > 0){
+					$imgcontainer.find('a').mouseenter(function (event) {$tile.find('span.copyright-info').css('opacity', 1);});
+					$imgcontainer.find('a').mouseleave(function (event) {$tile.find('span.copyright-info').css('opacity', 0);});
+				}				
+			});						
+			
+			self.refreshLayout();						
+			
+			$(this).trigger({
+				type: "smk_teasers_all_images_loaded"
+			});	
+			
+			//* once images are loaded, start preloading request
+			// (but preloading will start only under a given thresold of remaining number of preloaded images)
+			self.scrollUpdateManager.start_scroll_preload_request();
+			
+			return true;
+		},
+				
+		onClickLink: function (event) {
+			event.preventDefault();
+			$(event.data.caller).trigger({
+				type: "smk_search_call_detail",
+				detail_url: event.data.detail_url 
+			});
+
+			return;
+		},
+		
+		
+		/*
+		 * PRIVATE FUNCTIONS
+		 * **/
 		getTiles: function(){			
 			var artwork_data = null;		
 			var dataHandler = new getData_Teasers.constructor(this);				
@@ -85,79 +209,12 @@
 			return $(tiles);
 			
 		},				
-
-		onComplete: function onComplete() {	
-			var $tiles = $(this.target).find('.matrix-tile');
-			var self = this;
-
-			//* add click on image / title + hover on copyright
-			$tiles.each(function() {
-				var $tile = $(this);
-				
-				// image
-				$tile.find('a').click({detail_url: $tile.find('a').attr('href'), caller: self}, 
-					function (event) {self.onClickLink(event);}
-				);
-				
-				// title
-				$tile.find('.artwork-title').click({detail_url: $tile.find('.artwork-title').attr('href'), caller: self}, 
-					function (event) {self.onClickLink(event);}
-				);								 					  						
-
-				// copyright
-				var $imgcontainer = $tile.find('.matrix-tile-image').not('.matrix-tile-image-missing');
-				if($imgcontainer.length > 0){
-					$imgcontainer.find('a').mouseenter(function (event) {$tile.find('span.copyright-info').css('opacity', 1);});
-					$imgcontainer.find('a').mouseleave(function (event) {$tile.find('span.copyright-info').css('opacity', 0);});
-				}				
-			});						
-			
-			self.refreshLayout();
-			
-			$(this).trigger({
-				type: "smk_teasers_all_images_loaded"
-			});	
-			
-			return true;
-		},
-
-		onClickLink: function (event) {
-			event.preventDefault();
-			$(event.data.caller).trigger({
-				type: "smk_search_call_detail",
-				detail_url: event.data.detail_url 
-			});
-
-			return;
-		},
-				
+						
 		template_integration_json: function (json_data, templ_id){	  
 			var template = this.template; 	
 			var html = Mustache.to_html($(template).find(templ_id).html(), json_data);
 			return html;
-		},
-
-		removeAllArticles: function(){
-			var self = this;
-			var $target = $(this.target); 
-			var $all_articles = $target.find('.matrix .matrix-tile');
-			
-			if($all_articles.length > 0 ){
-				$target.find('.matrix').masonry('remove', $all_articles);
-				//$target.find('.matrix').masonry('destroy');
-				self.refreshLayout();
-			};
-			
-			// in case of some articles were in the matrix but not yet in masonry, remove it "manually"
-			//$target.empty();
-			
-			$all_articles.remove();
-		},
-		
-		refreshLayout: function(){
-			$(this.target).find('.matrix').masonry('layout');					
 		}
-
 	});
 
 })(jQuery);

@@ -241,7 +241,8 @@ var EventsManager;
 			id: 'teasers',
 			target: '#smk_teasers',
 			template: Mustache.getTemplate('templates/teasers.html'),
-			initTemplate:'#teaserInitTemplate'
+			initTemplate:'#teaserInitTemplate',
+			scrollManager: scrollManager
 		}));
 		
 		//* advanced search panel
@@ -312,20 +313,34 @@ var EventsManager;
 		}));	
 
 
-		//* scroll widget
-		// sub widget (managed by scrollManagerWidget)
-		var sub_scrollWidget = new AjaxSolr.ScrollWidget({
-			id: 'sub_scroll_teasers',
-			target: '#smk_teasers',
-			template: Mustache.getTemplate('templates/teasers.html')
-		});
-
-		Manager.addWidget( new AjaxSolr.ScrollUpdateManagerWidget({
-			id: 'scroll_update',
-			scrollManager: scrollManager, 
-			scroll_subWidget: sub_scrollWidget,
-			start_offset:parseInt(Manager.store.get('start').val()) + parseInt(Manager.store.get('rows').val())
-		}));
+//		//* scroll widget
+//		// sub widget (managed by scrollManagerWidget)
+//		var sub_scrollWidget = new AjaxSolr.ScrollWidget({
+//			id: 'sub_scroll_teasers',
+//			target: '#smk_teasers',
+//			template: Mustache.getTemplate('templates/teasers.html')
+//		});
+//		
+//		Manager.addWidget( new AjaxSolr.ScrollUpdateManagerWidget({
+//			id: 'scroll_update',
+//			scrollManager: scrollManager, 
+//			scroll_subWidget: sub_scrollWidget,
+//			start_offset:parseInt(Manager.store.get('start').val()) + parseInt(Manager.store.get('rows').val())
+//		}));
+		
+//		//* sub part widget (managed by scrollManagerWidget)
+//		var sub_parts_scrollWidget = new AjaxSolr.ScrollWidget({
+//			id: 'sub_scroll_parts',
+//			target: '#components',
+//			template: Mustache.getTemplate('templates/teasers.html')
+//		});		
+//
+//		Manager.addWidget( new AjaxSolr.ScrollUpdateManagerWidget({
+//			id: 'scroll_parts_update',
+//			scrollManager: scrollManager, 
+//			scroll_subWidget: sub_parts_scrollWidget,
+//			start_offset:parseInt(Manager.store.get('start').val()) + parseInt(Manager.store.get('rows').val())
+//		}));
 
 
 
@@ -380,9 +395,9 @@ var EventsManager;
 			EventsManager.smk_search_call_detail(event);
 		});				
 
-		$(Manager.widgets['scroll_update']).on('smk_search_call_detail', function(event){     	
-			EventsManager.smk_search_call_detail(event);
-		});
+//		$(Manager.widgets['scroll_update']).on('smk_search_call_detail', function(event){     	
+//			EventsManager.smk_search_call_detail(event);
+//		});
 
 		$(Manager.widgets['details_tabs']).on('smk_search_call_detail', function(event){     	
 			EventsManager.smk_search_call_detail(event);
@@ -404,15 +419,15 @@ var EventsManager;
 		 * 
 		 * */
 
-		//* no more results to show after scroll
-		$(Manager.widgets['scroll_update']).on('smk_scroll_no_more_results', function(event){     	            	
-			EventsManager.smk_scroll_no_more_results();
-		});
-
-		//* scroll has finished loading images
-		$(Manager.widgets['scroll_update']).on('smk_scroll_all_images_displayed', function(event){     	            	
-			EventsManager.smk_scroll_all_images_displayed(event.added);
-		});
+//		//* no more results to show after scroll
+//		$(Manager.widgets['scroll_update']).on('smk_scroll_no_more_results', function(event){     	            	
+//			EventsManager.smk_scroll_no_more_results();
+//		});
+//
+//		//* scroll has finished loading images
+//		$(Manager.widgets['scroll_update']).on('smk_scroll_all_images_displayed', function(event){     	            	
+//			EventsManager.smk_scroll_all_images_displayed(event.added);
+//		});
 
 		//* searchfilters has finished loading
 //		for (var i = 0, l = all_facets.length; i < l; i++) {

@@ -72,6 +72,10 @@
 			this.scrollSpin = new Spinner(this.scrollSpinopts);			
 
 			self.scrollManager.init(); 
+			
+			$( document ).ready(function() {				  				
+				$(window).scroll({self: self}, function(event){self.scrollStart(event)});								
+			});	  	
 
 		},
 		
@@ -83,53 +87,7 @@
 			// add current fq to scroll manager
 			//var fq = ModelManager.get_fq();			
 			this.set_sub_manager_fq();			
-		},
-
-		start_scroll_request: function(){
-			var self = this;						
-			var newImg = 0;													
-
-			// show preloaded images
-			if ($(self.scroll_subWidget.target).find('.preloaded').length > 0){									
-
-				$(self.scroll_subWidget.target).find('.preloaded').each(function(){
-					if(smkCommon.isElemIntoView(this)){
-						$(this).removeClass('preloaded').show();
-						if(smkCommon.debugLog()) console.log(sprintf("start_scroll_request - remove preloaded: %s", $(this).attr("id")));	
-						newImg++;
-					}										
-				});
-				if (newImg > 0)
-					self.onFinishLoaded(newImg);				
-			}
-			// ...or, if there are no more preloaded images, start scroll request
-			else{		
-				if(!this.isRequestRunning && !this.noMoreResults && this.trigger_req()){
-					var params = {};					
-					var nber_rows_to_load = this.scrollManager.store.scroll_rows_default * 5;
-					
-					params.q = ModelManager.get_q();				
-					params.start = $(this.scroll_subWidget.target).find('.matrix-tile').length;	//parseInt(this.scrollManager.store.get('start').val()) + 1;			
-					params.sort = smkCommon.isValidDataText(ModelManager.get_sort()) ? ModelManager.get_sort() : this.scrollManager.store.sort_default;				
-					params.rows = nber_rows_to_load; 
-					
-					
-					this.scrollManager.store.addByValue('q', params.q !== undefined && params.q.length > 0  ? params.q : this.scrollManager.store.q_default);
-					this.scrollManager.store.addByValue('start', params.start);
-					this.scrollManager.store.addByValue('sort', params.sort);
-					this.scrollManager.store.addByValue('rows', params.rows);
-										
-					this.isRequestRunning = true;
-					this.isPreloading = false;
-					this.scroll_subWidget.isPreloading(false);
-
-					if(smkCommon.debugLog()) console.log(sprintf("start_scroll_request - doRequest: start_%s, rows_%s, isRequestRunning_%s - isPreloading_%s", params.start, params.rows, this.isRequestRunning, this.isPreloading));	
-
-					this.scrollManager.doRequest();
-					this.show_infinite_scroll_spin('true');
-				}        				
-			}
-		},
+		},		
 
 		start_scroll_preload_request: function(){
 			var params = {};
@@ -159,21 +117,7 @@
 				this.scrollManager.doRequest();	
 				this.show_infinite_scroll_spin('true');
 			}        
-		},
-
-		set_sub_manager_fq: function(){
-			var model = ModelManager.getModel();
-			if(this.scrollManager != null && model.fq !== undefined && AjaxSolr.isArray(model.fq)){
-				for (var i = 0, l = model.fq.length; i < l; i++) {						
-					this.scrollManager.store.addByValue('fq', model.fq[i].value, model.fq[i].locals);
-				};											
-			};
-			if(this.scrollManager != null && model.auto !== undefined && AjaxSolr.isArray(model.auto)){
-				for (var i = 0, l = model.auto.length; i < l; i++) {						
-					this.scrollManager.store.addByValue('fq', model.auto[i].value, model.auto[i].locals);
-				};											
-			};
-		},
+		},		
 		
 		reset: function(){			
 			var start = this.start_offset - this.scrollManager.store.scroll_rows_default + 1;
@@ -228,6 +172,74 @@
 //			return elemTop <= (docViewBottom);// && (elemTop >= docViewTop));
 //		},				
 
+		/*
+		 * page scrolled 
+		 * */			        		           
+		scrollStart: function(event) {		        															
+
+			var st = $(window).scrollTop();
+			
+			if (ModelManager.get_view() != 'detail' 
+				&& $('.generalspinner').length == 0				
+				&& st > event.data.self.lastScrollTop
+				&& !$(event.target).hasClass('active-result') // user is not scrolling a facet-list				
+			){
+				//* start scroll request
+				event.data.self.start_scroll_request();	        																	        		    
+
+				//* start preloading of teaser's images				
+				//ViewManager.callWidgetFn('scroll_update', 'start_scroll_preload_request');					
+			}
+			
+			event.data.self.lastScrollTop = st;
+		},
+		
+		start_scroll_request: function(){
+			var self = this;						
+			var newImg = 0;													
+
+			// show preloaded images
+			if ($(self.scroll_subWidget.target).find('.preloaded').length > 0){									
+
+				$(self.scroll_subWidget.target).find('.preloaded').each(function(){
+					if(smkCommon.isElemIntoView(this)){
+						$(this).removeClass('preloaded').show();
+						if(smkCommon.debugLog()) console.log(sprintf("start_scroll_request - remove preloaded: %s", $(this).attr("id")));	
+						newImg++;
+					}										
+				});
+				if (newImg > 0)
+					self.onFinishLoaded(newImg);				
+			}
+			// ...or, if there are no more preloaded images, start scroll request
+			else{		
+				if(!this.isRequestRunning && !this.noMoreResults && this.trigger_req()){
+					var params = {};					
+					var nber_rows_to_load = this.scrollManager.store.scroll_rows_default * 5;
+					
+					params.q = ModelManager.get_q();				
+					params.start = $(this.scroll_subWidget.target).find('.matrix-tile').length;	//parseInt(this.scrollManager.store.get('start').val()) + 1;			
+					params.sort = smkCommon.isValidDataText(ModelManager.get_sort()) ? ModelManager.get_sort() : this.scrollManager.store.sort_default;				
+					params.rows = nber_rows_to_load; 
+					
+					
+					this.scrollManager.store.addByValue('q', params.q !== undefined && params.q.length > 0  ? params.q : this.scrollManager.store.q_default);
+					this.scrollManager.store.addByValue('start', params.start);
+					this.scrollManager.store.addByValue('sort', params.sort);
+					this.scrollManager.store.addByValue('rows', params.rows);
+										
+					this.isRequestRunning = true;
+					this.isPreloading = false;
+					this.scroll_subWidget.isPreloading(false);
+
+					if(smkCommon.debugLog()) console.log(sprintf("start_scroll_request - doRequest: start_%s, rows_%s, isRequestRunning_%s - isPreloading_%s", params.start, params.rows, this.isRequestRunning, this.isPreloading));	
+
+					this.scrollManager.doRequest();
+					this.show_infinite_scroll_spin('true');
+				}        				
+			}
+		},
+		
 		onFinishLoaded: function(num) {	
 			$(this).trigger({
 				type: "smk_scroll_all_images_displayed",
@@ -257,6 +269,20 @@
 			}									
 		},
 
+		set_sub_manager_fq: function(){
+			var model = ModelManager.getModel();
+			if(this.scrollManager != null && model.fq !== undefined && AjaxSolr.isArray(model.fq)){
+				for (var i = 0, l = model.fq.length; i < l; i++) {						
+					this.scrollManager.store.addByValue('fq', model.fq[i].value, model.fq[i].locals);
+				};											
+			};
+			if(this.scrollManager != null && model.auto !== undefined && AjaxSolr.isArray(model.auto)){
+				for (var i = 0, l = model.auto.length; i < l; i++) {						
+					this.scrollManager.store.addByValue('fq', model.auto[i].value, model.auto[i].locals);
+				};											
+			};
+		},
+		
 		/*
 		 * PRIVATE VARIABLES
 		 * **/	
@@ -268,6 +294,8 @@
 		scrollSpin: null, 
 
 		isPreloading: false,
+		
+		lastScrollTop: 0,
 
 		scrollSpinopts: {
 			lines: 11, // The number of lines to draw
