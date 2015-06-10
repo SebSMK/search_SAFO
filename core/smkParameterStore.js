@@ -84,7 +84,7 @@
 
 					var res = "";
 
-					if( this.qf_default[this.current_lang] != null){
+					if( this.qf_default !== null && this.qf_default[this.current_lang] != null){
 						$.each(this.qf_default[this.current_lang], function(k, v) {
 							res = res.concat(sprintf(' %s^%s', k, v));
 						});		  

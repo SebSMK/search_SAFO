@@ -41,16 +41,37 @@
 				template: self.template
 			});
 			
+			//* set and save default request parameters 
+			var offset = parseInt(self.manager.store.get('start').val()) + parseInt(self.manager.store.get('rows').val());
+			var scrollParams = {
+					'q': this.manager.store.q_default,						
+					'fq': this.manager.store.fq_default,	
+//					'fl': this.manager.store.get('fl'),						
+					'defType': 'edismax',      
+					'qf': this.manager.store.get_qf_string(),					
+					'start': offset - self.scrollManager.store.scroll_rows_default + 1,
+					'json.nl': 'map'
+			};
+
+			for (var name in scrollParams) {
+				self.scrollManager.store.addByValue(name, scrollParams[name]);
+			}    
+
+			//* save 'default request' parameters
+			self.scrollManager.store.save(true);
+			
+			
+			//* create scrollUpdateManager
 			self.scrollUpdateManager = new AjaxSolr.ScrollUpdateManagerWidget({
 				id: 'scroll_update',
 				scrollManager: self.scrollManager, 
 				scroll_subWidget: self.sub_scrollWidget,
-				start_offset: parseInt(Manager.store.get('start').val()) + parseInt(Manager.store.get('rows').val())
+				start_offset: offset,
+				mainManager: this.manager
 			});
 			
 			/* events management*/	
 			$(self.scrollUpdateManager).on('smk_search_call_detail', function(event){     	
-				//EventsManager.smk_search_call_detail(event);
 				$(self).trigger({
 					type: "smk_search_call_detail",
 					detail_url: event.detail_url 
@@ -58,14 +79,7 @@
 			});						
 
 			//* scroll has finished loading images
-			$(self.scrollUpdateManager).on('smk_scroll_all_images_displayed', function(event){     	            	
-				//EventsManager.smk_scroll_all_images_displayed(event.added);				
-				
-				
-//				$(self).trigger({
-//					type: "smk_teasers_all_images_loaded"
-//				});
-				
+			$(self.scrollUpdateManager).on('smk_scroll_all_images_displayed', function(event){     	            					
 				self.refreshLayout();
 				
 				//* once images are loaded, start preloading request
@@ -180,8 +194,7 @@
 			});
 
 			return;
-		},
-		
+		},		
 		
 		/*
 		 * PRIVATE FUNCTIONS

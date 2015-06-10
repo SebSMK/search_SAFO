@@ -104,7 +104,7 @@ var EventsManager;
 				exposed: exposed,
 				start: 0,     		
 				fq_default: fq_default,
-				fl_options: {"list": fl_options.list},
+//				fl_options: {"list": fl_options.list},
 				q_default: q_default,
 				qf_default: Manager.store.qf_default[current_language],
 				sort_default: sort_default,
@@ -284,14 +284,16 @@ var EventsManager;
 			id: 'parts',
 			target: '#components',
 			template: Mustache.getTemplate('templates/teasers.html'),
-			initTemplate:'#relatedInitTemplate'
+			initTemplate:'#relatedInitTemplate',
+			scrollManager: scrollManager
 		});
 		
 		var sub_relatedWidget = new AjaxSolr.TeasersWidget({
 			id: 'related',
 			target: '#related',
 			template: Mustache.getTemplate('templates/teasers.html'),
-			initTemplate:'#relatedInitTemplate'
+			initTemplate:'#relatedInitTemplate',
+			scrollManager: scrollManager
 		});
 
 		var sub_originalWidget = new AjaxSolr.OriginalWidget({
