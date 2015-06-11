@@ -97,30 +97,6 @@ var EventsManager;
 
 
 		//******************************
-		//** init scrollManager
-		//******************************    
-//		var scrollManager = new AjaxSolr.smkManager({
-//			solrUrl: server,
-//			proxyUrl: server_proxy,
-//			store: new AjaxSolr.smkParameterStore({
-//				exposed: exposed,
-//				start: 0,     		
-//				fq_default: fq_default,
-////				fl_options: {"list": fl_options.list},
-//				q_default: q_default,
-//				qf_default: Manager.store.qf_default[current_language],
-//				sort_default: sort_default,
-//				scroll_rows_default: scroll_rows_default,
-//				current_lang:current_language 
-//			}),
-//			allWidgetsProcessed: allWidgetsProcessedBound,
-//			generalSolrError: generalSolrErrorProcessedBound,
-//			translator: translator,
-//			id: 'scrollManager'
-//		});
-
-
-		//******************************
 		//** init partsManager
 		//******************************    
 		var partsManager = new AjaxSolr.smkManager({			
@@ -319,37 +295,6 @@ var EventsManager;
 		}));	
 
 
-//		//* scroll widget
-//		// sub widget (managed by scrollManagerWidget)
-//		var sub_scrollWidget = new AjaxSolr.ScrollWidget({
-//			id: 'sub_scroll_teasers',
-//			target: '#smk_teasers',
-//			template: Mustache.getTemplate('templates/teasers.html')
-//		});
-//		
-//		Manager.addWidget( new AjaxSolr.ScrollUpdateManagerWidget({
-//			id: 'scroll_update',
-//			scrollManager: scrollManager, 
-//			scroll_subWidget: sub_scrollWidget,
-//			start_offset:parseInt(Manager.store.get('start').val()) + parseInt(Manager.store.get('rows').val())
-//		}));
-		
-//		//* sub part widget (managed by scrollManagerWidget)
-//		var sub_parts_scrollWidget = new AjaxSolr.ScrollWidget({
-//			id: 'sub_scroll_parts',
-//			target: '#components',
-//			template: Mustache.getTemplate('templates/teasers.html')
-//		});		
-//
-//		Manager.addWidget( new AjaxSolr.ScrollUpdateManagerWidget({
-//			id: 'scroll_parts_update',
-//			scrollManager: scrollManager, 
-//			scroll_subWidget: sub_parts_scrollWidget,
-//			start_offset:parseInt(Manager.store.get('start').val()) + parseInt(Manager.store.get('rows').val())
-//		}));
-
-
-
 		//******************************
 		//** add event listeners
 		//******************************
@@ -401,52 +346,24 @@ var EventsManager;
 			EventsManager.smk_search_call_detail(event);
 		});				
 
-//		$(Manager.widgets['scroll_update']).on('smk_search_call_detail', function(event){     	
-//			EventsManager.smk_search_call_detail(event);
-//		});
-
 		$(Manager.widgets['details_tabs']).on('smk_search_call_detail', function(event){     	
 			EventsManager.smk_search_call_detail(event);
 		});
-
-//		//* calls to teasers view
-//		$(Manager.widgets['details']).on('smk_search_call_teasers', function(event){  
-//			EventsManager.smk_search_call_teasers();
-//		});
 
 		//* change language
 		$(Manager.widgets['lang-picker']).on('smk_lang_changed', function(event){  
 			EventsManager.smk_lang_changed(event.value);
 		});
 
-
 		/*
 		 * Finish loading events
 		 * 
 		 * */
 
-//		//* no more results to show after scroll
-//		$(Manager.widgets['scroll_update']).on('smk_scroll_no_more_results', function(event){     	            	
-//			EventsManager.smk_scroll_no_more_results();
-//		});
-//
-//		//* scroll has finished loading images
-//		$(Manager.widgets['scroll_update']).on('smk_scroll_all_images_displayed', function(event){     	            	
-//			EventsManager.smk_scroll_all_images_displayed(event.added);
-//		});
-
-		//* searchfilters has finished loading
-//		for (var i = 0, l = all_facets.length; i < l; i++) {
-//			$(Manager.widgets[all_facets[i]]).on('smk_search_filter_loaded', function(event){
-//				EventsManager.smk_search_filter_loaded(event.currentTarget.target);
-//			});
-//		};	
-
-		//* all images loaded in "teaser"
+		//* all images loaded in "list"
 		$(Manager.widgets['teasers']).on('smk_teasers_all_images_loaded', function(event){     	            	
 			EventsManager.smk_teasers_all_images_loaded(all_facets);
 		});		
-
 
 		//* image has finished loading in "detail"
 		$(Manager.widgets['details']).on('smk_detail_this_img_loaded', function(event){ 
@@ -454,7 +371,7 @@ var EventsManager;
 		});           
 
 		//******************************
-		//** init all widgets / Managers
+		//** init main widgets / Manager (not subWidgets and subManagers)
 		//****************************** 
 		ViewManager.init(); 
 		Manager.init();  

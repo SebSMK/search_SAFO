@@ -5,8 +5,7 @@
 		constructor: function (attributes) {
 			AjaxSolr.AbstractWidget.__super__.constructor.apply(this, arguments);
 			AjaxSolr.extend(this, {
-				mainManager:null,
-				scrollManager:null,
+				mainManager:null,				
 				scroll_subWidget:null,
 				start_offset:0
 			}, attributes);
@@ -14,31 +13,48 @@
 
 		/*
 		 * PUBLIC FUNCTIONS
-		 * **/
-
+		 * **/				
 		init: function(){     
 			var self = this;						
-			
-//			//* set and save default request parameters  
-//			var scrollParams = {
-//					'fq': Manager.store.fq_default,	
-//					'fl': Manager.store.fl_options.list,	
-//					'q': self.scrollManager.store.q_default,	
-//					'rows': self.scrollManager.store.scroll_rows_default,
-//					'defType': 'edismax',      
-//					'qf': Manager.store.get_qf_string(),
-//					'sort': self.scrollManager.store.sort_default,
-//					'start': self.start_offset - self.scrollManager.store.scroll_rows_default + 1,
-//					'json.nl': 'map'
-//			};
-//
-//			for (var name in scrollParams) {
-//				self.scrollManager.store.addByValue(name, scrollParams[name]);
-//			}    
-//
-//			//* save 'default request' parameters
-//			self.scrollManager.store.save(true);
 
+			//* init scroll request manager	
+			this.scrollManager = new AjaxSolr.smkManager({
+				solrUrl: self.mainManager.solrUrl,
+				proxyUrl: self.mainManager.proxyUrl,
+				store: new AjaxSolr.smkParameterStore({
+					exposed: self.mainManager.exposed,
+					start: 0,     		
+					fq_default: self.mainManager.store.fq_default,
+					q_default: self.mainManager.store.q_default,
+					qf_default: self.mainManager.store.qf_default != null ? self.mainManager.store.qf_default[self.mainManager.store.current_lang] : null,
+					sort_default: self.mainManager.store.sort_default,
+					scroll_rows_default: self.mainManager.store.scroll_rows_default,
+					current_lang: self.mainManager.store.current_lang 
+				}),
+				allWidgetsProcessed: self.mainManager.allWidgetsProcessedBound,
+				generalSolrError: self.mainManager.generalSolrErrorProcessedBound,
+				translator: self.mainManager.translator,
+				id: 'scrollManager_' + self.target
+			});
+			
+
+			// set and save default request parameters 
+			var scrollParams = {
+					'q': this.scrollManager.store.q_default,						
+					'fq': this.scrollManager.store.fq_default,							
+					'defType': 'edismax',      					
+					'start': self.start_offset - self.scrollManager.store.scroll_rows_default + 1,
+					'json.nl': 'map'
+			};
+
+			for (var name in scrollParams) {
+				self.scrollManager.store.addByValue(name, scrollParams[name]);
+			}    
+
+			// save 'default request' parameters
+			self.scrollManager.store.save(true);
+			
+			
 			//* add sub widget (will add pictures)
 			self.scrollManager.addWidget(this.scroll_subWidget); 		
 
@@ -94,19 +110,22 @@
 					&& !this.isRequestRunning 
 					&& !this.noMoreResults ){								
 
-				params.q = this.mainManager.store.get('q');
-				params.fl = this.mainManager.store.get('fl');
+				params.q = this.mainManager.store.values('q');
+				params.fl = this.mainManager.store.values('fl');
 				params.start = $(this.scroll_subWidget.target).find('.matrix-tile').length;			
-				params.sort = smkCommon.isValidDataText(this.mainManager.store.get('sort').value) ? this.mainManager.store.get('sort').value : this.scrollManager.store.sort_default;				
+				params.sort = smkCommon.isValidDataText(this.mainManager.store.values('sort')) ? this.mainManager.store.values('sort') : this.scrollManager.store.sort_default;				
 				params.rows = nber_rows_to_preload; // - $(this.scroll_subWidget.target).find('.preloaded').length;				
-
+				params.qf = this.mainManager.store.values('qf');
+				
 				//this.scrollManager.store.addByValue('q', params.q !== undefined && params.q.length > 0  ? params.q : this.scrollManager.store.q_default);
-				this.scrollManager.store.addByValue('q', params.q.value);
+				this.scrollManager.store.addByValue('q', params.q);
+				this.scrollManager.store.addByValue('fl', params.fl);
 				this.scrollManager.store.addByValue('start', params.start);
 				this.scrollManager.store.addByValue('sort', params.sort);
-				this.scrollManager.store.addByValue('rows', params.rows);	
-				// add current fq to scroll manager
-				//var fq = ModelManager.get_fq();			
+				this.scrollManager.store.addByValue('rows', params.rows);
+				this.scrollManager.store.addByValue('qf', params.qf);
+				
+				// add current fq to scroll manager					
 				this.set_sub_manager_fq();			
 
 				this.isRequestRunning = true;
@@ -126,7 +145,7 @@
 			var start = this.start_offset - this.scrollManager.store.scroll_rows_default + 1;
 			this.scrollManager.store.addByValue('start', start); 
 			this.scrollManager.store.remove('fq');
-			this.scrollManager.store.addByValue('fq', Manager.store.fq_default); 			
+			this.scrollManager.store.addByValue('fq', this.scrollManager.store.fq_default); 			
 			this.isRequestRunning = false;  
 			this.noMoreResults = false;  
 			this.isPreloading = false;
@@ -212,19 +231,21 @@
 					var params = {};					
 					var nber_rows_to_load = this.scrollManager.store.scroll_rows_default * 5;
 					
-					params.q = this.mainManager.store.get('q');	
-					params.fl = this.mainManager.store.get('fl');
+					params.q = this.mainManager.store.values('q');	
+					params.fl = this.mainManager.store.values('fl');
 					params.start = $(this.scroll_subWidget.target).find('.matrix-tile').length;	//parseInt(this.scrollManager.store.get('start').val()) + 1;
-					params.sort = smkCommon.isValidDataText(this.mainManager.store.get('sort').value) ? this.mainManager.store.get('sort').value : this.scrollManager.store.sort_default;				
-					params.rows = nber_rows_to_load; 					
+					params.sort = smkCommon.isValidDataText(this.mainManager.store.values('sort')) ? this.mainManager.store.values('sort') : this.scrollManager.store.sort_default;				
+					params.rows = nber_rows_to_load; 
+					params.qf = this.mainManager.store.values('qf');
 					
 					//this.scrollManager.store.addByValue('q', params.q !== undefined && params.q.length > 0  ? params.q : this.scrollManager.store.q_default);
-					this.scrollManager.store.addByValue('q', params.q.value);
+					this.scrollManager.store.addByValue('q', params.q);
+					this.scrollManager.store.addByValue('fl', params.fl);
 					this.scrollManager.store.addByValue('start', params.start);
 					this.scrollManager.store.addByValue('sort', params.sort);
 					this.scrollManager.store.addByValue('rows', params.rows);
-					// add current fq to scroll manager
-					//var fq = ModelManager.get_fq();			
+					this.scrollManager.store.addByValue('qf', params.qf);
+					// add current fq to scroll manager								
 					this.set_sub_manager_fq();			
 										
 					this.isRequestRunning = true;
@@ -277,6 +298,8 @@
 		/*
 		 * PRIVATE VARIABLES
 		 * **/	
+		
+		scrollManager:null,
 
 		isRequestRunning: false,
 

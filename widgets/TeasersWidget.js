@@ -5,15 +5,13 @@
 		constructor: function (attributes) {
 			AjaxSolr.AbstractWidget.__super__.constructor.apply(this, arguments);
 			AjaxSolr.extend(this, {
-				initTemplate:null, 
-				scrollmanager:null
+				initTemplate:null
 			}, attributes);
 		},
 
-
-		start: 0,		
-
-		scrollUpdateManager: null,
+		start: 0,				
+		
+		scrollUpdateWidget: null,
 
 		sub_scrollWidget: null,
 
@@ -31,57 +29,18 @@
 			$matrix.masonry( {
 				itemSelector: '.matrix-tile',
 				columnWidth: '.matrix-tile-size'
-			});
-						
-			this.scrollManager = new AjaxSolr.smkManager({
-				solrUrl: this.manager.solrUrl,
-				proxyUrl: this.manager.proxyUrl,
-				store: new AjaxSolr.smkParameterStore({
-					exposed: this.manager.exposed,
-					start: 0,     		
-					fq_default: this.manager.store.fq_default,
-					q_default: this.manager.store.q_default,
-					qf_default: this.manager.store.qf_default != null ? this.manager.store.qf_default[this.manager.store.current_lang] : null,
-					sort_default: this.manager.store.sort_default,
-					scroll_rows_default: this.manager.store.scroll_rows_default,
-					current_lang: this.manager.store.current_lang 
-				}),
-				allWidgetsProcessed: this.manager.allWidgetsProcessedBound,
-				generalSolrError: this.manager.generalSolrErrorProcessedBound,
-				translator: this.manager.translator,
-				id: 'scrollManager_' + self.target
-			});
+			});			
 
-			//* scroll widget
-			// sub widget (managed by scrollManagerWidget)
+			//* init sub widget (managed by scrollUpdateWidget)
 			self.sub_scrollWidget = new AjaxSolr.ScrollWidget({
 				id: 'sub_scroll_teasers',
 				target: self.target,
 				template: self.template
 			});
-
-			//* set and save default request parameters 
+			
 			var offset = parseInt(self.manager.store.get('start').val()) + parseInt(self.manager.store.get('rows').val());
-			var scrollParams = {
-					'q': this.manager.store.q_default,						
-					'fq': this.manager.store.fq_default,	
-//					'fl': this.manager.store.get('fl'),						
-					'defType': 'edismax',      
-					'qf': this.manager.store.get_qf_string(),					
-					'start': offset - self.scrollManager.store.scroll_rows_default + 1,
-					'json.nl': 'map'
-			};
-
-			for (var name in scrollParams) {
-				self.scrollManager.store.addByValue(name, scrollParams[name]);
-			}    
-
-			//* save 'default request' parameters
-			self.scrollManager.store.save(true);
-
-
-			//* create scrollUpdateManager
-			self.scrollUpdateManager = new AjaxSolr.ScrollUpdateManagerWidget({
+			//* init scrollUpdateWidget
+			self.scrollUpdateWidget = new AjaxSolr.ScrollUpdateManagerWidget({
 				id: 'scroll_update',
 				scrollManager: self.scrollManager, 
 				scroll_subWidget: self.sub_scrollWidget,
@@ -89,32 +48,31 @@
 				mainManager: this.manager
 			});
 
-			/* events management*/	
-			$(self.scrollUpdateManager).on('smk_search_call_detail', function(event){     	
+			//* events management	
+			$(self.scrollUpdateWidget).on('smk_search_call_detail', function(event){     	
 				$(self).trigger({
 					type: "smk_search_call_detail",
 					detail_url: event.detail_url 
 				});
 			});						
 
-			//* scroll has finished loading images
-			$(self.scrollUpdateManager).on('smk_scroll_all_images_displayed', function(event){     	            					
+			// scroll has finished loading images
+			$(self.scrollUpdateWidget).on('smk_scroll_all_images_displayed', function(event){     	            					
 				self.refreshLayout();
 
-				//* once images are loaded, start preloading request
+				// once images are loaded, start preloading request
 				// (but preloading will start only under a given thresold of remaining number of preloaded images)
-				self.scrollUpdateManager.start_scroll_preload_request(true);
+				self.scrollUpdateWidget.start_scroll_preload_request(true);
 			});
 
-			self.scrollUpdateManager.init();
+			self.scrollUpdateWidget.init();
 
 			$(document).ready(function() {
 				$(window).scroll(function(event){
 					if (self.getRefresh() && $(self.target).offset().top > 0)
-						self.scrollUpdateManager.scrollStart(event);
+						self.scrollUpdateWidget.scrollStart(event);
 				});								
 			});	  	
-
 		},  
 
 		afterRequest: function () {  
@@ -145,7 +103,7 @@
 		}, 	
 
 		beforeRequest: function(){
-			this.scrollUpdateManager.beforeRequest();						
+			this.scrollUpdateWidget.beforeRequest();						
 		},
 
 		removeAllArticles: function(){
@@ -207,7 +165,7 @@
 			});	
 
 			//* once images are loaded in teaser, start preloading request			
-			self.scrollUpdateManager.start_scroll_preload_request();
+			self.scrollUpdateWidget.start_scroll_preload_request();
 
 			return true;
 		},
