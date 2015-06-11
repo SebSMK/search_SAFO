@@ -1,8 +1,8 @@
 {
-   "version":"0.000.001.052",
-   "mode":"NOproxy debug",
+   "version":"0.000.001.066",
+   "mode":"proxy debug",
    "server":"http://csdev-seb:8180/solr-example/dev_SAFO/",
-   "server_proxyxxx":"http://solr.smk.dk:8080/proxySolrPHP/proxy.php",
+   "server_proxy":"http://solr.smk.dk:8080/proxySolrPHP/proxy.php",
    "facets":{
       "advanced":[
          {

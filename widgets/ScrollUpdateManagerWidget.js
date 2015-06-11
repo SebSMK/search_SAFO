@@ -17,7 +17,8 @@
 		 * **/
 
 		init: function(){     
-			var self = this;
+			var self = this;						
+			
 //			//* set and save default request parameters  
 //			var scrollParams = {
 //					'fq': Manager.store.fq_default,	
@@ -70,9 +71,7 @@
 				});
 			});
 
-			this.scrollSpin = new Spinner(this.scrollSpinopts);			
-
-			self.scrollManager.init(); 						
+			this.scrollSpin = new Spinner(this.scrollSpinopts);								
 
 		},
 		
@@ -81,12 +80,12 @@
 			// reset scroll manager				
 			this.reset();
 
-			// add current fq to scroll manager
-			//var fq = ModelManager.get_fq();			
-			this.set_sub_manager_fq();			
+//			// add current fq to scroll manager
+//			//var fq = ModelManager.get_fq();			
+//			this.set_sub_manager_fq();			
 		},		
 
-		start_scroll_preload_request: function(){
+		start_scroll_preload_request: function(spin){
 			var params = {};
 			var nber_rows_to_preload = this.scrollManager.store.scroll_rows_default * 30;
 
@@ -105,7 +104,10 @@
 				this.scrollManager.store.addByValue('q', params.q.value);
 				this.scrollManager.store.addByValue('start', params.start);
 				this.scrollManager.store.addByValue('sort', params.sort);
-				this.scrollManager.store.addByValue('rows', params.rows);							
+				this.scrollManager.store.addByValue('rows', params.rows);	
+				// add current fq to scroll manager
+				//var fq = ModelManager.get_fq();			
+				this.set_sub_manager_fq();			
 
 				this.isRequestRunning = true;
 				this.isPreloading = true;
@@ -114,7 +116,9 @@
 				if(smkCommon.debugLog()) console.log(sprintf("start_scroll_preload_request - doRequest: preloaded back_%s, start_%s, rows_%s, isRequestRunning_%s - isPreloading_%s",$('.preloaded').length, params.start, params.rows, this.isRequestRunning, this.isPreloading));	
 
 				this.scrollManager.doRequest();	
-				this.show_infinite_scroll_spin('true');
+				
+				if(spin)
+					this.show_infinite_scroll_spin('true');
 			}        
 		},		
 		
@@ -219,6 +223,9 @@
 					this.scrollManager.store.addByValue('start', params.start);
 					this.scrollManager.store.addByValue('sort', params.sort);
 					this.scrollManager.store.addByValue('rows', params.rows);
+					// add current fq to scroll manager
+					//var fq = ModelManager.get_fq();			
+					this.set_sub_manager_fq();			
 										
 					this.isRequestRunning = true;
 					this.isPreloading = false;

@@ -66,6 +66,7 @@ var EventsManager;
 				q_default: q_default,
 				qf_default: qf_default,
 				sort_default: sort_default,
+				scroll_rows_default: scroll_rows_default,
 				facets_default: filter_facets,
 				current_lang: current_language
 			}),
@@ -98,25 +99,25 @@ var EventsManager;
 		//******************************
 		//** init scrollManager
 		//******************************    
-		var scrollManager = new AjaxSolr.smkManager({
-			solrUrl: server,
-			proxyUrl: server_proxy,
-			store: new AjaxSolr.smkParameterStore({
-				exposed: exposed,
-				start: 0,     		
-				fq_default: fq_default,
-//				fl_options: {"list": fl_options.list},
-				q_default: q_default,
-				qf_default: Manager.store.qf_default[current_language],
-				sort_default: sort_default,
-				scroll_rows_default: scroll_rows_default,
-				current_lang:current_language 
-			}),
-			allWidgetsProcessed: allWidgetsProcessedBound,
-			generalSolrError: generalSolrErrorProcessedBound,
-			translator: translator,
-			id: 'scrollManager'
-		});
+//		var scrollManager = new AjaxSolr.smkManager({
+//			solrUrl: server,
+//			proxyUrl: server_proxy,
+//			store: new AjaxSolr.smkParameterStore({
+//				exposed: exposed,
+//				start: 0,     		
+//				fq_default: fq_default,
+////				fl_options: {"list": fl_options.list},
+//				q_default: q_default,
+//				qf_default: Manager.store.qf_default[current_language],
+//				sort_default: sort_default,
+//				scroll_rows_default: scroll_rows_default,
+//				current_lang:current_language 
+//			}),
+//			allWidgetsProcessed: allWidgetsProcessedBound,
+//			generalSolrError: generalSolrErrorProcessedBound,
+//			translator: translator,
+//			id: 'scrollManager'
+//		});
 
 
 		//******************************
@@ -128,6 +129,7 @@ var EventsManager;
 			store: new AjaxSolr.smkParameterStore({
 				exposed: exposed,
 				fl_options: {"parts": fl_options.parts},
+				scroll_rows_default: scroll_rows_default,
 				current_lang:current_language
 			}),
 			allWidgetsProcessed: allWidgetsProcessedBound,
@@ -145,6 +147,7 @@ var EventsManager;
 			store: new AjaxSolr.smkParameterStore({
 				exposed: exposed,
 				fl_options: {"related": fl_options.related},
+				scroll_rows_default: scroll_rows_default,
 				current_lang:current_language
 			}),
 			allWidgetsProcessed: allWidgetsProcessedBound,
@@ -245,8 +248,7 @@ var EventsManager;
 			id: 'teasers',
 			target: '#smk_teasers',
 			template: Mustache.getTemplate('templates/teasers.html'),
-			initTemplate:'#teaserInitTemplate',
-			scrollManager: scrollManager
+			initTemplate:'#teaserInitTemplate'
 		}));
 		
 		//* advanced search panel
@@ -288,16 +290,14 @@ var EventsManager;
 			id: 'parts',
 			target: '#components',
 			template: Mustache.getTemplate('templates/teasers.html'),
-			initTemplate:'#relatedInitTemplate',
-			scrollManager: scrollManager
+			initTemplate:'#relatedInitTemplate'
 		});
 		
 		var sub_relatedWidget = new AjaxSolr.TeasersWidget({
 			id: 'related',
 			target: '#related',
 			template: Mustache.getTemplate('templates/teasers.html'),
-			initTemplate:'#relatedInitTemplate',
-			scrollManager: scrollManager
+			initTemplate:'#relatedInitTemplate'
 		});
 
 		var sub_originalWidget = new AjaxSolr.OriginalWidget({

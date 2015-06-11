@@ -14,8 +14,7 @@
 
 	eventsManager.constructor = function(){
 
-		this.allWidgetProcessed = false;
-		this.startScroll = false;		
+		this.allWidgetProcessed = false;			
 
 		this.init = function(){
 			/*
@@ -44,8 +43,7 @@
 
 			//* reset all current running ajax request, queued functions and preloaded data
 			Manager.requestAbort();
-			$.taskQueue.clear();
-			this.startScroll = false;						
+			$.taskQueue.clear();								
 
 			if(smkCommon.debugTime()) console.time("adresschanged");	
 
@@ -388,26 +386,8 @@
 
 			ViewManager.allWidgetsLoaded();
 
-			if(smkCommon.debugLog()) console.log(sprintf(sprintf("Events - allWidgetsLoaded - scrollTop_%s", $(window).scrollTop() )));
-
-			this.startScroll = true;
-			//* start preloading of teaser's images 
-//			ViewManager.callWidgetFn('scroll_update', 'start_scroll_preload_request');		
+			if(smkCommon.debugLog()) console.log(sprintf(sprintf("Events - allWidgetsLoaded - scrollTop_%s", $(window).scrollTop() )));							
 		},
-
-//		//* scroll - no more result to show		 
-//		this.smk_scroll_no_more_results = function() {},
-//
-//		//* scroll - all new pictures has been added (in teaser)		
-//		this.smk_scroll_all_images_displayed = function(added){
-//			ViewManager.highlightning(); // highlight search words
-////			ViewManager.smk_scroll_all_images_displayed(added);	
-//
-////			//* start preloading of teaser's images 
-////			if(this.startScroll)
-////				ViewManager.callWidgetFn('scroll_update', 'start_scroll_preload_request');	
-//
-//		},
 
 		//* a searchfilter has finished loading	
 		this.smk_search_filter_loaded = function(value){			
