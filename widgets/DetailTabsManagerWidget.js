@@ -346,10 +346,16 @@
 		
 		end_tab_process: function(id){
 			$(this.target).find(sprintf('a[href=%s]', id)).removeClass('isloading');
+			
+			// all tabs loaded
 			if($(this.target).find('.isloading').length == 0){
 				if(smkCommon.debugLog()) console.log('teasers_all_images_loaded'); 
 				this.process_show_extended_titles();
-				this.process_show_tabs();				
+				this.process_show_tabs();	
+				
+				$(this).trigger({
+					type: "smk_search_detail_tabs_loaded"
+				});
 			}													
 		},
 		

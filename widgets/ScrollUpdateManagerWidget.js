@@ -90,7 +90,6 @@
 			this.scrollSpin = new Spinner(this.scrollSpinopts);		
 			this.nber_rows_to_preload = this.scrollManager.store.scroll_rows_default * 30;
 			this.nber_rows_to_load = this.scrollManager.store.scroll_rows_default * 5;
-
 		},
 		
 		beforeRequest: function(){			
@@ -206,7 +205,7 @@
 			params.q = this.mainManager.store.values('q');						
 			params.start = $(this.scroll_subWidget.target).find('.matrix-tile').length;
 			params.sort = smkCommon.isValidDataText(this.mainManager.store.values('sort')) ? this.mainManager.store.values('sort') : this.scrollManager.store.sort_default;				
-			params.rows = this.nber_rows_to_load; 
+			params.rows = preload ? this.nber_rows_to_preload : this.nber_rows_to_load; 
 			params.qf = this.mainManager.store.values('qf');
 			params.fl = this.mainManager.store.values('fl');
 			params.fq = this.mainManager.store.values('fq');
@@ -228,8 +227,6 @@
 			this.scrollManager.doRequest();
 			if (spin)
 				this.show_infinite_scroll_spin('true');
-			
-			
 		},
 
 		trigger_req: function(){
@@ -291,6 +288,5 @@
 			top: '95%', // Top position relative to parent
 			left: '57%' // Left position relative to parent
 		}			
-
 	});
 })(jQuery);

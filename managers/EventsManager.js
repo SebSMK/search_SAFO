@@ -424,5 +424,11 @@
 			// start details_tabs processing
 			ViewManager.callWidgetFn('details_tabs', 'process_details_tabs');
 		};
+		
+		//* all tabs loaded in "detail tabs"		 
+		this.smk_search_detail_tabs_loaded = function(){									
+			ViewManager.smk_search_detail_tabs_loaded();
+			this.wigdetLoaded();
+		}		
 	}
 }));

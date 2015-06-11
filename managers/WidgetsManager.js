@@ -104,6 +104,7 @@ var EventsManager;
 			//proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
 			store: new AjaxSolr.smkParameterStore({
 				exposed: exposed,
+				fq_default: null,
 				fl_options: {"parts": fl_options.parts},
 				scroll_rows_default: scroll_rows_default,
 				current_lang:current_language
@@ -122,6 +123,7 @@ var EventsManager;
 			proxyUrl: server_proxy,			
 			store: new AjaxSolr.smkParameterStore({
 				exposed: exposed,
+				fq_default: null,
 				fl_options: {"related": fl_options.related},
 				scroll_rows_default: scroll_rows_default,
 				current_lang:current_language
@@ -140,6 +142,7 @@ var EventsManager;
 			proxyUrl: server_proxy,		
 			store: new AjaxSolr.smkParameterStore({
 				exposed: exposed,
+				fq_default: null,
 				fl_options: {"detail": fl_options.detail},
 				current_lang:current_language
 			}),
@@ -368,8 +371,13 @@ var EventsManager;
 		//* image has finished loading in "detail"
 		$(Manager.widgets['details']).on('smk_detail_this_img_loaded', function(event){ 
 			EventsManager.smk_detail_this_img_loaded();
-		});           
-
+		});
+		
+		//* all tabs loaded in "detail tabs"
+		$(Manager.widgets['details_tabs']).on('smk_search_detail_tabs_loaded', function(event){ 
+			EventsManager.smk_search_detail_tabs_loaded();
+		});
+			
 		//******************************
 		//** init main widgets / Manager (not subWidgets and subManagers)
 		//****************************** 

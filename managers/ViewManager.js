@@ -84,7 +84,12 @@
 //			};
 
 			// details
-			this.add_modal_loading_to_widget('details');	 
+			this.add_modal_loading_to_widget('details');
+			
+			// details tabs
+			this.add_modal_loading_to_widget('details_tabs');
+			
+			
 			// related
 //			this.add_modal_loading_to_widget(Manager.widgets['details'].related_subWidget);*/
 
@@ -136,7 +141,6 @@
 		 * */		
 
 		//* teaser	
-
 		this.smk_teasers_all_images_loaded = function(){
 			var $this = $(this);
 
@@ -147,19 +151,16 @@
 			this.remove_modal_loading_from_widget(this.callWidgetTarget('teasers'));				
 
 			if(smkCommon.debugTime()) console.timeEnd("Teasers");																
-		}				
-
-		//...efter scroll: all the new images loaded in teaser
-//		this.smk_scroll_all_images_displayed = function(added){			
-//			if (added !== undefined)
-//				this.callWidgetFn('pager', 'refreshDisplay', {params: [added]});
-//		},
+		};				
 
 		//* detail
 		this.smk_detail_this_img_loaded = function(){			
 			this.remove_modal_loading_from_widget(this.callWidgetTarget('details'));												
-		};			
-
+		};	
+		
+		this.smk_search_detail_tabs_loaded = function(){			
+			this.remove_modal_loading_from_widget(this.callWidgetTarget('details_tabs'));												
+		};	
 
 		this.viewChanged = function (stateChange) {        	    
 			var $target = $(this.target);
