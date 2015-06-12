@@ -80,7 +80,12 @@
 			});
 
 			if(ModelManager.get_view() != 'detail'){
-				var searchstring = ModelManager.get_q().length != 0 ? ModelManager.get_q().toString() : AjaxSolr.Parameter.unescapeValue(ModelManager.get_auto_values().replace(/^"|"$/g, ''));
+				var auto_value = ModelManager.get_auto_value();
+				var auto_field = auto_value.field;
+				var auto_facet = smkCommon.isValidDataText(auto_value.text) ? AjaxSolr.Parameter.unescapeValue(auto_value.text.replace(/^"|"$/g, '')) : null;		
+				var q_value = ModelManager.get_q();
+				var searchstring = q_value.length != 0 ? q_value.toString() : this.get_text_from_facet(auto_facet, auto_field);
+				
 				$(this.target).find('input.search-bar-field').val(searchstring);
 			}
 
@@ -106,11 +111,11 @@
 				minLength: 1
 			}, {
 				name: 'autosearch',
-				displayKey: 'facet',
+				displayKey: 'text',
 				source: dropdown_list.ttAdapter(),
 				templates: {
 					suggestion: function(data){
-						return sprintf('<p>%s&nbsp;<i>(%s)</i></p>', data.facet, self.manager.translator.getLabel("autocomp_" +  data.field));
+						return sprintf('<p>%s&nbsp;<i>(%s)</i></p>', data.text, data.type);
 					}
 				}
 
@@ -168,13 +173,21 @@
 							var field = self.fields[i];								
 
 							for (var facet in response.facet_counts.facet_fields[field]) {
-								if(facet.toLowerCase().indexOf(response.responseHeader.params.q.toLowerCase()) > -1)									
+								if(facet.toLowerCase().indexOf(response.responseHeader.params.q.toLowerCase()) > -1){
+									var text = new String();
+
+									
+
 									self.list.push({
 										facet: facet,
-										field: field,										
+										field: field,
+										type: self.manager.translator.getLabel("autocomp_" +  field),
 										count: response.facet_counts.facet_fields[field][facet],
-										value: facet + ' (' + response.facet_counts.facet_fields[field][facet] + ') - ' + field
+										text: self.get_text_from_facet(facet, field)
 									});
+
+								}
+
 								if (self.list.length >= self.limit)
 									break;
 							}
@@ -183,7 +196,24 @@
 					}
 				}
 			});
-		},				
+		},	
+		
+		get_text_from_facet: function(facet, field){
+			var res = new String();
+			
+			switch (field){
+			case "materiale":
+			case "materiale_en":
+				var values = facet.split(smkCommon.split_2_niv); 					 										
+				res = smkCommon.isValidDataText(smkCommon.getValueFromSplit(values, 0)) ? smkCommon.firstCapital(smkCommon.getValueFromSplit(values, 0).trim()) : "";										
+				break;
+			default:
+				res = facet;
+			break;
+			}
+			
+			return res;
+		},
 
 		template_integration_json: function (json_data, templ_id){	  
 			var template = this.template; 	

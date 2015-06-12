@@ -135,13 +135,15 @@ var	ModelManager = {
 			return smkCommon.isValidDataText(this.auto)? this.auto : [];			
 		},
 		
-		get_auto_values: function(){
-			var res = new String();
+		get_auto_value: function(){
+			var res = {};
 			
 			if (jQuery.isArray(this.auto)){
 				for (var i = 0, l = this.auto.length; i < l; i++) {
-					if (smkCommon.isValidDataText(this.auto[i].value))
-						res += this.auto[i].value.replace(this.auto[i].value.split(':')[0] + ':', '');				
+					if (smkCommon.isValidDataText(this.auto[i].value)){
+						res['field'] = smkCommon.getValueFromSplit(this.auto[i].value.split(':'), 0);
+						res['text'] = this.auto[i].value.replace(smkCommon.getValueFromSplit(this.auto[i].value.split(':'), 0) + ':', '');
+					}										
 				}
 			}
 			

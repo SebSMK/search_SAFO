@@ -1399,7 +1399,9 @@
     "en": {
 		"sal 100":	"Information desk",
 		"sal 111":	"Conservators work space",
+		"sal 113":	"Sculpture hall",
 		"sal 114":	"x-rummet",
+		"sal 115":	"The children s exhibition",
 		"sal 116":	"The children s exhibition",
 		"sal 120":	"Special exhibition",
 		"sal 200":	"Corridor",
@@ -1480,7 +1482,9 @@
 				
 		"sal 100":	"Forhallen",
 		"sal 111":	"Konservator værksted",
+		"sal 113":	"Skulpturgaden",
 		"sal 114":	"x-rummet",
+		"sal 115":	"Børnenes udstilling",
 		"sal 116":	"Børnenes udstilling",
 		"sal 120":	"Særudstilling",
 		"sal 200":	"Rundgangen",

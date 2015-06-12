@@ -275,7 +275,8 @@
 				});	  	 		  	  
 				break;	
 
-			case "materiale":		    			  			   							  
+			case "materiale":
+			case "materiale_en":
 				for (var facet in self.manager.response.facet_counts.facet_fields[self.field]) {
 					var count = parseInt(self.manager.response.facet_counts.facet_fields[self.field][facet]);
 					if (count > maxCount) {

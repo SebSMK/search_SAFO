@@ -165,7 +165,7 @@
 			});	
 
 			//* once images are loaded in teaser, start preloading request			
-			self.scrollUpdateWidget.start_scroll_preload_request(false);
+			self.scrollUpdateWidget.start_scroll_preload_request(true);
 
 			return true;
 		},
