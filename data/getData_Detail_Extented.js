@@ -368,12 +368,17 @@
 
 
 		this.getDetailAcq = function(doc){
-			var method = smkCommon.isValidDataText(getData_Common.getErhverv_method(doc)) ? sprintf('%s', getData_Common.getErhverv_method(doc)) : "";
-			var source = smkCommon.isValidDataText(getData_Common.getErhverv_source(doc)) ? sprintf(' %s', getData_Common.getErhverv_source(doc)) : "";
-			var dato = smkCommon.isValidDataText(getData_Common.getErhverv_dato(doc)) ? sprintf(' %s', getData_Common.getErhverv_dato(doc)) : "";	 
+//			var method = smkCommon.isValidDataText(getData_Common.getErhverv_method(doc)) ? sprintf('%s', getData_Common.getErhverv_method(doc)) : "";
+//			var source = smkCommon.isValidDataText(getData_Common.getErhverv_source(doc)) ? sprintf(' %s', getData_Common.getErhverv_source(doc)) : "";
+//			var dato = smkCommon.isValidDataText(getData_Common.getErhverv_dato(doc)) ? sprintf(' %s', getData_Common.getErhverv_dato(doc)) : "";	 
+//
+//			return smkCommon.isValidDataText(getData_Common.getErhverv_method(doc)) || smkCommon.isValidDataText(getData_Common.getErhverv_source(doc)) || smkCommon.isValidDataText(getData_Common.getErhverv_dato(doc)) ? 
+//					sprintf("%s%s%s", method, source, dato) : null;
 
-			return smkCommon.isValidDataText(getData_Common.getErhverv_method(doc)) || smkCommon.isValidDataText(getData_Common.getErhverv_source(doc)) || smkCommon.isValidDataText(getData_Common.getErhverv_dato(doc)) ? 
-					sprintf("%s%s%s", method, source, dato) : null;
+			var dato = smkCommon.isValidDataText(getData_Common.getErhverv_dato(doc)) ? sprintf(' %s', getData_Common.getErhverv_dato(doc)) : "";
+			
+			return dato;
+			
 
 		};
 
@@ -433,19 +438,6 @@
 			return res; 			
 		};
 
-		this.getListProducers = function(doc, type){									
-			var res = new Array();
-			var list = new Array();
-			if (smkCommon.isValidDataText(getData_Common.getProducent_producent(doc, type))){				
-				for (var j = 0, k = getData_Common.getProducent_producent(doc, type).length; j < k ; j++) {																
-					var output = this.getArtistOutput(getData_Common.getProducent_producent(doc, type)[j].artist_data);
-					res.push(output);
-				}													
-			}
-
-			return res; 
-		};
-
 		this.getArtistOutput = function(doc){
 			var res = {};
 
@@ -455,7 +447,7 @@
 			var dates = smkCommon.isValidDataText(doc.dates) ? sprintf(', %s', doc.dates) : "";
 			var nationality = smkCommon.isValidDataText(doc.nationality) ? sprintf('%s', doc.nationality) : "";												
 
-			res.info = sprintf('(%s%s)', nationality, dates);			
+			res.info = dates || nationality ? sprintf('(%s%s)', nationality, dates) : "";			
 
 			return res;
 		};

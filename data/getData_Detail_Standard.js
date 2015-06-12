@@ -141,8 +141,9 @@
 			var role = smkCommon.isValidDataText(doc.type) ? sprintf(', %s', doc.type) : "";
 			var dates = smkCommon.isValidDataText(doc.dates) ? sprintf(', %s', doc.dates) : "";
 			var nationality = smkCommon.isValidDataText(doc.nationality) ? sprintf('%s', doc.nationality) : "";												
-
-			res.info = sprintf('(%s%s)%s', nationality, dates, role);
+			
+			res.info = nationality || dates ? sprintf('(%s%s)%s', nationality, dates, role) : "";			
+			res.info = sprintf('%s%s', res.info, role);
 			
 			return res;
 		};					
