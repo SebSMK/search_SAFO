@@ -8,9 +8,9 @@
 
 		init: function(){	  	    
 			var self = this;
-			
+
 			self.current_language = self.manager.translator.getLanguage();
-		}, 
+		}, 		
 
 		afterRequest: function () {	  
 
@@ -48,7 +48,7 @@
 			//* merge data and template
 			var html = self.template_integration_json({"detail": artwork_data}, '#detailTemplate'); 
 			var $html = $(html);						
-			
+
 			// add image			
 			var $imgcontainer = $html.find('.gallery__main');												
 			if(!$imgcontainer.hasClass('matrix-tile-image-missing')){
@@ -57,28 +57,29 @@
 				$imgcontainer.find('img').addClass('image-loading');			
 
 				$imgcontainer.find('img').imagesLoaded().progress( function( imgLoad, image ) {
-	  						
+
 //					// add copyright info on image
 //					$(image.img).mouseenter(function (event) {
-//						$html.find('span.copyright-info').css('opacity', 1);}
+//					$html.find('span.copyright-info').css('opacity', 1);}
 //					);
 //					$(image.img).mouseleave(function (event) {$html.find('span.copyright-info').css('opacity', 0);});
 
 					$(image.img).removeClass('image-loading');					
-					
+
 					//* add data to template
 					$target.prepend($html); 
-					
+
 					//* add current url to print button					
 					$($.find('.print a')).attr('href', window.location.href);
 
+					// unbind fancybox
+					$(document).unbind('click.fb-start');
+					
 					// add fancybox
 					$target.find('.fancybox').fancybox({
-						afterClose: function(){
-							$target.find('img').show();
-						}
-					});
 									
+					});
+
 					//* send loaded event
 					$(self).trigger({
 						type: "smk_detail_this_img_loaded"
@@ -87,7 +88,7 @@
 			}else{
 				//* add data to template
 				$target.prepend($html); 
-				
+
 				//* send loaded event
 				$(self).trigger({
 					type: "smk_detail_this_img_loaded"
