@@ -1,8 +1,8 @@
 {
    "version":"0.000.002.007",
-   "mode":"NOproxy debug",
+   "mode":"proxy debug",
    "server":"http://csdev-seb:8180/solr-example/dev_SAFO/",
-   "server_proxyzzz":"http://solr.smk.dk:8080/proxySolrPHP/proxy.php",
+   "server_proxy":"http://solr.smk.dk:8080/proxySolrPHP/proxy.php",
    "facets":{
       "advanced":[
          {
@@ -92,7 +92,7 @@
             "lab":"motiv",
             "values":[
                {
-                  "id":"portrait_person",
+                  "id":"portrait_person_surname_firstname",
                   "lang":"en dk"
                },
                {
