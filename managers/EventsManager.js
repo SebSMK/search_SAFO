@@ -104,7 +104,7 @@
 				}					
 			}else{
 				if(model.q !== undefined)
-					q = sprintf('id:%s', model.q);			    	
+					q = sprintf('id:"%s"', model.q);			    	
 			};
 
 			Manager.store.addByValue('q', q);			

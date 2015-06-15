@@ -39,7 +39,7 @@
 			{
 					"related": {					
 						'rows':20,					
-						'start': 0,
+						'start': 0,						
 						'fl': self.relatedManager.store.fl_options.related,
 						'json.nl': 'map'
 					},
@@ -47,6 +47,7 @@
 					"multi_work": {					
 						'rows':20,					
 						'start': 0,
+						'fq': self.partsManager.store.fq_default,
 						'sort': "part_nr asc",
 						'fl': self.partsManager.store.fl_options.parts,
 						'json.nl': 'map'

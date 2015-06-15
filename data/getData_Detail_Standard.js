@@ -64,13 +64,14 @@
 						},
 						
 						location: this.getListLocation(doc, this.caller)
-					},
-
-					subwidget:{
-						req_original: getData_Common.getSubWidgReq_original(doc),
-						req_multiwork: getData_Common.getSubWidgReq_vaerkdele(doc),
-						req_relatedid: getData_Common.getSubWidgReq_relatere(doc)									
 					}
+//					,
+//
+//					subwidget:{
+//						req_original: getData_Common.getSubWidgReq_original(doc),
+//						req_multiwork: getData_Common.getSubWidgReq_vaerkdele(doc),
+//						req_relatedid: getData_Common.getSubWidgReq_relatere(doc)									
+//					}
 			};	
 
 			return data;	  

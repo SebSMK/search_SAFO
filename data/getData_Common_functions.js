@@ -848,8 +848,8 @@
 		 */		
 		var rootId = smkCommon.getValueFromSplit(doc.id.split('/'), 0);
 		var partNr = smkCommon.getValueFromSplit(doc.id.split('/'), 1); 
-		var includeRootId = partNr != null ? sprintf('id:%s', rootId) : null;
-		return sprintf('id:%s/* -id:%s %s', rootId, doc.id, includeRootId);
+		var includeRootId = partNr != null ? sprintf('id:"%s"', rootId) : null;
+		return sprintf('id:%s/* -id:"%s" %s', rootId, doc.id, includeRootId);
 
 	};
 

@@ -34,7 +34,7 @@
 				allWidgetsProcessed: self.mainManager.allWidgetsProcessedBound,
 				generalSolrError: self.mainManager.generalSolrErrorProcessedBound,
 				translator: self.mainManager.translator,
-				id: 'scrollManager_' + self.target
+				id: 'scrollManager_' + self.scroll_subWidget.target
 			});
 			
 

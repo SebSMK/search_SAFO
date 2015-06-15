@@ -101,10 +101,10 @@ var EventsManager;
 		//******************************    
 		var partsManager = new AjaxSolr.smkManager({			
 			solrUrl: server, 
-			//proxyUrl: 'http://solr.smk.dk:8080/proxySolrPHP/proxy.php',			
+			proxyUrl: server_proxy,			
 			store: new AjaxSolr.smkParameterStore({
 				exposed: exposed,
-				fq_default: null,
+				fq_default: fq_default,
 				fl_options: {"parts": fl_options.parts},
 				scroll_rows_default: scroll_rows_default,
 				current_lang:current_language
