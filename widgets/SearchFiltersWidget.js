@@ -24,7 +24,8 @@
 			$target.find('select').chosen({				
 				disable_search_threshold: 10,	
 				no_results_text:self.manager.translator.getLabel('search_no_results'),
-				width: "100%",
+				width: "100%"
+					,
 				disable_search: !0,
 				// When set to true, Chosen will not display the search field (single selects only).
 				allow_single_deselect: !0
@@ -40,18 +41,17 @@
 			var $select = $(this.target).find('select');
 
 			if (!self.getRefresh())				
-				return;			
-
-
+				return;						
+		
 			// set label 	
-			$target.find('label').text(self.manager.translator.getLabel("tagcloud_" + this.field));
-
+			$target.find('label').text(self.manager.translator.getLabel("tagcloud_" + this.field));						
+			
 			// set textbox's text
 			$select.attr('data-placeholder', self.manager.translator.getLabel('search_data_loading'));	
 
-			this.update_filters();
-
-			$target.find('select').trigger("chosen:updated");
+			this.update_filters();									
+			
+			self.refreshChosen($select);
 
 		},
 
@@ -62,13 +62,12 @@
 			// remove all filters
 			//this.removeAllSelectedFilters();
 
-			// add current filters 
+			// add current filters to previous_values
 			if (facets !== undefined){	
 				for (var i = 0, l = facets.length; i < l; i++) {
 					if(facets[i].id == self.field)
-						self.addSelectedFilter(facets[i]);						
+						self.storeSelectedFilter(facets[i]);						
 				}
-
 			}			
 		},
 
@@ -320,10 +319,11 @@
 			if(smkCommon.debugTime()) console.timeEnd("SearchFilters - " + this.field + " - process");						
 			if(smkCommon.debugTime()) console.time("SearchFilters - " + this.field + " - chosen");
 
-			//* save previous selected values in the target 'select' component	  	 
-			$select.find("option:selected").each(function (){
-				self.previous_values[self.field].push(this.value.replace(/^"|"$/g, ''));	  		
-			});
+//			//* save previous selected values in the target 'select' component	  	 
+//			$select.find("option:selected").each(function (){
+//				if(smkCommon.isValidDataText(this.value))
+//					self.previous_values[self.field].push(this.value.replace(/^"|"$/g, ''));	  		
+//			});
 
 			//* remove all options in 'select'...
 			$select.empty();	  	
@@ -370,8 +370,9 @@
 
 
 			if(smkCommon.debugTime()) console.time("SearchFilters - " + this.field + " - chosen - update");
-			//* update 'chosen' plugin		
-			$target.find('select').trigger("chosen:updated");		
+			//* update 'chosen' plugin						
+			self.refreshChosen($select);
+									
 			if(smkCommon.debugTime()) console.timeEnd("SearchFilters - " + this.field + " - chosen - update");
 
 			if(smkCommon.debugTime()) console.time("SearchFilters - " + this.field + " - chosen - show");			
@@ -447,7 +448,7 @@
 			return html;
 		},
 
-		addSelectedFilter: function (filter){	 
+		storeSelectedFilter: function (filter){	 
 			filter.text.replace(/^"|"$/g, '');
 			this.previous_values[filter.id].push(filter);
 		},
@@ -462,10 +463,35 @@
 //				self.manager.store.removeByValue('fq', self.fq(this.value));
 			});	
 
-			//* update 'chosen' plugin		
-			$select.trigger("chosen:updated");
+			//* update 'chosen' plugin					
+			self.refreshChosen($select);
 
 			this.previous_values[this.field] = new Array();
+		},
+		
+		refreshChosen: function($target){
+//			// fix what is apparently a bug in Chosen component?!			
+//			$(this.target).find('.chosen-with-drop').removeClass('chosen-with-drop');
+//			$(this.target).find('.chosen-container-active').removeClass('chosen-container-active');
+			
+			$target.chosen({				
+				disable_search_threshold: 10,	
+				no_results_text:this.manager.translator.getLabel('search_no_results'),
+				width: "100%"
+					,
+				disable_search: !0,
+				// When set to true, Chosen will not display the search field (single selects only).
+				allow_single_deselect: !0
+
+			});
+			
+			$target.trigger("chosen:updated");
+			
+
+//			// fix what is apparently a bug in Chosen component?!			
+//			$(this.target).find('.chosen-with-drop').removeClass('chosen-with-drop');
+//			$(this.target).find('.chosen-container-active').removeClass('chosen-container-active');
+			
 		},
 
 		getParentType: function (tree, childNode)
@@ -539,7 +565,7 @@
 		},
 
 		formatRequest: function(facet, marks){	
-			if(marks && facet.indexOf(' ') > 0)
+			if(marks && facet.indexOf(' ') > -1)
 				facet = sprintf('"%s"', facet);
 			return sprintf('%s:%s', this.field, facet);						
 		}

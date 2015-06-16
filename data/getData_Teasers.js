@@ -42,7 +42,7 @@
 					},
 					
 					debug:{
-						score: getData_Common.getScore(doc)						
+						score: smkCommon.debugLog() ? getData_Common.getScore(doc) : null					
 					}
 			};	
 
