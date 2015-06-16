@@ -184,15 +184,15 @@
 							show: getData_Common.getTechnique_note_vaerkstatus(doc) != null ? true : false,
 						},												
 
-						technique_opstilling: {
-							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_opstilling')),  
-							value: getData_Common.getTechnique_opstilling(doc)
-						},
-
-						technique_note_elementer: {
-							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_note_elementer')),  
-							value: getData_Common.getTechnique_note_elementer(doc)
-						},
+//						technique_opstilling: {
+//							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_opstilling')),  
+//							value: getData_Common.getTechnique_opstilling(doc)
+//						},
+//
+//						technique_note_elementer: {
+//							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_note_elementer')),  
+//							value: getData_Common.getTechnique_note_elementer(doc)
+//						},
 
 
 						inscription_lab: this.caller.manager.translator.getLabel('detail_inscription_lab'),
