@@ -43,6 +43,9 @@
 			if (!self.getRefresh())				
 				return;						
 		
+			// reset "chosen"
+			$select.chosen("destroy");
+			
 			// set label 	
 			$target.find('label').text(self.manager.translator.getLabel("tagcloud_" + this.field));						
 			
@@ -326,7 +329,8 @@
 //			});
 
 			//* remove all options in 'select'...
-			$select.empty();	  	
+			$select.empty();				
+			
 			//*... and copy the new option list
 
 			$select.append($(html).find('option'));	  		  	
