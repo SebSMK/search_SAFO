@@ -63,7 +63,7 @@
 							value: this.getDetailAcq(doc)														
 						},
 						
-						location: this.getListLocation(doc, this.caller)
+						location: smkCommon.firstCapital(getData_Common.getLocation_location(doc, this.caller))
 					}
 //					,
 //
@@ -77,16 +77,16 @@
 			return data;	  
 		};
 		
-		this.getListLocation = function (doc, caller){
-			var location = smkCommon.firstCapital(doc.location_name);
-			var location_inhouse = smkCommon.isValidDataText(location) ? caller.manager.translator.getCollection(smkCommon.replace_dansk_char(location)) : ''; 
-			var label = smkCommon.isValidDataText(location_inhouse) ? 
-					sprintf('%s %s', caller.manager.translator.getLabel("teaser_on_display"), location) 
-						: 
-					caller.manager.translator.getLabel("teaser_appoint");
-			
-			return label;
-		};
+//		this.getListLocation = function (doc, caller){
+//			var location = smkCommon.firstCapital(doc.location_name);
+//			var location_inhouse = smkCommon.isValidDataText(location) ? caller.manager.translator.getCollection(smkCommon.replace_dansk_char(location)) : ''; 
+//			var label = smkCommon.isValidDataText(location_inhouse) ? 
+//					sprintf('%s %s', caller.manager.translator.getLabel("teaser_on_display"), location) 
+//						: 
+//					caller.manager.translator.getLabel("teaser_appoint");
+//			
+//			return label;
+//		};
 		
 		this.getDetailAcq = function(doc){
 			var method = smkCommon.isValidDataText(getData_Common.getErhverv_method(doc)) ? sprintf('%s', getData_Common.getErhverv_method(doc)) : "";
@@ -143,7 +143,7 @@
 			var dates = smkCommon.isValidDataText(doc.dates) ? sprintf(', %s', doc.dates) : "";
 			var nationality = smkCommon.isValidDataText(doc.nationality) ? sprintf('%s', doc.nationality) : "";												
 			
-			res.info = nationality || dates ? sprintf('(%s%s)%s', nationality, dates, role) : "";			
+			res.info = nationality || dates ? sprintf('(%s%s)', nationality, dates) : "";			
 			res.info = sprintf('%s%s', res.info, role);
 			
 			return res;

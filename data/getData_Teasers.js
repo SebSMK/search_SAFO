@@ -37,7 +37,7 @@
 						title_museum: getData_Common.getFirstTitle(doc), 															
 						datering_production_vaerkdatering:{'lab': smkCommon.firstCapital(this.caller.manager.translator.getLabel('teaser_date_lab')), 'value':getData_Common.getProduction_vaerkdatering(doc)},		
 						ident_invnummer: {'lab': smkCommon.firstCapital(this.caller.manager.translator.getLabel("list_reference")), 'value': getData_Common.getIdent_invnummer(doc)},	
-						location_location: smkCommon.firstCapital(this.getListLocation(doc, this.caller)),
+						location_location: smkCommon.firstCapital(getData_Common.getLocation_location(doc, this.caller)),
 						url: this.getDetailUrl(doc)
 					},
 					
@@ -60,16 +60,16 @@
 			return ModelManager.buildURLFromModel(model); 
 		};				
 		
-		this.getListLocation = function (doc, caller){
-			var location = smkCommon.firstCapital(doc.location_name);
-			var location_inhouse = smkCommon.isValidDataText(location) ? caller.manager.translator.getCollection(smkCommon.replace_dansk_char(location)) : ''; 
-			var label = smkCommon.isValidDataText(location_inhouse) ? 
-					sprintf('%s %s', caller.manager.translator.getLabel("teaser_on_display"), location) 
-						: 
-					caller.manager.translator.getLabel("teaser_appoint");
-			
-			return label;
-		};
+//		this.getListLocation = function (doc, caller){
+//			var location = smkCommon.firstCapital(doc.location_name);
+//			var location_inhouse = smkCommon.isValidDataText(location) ? caller.manager.translator.getCollection(smkCommon.replace_dansk_char(location)) : ''; 
+//			var label = smkCommon.isValidDataText(location_inhouse) ? 
+//					sprintf('%s %s', caller.manager.translator.getLabel("teaser_on_display"), location) 
+//						: 
+//					caller.manager.translator.getLabel("teaser_appoint");
+//			
+//			return label;
+//		};
 		
 		this.getListAllProducers = function(doc){
 			var self = this;

@@ -415,6 +415,7 @@
 				while(number > 21){
 					number = number / 10;
 				}
+				number++;
 				ordinal = smkCommon.ordinal_suffix(number);					  			  			  
 				break;		  
 			};

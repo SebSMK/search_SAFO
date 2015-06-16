@@ -90,7 +90,7 @@
 		 * * otherwise, return "default" label		 
 		 */		
 		this.getCollection = function(collection_orig){
-			var collection = collection_orig.toLowerCase();
+			var collection = collection_orig;
 			// check language
 			if(!this.collections.hasOwnProperty(this.current_lang))
 				if(!this.collections.hasOwnProperty(this.default_lang))

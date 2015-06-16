@@ -16,10 +16,21 @@
 	 * Location
 	 * */
 
+//	getdatacommon.getLocation_location = function (doc, caller){
+//		var location = smkCommon.firstCapital(doc.location_name);
+//		var location_inhouse = smkCommon.isValidDataText(location) ? caller.manager.translator.getCollection(smkCommon.replace_dansk_char(location)) : ''; 
+//		return smkCommon.isValidDataText(location_inhouse) ? location_inhouse : null;
+//	};
+	
 	getdatacommon.getLocation_location = function (doc, caller){
-		var location = smkCommon.firstCapital(doc.location_name);
-		var location_inhouse = smkCommon.isValidDataText(location) ? caller.manager.translator.getCollection(smkCommon.replace_dansk_char(location)) : ''; 
-		return smkCommon.isValidDataText(location_inhouse) ? location_inhouse : null;
+		var location = doc.location_name;
+		var location_inhouse = smkCommon.isValidDataText(location) ? caller.manager.translator.getCollection(location) : ''; 
+		var label = smkCommon.isValidDataText(location_inhouse) ? 
+				sprintf('%s %s', caller.manager.translator.getLabel("teaser_on_display"), location) 
+					: 
+				caller.manager.translator.getLabel("teaser_appoint");
+		
+		return label;
 	};
 
 	/**
