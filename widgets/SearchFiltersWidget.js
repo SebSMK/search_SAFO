@@ -107,8 +107,9 @@
 				break;	
 
 			case 'object_production_date_earliest':			
-
 				for (var facet in self.manager.response.facet_counts.facet_ranges[self.field].counts) {
+					if(!smkCommon.isValidDataText(facet))
+						continue;
 					var count = parseInt(self.manager.response.facet_counts.facet_ranges[self.field].counts[facet]);
 					if (count > maxCount) {
 						maxCount = count;
@@ -143,6 +144,8 @@
 			case 'object_type_dk':
 			case 'object_type_en':
 				for (var facet in self.manager.response.facet_counts.facet_fields[self.field]) {
+					if(!smkCommon.isValidDataText(facet))
+						continue;
 					var count = parseInt(self.manager.response.facet_counts.facet_fields[self.field][facet]);
 					if (count > maxCount) {
 						maxCount = count;
@@ -165,6 +168,8 @@
 
 			case 'artist_surname_firstname':
 				for (var facet in self.manager.response.facet_counts.facet_fields[self.field]) {
+					if(!smkCommon.isValidDataText(facet))
+						continue;
 					var count = parseInt(self.manager.response.facet_counts.facet_fields[self.field][facet]);
 					if (count > maxCount) {
 						maxCount = count;
@@ -188,6 +193,8 @@
 
 				var root_categories = {};
 				for (var facet in self.manager.response.facet_counts.facet_fields[self.field]) {
+					if(!smkCommon.isValidDataText(facet))
+						continue;
 					var count = parseInt(self.manager.response.facet_counts.facet_fields[self.field][facet]);
 					if (count > maxCount) {
 						maxCount = count;
@@ -231,6 +238,8 @@
 				for (var facet in self.manager.response.facet_counts.facet_fields[self.field]) {
 					var text = '';
 					index = 0;
+					if(!smkCommon.isValidDataText(facet))
+						continue;
 					var count = parseInt(self.manager.response.facet_counts.facet_fields[self.field][facet]);
 					if (count > maxCount) {
 						maxCount = count;
@@ -255,6 +264,8 @@
 
 			case "department":		    			  			   							  
 				for (var facet in self.manager.response.facet_counts.facet_fields[self.field]) {
+					if(!smkCommon.isValidDataText(facet))
+						continue;
 					var count = parseInt(self.manager.response.facet_counts.facet_fields[self.field][facet]);
 					if (count > maxCount) {
 						maxCount = count;
@@ -280,6 +291,8 @@
 			case "materiale":
 			case "materiale_en":
 				for (var facet in self.manager.response.facet_counts.facet_fields[self.field]) {
+					if(!smkCommon.isValidDataText(facet))
+						continue;
 					var count = parseInt(self.manager.response.facet_counts.facet_fields[self.field][facet]);
 					if (count > maxCount) {
 						maxCount = count;
@@ -300,11 +313,14 @@
 
 			default:		    			  			   							  
 				for (var facet in self.manager.response.facet_counts.facet_fields[self.field]) {
+					if(!smkCommon.isValidDataText(facet))
+						continue;
+					
 					var count = parseInt(self.manager.response.facet_counts.facet_fields[self.field][facet]);
 					if (count > maxCount) {
 						maxCount = count;
 					};
-
+										
 					objectedItems.push({ "value": self.formatRequest(facet, true), "text": smkCommon.firstCapital(facet).trim(), "count": count, "i": i }); 
 					i++;	    	  	  	      	  	      
 				};
