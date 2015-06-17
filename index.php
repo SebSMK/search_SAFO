@@ -9,25 +9,25 @@
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
 			
-	<script src="javascript/smksoeg.0.006-compressed.js" type="text/javascript"></script>
+	<script src="javascript/smksoeg.0.007-compressed.js" type="text/javascript"></script>
 	
-	<script src="managers/ModelManager.js" type="text/javascript"></script>		
+	<script src="src/managers/ModelManager.js" type="text/javascript"></script>		
 	
-	 <script src="js/supplier/jquery.highlight.js" type="text/javascript"></script>  	
-	<script src="js/supplier/backtotop/js/main.js" type="text/javascript"></script>
-	<script src="js/supplier/backtotop/js/modernizr.js" type="text/javascript"></script>
-  <script src="js/supplier/imagesloaded.pkgd.min.js" type="text/javascript"></script>  
-	<script src="js/supplier/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script>
-	<script src="js/supplier/jquery.address.js" type="text/javascript"></script>
-	<script src="js/supplier/spin.min.js" type="text/javascript"></script>	
-  <script src="js/supplier/chosen.jquery.min.js" type="text/javascript"></script>	    
-	<script src="js/supplier/masonry.pkgd.min.js" type="text/javascript"></script>  
-	<script src="js/supplier/typeahead.bundle.js" type="text/javascript"></script>  
-	<script src="js/supplier/sprintf.min.js" type="text/javascript"></script>
+	<script src="src/js/supplier/jquery.highlight.js" type="text/javascript"></script>  	
+	<script src="src/js/supplier/backtotop/js/main.js" type="text/javascript"></script>
+	<script src="src/js/supplier/backtotop/js/modernizr.js" type="text/javascript"></script>
+  	<script src="src/js/supplier/imagesloaded.pkgd.min.js" type="text/javascript"></script>  
+	<script src="src/js/supplier/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script>
+	<script src="src/js/supplier/jquery.address.js" type="text/javascript"></script>
+	<script src="src/js/supplier/spin.min.js" type="text/javascript"></script>	
+  	<script src="src/js/supplier/chosen.jquery.min.js" type="text/javascript"></script>	    
+	<script src="src/js/supplier/masonry.pkgd.min.js" type="text/javascript"></script>  
+	<script src="src/js/supplier/typeahead.bundle.js" type="text/javascript"></script>  
+	<script src="src/js/supplier/sprintf.min.js" type="text/javascript"></script>
 	
 	<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/themes/smoothness/jquery-ui.css" media="all" />
-	<link rel="stylesheet" type="text/css" href="js/supplier/fancybox/source/jquery.fancybox.css" media="all" />	
-	<link rel="stylesheet" type="text/css" href="js/supplier/backtotop/css/style.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="src/js/supplier/fancybox/source/jquery.fancybox.css" media="all" />	
+	<link rel="stylesheet" type="text/css" href="src/js/supplier/backtotop/css/style.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="css/app.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="css/smk_modif.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="css/print.css" media="print" />
