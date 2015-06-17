@@ -140,7 +140,7 @@
 		
 		preloading: false,
 		
-		reset: false,
+		reset: false
 	});
 
 })(jQuery);

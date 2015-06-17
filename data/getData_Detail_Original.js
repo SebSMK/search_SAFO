@@ -34,13 +34,13 @@
 						original_proveniens: {  
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_original_proveniens')),  
 							value: getData_Common.getErhverv_proveniens(doc),
-							show: getData_Common.getErhverv_proveniens(doc) !== null? true : false,
+							show: getData_Common.getErhverv_proveniens(doc) !== null? true : false
 						},																														
 						
 						original_autenticitet: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_original_autenticitet')),  
 							value: getData_Common.getProducent_objectophavsbeskrivelse(doc),
-							show: getData_Common.getProducent_objectophavsbeskrivelse(doc) !== null? true : false,
+							show: getData_Common.getProducent_objectophavsbeskrivelse(doc) !== null? true : false
 						},
 												
 						original_tilstand: {  
@@ -51,7 +51,7 @@
 						original_indskrift: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_original_indskrift')),  
 							value: getData_Common.getTechnique_kollation(doc),
-							show: getData_Common.getTechnique_kollation(doc) !== null? true : false,
+							show: getData_Common.getTechnique_kollation(doc) !== null? true : false
 						},
 												
 						original_vaerkdatering: {  
@@ -62,13 +62,13 @@
 						original_technique: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_original_technique')),  
 							value: getData_Common.getTechnique_technique(doc),
-							show: getData_Common.getTechnique_technique(doc) !== null? true : false,
+							show: getData_Common.getTechnique_technique(doc) !== null? true : false
 						},
 						
 						original_bemaerk: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_original_bemaerk')),  
 							value: getData_Common.getBemaerk_anden_litt(doc),
-							show: getData_Common.getBemaerk_anden_litt(doc) !== null? true : false,
+							show: getData_Common.getBemaerk_anden_litt(doc) !== null? true : false
 						}																								
 					}
 			};	

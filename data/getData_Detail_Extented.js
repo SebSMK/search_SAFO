@@ -55,13 +55,13 @@
 
 						producent_formeri: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_formeri')),  
-							value: getData_Common.getProducent_formeri(doc),							
+							value: getData_Common.getProducent_formeri(doc)							
 						},
 						
 						producent_objectophavsbeskrivelse: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_producent_objectophavsbeskrivelse')),  
 							value: getData_Common.getProducent_objectophavsbeskrivelse(doc),
-							show: getData_Common.getProducent_objectophavsbeskrivelse(doc) !== null? true : false,
+							show: getData_Common.getProducent_objectophavsbeskrivelse(doc) !== null? true : false
 						},       
 
 						title_lab: this.caller.manager.translator.getLabel('detail_title_lab'),
@@ -101,13 +101,13 @@
 						technique_technique: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_technique')),  
 							value: getData_Common.getTechnique_technique(doc),
-							show: getData_Common.getTechnique_technique(doc) !== null? true : false,
+							show: getData_Common.getTechnique_technique(doc) !== null? true : false
 						},						
 
 						technique_dimensions: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_dimensions')),  
 							value: this.getDim(doc),
-							show: this.getDim(doc).length > 0 ? true : false,
+							show: this.getDim(doc).length > 0 ? true : false
 						},
 
 						technique_diameter: {
@@ -123,7 +123,7 @@
 						technique_materiale: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_materiale')),  
 							value: this.getMateriale(doc),
-							show: this.getMateriale(doc).length > 0 ? true : false,
+							show: this.getMateriale(doc).length > 0 ? true : false
 						},
 
 						technique_format: {
@@ -144,7 +144,7 @@
 						technique_vaerkstatus: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_vaerkstatus')),  
 							value: getData_Common.getTechnique_vaerkstatus(doc),
-							show: getData_Common.getTechnique_vaerkstatus(doc) != null ? true : false,
+							show: getData_Common.getTechnique_vaerkstatus(doc) != null ? true : false
 						},
 
 						technique_eksemplar: {
@@ -175,13 +175,13 @@
 						technique_kollation: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_kollation')),  
 							value: getData_Common.getTechnique_kollation(doc),
-							show: getData_Common.getTechnique_kollation(doc) != null ? true : false,
+							show: getData_Common.getTechnique_kollation(doc) != null ? true : false
 						},
 
 						technique_note_vaerkstatus: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_note_vaerkstatus')),  
 							value: getData_Common.getTechnique_note_vaerkstatus(doc),
-							show: getData_Common.getTechnique_note_vaerkstatus(doc) != null ? true : false,
+							show: getData_Common.getTechnique_note_vaerkstatus(doc) != null ? true : false
 						},												
 
 //						technique_opstilling: {
@@ -200,32 +200,32 @@
 						inscription_signatur: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_inscription_signatur')),  
 							value: this.getInscription_transl(getData_Common.getInscription_signatur(doc)),
-							show: getData_Common.getInscription_signatur(doc) != null ? true : false,
+							show: getData_Common.getInscription_signatur(doc) != null ? true : false
 						},
 
 
 						inscription_tryktsignatur: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_inscription_tryktsignatur')),  
 							value: this.getInscription_transl(getData_Common.getInscription_tryktsignatur(doc)),
-							show: getData_Common.getInscription_tryktsignatur(doc) != null ? true : false,
+							show: getData_Common.getInscription_tryktsignatur(doc) != null ? true : false
 						},
 
 						inscription_paaskrift: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_inscription_paaskrift')),  
 							value: this.getInscription_transl(getData_Common.getInscription_paaskrift(doc)),
-							show: getData_Common.getInscription_paaskrift(doc) != null ? true : false,
+							show: getData_Common.getInscription_paaskrift(doc) != null ? true : false
 						},
 
 						inscription_trykttekst: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_inscription_trykttekst')),  
 							value: this.getInscription_transl(getData_Common.getInscription_trykttekst(doc)),
-							show: getData_Common.getInscription_trykttekst(doc) != null ? true : false,
+							show: getData_Common.getInscription_trykttekst(doc) != null ? true : false
 						},
 
 						inscription_samlermaerke: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_inscription_samlermaerke')),  
 							value: getData_Common.getInscription_samlermaerke(doc),
-							show: getData_Common.getInscription_samlermaerke(doc) != null ? true : false,
+							show: getData_Common.getInscription_samlermaerke(doc) != null ? true : false
 						},
 
 						erhverv_lab: this.caller.manager.translator.getLabel('detail_erhverv_lab'),
@@ -238,7 +238,7 @@
 						erhverv_proveniens: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_erhverv_proveniens')),  
 							value: getData_Common.getErhverv_proveniens(doc),
-							show: getData_Common.getErhverv_proveniens(doc) != null ? true : false,
+							show: getData_Common.getErhverv_proveniens(doc) != null ? true : false
 						},																						
 
 						references_lab: this.caller.manager.translator.getLabel('detail_references_lab'),
@@ -261,12 +261,12 @@
 						references_litteratur: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_references_litteratur')),  
 							value: getData_Common.getReferences_litteratur(doc),
-							show: getData_Common.getReferences_litteratur(doc) != null ? true : false,
+							show: getData_Common.getReferences_litteratur(doc) != null ? true : false
 						},
 
 						references_texts: {  
 							value: getData_Common.getReferences_texts(doc),
-							show: getData_Common.getReferences_texts(doc) != null ? true : false,
+							show: getData_Common.getReferences_texts(doc) != null ? true : false
 						},
 
 						udstilling_lab: this.caller.manager.translator.getLabel('detail_udstilling_lab'),
@@ -274,7 +274,7 @@
 						udstilling_udstilling: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_udstilling_udstilling')),  
 							value: getData_Common.getUdstilling_udstilling(doc),
-							show: getData_Common.getUdstilling_udstilling(doc) != null ? true : false,
+							show: getData_Common.getUdstilling_udstilling(doc) != null ? true : false
 						},	
 
 						bemaerk_lab: this.caller.manager.translator.getLabel('detail_bemaerk_lab'),
@@ -282,7 +282,7 @@
 						bemaerk_anden_litt: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_bemaerk_anden_litt')),  
 							value: getData_Common.getBemaerk_anden_litt(doc),
-							show: getData_Common.getBemaerk_anden_litt(doc) != null ? true : false,
+							show: getData_Common.getBemaerk_anden_litt(doc) != null ? true : false
 						},	
 
 						motiv_lab: this.caller.manager.translator.getLabel('detail_motiv_lab'),
@@ -290,19 +290,19 @@
 						motiv_topografisk: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_motiv_topografisk')),  
 							value: getData_Common.getMotiv_topografisk(doc),
-							show: getData_Common.getMotiv_topografisk(doc) != null ? true : false,
+							show: getData_Common.getMotiv_topografisk(doc) != null ? true : false
 						},	
 
 						motiv_portraet: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_motiv_portraet')),  
 							value: getData_Common.getMotiv_portraet(doc),
-							show: getData_Common.getMotiv_portraet(doc) != null ? true : false,
+							show: getData_Common.getMotiv_portraet(doc) != null ? true : false
 						},
 
 						motiv_note: { 
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_motiv_note')),  
 							value: getData_Common.getMotiv_note(doc),
-							show: getData_Common.getMotiv_note(doc) != null ? true : false,
+							show: getData_Common.getMotiv_note(doc) != null ? true : false
 						}																									
 					},
 

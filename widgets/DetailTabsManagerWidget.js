@@ -58,7 +58,7 @@
 						'start': 0,
 						'fl': self.originalManager.store.fl_options.detail,
 						'json.nl': 'map'
-					},
+					}
 
 			};
 

@@ -8,75 +8,26 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
+			
+	<script src="javascript/smksoeg.0.006-compressed.js" type="text/javascript"></script>
 	
-	<script src="js/common.smk.js" type="text/javascript"></script>
-	<script src="js/language.js" type="text/javascript"></script>
-	<script src="js/config.js" type="text/javascript"></script>
-	<script src="managers/ModelManager.js" type="text/javascript"></script>
+	<script src="managers/ModelManager.js" type="text/javascript"></script>		
 	
-	<script src="managers/WidgetsManager.js" type="text/javascript"></script>
-	<script src="core/Core.js" type="text/javascript"></script>
-	<script src="core/AbstractManager.js" type="text/javascript"></script>
-	<script src="managers/smkManager.jquery.js" type="text/javascript"></script>
-	<script src="core/Parameter.js" type="text/javascript"></script>
-	<script src="core/ParameterStore.js" type="text/javascript"></script>
-	<script src="core/smkParameterStore.js" type="text/javascript"></script>
-	<script src="core/AbstractWidget.js" type="text/javascript"></script>
-	<script src="widgets/DetailWidget.js" type="text/javascript"></script>
-	<script src="widgets/DetailTabsManagerWidget.js" type="text/javascript"></script>
-	<script src="widgets/OriginalWidget.js" type="text/javascript"></script>	
-	<script src="widgets/TeasersWidget.js" type="text/javascript"></script>	
-	<script src="widgets/PagerWidget.js" type="text/javascript"></script>
-	<script src="widgets/SearchInfoWidget.js" type="text/javascript"></script>	
-	<script src="widgets/ScrollWidget.js" type="text/javascript"></script>
-	<script src="widgets/LanguagePickerWidget.js" type="text/javascript"></script>	
-	<script src="widgets/ScrollUpdateManagerWidget.js" type="text/javascript"></script>	
-	<script src="js/jquery/jquery.highlight.js" type="text/javascript"></script>		
-	<script src="core/AbstractFacetWidget.js" type="text/javascript"></script>
-	<script src="widgets/SearchFiltersWidget.js" type="text/javascript"></script>
-	<script src="widgets/AdvancedSearchWidget.js" type="text/javascript"></script>
-	<script src="widgets/CategoryWidget.js" type="text/javascript"></script>
-	<script src="widgets/CurrentSearchWidget.js" type="text/javascript"></script>
-	<script src="widgets/CheckBoxWidget.js" type="text/javascript"></script>
-	<script src="widgets/DateRangeWidget.js" type="text/javascript"></script>
-		
-	<script src="managers/EventsManager.js" type="text/javascript"></script>
-   
-	<script src="managers/ViewManager.js" type="text/javascript"></script>                   
-	<script src="core/AbstractTextWidget.js" type="text/javascript"></script>
-	<script src="widgets/SearchBoxWidget.js" type="text/javascript"></script>
-	<script src="widgets/SearchBoxAutoWidget.js" type="text/javascript"></script>
-	<script src="js/sprintf.min.js" type="text/javascript"></script>
-	<script src="js/mustache.smk.js" type="text/javascript"></script>
-	<script src="js/jquery.cookie.js" type="text/javascript"></script>
-	<script src="js/masonry.pkgd.min.js" type="text/javascript"></script>
-	<script src="js/masonry.smk.extend.js" type="text/javascript"></script>
-
-	<script src="js/chosen.jquery.min.js" type="text/javascript"></script>
-	<script src="widgets/ViewPickerWidget.js" type="text/javascript"></script>
-	<script src="widgets/SorterWidget.js" type="text/javascript"></script>
-	
-	<script src="js/jquery.tooltipster.js" type="text/javascript"></script>
-	<script src="js/imagesloaded.pkgd.min.js" type="text/javascript"></script>  
-	<script src="js/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script>
-	<script src="js/jquery.address.js" type="text/javascript"></script>
-	<script src="js/spin.min.js" type="text/javascript"></script>
-	<script src="js/queueProcessor.js" type="text/javascript"></script>	
-	<script src="js/sorter.js" type="text/javascript"></script>
-	<script src="js/typeahead.bundle.js" type="text/javascript"></script>
-	
-	<script src="js/backtotop/js/main.js" type="text/javascript"></script>
-	<script src="js/backtotop/js/modernizr.js" type="text/javascript"></script>		
-	<script src="data/getData_Common_functions.js" type="text/javascript"></script>			
-	<script src="data/getData_Detail_Standard.js" type="text/javascript"></script>
-	<script src="data/getData_Detail_Original.js" type="text/javascript"></script>
-	<script src="data/getData_Detail_Extented.js" type="text/javascript"></script>		
-	<script src="data/getData_Teasers.js" type="text/javascript"></script>
-	<script src="data/getData_Advanced.js" type="text/javascript"></script>			
+	 <script src="js/supplier/jquery.highlight.js" type="text/javascript"></script>  	
+	<script src="js/supplier/backtotop/js/main.js" type="text/javascript"></script>
+	<script src="js/supplier/backtotop/js/modernizr.js" type="text/javascript"></script>
+  <script src="js/supplier/imagesloaded.pkgd.min.js" type="text/javascript"></script>  
+	<script src="js/supplier/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script>
+	<script src="js/supplier/jquery.address.js" type="text/javascript"></script>
+	<script src="js/supplier/spin.min.js" type="text/javascript"></script>	
+  <script src="js/supplier/chosen.jquery.min.js" type="text/javascript"></script>	    
+	<script src="js/supplier/masonry.pkgd.min.js" type="text/javascript"></script>  
+	<script src="js/supplier/typeahead.bundle.js" type="text/javascript"></script>  
+	<script src="js/supplier/sprintf.min.js" type="text/javascript"></script>
 	
 	<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/themes/smoothness/jquery-ui.css" media="all" />
-	<link rel="stylesheet" type="text/css" href="js/fancybox/source/jquery.fancybox.css" media="all" />	
-	<link rel="stylesheet" type="text/css" href="js/backtotop/css/style.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="js/supplier/fancybox/source/jquery.fancybox.css" media="all" />	
+	<link rel="stylesheet" type="text/css" href="js/supplier/backtotop/css/style.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="css/app.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="css/smk_modif.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="css/print.css" media="print" />

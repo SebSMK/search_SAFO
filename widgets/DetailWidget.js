@@ -100,7 +100,7 @@
 			var template = this.template; 	
 			var html = Mustache.to_html($(template).find(templ_id).html(), json_data);
 			return html;
-		},		
+		}		
 	});
 
 })(jQuery);
