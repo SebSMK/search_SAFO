@@ -27,10 +27,11 @@
       
       "autocomp_id": 				"inventar nummer",
       "autocomp_title_en": 			"titel",
+      "autocomp_title_dk": 			"titel",
       "autocomp_title_first": 		"titel",
 	  "autocomp_artist_name": 		"producent",
-	  "autocomp_object_type_dk": 	"værktype",
-	  "autocomp_object_type_en": 	"værktype",	  
+	  "autocomp_object_type_main_dk": 	"værktype",
+	  "autocomp_object_type_main_en": 	"værktype",	  
 	  "autocomp_portrait_person": 	"portrætteret",
 	  "autocomp_topografisk_motiv": "topografisk motiv",
 	  "autocomp_materiale": 		"materiale",
@@ -722,6 +723,7 @@
 
 	  "autocomp_id": 				"inventory number",
       "autocomp_title_en": 			"title",
+      "autocomp_title_dk": 			"title",
       "autocomp_title_first": 		"title",
 	  "autocomp_artist_name": 		"producer",
 	  "autocomp_object_type_main_en": 	"artwork type",

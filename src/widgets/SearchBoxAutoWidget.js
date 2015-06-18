@@ -85,7 +85,7 @@
 				var auto_facet = smkCommon.isValidDataText(auto_value.text) ? AjaxSolr.Parameter.unescapeValue(auto_value.text.replace(/^"|"$/g, '')) : null;		
 				var q_value = ModelManager.get_q();
 				var searchstring = q_value.length != 0 ? q_value.toString() : this.get_text_from_facet(auto_facet, auto_field);
-				
+
 				$(this.target).find('input.search-bar-field').val(searchstring);
 			}
 
@@ -108,7 +108,7 @@
 			$(self.target).find('input.search-bar-field').typeahead({
 				hint: !0,
 				highlight: !0,
-				minLength: 1
+				minLength: 1,
 			}, {
 				name: 'autosearch',
 				displayKey: 'text',
@@ -118,29 +118,14 @@
 						return sprintf('<p>%s&nbsp;<i>(%s)</i></p>', data.text, data.type);
 					}
 				}
-
 			});
 		},
 
 		init_bloodhound: function(){
 			var self = this;
+			self.list = [];
 
-			var qf = (self.manager.store.get_qf_string());
-			self.list = [];			
-			params = [ 'facet=true', 
-			           'facet.limit=-1', 
-			           'facet.mincount=1', 
-			           'json.nl=map', 
-			           'sort=score desc',
-			           'rows=0',
-			           'defType=edismax'];
-
-			for (var i = 0; i < self.fields.length; i++) {
-				params.push('facet.field=' + self.fields[i]);
-			}			
-
-			var locquery = encodeURIComponent(sprintf('&%s&qf=%s', params.join('&'), qf));								
-			var proxyurl = self.manager.proxyUrl + "?query=q%3D%QUERY"+ locquery + "&callback=" + function(data){};
+			var proxyurl = this.get_proxy_url_ng();
 
 			return new Bloodhound({
 				datumTokenizer: function(d) { return Bloodhound.tokenizers.whitespace(d.value); },
@@ -164,43 +149,16 @@
 						type: 'POST'
 					},
 
-					filter: function (response) {
-						// clear typeahead list
-						self.list = [];
-
-						// Map the remote source JSON array to a JavaScript object array						
-						for (var i = 0; i < self.fields.length; i++) {
-							var field = self.fields[i];								
-
-							for (var facet in response.facet_counts.facet_fields[field]) {
-								if(facet.toLowerCase().indexOf(response.responseHeader.params.q.toLowerCase()) > -1){
-									var text = new String();
-
-									
-
-									self.list.push({
-										facet: facet,
-										field: field,
-										type: self.manager.translator.getLabel("autocomp_" +  field),
-										count: response.facet_counts.facet_fields[field][facet],
-										text: self.get_text_from_facet(facet, field)
-									});
-
-								}
-
-								if (self.list.length >= self.limit)
-									break;
-							}
-						}
-						return self.list;				        					           
-					}
+					filter:function(response){
+						return self.filter_response_ng(response);	
+					}  
 				}
 			});
 		},	
-		
+
 		get_text_from_facet: function(facet, field){
 			var res = new String();
-			
+
 			switch (field){
 			case "materiale":
 			case "materiale_en":
@@ -211,7 +169,7 @@
 				res = facet;
 			break;
 			}
-			
+
 			return res;
 		},
 
@@ -219,6 +177,121 @@
 			var template = this.template; 	
 			var html = Mustache.to_html($(template).find(templ_id).html(), json_data);
 			return html;
+		},
+
+		get_proxy_url: function(){
+			var self = this;
+			var qf = (self.manager.store.get_qf_string());			
+			var params = [ 'facet=true', 
+			               'facet.limit=-1', 
+			               'facet.mincount=1', 
+			               'json.nl=map', 
+			               'sort=score desc',
+			               'rows=0',
+			               'defType=edismax'];
+
+			for (var i = 0; i < self.fields.length; i++) {
+				params.push('facet.field=' + self.fields[i]);
+			}			
+
+			var locquery = encodeURIComponent(sprintf('&%s&qf=%s', params.join('&'), qf));								
+			var proxyurl = self.manager.proxyUrl + "?query=q%3D%QUERY"+ locquery + "&callback=" + function(data){};
+
+			return proxyurl;
+
+		},
+
+		get_proxy_url_ng: function(){
+			var self = this;		
+			var params = [ "facet=true",
+			               "facet.mincount=1",
+			               "facet.limit=-1",
+			               "q.op=AND",
+			               "rows=0"];
+
+			for (var i = 0; i < self.fields.length; i++) {
+				params.push('facet.field=' + self.fields[i]);
+			}			
+
+			var locquery = encodeURIComponent(sprintf('&%s', params.join('&')));								
+			var proxyurl = self.manager.proxyUrl + "?query=q%3DcollectorAutoCompNG1:(%QUERY)"+ locquery + "&callback=" + function(data){};
+
+			return proxyurl;
+
+		},
+
+		filter_response: function (response) {
+			var self = this;
+
+			// clear typeahead list
+			self.list = [];
+
+			// Map the remote source JSON array to a JavaScript object array						
+			for (var i = 0; i < self.fields.length; i++) {
+				var field = self.fields[i];								
+
+				for (var facet in response.facet_counts.facet_fields[field]) {
+					if(facet.toLowerCase().indexOf(response.responseHeader.params.q.toLowerCase()) > -1){
+						var text = new String();
+						self.list.push({
+							facet: facet,
+							field: field,
+							type: self.manager.translator.getLabel("autocomp_" +  field),
+							count: response.facet_counts.facet_fields[field][facet],
+							text: self.get_text_from_facet(facet, field)
+						});
+					}
+
+					if (self.list.length >= self.limit)
+						break;
+				}
+			}
+			return self.list;				        					           
+		},
+
+		filter_response_ng: function (response) {
+			var self = this;
+
+			// clear typeahead list
+			self.list = [];
+			var regExp = /\(([^)]+)\)/;
+			var paramq = regExp.exec(response.responseHeader.params.q.toLowerCase());
+
+			// Map the remote source JSON array to a JavaScript object array						
+			for (var i = 0; i < self.fields.length; i++) {
+				var field = self.fields[i];								
+
+				for (var facet in response.facet_counts.facet_fields[field]) {
+					if(self.containSearchString(facet, paramq[1])){
+						var text = new String();
+						self.list.push({
+							facet: facet,
+							field: field,
+							type: self.manager.translator.getLabel("autocomp_" +  field),
+							count: response.facet_counts.facet_fields[field][facet],
+							text: self.get_text_from_facet(facet, field)
+						});
+					}
+
+					if (self.list.length >= self.limit)
+						break;
+				}
+			}
+			return self.list;				        					           
+		},
+
+		containSearchString: function(facet, searchString){
+			var res = false;
+			var searchSplit = searchString.split(" ");
+
+			$.each(searchSplit, function( index, value){
+				if(smkCommon.isValidDataText(value) && facet.toLowerCase().indexOf(value) > -1){
+					res = true;
+					return false; // break each loop
+				}
+			});
+
+			return res;
 		},
 
 		limit: 10

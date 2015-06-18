@@ -22,8 +22,7 @@
 	<script src="src/widgets/DetailWidget.js" type="text/javascript"></script>
 	<script src="src/widgets/DetailTabsManagerWidget.js" type="text/javascript"></script>
 	<script src="src/widgets/OriginalWidget.js" type="text/javascript"></script>	
-	<script src="src/widgets/TeasersWidget.js" type="text/javascript"></script>	
-	<script src="src/widgets/PagerWidget.js" type="text/javascript"></script>
+	<script src="src/widgets/TeasersWidget.js" type="text/javascript"></script>
 	<script src="src/widgets/SearchInfoWidget.js" type="text/javascript"></script>	
 	<script src="src/widgets/ScrollWidget.js" type="text/javascript"></script>
 	<script src="src/widgets/LanguagePickerWidget.js" type="text/javascript"></script>	
@@ -37,7 +36,6 @@
 	<script src="src/managers/EventsManager.js" type="text/javascript"></script>
 	<script src="src/managers/ViewManager.js" type="text/javascript"></script>                   
 	<script src="src/core/AbstractTextWidget.js" type="text/javascript"></script>
-	<script src="src/widgets/SearchBoxWidget.js" type="text/javascript"></script>
 	<script src="src/widgets/SearchBoxAutoWidget.js" type="text/javascript"></script>
 	<script src="src/widgets/SorterWidget.js" type="text/javascript"></script>
 	
