@@ -235,13 +235,13 @@
 			var default_teaser_view = ModelManager.get_view() == 'detail';
 			var model = {};										
 			model.q = [search_string];					
-			model.sort = ModelManager.current_value_joker;
-			model.view = default_teaser_view ? "teasers" : ModelManager.current_value_joker;
-			model.category = default_teaser_view ? "all" : ModelManager.current_value_joker;
+//			model.sort = ModelManager.current_value_joker;
+//			model.view = default_teaser_view ? "teasers" : ModelManager.current_value_joker;
+//			model.category = default_teaser_view ? "all" : ModelManager.current_value_joker;
 			model.lang = ModelManager.current_value_joker;
 
-			if (!default_teaser_view)
-				model.fq = ModelManager.current_value_joker;
+//			if (!default_teaser_view)
+//				model.fq = ModelManager.current_value_joker;
 
 			ModelManager.update(model);					
 
@@ -269,7 +269,7 @@
 		};  
 
 		/*
-		 * search filter added / removed (only in "collection" tab/category)
+		 * search filter added / removed
 		 * @result:  model update 
 		 * */
 		this.smk_search_filter_changed = function (caller, params){

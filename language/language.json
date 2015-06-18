@@ -8,7 +8,7 @@
       "no_results":				"Desværre kan vi ikke finde nogle resultater til din søgning.",	
               
       "detail_copyright_def":			"Dette billede er i Public Domain, og du kan derfor frit benytte det til alle formål.",
-      "teaser_copyright_def":	"cc0 | Public Domain",
+      "teaser_copyright_def":	"CC0 | Public Domain",
       "copyright_link":			"http://creativecommons.org/publicdomain/zero/1.0/",
 
 	  "adv_artist_column_title": 	"kunstner | producent",
@@ -703,7 +703,7 @@
       "no_results":				"No results were found. Please try a different search.",
       
       "detail_copyright_def":	"This image is in the Public Domain so you may freely use it for any purpose.",
-      "teaser_copyright_def":	"cc0 | Public Domain",	
+      "teaser_copyright_def":	"CC0 | Public Domain",	
       "copyright_link":			"http://creativecommons.org/publicdomain/zero/1.0/",		
 
 	  "checkbox_hasimage": 			"has image", 
