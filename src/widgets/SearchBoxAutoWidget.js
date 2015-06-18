@@ -202,15 +202,25 @@
 		},
 
 		get_proxy_url_ng: function(){
-			var self = this;		
+			var self = this;
+			
 			var params = [ "facet=true",
 			               "facet.mincount=1",
 			               "facet.limit=-1",
 			               "q.op=AND",
 			               "rows=0"];
 
-			for (var i = 0; i < self.fields.length; i++) {
-				params.push('facet.field=' + self.fields[i]);
+			var fields = ["id", 
+			              "artist_name",
+			              "title_dk",
+			              "title_eng",
+			              "title_first",
+			              "proveniens",
+			              "materiale",
+			              "object_type_dk"];
+			
+			for (var i = 0; i < fields.length; i++) {
+				params.push('facet.field=' + fields[i]);
 			}			
 
 			var locquery = encodeURIComponent(sprintf('&%s', params.join('&')));								
