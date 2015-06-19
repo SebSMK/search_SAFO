@@ -108,7 +108,7 @@
 			$(self.target).find('input.search-bar-field').typeahead({
 				hint: !0,
 				highlight: !0,
-				minLength: 1,
+				minLength: 1
 			}, {
 				name: 'autosearch',
 				displayKey: 'text',
