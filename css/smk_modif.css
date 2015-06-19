@@ -27,6 +27,10 @@
   margin-top: 10px;
 }
 
+.filter-group-pair label {
+  text-transform: capitalize;
+}
+
 .no-touch .cd-top:hover {
     background-color: #fff;
 }   
