@@ -40,7 +40,7 @@
 			var self = this;
 			var i = 0;
 
-			// change_columns_titles
+			// refresh columns_titles
 			$(self.target).find(".filter-group h3").each(function (){
 				if(self.panel_data.filters[i] !== undefined)
 					$(this).html(self.manager.translator.getLabel(self.panel_data.filters[i].lab_tag)); 				
@@ -48,9 +48,9 @@
 				
 			});
 			
-			// panel switch
-			var show_panel_lab = this.manager.translator.getLabel("advanced_search_panel_show");
-			var hide_panel_lab = this.manager.translator.getLabel("advanced_search_panel_hide");
+			// refresh panel switch
+			var show_panel_lab = self.manager.translator.getLabel("advanced_search_panel_show");
+			var hide_panel_lab = self.manager.translator.getLabel("advanced_search_panel_hide");
 			var text = $(self.target).find('.advanced-search-panel-hidden').lenght > 0 ? hide_panel_lab : show_panel_lab;
 			$(self.target).find('.advanced-search-panel-show-hide a')
 			.attr('data-label-open', show_panel_lab)

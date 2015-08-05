@@ -5,6 +5,7 @@
 	opacity: 0.5; 
 }
 
+/*
 .filter-group-interval input[type="submit"] {
   float: left;
   width: 16%;
@@ -22,6 +23,7 @@
     transition: background-color 0.2s ease 0s; 
     margin-left: 10px;
 }
+*/
 
 .filter-group {
   margin-top: 10px;
@@ -35,9 +37,11 @@
     background-color: #fff;
 }   
 
+/*
 .data-section .data-pair:nth-child(odd) {
   background: #fff8ed;
 }
+*/
 
 .data-section .data-pair .data-pair-key.indent{  
   text-indent: 10px;
@@ -51,6 +55,7 @@
 	position: relative;		
 }
 
+
 .matrix-tile-date:before {
     content: ", ";
 }
@@ -58,6 +63,7 @@
 .matrix-tile-date {
     font-size: 0.8em;
 }
+
 
 .preloaded{
 	opacity:0 !important;	
@@ -298,10 +304,12 @@ a.divLink {
   font-size: 1.1em;
 }
 
+/*
 .filter-group-interval input[type="text"] {
   float: left;
   width: 26%;
 }
+*/
 
 /*
 .tab-content {

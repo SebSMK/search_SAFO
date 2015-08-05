@@ -49,7 +49,7 @@
 			$target.hide();
 
 			//* merge data and template						
-			var html = self.template_integration_json({}, '#generalTemplate');    	  	  
+			var html = self.template_integration_json({"general_title": Manager.translator.getLabel("general_title")}, '#generalTemplate');    	  	  
 			$target.html(html);	
 
 			ModelManager.setModel($.address.value(), "url");
@@ -88,6 +88,9 @@
 			
 			// details tabs
 			this.add_modal_loading_to_widget('details_tabs');
+			
+			// reload title
+			$(this.target).find(".branding i").text(Manager.translator.getLabel("general_title"));
 			
 			
 			// related

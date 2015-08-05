@@ -63,14 +63,14 @@
 				ViewManager.viewChanged({'view': model.view});				    				    				    					    					    	
 			}else{
 				ViewManager.viewChanged({'view': "teasers"});
-			}			    
-
-			ViewManager.beforeRequest();				    			    
+			}			    						    			    
 
 			//* process language
 			Manager.translator.setLanguage(model.lang);		
 
-			Manager.store.set_current_lang(model.lang);	
+			Manager.store.set_current_lang(model.lang);
+			
+			ViewManager.beforeRequest();
 
 			if(smkCommon.debugTime()) console.timeEnd("adresschanged-process view");
 
