@@ -1,5 +1,5 @@
 {
-   "version":"1.000.006 PROD BETA",
+   "version":"1.000.007 PROD BETA",
    "mode":"proxy min debug",   
    "server":"http://solr-02.smk.dk:8080/solr/prod_SAFO/",      
    "server_proxy":"http://solr.smk.dk:8080/proxySolrPHP/proxy.php",
@@ -125,9 +125,9 @@
       "qf"
    ],
    
-   "fq_default":"-(id:(*verso))",
+   "fq_default":"",
    "fq_default_debug":"-(id:(*/*)) -(id:(*verso)) -(medium_image_url:[* TO *])",
-   "fq_default_prod":"-(id:(*verso))",
+   "fq_default_prod":"",
    
    "q_default":"*:*",
    "sort_default":"score desc",
