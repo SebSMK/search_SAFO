@@ -64,6 +64,9 @@
     font-size: 0.8em;
 }
 
+.data-section .data-pair .data-pair-value.high { 
+    line-height: 2em;    
+}
 
 .preloaded{
 	opacity:0 !important;	
