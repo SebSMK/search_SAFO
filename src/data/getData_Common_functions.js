@@ -32,6 +32,10 @@
 		
 		return label;
 	};
+	
+	getdatacommon.getLocation_location_kks = function (doc, caller){
+		return doc.location_kks_kas === undefined ? null : doc.location_kks_kas;		
+	};
 
 	/**
 	 * Identification

@@ -127,7 +127,8 @@
     "detail_ident_dele": "antal dele ",
     "detail_ident_invnummer": "inv.nr.",
     "detail_ident_samling": "samling",
-    "detail_ident_andet_inv": "andet inventar nr",
+    "detail_ident_andet_inv": "andet inventar nr.",
+    "detail_ident_kks_location": "placeringsnr.",
     
     	  
 	  "detail_tab_reference":		"værktekst",
@@ -838,6 +839,7 @@
 		"detail_ident_andet_inv":	"additional inventory number",
 		"detail_ident_dele":	"number of components",
 		"detail_ident_invnummer":	"inventory number",
+		"detail_ident_kks_location": "location number",
 		"detail_ident_lab":	"identification",
 		"detail_ident_samling":	"collection",
 		"detail_ident_vaerktype":	"object type",

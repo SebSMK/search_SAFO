@@ -45,6 +45,11 @@
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_ident_andet_inv')),  
 							value: getData_Common.getIdent_andet_inv(doc)
 						},
+						
+						ident_kks_location: {
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_ident_kks_location')),  
+							value: getData_Common.getLocation_location_kks(doc)
+						},
 
 						producent_lab: this.caller.manager.translator.getLabel('detail_producent_lab'),						
 
