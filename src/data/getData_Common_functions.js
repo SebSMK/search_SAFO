@@ -482,7 +482,8 @@
 		var arrayLength = split.length;
 
 		for (var i = 0; i < arrayLength; i++) {	
-			res.push({value:split[i]});					
+			if (getdatacommon.getIdent_invnummer(doc).indexOf("/") == -1) // Only for parent artwork
+				res.push({value:split[i]});					
 		}				
 
 		return res.length > 0 ? res : null;
