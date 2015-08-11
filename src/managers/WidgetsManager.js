@@ -239,6 +239,14 @@ var EventsManager;
 			field: {'max': 'acq_date_earliest', 'min': 'acq_date_latest'},
 			template: Mustache.getTemplate('templates/daterange.html')
 		})); 
+		
+		//* daterange -> overrides date filter, so it has to be declared after filters
+		Manager.addWidget(new AjaxSolr.DateRangeWidget({
+			id: 'adv_object_production_date_range',
+			target: '#adv_object_production_date_range',
+			field: {'max': 'object_production_date_earliest' , 'min': 'object_production_date_latest'},
+			template: Mustache.getTemplate('templates/daterange.html')
+		})); 
 
 		//* Detail widget		
 		Manager.addWidget(new AjaxSolr.DetailWidget({

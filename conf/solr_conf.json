@@ -1,5 +1,5 @@
 {
-   "version":"1.000.010 PROD BETA",
+   "version":"1.000.011 PROD BETA",
    "mode":"proxy min debug",   
    "server_prod":"http://solr-02.smk.dk:8080/solr/prod_SAFO/", 
    "server":"http://csdev-seb:8180/solr-example/dev_SAFO/",      
@@ -60,14 +60,7 @@
             "lab":"blank",
             "values":[
                {
-                  "id":"object_production_date_earliest",
-                  "ranges":{
-                     "range":"object_production_date_earliest",
-                     "start":"1400-01-01T00:00:00.001Z",
-                     "end":"NOW",
-                     "gap":"+100YEARS",
-                     "other":"before"
-                  },
+                  "id":"object_production_date_range",                  
                   "lang":"en dk"
                },
                {
