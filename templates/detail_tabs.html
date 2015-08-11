@@ -31,11 +31,30 @@
 	<script id="detailReferenceTemplate" type="text/template">	
 		{{#info.references_texts.show}}	
 		<div data-tabs-id="artwork-tabs" id="reference" class="tab-content">
+			
 			{{#info.references_texts.value}}
-			<div class="copy">{{{value}}}</div>
+			<div class="copy">{{{value}}}</div>			
+
+			{{#type}}
+			<div class="data-extend-key">{{info.references_texts.key.type}}</div>
+			<div class="data-extend-value">{{{type}}}</div>			
+			{{/type}}
+			
+			{{#date}}
+			<div class="data-extend-key">{{info.references_texts.key.date}}</div>
+			<div class="data-extend-value">{{{date}}}</div>			
+			{{/date}}
+
+			{{#author}}
+			<div class="data-extend-key">{{info.references_texts.key.author}}</div>
+			<div class="data-extend-value">{{{author}}}</div>			
+			{{/author}}
+
 			{{/info.references_texts.value}}
+
 		</div>
 		{{/info.references_texts.show}}
+
 	</script>
 
 	<script id="detailExtendedTemplate" type="text/template">	

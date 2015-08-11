@@ -25,6 +25,14 @@
 }
 */
 
+.data-extend-key{
+    color: #a2a2a5;
+}
+
+.data-extend-value{    
+	padding-bottom: 8px;
+}
+
 .filter-group {
   margin-top: 10px;
 }

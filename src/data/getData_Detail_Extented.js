@@ -270,9 +270,15 @@
 						},
 
 						references_texts: {  
+							key:{
+									type: (this.caller.manager.translator.getLabel('detail_extended_type')),
+									author: (this.caller.manager.translator.getLabel('detail_extended_author')),
+									date: (this.caller.manager.translator.getLabel('detail_extended_date'))
+								},
 							value: getData_Common.getReferences_texts(doc),
 							show: getData_Common.getReferences_texts(doc) != null ? true : false
 						},
+						
 
 						udstilling_lab: this.caller.manager.translator.getLabel('detail_udstilling_lab'),
 

@@ -237,6 +237,10 @@
     "detail_references_beckett": "beckett nr",
     "detail_references_litteratur": "litteratur",
     
+    "detail_extended_type": "type",
+    "detail_extended_author": "kilde / forfatter",
+    "detail_extended_date": "datering",        
+    
     "detail_udstilling_lab": "udstillinger",
     "detail_udstilling_udstilling": "udstillinger",
     
@@ -836,6 +840,9 @@
 		"detail_erhverv_erhverv":	"acquisition",
 		"detail_erhverv_lab":	"acquisition",
 		"detail_erhverv_proveniens":	"provenance",
+		"detail_extended_type": "type",
+		"detail_extended_author": "source / author",
+		"detail_extended_date": "date",
 		"detail_ident_andet_inv":	"additional inventory number",
 		"detail_ident_dele":	"number of components",
 		"detail_ident_invnummer":	"inventory number",

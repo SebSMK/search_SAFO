@@ -682,8 +682,10 @@
 
 		for (var i = 0; i < arrayLength; i++) {	
 			var values = split[i].split(smkCommon.split_2_niv);
-			var source = smkCommon.getValueFromSplit(values, 0);
+			var type = smkCommon.getValueFromSplit(values, 0);
 			var text = smkCommon.getValueFromSplit(values, 1);
+			var author = smkCommon.getValueFromSplit(values, 3);
+			var date = smkCommon.getValueFromSplit(values, 4);
 
 			if(smkCommon.isValidDataText(text)){
 				text = text.replace(/\r\n\r\n/g, "</p><p>").replace(/\n\n/g, "</p><p>");
@@ -701,8 +703,23 @@
 					break;
 				}
 
-				if(smkCommon.isValidDataText(lang) && lang.indexOf(current_lang) > -1)
-					reference_texts.push({value:text});					
+				if(smkCommon.isValidDataText(lang) && lang.indexOf(current_lang) > -1){
+					var json = {};
+					
+					json['value'] = text;
+															
+					if(smkCommon.isValidDataText(type))
+						json['type'] = type;
+					
+					if(smkCommon.isValidDataText(author))
+						json['author'] = author;
+					
+					if(smkCommon.isValidDataText(date))
+						json['date'] = date;						
+					
+					reference_texts.push(json);
+				}
+										
 			}
 		}				
 
