@@ -378,7 +378,13 @@
 		};
 
 
-		this.getDetailAcq = function(doc){
+		this.getDetailAcq = function(doc){			
+			var source = smkCommon.isValidDataText(getData_Common.getErhverv_source(doc)) ? sprintf(' %s', getData_Common.getErhverv_source(doc)) : "";
+			var dato = smkCommon.isValidDataText(getData_Common.getErhverv_dato(doc)) ? sprintf(' %s', getData_Common.getErhverv_dato(doc)) : "";	 
+
+			return smkCommon.isValidDataText(getData_Common.getErhverv_source(doc)) || smkCommon.isValidDataText(getData_Common.getErhverv_dato(doc)) ? 
+					sprintf("%s%s", source, dato) : null;
+			
 //			var method = smkCommon.isValidDataText(getData_Common.getErhverv_method(doc)) ? sprintf('%s', getData_Common.getErhverv_method(doc)) : "";
 //			var source = smkCommon.isValidDataText(getData_Common.getErhverv_source(doc)) ? sprintf(' %s', getData_Common.getErhverv_source(doc)) : "";
 //			var dato = smkCommon.isValidDataText(getData_Common.getErhverv_dato(doc)) ? sprintf(' %s', getData_Common.getErhverv_dato(doc)) : "";	 
@@ -386,9 +392,9 @@
 //			return smkCommon.isValidDataText(getData_Common.getErhverv_method(doc)) || smkCommon.isValidDataText(getData_Common.getErhverv_source(doc)) || smkCommon.isValidDataText(getData_Common.getErhverv_dato(doc)) ? 
 //					sprintf("%s%s%s", method, source, dato) : null;
 
-			var dato = smkCommon.isValidDataText(getData_Common.getErhverv_dato(doc)) ? sprintf(' %s', getData_Common.getErhverv_dato(doc)) : "";
-			
-			return dato;
+//			var dato = smkCommon.isValidDataText(getData_Common.getErhverv_dato(doc)) ? sprintf(' %s', getData_Common.getErhverv_dato(doc)) : "";
+//			
+//			return dato;
 			
 
 		};
