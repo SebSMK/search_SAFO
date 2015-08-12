@@ -6,7 +6,7 @@
 
 			var self = this;
 			var $target = $(this.target);		  		  
-			var html = self.template_integration_json({label: this.manager.translator.getLabel('daterange_label') ,
+			var html = self.template_integration_json({label: this.manager.translator.getLabel('daterange_label_' + self.id) ,
 														from: smkCommon.firstCapital(this.manager.translator.getLabel('daterange_from')),
 														to: smkCommon.firstCapital(this.manager.translator.getLabel('daterange_to')),
 														show: smkCommon.firstCapital(this.manager.translator.getLabel('daterange_show'))}, '#daterangeTemplate');

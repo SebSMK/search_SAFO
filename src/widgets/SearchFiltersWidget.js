@@ -102,42 +102,7 @@
 			var i = 0;
 			var objectedItems = [];
 
-			switch (self.field){
-			case 'acq_date_earliest':		    			  			   							  				  	  
-				break;	
-
-			case 'object_production_date_earliest':			
-				for (var facet in self.manager.response.facet_counts.facet_ranges[self.field].counts) {
-					if(!smkCommon.isValidDataText(facet))
-						continue;
-					var count = parseInt(self.manager.response.facet_counts.facet_ranges[self.field].counts[facet]);
-					if (count > maxCount) {
-						maxCount = count;
-					};	
-
-					var daterange = new Date(facet);
-
-					objectedItems.push({ "value": self.formatRequest(sprintf("[%1$s TO %1$s+100YEARS]", facet), false), "text": this.getCentury(daterange.getFullYear()), "count": count, "i": i });
-					//objectedItems.push({ "value": facet, "text": this.getCentury(daterange.getFullYear()), "count": count, "i": i });
-					i++;
-				};
-
-				// add lower range bound
-				if (self.manager.response.facet_counts.facet_ranges[self.field].before !== undefined && self.manager.response.facet_counts.facet_ranges[self.field].before > 0){
-					var count = self.manager.response.facet_counts.facet_ranges[self.field].before;				
-					var first_facet = self.manager.response.facet_counts.facet_ranges[self.field].start;
-					var datefirst_facet = new Date(first_facet);
-					var text = sprintf("%s %s",  self.manager.translator.getLabel("search_filter_before"), this.getCentury(datefirst_facet.getFullYear()));
-
-					objectedItems.push({ "value": self.formatRequest(sprintf("[* TO %s]", first_facet)), "text": text, "count": count, "i": i });
-					i++;
-				}
-
-				totalCount = i;
-				objectedItems.sort(function (a, b) {
-					return parseInt(b.text)-parseInt(a.text);	  	      
-				});				  			  			  
-				break;	
+			switch (self.field){			
 
 			case 'artist_natio_en':
 			case 'artist_natio_dk':
@@ -273,7 +238,7 @@
 
 					$.each(getData_Common.enumDepartment, function(key, type) {
 						if(facet.indexOf(type) > -1){
-							text = smkCommon.firstCapital(self.manager.translator.getLabel('search_'+ key +'_lab'));
+							text = self.manager.translator.getLabel('search_'+ key +'_lab');
 							return false; //break each loop
 						}
 						index++;

@@ -26,7 +26,7 @@
 		var location = doc.location_name;
 		var location_inhouse = smkCommon.isValidDataText(location) ? caller.manager.translator.getCollection(location) : ''; 
 		var label = smkCommon.isValidDataText(location_inhouse) ? 
-				sprintf('%s %s', caller.manager.translator.getLabel("teaser_on_display"), location) 
+				sprintf('%s %s', caller.manager.translator.getLabel("teaser_on_display"), location_inhouse) 
 					: 
 				getdatacommon.getIdent_invnummer(doc).toLowerCase().indexOf('kks') == 0 || getdatacommon.getIdent_invnummer(doc).toLowerCase().indexOf('kas') == 0 ? caller.manager.translator.getLabel("teaser_appoint") : null;
 		
