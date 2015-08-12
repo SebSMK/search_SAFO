@@ -496,7 +496,9 @@
 					{{/inscription_tryktsignatur.value}}
 				</div>
 				<!-- /.data-pair -->
-				{{/inscription_tryktsignatur.show}} {{#inscription_paaskrift.show}}
+				{{/inscription_tryktsignatur.show}} 
+				
+				{{#inscription_paaskrift.show}}
 				<div class="data-pair">
 					<h4 class="data-pair-key">{{{inscription_paaskrift.key}}}</h4>
 					{{#inscription_paaskrift.value}}
@@ -675,7 +677,9 @@
 					{{/motiv_topografisk.value}}
 				</div>
 				<!-- /.data-pair -->
-				{{/motiv_topografisk.show}} {{#motiv_portraet.show}}
+				{{/motiv_topografisk.show}} 
+
+				{{#motiv_portraet.show}}
 				<div class="data-pair">
 					<h4 class="data-pair-key">{{{motiv_portraet.key}}}</h4>
 					{{#motiv_portraet.value}}
@@ -686,18 +690,20 @@
 					{{/motiv_portraet.value}}
 				</div>
 				<!-- /.data-pair -->
-				{{/motiv_portraet.show}} {{#motiv_note.value}}
+				{{/motiv_portraet.show}} 
+
+				{{#motiv_note.show}}
 				<div class="data-pair">
 					<h4 class="data-pair-key">{{{motiv_note.key}}}</h4>
 					{{#motiv_note.value}}
 					<div class="data-pair-value">
-						{{{motiv_note.value}}}
+						{{{value}}}
 					</div>
 					<!-- /.data-pair-value -->
 					{{/motiv_note.value}}
 				</div>
 				<!-- /.data-pair -->
-				{{/motiv_note.value}}
+				{{/motiv_note.show}}
 	
 			</div>
 			<!-- /.motiv -->

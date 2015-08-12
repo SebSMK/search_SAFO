@@ -23,7 +23,7 @@
       "checkbox_hasimage": 			"med foto", 
       
       "daterange_label_adv_acq_date_range":			"dato",
-      "daterange_label_adv_object_production_date_range":			"periode",
+      "daterange_label_adv_object_production_date_range":			"datering",
       "daterange_to":				"til...",
       "daterange_from":				"fra...",
       "daterange_show":				"vis",

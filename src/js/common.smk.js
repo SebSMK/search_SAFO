@@ -29,6 +29,16 @@
 		return !this.isValidDataText(string) ? '' : string.charAt(0).toUpperCase() + string.slice(1)		
 	};
 	
+	common.feedlineToHTML = function(text){
+		if (!this.isValidDataText(text)) return text;
+		
+		var conv = text.replace(/\r\n\r\n/g, "</p><p>").replace(/\n\n/g, "</p><p>");
+		conv = conv.replace(/\r\n/g, "<br />").replace(/\n/g, "<br />");
+		
+		return conv;
+		
+	};
+	
 	common.isValidDataText = function(text, field){
 		text = new String(text);
 		if (text === undefined 

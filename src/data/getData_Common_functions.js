@@ -482,8 +482,10 @@
 		var arrayLength = split.length;
 
 		for (var i = 0; i < arrayLength; i++) {	
-			if (getdatacommon.getIdent_invnummer(doc).indexOf("/") == -1) // Only for parent artwork
-				res.push({value:split[i]});					
+			if (getdatacommon.getIdent_invnummer(doc).indexOf("/") == -1){ // Only for parent artwork				
+				var conv_text = smkCommon.feedlineToHTML(split[i]);
+				res.push({value: conv_text});
+			}
 		}				
 
 		return res.length > 0 ? res : null;
@@ -543,8 +545,9 @@
 		var inscr_split = doc.inscription_signatur.split(smkCommon.split_1_niv);							
 		var arrayLength = inscr_split.length;
 
-		for (var i = 0; i < arrayLength; i++) {	
-			res.push({value:inscr_split[i]});				
+		for (var i = 0; i < arrayLength; i++) {					
+			var conv_text = smkCommon.feedlineToHTML(inscr_split[i]);
+			res.push({value: conv_text});
 		}				
 
 		return res.length > 0 ? res : null;
@@ -559,7 +562,8 @@
 		var arrayLength = inscr_split.length;
 
 		for (var i = 0; i < arrayLength; i++) {	
-			res.push({value:inscr_split[i]});					
+			var conv_text = smkCommon.feedlineToHTML(inscr_split[i]);
+			res.push({value: conv_text});					
 		}				
 
 		return res.length > 0 ? res : null;
@@ -572,9 +576,10 @@
 		var res = [];
 		var inscr_split = doc.inscription_paaskrift.split(smkCommon.split_1_niv);							
 		var arrayLength = inscr_split.length;
-
+		
 		for (var i = 0; i < arrayLength; i++) {	
-			res.push({value:inscr_split[i]});					
+			var conv_text = smkCommon.feedlineToHTML(inscr_split[i]);
+			res.push({value: conv_text});						
 		}				
 
 		return res.length > 0 ? res : null;
@@ -589,7 +594,8 @@
 		var arrayLength = inscr_split.length;
 
 		for (var i = 0; i < arrayLength; i++) {	
-			res.push({value:inscr_split[i]});					
+			var conv_text = smkCommon.feedlineToHTML(inscr_split[i]);
+			res.push({value: conv_text});					
 		}				
 
 		return res.length > 0 ? res : null;
@@ -604,7 +610,8 @@
 		var arrayLength = inscr_split.length;
 
 		for (var i = 0; i < arrayLength; i++) {	
-			res.push({value:inscr_split[i]});					
+			var conv_text = smkCommon.feedlineToHTML(inscr_split[i]);
+			res.push({value: conv_text});					
 		}				
 
 		return res.length > 0 ? res : null;
@@ -649,7 +656,8 @@
 		var arrayLength = split.length;
 
 		for (var i = 0; i < arrayLength; i++) {	
-			res.push({value:split[i]});					
+			var conv_text = smkCommon.feedlineToHTML(split[i]);
+			res.push({value: conv_text});				
 		}				
 
 		return res.length > 0 ? res : null;								
@@ -688,8 +696,7 @@
 			var date = smkCommon.getValueFromSplit(values, 4);
 
 			if(smkCommon.isValidDataText(text)){
-				text = text.replace(/\r\n\r\n/g, "</p><p>").replace(/\n\n/g, "</p><p>");
-				text = text.replace(/\r\n/g, "<br />").replace(/\n/g, "<br />");
+				text = smkCommon.feedlineToHTML(text);
 
 				var lang = smkCommon.getValueFromSplit(values, 2);
 				var current_lang = "";
@@ -809,7 +816,8 @@
 		var arrayLength = split.length;
 
 		for (var i = 0; i < arrayLength; i++) {	
-			res.push({value:split[i]});					
+			var conv_text = smkCommon.feedlineToHTML(split[i]);
+			res.push({value: conv_text});					
 		}				
 
 		return res.length > 0 ? res : null;		
@@ -848,8 +856,20 @@
 		return res.length > 0 ? res : null;	
 	};
 
-	getdatacommon.getMotiv_note = function(doc){			
-		return doc.content_notes === undefined ? null : doc.content_notes;
+	getdatacommon.getMotiv_note = function(doc){	
+		if (doc.content_notes === undefined) 
+			return null;
+
+		var res = [];
+		var split = doc.content_notes.split(smkCommon.split_1_niv);							
+		var arrayLength = split.length;
+
+		for (var i = 0; i < arrayLength; i++) {	
+			var conv_text = smkCommon.feedlineToHTML(split[i]);
+			res.push({value: conv_text});					
+		}				
+
+		return res.length > 0 ? res : null;		
 	};
 
 	/**
