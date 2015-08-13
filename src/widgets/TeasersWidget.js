@@ -78,6 +78,8 @@
 				return;
 			}	 		  						
 
+			$matrix.empty();
+			
 			if(smkCommon.debugTime()) console.time("Teasers");									
 
 			if (this.manager.response.response.docs.length == 0){
