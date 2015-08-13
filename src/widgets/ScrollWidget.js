@@ -25,17 +25,13 @@
 			}
 			else{
 				if(smkCommon.debugLog()) console.log(sprintf("scroll_request - afterRequest: isPreloading_%s", this.preloading));
-				//* load data				
-				var $matrix = $target.find('.matrix');
-				var container = document.querySelector($matrix.selector);
-				var msnry = Masonry.data(container);			
-				
+				//* load data											
 				if(smkCommon.debugLog()) console.log(sprintf(sprintf("scroll_request - afterRequest: scrollTop_%s", $(window).scrollTop() )));
 				var $tiles = this.getTiles();
 				if(smkCommon.debugLog()) console.log(sprintf("scroll_request - afterRequest: getTiles"));
 				this.setReset(false);
-				$(msnry.element).masonryImagesReveal(msnry, $tiles,  $.proxy(this.onAllImagesLoaded, self), self, this.onClickLink, this.preloading);
-				if(smkCommon.debugLog()) console.log(sprintf("scroll_request - afterRequest: masonryImagesReveal"));
+				$target.find('.matrix').imagesLoadedReveal($tiles,  $.proxy(this.onAllImagesLoaded, self), self, this.onClickLink, this.preloading);
+				if(smkCommon.debugLog()) console.log(sprintf("scroll_request - afterRequest: imagesLoadedReveal"));
 			}
 		}, 
 				

@@ -22,14 +22,7 @@
 
 			//* load empty template
 			var html = self.template;     
-			$target.html($(html).find(this.initTemplate).html());
-
-			//* init masonry*/	
-			var $matrix = $target.find('.matrix');
-			$matrix.masonry( {
-				itemSelector: '.matrix-tile',
-				columnWidth: '.matrix-tile-size'
-			});			
+			$target.html($(html).find(this.initTemplate).html());				
 
 			//* init sub widget (managed by scrollUpdateWidget)
 			self.sub_scrollWidget = new AjaxSolr.ScrollWidget({
@@ -95,10 +88,8 @@
 				return;		
 			}
 			else{																														
-				var $tiles = this.getTiles();					
-				var container = document.querySelector($matrix.selector);
-				var msnry = Masonry.data(container);
-				$(msnry.element).masonryImagesReveal(msnry, $tiles,  $.proxy(this.onComplete, self), self, this.onClickLink);				
+				var $tiles = this.getTiles();									
+				$target.find('.matrix').imagesLoadedReveal($tiles,  $.proxy(this.onComplete, self), self, this.onClickLink);				
 			}	   
 		}, 	
 
@@ -111,20 +102,14 @@
 			var $target = $(this.target); 
 			var $all_articles = $target.find('.matrix .matrix-tile');
 
-			if($all_articles.length > 0 ){
-				$target.find('.matrix').masonry('remove', $all_articles);
-				//$target.find('.matrix').masonry('destroy');
+			if($all_articles.length > 0 ){				
 				self.refreshLayout();
-			};
-
-			// in case of some articles were in the matrix but not yet in masonry, remove it "manually"
-			//$target.empty();
+			};			
 
 			$all_articles.remove();
 		},			
 
 		refreshLayout: function(){
-			$(this.target).find('.matrix').masonry('layout');
 			this.highlightning();
 		},
 

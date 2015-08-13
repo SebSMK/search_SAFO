@@ -47,7 +47,7 @@
 	<script src="src/data/getData_Advanced.js" type="text/javascript"></script>	
     
   	<script src="src/js/mustache.smk.js" type="text/javascript"></script>	
-	<script src="src/js/masonry.smk.extend.js" type="text/javascript"></script>
+	<script src="src/js/imageLoaded.smk.extend.js" type="text/javascript"></script>
 	<script src="src/js/queueProcessor.js" type="text/javascript"></script>	
 	<script src="src/js/sorter.js" type="text/javascript"></script>
   	<script src="src/js/common.smk.js" type="text/javascript"></script>
@@ -61,8 +61,7 @@
 	<script src="js/supplier/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script>
 	<script src="js/supplier/jquery.address.js" type="text/javascript"></script>
 	<script src="js/supplier/spin.min.js" type="text/javascript"></script>	
-  	<script src="js/supplier/chosen.jquery.min.js" type="text/javascript"></script>	    
-	<script src="js/supplier/masonry.pkgd.min.js" type="text/javascript"></script>  
+  	<script src="js/supplier/chosen.jquery.min.js" type="text/javascript"></script>	      
 	<script src="js/supplier/typeahead.bundle.js" type="text/javascript"></script>  
 	<script src="js/supplier/sprintf.min.js" type="text/javascript"></script>
 	

@@ -25,8 +25,7 @@
 	<script src="js/supplier/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script>
 	<script src="js/supplier/jquery.address.js" type="text/javascript"></script>
 	<script src="js/supplier/spin.min.js" type="text/javascript"></script>	
-  	<script src="js/supplier/chosen.jquery.min.js" type="text/javascript"></script>	    
-	<script src="js/supplier/masonry.pkgd.min.js" type="text/javascript"></script>  
+  	<script src="js/supplier/chosen.jquery.min.js" type="text/javascript"></script>	      
 	<script src="js/supplier/typeahead.bundle.js" type="text/javascript"></script>  
 	<script src="js/supplier/sprintf.min.js" type="text/javascript"></script>
 	

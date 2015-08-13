@@ -197,22 +197,18 @@ a.divLink {
 }
 
 .matrix-tile-size  {
-  width: 33.33%;
-  padding: 10px;
+  width: 1px;  
   float: left;
-  margin-bottom: 0;
-  background-color: #fff;
   border: 1px solid transparent;
-  border-radius: 1px;
+  
 }
 @media (min-width: 1000px) {
   .matrix-tile-size  {
-    width: 25%;
-    padding: 15px;
+    width: 1px;
   }
   
   .matrix-five-columns .matrix-tile-size, .search-results-full-width .matrix-tile-size{
-    width: 20%;
+    width: 1px;
 	}
   
 }
