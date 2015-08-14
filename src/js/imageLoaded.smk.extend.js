@@ -32,11 +32,11 @@ $.fn.imagesLoadedReveal = function($tiles, onComplete, caller, onClickLink, prel
 		
 		onComplete();
 		
-	}else{
+	}else{		
 		$tiles.find('img').each(function() {
 			$(this).delay(10).imagesLoaded().progress( function( imgLoad, image ) {
 				
-				//if(smkCommon.debugLog()) console.log(sprintf(sprintf("scroll_request - imagesLoadedReveal - imagesLoaded: scrollTop_%s", $(window).scrollTop() )));
+				if(smkCommon.debugLog()) console.log(sprintf(sprintf("imagesLoadedReveal - imagesLoaded: %s", $(image.img).closest('.matrix-tile').attr('id'))));
 				
 				if (caller.reset == true)	// avoid infinite loop when a new request is send while preloading is still running
 					return this;

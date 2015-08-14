@@ -76,9 +76,7 @@
 			if (!self.getRefresh()){
 				self.setRefresh(true);
 				return;
-			}	 		  						
-
-			$matrix.empty();
+			}	 		  									
 			
 			if(smkCommon.debugTime()) console.time("Teasers");									
 
@@ -89,13 +87,19 @@
 				});				
 				return;		
 			}
-			else{																														
+			else{								
+				$matrix.empty();
+				
 				var $tiles = this.getTiles();									
 				$target.find('.matrix').imagesLoadedReveal($tiles,  $.proxy(this.onComplete, self), self, this.onClickLink);				
 			}	   
 		}, 	
 
 		beforeRequest: function(){
+			//* load empty template
+			var html = this.template;     
+			$(this.target).html($(html).find(this.initTemplate).html());
+			
 			this.scrollUpdateWidget.beforeRequest();						
 		},
 
