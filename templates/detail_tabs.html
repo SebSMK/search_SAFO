@@ -609,15 +609,19 @@
 					{{/references_beckett.value}}
 				</div>
 				<!-- /.data-pair -->
-				{{/references_beckett.value}} {{#references_litteratur.show}}
+				{{/references_beckett.value}} 
+
+				{{#references_litteratur.show}}
 				<div class="data-pair">
 					<h4 class="data-pair-key">{{{references_litteratur.key}}}</h4>
+					<ul class="data-pair-value">
 					{{#references_litteratur.value}}
-					<div class="data-pair-value high">
-						{{{value}}}
-					</div>
-					<!-- /.data-pair-value -->
+					
+						<li>{{{value}}}<>
+					
+					<!-- /.data-pair-value -->					
 					{{/references_litteratur.value}}
+					</ul>
 				</div>
 				<!-- /.data-pair -->
 				{{/references_litteratur.show}}
@@ -632,12 +636,14 @@
 				{{#udstilling_udstilling.show}}
 				<div class="data-pair">
 					<h4 class="data-pair-key">{{{udstilling_udstilling.key}}}</h4>
+					
+					<ul class="data-pair-value">
 					{{#udstilling_udstilling.value}}
-					<div class="data-pair-value high">
-						{{{value}}}
-					</div>
-					<!-- /.data-pair-value -->
+						<li>{{{value}}}</li>
 					{{/udstilling_udstilling.value}}
+					</ul>
+					<!-- /.data-pair-value -->
+					
 				</div>
 				<!-- /.data-pair -->
 				{{/udstilling_udstilling.show}}
