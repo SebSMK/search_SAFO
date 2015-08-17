@@ -247,7 +247,7 @@ a.divLink {
 
 .matrix-tile-header h3 {
   position: relative;
-  /* height: 1.2em; exactly one line */
+   height: 1.3em; /* one line */
 }
 
 .matrix-tile-header h3 {
@@ -267,7 +267,7 @@ a.divLink {
 
 .matrix-tile-header h2 a {
   position: relative;
-  /*height: 3.6em;  exactly three lines */
+  height: 3.8em; /* three lines */
     
 }
 
@@ -281,21 +281,6 @@ a.divLink {
   height: 1.2em;
   background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
 	
-}
-
-.fade {
-  position: relative;
-  height: 3.6em; /* exactly three lines */
-}
-.fade:after {
-  content: "...";
-  text-align: right;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 70%;
-  height: 1.2em;
-  background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
 }
 
 
