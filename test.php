@@ -53,6 +53,7 @@
   	<script src="src/js/common.smk.js" type="text/javascript"></script>
   	<script src="src/js/language.js" type="text/javascript"></script>
 	<script src="src/js/config.js" type="text/javascript"></script>
+
   
   	<script src="js/supplier/jquery.highlight.js" type="text/javascript"></script>  	
 	<script src="js/supplier/backtotop/js/main.js" type="text/javascript"></script>
@@ -65,6 +66,7 @@
 	<script src="js/supplier/typeahead.bundle.js" type="text/javascript"></script>  
 	<script src="js/supplier/sprintf.min.js" type="text/javascript"></script>
 	<script src="js/supplier/jquery.visible.min.js" type="text/javascript"></script>
+	<script src="js/supplier/feed.js" type="text/javascript"></script>
 	
 	<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/themes/smoothness/jquery-ui.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="js/supplier/fancybox/source/jquery.fancybox.css" media="all" />	
@@ -142,9 +144,9 @@ function main() {
 		
 				</script>
 					
-				<div id="smk_search_wrapper">
-				
-				</div>',
+				<div id="smk_search_wrapper"></div>
+								
+',
 					
 				$solr_path,
 				$dir_base,

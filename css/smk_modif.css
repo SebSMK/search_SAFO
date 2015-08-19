@@ -25,6 +25,10 @@
 }
 */
 
+.sis-FeedbackButton {
+	z-index: 11;	
+}
+
 ul.data-pair-value li:before
 {
 	content:"-   ";

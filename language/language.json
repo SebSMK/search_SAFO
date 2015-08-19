@@ -20,6 +20,17 @@
       "adv_acq_column_title": 		"erhvervelse",
       "adv_motiv_column_title": 	"motiv", 
       
+      "feedback_title":			 	"Feedback til Søg i Samlingen", 
+      "feedback_main": 				"Hvis du har ideer, kommentarer eller feedback til Søg i Samlingen, så hører vi gerne fra dig. Dine informationer vil ikke blive delt.",
+      "feedback_send":				"Din besked blev sendt",
+      "feedback_close":				"Luk",
+      "feedback_tak":				"Tak for din feedback! Det er en stor hjælp.",
+      "feedback_name":				"Navn",
+      "feedback_email":				"Email",
+      "feedback_feedback":			"Feedback",
+      "feedback_default":			"Din feedback til Søg i Samlingen",
+      "feedback_button":			"Send feedback",
+      
       "checkbox_hasimage": 			"med foto", 
       
       "daterange_label_adv_acq_date_range":			"dato",
@@ -730,7 +741,18 @@
       "adv_blank_column_title": 	"&nbsp;",
       "adv_technic_column_title": 	"technique",
       "adv_acq_column_title": 		"acquisition",
-      "adv_motiv_column_title": 	"subject",      
+      "adv_motiv_column_title": 	"subject", 
+      
+      "feedback_title":			 	"Give your feedback on Search the Collection", 
+      "feedback_main": 				"Thank you for using the beta-version of Search the Collection. If you have any comments or ideas, please do share them with us. Your details and feedback will not be shared publically. Thank you.",
+      "feedback_send":				"Your message has been sent.",
+      "feedback_close":				"Close",
+      "feedback_tak":				"Thank your for your feedback!",
+      "feedback_name":				"Name",
+      "feedback_email":				"Email",
+      "feedback_feedback":			"Feedback",
+      "feedback_default":			"Your feedback on Search the Collection",  
+      "feedback_button":			"Send feedback",   
 
 	  "autocomp_id": 				"inventory number",
       "autocomp_title_en": 			"title",

@@ -1,0 +1,201 @@
+<div class="search-type-selector">	
+	<script id="feedbackTemplate" type="text/template"> 	
+			
+			
+			  <style>
+			    .sis-FeedbackPanel {
+			      background-color: #fff;
+			      border-right: 1px solid black;
+			      position: fixed;
+			      top: 0;
+			      left: -300px;
+			      bottom: 0;
+			      width: 300px;
+			      z-index: 9999;
+			      transition: left .3s ease;
+			      padding: 3em 20px 20px;
+			      overflow: hidden;
+			    }
+				
+			    .sis-Feedback-isOpen .sis-FeedbackPanel {
+			      left: 0;
+			      box-shadow: 2px 0 8px 0 rgba(0, 0, 0, .1);
+			    }
+			
+			    .sis-FeedbackPanel h2 {
+			      font-family: "hill demibold", sans-serif;
+			      font-size: 1.75em;
+			      margin-bottom: .5em;
+			    }
+			
+			    .sis-FeedbackPanel p {
+			      margin-bottom: 2em;
+			    }
+			
+			    .sis-FeedbackButton {
+			      position: fixed;
+			      top: -90px;
+			      left: -70px;
+			      border: 1px solid black;
+			      font-family: "hill demibold", sans-serif;
+			      font-size: 14px;
+			      color: black;
+			      text-transform: uppercase;
+			      letter-spacing: .05em;
+			      padding: .55em 0 .5em;
+			      width: 90px;
+			      text-align: center;
+			      -ms-transform: rotate(-90deg);
+			      -webkit-transform: rotate(-90deg);
+			      transform: rotate(-90deg);
+			      transition: left .3s ease;
+			      box-shadow: -1px 1px 1px 0 rgba(0, 0, 0, .1);
+			    }
+			
+			    .sis-FeedbackButton:hover {
+			      background-color: black;
+			      color: white;
+			    }
+			
+			    .sis-Feedback-isOpen .sis-FeedbackButton {
+			      left: 271px !important;
+			      background-color: black;
+			      color: white;
+			    }
+			
+			    .sis-FormItem {
+			      margin-bottom: 1.25em;
+			    }
+			
+			    .sis-FormItem label {
+			      display: block;
+			      margin-bottom: .15em;
+			    }
+			
+			    .sis-FormItem input[type="text"],
+			    .sis-FormItem textarea {
+			      border: 1px solid black;
+			      width: 100%;
+			      padding: .5em;
+			      border-radius: 2px;
+			    }
+			
+			    .sis-FormItem textarea {
+			      height: 110px;
+			    }
+			
+			    .sis-FeedbackThankYouPanelClose,
+			    .sis-FormSubmit {
+			      font-family: "hill demibold", sans-serif;
+			      text-transform: uppercase;
+			      font-size: 14px;
+			      letter-spacing: .05em;
+			      border: 1px solid black;
+			      padding: .55em 1em .5em;
+			      border-radius: 2px;
+			      background-color: #fff;
+			      float: right;
+			      color: black;
+			    }
+			
+			    .sis-FeedbackThankYouPanelClose:hover,
+			    .sis-FormSubmit:hover {
+			      background-color: black;
+			      color: white;      
+			    }
+			
+			    .sis-FeedbackPanelClose {
+			      position: absolute;
+			      top: 0;
+			      right: 0;
+			      width: 40px;
+			      height: 40px;
+			      background-image: url(images/sprite@2x.png);
+			      vertical-align: middle;
+			      text-indent: -9999em;
+			      display: block;
+			      background-size: 500px;
+			      background-position: -104px -111px;
+			    }
+			
+			    .sis-FeedbackThankYouPanel,
+			    .sis-FeedbackPanelForm {
+			      position: absolute;
+			      width: 300px;
+			      top: 0;
+			      right: 0;
+			      padding: 3em 20px 20px;
+			      transition: right .3s ease;
+			    }
+			
+			    .sis-FeedbackThankYouPanel {
+			      right: -300px;
+			    }
+			
+			    .sis-Feedback-isSubmitted .sis-FeedbackPanelForm {
+			      right: 300px;
+			    }
+			
+			    .sis-Feedback-isSubmitted .sis-FeedbackThankYouPanel {
+			      right: 0px;
+			    }
+			
+			    .sis-Message {
+			      padding: .25em .6em;
+			      border-radius: 2px;
+			      font-size: 12px;
+			      background-color: white;
+			      color: #2DC273;
+			      display: inline-block;
+			      border: 1px solid #2DC273;
+			    }
+			  </style>
+			 
+			  <a class="sis-FeedbackButton" href="#" style="top: 349.5px; left: -29px;">Feedback</a>
+			  
+			  <div class="sis-FeedbackPanel">
+			
+			    <div class="sis-FeedbackPanelForm">
+			      <h2>{{{title}}}</h2>
+			      <p>{{{main}}}</p>
+			
+			      <form name="sisForm" class="sis-Form" onsubmit="" target="_self" id="ss-form" method="POST" action="https://docs.google.com/forms/d/1cSKyT3mnrK0jOty-X__UqClV0moj5b7q9qmX_yqRmqk/formResponse">
+			        <div class="sis-FormItem">
+			          <label for="entry_1621335801">{{{name}}}</label>
+			          <input type="text" title="" aria-label="Navn" dir="auto" id="entry_1621335801" class="ss-q-short" value="" name="entry.1621335801" placeholder="{{{name}}}...">
+			        </div>
+			
+			        <div class="sis-FormItem">
+			          <label for="entry_1864338152">{{{email}}}</label>
+			          <input type="text" title="" aria-label="Email Vi svarer dig på denne email-adresse." dir="auto" id="entry_1864338152" class="ss-q-short" value="" name="entry.1864338152" placeholder="{{{email}}}...">
+			        </div>
+			
+			        <div class="sis-FormItem">
+			          <label for="entry_229050045">{{{feedback}}}</label>
+			          <textarea aria-label="Feedback" dir="auto" id="entry_229050045" class="ss-q-long" cols="0" rows="8" name="entry.229050045" placeholder="{{{default}}}..."></textarea>
+			        </div>
+			
+			        <input type="hidden" value="[,,&quot;1774079522433357490&quot;]" name="draftResponse">
+			        <input type="hidden" value="0" name="pageHistory">
+			        <input type="hidden" value="0" name="fvv">
+			        <input type="hidden" value="1774079522433357490" name="fbzx">
+			
+			        <div class="sis-FormItem">
+			          <input type="submit" class="sis-FormSubmit button" id="ss-submit" value="{{{button}}}" name="submit">
+			        </div>
+			      </form>
+			    </div>
+			
+			    <div class="sis-FeedbackThankYouPanel">
+			      <p class="sis-Message">{{{send}}}</p>
+			      <h2>{{{tak}}}</h2>
+			      <a class="sis-FeedbackThankYouPanelClose" href="#">{{{close}}}</a>
+			    </div>
+			
+			    <a class="sis-FeedbackPanelClose" href="#">{{{close}}}</a>
+			  </div>
+			
+			</div>
+
+	</script>	
+</div>

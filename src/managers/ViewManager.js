@@ -50,7 +50,7 @@
 
 			//* merge data and template						
 			var html = self.template_integration_json({"general_title": Manager.translator.getLabel("general_title")}, '#generalTemplate');    	  	  
-			$target.html(html);	
+			$target.html(html);						
 
 			ModelManager.setModel($.address.value(), "url");
 			var model = ModelManager.getModel();	
@@ -92,6 +92,24 @@
 			// reload title
 			$(this.target).find(".branding i").text(Manager.translator.getLabel("general_title"));
 			
+			// reload feebackform's text
+			$(this.target).find('#smk_feedback').removeClass("sis-Feedback-isOpen").empty();
+			var feed = Mustache.getTemplate('templates/feedback.html');
+			var html = Mustache.to_html($(feed).find('#feedbackTemplate').html(),
+										{
+										"title": Manager.translator.getLabel("feedback_title"),			 	 
+									      "main": Manager.translator.getLabel("feedback_main"),				
+									      "send":	Manager.translator.getLabel("feedback_send"),			
+									      "close":	Manager.translator.getLabel("general_title"),			
+									      "tak":	Manager.translator.getLabel("feedback_tak"),			
+									      "name":	Manager.translator.getLabel("feedback_name"),			
+									      "email":	Manager.translator.getLabel("feedback_email"),			
+									      "feedback":	Manager.translator.getLabel("feedback_feedback"),		
+									      "default": Manager.translator.getLabel("feedback_default"),
+									      "button": Manager.translator.getLabel("feedback_button"),
+										});
+			$(this.target).find('#smk_feedback').append(html);
+			initFeedForm();
 			
 			// related
 //			this.add_modal_loading_to_widget(Manager.widgets['details'].related_subWidget);*/
