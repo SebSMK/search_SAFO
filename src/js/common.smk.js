@@ -137,7 +137,9 @@
 		var elemTop = $elem.offset().top;
 		var elemBottom = elemTop + $elem.height();
 
-		return elemTop <= (docViewBottom);// && (elemTop >= docViewTop));
+		//return elemTop <= (docViewBottom);// && (elemTop >= docViewTop));
+		
+		return $elem.visible(true, false, 'vertical');
 	};			
 
 	common.getDefaultPicture = function(size){		

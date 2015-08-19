@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html>
   <head>
   	<meta charset="utf-8">
@@ -28,6 +28,8 @@
   	<script src="js/supplier/chosen.jquery.min.js" type="text/javascript"></script>	      
 	<script src="js/supplier/typeahead.bundle.js" type="text/javascript"></script>  
 	<script src="js/supplier/sprintf.min.js" type="text/javascript"></script>
+	<script src="js/supplier/jquery.visible.min.js" type="text/javascript"></script>
+
 	
 	<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/themes/smoothness/jquery-ui.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="js/supplier/fancybox/source/jquery.fancybox.css" media="all" />	
