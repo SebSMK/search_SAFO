@@ -76,11 +76,20 @@
 			var self = this;
 			var all_prod_datas = getData_Common.getProducent_all_producers(doc);
 			var res = [];
+			var max_lines = 3;
+			var i = 0;
 			
-			$.each(all_prod_datas, function(index, data) {					
+			$.each(all_prod_datas, function(index, data) {	
+				if (i >= max_lines){
+					res.push({'artist_data':{'name':'...'}});
+					return false; //break each loop
+				}
+									
 				data.type = (data.type != 'orig') ? self.caller.manager.translator.getLabel('detail_producent_' + data.type) : null;
 				var output = {'artist_data': self.getArtistOutput(data)};				
-				res.push(output);					
+				res.push(output);
+				i++;
+				
 			});	
 			
 			res.show = res.length > 0 ? true : false;

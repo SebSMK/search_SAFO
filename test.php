@@ -67,6 +67,8 @@
 	<script src="js/supplier/sprintf.min.js" type="text/javascript"></script>
 	<script src="js/supplier/jquery.visible.min.js" type="text/javascript"></script>
 	<script src="js/supplier/feed.js" type="text/javascript"></script>
+	<script src="js/supplier/dotdotdot.js" type="text/javascript"></script>
+	<script src="js/supplier/dotdotdot-config.js" type="text/javascript"></script>
 	
 	<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/themes/smoothness/jquery-ui.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="js/supplier/fancybox/source/jquery.fancybox.css" media="all" />	

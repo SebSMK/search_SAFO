@@ -117,6 +117,7 @@
 
 		refreshLayout: function(){
 			this.highlightning();
+			this.dotdotdot();
 		},
 
 		/*
@@ -131,6 +132,9 @@
 			$tiles.each(function() {
 				var $tile = $(this);
 
+				// flag to dotdotdot
+				$(this).addClass('todot');
+				
 				// image
 				$tile.find('a').click({detail_url: $tile.find('a').attr('href'), caller: self}, 
 						function (event) {self.onClickLink(event);}
@@ -222,6 +226,22 @@
 				$(this.target).find('.matrix-tile-header').highlight(words);
 				$(this.target).find('.matrix-tile-meta').highlight(words);
 			}    
+		},
+		
+		
+		dotdotdot: function(){
+			var self = this;
+			waitForWebfonts([ "hill thin", "hill regular", "hill light", "hill demibold" ], function() {
+				$(self.target).find('.matrix-tile.todot').not('.preloaded').each(function() {
+					// Artwork title				
+			        $(this).find(".matrix-tile-header h2 a").dotdotdot({
+			            tolerance: 0
+			        }); 								        
+			        $(this).removeClass('todot');										
+				})
+				
+				
+		    });			
 		}
 	});
 

@@ -30,6 +30,8 @@
 	<script src="js/supplier/sprintf.min.js" type="text/javascript"></script>
 	<script src="js/supplier/jquery.visible.min.js" type="text/javascript"></script>
 	<script src="js/supplier/feed.js" type="text/javascript"></script>
+	<script src="js/supplier/dotdotdot.js" type="text/javascript"></script>
+	<script src="js/supplier/dotdotdot-config.js" type="text/javascript"></script>
 
 
 	
