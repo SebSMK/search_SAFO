@@ -4,7 +4,6 @@
   	<meta charset="utf-8">
 	<meta content="IE=edge" http-equiv="X-UA-Compatible">
 	<meta content="Supporters Static Mockups" name="description">
-	<meta content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, width=device-width" name="viewport">
 	<link href="favicon.ico" type="image/x-icon" rel="icon">	
   	
   	<title>SMK | Søg i Samling</title>
