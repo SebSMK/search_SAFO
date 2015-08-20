@@ -106,7 +106,7 @@
 									      "email":	Manager.translator.getLabel("feedback_email"),			
 									      "feedback":	Manager.translator.getLabel("feedback_feedback"),		
 									      "default": Manager.translator.getLabel("feedback_default"),
-									      "button": Manager.translator.getLabel("feedback_button"),
+									      "button": Manager.translator.getLabel("feedback_button")
 										});
 			$(this.target).find('#smk_feedback').append(html);
 			initFeedForm();

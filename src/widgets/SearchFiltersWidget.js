@@ -241,7 +241,6 @@
 							text = self.manager.translator.getLabel('search_'+ key +'_lab');
 							return false; //break each loop
 						}
-						index++;
 					});
 					if(smkCommon.isValidDataText(text))
 						objectedItems.push({ "value": self.formatRequest(facet, true), "text": text , "count": count, "i": i }); 

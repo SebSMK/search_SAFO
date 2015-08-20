@@ -487,11 +487,15 @@
 		};
 		
 		this.getRootArtType = function(doc){
-			var arttype = getData_Common.getIdent_vaerktype(doc);						
+			var arttype = getData_Common.getIdent_vaerktype(doc);
+			if(!arttype)
+				return new String();
+			
 			var arttype_hierarchi = this.caller.manager.translator.getLabel('arttype_hierarchi');							
-			var parent =  this.getParentType(arttype_hierarchi, arttype.trim());
-			var root_category = parent != null && parent.id !== undefined ? parent.id : arttype.trim();
-			// iterate the object_type tree until we find a root category
+			var parent =  this.getParentType(arttype_hierarchi, arttype);
+			var root_category = parent != null && parent.id !== undefined ? parent.id : arttype.trim(); // lesser root category
+			
+			// iterate the object_type tree until we find an upper root category
 			while (parent != null && parent.id !== undefined){
 				root_category = parent.id;
 				parent = this.getParentType(arttype_hierarchi, parent.id.trim());
@@ -505,6 +509,10 @@
 			if (!tree || !tree.value) {
 				return null;
 			}
+			if (!childNode) {
+				return null;
+			}
+			childNode = childNode.trim();
 			if( Object.prototype.toString.call(tree.value) === '[object Array]' ) {
 				for (i in tree.value) {
 					if (tree.value[i].id === childNode) {
