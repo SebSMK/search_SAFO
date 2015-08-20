@@ -27,9 +27,12 @@ $.fn.imagesLoadedReveal = function($tiles, onComplete, caller, onClickLink, prel
 	if($tiles.find('img').length == 0){
 		$tiles.each(function() {
 			$(this).show();		    			    			    			    					    		
-//			msnry.appended(this);						
-		});			
-		
+//			msnry.appended(this);
+			
+			if(!smkCommon.isElemIntoView($(this)))
+				$(this).addClass('preloaded');
+		});	
+
 		onComplete();
 		
 	}else{		

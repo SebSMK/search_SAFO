@@ -328,7 +328,7 @@
 				} 																		
 			});
 			
-			self.refreshLayout();
+			//self.refreshLayout();
 
 			//* show tabs	
 			$target.css('visibility', 'visible');						

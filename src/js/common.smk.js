@@ -127,19 +127,8 @@
 		return res;
 	};
 	
-	common.isElemIntoView = function(elem){		   		    						
-		var $elem = $(elem);
-		var $window = $(window);
-
-		var docViewTop = $window.scrollTop();
-		var docViewBottom = docViewTop + window.outerHeight;// $window.height();		    
-
-		var elemTop = $elem.offset().top;
-		var elemBottom = elemTop + $elem.height();
-
-		//return elemTop <= (docViewBottom);// && (elemTop >= docViewTop));
-		
-		return $elem.visible(true, false, 'vertical');
+	common.isElemIntoView = function(elem){		   		    								
+		return $(elem).visible(true, false, 'vertical');
 	};			
 
 	common.getDefaultPicture = function(size){		

@@ -118,6 +118,14 @@
 		refreshLayout: function(){
 			this.highlightning();
 			this.dotdotdot();
+			
+			var $tiles = $(this.target).find('.matrix-tile');
+			$tiles.each(function() {
+				var $tile = $(this);
+				if(smkCommon.isElemIntoView(this))
+					$tile.removeClass('preloaded').show();
+			});
+			
 		},
 
 		/*
