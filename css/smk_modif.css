@@ -25,6 +25,16 @@
 }
 */
 
+@media print {
+    .sis-Feedback {
+        display:none;
+    }
+    
+    #smk_search_version{
+    	display:none;
+    }
+}
+
 .sis-FeedbackButton {
 	z-index: 11;	
 }
