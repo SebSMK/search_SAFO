@@ -625,7 +625,7 @@
 									               "id":"kobberstik"
 									            },
 									            {
-									               "id":"mezzotint"
+									               "id":"mezzotinte"
 									            },
 									            {
 									               "id":"radering"
@@ -1039,7 +1039,7 @@
 									         "id":"Collage",
 									         "value":[
 									            {
-									               "id":"Collage-painting"
+									               "id":"Collage painting"
 									            },
 									            {
 									               "id":"Décollage"
@@ -1055,13 +1055,16 @@
 									         ]
 									      },
 									      {
-									         "id":"Installation",
+									         "id":"Installation (sculpture)",
 									         "value":[
 									            {
 									               "id":"Audio-visuel"
 									            },
 									            {
 									               "id":"Wall piece"
+									            },
+									            {
+									               "id":"Installation"
 									            }
 									         ]
 									      },
@@ -1206,6 +1209,9 @@
 									               "id":"Figurine/statuette"
 									            },
 									            {
+									               "id":"Figurines/statuette"
+									            },
+									            {
 									               "id":"Figurines/statuettes"
 									            },
 									            {
@@ -1289,6 +1295,9 @@
 									               "id":"Textil"
 									            },
 									            {
+									               "id":"Textiles"
+									            },
+									            {
 									               "id":"Tapestry"
 									            }
 									         ]
@@ -1341,13 +1350,19 @@
 									               "id":"Photogravure-heliogravure"
 									            },
 									            {
+									               "id":"Photogravure"
+									            },
+									            {
 									               "id":"Engraving"
+									            },
+									            {
+									               "id":"Steel engraving"
 									            },
 									            {
 									               "id":"Mezzotint"
 									            },
 									            {
-									               "id":"Etching"
+									               "id":"Etching (drypoint)"
 									            },
 									            {
 									               "id":"Drypoint"
@@ -1356,7 +1371,10 @@
 									               "id":"Etching"
 									            },
 									            {
-									               "id":"Line block"
+									               "id":"Line etching"
+									            },
+									            {
+									               "id":"Block printing"
 									            },
 									            {
 									               "id":"Silverpoint"
@@ -1365,7 +1383,7 @@
 									               "id":"Vernis mou"
 									            },
 									            {
-									               "id":"Zinkography"
+									               "id":"Zincography"
 									            },
 									            {
 									               "id":"Zinc engraving"
