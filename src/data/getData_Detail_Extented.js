@@ -148,7 +148,7 @@
 
 						technique_vaerkstatus: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_vaerkstatus')),  
-							value: getData_Common.getTechnique_vaerkstatus(doc),
+							value: getData_Common.getTechnique_vaerkstatus_translate(getData_Common.getTechnique_vaerkstatus(doc), this.caller),
 							show: getData_Common.getTechnique_vaerkstatus(doc) != null ? true : false
 						},
 
@@ -271,9 +271,9 @@
 
 						references_texts: {  
 							key:{
-									type: (this.caller.manager.translator.getLabel('detail_extended_type')),
-									author: (this.caller.manager.translator.getLabel('detail_extended_author')),
-									date: (this.caller.manager.translator.getLabel('detail_extended_date'))
+									type: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_extended_type')),
+									author: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_extended_author')),
+									date: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_extended_date'))
 								},
 							value: getData_Common.getReferences_texts(doc),
 							show: getData_Common.getReferences_texts(doc) != null ? true : false

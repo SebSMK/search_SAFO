@@ -38,7 +38,7 @@
 						datering_production_vaerkdatering:{'lab': smkCommon.firstCapital(this.caller.manager.translator.getLabel('teaser_date_lab')), 'value':getData_Common.getProduction_vaerkdatering(doc)},		
 						ident_invnummer: {'lab': smkCommon.firstCapital(this.caller.manager.translator.getLabel("list_reference")), 'value': getData_Common.getIdent_invnummer(doc)},	
 						location_location: smkCommon.firstCapital(getData_Common.getLocation_location(doc, this.caller)),
-						location_kks: {'lab': smkCommon.firstCapital(this.caller.manager.translator.getLabel("detail_ident_kks_location")), 'value': getData_Common.getLocation_location_kks(doc)},						
+						location_kks: {'lab': smkCommon.firstCapital(this.caller.manager.translator.getLabel("teaser_kks_location")), 'value': getData_Common.getLocation_location_kks(doc)},						
 						url: this.getDetailUrl(doc)
 					},
 					

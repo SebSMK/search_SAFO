@@ -17,22 +17,22 @@
 	 * */
 
 //	getdatacommon.getLocation_location = function (doc, caller){
-//		var location = smkCommon.firstCapital(doc.location_name);
-//		var location_inhouse = smkCommon.isValidDataText(location) ? caller.manager.translator.getCollection(smkCommon.replace_dansk_char(location)) : ''; 
-//		return smkCommon.isValidDataText(location_inhouse) ? location_inhouse : null;
+//	var location = smkCommon.firstCapital(doc.location_name);
+//	var location_inhouse = smkCommon.isValidDataText(location) ? caller.manager.translator.getCollection(smkCommon.replace_dansk_char(location)) : ''; 
+//	return smkCommon.isValidDataText(location_inhouse) ? location_inhouse : null;
 //	};
-	
+
 	getdatacommon.getLocation_location = function (doc, caller){
 		var location = doc.location_name;
 		var location_inhouse = smkCommon.isValidDataText(location) ? caller.manager.translator.getCollection(location) : ''; 
 		var label = smkCommon.isValidDataText(location_inhouse) ? 
 				sprintf('%s %s', caller.manager.translator.getLabel("teaser_on_display"), location_inhouse) 
-					: 
-				getdatacommon.getIdent_invnummer(doc).toLowerCase().indexOf('kks') == 0 || getdatacommon.getIdent_invnummer(doc).toLowerCase().indexOf('kas') == 0 ? caller.manager.translator.getLabel("teaser_appoint") : null;
-		
-		return label;
+				: 
+					getdatacommon.getIdent_invnummer(doc).toLowerCase().indexOf('kks') == 0 || getdatacommon.getIdent_invnummer(doc).toLowerCase().indexOf('kas') == 0 ? caller.manager.translator.getLabel("teaser_appoint") : null;
+
+					return label;
 	};
-	
+
 	getdatacommon.getLocation_location_kks = function (doc, caller){
 		return doc.location_kks_kas === undefined ? null : doc.location_kks_kas;		
 	};
@@ -67,7 +67,7 @@
 	getdatacommon.getIdent_samling = function(doc, caller){	
 		if (doc.department === undefined) 
 			return null;		
-		
+
 		var dep;
 		$.each(getData_Common.enumDepartment, function(key, type) {
 			if(doc.department.indexOf(type) > -1){
@@ -133,15 +133,15 @@
 
 		return artistData;
 	};	
-	
+
 	getdatacommon.getProducent_all_producers = function(doc){		
 		var self = this;
 		var res = new Array();
 		var list = new Array();
-		
+
 		$.each(getdatacommon.enumProducent, function(key, type) {
 			var prod_datas = getdatacommon.getProducent_producent(doc, type);
-			
+
 			$.each(prod_datas, function(index, data) {
 				data.artist_data.type = key;
 				res.push(data.artist_data);					
@@ -213,7 +213,7 @@
 					tmp.trans = translation;								
 
 				titles_data.push(tmp);	
-				
+
 				if(type == 'first')
 					break; // in this case, we want only the first title in the list
 			}				
@@ -221,11 +221,11 @@
 
 		return titles_data.length > 0 ? titles_data : null;			
 	};
-	
+
 	getdatacommon.getFirstTitle = function(doc){			
 		var title_teaser = getData_Common.getTitle(doc, 'first');			
 		var title = new String();
-		
+
 		if(title_teaser != null && title_teaser.length > 0){
 			switch(smkCommon.getCurrentLanguage()){
 			case "dk":		 		
@@ -238,7 +238,7 @@
 		}else{				
 			title = doc.title_first;
 		}
-					
+
 		return smkCommon.isValidDataText(title) ? title : null;
 	};
 
@@ -295,7 +295,8 @@
 
 	/**
 	 * Technique
-	 * */
+	 * */	
+
 	getdatacommon.getTechnique_technique = function (doc){			
 		if (doc.prod_technique_dk === undefined && doc.prod_technique_en === undefined) 
 			return null;
@@ -453,6 +454,25 @@
 		return res.length > 0 ? res : null;
 	};
 
+
+	getdatacommon.getTechnique_vaerkstatus_translate = function(vaerkstatus, caller){
+		if (!smkCommon.isValidDataText(vaerkstatus)) 
+			return null;
+		
+		var res = [];									
+		var arrayLength = vaerkstatus.length;
+
+		for (var i = 0; i < arrayLength; i++) {	
+			var vaerktag = smkCommon.replace_non_alpha_char(smkCommon.replace_dansk_char(vaerkstatus[i].value));
+			var value = caller.manager.translator.getLabel('vaerkstatus_' + vaerktag);	
+			res.push({value:value});					
+		}				
+
+		return res.length > 0 ? res : null;
+		
+		
+	};
+
 	getdatacommon.getTechnique_eksemplar = function(doc){			
 		return doc.oplag === undefined ? null : doc.oplag;
 	};
@@ -505,7 +525,7 @@
 			status = doc.description_note_dk !== undefined ? doc.description_note_dk : default_value;					  			  			  
 			break;
 		case "en":
-			status = doc.description_note_en !== undefined ? doc.description_note_en : default_value;
+			status = doc.description_note_en !== undefined ? doc.description_note_en : doc.description_note_dk !== undefined ? doc.description_note_dk : default_value;
 			break;
 		default:	
 			status = default_value;
@@ -576,7 +596,7 @@
 		var res = [];
 		var inscr_split = doc.inscription_paaskrift.split(smkCommon.split_1_niv);							
 		var arrayLength = inscr_split.length;
-		
+
 		for (var i = 0; i < arrayLength; i++) {	
 			var conv_text = smkCommon.feedlineToHTML(inscr_split[i]);
 			res.push({value: conv_text});						
@@ -629,7 +649,7 @@
 			date = doc.acq_date !== undefined ? doc.acq_date : default_value;					  			  			  
 			break;
 		case "en":
-			date = doc.acq_date_en !== undefined ? doc.acq_date_en : default_value;
+			date = doc.acq_date_eng !== undefined ? doc.acq_date_eng : default_value;
 			break;
 		default:	
 			date = default_value;
@@ -712,21 +732,21 @@
 
 				if(smkCommon.isValidDataText(lang) && lang.indexOf(current_lang) > -1){
 					var json = {};
-					
+
 					json['value'] = text;
-															
+
 					if(smkCommon.isValidDataText(type))
 						json['type'] = type;
-					
+
 					if(smkCommon.isValidDataText(author))
 						json['author'] = author;
-					
+
 					if(smkCommon.isValidDataText(date))
 						json['date'] = date;						
-					
+
 					reference_texts.push(json);
 				}
-										
+
 			}
 		}				
 
@@ -959,13 +979,13 @@
 	/**
 	 * Enum
 	 * */
-	
+
 	getdatacommon.enumDepartment = {			
 			'kks': 'kks',
 			'kms': 'kms',
 			'kas': 'kas'
 	};
-	
+
 	getdatacommon.enumProducent = {			
 			'orig': 'original',
 			'tilsk': 'tilskrevet',

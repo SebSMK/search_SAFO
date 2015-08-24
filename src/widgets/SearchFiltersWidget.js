@@ -274,7 +274,27 @@
 				});	  	 		  	  
 				break;		  
 
-
+				
+			case "vaerkstatus":		    			  			   							  
+				for (var facet in self.manager.response.facet_counts.facet_fields[self.field]) {
+					if(!smkCommon.isValidDataText(facet))
+						continue;
+					
+					var count = parseInt(self.manager.response.facet_counts.facet_fields[self.field][facet]);
+					if (count > maxCount) {
+						maxCount = count;
+					};
+					
+					var text = getData_Common.getTechnique_vaerkstatus_translate([{"value":facet}], this);
+					objectedItems.push({ "value": self.formatRequest(facet, true), "text": smkCommon.firstCapital(text[0].value).trim(), "count": count, "i": i }); 
+					i++;	    	  	  	      	  	      
+				};
+				totalCount = i;
+				objectedItems.sort(function (a, b) {
+					return typeof (a.value === 'string') && typeof (b.value === 'string') ? (a.text.trim() < b.text.trim() ? -1 : 1) : (a.value < b.value ? -1 : 1);	  	      
+				});	  	 		  	  
+				break;	
+				
 			default:		    			  			   							  
 				for (var facet in self.manager.response.facet_counts.facet_fields[self.field]) {
 					if(!smkCommon.isValidDataText(facet))
@@ -292,7 +312,8 @@
 				objectedItems.sort(function (a, b) {
 					return typeof (a.value === 'string') && typeof (b.value === 'string') ? (a.value.trim() < b.value.trim() ? -1 : 1) : (a.value < b.value ? -1 : 1);	  	      
 				});	  	 		  	  
-				break;		  
+				break;	
+				
 			};
 
 			//* merge facet data and template			

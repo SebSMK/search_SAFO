@@ -97,7 +97,7 @@
 
 	common.replace_dansk_char = function(text) {				
 
-		if (text === undefined)
+		if (!common.isValidDataText(text))
 			return text;			
 
 		text = text.toLowerCase();
