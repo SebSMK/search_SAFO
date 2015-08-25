@@ -304,7 +304,7 @@
 
 			if (trigg_req){	
 				var model = {};					
-				model.fq = params.date_range !== undefined || params.selected !== undefined || params.deselected !== undefined ? current_fqs : ModelManager.current_value_joker;
+				model.fq = params.auto !== undefined ? null : params.date_range !== undefined || params.selected !== undefined || params.deselected !== undefined ? current_fqs : ModelManager.current_value_joker;
 				model.auto = params.auto !== undefined ? [new AjaxSolr.Parameter({ name: 'fq', value: params.auto})] : ModelManager.current_value_joker;
 				model.q = params.auto === undefined ? ModelManager.current_value_joker : null;
 				model.sort = ModelManager.current_value_joker;
