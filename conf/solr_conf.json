@@ -1,5 +1,5 @@
 {
-   "version":"1.002.006 TEST BETA",
+   "version":"1.002.007 TEST BETA",
    "mode":"proxy min",   
    "server_prod":"http://solr-02.smk.dk:8080/solr/prod_SAFO/", 
    "server":"http://csdev-seb:8180/solr-example/dev_SAFO/",      
@@ -97,17 +97,15 @@
          }
       ],
       "autocomplete":[
-      	 "id",
-         "artist_name",         
-         "object_type_main_dk",
-         "object_type_main_en",
-         "portrait_person",
-         "topografisk_motiv",
-         "materiale",
-         "materiale_en",
-         "title_en",
-         "title_first",
-         "proveniens"
+      	"id",
+      	"artist_name",
+      	"title_dk",
+      	"title_eng",
+      	"title_first",
+      	"proveniens",
+      	"materiale",
+      	"object_type_dk",
+      	"location_kks_kas"
       ]
    },
    "exposed":[

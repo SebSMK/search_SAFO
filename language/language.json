@@ -51,8 +51,8 @@
 	  "autocomp_materiale": 		"materiale",
 	  "autocomp_materiale_en": 		"materiale",
 	  "autocomp_proveniens": 		"proveniens",
-      
-      
+	  "autocomp_location_kks_kas": 	"placering",
+	  
       "tagcloud_artist_surname_firstname": 			"kunstner | producent",
       "tagcloud_artist_auth": 			"rolle",      
 	  "tagcloud_object_production_date_earliest": 		"periode",
@@ -806,6 +806,7 @@
 	  "autocomp_materiale": 		"material",
 	  "autocomp_materiale_en": 		"material",
 	  "autocomp_proveniens": 		"provenenance",
+	  "autocomp_location_kks_kas": 			"locatino",
 
 	  "tagcloud_artist_surname_firstname": 		"artist | maker",
 	  "tagcloud_artist_auth": 		"role",

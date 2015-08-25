@@ -209,18 +209,9 @@
 			               "facet.limit=-1",
 			               "q.op=AND",
 			               "rows=0"];
-
-			var fields = ["id", 
-			              "artist_name",
-			              "title_dk",
-			              "title_eng",
-			              "title_first",
-			              "proveniens",
-			              "materiale",
-			              "object_type_dk"];
 			
-			for (var i = 0; i < fields.length; i++) {
-				params.push('facet.field=' + fields[i]);
+			for (var i = 0; i < self.fields.length; i++) {
+				params.push('facet.field=' + self.fields[i]);
 			}			
 
 			var locquery = encodeURIComponent(sprintf('&%s', params.join('&')));								
