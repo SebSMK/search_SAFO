@@ -269,8 +269,8 @@
 		var split = doc.object_production_place_udgivet.split(smkCommon.split_1_niv);							
 		var arrayLength = split.length;
 
-		for (var i = 0; i < arrayLength; i++) {	
-			res.push(split[i]);					
+		for (var i = 0; i < arrayLength; i++) {				
+			res.push({value:split[i]});		
 		}				
 
 		return res.length > 0 ? res : null;						
@@ -285,8 +285,10 @@
 		var arrayLength = split.length;
 
 		for (var i = 0; i < arrayLength; i++) {	
-			res.push(split[i]);					
-		}							
+			res.push({value:split[i]});							
+		}	
+		
+		return res.length > 0 ? res : null;	
 	};
 
 	getdatacommon.getProduction_note = function(doc){					

@@ -88,12 +88,14 @@
 
 						datering_production_udgivet_place: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_datering_production_udgivet_place')),  
-							value: getData_Common.getProduction_udgivet_place(doc)												
+							value: getData_Common.getProduction_udgivet_place(doc),						
+							show: getData_Common.getProduction_udgivet_place(doc) !== null? true : false
 						},
 
 						datering_production_udfoert_place: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_datering_production_udfoert_place')),  
-							value: getData_Common.getProduction_udfoert_place(doc)											
+							value: getData_Common.getProduction_udfoert_place(doc),
+							show: getData_Common.getProduction_udfoert_place(doc) !== null? true : false
 						},						
 						
 						datering_production_note: {

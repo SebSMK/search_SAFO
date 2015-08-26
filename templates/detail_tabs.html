@@ -221,29 +221,28 @@
 				<!-- /.data-pair -->
 				{{/datering_production_vaerkdatering.value}}
 	
-				{{#datering_production_udgivet_place.value}}
+				{{#datering_production_udgivet_place.show}}
 				<div class="data-pair">
 					<h4 class="data-pair-key">{{{datering_production_udgivet_place.key}}}</h4>
 					{{#datering_production_udgivet_place.value}}
-					<div class="data-pair-value">{{{datering_production_udgivet_place.value}}}
-					</div>
+					<div class="data-pair-value">{{{value}}}</div>
 					<!-- /.data-pair-value -->
 					{{/datering_production_udgivet_place.value}}
 				</div>
 				<!-- /.data-pair -->
-				{{/datering_production_udgivet_place.value}}
-	
-				{{#datering_production_udfoert_place.value}}
+				{{/datering_production_udgivet_place.show}}
+
+
+				{{#datering_production_udfoert_place.show}}
 				<div class="data-pair">
 					<h4 class="data-pair-key">{{{datering_production_udfoert_place.key}}}</h4>
 					{{#datering_production_udfoert_place.value}}
-					<div class="data-pair-value">{{{datering_production_udfoert_place.value}}}
-					</div>
+					<div class="data-pair-value">{{{value}}}</div>
 					<!-- /.data-pair-value -->
 					{{/datering_production_udfoert_place.value}}
 				</div>
 				<!-- /.data-pair -->
-				{{/datering_production_udfoert_place.value}}
+				{{/datering_production_udfoert_place.show}}
 
 				{{#datering_production_note.show}}
 				<div class="data-pair">
