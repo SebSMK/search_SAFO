@@ -55,6 +55,9 @@
 			$tiles.each(function() {
 				var $tile = $(this);
 				
+				// flag to dotdotdot
+				$(this).addClass('todot');
+				
 				// image
 				$tile.find('a').click({detail_url: $tile.find('a').attr('href'), caller: self}, 
 					function (event) {self.onClickLink(event);}

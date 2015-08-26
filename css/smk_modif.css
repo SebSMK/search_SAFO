@@ -310,18 +310,6 @@ a.divLink {
     opacity: 0.4;
 }
 
-.matrix-tile-header h2 {    
-  margin-top: 0.5em;
-}
-
-.matrix-tile-header h3 {  
-  margin-bottom: 0em;  
-}
-
-.matrix-tile-header h2 a {
-  max-height: 2.50em;  
-}
-
 .matrix-equalized .matrix-tile-meta {
   height: 27px;
 }
