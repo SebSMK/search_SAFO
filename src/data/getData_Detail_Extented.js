@@ -94,12 +94,13 @@
 						datering_production_udfoert_place: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_datering_production_udfoert_place')),  
 							value: getData_Common.getProduction_udfoert_place(doc)											
-						},
-
+						},						
+						
 						datering_production_note: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_datering_production_note')),  
-							value: getData_Common.getProduction_note(doc)												
-						},
+							value: getData_Common.getProduction_note(doc),	
+							show: getData_Common.getProduction_note(doc) !== null? true : false
+						},	
 
 						technique_lab: this.caller.manager.translator.getLabel('detail_technique_lab'),
 

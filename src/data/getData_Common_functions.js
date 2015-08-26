@@ -289,8 +289,19 @@
 		}							
 	};
 
-	getdatacommon.getProduction_note = function(doc){			
-		return doc.object_production_note === undefined ? null : doc.object_production_note;
+	getdatacommon.getProduction_note = function(doc){					
+		if (doc.object_production_note === undefined) 
+			return null;
+
+		var res = [];
+		var split = doc.object_production_note.split(smkCommon.split_1_niv);							
+		var arrayLength = split.length;
+
+		for (var i = 0; i < arrayLength; i++) {	
+			res.push({value:split[i]});					
+		}				
+
+		return res.length > 0 ? res : null;
 	};
 
 	/**

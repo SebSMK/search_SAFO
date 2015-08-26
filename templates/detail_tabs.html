@@ -244,18 +244,17 @@
 				</div>
 				<!-- /.data-pair -->
 				{{/datering_production_udfoert_place.value}}
-	
-				{{#datering_production_note.value}}
+
+				{{#datering_production_note.show}}
 				<div class="data-pair">
 					<h4 class="data-pair-key">{{{datering_production_note.key}}}</h4>
 					{{#datering_production_note.value}}
-					<div class="data-pair-value">{{{datering_production_note.value}}}
-					</div>
+					<div class="data-pair-value">{{{value}}}</div>
 					<!-- /.data-pair-value -->
 					{{/datering_production_note.value}}
 				</div>
 				<!-- /.data-pair -->
-				{{/datering_production_note.value}}
+				{{/datering_production_note.show}}
 	
 			</div>
 			<!-- /.datering -->
