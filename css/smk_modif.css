@@ -5,6 +5,14 @@
 	opacity: 0.5; 
 }
 
+.matrix-equalized .matrix-tile-image .spinner {
+    display: inline;    
+}
+
+.matrix-equalized .matrix-tile-image.matrix-tile-image-missing .spinner {
+    display: none;    
+}
+
 /*
 .filter-group-interval input[type="submit"] {
   float: left;

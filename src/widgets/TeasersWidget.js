@@ -141,23 +141,7 @@
 				var $tile = $(this);
 
 				// flag to dotdotdot
-				$tile.addClass('todot');							
-								
-//				// if tile in the viewport, load image
-//				if(smkCommon.isElemIntoView($tile)){
-//					// add image					
-//					var $imgcontainer = $tile.find('.matrix-tile-image');												
-//					if(!$imgcontainer.hasClass('matrix-tile-image-missing')){
-//						var dataHandler = new getData_Teasers.constructor(self);
-//						var img = dataHandler.getImage($imgcontainer);				
-//						$imgcontainer.find('img').hide();
-//						$imgcontainer.prepend($(img));
-//						$imgcontainer.find('img').addClass('image-loading');
-//					}						
-//					$tile.find('a').click({detail_url: $tile.find('a').attr('href'), caller: self}, 
-//							function (event) {self.onClickLink(event);}
-//					);					
-//				}
+				$tile.addClass('todot');															
 				
 				self.loadImage($tile);
 				
