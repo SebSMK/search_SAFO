@@ -915,7 +915,7 @@
 		"detail_ident_lab":	"identification",
 		"detail_ident_samling":	"collection",
 		"detail_ident_vaerktype":	"artwork type",
-		"detail_inscription_lab":	"signature | inscriptions | markings",
+		"detail_inscription_lab":	"signatures | inscriptions | markings",
 		"detail_inscription_paaskrift":	"inscription",
 		"detail_inscription_samlermaerke":	"collector's mark",
 		"detail_inscription_signatur":	"signature",
