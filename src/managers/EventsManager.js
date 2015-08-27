@@ -332,6 +332,7 @@
 			var model = {};
 			model.sort = sortvalue;
 			model.q = ModelManager.current_value_joker;
+			model.auto = ModelManager.current_value_joker;
 			model.fq = ModelManager.current_value_joker;	
 			model.view = ModelManager.current_value_joker;
 			model.category = ModelManager.current_value_joker;
