@@ -84,7 +84,7 @@
 				var auto_field = auto_value.field;
 				var auto_facet = smkCommon.isValidDataText(auto_value.text) ? AjaxSolr.Parameter.unescapeValue(auto_value.text.replace(/^"|"$/g, '')) : null;		
 				var q_value = ModelManager.get_q();
-				var searchstring = q_value.length != 0 ? q_value.toString() : this.get_text_from_facet(auto_facet, auto_field);
+				var searchstring = q_value.length != 0 ? q_value.toString() : this.get_text_display(auto_facet, auto_field);
 
 				$(this.target).find('input.search-bar-field').val(searchstring);
 			}
@@ -106,16 +106,16 @@
 			dropdown_list.initialize();
 
 			$(self.target).find('input.search-bar-field').typeahead({
-				hint: !0,
+				hint: false,
 				highlight: !0,
 				minLength: 1
 			}, {
 				name: 'autosearch',
-				displayKey: 'text',
+				displayKey: 'display',
 				source: dropdown_list.ttAdapter(),
 				templates: {
 					suggestion: function(data){
-						return sprintf('<p>%s&nbsp;<i>(%s)</i></p>', data.text, data.type);
+						return sprintf('<p>%s&nbsp;<i>(%s)</i></p>', data.text_dropdown, data.type);
 					}
 				}
 			});
@@ -172,7 +172,12 @@
 
 			return res;
 		},
-
+		
+		get_text_display: function(facet, field){
+			var text = this.get_text_from_facet(facet, field);
+			return smkCommon.isValidDataText(text) ? sprintf('%s (%s)', text, this.manager.translator.getLabel("autocomp_" +  field)) : "";
+		},
+		
 		template_integration_json: function (json_data, templ_id){	  
 			var template = this.template; 	
 			var html = Mustache.to_html($(template).find(templ_id).html(), json_data);
@@ -270,7 +275,8 @@
 							field: field,
 							type: self.manager.translator.getLabel("autocomp_" +  field),
 							count: response.facet_counts.facet_fields[field][facet],
-							text: self.get_text_from_facet(facet, field)
+							display: self.get_text_display(facet, field),
+							text_dropdown: self.get_text_from_facet(facet, field),
 						});
 					}
 
