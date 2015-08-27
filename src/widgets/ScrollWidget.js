@@ -27,10 +27,11 @@
 				if(smkCommon.debugLog()) console.log(sprintf("scroll_request - afterRequest: isPreloading_%s", this.preloading));
 				//* load data											
 				if(smkCommon.debugLog()) console.log(sprintf(sprintf("scroll_request - afterRequest: scrollTop_%s", $(window).scrollTop() )));
-				var $tiles = this.getTiles();
+				var $tiles = self.getTiles();				
 				if(smkCommon.debugLog()) console.log(sprintf("scroll_request - afterRequest: getTiles"));
-				this.setReset(false);
-				$target.find('.matrix').imagesLoadedReveal($tiles,  $.proxy(this.onAllImagesLoaded, self), self, this.onClickLink, this.preloading);
+				self.setReset(false);
+				self.loadTiles($tiles);
+				//$target.find('.matrix').imagesLoadedReveal($tiles,  $.proxy(this.onAllImagesLoaded, self), self, this.onClickLink, this.preloading);
 				if(smkCommon.debugLog()) console.log(sprintf("scroll_request - afterRequest: imagesLoadedReveal"));
 			}
 		}, 
@@ -47,7 +48,7 @@
 		 * EVENTS
 		 * **/
 		
-		onAllImagesLoaded: function onComplete() {	
+		onComplete: function onComplete() {	
 			var $tiles = $(this.target).find('.matrix-tile.scroll_add');
 			var self = this;
 
@@ -58,10 +59,10 @@
 				// flag to dotdotdot
 				$(this).addClass('todot');
 				
-				// image
-				$tile.find('a').click({detail_url: $tile.find('a').attr('href'), caller: self}, 
-					function (event) {self.onClickLink(event);}
-				);
+//				// image
+//				$tile.find('a').click({detail_url: $tile.find('a').attr('href'), caller: self}, 
+//					function (event) {self.onClickLink(event);}
+//				);
 				
 				// title
 				$tile.find('.artwork-title').click({detail_url: $tile.find('.artwork-title').attr('href'), caller: self}, 
@@ -95,7 +96,27 @@
 		
 		/*
 		 * PRIVATE FUNCTIONS
-		 * **/	
+		 * **/
+		loadTiles: function($tiles){
+			if (this.reset == true)	// avoid infinite loop when a new request is send while preloading is still running 
+				return this;
+
+			// hide by default
+			$tiles.hide();
+
+			// append to container		
+			$(this.target).find('.matrix').append( $tiles );
+			
+			$tiles.each(function() {
+				$(this).show();		    			    			    			    					    		
+				
+				if(!smkCommon.isElemIntoView($(this)))
+					$(this).addClass('preloaded');
+			});	
+
+			this.onComplete();
+																			
+		},
 		
 		template_integration_json: function (json_data, templ_id){	  
 			var template = this.template; 	
@@ -118,13 +139,13 @@
 				var $tile = $(this.template_integration_json({"artworks": artwork_data}, '#teaserArticleTemplate'));
 				$tile.addClass('scroll_add');
 				
-				// add image					
-				var $imgcontainer = $tile.find('.matrix-tile-image');												
-				if(!$imgcontainer.hasClass('matrix-tile-image-missing')){
-					var img = dataHandler.getImage($imgcontainer);				
-					$imgcontainer.prepend( $(img) );
-					$imgcontainer.find('img').addClass('image-loading');
-				}
+//				// add image					
+//				var $imgcontainer = $tile.find('.matrix-tile-image');												
+//				if(!$imgcontainer.hasClass('matrix-tile-image-missing')){
+//					var img = dataHandler.getImage($imgcontainer);				
+//					$imgcontainer.prepend( $(img) );
+//					$imgcontainer.find('img').addClass('image-loading');
+//				}
 								
 				tiles += $tile[0].outerHTML;										
 			}									

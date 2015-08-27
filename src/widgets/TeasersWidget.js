@@ -90,8 +90,9 @@
 			else{								
 				$matrix.empty();
 				
-				var $tiles = this.getTiles();									
-				$target.find('.matrix').imagesLoadedReveal($tiles,  $.proxy(this.onComplete, self), self, this.onClickLink);				
+				var $tiles = this.getTiles();
+				self.loadTiles($tiles);
+				//$target.find('.matrix').imagesLoadedReveal($tiles,  $.proxy(this.onComplete, self), self, this.onClickLink);				
 			}	   
 		}, 	
 
@@ -131,7 +132,7 @@
 		/*
 		 * EVENTS
 		 * **/
-		// all images are loaded in teaser
+		// all tiles are loaded in teaser
 		onComplete: function onComplete() {	
 			var $tiles = $(this.target).find('.matrix-tile');
 			var self = this;
@@ -141,12 +142,22 @@
 				var $tile = $(this);
 
 				// flag to dotdotdot
-				$(this).addClass('todot');
-				
-				// image
-				$tile.find('a').click({detail_url: $tile.find('a').attr('href'), caller: self}, 
-						function (event) {self.onClickLink(event);}
-				);
+				$tile.addClass('todot');							
+								
+//				// if tile in the viewport, load image
+//				if(smkCommon.isElemIntoView($tile)){
+//					// add image					
+//					var $imgcontainer = $tile.find('.matrix-tile-image');												
+//					if(!$imgcontainer.hasClass('matrix-tile-image-missing')){
+//						var dataHandler = new getData_Teasers.constructor(self);
+//						var img = dataHandler.getImage($imgcontainer);				
+//						$imgcontainer.prepend($(img));
+//						$imgcontainer.find('img').addClass('image-loading');
+//					}						
+//					$tile.find('a').click({detail_url: $tile.find('a').attr('href'), caller: self}, 
+//							function (event) {self.onClickLink(event);}
+//					);					
+//				}				
 
 				// title
 				$tile.find('.artwork-title').click({detail_url: $tile.find('.artwork-title').attr('href'), caller: self}, 
@@ -159,18 +170,36 @@
 					$imgcontainer.find('a').mouseenter(function (event) {$tile.find('span.copyright-info').css('opacity', 1);});
 					$imgcontainer.find('a').mouseleave(function (event) {$tile.find('span.copyright-info').css('opacity', 0);});
 				}				
-			});						
+			});	
+			
+			$(self.target).find('.matrix').imagesLoadedReveal($tiles,  $.proxy(this.onAllImagesLoaded, self), self, this.onClickLink);
 
+//			self.refreshLayout();						
+//
+//			$(this).trigger({
+//				type: "smk_teasers_all_images_loaded"
+//			});	
+//
+//			//* once images are loaded in teaser, start preloading request			
+//			self.scrollUpdateWidget.start_scroll_preload_request(true);
+
+			return true;
+		},
+		
+		onAllImagesLoaded: function(){
+			var self = this;
+			
 			self.refreshLayout();						
 
-			$(this).trigger({
+			$(self).trigger({
 				type: "smk_teasers_all_images_loaded"
 			});	
 
 			//* once images are loaded in teaser, start preloading request			
 			self.scrollUpdateWidget.start_scroll_preload_request(true);
-
+			
 			return true;
+			
 		},
 
 		onClickLink: function (event) {
@@ -186,6 +215,27 @@
 		/*
 		 * PRIVATE FUNCTIONS
 		 * **/
+		loadTiles: function($tiles){
+			if (this.reset == true)	// avoid infinite loop when a new request is send while preloading is still running 
+				return this;
+
+			// hide by default
+			$tiles.hide();
+
+			// append to container		
+			$(this.target).find('.matrix').append( $tiles );
+			
+			$tiles.each(function() {
+				$(this).show();		    			    			    			    					    		
+				
+				if(!smkCommon.isElemIntoView($(this)))
+					$(this).addClass('preloaded');
+			});	
+
+			this.onComplete();
+																			
+		},
+		
 		getTiles: function(){			
 			var artwork_data = null;		
 			var dataHandler = new getData_Teasers.constructor(this);				
@@ -201,12 +251,12 @@
 				var $tile = $(this.template_integration_json({"artworks": artwork_data}, '#teaserArticleTemplate'));
 
 				// add image					
-				var $imgcontainer = $tile.find('.matrix-tile-image');												
-				if(!$imgcontainer.hasClass('matrix-tile-image-missing')){
-					var img = dataHandler.getImage($imgcontainer);				
-					$imgcontainer.prepend($(img));
-					$imgcontainer.find('img').addClass('image-loading');
-				}				
+//				var $imgcontainer = $tile.find('.matrix-tile-image');												
+//				if(!$imgcontainer.hasClass('matrix-tile-image-missing')){
+//					var img = dataHandler.getImage($imgcontainer);				
+//					$imgcontainer.prepend($(img));
+//					$imgcontainer.find('img').addClass('image-loading');
+//				}				
 
 				tiles += $tile[0].outerHTML;										
 			}									
