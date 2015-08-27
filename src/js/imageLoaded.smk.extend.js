@@ -14,7 +14,7 @@ $.fn.imagesLoadedReveal = function($tiles, onAllImagesLoaded, caller, onClickLin
 					return this;
 
 				$(image.img).removeClass('image-loading');
-				$(image.img).show();
+				//$(image.img).show();
 
 				// when images are loaded, trigger callback
 				if ($(caller.target).find('img.image-loading').length == 0)

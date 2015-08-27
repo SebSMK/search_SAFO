@@ -205,13 +205,13 @@
 				$(self.scroll_subWidget.target).find('.preloaded').each(function(){
 					if(smkCommon.isElemIntoView(this)){
 						self.loadImage($(this))
-						//$(this).removeClass('preloaded').show();							
+						$(this).removeClass('preloaded');							
 						newImg++;
 					}										
 				});
 				if (newImg > 0)
 					// start image loader manager
-					$(self.target).find('.matrix').imagesLoadedReveal($(self.target).find('.image-loading'),  $.proxy(self.onFinishLoaded, self), self, self.onClickLink);
+					$(self.scroll_subWidget.target).find('.matrix').imagesLoadedReveal($(self.scroll_subWidget.target).find('.matrix-tile'),  $.proxy(self.onFinishLoaded, self), self, self.onClickLink);
 					//self.onFinishLoaded(newImg);				
 			}
 			// ...or, if there are no more preloaded images, start scroll request
