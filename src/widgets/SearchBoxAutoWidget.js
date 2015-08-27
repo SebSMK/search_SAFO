@@ -276,7 +276,7 @@
 							type: self.manager.translator.getLabel("autocomp_" +  field),
 							count: response.facet_counts.facet_fields[field][facet],
 							display: self.get_text_display(facet, field),
-							text_dropdown: self.get_text_from_facet(facet, field),
+							text_dropdown: self.get_text_from_facet(facet, field)
 						});
 					}
 
