@@ -125,8 +125,7 @@
 				var $tile = $(this);
 				if(smkCommon.isElemIntoView(this))
 					$tile.removeClass('preloaded').show();
-			});
-			
+			});			
 		},
 
 		/*
@@ -198,8 +197,7 @@
 			//* once images are loaded in teaser, start preloading request			
 			self.scrollUpdateWidget.start_scroll_preload_request(true);
 			
-			return true;
-			
+			return true;			
 		},
 
 		onClickLink: function (event) {

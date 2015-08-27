@@ -143,18 +143,42 @@
 				this.scroll_subWidget.isPreloading(false);			}			 		  			
 		},
 				
-		onFinishLoaded: function(num) {	
+		onFinishLoaded: function() {	
 			$(this).trigger({
-				type: "smk_scroll_all_images_displayed",
-				added: num // number of added images
+				type: "smk_scroll_all_images_displayed"
 			});
 			return true;
 		},						
 		
 		/*
 		 * PRIVATE FUNCTIONS
-		 * **/				
+		 * **/	
+		onClickLink: function (event) {
+			event.preventDefault();
+			$(event.data.caller).trigger({
+				type: "smk_search_call_detail",
+				detail_url: event.data.detail_url 
+			});
 
+			return;
+		},
+
+		loadImage: function($tile){
+			var self = this;
+			// if tile in the viewport, load image
+			if(smkCommon.isElemIntoView($tile)){
+				// add image					
+				var $imgcontainer = $tile.find('.matrix-tile-image');												
+				if(!$imgcontainer.hasClass('matrix-tile-image-missing')){
+					var dataHandler = new getData_Teasers.constructor(self);
+					var img = dataHandler.getImage($imgcontainer);				
+					$imgcontainer.find('img').hide();
+					$imgcontainer.prepend($(img));
+					$imgcontainer.find('img').addClass('image-loading');
+				}													
+			}							
+		},		
+		
 		/* page scrolled */			        		           
 		scrollStart: function(event) {		        															
 
@@ -180,12 +204,15 @@
 
 				$(self.scroll_subWidget.target).find('.preloaded').each(function(){
 					if(smkCommon.isElemIntoView(this)){
-						$(this).removeClass('preloaded').show();							
+						self.loadImage($(this))
+						//$(this).removeClass('preloaded').show();							
 						newImg++;
 					}										
 				});
 				if (newImg > 0)
-					self.onFinishLoaded(newImg);				
+					// start image loader manager
+					$(self.target).find('.matrix').imagesLoadedReveal($(self.target).find('.image-loading'),  $.proxy(self.onFinishLoaded, self), self, self.onClickLink);
+					//self.onFinishLoaded(newImg);				
 			}
 			// ...or, if there are no more preloaded images, start scroll request
 			else{		

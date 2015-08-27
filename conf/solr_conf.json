@@ -1,5 +1,5 @@
 {
-   "version":"1.002.016 TEST BETA",
+   "version":"1.002.018 TEST BETA",
    "mode":"proxy min",   
    "server":"http://solr-02.smk.dk:8080/solr/prod_SAFO/", 
    "server_test":"http://csdev-seb:8180/solr-example/dev_SAFO/",      
