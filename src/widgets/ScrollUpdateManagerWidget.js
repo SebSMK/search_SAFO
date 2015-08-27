@@ -180,8 +180,7 @@
 
 				$(self.scroll_subWidget.target).find('.preloaded').each(function(){
 					if(smkCommon.isElemIntoView(this)){
-						$(this).removeClass('preloaded').show();
-						if(smkCommon.debugLog()) console.log(sprintf("start_scroll_request - remove preloaded: %s", $(this).attr("id")));	
+						$(this).removeClass('preloaded').show();							
 						newImg++;
 					}										
 				});

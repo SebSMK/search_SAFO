@@ -151,13 +151,21 @@
 //					if(!$imgcontainer.hasClass('matrix-tile-image-missing')){
 //						var dataHandler = new getData_Teasers.constructor(self);
 //						var img = dataHandler.getImage($imgcontainer);				
+//						$imgcontainer.find('img').hide();
 //						$imgcontainer.prepend($(img));
 //						$imgcontainer.find('img').addClass('image-loading');
 //					}						
 //					$tile.find('a').click({detail_url: $tile.find('a').attr('href'), caller: self}, 
 //							function (event) {self.onClickLink(event);}
 //					);					
-//				}				
+//				}
+				
+				self.loadImage($tile);
+				
+				// add click on image
+				$tile.find('a').click({detail_url: $tile.find('a').attr('href'), caller: self}, 
+						function (event) {self.onClickLink(event);}
+				);
 
 				// title
 				$tile.find('.artwork-title').click({detail_url: $tile.find('.artwork-title').attr('href'), caller: self}, 
@@ -172,16 +180,8 @@
 				}				
 			});	
 			
+			// start image loader manager
 			$(self.target).find('.matrix').imagesLoadedReveal($tiles,  $.proxy(this.onAllImagesLoaded, self), self, this.onClickLink);
-
-//			self.refreshLayout();						
-//
-//			$(this).trigger({
-//				type: "smk_teasers_all_images_loaded"
-//			});	
-//
-//			//* once images are loaded in teaser, start preloading request			
-//			self.scrollUpdateWidget.start_scroll_preload_request(true);
 
 			return true;
 		},
@@ -215,6 +215,22 @@
 		/*
 		 * PRIVATE FUNCTIONS
 		 * **/
+		loadImage: function($tile){
+			var self = this;
+			// if tile in the viewport, load image
+			if(smkCommon.isElemIntoView($tile)){
+				// add image					
+				var $imgcontainer = $tile.find('.matrix-tile-image');												
+				if(!$imgcontainer.hasClass('matrix-tile-image-missing')){
+					var dataHandler = new getData_Teasers.constructor(self);
+					var img = dataHandler.getImage($imgcontainer);				
+					$imgcontainer.find('img').hide();
+					$imgcontainer.prepend($(img));
+					$imgcontainer.find('img').addClass('image-loading');
+				}													
+			}							
+		},
+		
 		loadTiles: function($tiles){
 			if (this.reset == true)	// avoid infinite loop when a new request is send while preloading is still running 
 				return this;
