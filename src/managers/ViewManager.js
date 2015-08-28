@@ -63,6 +63,15 @@
 			//* add page title
 			document.title = Manager.translator.getLabel("site_title");
 			$target.show();
+			
+			//* add click on print button
+			$target.find('.print a')
+			.attr("href", window.location.href)
+			.click(function (event) {
+				//display all pictures on the page
+				$target.find('.matrix-tile').removeClass('preloaded');			
+				window.print();				
+			});
 		};
 
 		this.beforeRequest = function(){	 
@@ -116,8 +125,9 @@
 			//* reload page title
 			document.title = Manager.translator.getLabel("site_title");
 			
-			// related
-//			this.add_modal_loading_to_widget(Manager.widgets['details'].related_subWidget);*/
+			//* reload print target
+			$(this.target).find('.print a')
+			.attr("href", window.location.href)					
 
 		};  
 
