@@ -211,8 +211,7 @@
 				});
 				if (newImg > 0)
 					// start image loader manager
-					$(self.scroll_subWidget.target).find('.matrix').imagesLoadedReveal($(self.scroll_subWidget.target).find('.matrix-tile'),  $.proxy(self.onFinishLoaded, self), self, self.onClickLink);
-					//self.onFinishLoaded(newImg);				
+					$(self.scroll_subWidget.target).find('.matrix').imagesLoadedReveal($(self.scroll_subWidget.target).find('.image-loading').parents('.matrix-tile'),  $.proxy(self.onFinishLoaded, self), self, self.onClickLink);									
 			}
 			// ...or, if there are no more preloaded images, start scroll request
 			else{		
