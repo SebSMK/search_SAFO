@@ -60,6 +60,8 @@
 			//* add version number
 			$target.find('#smk_search_version').text(smkCommon.getVersion() + "-" + smkCommon.getMode());
 
+			//* add page title
+			document.title = Manager.translator.getLabel("site_title");
 			$target.show();
 		};
 
@@ -110,6 +112,9 @@
 										});
 			$(this.target).find('#smk_feedback').append(html);
 			initFeedForm();
+			
+			//* reload page title
+			document.title = Manager.translator.getLabel("site_title");
 			
 			// related
 //			this.add_modal_loading_to_widget(Manager.widgets['details'].related_subWidget);*/

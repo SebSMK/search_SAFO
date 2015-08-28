@@ -35,6 +35,16 @@
     }
 }
 
+.main-header .branding span {
+	font-family: 'hill thin', sans-serif;	
+}
+
+@media print {
+	.main-header .branding span {
+		display:none;	
+	}
+}
+
 .sis-FeedbackButton {
 	z-index: 11;	
 }
