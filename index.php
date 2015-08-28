@@ -13,7 +13,7 @@
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
 			
-	<script src="js/smk.search.mini-0.002.021.js" type="text/javascript"></script>
+	<script src="js/smk.search.mini-0.002.025.js" type="text/javascript"></script>
 	
 	<script src="src/managers/ModelManager.js" type="text/javascript"></script>		
 	
