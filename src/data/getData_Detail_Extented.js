@@ -239,7 +239,7 @@
 						erhverv_lab: this.caller.manager.translator.getLabel('detail_erhverv_lab'),
 
 						erhverv_erhverv: {
-							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_erhverv_erhverv')),  
+							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_erhverv_dato')),  
 							value: this.getDetailAcq(doc)
 						},
 

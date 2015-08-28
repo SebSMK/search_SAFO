@@ -43,6 +43,16 @@
     }
 }
 
+.main-header .branding span {
+	font-family: 'hill thin', sans-serif;	
+}
+
+@media print {
+	.main-header .branding span {
+		display:none;	
+	}
+}
+
 .sis-FeedbackButton {
 	z-index: 11;	
 }
@@ -334,6 +344,7 @@ a.divLink {
   margin-bottom: 0em;  
 }
 
+/*
 .matrix-tile-header h2 a {
   max-height: 2.50em;  
 }

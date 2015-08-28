@@ -12,6 +12,7 @@
       "copyright_link":			"http://creativecommons.org/publicdomain/zero/1.0/",
       
       "general_title":			"Søg i Samlingen",
+      "site_title":				"SMK | Søg i Samlingen",
 
 	  "adv_artist_column_title": 	"kunstner | producent",
       "adv_artwork_column_title": 	"værk",
@@ -766,7 +767,8 @@
       "teaser_copyright_def":	"CC0 | Public Domain",	
       "copyright_link":			"http://creativecommons.org/publicdomain/zero/1.0/",
       
-      "general_title":			"Search the Collection",		
+      "general_title":			"Search the Collection",
+      "site_title":				"SMK | Search the Collection",		
 
 	  "checkbox_hasimage": 			"with image", 
 	  
@@ -915,7 +917,7 @@
 		"detail_ident_lab":	"identification",
 		"detail_ident_samling":	"collection",
 		"detail_ident_vaerktype":	"artwork type",
-		"detail_inscription_lab":	"signature | inscriptions | markings",
+		"detail_inscription_lab":	"signatures | inscriptions | markings",
 		"detail_inscription_paaskrift":	"inscription",
 		"detail_inscription_samlermaerke":	"collector's mark",
 		"detail_inscription_signatur":	"signature",
