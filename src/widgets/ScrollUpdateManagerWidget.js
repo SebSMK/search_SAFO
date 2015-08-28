@@ -165,8 +165,8 @@
 
 		loadImage: function($tile){
 			var self = this;
-			// if tile in the viewport, load image
-			if(smkCommon.isElemIntoView($tile)){
+			
+			//if(smkCommon.isElemIntoView($tile)){
 				// add image					
 				var $imgcontainer = $tile.find('.matrix-tile-image');												
 				if(!$imgcontainer.hasClass('matrix-tile-image-missing')){
@@ -174,9 +174,9 @@
 					var img = dataHandler.getImage($imgcontainer);				
 					$imgcontainer.find('img').hide();
 					$imgcontainer.prepend($(img));
-					$imgcontainer.find('img').addClass('image-loading');
+					$imgcontainer.closest('.matrix-tile').addClass('image-loading');
 				}													
-			}							
+			//}							
 		},		
 		
 		/* page scrolled */			        		           
@@ -211,7 +211,7 @@
 				});
 				if (newImg > 0)
 					// start image loader manager
-					$(self.scroll_subWidget.target).find('.matrix').imagesLoadedReveal($(self.scroll_subWidget.target).find('.image-loading').parents('.matrix-tile'),  $.proxy(self.onFinishLoaded, self), self, self.onClickLink);									
+					$(self.scroll_subWidget.target).find('.matrix').imagesLoadedReveal($(self.scroll_subWidget.target).find('.image-loading'),  $.proxy(self.onFinishLoaded, self), self, self.onClickLink);									
 			}
 			// ...or, if there are no more preloaded images, start scroll request
 			else{		

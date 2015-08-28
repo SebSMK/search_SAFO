@@ -5,7 +5,7 @@
 	opacity: 0.5; 
 }
 
-.matrix-equalized .matrix-tile-image .spinner {
+.matrix-equalized .matrix-tile.image-loading .spinner {
     display: inline;    
 }
 

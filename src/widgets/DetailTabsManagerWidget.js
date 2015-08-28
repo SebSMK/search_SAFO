@@ -364,8 +364,8 @@
 			var self = this;
 			var $target = $(self.target);
 
-			this.related_subWidget.refreshLayout();
-			this.parts_subWidget.refreshLayout();
+			this.related_subWidget.refreshViewport();
+			this.parts_subWidget.refreshViewport();
 		}
 	});
 

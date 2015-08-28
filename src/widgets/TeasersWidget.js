@@ -120,6 +120,15 @@
 			this.highlightning();
 			this.dotdotdot();
 			
+//			var $tiles = $(this.target).find('.matrix-tile');
+//			$tiles.each(function() {
+//				var $tile = $(this);
+//				if(smkCommon.isElemIntoView(this))
+//					$tile.removeClass('preloaded').show();
+//			});			
+		},
+		
+		refreshViewport: function(){			
 			var $tiles = $(this.target).find('.matrix-tile');
 			$tiles.each(function() {
 				var $tile = $(this);
@@ -199,8 +208,8 @@
 		 * **/
 		loadImage: function($tile){
 			var self = this;
-			// if tile in the viewport, load image
-			if(smkCommon.isElemIntoView($tile)){
+
+			//if(smkCommon.isElemIntoView($tile)){
 				// add image					
 				var $imgcontainer = $tile.find('.matrix-tile-image');												
 				if(!$imgcontainer.hasClass('matrix-tile-image-missing')){
@@ -208,9 +217,9 @@
 					var img = dataHandler.getImage($imgcontainer);				
 					$imgcontainer.find('img').hide();
 					$imgcontainer.prepend($(img));
-					$imgcontainer.find('img').addClass('image-loading');
+					$imgcontainer.closest('.matrix-tile').addClass('image-loading');
 				}													
-			}							
+			//}							
 		},
 		
 		loadTiles: function($tiles){

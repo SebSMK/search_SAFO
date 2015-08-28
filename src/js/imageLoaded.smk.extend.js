@@ -13,11 +13,11 @@ $.fn.imagesLoadedReveal = function($tiles, onAllImagesLoaded, caller, onClickLin
 				if (caller.reset == true)	// avoid infinite loop when a new request is send while preloading is still running
 					return this;
 
-				$(image.img).removeClass('image-loading');
+				$(image.img).closest('.image-loading').removeClass('image-loading');
 				//$(image.img).show();
 
 				// when images are loaded, trigger callback
-				if ($(caller.target).find('img.image-loading').length == 0)
+				if ($(caller.target).find('.image-loading').length == 0)
 					onAllImagesLoaded();												
 			});		
 		});		
