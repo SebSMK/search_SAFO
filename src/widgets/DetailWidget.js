@@ -64,7 +64,13 @@
 //					);
 //					$(image.img).mouseleave(function (event) {$html.find('span.copyright-info').css('opacity', 0);});
 
-					$(image.img).removeClass('image-loading');					
+					$(image.img).removeClass('image-loading');	
+					
+					if (image.isLoaded){// check broken link
+						$(image.img).css('opacity', 1);
+					}else{
+						$imgcontainer.addClass('matrix-tile-image-missing')
+					}						
 
 					//* add data to template
 					$target.prepend($html); 
@@ -76,9 +82,7 @@
 					$(document).unbind('click.fb-start');
 					
 					// add fancybox
-					$target.find('.fancybox').fancybox({
-									
-					});
+					$target.find('.fancybox').fancybox({});
 
 					//* send loaded event
 					$(self).trigger({
