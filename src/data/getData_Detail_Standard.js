@@ -27,7 +27,8 @@
 						copyright: getData_Common.getMedia_copyright(doc, this.caller),
 						copyright_text_cc0: this.caller.manager.translator.getLabel('detail_copyright_def'),
 						img_id:doc.id,
-						fullsizeText: this.caller.manager.translator.getLabel('detail_fullsize_lab') 
+						fullsizeText: this.caller.manager.translator.getLabel('detail_fullsize_lab'),
+						current_url: this.getCurrentUrl(doc)
 					},					
 					
 					info:{
@@ -87,6 +88,15 @@
 //			
 //			return label;
 //		};
+		
+		this.getCurrentUrl = function(doc){									
+			var model = {};
+			model.q = doc.id;
+			model.view = 'detail';
+			model.lang = smkCommon.getCurrentLanguage();
+
+			return ModelManager.buildURLFromModel(model); 
+		};
 		
 		this.getDetailAcq = function(doc){
 			var method = smkCommon.isValidDataText(getData_Common.getErhverv_method(doc)) ? sprintf('%s', getData_Common.getErhverv_method(doc)) : "";

@@ -84,6 +84,34 @@
 					$(self).trigger({
 						type: "smk_detail_this_img_loaded"
 					});
+					
+					// click on high res
+					 $('.mainImg:not([data-zoom=""]), .tool-img-zoom')
+		             .click(function () {
+		                 if(window.innerWidth >= 1024) {
+		                     $('body')
+		                             .append($('<div>', {'id': 'img-comparator-cover'}))
+		                             .append($('<div>', {'id': 'img-comparator-viewer'})
+		                                     .append($('<img>', {
+		                                         'class': 'close-icon',
+		                                         'src': 'images/close.png'
+		                                     }))
+		                                     .append($('<iframe>', {
+		                                         'src': 'about:blank',
+		                                         'frameborder': '0',
+		                                         'scrolling': '0'
+		                                     })));
+
+
+		                     $('#img-comparator-viewer .close-icon').click(function () {
+		                         $('#img-comparator-cover').remove();
+		                         $('#img-comparator-viewer').remove();
+		                     });
+		                    
+		                     var url = "http://192.168.10.17/highres_srv/";
+		                     $('#img-comparator-viewer').find('iframe').attr('src', url);
+		                 }
+		             });                    
 				});	
 			}else{
 				//* add data to template
