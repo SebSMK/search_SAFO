@@ -14,7 +14,9 @@ $.fn.imagesLoadedReveal = function($tiles, onAllImagesLoaded, caller, onClickLin
 					return this;
 
 				$(image.img).closest('.image-loading').removeClass('image-loading');
-				//$(image.img).show();
+				
+				if (image.isLoaded) // check if link is broken or not
+					$(image.img).css('opacity', 1);
 
 				// when images are loaded, trigger callback
 				if ($(caller.target).find('.image-loading').length == 0)

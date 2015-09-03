@@ -283,7 +283,7 @@ a.divLink {
 }
 
 .matrix-equalized .matrix-tile-image img {
-   opacity: 1; 
+  /* opacity: 1;*/ 
   -webkit-transition: opacity 400ms ease;
   -moz-transition: opacity 400ms ease;
   -ms-transition: opacity 400ms ease;
