@@ -134,11 +134,17 @@
       "dk":{
          "collectorExact1":"150",
          "collectorExact2":"30",
-         "collectorExact3":"20"
+         "collectorExact3":"20",
+         "collector1":"20",
+         "collector2":"15",
+         "collector3":"10",
+         "collector4":"5"
       },
       "en":{
          "collectorExact1Eng":"150",
          "collectorExact2Eng":"30",
+         "collector1Eng":"30",
+         "collector2Eng":"20",
          "collectorExact3":"10"
       }
    },
