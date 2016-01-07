@@ -71,9 +71,6 @@
 	<script src="js/supplier/dotdotdot-config.js" type="text/javascript"></script>
 	<script src="js/supplier/ga.js" type="text/javascript"></script>
   
-
-  <link rel="stylesheet" type="text/css" href="js/supplier/iip/css/site.css" media="all" />
-  <link rel="stylesheet" type="text/css" href="js/supplier/iip/css/content.css" media="all" />
 	
 	<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/themes/smoothness/jquery-ui.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="js/supplier/fancybox/source/jquery.fancybox.css" media="all" />	
@@ -81,6 +78,9 @@
 	<link rel="stylesheet" type="text/css" href="css/app.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="css/smk_modif.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="css/print.css" media="print" />
+  
+  <link rel="stylesheet" type="text/css" href="js/supplier/iip/css/site.css" media="all" />
+  <link rel="stylesheet" type="text/css" href="js/supplier/iip/css/content.css" media="all" />
 
 </head>
   <body>

@@ -73,12 +73,10 @@
 					$($.find('.print a')).attr('href', window.location.href);
 
 					// unbind fancybox
-					$(document).unbind('click.fb-start');
+//					$(document).unbind('click.fb-start');
 					
 					// add fancybox
-					$target.find('.fancybox').fancybox({
-									
-					});
+//					$target.find('.fancybox').fancybox({});
 
 					//* send loaded event
 					$(self).trigger({
@@ -108,7 +106,7 @@
 		                         $('#img-comparator-viewer').remove();
 		                     });
 		                    
-		                     var url = "http://192.168.10.17/highres_srv/";
+		                     var url = "http://csdev-seb-02:4000/imgsrv/test/zoom/" + artwork_data.id;
 		                     $('#img-comparator-viewer').find('iframe').attr('src', url);
 		                 }
 		             });                    
