@@ -104,55 +104,6 @@
 
 			switch (self.field){			
 
-			case 'artist_natio_en':
-			case 'artist_natio_dk':
-			case 'object_type_dk':
-			case 'object_type_en':
-				for (var facet in self.manager.response.facet_counts.facet_fields[self.field]) {
-					if(!smkCommon.isValidDataText(facet))
-						continue;
-					var count = parseInt(self.manager.response.facet_counts.facet_fields[self.field][facet]);
-					if (count > maxCount) {
-						maxCount = count;
-					};
-
-					if(smkCommon.isValidDataText(facet)){
-						objectedItems.push({ "value": self.formatRequest(facet, true), "text": smkCommon.firstCapital(facet).trim(), "count": count, "i": i }); 
-						i++;
-					}
-
-				};
-				totalCount = i;
-				objectedItems.sort(function (a, b) {
-					if (self.manager.translator.getLanguage() == 'dk')
-						return typeof (a.value === 'string') && typeof (b.value === 'string') ? (a.value.trim() < b.value.trim() ? -1 : 1) : (a.value < b.value ? -1 : 1);
-
-						return typeof (a.text === 'string') && typeof (b.text === 'string') ? (a.text.trim() < b.text.trim() ? -1 : 1) : (a.text < b.text ? -1 : 1);
-				});	  	 		  	  
-				break;	
-
-			case 'artist_surname_firstname':
-				for (var facet in self.manager.response.facet_counts.facet_fields[self.field]) {
-					if(!smkCommon.isValidDataText(facet))
-						continue;
-					var count = parseInt(self.manager.response.facet_counts.facet_fields[self.field][facet]);
-					if (count > maxCount) {
-						maxCount = count;
-					};
-
-					if(smkCommon.isValidDataText(facet)){
-						objectedItems.push({ "value": self.formatRequest(facet, true), "text": smkCommon.firstCapital(facet).trim(), "count": count, "i": i }); 
-						i++;
-					}
-
-				};
-				totalCount = i;
-				objectedItems.sort(function (a, b) {	
-					return typeof(a.text === 'string') && typeof (b.text === 'string') ? (a.text.trim() < b.text.trim() ? -1 : 1) : (a.text < b.text ? -1 : 1);						
-				});	  	 		  	  
-				break;		
-
-
 			case 'object_type_main_dk':
 			case 'object_type_main_en':
 
@@ -270,7 +221,7 @@
 				};
 				totalCount = i;
 				objectedItems.sort(function (a, b) {
-					return typeof (a.value === 'string') && typeof (b.value === 'string') ? (a.value.trim() < b.value.trim() ? -1 : 1) : (a.value < b.value ? -1 : 1);	  	      
+					return a.value.replace(/\W/gi, '').toLowerCase() < b.value.replace(/\W/gi, '').toLowerCase() ? -1 : 1;						  	      
 				});	  	 		  	  
 				break;		  
 
@@ -304,13 +255,14 @@
 					if (count > maxCount) {
 						maxCount = count;
 					};
-										
-					objectedItems.push({ "value": self.formatRequest(facet, true), "text": smkCommon.firstCapital(facet).trim(), "count": count, "i": i }); 
-					i++;	    	  	  	      	  	      
+					if(smkCommon.isValidDataText(facet)){					
+	  					objectedItems.push({ "value": self.formatRequest(facet, true), "text": smkCommon.firstCapital(facet).trim(), "count": count, "i": i }); 
+	  					i++;	    	  	  	      	  	     
+					} 
 				};
 				totalCount = i;
 				objectedItems.sort(function (a, b) {
-					return typeof (a.value === 'string') && typeof (b.value === 'string') ? (a.value.trim() < b.value.trim() ? -1 : 1) : (a.value < b.value ? -1 : 1);	  	      
+					return typeof (a.text === 'string') && typeof (b.text === 'string') ? (a.text.toLowerCase() < b.text.toLowerCase()  ? -1 : 1) : (a.value < b.value ? -1 : 1);								
 				});	  	 		  	  
 				break;	
 				
