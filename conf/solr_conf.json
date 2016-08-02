@@ -117,9 +117,9 @@
       "qf"
    ],
    
-   "fq_default":"",
+   "fq_default":"-(id:(ORIG*))",
    "fq_default_debug":"-(id:(*/*)) -(id:(*verso)) -(medium_image_url:[* TO *])",
-   "fq_default_prod":"",
+   "fq_default_prod":"-(id:(ORIG*))",
    
    "q_default":"*:*",
    "sort_default":"score desc",
