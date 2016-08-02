@@ -354,7 +354,16 @@
 					{{/technique_tilstand.value}}
 				</div>
 				<!-- /.data-pair -->
-				{{/technique_tilstand.value}} {{#technique_vaerkstatus.show}}
+				{{/technique_tilstand.value}} 					
+	
+			</div>
+			<!-- /.technique -->
+			
+			<!-- værkstatus -->
+			<div class="data-section">
+				<h3>{{{technique_vaerkstatus_lab}}}</h3>
+	
+        {{#technique_vaerkstatus.show}}
 				<div class="data-pair">
 					<h4 class="data-pair-key">{{{technique_vaerkstatus.key}}}</h4>
 					{{#technique_vaerkstatus.value}}
@@ -365,7 +374,9 @@
 					{{/technique_vaerkstatus.value}}
 				</div>
 				<!-- /.data-pair -->
-				{{/technique_vaerkstatus.show}} {{#technique_eksemplar.value}}
+				{{/technique_vaerkstatus.show}} 
+				
+				{{#technique_eksemplar.value}}
 				<div class="data-pair">
 					<h4 class="data-pair-key">{{{technique_eksemplar.key}}}</h4>
 					{{#technique_eksemplar.value}}
@@ -464,12 +475,10 @@
 					{{/technique_note_elementer.value}}
 				</div>
 				<!-- /.data-pair -->
-				{{/technique_note_elementer.value}}
-	
+				{{/technique_note_elementer.value}}				
 	
 			</div>
-			<!-- /.technique -->
-	
+			<!-- /værkstatus -->
 	
 			<!-- inscription -->
 			<div class="data-section">

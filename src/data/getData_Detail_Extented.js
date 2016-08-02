@@ -148,6 +148,8 @@
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_tilstand')),  
 							value: getData_Common.getTechnique_tilstand(doc)
 						},
+						
+						technique_vaerkstatus_lab: this.caller.manager.translator.getLabel('detail_vaerkstatus_lab'),
 
 						technique_vaerkstatus: {
 							key: smkCommon.firstCapital(this.caller.manager.translator.getLabel('detail_technique_vaerkstatus')),  

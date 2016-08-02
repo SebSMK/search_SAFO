@@ -208,6 +208,9 @@
     "detail_technique_stoebenum": "støbenummer.",
     "detail_technique_note": "note til",
     "detail_technique_tilstand": "fysisk tilstand",
+    
+    "detail_vaerkstatus_lab": "værkstatus | relaterede værker",
+    
     "detail_technique_vaerkstatus": "værkstatus",
     "detail_technique_eksemplar": "eksemplar",
     "detail_technique_bladnummer": "bladnummer",
@@ -992,6 +995,9 @@
 		"detail_technique_technique":	"technique",
 		"detail_technique_tilstand":	"condition",
 		"detail_technique_vaegt":	"weight",
+		
+		"detail_vaerkstatus_lab": "artwork status | related artworks",
+		
 		"detail_technique_vaerkstatus":	"artwork status",
 		"detail_technique_watermark":	"watermarks",
 		"detail_title_beskrivelse":	"description",
