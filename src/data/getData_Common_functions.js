@@ -195,13 +195,34 @@
 				var title_transl = smkCommon.getValueFromSplit(values, 3);				
 				var title_type = smkCommon.getValueFromSplit(values, 4) == null ? 'museum' : smkCommon.getValueFromSplit(values, 4);
 				var tmp;
-				var translation = new String();
+				//var translation = new String();
+				var translation = [];
 
-				// we take only the first translation
+				// we proceed all translations
 				if(smkCommon.isValidDataText(title_transl)){
 					var split_trans = title_transl.split(smkCommon.split_3_niv); 	           
-					if (split_trans.length > 0)	
-						translation= split_trans[0].split(smkCommon.split_4_niv)[0];            					           		         	            				                       
+
+					for (var j = 0; j < split_trans.length; j++) {
+						var split_trans_values = split_trans[j].split(smkCommon.split_4_niv);
+						var split_trans_value = smkCommon.getValueFromSplit(split_trans_values, 0);
+						var split_trans_lang = smkCommon.getValueFromSplit(split_trans_values, 1);
+						var split_trans_note = smkCommon.getValueFromSplit(split_trans_values, 2);
+						var split_trans_json = {};
+						
+						if(smkCommon.isValidDataText(split_trans_value)){
+							split_trans_json['value'] = split_trans_value;
+							
+							if(smkCommon.isValidDataText(split_trans_note))
+								split_trans_json['note'] = split_trans_note;
+							
+							if(smkCommon.isValidDataText(split_trans_lang))
+								split_trans_json['lang'] = split_trans_lang;
+													
+							translation.push(split_trans_json);							
+						}
+								
+					}	
+					
 				}        	  		  
 
 				tmp = {'title' : title, 'type':title_type};
@@ -232,7 +253,19 @@
 				title = title_teaser[0].title;
 				break;
 			case "en":
-				title = smkCommon.isValidDataText(title_teaser[0].trans) ? title_teaser[0].trans : title_teaser[0].title; 
+				//title = smkCommon.isValidDataText(title_teaser[0].trans) ? title_teaser[0].trans[0].value : title_teaser[0].title;
+				if(smkCommon.isValidDataText(title_teaser[0].trans)){
+					
+					title = title_teaser[0].title;	
+					
+					for (var i = 0; i < title_teaser[0].trans.length; i++) {
+						if(title_teaser[0].trans[i].lang.indexOf("eng") > -1){
+							title = title_teaser[0].trans[0].value;
+							break;
+						}
+					}
+				}
+				
 				break;
 			}									
 		}else{				

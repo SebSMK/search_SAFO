@@ -188,11 +188,17 @@
 					<h4 class="data-pair-key indent">{{{title_titles.key_note}}}</h4>
 					<div class="data-pair-value">{{{note}}}</div>
 					<!-- /.data-pair-value -->
-					{{/note}} {{#trans}}
+					{{/note}} 
+					{{#trans}}
 					<h4 class="data-pair-key indent">{{{title_titles.key_trans}}}</h4>
-					<div class="data-pair-value">{{{trans}}}</div>
+					<div class="data-pair-value">{{{value}}}</div>
+					{{#note}}
+					<h4 class="data-pair-key indent">{{{title_titles.key_trans_note}}}</h4>
+					<div class="data-pair-value">{{{note}}}</div>
+					{{/note}}
 					<!-- /.data-pair-value -->
-					{{/trans}} {{#trans_note}}
+					{{/trans}} 
+					{{#trans_note}}
 					<h4 class="data-pair-key indent">{{{title_titles.key_trans_note}}}</h4>
 					<div class="data-pair-value">{{{trans_note}}}</div>
 					<!-- /.data-pair-value -->

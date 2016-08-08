@@ -1,10 +1,10 @@
 {   
-   "version":"1.003.0002 TEST BETA",
+   "version":"1.003.0007 TEST BETA",
    "mode":"proxy min",   
    "server_prod":"http://solr-02.smk.dk:8080/solr/prod_SAFO/", 
-   "server":"http://csdev-seb:8180/solr-example/dev_SAFO/",
-   "server_preprod":"http://csdev-seb:8180/solr-example/preprod_SAFO/",      
-   "server_proxy_XXXX":"http://solr.smk.dk:8080/proxySolrPHP/proxy.php",
+   "server_dev":"http://csdev-seb:8180/solr-example/dev_SAFO/",
+   "server":"http://csdev-seb:8180/solr-example/preprod_SAFO/",      
+   "server_proxy":"http://solr.smk.dk:8080/proxySolrPHP/proxy.php",
    "facets":{
       "advanced":[
          {
