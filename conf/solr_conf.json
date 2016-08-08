@@ -1,9 +1,10 @@
 {   
-   "version":"1.002.02504 TEST BETA",
+   "version":"1.003.0002 TEST BETA",
    "mode":"proxy min",   
-   "server":"http://solr-02.smk.dk:8080/solr/prod_SAFO/", 
-   "server_test":"http://csdev-seb:8180/solr-example/dev_SAFO/",      
-   "server_proxy":"http://solr.smk.dk:8080/proxySolrPHP/proxy.php",
+   "server_prod":"http://solr-02.smk.dk:8080/solr/prod_SAFO/", 
+   "server":"http://csdev-seb:8180/solr-example/dev_SAFO/",
+   "server_preprod":"http://csdev-seb:8180/solr-example/preprod_SAFO/",      
+   "server_proxy_XXXX":"http://solr.smk.dk:8080/proxySolrPHP/proxy.php",
    "facets":{
       "advanced":[
          {
@@ -47,11 +48,11 @@
                   "lang":"en"
                },
                {
-                  "id":"materiale",
+                  "id":"materiale_type",
                   "lang":"dk"
                },
                {
-                  "id":"materiale_en",
+                  "id":"materiale_type_en",
                   "lang":"en"
                }
             ]

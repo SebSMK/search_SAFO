@@ -64,7 +64,7 @@
 	  "tagcloud_department":			"samling",
 	  "tagcloud_portrait_person_surname_firstname": 		"portrætteret",
 	  "tagcloud_topografisk_motiv": 	"topografisk motiv",
-	  "tagcloud_materiale": 			"materiale",
+	  "tagcloud_materiale_type":		"materiale",
 	  "tagcloud_acq_date_earliest": 	"dato", 
 	  "tagcloud_vaerkstatus": 			"værkstatus", 	  	  
           
@@ -78,7 +78,7 @@
       "search_department_lab":			"Indtast samling",
       "search_portrait_person_surname_firstname_lab":		"Indtast navn",
       "search_topografisk_motiv_lab":	"Indtast sted",
-      "search_materiale_lab":			"Indtast materiale",      
+      "search_materiale_type_lab":		"Indtast materiale",      
       "search_acq_date_earliest_lab":	"Indtast dato",
       "search_vaerkstatus_lab":			"Indtast værkstatus",  
       "search_kks_lab":					"Den Kongelige Kobberstiksamling",
@@ -288,8 +288,8 @@
 	  "sorter_score desc":		"relevans",
 	  "sorter_object_production_date_earliest desc":	"datering (nyeste først)",
 	  "sorter_object_production_date_earliest asc":		"datering (ældste først)",
-	  "sorter_artist_first_name desc":		"navn (Å to A)",
-	  "sorter_artist_first_name asc":		"navn (A to Å)",
+	  "sorter_artist_first_surname_firstname desc":		"navn (Å to A)",
+	  "sorter_artist_first_surname_firstname asc":		"navn (A to Å)",
 	  "sorter_last_update desc":	"sidst opdateret",	
 	  
 	  "sorter_last_updated":	"sidst opdateret",
@@ -823,7 +823,7 @@
 	  "tagcloud_department":		"collection",
 	  "tagcloud_portrait_person_surname_firstname": 		"portrait of",
 	  "tagcloud_topografisk_motiv": 	"place depicted",
-	  "tagcloud_materiale_en": 			"material",
+	  "tagcloud_materiale_type_en": 			"material",
 	  "tagcloud_acq_date_earliest": 	"date", 
 	  "tagcloud_vaerkstatus": 			"artwork status", 	  	
 	  
@@ -837,7 +837,7 @@
 	  "search_department_lab":			"Select collection",
 	  "search_portrait_person_surname_firstname_lab":		"Select name",
       "search_topografisk_motiv_lab":	"Select place",
-      "search_materiale_en_lab":		"Select material",      
+      "search_materiale_type_en_lab":	"Select material",      
       "search_acq_date_earliest_lab":	"Select date",
       "search_vaerkstatus_lab":			"Select artwork status",
 	    
@@ -1057,8 +1057,8 @@
 	  "sorter_score desc":		"relevance",
 	  "sorter_object_production_date_earliest desc":	"date (most recent first)",
 	  "sorter_object_production_date_earliest asc":		"date (oldest first)",
-	  "sorter_artist_first_name desc":		"name (Å to A)",
-	  "sorter_artist_first_name asc":		"name (A to Å)",
+	  "sorter_artist_first_surname_firstname desc":		"name (Å to A)",
+	  "sorter_artist_first_surname_firstname asc":		"name (A to Å)",
 	  "sorter_last_update desc":	"last updated",
 	  
 	  "teaser_reference":		"inventory number",

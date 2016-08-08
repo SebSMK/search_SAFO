@@ -187,8 +187,8 @@ var EventsManager;
 							 	{"value": "score desc"},
 						        {"value": "object_production_date_earliest asc"},
 						        {"value": "object_production_date_earliest desc"},
-						        {"value": "artist_first_name asc"},
-						        {"value": "artist_first_name desc"},
+						        {"value": "artist_first_surname_firstname asc"},
+						        {"value": "artist_first_surname_firstname desc"},
 						        {"value": "last_update desc"}
 						    ]};		
 		
