@@ -61,9 +61,10 @@ article.artwork {
   left: 0 !important;
 }
 
+/*
 .tab-content#related {
   display: none;
-}
+}*/
 
 .tabs {
   display: none;
