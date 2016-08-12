@@ -511,7 +511,7 @@
 				var tree = treeRoot.value[i];
 
 				if(tree.value === undefined){				
-					res.push(this.formatRequest(tree.id));
+					res.push(this.formatRequest(tree.id, true));
 				}else{
 					var subres = this.getSubRequestFromNode({'value' : tree.value});
 					if(subres)

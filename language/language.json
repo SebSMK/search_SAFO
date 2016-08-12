@@ -421,7 +421,16 @@
 									      },
 									      {
 									         "id":"skulptur",
-									         "value":[
+									         "value":[				
+									            {
+									               "id":"altertavle (skulptur)"
+									            },
+									            {
+									               "id":"dørstykke (skulptur)"
+									            },
+									            {
+									               "id":"predella (skulptur)"
+									            },
 									            {
 									               "id":"alter"
 									            },
@@ -622,7 +631,13 @@
 									         "id":"maleri",
 									         "value":[
 									            {
-									               "id":"altertavle"
+									               "id":"altertavle (maleri)"
+									            },
+									            {
+									               "id":"dørstykke (maleri)"
+									            },
+									            {
+									               "id":"predella (maleri)"
 									            },
 									            {
 									               "id":"predella"
