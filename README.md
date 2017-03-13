@@ -7,6 +7,8 @@ This development is based on Evolvingbweb's [Ajax-Solr JQuery library][1].
 * URI to backend (Solr proxy)
 * Solr default parameters 
 
+*OBS!!! Link to image server is hardcoded (sorry for that...) in src/js/common.smk.js in this function: common.getScaledPicture*
+
 
 #### Application sources:
 `src/` contains source code to:
